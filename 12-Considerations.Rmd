@@ -1,0 +1,27 @@
+# Considerations
+
+What we have outlined here is a supervised machine learning problem and a practical possible approach to the problem, but the results contained in this document **would not translate to real-world results**. 
+
+This tutorial is not meant to show anyone how to trade on the cryptocurrency markets, but rather encourage people to apply these tools to their own data problems, and that is the reason the tutorial stops here (also because we like not getting sued).
+
+We stop here before dealing with many difficult execution problems, including but not exclusive to:
+
+- Finding a trading methodology that makes sense. There are lots of decisions to be made, market or limit orders? Coming up with a good trade execution plan that works consistently is not as easy.
+
+-
+
+
+- ...Keep outlining the issues outlined by Chandler, especially relating to low market cap cryptocurrencies
+
+
+
+## Session Information
+
+Below is information relating to the specific R session that was run. If you are unable to reproduce these steps, find the correct version of the tools to install below:
+
+```{r}
+sessionInfo()
+```
+
+
+

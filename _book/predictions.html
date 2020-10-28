@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section - 9 Predictions | Untitled</title>
+  <meta name="description" content="Section - 9 Predictions | Untitled" />
+  <meta name="generator" content="bookdown 0.19.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section - 9 Predictions | Untitled" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section - 9 Predictions | Untitled" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="evaluate-model-performance.html"/>
+<link rel="next" href="explain-predictions.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.13/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Cryptocurrency Research</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#what-will-i-learn"><i class="fa fa-check"></i><b>1.1</b> What will I learn?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#before-getting-started"><i class="fa fa-check"></i><b>1.2</b> Before Getting Started</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#who-is-this-example-for"><i class="fa fa-check"></i><b>1.3</b> Who is this example for?</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#format-notes"><i class="fa fa-check"></i><b>1.4</b> Format Notes</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#plan-of-attack"><i class="fa fa-check"></i><b>1.5</b> Plan of Attack</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#disclaimer"><i class="fa fa-check"></i><b>1.6</b> Disclaimer</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>2</b> Setup and Installation</a></li>
+<li class="chapter" data-level="3" data-path="explore-data.html"><a href="explore-data.html"><i class="fa fa-check"></i><b>3</b> Explore the Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="explore-data.html"><a href="explore-data.html#data-preview"><i class="fa fa-check"></i><b>3.1</b> Data Preview</a></li>
+<li class="chapter" data-level="3.2" data-path="explore-data.html"><a href="explore-data.html#data-quality"><i class="fa fa-check"></i><b>3.2</b> Data Quality</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-prep.html"><a href="data-prep.html"><i class="fa fa-check"></i><b>4</b> Data Prep</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-prep.html"><a href="data-prep.html#convert-date-time"><i class="fa fa-check"></i><b>4.1</b> Convert Date Time</a></li>
+<li class="chapter" data-level="4.2" data-path="data-prep.html"><a href="data-prep.html#prices-by-exchange"><i class="fa fa-check"></i><b>4.2</b> Prices by Exchange</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="data-prep.html"><a href="data-prep.html#pull-exchange-data"><i class="fa fa-check"></i><b>4.2.1</b> Pull Exchange Data</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-prep.html"><a href="data-prep.html#the-definition-of-a-price"><i class="fa fa-check"></i><b>4.2.2</b> The definition of a “price”</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-prep.html"><a href="data-prep.html#join-datasets"><i class="fa fa-check"></i><b>4.2.3</b> Join Datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-prep.html"><a href="data-prep.html#add-target"><i class="fa fa-check"></i><b>4.3</b> Add Target Variable</a></li>
+<li class="chapter" data-level="4.4" data-path="data-prep.html"><a href="data-prep.html#group-by-crypto"><i class="fa fa-check"></i><b>4.4</b> Group by Cryptocurrency and Exchange</a></li>
+<li class="chapter" data-level="4.5" data-path="data-prep.html"><a href="data-prep.html#split-data"><i class="fa fa-check"></i><b>4.5</b> Split Data</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="data-prep.html"><a href="data-prep.html#traintest-split"><i class="fa fa-check"></i><b>4.5.1</b> Train/Test Split</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="data-prep.html"><a href="data-prep.html#final-adjustments"><i class="fa fa-check"></i><b>4.6</b> Final Adjustments</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="data-prep.html"><a href="data-prep.html#do-function"><i class="fa fa-check"></i><b>4.6.1</b> do() Function</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization 📉</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="visualization.html"><a href="visualization.html#basics---ggplot2"><i class="fa fa-check"></i><b>5.1</b> Basics - ggplot2</a></li>
+<li class="chapter" data-level="5.2" data-path="visualization.html"><a href="visualization.html#plot-relationships"><i class="fa fa-check"></i><b>5.2</b> Plot Relationships</a></li>
+<li class="chapter" data-level="5.3" data-path="visualization.html"><a href="visualization.html#using-extensions"><i class="fa fa-check"></i><b>5.3</b> Using Extensions</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="visualization.html"><a href="visualization.html#ggthemes"><i class="fa fa-check"></i><b>5.3.1</b> ggthemes</a></li>
+<li class="chapter" data-level="5.3.2" data-path="visualization.html"><a href="visualization.html#plotly"><i class="fa fa-check"></i><b>5.3.2</b> plotly</a></li>
+<li class="chapter" data-level="5.3.3" data-path="visualization.html"><a href="visualization.html#ggpubr"><i class="fa fa-check"></i><b>5.3.3</b> ggpubr</a></li>
+<li class="chapter" data-level="5.3.4" data-path="visualization.html"><a href="visualization.html#gganimate"><i class="fa fa-check"></i><b>5.3.4</b> gganimate</a></li>
+<li class="chapter" data-level="5.3.5" data-path="visualization.html"><a href="visualization.html#calendar-heatmap"><i class="fa fa-check"></i><b>5.3.5</b> Calendar Heatmap</a></li>
+<li class="chapter" data-level="5.3.6" data-path="visualization.html"><a href="visualization.html#rayshader"><i class="fa fa-check"></i><b>5.3.6</b> Rayshader</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>6</b> Predictive Modeling</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#linear-model"><i class="fa fa-check"></i><b>6.1</b> Linear Model</a></li>
+<li class="chapter" data-level="6.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#caret"><i class="fa fa-check"></i><b>6.2</b> Caret</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#linear-model-1"><i class="fa fa-check"></i><b>6.2.1</b> Linear Model</a></li>
+<li class="chapter" data-level="6.2.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#xgboost"><i class="fa fa-check"></i><b>6.2.2</b> XGBoost</a></li>
+<li class="chapter" data-level="6.2.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#neural-network"><i class="fa fa-check"></i><b>6.2.3</b> Neural Network</a></li>
+<li class="chapter" data-level="6.2.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cubist"><i class="fa fa-check"></i><b>6.2.4</b> Cubist</a></li>
+<li class="chapter" data-level="6.2.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#gradient-boosting-machines"><i class="fa fa-check"></i><b>6.2.5</b> Gradient Boosting Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#making-predictions"><i class="fa fa-check"></i><b>6.3</b> Making Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>7</b> Time Series</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="time-series.html"><a href="time-series.html#create-tsibble"><i class="fa fa-check"></i><b>7.0.1</b> Create <code>tsibble</code></a></li>
+<li class="chapter" data-level="7.0.2" data-path="time-series.html"><a href="time-series.html#fable-time-series-models"><i class="fa fa-check"></i><b>7.0.2</b> Fable Time Series Models</a></li>
+<li class="chapter" data-level="7.0.3" data-path="time-series.html"><a href="time-series.html#ets"><i class="fa fa-check"></i><b>7.0.3</b> ETS</a></li>
+<li class="chapter" data-level="7.0.4" data-path="time-series.html"><a href="time-series.html#arima"><i class="fa fa-check"></i><b>7.0.4</b> ARIMA</a></li>
+<li class="chapter" data-level="7.0.5" data-path="time-series.html"><a href="time-series.html#make-models"><i class="fa fa-check"></i><b>7.0.5</b> Make models</a></li>
+<li class="chapter" data-level="7.0.6" data-path="time-series.html"><a href="time-series.html#make-predictions"><i class="fa fa-check"></i><b>7.0.6</b> Make Predictions</a></li>
+<li class="chapter" data-level="7.0.7" data-path="time-series.html"><a href="time-series.html#error-metrics"><i class="fa fa-check"></i><b>7.0.7</b> Error Metrics</a></li>
+<li class="chapter" data-level="7.0.8" data-path="time-series.html"><a href="time-series.html#add-to-grouped-data"><i class="fa fa-check"></i><b>7.0.8</b> Add to Grouped Data</a></li>
+<li class="chapter" data-level="7.1" data-path="time-series.html"><a href="time-series.html#references-for-this-section"><i class="fa fa-check"></i><b>7.1</b> References for this section:</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html"><i class="fa fa-check"></i><b>8</b> Evaluate Model Performance</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#caret-1"><i class="fa fa-check"></i><b>8.1</b> Caret</a></li>
+<li class="chapter" data-level="8.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#timeseries"><i class="fa fa-check"></i><b>8.2</b> Timeseries</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#do-arima-models-perform-better-than-naive-ones"><i class="fa fa-check"></i><b>8.2.1</b> Do ARIMA models perform better than NAIVE ones?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#find-best-results"><i class="fa fa-check"></i><b>8.3</b> Find best results</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="predictions.html"><a href="predictions.html"><i class="fa fa-check"></i><b>9</b> Predictions</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="predictions.html"><a href="predictions.html#make-trades"><i class="fa fa-check"></i><b>9.1</b> Make Trades</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="explain-predictions.html"><a href="explain-predictions.html"><i class="fa fa-check"></i><b>10</b> Explain Predictions</a></li>
+<li class="chapter" data-level="11" data-path="evaluate-results.html"><a href="evaluate-results.html"><i class="fa fa-check"></i><b>11</b> Evaluate Results</a></li>
+<li class="chapter" data-level="12" data-path="considerations.html"><a href="considerations.html"><i class="fa fa-check"></i><b>12</b> Considerations</a></li>
+<li class="chapter" data-level="13" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>13</b> Archive</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="archive.html"><a href="archive.html#may-2020"><i class="fa fa-check"></i><b>13.1</b> May 2020</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>14</b> References</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="references.html"><a href="references.html#resources-used"><i class="fa fa-check"></i><b>14.1</b> Resources Used</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="references.html"><a href="references.html#visualization-section"><i class="fa fa-check"></i><b>14.1.1</b> Visualization Section</a></li>
+<li class="chapter" data-level="14.1.2" data-path="references.html"><a href="references.html#time-series-section"><i class="fa fa-check"></i><b>14.1.2</b> Time Series Section</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="references.html"><a href="references.html#packages-used-and-cited"><i class="fa fa-check"></i><b>14.2</b> Packages used and cited</a></li>
+<li class="chapter" data-level="14.3" data-path="references.html"><a href="references.html#r-markdown"><i class="fa fa-check"></i><b>14.3</b> R Markdown</a></li>
+<li class="chapter" data-level="14.4" data-path="references.html"><a href="references.html#including-plots"><i class="fa fa-check"></i><b>14.4</b> Including Plots</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Untitled</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="predictions" class="section level1" number="9">
+<h1><span class="header-section-number">Section - 9</span> Predictions</h1>
+<!-- Here import new `messarir` package and use it to pull latest data -->
+<!-- ```{r pull_predictions_messarir} -->
+<!-- library(messarir) -->
+<!-- # Pull latest data: -->
+<!-- messari_new_predictions <- latest_data(messari_api_key) -->
+<!-- # Show dataset: -->
+<!-- messari_new_predictions -->
+<!-- ``` -->
+<!-- Left join to models dataframe -->
+<!-- NEW TO JUST GET TRADES UP AND RUNNING BELOW: -->
+<!-- <!-- WAIT UNTIL 6TH MINUTE OF THE HOUR BEFORE MOVING ON -->
+<p>–&gt; <!-- ```{r} --> <!-- while(substr(Sys.time(), 15,16) != '06'){ --> <!--   Sys.sleep(15) --> <!-- } --> <!-- ``` --></p>
+<!-- ADD ALL STEPS TO MAKE NEW DATA FOR PREDICTIONS BELOW -->
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="predictions.html#cb152-1"></a>database_connection &lt;-<span class="st"> </span><span class="kw">getSqlConnection</span>()</span>
+<span id="cb152-2"><a href="predictions.html#cb152-2"></a>query &lt;-<span class="st"> &quot;SELECT DISTINCT * FROM Messari_R WHERE Symbol IS NOT NULL AND pkDummy = (select max(pkDummy) FROM Messari_R)&quot;</span></span>
+<span id="cb152-3"><a href="predictions.html#cb152-3"></a>messari &lt;-<span class="st"> </span><span class="kw">dbFetch</span>(<span class="kw">dbSendQuery</span>(database_connection, query), <span class="dv">500</span>)</span>
+<span id="cb152-4"><a href="predictions.html#cb152-4"></a></span>
+<span id="cb152-5"><a href="predictions.html#cb152-5"></a><span class="co"># Adjust data types. There&#39;s gotta be a better way than writing and reading files!</span></span>
+<span id="cb152-6"><a href="predictions.html#cb152-6"></a><span class="kw">write.csv</span>(messari, <span class="st">&#39;messari_data.csv&#39;</span>)</span>
+<span id="cb152-7"><a href="predictions.html#cb152-7"></a>messari &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;messari_data.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> F)</span>
+<span id="cb152-8"><a href="predictions.html#cb152-8"></a><span class="co"># delete csv file</span></span>
+<span id="cb152-9"><a href="predictions.html#cb152-9"></a><span class="kw">library</span>(fs)</span>
+<span id="cb152-10"><a href="predictions.html#cb152-10"></a><span class="kw">file_delete</span>(<span class="st">&#39;messari_data.csv&#39;</span>)</span>
+<span id="cb152-11"><a href="predictions.html#cb152-11"></a><span class="co"># add pkey</span></span>
+<span id="cb152-12"><a href="predictions.html#cb152-12"></a>messari<span class="op">$</span>pkey &lt;-<span class="st"> </span><span class="kw">paste0</span>(messari<span class="op">$</span>pkDummy, messari<span class="op">$</span>symbol)</span>
+<span id="cb152-13"><a href="predictions.html#cb152-13"></a></span>
+<span id="cb152-14"><a href="predictions.html#cb152-14"></a><span class="co"># Remove &quot;X&quot; column:</span></span>
+<span id="cb152-15"><a href="predictions.html#cb152-15"></a>messari &lt;-<span class="st"> </span><span class="kw">select</span>(messari, <span class="op">-</span>X)</span>
+<span id="cb152-16"><a href="predictions.html#cb152-16"></a></span>
+<span id="cb152-17"><a href="predictions.html#cb152-17"></a><span class="co"># Disconnect from the database</span></span>
+<span id="cb152-18"><a href="predictions.html#cb152-18"></a><span class="kw">dbDisconnect</span>(database_connection)</span></code></pre></div>
+<!-- DATA PREP SECTION W/HITBTC DATA:  -->
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="predictions.html#cb153-1"></a>messari<span class="op">$</span>date_time_utc &lt;-<span class="st"> </span><span class="kw">anytime</span>(messari<span class="op">$</span>date_time_utc, <span class="dt">tz =</span> <span class="st">&#39;UTC&#39;</span>)</span>
+<span id="cb153-2"><a href="predictions.html#cb153-2"></a></span>
+<span id="cb153-3"><a href="predictions.html#cb153-3"></a><span class="co"># HitBTC Data:</span></span>
+<span id="cb153-4"><a href="predictions.html#cb153-4"></a>database_connection &lt;-<span class="st"> </span><span class="kw">getSqlConnection</span>()</span>
+<span id="cb153-5"><a href="predictions.html#cb153-5"></a>query &lt;-<span class="st"> &quot;SELECT * FROM HitBTC_orderbook_USD WHERE pkDummy = (select max(pkDummy) FROM HitBTC_orderbook_USD)&quot;</span></span>
+<span id="cb153-6"><a href="predictions.html#cb153-6"></a>HitBTC &lt;-<span class="st"> </span><span class="kw">dbFetch</span>(<span class="kw">dbSendQuery</span>(database_connection, query), <span class="dv">500</span>)</span>
+<span id="cb153-7"><a href="predictions.html#cb153-7"></a></span>
+<span id="cb153-8"><a href="predictions.html#cb153-8"></a><span class="co"># Adjust data types. There&#39;s gotta be a better way than writing and reading files!</span></span>
+<span id="cb153-9"><a href="predictions.html#cb153-9"></a><span class="kw">write.csv</span>(HitBTC, <span class="st">&#39;HitBTC.csv&#39;</span>)</span>
+<span id="cb153-10"><a href="predictions.html#cb153-10"></a>HitBTC &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;HitBTC.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> F)</span>
+<span id="cb153-11"><a href="predictions.html#cb153-11"></a><span class="co"># delete csv file</span></span>
+<span id="cb153-12"><a href="predictions.html#cb153-12"></a><span class="kw">library</span>(fs)</span>
+<span id="cb153-13"><a href="predictions.html#cb153-13"></a><span class="kw">file_delete</span>(<span class="st">&#39;HitBTC.csv&#39;</span>)</span>
+<span id="cb153-14"><a href="predictions.html#cb153-14"></a><span class="co"># add pkey</span></span>
+<span id="cb153-15"><a href="predictions.html#cb153-15"></a>HitBTC<span class="op">$</span>pkey &lt;-<span class="st"> </span><span class="kw">paste0</span>(HitBTC<span class="op">$</span>pkDummy, HitBTC<span class="op">$</span>symbol)</span>
+<span id="cb153-16"><a href="predictions.html#cb153-16"></a></span>
+<span id="cb153-17"><a href="predictions.html#cb153-17"></a><span class="co"># checkpoint delete</span></span>
+<span id="cb153-18"><a href="predictions.html#cb153-18"></a><span class="co">#save.image(&#39;09-06-2dot5.RData&#39;)</span></span>
+<span id="cb153-19"><a href="predictions.html#cb153-19"></a></span>
+<span id="cb153-20"><a href="predictions.html#cb153-20"></a><span class="co"># Make sure only one unique pkey returned (could have two different quote_currency):</span></span>
+<span id="cb153-21"><a href="predictions.html#cb153-21"></a>HitBTC &lt;-<span class="st"> </span><span class="kw">distinct</span>(HitBTC, pkey, <span class="dt">.keep_all =</span> T)</span>
+<span id="cb153-22"><a href="predictions.html#cb153-22"></a></span>
+<span id="cb153-23"><a href="predictions.html#cb153-23"></a><span class="co"># Remove &quot;X&quot; column:</span></span>
+<span id="cb153-24"><a href="predictions.html#cb153-24"></a>HitBTC &lt;-<span class="st"> </span><span class="kw">select</span>(HitBTC, <span class="op">-</span>X)</span>
+<span id="cb153-25"><a href="predictions.html#cb153-25"></a></span>
+<span id="cb153-26"><a href="predictions.html#cb153-26"></a><span class="co"># Disconnect from the database</span></span>
+<span id="cb153-27"><a href="predictions.html#cb153-27"></a><span class="kw">dbDisconnect</span>(database_connection)</span></code></pre></div>
+<!-- KEEP GOING W/DATAPREP: -->
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="predictions.html#cb154-1"></a>crypto_data &lt;-<span class="st"> </span><span class="kw">merge</span>(HitBTC, messari, <span class="dt">by=</span><span class="st">&#39;pkey&#39;</span>)</span>
+<span id="cb154-2"><a href="predictions.html#cb154-2"></a></span>
+<span id="cb154-3"><a href="predictions.html#cb154-3"></a><span class="co"># temp rename:</span></span>
+<span id="cb154-4"><a href="predictions.html#cb154-4"></a>crypto_data &lt;-<span class="st"> </span>crypto_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">date_time_utc=</span><span class="st">&#39;date_time_utc.x&#39;</span>,</span>
+<span id="cb154-5"><a href="predictions.html#cb154-5"></a>                                      <span class="dt">date=</span><span class="st">&#39;date.x&#39;</span>,</span>
+<span id="cb154-6"><a href="predictions.html#cb154-6"></a>                                      <span class="dt">symbol=</span><span class="st">&#39;symbol.x&#39;</span>)</span>
+<span id="cb154-7"><a href="predictions.html#cb154-7"></a></span>
+<span id="cb154-8"><a href="predictions.html#cb154-8"></a><span class="co"># drop extra columns:</span></span>
+<span id="cb154-9"><a href="predictions.html#cb154-9"></a>crypto_data &lt;-<span class="st"> </span><span class="kw">select</span>(crypto_data, <span class="op">-</span>pkDummy.x, <span class="op">-</span>date.y, <span class="op">-</span>date_time_utc.y, <span class="op">-</span>symbol.y, <span class="op">-</span>pkDummy.y)</span>
+<span id="cb154-10"><a href="predictions.html#cb154-10"></a></span>
+<span id="cb154-11"><a href="predictions.html#cb154-11"></a><span class="co"># Group data</span></span>
+<span id="cb154-12"><a href="predictions.html#cb154-12"></a>crypto_data<span class="op">$</span>exchange &lt;-<span class="st"> &#39;HitBTC&#39;</span></span>
+<span id="cb154-13"><a href="predictions.html#cb154-13"></a></span>
+<span id="cb154-14"><a href="predictions.html#cb154-14"></a><span class="co"># adjust date_time_utc again (not sure why but needed)</span></span>
+<span id="cb154-15"><a href="predictions.html#cb154-15"></a>crypto_data<span class="op">$</span>date_time_utc &lt;-<span class="st"> </span><span class="kw">anytime</span>(crypto_data<span class="op">$</span>date_time_utc, <span class="dt">tz =</span> <span class="st">&#39;UTC&#39;</span>)</span>
+<span id="cb154-16"><a href="predictions.html#cb154-16"></a></span>
+<span id="cb154-17"><a href="predictions.html#cb154-17"></a><span class="co"># only keep max pkDummy</span></span>
+<span id="cb154-18"><a href="predictions.html#cb154-18"></a>crypto_data<span class="op">$</span>pkDummy &lt;-<span class="st"> </span><span class="kw">substr</span>(crypto_data<span class="op">$</span>pkey, <span class="dv">1</span>, <span class="dv">13</span>)</span>
+<span id="cb154-19"><a href="predictions.html#cb154-19"></a><span class="co"># filter data</span></span>
+<span id="cb154-20"><a href="predictions.html#cb154-20"></a>crypto_data &lt;-<span class="st"> </span><span class="kw">filter</span>(crypto_data, pkDummy <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(pkDummy))</span>
+<span id="cb154-21"><a href="predictions.html#cb154-21"></a><span class="co"># group data</span></span>
+<span id="cb154-22"><a href="predictions.html#cb154-22"></a>crypto_data &lt;-<span class="st"> </span>crypto_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(name, exchange)</span></code></pre></div>
+<!-- NOW JOIN TO MODELS  -->
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="predictions.html#cb155-1"></a>predictions &lt;-<span class="st"> </span>crypto_data_grouped</span>
+<span id="cb155-2"><a href="predictions.html#cb155-2"></a></span>
+<span id="cb155-3"><a href="predictions.html#cb155-3"></a>crypto_data &lt;-<span class="st"> </span>crypto_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unique</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(name) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nest</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">prediction_data=</span><span class="st">&#39;data&#39;</span>)</span>
+<span id="cb155-4"><a href="predictions.html#cb155-4"></a></span>
+<span id="cb155-5"><a href="predictions.html#cb155-5"></a>predictions &lt;-<span class="st"> </span><span class="kw">left_join</span>(crypto_data, predictions, <span class="dt">by=</span><span class="st">&#39;name&#39;</span>)</span></code></pre></div>
+<!-- ADJUST TO ONLY KEEP VALID ROWS -->
+<!-- ON OCTOBER 1ST STILL FAILING HERE! NOT SURE WHY! -->
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="predictions.html#cb156-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(predictions)){</span>
+<span id="cb156-2"><a href="predictions.html#cb156-2"></a>  <span class="co"># create variable if does not exist</span></span>
+<span id="cb156-3"><a href="predictions.html#cb156-3"></a>  <span class="cf">if</span> (<span class="kw">exists</span>(<span class="st">&quot;remove_index&quot;</span>) <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span><span class="kw">nrow</span>(predictions<span class="op">$</span>prediction_data[[i]]) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span> ){</span>
+<span id="cb156-4"><a href="predictions.html#cb156-4"></a>    remove_index &lt;-<span class="st"> </span>i</span>
+<span id="cb156-5"><a href="predictions.html#cb156-5"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">nrow</span>(predictions<span class="op">$</span>prediction_data[[i]]) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>){</span>
+<span id="cb156-6"><a href="predictions.html#cb156-6"></a>    remove_index &lt;-<span class="st"> </span><span class="kw">c</span>(remove_index, i)</span>
+<span id="cb156-7"><a href="predictions.html#cb156-7"></a>  } <span class="cf">else</span> <span class="cf">if</span> ((<span class="st">&#39;target_percent_change&#39;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">colnames</span>(predictions<span class="op">$</span>train[[i]])) <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>){ <span class="co">#must contain target column</span></span>
+<span id="cb156-8"><a href="predictions.html#cb156-8"></a>    remove_index &lt;-<span class="st"> </span><span class="kw">c</span>(remove_index, i)</span>
+<span id="cb156-9"><a href="predictions.html#cb156-9"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">length</span>(predictions<span class="op">$</span>xgboost_model) <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>){</span>
+<span id="cb156-10"><a href="predictions.html#cb156-10"></a>    remove_index &lt;-<span class="st"> </span><span class="kw">c</span>(remove_index, i)</span>
+<span id="cb156-11"><a href="predictions.html#cb156-11"></a>  }</span>
+<span id="cb156-12"><a href="predictions.html#cb156-12"></a>}</span>
+<span id="cb156-13"><a href="predictions.html#cb156-13"></a><span class="co"># only remove indexes if does not equal to NA</span></span>
+<span id="cb156-14"><a href="predictions.html#cb156-14"></a><span class="cf">if</span> (<span class="kw">exists</span>(<span class="st">&quot;remove_index&quot;</span>) <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>){</span>
+<span id="cb156-15"><a href="predictions.html#cb156-15"></a>  predictions &lt;-<span class="st"> </span>predictions[<span class="op">-</span>remove_index,]</span>
+<span id="cb156-16"><a href="predictions.html#cb156-16"></a>}</span></code></pre></div>
+<!-- MAKE PREDICTIONS -->
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="predictions.html#cb157-1"></a><span class="co"># Example:</span></span>
+<span id="cb157-2"><a href="predictions.html#cb157-2"></a><span class="co"># predict(predictions$xgboost_model[[1]], newdata=predictions$prediction_data[[1]])</span></span>
+<span id="cb157-3"><a href="predictions.html#cb157-3"></a></span>
+<span id="cb157-4"><a href="predictions.html#cb157-4"></a></span>
+<span id="cb157-5"><a href="predictions.html#cb157-5"></a><span class="co"># Exclude nulls</span></span>
+<span id="cb157-6"><a href="predictions.html#cb157-6"></a>predictions &lt;-<span class="st"> </span><span class="kw">filter</span>(predictions, split <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb157-7"><a href="predictions.html#cb157-7"></a></span>
+<span id="cb157-8"><a href="predictions.html#cb157-8"></a></span>
+<span id="cb157-9"><a href="predictions.html#cb157-9"></a><span class="co"># Remove rows with missing models or prediction data</span></span>
+<span id="cb157-10"><a href="predictions.html#cb157-10"></a><span class="co"># IMPORTANT </span><span class="al">NOTE</span><span class="co"> 09/30 - CODE IS FAILING IN STEP BELOW! HAVEN&#39;T FIGURED OUT ISSUE, BUT PROBABLY MISSING DATA OR MODEL FOR ONE OF THE ROWS?</span></span>
+<span id="cb157-11"><a href="predictions.html#cb157-11"></a><span class="co"># How about removing any rows with nulls for the whole row?</span></span>
+<span id="cb157-12"><a href="predictions.html#cb157-12"></a>predictions &lt;-<span class="st"> </span><span class="kw">na.omit</span>(predictions)</span>
+<span id="cb157-13"><a href="predictions.html#cb157-13"></a></span>
+<span id="cb157-14"><a href="predictions.html#cb157-14"></a></span>
+<span id="cb157-15"><a href="predictions.html#cb157-15"></a><span class="co"># IMPORTANT </span><span class="al">NOTE</span><span class="co"> 10/03/2020: FOR SOME REASON STOPS WORKING, NOTHING ABOUT THE DATA SEEMS TO BE MISSING</span></span>
+<span id="cb157-16"><a href="predictions.html#cb157-16"></a><span class="co"># predictions &lt;- head(predictions,8)</span></span>
+<span id="cb157-17"><a href="predictions.html#cb157-17"></a></span>
+<span id="cb157-18"><a href="predictions.html#cb157-18"></a><span class="co"># Add new column with predictions:</span></span>
+<span id="cb157-19"><a href="predictions.html#cb157-19"></a></span>
+<span id="cb157-20"><a href="predictions.html#cb157-20"></a></span>
+<span id="cb157-21"><a href="predictions.html#cb157-21"></a><span class="co"># Neural Network:</span></span>
+<span id="cb157-22"><a href="predictions.html#cb157-22"></a>predictions &lt;-<span class="st"> </span><span class="kw">do</span>(predictions, <span class="kw">mutate</span>(., <span class="dt">predictions_nnet =</span> <span class="kw">predict</span>(.<span class="op">$</span>nnet_model, <span class="dt">newdata=</span>.<span class="op">$</span>prediction_data)))</span>
+<span id="cb157-23"><a href="predictions.html#cb157-23"></a><span class="co"># extract value from list</span></span>
+<span id="cb157-24"><a href="predictions.html#cb157-24"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(predictions)){</span>
+<span id="cb157-25"><a href="predictions.html#cb157-25"></a>  <span class="co"># ADDED STEP TO FIX DATA ISSUES LATER ON!</span></span>
+<span id="cb157-26"><a href="predictions.html#cb157-26"></a>  <span class="cf">if</span> (<span class="kw">length</span>(predictions<span class="op">$</span>predictions_nnet[i][[<span class="dv">1</span>]]) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>){</span>
+<span id="cb157-27"><a href="predictions.html#cb157-27"></a>    predictions &lt;-<span class="st"> </span>predictions[<span class="op">-</span>i,]</span>
+<span id="cb157-28"><a href="predictions.html#cb157-28"></a>  } <span class="cf">else</span>{</span>
+<span id="cb157-29"><a href="predictions.html#cb157-29"></a>    predictions<span class="op">$</span>nnet[i] &lt;-<span class="st"> </span>predictions<span class="op">$</span>predictions_nnet[i][[<span class="dv">1</span>]]</span>
+<span id="cb157-30"><a href="predictions.html#cb157-30"></a>  }</span>
+<span id="cb157-31"><a href="predictions.html#cb157-31"></a>}</span>
+<span id="cb157-32"><a href="predictions.html#cb157-32"></a><span class="co"># XGBOOST:</span></span>
+<span id="cb157-33"><a href="predictions.html#cb157-33"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(predictions)){</span>
+<span id="cb157-34"><a href="predictions.html#cb157-34"></a>    <span class="kw">tryCatch</span>({</span>
+<span id="cb157-35"><a href="predictions.html#cb157-35"></a>        predictions<span class="op">$</span>xgboost[i] &lt;-<span class="st"> </span><span class="kw">predict</span>(predictions<span class="op">$</span>xgboost_model[[i]], <span class="dt">newdata=</span>predictions<span class="op">$</span>prediction_data[[i]])</span>
+<span id="cb157-36"><a href="predictions.html#cb157-36"></a>    }, <span class="dt">error=</span><span class="cf">function</span>(e){})</span>
+<span id="cb157-37"><a href="predictions.html#cb157-37"></a>    </span>
+<span id="cb157-38"><a href="predictions.html#cb157-38"></a>}</span>
+<span id="cb157-39"><a href="predictions.html#cb157-39"></a><span class="co"># Linear:</span></span>
+<span id="cb157-40"><a href="predictions.html#cb157-40"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(predictions)){</span>
+<span id="cb157-41"><a href="predictions.html#cb157-41"></a>    <span class="kw">tryCatch</span>({</span>
+<span id="cb157-42"><a href="predictions.html#cb157-42"></a>        predictions<span class="op">$</span>linear[i] &lt;-<span class="st"> </span><span class="kw">predict</span>(predictions<span class="op">$</span>linear_model[[i]], <span class="dt">newdata=</span>predictions<span class="op">$</span>prediction_data[[i]])</span>
+<span id="cb157-43"><a href="predictions.html#cb157-43"></a>    }, <span class="dt">error=</span><span class="cf">function</span>(e){})</span>
+<span id="cb157-44"><a href="predictions.html#cb157-44"></a></span>
+<span id="cb157-45"><a href="predictions.html#cb157-45"></a>}</span>
+<span id="cb157-46"><a href="predictions.html#cb157-46"></a><span class="co"># Cubist:</span></span>
+<span id="cb157-47"><a href="predictions.html#cb157-47"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(predictions)){</span>
+<span id="cb157-48"><a href="predictions.html#cb157-48"></a>    <span class="kw">tryCatch</span>({</span>
+<span id="cb157-49"><a href="predictions.html#cb157-49"></a>        predictions<span class="op">$</span>cubist[i] &lt;-<span class="st"> </span><span class="kw">predict</span>(predictions<span class="op">$</span>cubist_model[[i]], <span class="dt">newdata=</span>predictions<span class="op">$</span>prediction_data[[i]])</span>
+<span id="cb157-50"><a href="predictions.html#cb157-50"></a>    }, <span class="dt">error=</span><span class="cf">function</span>(e){})</span>
+<span id="cb157-51"><a href="predictions.html#cb157-51"></a></span>
+<span id="cb157-52"><a href="predictions.html#cb157-52"></a>}</span>
+<span id="cb157-53"><a href="predictions.html#cb157-53"></a><span class="co"># gbm:</span></span>
+<span id="cb157-54"><a href="predictions.html#cb157-54"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(predictions)){</span>
+<span id="cb157-55"><a href="predictions.html#cb157-55"></a>    <span class="kw">tryCatch</span>({</span>
+<span id="cb157-56"><a href="predictions.html#cb157-56"></a>        predictions<span class="op">$</span>gbm[i] &lt;-<span class="st"> </span><span class="kw">predict</span>(predictions<span class="op">$</span>gbm_model[[i]], <span class="dt">newdata=</span>predictions<span class="op">$</span>prediction_data[[i]])</span>
+<span id="cb157-57"><a href="predictions.html#cb157-57"></a>    }, <span class="dt">error=</span><span class="cf">function</span>(e){})</span>
+<span id="cb157-58"><a href="predictions.html#cb157-58"></a></span>
+<span id="cb157-59"><a href="predictions.html#cb157-59"></a>}</span>
+<span id="cb157-60"><a href="predictions.html#cb157-60"></a></span>
+<span id="cb157-61"><a href="predictions.html#cb157-61"></a><span class="co"># Gather data</span></span>
+<span id="cb157-62"><a href="predictions.html#cb157-62"></a>predictions &lt;-<span class="st"> </span>predictions <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(<span class="st">&#39;model&#39;</span>,<span class="st">&#39;prediction&#39;</span>, nnet<span class="op">:</span>xgboost) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(name, model, exchange, split)</span></code></pre></div>
+<!-- AVERAGE PREDICTIONS FROM SPLITS (EVENTUALLY WEIGH LAST SPLIT MORE) -->
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="predictions.html#cb158-1"></a>results &lt;-<span class="st"> </span>predictions <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(name, model, exchange) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">average_prediction =</span> <span class="kw">mean</span>(prediction)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(average_prediction) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unique</span>()</span></code></pre></div>
+<pre><code>## Adding missing grouping variables: `name`, `model`, `exchange`</code></pre>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="predictions.html#cb160-1"></a><span class="co"># Exclude values outside of reasonable range</span></span>
+<span id="cb160-2"><a href="predictions.html#cb160-2"></a>results &lt;-<span class="st"> </span><span class="kw">filter</span>(results, average_prediction <span class="op">&gt;</span><span class="st"> </span><span class="dv">-80</span>, average_prediction <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>)</span>
+<span id="cb160-3"><a href="predictions.html#cb160-3"></a></span>
+<span id="cb160-4"><a href="predictions.html#cb160-4"></a><span class="co"># Average overall</span></span>
+<span id="cb160-5"><a href="predictions.html#cb160-5"></a>average_results &lt;-<span class="st"> </span><span class="kw">mean</span>(results<span class="op">$</span>average_prediction, <span class="dt">na.rm=</span>T)</span></code></pre></div>
+<!-- FIND TOP MODELS TO USE -->
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="predictions.html#cb161-1"></a><span class="co"># first exclude crazy results for RSME</span></span>
+<span id="cb161-2"><a href="predictions.html#cb161-2"></a>average_scores &lt;-<span class="st"> </span><span class="kw">filter</span>(average_scores, avg_RMSE <span class="op">&gt;</span><span class="st"> </span><span class="dv">-50</span>, avg_RMSE <span class="op">&lt;</span><span class="st"> </span><span class="dv">50</span>)</span>
+<span id="cb161-3"><a href="predictions.html#cb161-3"></a><span class="co"># then find cryptocurrencies with best RMSE scores across the board</span></span>
+<span id="cb161-4"><a href="predictions.html#cb161-4"></a>best_ones &lt;-<span class="st"> </span>average_scores <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-5"><a href="predictions.html#cb161-5"></a><span class="st">                </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-6"><a href="predictions.html#cb161-6"></a><span class="st">                </span><span class="kw">group_by</span>(name, model, exchange) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-7"><a href="predictions.html#cb161-7"></a><span class="st">                </span><span class="kw">mutate</span>(<span class="dt">avg_RMSE =</span> <span class="kw">mean</span>(avg_RMSE, <span class="dt">na.rm=</span>T)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-8"><a href="predictions.html#cb161-8"></a><span class="st">                </span><span class="kw">distinct</span>(name, model, exchange, avg_RMSE) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-9"><a href="predictions.html#cb161-9"></a><span class="st">                </span><span class="kw">arrange</span>(avg_RMSE) </span>
+<span id="cb161-10"><a href="predictions.html#cb161-10"></a>                <span class="co"># uncomment below to only keep 50 most accurate models</span></span>
+<span id="cb161-11"><a href="predictions.html#cb161-11"></a>                <span class="co">#head(50)</span></span>
+<span id="cb161-12"><a href="predictions.html#cb161-12"></a></span>
+<span id="cb161-13"><a href="predictions.html#cb161-13"></a><span class="co"># Adjust models naming convention</span></span>
+<span id="cb161-14"><a href="predictions.html#cb161-14"></a>best_ones<span class="op">$</span>model &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&#39;_rmse&#39;</span>,<span class="st">&#39;&#39;</span>, best_ones<span class="op">$</span>model)</span>
+<span id="cb161-15"><a href="predictions.html#cb161-15"></a></span>
+<span id="cb161-16"><a href="predictions.html#cb161-16"></a><span class="co"># Find best trades to make</span></span>
+<span id="cb161-17"><a href="predictions.html#cb161-17"></a>trades &lt;-<span class="st"> </span><span class="kw">merge</span>(best_ones, results, <span class="dt">by=</span> <span class="kw">c</span>(<span class="st">&#39;name&#39;</span>, <span class="st">&#39;model&#39;</span>, <span class="st">&#39;exchange&#39;</span>))</span>
+<span id="cb161-18"><a href="predictions.html#cb161-18"></a></span>
+<span id="cb161-19"><a href="predictions.html#cb161-19"></a></span>
+<span id="cb161-20"><a href="predictions.html#cb161-20"></a><span class="co"># Find the average score by cryptocurrency overall</span></span>
+<span id="cb161-21"><a href="predictions.html#cb161-21"></a>trades &lt;-<span class="st"> </span>trades <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-22"><a href="predictions.html#cb161-22"></a><span class="st">            </span>ungroup <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-23"><a href="predictions.html#cb161-23"></a><span class="st">            </span><span class="kw">group_by</span>(name, exchange) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-24"><a href="predictions.html#cb161-24"></a><span class="st">            </span><span class="kw">mutate</span>(<span class="dt">average_prediction_by_crypto =</span> <span class="kw">mean</span>(average_prediction))</span>
+<span id="cb161-25"><a href="predictions.html#cb161-25"></a></span>
+<span id="cb161-26"><a href="predictions.html#cb161-26"></a><span class="co"># Any positive predictions? Find those where prediction more positive than average RMSE</span></span>
+<span id="cb161-27"><a href="predictions.html#cb161-27"></a>trades &lt;-<span class="st"> </span><span class="kw">filter</span>(trades, average_prediction <span class="op">&gt;</span><span class="st"> </span>avg_RMSE, average_prediction_by_crypto <span class="op">&gt;</span><span class="st"> </span>avg_RMSE) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">distinct</span>(name, <span class="dt">.keep_all=</span>T)</span>
+<span id="cb161-28"><a href="predictions.html#cb161-28"></a><span class="co"># Sort by most favorable</span></span>
+<span id="cb161-29"><a href="predictions.html#cb161-29"></a>trades &lt;-<span class="st"> </span>trades <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="op">-</span>average_prediction_by_crypto)</span>
+<span id="cb161-30"><a href="predictions.html#cb161-30"></a><span class="co"># Backup trades to write to db</span></span>
+<span id="cb161-31"><a href="predictions.html#cb161-31"></a>trades_backup &lt;-<span class="st"> </span>trades</span>
+<span id="cb161-32"><a href="predictions.html#cb161-32"></a></span>
+<span id="cb161-33"><a href="predictions.html#cb161-33"></a><span class="co"># Add symbols back in </span></span>
+<span id="cb161-34"><a href="predictions.html#cb161-34"></a>trades &lt;-<span class="st"> </span><span class="kw">merge</span>(trades, messari, <span class="dt">by=</span><span class="st">&#39;name&#39;</span>)</span>
+<span id="cb161-35"><a href="predictions.html#cb161-35"></a></span>
+<span id="cb161-36"><a href="predictions.html#cb161-36"></a><span class="co"># Get symbols for top predictions</span></span>
+<span id="cb161-37"><a href="predictions.html#cb161-37"></a><span class="cf">if</span>(<span class="kw">nrow</span>(trades) <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>){</span>
+<span id="cb161-38"><a href="predictions.html#cb161-38"></a>  fifthPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">5</span>]]</span>
+<span id="cb161-39"><a href="predictions.html#cb161-39"></a>  fourthPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">4</span>]]</span>
+<span id="cb161-40"><a href="predictions.html#cb161-40"></a>  thirdPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">3</span>]]</span>
+<span id="cb161-41"><a href="predictions.html#cb161-41"></a>  secondPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">2</span>]]</span>
+<span id="cb161-42"><a href="predictions.html#cb161-42"></a>  topPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">1</span>]]</span>
+<span id="cb161-43"><a href="predictions.html#cb161-43"></a>} <span class="cf">else</span> <span class="cf">if</span>(<span class="kw">nrow</span>(trades) <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>){</span>
+<span id="cb161-44"><a href="predictions.html#cb161-44"></a>  fifthPrediction &lt;-<span class="st"> &#39;None&#39;</span></span>
+<span id="cb161-45"><a href="predictions.html#cb161-45"></a>  fourthPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">4</span>]]</span>
+<span id="cb161-46"><a href="predictions.html#cb161-46"></a>  thirdPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">3</span>]]</span>
+<span id="cb161-47"><a href="predictions.html#cb161-47"></a>  secondPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">2</span>]]</span>
+<span id="cb161-48"><a href="predictions.html#cb161-48"></a>  topPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">1</span>]]</span>
+<span id="cb161-49"><a href="predictions.html#cb161-49"></a>} <span class="cf">else</span> <span class="cf">if</span>(<span class="kw">nrow</span>(trades) <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>){</span>
+<span id="cb161-50"><a href="predictions.html#cb161-50"></a>  fifthPrediction &lt;-<span class="st"> &#39;None&#39;</span></span>
+<span id="cb161-51"><a href="predictions.html#cb161-51"></a>  fourthPrediction &lt;-<span class="st"> &#39;None&#39;</span></span>
+<span id="cb161-52"><a href="predictions.html#cb161-52"></a>  thirdPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">3</span>]]</span>
+<span id="cb161-53"><a href="predictions.html#cb161-53"></a>  secondPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">2</span>]]</span>
+<span id="cb161-54"><a href="predictions.html#cb161-54"></a>  topPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">1</span>]]</span>
+<span id="cb161-55"><a href="predictions.html#cb161-55"></a>} <span class="cf">else</span> <span class="cf">if</span>(<span class="kw">nrow</span>(trades) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>){</span>
+<span id="cb161-56"><a href="predictions.html#cb161-56"></a>  fifthPrediction &lt;-<span class="st"> &#39;None&#39;</span></span>
+<span id="cb161-57"><a href="predictions.html#cb161-57"></a>  fourthPrediction &lt;-<span class="st"> &#39;None&#39;</span></span>
+<span id="cb161-58"><a href="predictions.html#cb161-58"></a>  thirdPrediction &lt;-<span class="st"> &#39;None&#39;</span></span>
+<span id="cb161-59"><a href="predictions.html#cb161-59"></a>  secondPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">2</span>]]</span>
+<span id="cb161-60"><a href="predictions.html#cb161-60"></a>  topPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">1</span>]]</span>
+<span id="cb161-61"><a href="predictions.html#cb161-61"></a>} <span class="cf">else</span> <span class="cf">if</span>(<span class="kw">nrow</span>(trades) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>){</span>
+<span id="cb161-62"><a href="predictions.html#cb161-62"></a>  fifthPrediction &lt;-<span class="st"> &#39;None&#39;</span></span>
+<span id="cb161-63"><a href="predictions.html#cb161-63"></a>  fourthPrediction &lt;-<span class="st"> &#39;None&#39;</span></span>
+<span id="cb161-64"><a href="predictions.html#cb161-64"></a>  thirdPrediction &lt;-<span class="st"> &#39;None&#39;</span></span>
+<span id="cb161-65"><a href="predictions.html#cb161-65"></a>  secondPrediction &lt;-<span class="st"> &#39;None&#39;</span></span>
+<span id="cb161-66"><a href="predictions.html#cb161-66"></a>  topPrediction &lt;-<span class="st"> </span>trades<span class="op">$</span>symbol[[<span class="dv">1</span>]]</span>
+<span id="cb161-67"><a href="predictions.html#cb161-67"></a>}</span>
+<span id="cb161-68"><a href="predictions.html#cb161-68"></a></span>
+<span id="cb161-69"><a href="predictions.html#cb161-69"></a><span class="co"># import reticulate for Python code below</span></span>
+<span id="cb161-70"><a href="predictions.html#cb161-70"></a><span class="kw">library</span>(reticulate)</span></code></pre></div>
+<div id="make-trades" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Make Trades</h2>
+<pre><code>## {&#39;isDynamic&#39;: False, &#39;allocations&#39;: [{&#39;symbol&#39;: &#39;BAT&#39;, &#39;percent&#39;: &#39;30&#39;}, {&#39;symbol&#39;: &#39;ENJ&#39;, &#39;percent&#39;: &#39;20&#39;}, {&#39;symbol&#39;: &#39;EOS&#39;, &#39;percent&#39;: &#39;20&#39;}, {&#39;symbol&#39;: &#39;HT&#39;, &#39;percent&#39;: &#39;15&#39;}, {&#39;symbol&#39;: &#39;NEO&#39;, &#39;percent&#39;: &#39;15&#39;}]}</code></pre>
+<pre><code>## {&#39;isDynamic&#39;: False, &#39;allocations&#39;: [{&#39;symbol&#39;: &#39;BAT&#39;, &#39;percent&#39;: &#39;30&#39;}, {&#39;symbol&#39;: &#39;ENJ&#39;, &#39;percent&#39;: &#39;20&#39;}, {&#39;symbol&#39;: &#39;EOS&#39;, &#39;percent&#39;: &#39;20&#39;}, {&#39;symbol&#39;: &#39;HT&#39;, &#39;percent&#39;: &#39;15&#39;}, {&#39;symbol&#39;: &#39;NEO&#39;, &#39;percent&#39;: &#39;15&#39;}]}
+## {&#39;success&#39;: True}</code></pre>
+<pre><code>## {&#39;success&#39;: True}</code></pre>
+<!-- WRITE INFORMATION TO DATABASE - SHRIMPY VALUE -->
+<!-- EMAIL CONFIRMATION (NOT WORKING YET) -->
+<!-- ```{r email_confirmation} -->
+<!-- library(gmailr) -->
+<!-- use_secret_file('misc/client_secret_gmail.json') -->
+<!-- # Compose email -->
+<!-- email_message <- mime() %>%  -->
+<!--                     to('ries9112@colorado.edu') %>%  -->
+<!--                     from('riccardoesclapon@gmail.com') %>%  -->
+<!--                     subject('test') %>%  -->
+<!--                     text_body('test') -->
+<!-- # Send email -->
+<!-- send_message(email_message) -->
+<!-- ``` -->
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="evaluate-model-performance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="explain-predictions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["CryptoResearchPaper.pdf", "CryptoResearchPaper.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

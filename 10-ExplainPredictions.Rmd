@@ -1,0 +1,31 @@
+# Explain Predictions
+
+
+```{r explain_preds_got_here}
+# remove after test!
+print('got here')
+```
+
+
+
+
+
+
+
+
+
+<!-- OLD -->
+<!-- **Summary for discussion:** Now that we feel like we have some pretty complex models that seem to be doing a relatively good job at the problem, it's pretty natural for that complexity to feel overwhelming and to be left feeling like ***now what?*** Therefore, this section will focus around creating solutions that can be used to explain predictions and are also model-agnostic meaning they can be applied to any type of model. The tool I am most familiar with around doing this specific task is **lime**, but there are several of these tools in Python so I might explore some different tools here, but I will start with this one: https://github.com/thomasp85/lime -->
+
+<!-- ====================================== -->
+
+<!-- Ricky dev work for this section below. -->
+
+
+
+<!-- - Use lime to explain the predictions made through model-agnostic explanations: https://github.com/thomasp85/lime -->
+
+<!-- - I know there are other alternatives for this in Python so explore those tools more before finalizing this section -->
+
+
+<!-- - In Python use SHAP: https://www.kaggle.com/dansbecker/shap-values -->

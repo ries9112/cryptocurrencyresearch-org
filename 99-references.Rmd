@@ -1,0 +1,29 @@
+# References
+
+The **bookdown** package [@R-bookdown] was used to produce this document, which was built on top of R Markdown and **knitr** [@xie2015].
+
+```{r write_bib_packages, message=FALSE, warning=FALSE}
+knitr::write_bib(c(.packages()), "packages.bib")
+```
+
+## Resources Used
+
+### Visualization Section
+
+- https://www.rayshader.com/
+
+- https://github.com/yutannihilation/gghighlight
+
+    - https://github.com/njtierney/rstudioconf20/blob/master/slides/index.Rmd
+
+- ... add rest here
+
+
+### Time Series Section
+
+- https://stackoverflow.com/questions/42820696/using-prophet-package-to-predict-by-group-in-dataframe-in-r
+
+- ... add rest here
+
+
+## Packages used and cited

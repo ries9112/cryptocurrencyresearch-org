@@ -1,0 +1,205 @@
+# Predictive Modeling {#predictive-modeling}
+
+## What is it?
+
+<!-- [TODO - Here talk about how models are meant to give us a simpler version of the world that we can extrapolate the information we need out of, but most models don't expect to be perfect so our job is to understand the expected levels of accuracy and put them to the test before we actually make any conclusive descision... edit and add] -->
+
+## Example Simple Model
+
+...First need to run example normal lm model, etc...
+
+### Using Functional Programming {#using-functional-programming}
+
+```{r}
+linear_model <- function(df){
+  lm(price_usd ~ . -date_time_utc -date, data = df)
+}
+```
+
+Can now use it for `map()`
+
+```{r}
+cryptodata_nested %>% mutate(lm_model = map(train_data, linear_model))
+```
+
+## Caret
+
+### Parallel Processing
+
+[ADD HERE About R only using one CPU as deafault but can use more enabling parallel processing]
+
+```{r parallel_processing}
+library(doParallel)
+cl <- makePSOCKcluster(12)
+registerDoParallel(cl)
+```
+
+### Functional Programming - here or elsewhere?
+
+[ADD HERE]
+
+Here use Caret + purrr to make models
+
+```{r}
+linear_model_caret <- function(df){
+
+  train(price_usd ~ . -date_time_utc -date, data = df,
+        method = 'lm',
+        trControl=trainControl(method="none"))
+
+}
+```
+
+Can now use it for `map()`
+
+```{r}
+cryptodata_nested <- mutate(cryptodata_nested, 
+                            lm_model = map(train_data, linear_model_caret))
+```
+
+### Cross Validation
+
+Within each split we created, we can set caret to perform an additional cross-validation step to allow it to do a minimal level of automated hyperparameter tuning as it creates the models (the more we do the longer it will take).
+
+```{r}
+fitControl <- trainControl(## 3-fold CV
+                           method = "repeatedcv",
+                           number = 3,
+                           ## repeated three times
+                           repeats = 3)
+```
+
+<!-- [TODO - here need to explain "method" options like I did in the high-level version (use those images)] -->
+
+Now create more generalized version
+
+```{r}
+model_caret <- function(df, method_choice){
+
+  train(price_usd ~ . -date_time_utc -date, data = df,
+        method = method_choice,
+        trControl=fitControl)
+
+}
+```
+
+### XGBoost models
+
+Will now need to use map2()
+
+```{r}
+cryptodata_nested <- mutate(cryptodata_nested, 
+                            xgb_model = map2(train_data, "xgbLinear",model_caret))
+```
+
+Can also make a tree based XGBoost model:
+
+```{r}
+cryptodata_nested <- mutate(cryptodata_nested, 
+                            xgbTree_model = map2(train_data, "xgbTree",model_caret))
+```
+
+[TODO - Reference xgboost documentation. Can I embed it? <https://xgboost.readthedocs.io/en/latest/parameter.html>]
+
+### All Other Models
+
+Can use the same function and methodology to keep adding models. Could also all be done in one step adding more arguments to `mutate()`, but broken up to be verbose and take it step by step.
+
+#### Neural Network models
+
+```{r}
+cryptodata_nested <- mutate(cryptodata_nested, 
+                            nnet_model = map2(train_data, "dnn", model_caret))
+```
+
+#### Gradient Boosting Machines
+
+<!-- ```{r} -->
+
+<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
+
+<!--                             gbm = map2(train_data, "gbm", model_caret)) -->
+
+<!-- ``` -->
+
+[TODO - Here could also mention using preProcess function to do things like center and scale data ]
+
+## Make Predictions
+
+[TODO]
+
+... first one example...
+
+```{r}
+predict(object  = cryptodata_nested$lm_model[[1]],
+              newdata = cryptodata_nested$test_data[[1]],
+              na.action = na.pass)
+```
+
+... now make function to use for map
+
+```{r}
+make_predictions <- function(model, test){
+  
+  predict(object  = model, newdata = test, na.action = na.pass)
+  
+}
+```
+
+And use map2() to use it to make predictions and create new columns for both the test data and the holdout:
+
+```{r}
+cryptodata_nested <- mutate(cryptodata_nested, 
+                            lm_test_predictions =  map2(lm_model,
+                                                   test_data,
+                                                   make_predictions),
+                            
+                            lm_holdout_predictions =  map2(lm_model,
+                                                      holdout_data,
+                                                      make_predictions))
+```
+
+We can view the results:
+
+```{r}
+select(cryptodata_nested, lm_test_predictions, lm_holdout_predictions)
+```
+
+Now we can do the same for the rest of the models:
+
+```{r}
+cryptodata_nested <- mutate(cryptodata_nested, 
+                            # XGBoost:
+                            xgb_test_predictions =  map2(xgb_model,
+                                                    test_data,
+                                                    make_predictions),
+                            
+                            xgb_holdout_predictions =  map2(xgb_model,
+                                                       holdout_data,
+                                                       make_predictions),
+                            # XGBoost Trees:
+                            xgbTree_test_predictions =  map2(xgbTree_model,
+                                                        test_data,
+                                                        make_predictions),
+                            xgbTree_holdout_predictions =  map2(xgbTree_model,
+                                                           holdout_data,
+                                                           make_predictions),
+                            # Neural Network:
+                            nnet_test_predictions =  map2(nnet_model,
+                                                     test_data,
+                                                     make_predictions),
+                            
+                            nnet_holdout_predictions =  map2(nnet_model,
+                                                        holdout_data,
+                                                        make_predictions))
+```
+
+Done with the parallel processing now:
+
+```{r stop_parallel_processing}
+stopCluster(cl)
+```
+
+## Traditional Timeseries
+
+<!-- [TODO - HERE TALK ABOUT ARIMA AND ETS AND MAKE MODELS! KEEP SAME STRUCTURE AND WILL BE ABLE TO DO postResample()] -->

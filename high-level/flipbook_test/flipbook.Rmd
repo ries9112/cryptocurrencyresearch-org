@@ -1,0 +1,217 @@
+---
+title: "Cryptocurrency Research"
+author: "Ricky Esclapon"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:10
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+
+```{r setup, include = F}
+# This is the recommended set up for flipbooks
+# you might think about setting cache to TRUE as you gain practice --- building flipbooks from scracth can be time consuming
+knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = FALSE, fig.retina = 3)
+library(flipbookr)
+library(tidyverse)
+```
+
+
+
+
+
+```{r initialSetup_needs_adjusting, message=FALSE, warning=FALSE, include=F, cache=T}
+library(bookdown)
+library(knitr)
+library(devtools)
+library(dplyr)
+library(tictoc)
+#install_github("ries9112/PredictCrypto")
+library(PredictCrypto) #import with eval=F later
+options(scipen=999) # disable scientific notation
+
+
+# start timer
+tic('whole process time')
+##### TEMPORARY SETUP, THIS DATA WILL BE AVAILABLE THROUGH THE PREDICT CRYPTO PACKAGE IN THE FUTURE ####
+library(DBI)
+library(RMariaDB)
+source("login_info.R")
+### SQL CONNECTION
+getSqlConnection <- function(){
+  con <-
+    dbConnect(
+      RMariaDB::MariaDB(),
+      username = Sys.getenv('db_user'),
+      password = Sys.getenv('db_pswd'),
+      host = Sys.getenv('db_ip'),
+      dbname = 'ScrapeStorm'
+    )
+  return(con)
+}
+database_connection <- getSqlConnection()
+query <- "SELECT Date as 'DateExtracted', DateTime as 'DateTimeColoradoMST', Name, Rank, PriceUSD, PriceBTC, PercChange24hVsUSD, PercChange24hVsBTC, Reported_MarketCap, Reported24hVolume, VolumeTurnover24h, Reported_Supply, CurrentInflation, ATH_USD, TimeFromATH, PercDownFromATH, BreakevenMultiple, PercUpSinceLow, PercChange7d, PercChange7d_BTC, PercChange30d, PercChange30d_BTC, PercChange90d, PercChange90d_BTC, PercChange1y,PercChange1y_BTC, PercChange_MTD, PercChange_QTD, PercChange_YTD, NetworkPercStaking, FlipsideFCAS_Grade, FlipsideFCAS_Rating, FlipsideScore_Dev, FlipsideScore_Utility, FlipsideScore_Maturity, TokenInsight_Grade, TokenInsight_TeamScore, TokenInsight_SubjectScore, TxVol24h, AdjstedTxVol24h, MedianTxValueUSD, ActiveAddresses, Transactions24h, Fees24hUSD, MedianFeeUSD, AvgDifficulty, KilobytesAdded24h, NumBlocks24h, Git_Stars, Git_Watchers, Git_CommitsLast90Days, Git_CommitsLastYear, Git_LinesAddedLast90Days, Git_LinesAddedLastYear, Git_LinesRemovedLast90Days, Git_LinesRemovedLastYear, ROI_2018, ROI_2017, ROI_2016, Volatility30d, Volatility90d, Volatility1y, Volatility3y, Sharpe30d, Sharpe90d, Sharpe1y, Sharpe3y, BlockReward, TargetBlockTimeSeconds, OnChainGovernanceStructure, IsTreasuryDecentralized, LaunchStyle, MiningAlgorithm, NextHalvingDate, GenesisBlockDate, Age, HasExperienced51PercAttack, EmissionType_General, EmissionType_Precise, IsSupplyCapped, MaxSupply, Sector, Category, TokenUsage, TokenType, ConsensusAlgorithm, pkDummy FROM Messari WHERE Date >= date_sub(now(), INTERVAL 50 DAY) AND Name != '' order by pkDummy desc, cast(Rank as unsigned) asc" #Manually picked all fields that could be interesting for this + Use Case tutorial 
+
+# Pull Data
+crypto_data <- dbFetch(dbSendQuery(database_connection, query), 5000000)
+
+# Remove any non-ascii characters/non UTF-8 compatible, gives error when mapping models otherwise
+library(textclean)
+for (i in colnames(crypto_data)){
+  crypto_data[[i]] <- replace_non_ascii(crypto_data[[i]])
+}
+
+
+
+
+# Write Data to .csv in order to convert data types
+write.csv(crypto_data, 'crypto_data.csv')
+crypto_data <- read.csv('crypto_data.csv', stringsAsFactors = F)
+
+# Remove "X" field
+crypto_data <- crypto_data %>% select(-X)
+
+# Adjust fields that need it
+crypto_data$TxVol24h <- as.numeric(crypto_data$TxVol24h)
+crypto_data$AdjstedTxVol24h <- as.numeric(crypto_data$AdjstedTxVol24h)
+crypto_data$PriceBTC <- as.numeric(crypto_data$PriceBTC)
+crypto_data$PercUpSinceLow <- as.numeric(crypto_data$PercUpSinceLow)
+
+# Also remove fields as needed from raw data
+crypto_data <- crypto_data %>% select(-TimeFromATH)
+crypto_data <- crypto_data %>% select(-TokenType)
+crypto_data <- crypto_data %>% select(-EmissionType_General)
+crypto_data <- crypto_data %>% select(-HasExperienced51PercAttack)
+
+
+# Disconnect from the database
+dbDisconnect(database_connection)
+```
+
+
+
+## Install required packages
+
+First, we will need to **install devtools to interact with GitHub** using the function `install.packages()`
+
+---
+
+```{r install_required_packages, eval=F, message=FALSE, warning=FALSE, include=F, cache=T}
+install.packages("devtools")
+library(devtools)
+install_github("ries9112/PredictCrypto")
+library(PredictCrypto)
+```
+
+`r chunk_reveal('install_required_packages',display_type='code')`
+
+---
+
+### The tidyverse
+
+The R ecosystem has been growing at an incredibly rapid pace thanks to the incredible work done by the [Benefit Corporation](https://bcorporation.net/directory/rstudio) known as [RStudio](https://rstudio.com/); they have been creating countless packages to make data science easier and more accessible to enable users to better focus on the analysis part of their work rather than the programming side of things. The most fundamental building block in order to use effectively use the amazing tools RStudio has made available, is to be familiar with the ***tidyverse***. There are two fundamental concepts to understand relating to the tidyverse to follow along with this example:
+
+1. As of writing this, the ***core tidyverse*** is comprised of [8 different packages](https://www.tidyverse.org/packages/) and includes most if not all of the tools you would need for your daily data analysis work. 
+
+2. There are **lots** of important concepts to grasp in order to use the tidyverse to its full potential, and we will not be able to cover those, but to follow along, you **will** have to understand the **`%>%`** operator and why/when it should be used as a much better way to write code. If you are not familiar with the `%>%`, please review [the last section on this page](#tidy-example).
+
+---
+
+In order to **import all the packages that are part of the tidyverse**, we can install the *tidyverse* package through [CRAN](https://cran.r-project.org/):
+```{r tidy_install, eval=F, cache=T}
+install.packages('tidyverse')
+```
+
+When we import the tidyverse we make the 8 all 8 packages available in our R session: 
+
+```{r import_tidyverse, echo=T, message=TRUE, warning=FALSE}
+library(tidyverse)
+```
+
+
+---
+
+
+
+
+
+
+
+
+
+---
+
+another slide
+
+---
+
+another slide
+
+---
+
+another slide
+
+---
+
+another slide
+
+---
+
+another slide
+
+---
+
+another slide
+
+---
+
+another slide
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 80%}
+```
