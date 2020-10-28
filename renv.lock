@@ -198,19 +198,6 @@
       "Repository": "CRAN",
       "Hash": "b7d7f1e926dfcd57c74ce93f5c048e80"
     },
-    "capsule": {
-      "Package": "capsule",
-      "Version": "0.1.1",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "Remotes": "rstudio/renv, anthonynorth/using",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "capsule",
-      "RemoteUsername": "MilesMcBain",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "0841cf108179e1604288cf9f05f515b55a5687f8",
-      "Hash": "5a5b47c484a44afe92909bbc3c1d98ba"
-    },
     "car": {
       "Package": "car",
       "Version": "3.0-10",
@@ -1357,31 +1344,12 @@
       "Repository": "CRAN",
       "Hash": "c541a7aed5f7fb3b487406bf92842e34"
     },
-    "using": {
-      "Package": "using",
-      "Version": "0.4.0",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "using",
-      "RemoteUsername": "anthonynorth",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "c33a88c5c42c64fd84423a65af7b5a3ae8d5e64a",
-      "Hash": "ff1b4c43bd0f709414b852ee67794ce4"
-    },
     "utf8": {
       "Package": "utf8",
       "Version": "1.1.4",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "4a5081acfb7b81a572e4384a7aaf2af1"
-    },
-    "uuid": {
-      "Package": "uuid",
-      "Version": "0.1-4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "e4169eb989a5d03ccb6b628cad1b1b50"
     },
     "vctrs": {
       "Package": "vctrs",
