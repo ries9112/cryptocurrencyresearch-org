@@ -1,6 +1,5 @@
 name: Run Crypto Tutorial
 on:
-  push:
   schedule:
     - cron: '00 05,17 * * *'
       
