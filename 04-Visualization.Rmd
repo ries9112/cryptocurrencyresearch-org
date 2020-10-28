@@ -120,7 +120,7 @@ crypto_chart
 
 See below for a full list of themes you can test. If you followed to this point try running the code `crypto_chart + theme_excel()` or any of the other options listed below instead of `+ theme_excel()`:
 ```{r show_ggthemes_site, echo=F}
-knitr::include_url("https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/", heigth='500px')
+knitr::include_url("https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/", height = '500px' )
 ```
 *https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/*
 
