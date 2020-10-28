@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-7"><a href="data-prep.html#cb12-7" aria-hidden="true"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">5</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">5</span>_price))</span></code></pre></div>
 <p>Now remove rows where we couldn’t find a price above $15 for any of the 5 cheapest orders in the order book.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="data-prep.html#cb13-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">na.omit</span>(cryptodata)</span></code></pre></div>
-<p>This step removed 20952 rows on the latest run.</p>
+<p>This step removed 21180 rows on the latest run.</p>
 </div>
 <div id="clean-data-by-group" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Clean Data by Group</h2>
@@ -317,13 +317,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.3.1</span> Remove symbols without enough rows</h3>
 <p>[ADD HERE]</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-prep.html#cb15-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(cryptodata, <span class="kw">n</span>() <span class="op">&gt;=</span><span class="st"> </span><span class="dv">700</span>)</span></code></pre></div>
-<p>The number of rows for the <code>cryptodata</code> dataset before the filtering step was 178533 and is now 151749.</p>
+<p>The number of rows for the <code>cryptodata</code> dataset before the filtering step was 179973 and is now 152998.</p>
 </div>
 <div id="remove-symbols-without-data-from-the-last-3-days" class="section level3" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Remove symbols without data from the last 3 days</h3>
 <p>If there was no data collected for a cryptocurrency over the last 3 day period, let’s exclude that asset from the dataset since we are only looking to model data that is currently flowing through the process. If an asset is removed from the exchange (if a project is a scam for example) or is no longer being actively captured by the data collection process, we can’t make new predictions for it, so might as well exclude these ahead of time as well.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-prep.html#cb16-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(cryptodata, <span class="kw">max</span>(date) <span class="op">&gt;</span><span class="st"> </span><span class="kw">Sys.Date</span>()<span class="op">-</span><span class="dv">3</span>)</span></code></pre></div>
-<p>The number of rows for the <code>cryptodata</code> dataset before this filtering step was 151749 and is now 110814.</p>
+<p>The number of rows for the <code>cryptodata</code> dataset before this filtering step was 152998 and is now 112063.</p>
 </div>
 </div>
 <div id="calculate-target" class="section level2" number="3.4">
@@ -349,7 +349,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="scan-gaps" class="section level3" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> Scan gaps</h3>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-prep.html#cb20-1" aria-hidden="true"></a><span class="kw">scan_gaps</span>(cryptodata)</span></code></pre></div>
-<pre><code>## [90m# A tsibble: 20,889 x 2 [1h] &lt;UTC&gt;[39m
+<pre><code>## [90m# A tsibble: 20,967 x 2 [1h] &lt;UTC&gt;[39m
 ## [90m# Key:       symbol [90][39m
 ##    symbol ts_index           
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m             
@@ -363,14 +363,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m 8[39m ACAT   2020-08-15 [90m04:00:00[39m
 ## [90m 9[39m ACAT   2020-08-15 [90m05:00:00[39m
 ## [90m10[39m ACAT   2020-08-15 [90m06:00:00[39m
-## [90m# … with 20,879 more rows[39m</code></pre>
+## [90m# … with 20,957 more rows[39m</code></pre>
 </div>
 <div id="fill-gaps" class="section level3" number="3.4.4">
 <h3><span class="header-section-number">3.4.4</span> Fill gaps</h3>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-prep.html#cb22-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">fill_gaps</span>(cryptodata)</span></code></pre></div>
-<p>Now looking at the data again, there are 20889 additional rows that were added as implicitly missing in the data:</p>
+<p>Now looking at the data again, there are 20967 additional rows that were added as implicitly missing in the data:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-prep.html#cb23-1" aria-hidden="true"></a>cryptodata</span></code></pre></div>
-<pre><code>## [90m# A tsibble: 131,503 x 34 [1h] &lt;UTC&gt;[39m
+<pre><code>## [90m# A tsibble: 132,830 x 34 [1h] &lt;UTC&gt;[39m
 ## [90m# Key:       symbol [90][39m
 ## [90m# Groups:    symbol [90][39m
 ##    pair  symbol quote_currency ask_1_price ask_1_quantity ask_2_price
@@ -385,7 +385,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m 8[39m ACAT… ACAT   USD                0.000[4m1[24m[4m9[24m         [4m1[24m[4m1[24m[4m8[24m300     0.000[4m2[24m[4m2[24m
 ## [90m 9[39m ACAT… ACAT   USD                0.000[4m1[24m[4m9[24m         [4m1[24m[4m1[24m[4m8[24m300     0.000[4m2[24m[4m2[24m
 ## [90m10[39m ACAT… ACAT   USD                0.000[4m1[24m[4m9[24m         [4m1[24m[4m1[24m[4m8[24m300     0.000[4m2[24m[4m2[24m
-## [90m# … with 131,493 more rows, and 28 more variables: ask_2_quantity [3m[90m&lt;dbl&gt;[90m[23m,[39m
+## [90m# … with 132,820 more rows, and 28 more variables: ask_2_quantity [3m[90m&lt;dbl&gt;[90m[23m,[39m
 ## [90m#   ask_3_price [3m[90m&lt;dbl&gt;[90m[23m, ask_3_quantity [3m[90m&lt;dbl&gt;[90m[23m, ask_4_price [3m[90m&lt;dbl&gt;[90m[23m,[39m
 ## [90m#   ask_4_quantity [3m[90m&lt;dbl&gt;[90m[23m, ask_5_price [3m[90m&lt;dbl&gt;[90m[23m, ask_5_quantity [3m[90m&lt;dbl&gt;[90m[23m,[39m
 ## [90m#   bid_1_price [3m[90m&lt;dbl&gt;[90m[23m, bid_1_quantity [3m[90m&lt;dbl&gt;[90m[23m, bid_2_price [3m[90m&lt;dbl&gt;[90m[23m,[39m
@@ -416,7 +416,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Here is an example showing the results for the subset of data related to the Bitcoin cryptocurrency (using <code>symbol == 'BTC'</code>) showing 30 rows and the relevant columns we just calculated:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-prep.html#cb27-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">select</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>),ts_index, price_usd, lagged_price_1h, lagged_price_24h, target_price_24h), <span class="dt">n=</span><span class="dv">30</span>)</span></code></pre></div>
 <pre><code>## Adding missing grouping variables: `symbol`</code></pre>
-<pre><code>## [90m# A tibble: 1,895 x 6[39m
+<pre><code>## [90m# A tibble: 1,910 x 6[39m
 ## [90m# Groups:   symbol [1][39m
 ##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
@@ -450,12 +450,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m28[39m BTC    2020-08-11 [90m07:00:00[39m    [4m1[24m[4m1[24m774.          [4m1[24m[4m1[24m847.           [4m1[24m[4m1[24m994.
 ## [90m29[39m BTC    2020-08-11 [90m08:00:00[39m    [4m1[24m[4m1[24m761.          [4m1[24m[4m1[24m774.           [4m1[24m[4m1[24m984.
 ## [90m30[39m BTC    2020-08-11 [90m09:00:00[39m    [4m1[24m[4m1[24m753.          [4m1[24m[4m1[24m761.           [4m1[24m[4m1[24m962.
-## [90m# … with 1,865 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
+## [90m# … with 1,880 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
 <p>The field <code>target_price_24h</code> shows the value of <code>price_usd</code> 24 hours into the future relative to the row of data. All the <code>lagged_</code> fields show the price from the past relative to when the data was collected (where <code>lagged_price_1h</code> shows the price 1 hour before the <code>ts_index</code> timestamp of the data).</p>
 <p>So looking at the <span style="color: green;"><strong>tail()</strong></span> end of the data, we should see 24 rows with no values for <span style="color: blue;"><strong>target_price_24h</strong></span>, while all the <span style="color: blue;"><strong>lagged_price_</strong></span> columns should have values:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-prep.html#cb30-1" aria-hidden="true"></a><span class="kw">tail</span>(<span class="kw">print</span>(<span class="kw">select</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>),ts_index, price_usd, lagged_price_1h, lagged_price_24h, target_price_24h), <span class="dt">n=</span><span class="dv">30</span>))</span></code></pre></div>
 <pre><code>## Adding missing grouping variables: `symbol`</code></pre>
-<pre><code>## [90m# A tibble: 1,895 x 6[39m
+<pre><code>## [90m# A tibble: 1,910 x 6[39m
 ## [90m# Groups:   symbol [1][39m
 ##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
@@ -489,17 +489,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m28[39m BTC    2020-08-11 [90m07:00:00[39m    [4m1[24m[4m1[24m774.          [4m1[24m[4m1[24m847.           [4m1[24m[4m1[24m994.
 ## [90m29[39m BTC    2020-08-11 [90m08:00:00[39m    [4m1[24m[4m1[24m761.          [4m1[24m[4m1[24m774.           [4m1[24m[4m1[24m984.
 ## [90m30[39m BTC    2020-08-11 [90m09:00:00[39m    [4m1[24m[4m1[24m753.          [4m1[24m[4m1[24m761.           [4m1[24m[4m1[24m962.
-## [90m# … with 1,865 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
+## [90m# … with 1,880 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
 <pre><code>## [90m# A tibble: 6 x 6[39m
 ## [90m# Groups:   symbol [1][39m
 ##   symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##   [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
-## [90m1[39m BTC    2020-10-27 [90m21:00:00[39m    [4m1[24m[4m3[24m601.          [4m1[24m[4m3[24m653.           [4m1[24m[4m3[24m003.
-## [90m2[39m BTC    2020-10-27 [90m22:00:00[39m    [4m1[24m[4m3[24m695.          [4m1[24m[4m3[24m601.           [4m1[24m[4m3[24m013.
-## [90m3[39m BTC    2020-10-27 [90m23:00:00[39m    [4m1[24m[4m3[24m728.          [4m1[24m[4m3[24m695.           [4m1[24m[4m3[24m040.
-## [90m4[39m BTC    2020-10-28 [90m00:00:00[39m    [4m1[24m[4m3[24m635.          [4m1[24m[4m3[24m728.           [4m1[24m[4m3[24m053.
-## [90m5[39m BTC    2020-10-28 [90m01:00:00[39m    [4m1[24m[4m3[24m714.          [4m1[24m[4m3[24m635.           [4m1[24m[4m3[24m092.
-## [90m6[39m BTC    2020-10-28 [90m02:00:00[39m    [4m1[24m[4m3[24m715.          [4m1[24m[4m3[24m714.           [4m1[24m[4m3[24m090.
+## [90m1[39m BTC    2020-10-28 [90m12:00:00[39m    [4m1[24m[4m3[24m322.          [4m1[24m[4m3[24m559.           [4m1[24m[4m3[24m445 
+## [90m2[39m BTC    2020-10-28 [90m13:00:00[39m    [4m1[24m[4m3[24m287.          [4m1[24m[4m3[24m322.           [4m1[24m[4m3[24m383.
+## [90m3[39m BTC    2020-10-28 [90m14:00:00[39m    [4m1[24m[4m3[24m101.          [4m1[24m[4m3[24m287.           [4m1[24m[4m3[24m391.
+## [90m4[39m BTC    2020-10-28 [90m15:00:00[39m    [4m1[24m[4m3[24m067.          [4m1[24m[4m3[24m101.           [4m1[24m[4m3[24m388.
+## [90m5[39m BTC    2020-10-28 [90m16:00:00[39m    [4m1[24m[4m3[24m224.          [4m1[24m[4m3[24m067.           [4m1[24m[4m3[24m603.
+## [90m6[39m BTC    2020-10-28 [90m17:00:00[39m    [4m1[24m[4m3[24m140.          [4m1[24m[4m3[24m224.           [4m1[24m[4m3[24m640.
 ## [90m# … with 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
 <p>Reading the code shown above is less than ideal. One of the more popular tools introduced by the <a href="https://www.tidyverse.org/">tidyverse</a> is the <span style="color: purple;"><strong>%&gt;%</strong></span> operator, which works by starting with the object/data you want to make changes to first, and then apply each transformation step by step. It’s simply a way of re-writing the same code in a way that is easier to read by splitting the way the function is called rather than adding functions onto each other into a single line that becomes really hard to read. In the example above it becomes difficult to keep track of where things begin, the order of operations, and the parameters associated with the specific functions. Compare that to the code below:</p>
 <!-- [TODO - ADD HERE ABOUT PIPE OPERATOR] -->
@@ -514,7 +514,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb34-9"><a href="data-prep.html#cb34-9" aria-hidden="true"></a><span class="st">  </span><span class="co"># Show the last 30 elements of the data</span></span>
 <span id="cb34-10"><a href="data-prep.html#cb34-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">tail</span>(<span class="dv">30</span>)</span></code></pre></div>
 <pre><code>## Adding missing grouping variables: `symbol`</code></pre>
-<pre><code>## [90m# A tibble: 1,895 x 6[39m
+<pre><code>## [90m# A tibble: 1,910 x 6[39m
 ## [90m# Groups:   symbol [1][39m
 ##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
@@ -548,21 +548,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m28[39m BTC    2020-08-11 [90m07:00:00[39m    [4m1[24m[4m1[24m774.          [4m1[24m[4m1[24m847.           [4m1[24m[4m1[24m994.
 ## [90m29[39m BTC    2020-08-11 [90m08:00:00[39m    [4m1[24m[4m1[24m761.          [4m1[24m[4m1[24m774.           [4m1[24m[4m1[24m984.
 ## [90m30[39m BTC    2020-08-11 [90m09:00:00[39m    [4m1[24m[4m1[24m753.          [4m1[24m[4m1[24m761.           [4m1[24m[4m1[24m962.
-## [90m# … with 1,865 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
+## [90m# … with 1,880 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
 <pre><code>## [90m# A tibble: 30 x 6[39m
 ## [90m# Groups:   symbol [1][39m
 ##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m BTC    2020-10-26 [90m21:00:00[39m    [4m1[24m[4m3[24m003.          [4m1[24m[4m3[24m007.           [4m1[24m[4m3[24m024.
-## [90m 2[39m BTC    2020-10-26 [90m22:00:00[39m    [4m1[24m[4m3[24m013.          [4m1[24m[4m3[24m003.           [4m1[24m[4m3[24m025.
-## [90m 3[39m BTC    2020-10-26 [90m23:00:00[39m    [4m1[24m[4m3[24m040.          [4m1[24m[4m3[24m013.           [4m1[24m[4m3[24m012.
-## [90m 4[39m BTC    2020-10-27 [90m00:00:00[39m    [4m1[24m[4m3[24m053.          [4m1[24m[4m3[24m040.           [4m1[24m[4m3[24m028.
-## [90m 5[39m BTC    2020-10-27 [90m01:00:00[39m    [4m1[24m[4m3[24m092.          [4m1[24m[4m3[24m053.           [4m1[24m[4m3[24m049.
-## [90m 6[39m BTC    2020-10-27 [90m02:00:00[39m    [4m1[24m[4m3[24m090.          [4m1[24m[4m3[24m092.           [4m1[24m[4m3[24m070.
-## [90m 7[39m BTC    2020-10-27 [90m03:00:00[39m    [4m1[24m[4m3[24m071.          [4m1[24m[4m3[24m090.           [4m1[24m[4m3[24m084.
-## [90m 8[39m BTC    2020-10-27 [90m04:00:00[39m    [4m1[24m[4m3[24m085.          [4m1[24m[4m3[24m071.           [4m1[24m[4m3[24m097.
-## [90m 9[39m BTC    2020-10-27 [90m05:00:00[39m    [4m1[24m[4m3[24m119.          [4m1[24m[4m3[24m085.           [4m1[24m[4m3[24m111.
-## [90m10[39m BTC    2020-10-27 [90m06:00:00[39m    [4m1[24m[4m3[24m087.          [4m1[24m[4m3[24m119.           [4m1[24m[4m3[24m103.
+## [90m 1[39m BTC    2020-10-27 [90m12:00:00[39m    [4m1[24m[4m3[24m445           [4m1[24m[4m3[24m253.           [4m1[24m[4m3[24m145.
+## [90m 2[39m BTC    2020-10-27 [90m13:00:00[39m    [4m1[24m[4m3[24m383.          [4m1[24m[4m3[24m445            [4m1[24m[4m3[24m137.
+## [90m 3[39m BTC    2020-10-27 [90m14:00:00[39m    [4m1[24m[4m3[24m391.          [4m1[24m[4m3[24m383.           [4m1[24m[4m3[24m202.
+## [90m 4[39m BTC    2020-10-27 [90m15:00:00[39m    [4m1[24m[4m3[24m388.          [4m1[24m[4m3[24m391.           [4m1[24m[4m3[24m172.
+## [90m 5[39m BTC    2020-10-27 [90m16:00:00[39m    [4m1[24m[4m3[24m603.          [4m1[24m[4m3[24m388.           [4m1[24m[4m2[24m970.
+## [90m 6[39m BTC    2020-10-27 [90m17:00:00[39m    [4m1[24m[4m3[24m640.          [4m1[24m[4m3[24m603.           [4m1[24m[4m2[24m843.
+## [90m 7[39m BTC    2020-10-27 [90m18:00:00[39m    [4m1[24m[4m3[24m675.          [4m1[24m[4m3[24m640.           [4m1[24m[4m2[24m870 
+## [90m 8[39m BTC    2020-10-27 [90m19:00:00[39m    [4m1[24m[4m3[24m631.          [4m1[24m[4m3[24m675.           [4m1[24m[4m2[24m965.
+## [90m 9[39m BTC    2020-10-27 [90m20:00:00[39m    [4m1[24m[4m3[24m653.          [4m1[24m[4m3[24m631.           [4m1[24m[4m3[24m007.
+## [90m10[39m BTC    2020-10-27 [90m21:00:00[39m    [4m1[24m[4m3[24m601.          [4m1[24m[4m3[24m653.           [4m1[24m[4m3[24m003.
 ## [90m# … with 20 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
 <p>There are several advantages to writing code <em>the</em> <strong><em>tidy</em></strong> <em>way</em>, but while some love it others hate it, so we won’t force anyone to have to understand how the <strong>%&gt;%</strong> operator works and we have stayed away from its use for the rest of the code shown, but we do encourage the use of this tool: <a href="https://magrittr.tidyverse.org/reference/pipe.html" class="uri">https://magrittr.tidyverse.org/reference/pipe.html</a></p>
 </div>
@@ -625,7 +625,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Our data now has the new columns <code>training</code> (<em>train</em>, <em>test</em> or <em>holdout</em>) and <code>split</code> (numbers 1-5) added to it, let’s take a look at the new columns:</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="data-prep.html#cb39-1" aria-hidden="true"></a><span class="kw">select</span>(cryptodata, training, split)</span></code></pre></div>
 <pre><code>## Adding missing grouping variables: `symbol`</code></pre>
-<pre><code>## [90m# A tibble: 110,614 x 3[39m
+<pre><code>## [90m# A tibble: 111,863 x 3[39m
 ## [90m# Groups:   symbol [90][39m
 ##    symbol training split
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;dbl&gt;[39m[23m
@@ -639,7 +639,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m 8[39m IHF    train        1
 ## [90m 9[39m DGB    train        1
 ## [90m10[39m RCN    train        1
-## [90m# … with 110,604 more rows[39m</code></pre>
+## [90m# … with 111,853 more rows[39m</code></pre>
 <p><em>Notice that even though we left <code>symbol</code> variables out of our selection, because it is part of the way we grouped our data, it was added back in with the message “Adding missing grouping variables <code>symbol</code>”. The data is tied to its groupings when performing all operations until we use <code>ungroup()</code> to undo them.</em></p>
 <p>Let’s add the new <code>split</code> column to the way the data is grouped:</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="data-prep.html#cb42-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol, split)</span></code></pre></div>
@@ -655,8 +655,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m2[39m REP    holdout      5
 ## [90m3[39m BYTZ   holdout      5
 ## [90m4[39m DAY    holdout      5
-## [90m5[39m UTT    holdout      5
-## [90m6[39m DCN    holdout      5</code></pre>
+## [90m5[39m NUT    holdout      5
+## [90m6[39m UTT    holdout      5</code></pre>
 <p>The easiest way to understand these groupings, is to visualize them. In the next section, you will learn powerful tools for visualizing data in R. Do not worry if you do not understand the code below and are not familiar with <code>ggplot()</code>, we will explain this framework in the <a href="visualization.html#visualization">next section</a>, for now review the charts below and try to follow along with the way we are grouping the data for the predictive models by looking at what the x and y axis represent, as well as the colors. On the x-axis we are plotting the DateTime of when a data point was collected, and on the y-axis the <code>split</code> (1-5) as described in this section. The data is then colored based on the category assigned for the <code>training</code> variable (“train”,“test” or “holdout”).</p>
 <p>We can visualize the new grouping variables:</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="data-prep.html#cb46-1" aria-hidden="true"></a>groups_chart &lt;-<span class="st"> </span><span class="kw">ggplot</span>(cryptodata,</span>
@@ -703,21 +703,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Adding missing grouping variables: `symbol`, `split`, `training`</code></pre>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="data-prep.html#cb52-1" aria-hidden="true"></a><span class="co"># Show data</span></span>
 <span id="cb52-2"><a href="data-prep.html#cb52-2" aria-hidden="true"></a>find_zero_var</span></code></pre></div>
-<pre><code>## [90m# A tibble: 110,614 x 4[39m
+<pre><code>## [90m# A tibble: 111,863 x 4[39m
 ## [90m# Groups:   symbol, split, training [900][39m
 ##    symbol split training    min_sd
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m        [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m LEO        1 train    0.114    
-## [90m 2[39m GBX        1 train    0.002[4m5[24m[4m9[24m  
-## [90m 3[39m ACT        1 train    0.000[4m6[24m[4m4[24m[4m6[24m 
+## [90m 1[39m LEO        1 train    0.113    
+## [90m 2[39m GBX        1 train    0.002[4m6[24m[4m2[24m  
+## [90m 3[39m ACT        1 train    0.000[4m6[24m[4m4[24m[4m1[24m 
 ## [90m 4[39m BTG        1 train    0.400    
-## [90m 5[39m ACAT       1 train    0.000[4m0[24m[4m1[24m[4m6[24m3
-## [90m 6[39m LINK       1 train    2.04     
-## [90m 7[39m VET        1 train    0.000[4m8[24m[4m5[24m[4m3[24m 
-## [90m 8[39m IHF        1 train    0.003[4m2[24m[4m7[24m  
+## [90m 5[39m ACAT       1 train    0.000[4m0[24m[4m1[24m[4m6[24m2
+## [90m 6[39m LINK       1 train    2.03     
+## [90m 7[39m VET        1 train    0.000[4m8[24m[4m5[24m[4m1[24m 
+## [90m 8[39m IHF        1 train    0.003[4m2[24m[4m6[24m  
 ## [90m 9[39m DGB        1 train    0.002[4m0[24m[4m3[24m  
-## [90m10[39m RCN        1 train    0.014[4m0[24m   
-## [90m# … with 110,604 more rows[39m</code></pre>
+## [90m10[39m RCN        1 train    0.013[4m9[24m   
+## [90m# … with 111,853 more rows[39m</code></pre>
 <p>Now let’s get to a list of cryptocurrency symbols where the minimum standard deviation across all columns for all splits of the data is 0, which is the list of cryptocurrencies to remove from the data.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="data-prep.html#cb54-1" aria-hidden="true"></a>minimum_sd &lt;-<span class="st"> </span><span class="kw">filter</span>(<span class="kw">distinct</span>(<span class="kw">mutate</span>(<span class="kw">group_by</span>(<span class="kw">ungroup</span>(find_zero_var), symbol),</span>
 <span id="cb54-2"><a href="data-prep.html#cb54-2" aria-hidden="true"></a>                                     <span class="dt">min_sd =</span> <span class="kw">min</span>(min_sd, <span class="dt">na.rm=</span>T)), min_sd),min_sd <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.000001</span>)<span class="op">$</span>symbol</span>
@@ -756,16 +756,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m# Groups:   symbol, training, split [520][39m
 ##    symbol training split data               
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m             
-## [90m 1[39m BTG    train        1 [90m&lt;tibble [278 × 11]&gt;[39m
-## [90m 2[39m LINK   train        1 [90m&lt;tibble [204 × 11]&gt;[39m
-## [90m 3[39m VET    train        1 [90m&lt;tibble [289 × 11]&gt;[39m
-## [90m 4[39m IHF    train        1 [90m&lt;tibble [228 × 11]&gt;[39m
-## [90m 5[39m DGB    train        1 [90m&lt;tibble [301 × 11]&gt;[39m
-## [90m 6[39m RCN    train        1 [90m&lt;tibble [266 × 11]&gt;[39m
-## [90m 7[39m LTC    train        1 [90m&lt;tibble [301 × 11]&gt;[39m
-## [90m 8[39m NUT    train        1 [90m&lt;tibble [285 × 11]&gt;[39m
-## [90m 9[39m NEXO   train        1 [90m&lt;tibble [300 × 11]&gt;[39m
-## [90m10[39m XMR    train        1 [90m&lt;tibble [300 × 11]&gt;[39m
+## [90m 1[39m BTG    train        1 [90m&lt;tibble [280 × 11]&gt;[39m
+## [90m 2[39m LINK   train        1 [90m&lt;tibble [206 × 11]&gt;[39m
+## [90m 3[39m VET    train        1 [90m&lt;tibble [290 × 11]&gt;[39m
+## [90m 4[39m IHF    train        1 [90m&lt;tibble [230 × 11]&gt;[39m
+## [90m 5[39m DGB    train        1 [90m&lt;tibble [304 × 11]&gt;[39m
+## [90m 6[39m RCN    train        1 [90m&lt;tibble [268 × 11]&gt;[39m
+## [90m 7[39m LTC    train        1 [90m&lt;tibble [304 × 11]&gt;[39m
+## [90m 8[39m NUT    train        1 [90m&lt;tibble [288 × 11]&gt;[39m
+## [90m 9[39m NEXO   train        1 [90m&lt;tibble [302 × 11]&gt;[39m
+## [90m10[39m XMR    train        1 [90m&lt;tibble [302 × 11]&gt;[39m
 ## [90m# … with 510 more rows[39m</code></pre>
 <p>First make training data nested:</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="data-prep.html#cb60-1" aria-hidden="true"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, training<span class="op">==</span><span class="st">&#39;train&#39;</span>)), <span class="dt">train_data =</span> <span class="st">&#39;data&#39;</span>)</span>
@@ -798,27 +798,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb65-4"><a href="data-prep.html#cb65-4" aria-hidden="true"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">left_join</span>(cryptodata_nested, cryptodata_holdout, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;symbol&quot;</span>))</span></code></pre></div>
 <p>New data:</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="data-prep.html#cb66-1" aria-hidden="true"></a>cryptodata_nested</span></code></pre></div>
-<pre><code>## [90m# A tibble: 240 x 5[39m
-## [90m# Groups:   symbol, split [240][39m
+<pre><code>## [90m# A tibble: 235 x 5[39m
+## [90m# Groups:   symbol, split [235][39m
 ##    symbol split train_data          test_data          holdout_data      
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m              [3m[90m&lt;list&gt;[39m[23m             [3m[90m&lt;list&gt;[39m[23m            
-## [90m 1[39m BTG        1 [90m&lt;tibble [191 × 11]&gt;[39m [90m&lt;tibble [70 × 11]&gt;[39m [90m&lt;tibble [70 × 11]&gt;[39m
-## [90m 2[39m LINK       1 [90m&lt;tibble [132 × 11]&gt;[39m [90m&lt;tibble [52 × 11]&gt;[39m [90m&lt;tibble [53 × 11]&gt;[39m
-## [90m 3[39m VET        1 [90m&lt;tibble [217 × 11]&gt;[39m [90m&lt;tibble [73 × 11]&gt;[39m [90m&lt;tibble [73 × 11]&gt;[39m
-## [90m 4[39m IHF        1 [90m&lt;tibble [145 × 11]&gt;[39m [90m&lt;tibble [58 × 11]&gt;[39m [90m&lt;tibble [61 × 11]&gt;[39m
-## [90m 5[39m DGB        1 [90m&lt;tibble [229 × 11]&gt;[39m [90m&lt;tibble [76 × 11]&gt;[39m [90m&lt;tibble [79 × 11]&gt;[39m
-## [90m 6[39m RCN        1 [90m&lt;tibble [137 × 11]&gt;[39m [90m&lt;tibble [67 × 11]&gt;[39m [90m&lt;tibble [71 × 11]&gt;[39m
-## [90m 7[39m LTC        1 [90m&lt;tibble [222 × 11]&gt;[39m [90m&lt;tibble [76 × 11]&gt;[39m [90m&lt;tibble [78 × 11]&gt;[39m
-## [90m 8[39m NUT        1 [90m&lt;tibble [213 × 11]&gt;[39m [90m&lt;tibble [72 × 11]&gt;[39m [90m&lt;tibble [74 × 11]&gt;[39m
-## [90m 9[39m NEXO       1 [90m&lt;tibble [228 × 11]&gt;[39m [90m&lt;tibble [75 × 11]&gt;[39m [90m&lt;tibble [78 × 11]&gt;[39m
-## [90m10[39m XMR        1 [90m&lt;tibble [213 × 11]&gt;[39m [90m&lt;tibble [75 × 11]&gt;[39m [90m&lt;tibble [79 × 11]&gt;[39m
-## [90m# … with 230 more rows[39m</code></pre>
+## [90m 1[39m BTG        1 [90m&lt;tibble [193 × 11]&gt;[39m [90m&lt;tibble [70 × 11]&gt;[39m [90m&lt;tibble [74 × 11]&gt;[39m
+## [90m 2[39m LINK       1 [90m&lt;tibble [134 × 11]&gt;[39m [90m&lt;tibble [52 × 11]&gt;[39m [90m&lt;tibble [53 × 11]&gt;[39m
+## [90m 3[39m VET        1 [90m&lt;tibble [218 × 11]&gt;[39m [90m&lt;tibble [73 × 11]&gt;[39m [90m&lt;tibble [76 × 11]&gt;[39m
+## [90m 4[39m IHF        1 [90m&lt;tibble [147 × 11]&gt;[39m [90m&lt;tibble [58 × 11]&gt;[39m [90m&lt;tibble [62 × 11]&gt;[39m
+## [90m 5[39m DGB        1 [90m&lt;tibble [232 × 11]&gt;[39m [90m&lt;tibble [76 × 11]&gt;[39m [90m&lt;tibble [79 × 11]&gt;[39m
+## [90m 6[39m RCN        1 [90m&lt;tibble [139 × 11]&gt;[39m [90m&lt;tibble [68 × 11]&gt;[39m [90m&lt;tibble [72 × 11]&gt;[39m
+## [90m 7[39m LTC        1 [90m&lt;tibble [225 × 11]&gt;[39m [90m&lt;tibble [76 × 11]&gt;[39m [90m&lt;tibble [78 × 11]&gt;[39m
+## [90m 8[39m NUT        1 [90m&lt;tibble [216 × 11]&gt;[39m [90m&lt;tibble [72 × 11]&gt;[39m [90m&lt;tibble [73 × 11]&gt;[39m
+## [90m 9[39m NEXO       1 [90m&lt;tibble [230 × 11]&gt;[39m [90m&lt;tibble [76 × 11]&gt;[39m [90m&lt;tibble [79 × 11]&gt;[39m
+## [90m10[39m XMR        1 [90m&lt;tibble [215 × 11]&gt;[39m [90m&lt;tibble [76 × 11]&gt;[39m [90m&lt;tibble [80 × 11]&gt;[39m
+## [90m# … with 225 more rows[39m</code></pre>
 <p>[ADD HERE - Intro to Visualization and explain we will use grouped data in PredictiveModeling]</p>
 <p>[ADD HERE - Worth mentioning the fact that some data will be higher quality, etc…? Give more background on those steps as “catch-alls”?]</p>
 </div>
 <div id="functional-programming" class="section level2" number="3.8">
 <h2><span class="header-section-number">3.8</span> Functional Programming</h2>
-<p>Could work with the data using for loops, which is an “object-oriented” approach. Basically, we could take our given option, iterate through every row of the data, and perform operations on each row and subset of the data we are interested in. That is one approach, but instead we will use a different approach using a “functional programming” approach</p>
+<p>[TODO - ADD HERE]</p>
 <!-- https://youtu.be/rz3_FDVt9eg?t=1407  -->
 <!-- [TODO - EXPLAIN THINGS A LOT MORE HERE] -->
 <!-- ### Fix Data by Split -->
