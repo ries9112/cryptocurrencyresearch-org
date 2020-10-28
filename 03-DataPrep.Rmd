@@ -498,7 +498,7 @@ cryptodata_nested
 
 ## Functional Programming
 
-Could work with the data using for loops, which is an "object-oriented" approach. Basically, we could take our given option, iterate through every row of the data, and perform operations on each row and subset of the data we are interested in. That is one approach, but instead we will use a different approach using a "functional programming" approach
+[TODO - ADD HERE]
 
 <!-- https://youtu.be/rz3_FDVt9eg?t=1407  -->
 
