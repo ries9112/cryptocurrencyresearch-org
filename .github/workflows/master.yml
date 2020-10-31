@@ -1,12 +1,11 @@
 name: Run Crypto Tutorial
 on:
-  push:
   schedule:
-    - cron: '00 05,17,19 * * *'
+    - cron: '00 05,17 * * *'
       
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: macOS-10.15
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@v1
@@ -39,4 +38,3 @@ jobs:
           git add .
           git commit -m "Add html output from CI process" -a
           git push https://ries9112:${{secrets.GITHUB_TOKEN}}@github.com/ries9112/cryptocurrencyresearch-org.git HEAD:master --force
-          
