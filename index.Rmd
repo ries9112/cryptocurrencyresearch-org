@@ -1,0 +1,158 @@
+--
+title: "Cryptocurrency Research"
+date: '`r paste("Last Updated:<br/>",Sys.time())`'
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- packages.bib
+- packages_two.bib
+biblio-style: apalike
+link-citations: yes
+---
+
+# Introduction {#introduction}
+
+```{r initialSetup, message=FALSE, warning=FALSE, include=F}
+library(bookdown)
+library(knitr)
+# tidy code
+#knitr::opts_chunk$set(tidy = TRUE)
+# to try to fix issue with ggplotly() not showing htmlwidget properly
+knitr::opts_chunk$set(widgetframe_widgets_dir = 'widgets' )
+# Get rid of messages and warnings
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+# Try getting rid of extra unwanted outputs
+knitr::opts_knit$set(progress=FALSE, verbose = FALSE)
+```
+
+**(this book is a work in progress and is NOT ready)**
+
+
+
+Welcome to this programming tutorial on machine learning!
+
+In this tutorial we will use the latest data from the cryptocurrency markets to provide a hands-on and complete example that anyone can follow along with.
+
+## What will I learn?
+
+-   In this tutorial you will primarily learn about tools for the R programming language developed by [RStudio](https://rstudio.com/) and more specifically the [tidyverse](https://www.tidyverse.org/). If you are not familiar with these open source products, don't worry. We'll introduce these throughout the tutorial as needed.
+
+-   The focus of the tutorial is on supervised machine learning, a process for building models that can predict future events, such as cryptocurrency prices. You will learn how to use the [`caret`](https://topepo.github.io/caret/index.html) package to make many different predictive models, and tools to evaluate their performance.
+
+-   Before we can make the models themselves, we will need to "clean" the data. You will learn how to perform "group by" operations on your data using the [`dplyr`](https://dplyr.tidyverse.org/) package and to clean and modify grouped data.
+
+<!-- -   You will be exposed to some useful data pre-processing R packages. -->
+
+-   You will learn to visualize data using the [`ggplot2`](https://ggplot2.tidyverse.org/) package, as well as some powerful [tools to extend the functionality of ggplot2](https://exts.ggplot2.tidyverse.org/).
+
+-   You will gain a better understanding of the steps involved in any supervised machine learning process, as well as considerations you might need to keep in mind based on your specific data and the way you plan on acting on the predictions you have made. Each problem comes with a unique set of challenges, but there are steps that are necessary in creating any supervised machine learning model, and questions you should ask yourself regardless of the specific problem at hand.
+
+<!-- - [TODO - Add note on cross validation] -->
+
+
+-   You will also learn a little about cryptocurrencies themselves, but **this is not a tutorial centered around trading or blockchain technology**.
+
+## Before Getting Started
+
+You can toggle the sidebar on the left side of the page by clicking on the menu button in the top left, or by pressing on the **s** key on your keyboard. You can read this document as if it were a book, scrolling to the bottom of the page and going to the next "chapter", or navigating between sections using the sidebar.
+
+This document is the tutorial itself, but in order to make the tutorial more accessible to people with less programming experience (or none) we created a [high-level version of this tutorial](https://cryptocurrencyresearch.org/high-level/), which simplifies both the problem at hand (what we want to predict) and the specific programming steps, but uses the same tools and methodology providing easier to digest examples that can be applied to many different datasets and problems.
+
+### High-Level Version
+
+If you are not very familiar with programming in either R or Python, or are not sure what cryptocurrencies are, you should **definitely** work your way through the [high-level version first](https://cryptocurrencyresearch.org/high-level/). If you are an intermediate programmer we still recommend the [high-level version first](https://cryptocurrencyresearch.org/high-level/). 
+
+Below is an embedded version of the high-level version, but we recommend using any of the links above to view it in its own window. Once in its own window it can be full-screened by pressing on the **f** button on your keyboard.
+```{r embed_high-level, echo=F}
+knitr::include_url("https://cryptocurrencyresearch.org/high-level/")
+```
+
+
+```{block2, type='infoicon'}
+When following along with the high-level tutorial embedded above, the results will be completely reproducible and the document is static and does not update over time meaning your results will exactly match those shown. The document you are currently reading this text on on the other hand updates every 12 hours. You will be able to access the same data source, but it updates hourly by the 8th minute of every hour with the most recent data, so this document and your results won't perfectly match.
+```
+
+
+<!-- ## Who is this example for? -->
+
+<!-- Are you a Bob, Hosung, or Jessica below? This section provides more information on how to proceed with this tutorial. -->
+
+<!-- -   **Bob (beginner)**: Bob is someone who understands the idea of predictive analytics at a high level and has heard of cryptocurrencies and is interested in learning more about both, but he has never used R. Bob would want to first [learn the basics of the R programming language](https://predictcrypto.org/r-basics-tutorial). Afterwards, like Hosung, he might decide to [opt for the more high-level version of this tutorial](https://cryptocurrencyresearch.org/high-level/). -->
+
+<!--     -   Bob might benefit from the book ["R for Data Science"](https://r4ds.had.co.nz/) and DataCamp's free ["Introduction to R"](https://www.datacamp.com/courses/free-introduction-to-r) course are great resources as well. Both are available for free online. -->
+
+<!-- -   **Hosung (intermediate)**: Hosung is a statistician who learned to use R 10 years ago. He has heard of the tidyverse, but doesn't regularly use it in his work and he usually sticks to base R as his preference. Hosung should review the example explaining the pipe operator and the tidyverse [when it comes up in the next section](https://cryptocurrencyresearch.org/setup.html#tidy-example). Hosung does not care much for cryptocurrencies specifically, but is interested in learning new tools to use for his work in R and getting some useful boilerplate code. Hosung would want to start with the [**high-level version of this tutorial**](https://cryptocurrencyresearch.org/high-level/) and later return to the [**detailed tutorial**](https://cryptocurrencyresearch.org/index.html#introduction). -->
+
+<!-- -   **Jessica (expert)**: Jessica is a business analyst who has experience with both R and the Tidyverse and uses the pipe operator (%\>%) regularly. Jessica should [**move onto the next section**](#introduction) for the detailed tutorial. -->
+
+-   Whenever text is **`highlighted this way`**, that means it is a snippet of **R code**, which will usually be done to bring attention to specific parts of the code.
+
+<!-- ### Approach taken -->
+
+
+<!-- It is also worth mentioning that we will be taking a very practical approach to machine learning. Because we are modeling many cryptocurrencies independently at the same time and the dataset evolves as time passes, it becomes difficult to make a decision across the board in terms of what the "best model" to use is because it may change based on the specific cryptocurrency in question and/or over time. -->
+
+ <!-- [TODO - KEEP ADDING HERE?] -->
+
+## Format Notes
+
+
+Are you a Bob, Hosung, or Jessica below? This section provides an example of how different users may want to approach the tutorial differently based on their levels of experience.
+
+-   You can hide the sidebar on the left by pressing the ***s*** key on your keyboard.
+
+
+-   The cryptocurrency data was chosen to produce results that change over time and because these markets don't have any downtime (unlike the stock market).
+
+<!-- [TODO - JUST LIKE THE HIGH LEVEL VERSION, WE WILL USE COLOR CODING] -->
+
+- Whenever an **R package** is referenced, the text will be <span style="color: #ae7b11;"> **colored orange**</span>. We will discuss ***R packages*** and the rest of the terms below later in this document, but if you are not familiar with these terms please look through the [high-level version first](https://cryptocurrencyresearch.org/high-level/).
+
+- Whenever a **function** is referenced, it will be <span style="color: green;"> colored green</span>.
+
+- Whenever an **R object** is referenced, it will be <span style="color: blue;"> colored blue</span>. We will also refer to the **parameters** of functions in <span style="color: blue;">blue</span>.
+
+- When a **term** is particularly common in machine learning or data science, we will call it out with <span style="color: purple;"> purple text</span>, but only the first time it appears.
+
+-   Whenever text is **`highlighted this way`**, that means it is a snippet of R code, which will usually be done to bring attention to specific parts of the code.
+
+## Plan of Attack
+
+How will we generate predictive models to predict cryptocurrency prices? At a high level, here are the steps we will be taking:
+
+1.  [Setup guide](#setup). Installation guide on getting the tools used installed on your machine.
+
+2.  [Explore data](#explore-data). What ***is*** the data we are working with? How "good" is the "quality"?
+
+3.  [Prepare the data](#data-prep). Make adjustments to "clean" the data based on the findings from the previous section to avoid running into problems when making models to make predictions.
+
+4.  [Visualize the data](#visualization). Visualizing the data can be an effective way to understand relationships, trends and outliers before creating predictive models, and is generally useful for many different purposes. Definitely the most fun section!
+
+5.  [Make predictive models](#predictive-modeling). Now we are ready to take the data available to us and use it to make predictive models that can be used to make predictions about future price movements using the latest data.
+
+6.  [Evaluate the performance of the models](#evaluate-model-performance). Before we can use the predictive models to make predictions on the latest data, we need to understand how well we expect them to perform, which is also essential in detecting issues.
+
+## GitHub Repository
+
+
+This tutorial has a public [**GitHub Repository**]{style="color: purple;"} associated with it, which is not only a website for us to easily distribute all the code behind this document for others to view and use, but also where it actually runs. Every 12 hours, a process gets kicked off on the page associated with our project on GitHub.com and refreshes these results. You can view the latest runs as they execute over time here: <https://github.com/ries9112/cryptocurrencyresearch-org/actions>
+
+In the [next section](#setup) we will talk more about the GitHub Repository for this tutorial, for now you can check on the latest run history for this document, which is expected to update every 12 hours every day: https://github.com/ries9112/cryptocurrencyresearch-org/actions
+
+
+If you are seeing ✅ associated with the most recent runs at the link above, that means you are looking at a version that refreshed in the last 12 hours. If you are seeing red ❌ on the latest runs, you may be looking at an older analysis, but that should not be the case, check the timestamp at the top of this document to be sure.
+
+
+If you are running into problems using the code or notice any problems, please let us know by creating an ***issue*** on the GitHub repository: https://github.com/ries9112/cryptocurrencyresearch-org/issues
+
+Go to the [next section](#setup) for instruction on getting setup to follow along with the code run in the tutorial. You can run every step either in the cloud on your web browser, or in your own R session. You can even make a copy of the GitHub Repository on your computer and run this "book" on the latest data (updated hourly), and make changes wherever you would like. All explained in the next section ➡️
+
+
+## Disclaimer
+
+```{block2, note-disclaimer, type='rmdimportant'}
+This tutorial is made available for learning and educational purposes only and the information to follow does not constitute trading advice in any way shape or form. We avoid giving any advice when it comes to trading strategies, as this is a very complex ecosystem that is out of the scope of this tutorial; we make no attempt in this regard, and if this, rather than data science, is your interest, your time would be better spent following a different tutorial that aims to answer those questions.
+```
+
+
+<!-- REMEMBER OTHER SPECIAL BLOCK TYPE IS CALLED "rmdcaution" USE THESE TO DRAW ATTENTION TO ANYTHING IMPORTANT! -->
