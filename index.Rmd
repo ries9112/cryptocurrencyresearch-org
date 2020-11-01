@@ -1,4 +1,4 @@
---
+---
 title: "Cryptocurrency Research"
 date: '`r paste("Last Updated:<br/>",Sys.time())`'
 site: bookdown::bookdown_site
@@ -32,6 +32,11 @@ knitr::opts_knit$set(progress=FALSE, verbose = FALSE)
 Welcome to this programming tutorial on machine learning!
 
 In this tutorial we will use the latest data from the cryptocurrency markets to provide a hands-on and complete example that anyone can follow along with.
+
+
+```{r}
+"test"
+```
 
 ## What will I learn?
 
@@ -140,7 +145,7 @@ This tutorial has a public [**GitHub Repository**]{style="color: purple;"} assoc
 In the [next section](#setup) we will talk more about the GitHub Repository for this tutorial, for now you can check on the latest run history for this document, which is expected to update every 12 hours every day: https://github.com/ries9112/cryptocurrencyresearch-org/actions
 
 
-If you are seeing ✅ associated with the most recent runs at the link above, that means you are looking at a version that refreshed in the last 12 hours. If you are seeing red ❌ on the latest runs, you may be looking at an older analysis, but that should not be the case, check the timestamp at the top of this document to be sure.
+<!-- If you are seeing ✅ associated with the most recent runs at the link above, that means you are looking at a version that refreshed in the last 12 hours. If you are seeing red ❌ on the latest runs, you may be looking at an older analysis, but that should not be the case, check the timestamp at the top of this document to be sure. -->
 
 
 If you are running into problems using the code or notice any problems, please let us know by creating an ***issue*** on the GitHub repository: https://github.com/ries9112/cryptocurrencyresearch-org/issues
