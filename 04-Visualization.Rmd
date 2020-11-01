@@ -1,13 +1,10 @@
 # Visualization `r emo::ji('chart_decreasing')`
 
-
 <!-- NOTE 09/27: REVAMP THIS SECTION, ANSWER QUESTIONS ABOUT THE DATA MORE -->
-
 
 <!-- NOTE 05/24: I'm thinking should calculate % change just for visualization purposes just here, but what if we avoid that completely and instead make the tutorial on visualizing price over time for BTC first and then creating gganimate tutorial to iterate over the rest? Just keep it to ggplot2 + extensions + gganimate tutorial here, no need to make a million visualizations. Would be good to add rayshader too, but add that as a stretch goal for later. -->
 
 Making visualizations using `ggplot2` is one of the very best tools available in the R ecosystem. The ***gg*** in `ggplot2` stands for the ***Grammar of Graphics***, which is essentially the idea that many different types of charts share the same underlying building blocks, and that they can be put together in different ways to make charts that look very different from each other. [In Hadley's own words,](https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/) "a pie chart is just a bar chart drawn in polar coordinates", "They look very different, but in terms of the grammar they have a lot of underlying similarities."
-
 
 ## Basics - ggplot2
 
@@ -17,11 +14,9 @@ Let's break this down step by step.
 
 ***"start with ggplot(), supply a dataset and aesthetic mapping (with aes())***
 
-
 ```{r ggplot_blank}
 ggplot(data = cryptodata, aes(x = date_time_utc, y = price_usd))
 ```
-
 
 The chart now shows up but is blank because we need to perform an additional step ***"You then add on layers (like `geom_point()` or `geom_histogram()`)..."***
 
@@ -34,6 +29,7 @@ ggplot(data = cryptodata, aes(x = date_time_utc, y = price_usd)) +
 ```
 
 The most expensive cryptocurrency being shown, `r subset(cryptodata, price_usd == max(cryptodata$price_usd))$symbol` in this case, makes it difficult to take a look at any of the other ones. Let's try *zooming-in* on a single one by using the same code but making an adjustment to the `data` parameter to only show data for the cryptocurrency with the symbol *ETH*, first let's filter the data down to those results only:
+
 ```{r ETH_subset}
 eth_data <- subset(cryptodata, symbol == 'ETH')
 ```
@@ -46,7 +42,7 @@ ggplot(data = eth_data,
 
 *The axis automatically adjusted to the new data.*
 
-This is better, but geom_point() might not be the best choice for this chart, let's change `geom_point` with `geom_line` and see what that looks like:
+This is better, but geom\_point() might not be the best choice for this chart, let's change `geom_point` with `geom_line` and see what that looks like:
 
 ```{r ggplot_ETH_line}
 ggplot(data = eth_data, 
@@ -56,6 +52,7 @@ ggplot(data = eth_data,
 ```
 
 Let's save the results as an object called `crypto_chart`:
+
 ```{r}
 crypto_chart <- ggplot(data = eth_data, 
                        aes(x = date_time_utc, y = price_usd)) + 
@@ -69,7 +66,7 @@ crypto_chart <- crypto_chart + stat_smooth()
 crypto_chart
 ```
 
-One particularly nice aspect of using the ggplot framework, is that we can keep adding as many elements and transformations to the chart as we would like with no limitations. 
+One particularly nice aspect of using the ggplot framework, is that we can keep adding as many elements and transformations to the chart as we would like with no limitations.
 
 We will not save the next result, but to illustrate this point, we can add a new line showing a linear regression fit going through the data using `stat_smooth(method = 'lm')`. And let's also show the individual points in green to show we can keep layering things as much as we want.
 
@@ -84,6 +81,7 @@ crypto_chart +
 By not providing any `method` option, the `stat_smooth()` function defaults to use the `method` called [`loess`, which shows the local trends](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/loess), while the `lm` model fits the best fitting linear regression line for the data as a whole.
 
 Of course we can add other components that make a visualization effective, let's add labels to the chart now:
+
 ```{r ggplot_labels}
 crypto_chart <- crypto_chart +
                   ggtitle(paste('Price Change Over Time -', eth_data$symbol),
@@ -99,8 +97,8 @@ The `ggplot2` package comes with a large amount of functionality. You can find a
 ```{r show_ggplot2_ref, echo=F}
 knitr::include_url("https://ggplot2.tidyverse.org/reference/")
 ```
-*https://ggplot2.tidyverse.org/reference/*
 
+[*https://ggplot2.tidyverse.org/reference/*](https://ggplot2.tidyverse.org/reference/){.uri}
 
 What makes the `ggplot2` package **even better** is the fact that [it also comes with a framework for anyone to develop their own extensions](https://cran.r-project.org/web/packages/ggplot2/vignettes/extending-ggplot2.html). Meaning there is a lot more functionality that the community has created that can be added in importing other packages that provide extensions to ggplot.
 
@@ -119,13 +117,15 @@ crypto_chart
 ```
 
 See below for a full list of themes you can test. If you followed to this point try running the code `crypto_chart + theme_excel()` or any of the other options listed below instead of `+ theme_excel()`:
+
 ```{r show_ggthemes_site, echo=F}
 knitr::include_url("https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/", height = '500px' )
 ```
-*https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/*
 
+[*https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/*](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/){.uri}
 
 ### plotly
+
 In some cases, it's helpful to make a chart responsive to a cursor hovering over it. We can convert any ggplot into an interactive chart by using the `plotly`[@R-plotly] package, and it is super easy!
 
 We already imported the `plotly` package [in the setup section](#setup), so all we need to do is wrap our chart in the function `ggplotly()`:
@@ -137,12 +137,15 @@ ggplotly(crypto_chart)
 **Use your mouse to hover over specific points on the chart above**. Also notice that we did not overwrite the `crypto_chart` object, but are just displaying the results.
 
 If you are not looking to convert a ggplot to be interactive, plotly also provides its own framework for making charts from scratch, you can find out more about it here:
+
 ```{r show_plotly_website, echo=F}
 knitr::include_url("https://plotly.com/r/")
 ```
-***https://plotly.com/r/***
+
+[***https://plotly.com/r/***](https://plotly.com/r/){.uri}
 
 <!-- NOT WORKING ANYMORE ON 10/21/2020: -->
+
 ### ggpubr
 
 The `ggpubr` [@R-ggpubr] extension provides a lot of functionality that we won't cover here, but one function we can use from this extension is `stat_cor()`, which allows us to add a correlation coefficient (R) and p-value to the chart.
@@ -172,16 +175,17 @@ crypto_chart <- crypto_chart +
 When using the `geom_mark_ellipse()` function we are passing the `data` argument, the `label` and the `description` through the `aes()` function. We are marking two points, one for the minimum price during the time period, and one for the maximum price. For the first point we filter the data to only the point where the `price_usd` was equal to the `max(price_usd)` and add the labels accordingly. The same is done for the second point, but showing the lowest price point for the given date range.
 
 Now view the new chart:
+
 ```{r}
 crypto_chart
 ```
 
 Notice that this chart is specifically annotated around these points, but we never specified the specific dates to circle, and we are always circling the maximum and minimum values regardless of the specific data. One of the points of this document is to show the idea that when it comes to data analysis, visualizations, and reporting, most people in the workplace approach these as one time tasks, but with the proper (open source/free) tools automation and reproducibility becomes a given, and any old analysis can be run again to get the exact same results, or could be performed on the most recent view of the data using the same exact methodology.
 
-
 ### gganimate
 
 We can also extend the functionality of ggplot by using the `gganimate` [@R-gganimate] package, which allows us to create an animated GIF that iterates over groups in the data through the use of the `transition_states()` function.
+
 ```{r first_gganimate, message=FALSE, warning=FALSE, error=TRUE}
 animated_prices <- ggplot(data = mutate(cryptodata, groups=symbol),
                           aes(x = date_time_utc, y = price_usd)) +
@@ -194,8 +198,7 @@ animated_prices <- ggplot(data = mutate(cryptodata, groups=symbol),
 animate(animated_prices,fps=1)
 ```
 
-We recommend consulting this documentation for simple and straightforward examples on using gganimate: https://gganimate.com/articles/gganimate.html
-
+We recommend consulting this documentation for simple and straightforward examples on using gganimate: <https://gganimate.com/articles/gganimate.html>
 
 ### ggTimeSeries
 
@@ -212,8 +215,7 @@ To read this chart in the correct date order start from the top left and work yo
 
 ### Rayshader
 
-The previous chart is helpful, but a color scale like that can be a bit difficult to interpret. We could convert the previous chart into a 3d figure that is easier to visually interpret by using the amazing `rayshader` [@R-rayshader] package. 
-<!-- [TODO - NEED TO MANUALLY FIX THIS CITATION! Add new .bib file, right now just packages.bib which is automatically overwritten each time.] -->
+The previous chart is helpful, but a color scale like that can be a bit difficult to interpret. We could convert the previous chart into a 3d figure that is easier to visually interpret by using the amazing `rayshader` [@R-rayshader] package. <!-- [TODO - NEED TO MANUALLY FIX THIS CITATION! Add new .bib file, right now just packages.bib which is automatically overwritten each time.] -->
 
 **This document runs automatically through GitHub Actions, which [does not have a graphical environment to run the code below](https://github.community/t/installation-of-xquartz-not-found/139804), which prevents it from refreshing the results with the latest data. We are showing old results for the Rayshader section below. If you have gotten to this point, run the code below yourself on the latest data to see this amazing package in action!**
 
@@ -235,6 +237,7 @@ rgl.close()
 This is the same two dimensional [calendar heatmap that was made earlier](#calendar-heatmap).
 
 Because we can programmatically adjust the camera as shown above, that means that we can also create a snapshot, move the camera and take another one, and keep going until we have enough to make it look like a video! This is not difficult to do using the `render_movie()` function, which will take care of everything behind the scenes for the same plot as before:
+
 ```{r rayshader_render_movie, eval=FALSE}
 # This time let's remove the scale too since we aren't changing it:
 calendar_heatmap <- calendar_heatmap + theme(legend.position = "none")
@@ -251,4 +254,3 @@ rgl.close()
 ![](rayshader_video.mp4)
 
 Awesome! Move on to the [next section](#predictive-modeling) to start making predictive models for the data..
-

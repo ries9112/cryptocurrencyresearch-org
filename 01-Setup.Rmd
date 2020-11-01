@@ -66,7 +66,7 @@ Install other packages:
 
 ```{r install_all_other_packages}
 p_load('pins','tidyverse','skimr','tsibble','doParallel','DT', 'caret','anytime', # Data Exploration + Data Prep
-       'ggTimeSeries','gifski','av', 'magick', 'ggthemes', 'plotly', 'ggpubr', # VIsualization
+       'ggTimeSeries','gifski','av', 'magick', 'ggthemes', 'plotly', 'ggpubr', # Visualization
        'ggforce','gganimate', 'transformr', # Visualization continued
        'xgboost','gbm','deepnet') # Predictive Modeling
 ```
