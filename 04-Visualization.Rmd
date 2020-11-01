@@ -126,16 +126,17 @@ knitr::include_url("https://yutannihilation.github.io/allYourFigureAreBelongToUs
 
 
 ### plotly
-In some cases, it's helpful to make a chart responsive to a cursor hovering over it. We can convert any ggplot into an interactive chart by using the `plotly` [@R-plotly] package, and it is super easy!
+In some cases, it's helpful to make a chart responsive to a cursor hovering over it. We can convert any ggplot into an interactive chart by using the `plotly`[@R-plotly] package, and it is super easy!
 
 We already imported the `plotly` package [in the setup section](#setup), so all we need to do is wrap our chart in the function `ggplotly()`:
 
-<!-- CAUSES ISSUES 06/11 -->
 ```{r plotly, message=FALSE, warning=FALSE}
-ggplotly(crypto_chart) # notice that we did not overwrite the crypto_chart object this time
+ggplotly(crypto_chart)
 ```
 
-If you are not looking to convert a ggplot, plotly also provides its own framework for making charts from scratch, you can find out more about it here:
+**Use your mouse to hover over specific points on the chart above**. Also notice that we did not overwrite the `crypto_chart` object, but are just displaying the results.
+
+If you are not looking to convert a ggplot to be interactive, plotly also provides its own framework for making charts from scratch, you can find out more about it here:
 ```{r show_plotly_website, echo=F}
 knitr::include_url("https://plotly.com/r/")
 ```

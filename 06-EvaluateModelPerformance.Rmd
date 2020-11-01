@@ -1,9 +1,15 @@
-# Evaluate Model Performance{#evaluate-model-performance}
+<!-- # Evaluate Model Performance{#evaluate-model-performance} -->
+
+<!-- <!-- [TODO - FINAL NOTE BEFORE PUTTING AWAY ON 10/28: A bit of a disaster on this section... struggling to have the actuals and the % change predictions match up. Was it a bad call to split up things the way I did? Re-think through the process of things, maybe write things out to think through them better...] --> -->
 
 
 <!-- ## Summarizing models -->
 
-<!-- [TODO - HERE add notes on using **postResample()** and explain that if you think about it all you need to evaluate a model is the predictions made (on data never seen by the model) ] -->
+<!-- <!-- [TODO - HERE add notes on using **postResample()** and explain that if you think about it all you need to evaluate a model is the predictions made (on data never seen by the model) ] --> -->
+
+<!-- <!-- [TODO - NOTE 10/28 - postResample() produces a ton of NULL values!! Could calculate R^2 correlation between values of predictions and observations extracting it out of lm() models! So making lm() model between predictions and actuals:  -->
+<!-- m <- lm(cryptodata_nested$lm_test_predictions[[1]] ~ cryptodata_nested$test_data[[1]]$target_price_24h) --> -->
+<!-- <!-- summary(m)$r.squared ] --> -->
 
 <!-- Example for one model: -->
 <!-- ```{r caret_post_resample_example} -->
@@ -25,22 +31,26 @@
 
 <!-- This model used the earliest subset of the data available for the `r cryptodata_nested$test_data[[1]]$symbol` cryptocurrency. How does the same model used to predict this older subset of the data perform when applied to the most recent subset of the data?  -->
 
-<!-- We can answer this question by running the exact same code as above, but for the **holdout**: -->
-<!-- ```{r} -->
-<!-- print(paste('Now showing RMSE example-Holdout:', postResample(pred = cryptodata_nested$lm_holdout_predictions[[1]],  -->
-<!--                                                               obs = cryptodata_nested$holdout_data[[1]]$target_price_24h)[[1]])) -->
+<!-- We can get the same summary of results on the **holdout**: -->
+<!-- ```{r caret_post_resample_example_holdout} -->
+<!-- postResample(pred = cryptodata_nested$lm_holdout_predictions[[1]],  -->
+<!--              obs = cryptodata_nested$holdout_data[[1]]$target_price_24h) -->
 <!-- ``` -->
+<!-- <!-- If we wrote a [*for loop*](https://r4ds.had.co.nz/iteration.html#for-loops) to iterate through all the options we would get the same results using an **object oriented approach**, this has to do with coding styles and preferences and generally speaking there are many ways of doing the same things in programming. --> -->
 
-<!-- ```{r} -->
-<!-- print(paste('Now showing R Squared example-Holdout:', postResample(pred = cryptodata_nested$lm_holdout_predictions[[1]],  -->
-<!--                                                                    obs = cryptodata_nested$holdout_data[[1]]$target_price_24h)[[2]])) -->
-<!-- ``` -->
+<!-- ### Comparing Metrics -->
 
-<!-- Reading this kind of code fetching specific objects from the data is difficult, so in order to calculate the metrics for all cryptocurrencies, we will once again use a **functional approach** as explained in a [previous section](#using-functional-programming). If we wrote a [*for loop*](https://r4ds.had.co.nz/iteration.html#for-loops) to iterate through all the options we would get the same results using an **object oriented approach**, this has to do with coding styles and preferences and generally speaking there are many ways of doing the same things in programming. -->
+<!-- How do these two results compare and why is this comparison important? -->
+
+<!-- The **RMSE** -->
+
+<!-- <!-- [TODO - ADD HERE explaining RMSE and R^2 metrics and how we will use them to standardize the way we evaluate the effectiveness of a model. We are looking to avoid using models where the results looked good for the test data but then perform much worse than that initial expectation when looking at the holdout results] --> -->
+
+
 
 <!-- ### Adjust RMSE -->
 
-<!-- [TODO - NEED TO MAKE SURE RMSE IS STANDARDIZED HERE!] -->
+<!-- <!-- [TODO - NEED TO MAKE SURE RMSE IS STANDARDIZED HERE!] --> -->
 
 <!-- Because cryptocurrencies can vary dramatically in their prices with some trading in the tens of thousands of dollars and others trading for less than a cent, we need to make sure to standardize the RMSE columns to provide a fair comparison for the metric. -->
 
@@ -50,56 +60,88 @@
 <!-- #### Predictions Adjustment -->
 <!-- First we will adjust the predictions to instead of being predictions for the price in dollars, will be % change relative to the previous price. -->
 
+<!-- <!-- [TODO - ADD note about tedious step-by-step and understanding what's happening and why] --> -->
 
-<!-- <!-- [TODO - NEED TO FIX THIS! NEED TO GRAB LAST PRICE FROM TRAIN DATA AND CALCULATE % CHANGE BETWEEN THAT AND FIRST OF TEST, AND THEN CALCULATE USING LAG OFFSET FOR REST OF TEST] --> -->
+<!-- Function to add last_price_train column and append it to the predictions made so we can calculate the % change of the first element, before later removing the value not associated with the predictions: -->
 <!-- ```{r} -->
-<!-- calculate_percent_change_preds <- function(train, test_predictions){ -->
-
-<!--   ((lag(tail(train,1)$price_usd, 1) - tail(train,1)$price_usd) / abs(tail(train,1)$price_usd))*100 -->
-
+<!-- last_train_price <- function(train_data, predictions){ -->
+<!--   c(tail(train_data$price_usd,1), predictions) -->
 <!-- } -->
 <!-- ``` -->
 
-<!-- <!-- [TODO - Show formula? It's ((V2-V1)/abs(V1))*100] --> -->
-
-
-<!-- Overwrite the old predictions with the predictions adjusted as a percentage now: -->
-
-<!-- <!-- [TODO - FIX!] --> -->
-<!-- <!-- ```{r target_adjust_test} --> -->
-<!-- <!-- cryptodata_nested <- mutate(cryptodata_nested, --> -->
-<!-- <!--                             lm_test_predictions = map2(train_data, lm_test_predictions, calculate_percent_change_preds)) --> -->
-<!-- <!-- ``` --> -->
-
-<!-- <!-- NEW: --> -->
-
-<!-- First create a new column with the last price from the the train data: -->
+<!-- Now overwrite the old predictions: -->
 <!-- ```{r} -->
-<!-- # add here -->
+<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
+<!--                             lm_test_predictions = map2(train_data, lm_test_predictions, last_train_price)) -->
 <!-- ``` -->
+<!-- <!-- [TODO - CLEAN UP EXPLANATIONS HERE!] --> -->
 
-<!-- Then use that to calculate the first % change, then can calculate the rest for test set by doing ((lag(price, 1) - price / abs(price))*100... KEEP GOING -->
-
-
-<!-- #### Actual Results Adjustment -->
-
-<!-- Now do the same thing to the target variable before we calculate the error metrics: -->
-<!-- <!-- [TODO - FIX!] --> -->
 <!-- ```{r} -->
-<!-- calculate_percent_change_actual <- function(train, test_predictions){ -->
-
-<!--   ((lag(tail(train,1)$price_usd, 1) - tail(train,1)$price_usd) / abs(tail(train,1)$price_usd))*100 -->
-
+<!-- standardize_perc_change <- function(predictions){ -->
+<!--   results <- (diff(c(lag(predictions, 1), predictions)) / lag(predictions, 1))*100 -->
+<!--   # Exclude the first element, next element will be % change of first prediction -->
+<!--   head(tail(results, length(predictions)-1),length(predictions)-1) -->
 <!-- } -->
 <!-- ``` -->
 
-<!-- Overwrite the old predictions with the predictions adjusted as a -->
+<!-- <!-- [TODO - Show formula? It's (diff(V1, V2)/abs(V1))*100] --> -->
 
-<!-- <!-- ```{r target_adjust_preds} --> -->
-<!-- <!-- cryptodata_nested <- mutate(cryptodata_nested, --> -->
-<!-- <!--                             lm_test_predictions = map2(train_data, lm_test_predictions, calculate_percent_change_actual)) --> -->
-<!-- <!-- ``` --> -->
+<!-- Overwrite the old predictions with the new predictions adjusted as a percentage now: -->
+<!-- ```{r target_adjust_test} -->
+<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
+<!--                             lm_test_predictions_t = map(lm_test_predictions, standardize_perc_change)) -->
+<!-- ``` -->
 
+
+<!-- Now do the same thing to the actual prices. Let's make a new column called **actuals** containing the real price values (rather than the predicted ones): -->
+<!-- ```{r} -->
+<!-- actuals_create <- function(test_data){ -->
+<!--   as.numeric(unlist(select(test_data, price_usd))) -->
+<!-- } -->
+<!-- ``` -->
+
+<!-- Use the new function to create the new column `actuals`: -->
+<!-- ```{r} -->
+<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
+<!--                             actuals = ifelse(split < 5, -->
+<!--                                              map(test_data, actuals_create), -->
+<!--                                              map(holdout_data, actuals_create))) -->
+<!-- ``` -->
+
+<!-- Now we can convert the new `actuals` to express the `price_usd` as a % change relative to the previous value using adapting the function from earlier: -->
+<!-- ```{r} -->
+<!-- actuals_perc_change <- function(predictions){ -->
+<!--   results <- (diff(c(lag(predictions, 1), predictions)) / lag(predictions, 1))*100 -->
+<!--   # Exclude the first element, next element will be % change of first prediction -->
+<!--   head(tail(results, length(predictions)-1),length(predictions)-1) -->
+<!-- } -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
+<!--                             actuals = map(actuals, actuals_perc_change)) -->
+<!-- ``` -->
+
+<!-- Now also need to do the same for the holdout. This time we need to create a column with the `holdout_actuals` which will have data associated with all rows, but only show the actuals from the **holdout** split, which is the data for split number 5. -->
+
+<!-- ```{r} -->
+
+<!-- ``` -->
+
+
+<!-- <!-- [TODO - Make sure to do this!] --> -->
+
+
+<!-- #### Review Summary Statistics -->
+
+<!-- Now that we standardized the price to show the percentage change relative to the previous period instead of the price in dollars, we can actually compare the summary statistics across all cryptocurrencies and have it be a fair comparison. -->
+
+<!-- Let's get the same statistic as we did at the beginning of this section, but this time on the standardized values: -->
+<!-- ```{r} -->
+<!-- hydroGOF::rmse(cryptodata_nested$lm_test_predictions[[1]],  -->
+<!--                cryptodata_nested$actuals[[1]],  -->
+<!--                na.rm=T) -->
+<!-- ``` -->
 
 
 
@@ -108,21 +150,21 @@
 <!-- Now make a function to get the RMSE metric for all models: -->
 
 <!-- ```{r evaluate_rmse_function} -->
-<!-- evaluate_preds_rmse <- function(predictions, test_data){ -->
+<!-- evaluate_preds_rmse <- function(predictions, actuals){ -->
 
-<!--   postResample(pred = predictions, obs = test_data$target_price_24h)[[1]] -->
+<!--   hydroGOF::rmse(predictions, actuals, na.rm=T) -->
 
 <!-- } -->
 <!-- ``` -->
 
-
 <!-- Now we can use map2() to use it to get the RMSE metric for both the test data and the holdout: -->
 <!-- ```{r add_rmse} -->
 <!-- cryptodata_nested <- mutate(cryptodata_nested, -->
-<!--                             lm_rmse_test =  unlist(map2(lm_test_predictions, test_data, evaluate_preds_rmse)), -->
+<!--                             lm_rmse_test =  unlist(map2(lm_test_predictions, actuals, evaluate_preds_rmse)), -->
 
 <!--                             lm_rmse_holdout = unlist(map2(lm_holdout_predictions, holdout_data, evaluate_preds_rmse))) -->
 <!-- ``` -->
+
 
 <!-- <!-- [TODO - Add explanation for ifelse() to add rmse based on test or holdout] --> -->
 
@@ -142,6 +184,7 @@
 
 <!-- } -->
 <!-- ``` -->
+
 
 
 <!-- ```{r add_rsq} -->
@@ -306,11 +349,11 @@
 <!-- ``` -->
 
 <!-- The app shown above also has a button to **Show Code**. If you were to copy and paste that code into an RStudio session on your computer into a file with the .Rmd file extension and you then *Knit* the file, the same exact app should show up on your computer, no logins or setup outside of the packages required for the code to run; RStudio should automatically prompt you to install packages that are not currently installed on your computer. -->
-<!-- [TODO - MAKE THE TEXT ABOVE AN INFO NOTE (NOT WARNING, JUST AN i FOR INFO)] -->
+<!-- <!-- [TODO - MAKE THE TEXT ABOVE AN INFO NOTE (NOT WARNING, JUST AN i FOR INFO)] --> -->
 
 
 
 
-<!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS AND WRITE THE SAME INFO TO THE DB] -->
+<!-- <!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS AND WRITE THE SAME INFO TO THE DB] --> -->
 
 
