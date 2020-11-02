@@ -245,7 +245,7 @@ There are several advantages to writing code *the* ***tidy*** *way*, but while s
 
 NEW CV METHOD - need to explain:
 
-```{r ts_cross_validation}
+```{r ts_cross_validation, class.output="scroll-lim"}
 # Remove rows with null date_time_utc to exclude missing data from next steps
 cryptodata <- drop_na(cryptodata, date_time_utc)
 # Counts by symbol
@@ -318,7 +318,7 @@ Running the same code as before with `tail()` added, we should see rows associat
 tail( select(cryptodata, training, split) )
 ```
 
-The easiest way to understand these groupings, is to visualize them. In the next section, you will learn powerful tools for visualizing data in R. Do not worry if you do not understand the code below and are not familiar with `ggplot()`, we will explain this framework in the [next section](#visualization), for now review the charts below and try to follow along with the way we are grouping the data for the predictive models by looking at what the x and y axis represent, as well as the colors. On the x-axis we are plotting the DateTime of when a data point was collected, and on the y-axis the `split` (1-5) as described in this section. The data is then colored based on the category assigned for the `training` variable ("train","test" or "holdout").
+The easiest way to understand these groupings, is to visualize them. In the next section, you will learn powerful tools for visualizing data in R. Do not worry if you do not understand the code below and are not familiar with `ggplot()`, **we will explain this framework in the [next section](#visualization), for now review the charts below and try to follow along with the way we are grouping the data for the predictive models by looking at what the x and y axis represent, as well as the colors**. On the x-axis we are plotting the DateTime of when a data point was collected, and on the y-axis the `split` (1-5) as described in this section. The data is then colored based on the category assigned for the `training` variable ("train","test" or "holdout").
 
 We can visualize the new grouping variables:
 
