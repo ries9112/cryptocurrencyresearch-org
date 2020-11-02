@@ -88,3 +88,21 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+
+
+
+.scroll-lim {
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: inherit;
+}
+
+pre {
+  max-height: 900px;
+  overflow-y: auto;
+}
+
+pre[class] {
+  max-height: 300px;
+}
