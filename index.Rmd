@@ -28,30 +28,6 @@ knitr::opts_knit$set(progress=FALSE, verbose = FALSE)
 **(this book is a work in progress and is NOT ready)**
 
 
-```{r}
-#test line
-
-
-#sdasds
-
-
-#sdasda
-
-
-
-#sfsddfsa
-
-
-#sdada
-
-
-# asdasdas
-
-# sada
-```
-
-
-
 Welcome to this programming tutorial on machine learning!
 
 In this tutorial we will use the latest data from the cryptocurrency markets to provide a hands-on and complete example that anyone can follow along with.

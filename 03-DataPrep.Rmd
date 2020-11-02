@@ -331,7 +331,18 @@ groups_chart <- ggplot(cryptodata,
 groups_chart
 ```
 
-We can check on the groupings for each cryptocurrency by animating the previous chart:
+The chart above looks strange, we can view the results for the **BTC** cryptocurrency by running the same code as above, but instead of visualizing the dataset as a whole `cryptodata`, we will limit the data using `filter(cryptodata, symbol == "BTC")`. This time we are not saving these results as an R object.
+```{r}
+ggplot(filter(cryptodata, symbol == 'BTC'), 
+       aes(x = date_time_utc,
+           y = split, 
+           color = training)) +
+  geom_point()
+```
+
+The code above might seem difficult, but there is a standardized mathod to using these tools that is relatively easy to learn as we will see in the [next section](#visualization).
+
+We can check on the groupings for each cryptocurrency by animating the `cryptodata` object:
 
 ```{r animate_groupings, message=FALSE, warning=FALSE}
 library(gganimate)
@@ -342,11 +353,11 @@ animated_chart <- groups_chart +
 animate(animated_chart, fps = 2)
 ```
 
-If/when need to slow these down, use this code: (can't change fps from 1 - or at least be careful, it's error prone) animate(animated\_chart, fps = 1)
+<!-- The fps needs to be 1, 2, or any number divisible by 2 or the code won't work -->
 
 ***This is another tool that we will walk through in the [next section](#visualization).***
 
-It can be a bit hard to tell how many data points there are because they end up looking like lines. Let's change the plot to use `geom_jitter()` instead of `geom_point()`, which will manually offset the points and let us see exactly how many data points there are:
+It can be a bit hard to tell how many data points there are because they end up looking like lines. Let's change the plot to use `geom_jitter()` instead of `geom_point()`, which will manually offset the points and give us a better impression of how many data points there are:
 
 ```{r gganimate_jitter, message=FALSE, warning=FALSE}
 animated_chart <- animated_chart +
