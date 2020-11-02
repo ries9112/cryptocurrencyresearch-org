@@ -61,7 +61,6 @@ neural-network-models
 gradient-boosting-machines
 make-predictions
 traditional-timeseries
-evaluate-model-performance
 time-series
 explain-predictions
 considerations
