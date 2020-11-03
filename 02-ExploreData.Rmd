@@ -95,3 +95,29 @@ skim(cryptodata)
 This summary helps us understand things like how many null values are present in a given column and how those values are distributed. In this case there shouldn't be any major data quality issues, for example the majority of values should not be NA/missing. If you are noticing something different 
 
 Move on to the [next section](#data-prep), where we make the adjustments necessary to the data before we can start making visualizations and predictive models.
+
+
+
+## Data Source Details
+
+[TODO - HERE add notes on data source]
+
+This section is optional. The data is pulled without an authentication requirement. See the example code below for an actual example of how the data was sourced. Below is an example for the Ethereum (ETH) cryptocurrency. The data is collected by iterating through all cryptocurrency options one by one at the start of every hour. 
+
+```{r orderbooks_live_example}
+get_response_content <- function(api_response) {
+  httr::content(api_response,
+                type = "text",
+                encoding = "UTF-8") %>%
+    jsonlite::fromJSON(simplifyDataFrame = FALSE)
+}
+
+# Get the data
+example_data <- httr::GET("https://api.hitbtc.com/api/2/public/orderbook/ETHUSD", query=list(limit=5))
+# Show data
+get_response_content(example_data)
+```
+
+
+
+
