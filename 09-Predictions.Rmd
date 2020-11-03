@@ -1,4 +1,6 @@
-<!-- # Predictions -->
+# Predictions
 
 
-<!-- (look at past versions) -->
+(look at past versions)
+
+<!-- [TODO - HERE WHY NOT DO AN EXAMPLE PULLING THE LATEST DATA USING THE API DIRECTLY FOR THE CRYPTOCURRENCIES MODELED?] -->
