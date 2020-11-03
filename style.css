@@ -30,8 +30,8 @@ pre code {
 .book .book-summary {
   position: absolute;
   top: 0;
-  left: -300px;
-  width: 300px;
+  left: -270px;
+  width: 270px;
   bottom: 0;
   z-index: 1;
   color: #FFFFFF;
