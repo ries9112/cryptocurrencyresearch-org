@@ -1,7 +1,7 @@
 # Evaluate Model Performance{#evaluate-model-performance}
 
 
-<!-- NOTE 11/2: THINGS ARE WORKING OVERALL, BUT LOOKS LIKE THERE IS A PROBLEM WITH THE HOLDOUT CALCULATIONS -->
+<!-- NOTE 11/2: LOTS OF PROGRESS, BUT HOLDOUT NEEDS TO BE FIXED! Holdout right now is WRONG, need to grab the last price from train_data of split == 4!! ONCE I MAKE THAT UPDATE, EVERYTHING CORRECTLY STANDARDIZED AND READY TO CALC FOR ALL OTHER MODELS-->
 
 
 ## Summarizing models
@@ -76,8 +76,10 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             lm_test_predictions = ifelse(split < 5,
                                                          map2(train_data, lm_test_predictions, last_train_price),
                                                          NA),
-                            # Holdout for all splits
-                            lm_holdout_predictions = map2(train_data, lm_holdout_predictions, last_train_price))
+                            # Holdout for all splits (UPDATE THIS, NEED TRAIN PRICE OF 4th SPLIT)
+                            lm_holdout_predictions = ifelse(split < 5,
+                                             map2(test_data, lm_holdout_predictions, last_train_price),
+                                             map2(train_data, lm_holdout_predictions, last_train_price)))
 ```
 <!-- [TODO - CLEAN UP EXPLANATIONS HERE!] -->
 
@@ -381,6 +383,6 @@ select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_hol
 
 
 
-<!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS AND WRITE THE SAME INFO TO THE DB] -->
+<!-- <!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS AND WRITE THE SAME INFO TO THE DB] --> -->
 
 
