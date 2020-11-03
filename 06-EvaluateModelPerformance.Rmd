@@ -1,6 +1,7 @@
 # Evaluate Model Performance{#evaluate-model-performance}
 
-<!-- [TODO - FINAL NOTE BEFORE PUTTING AWAY ON 10/28: A bit of a disaster on this section... struggling to have the actuals and the % change predictions match up. Was it a bad call to split up things the way I did? Re-think through the process of things, maybe write things out to think through them better...] -->
+
+<!-- NOTE 11/2: THINGS ARE WORKING OVERALL, BUT LOOKS LIKE THERE IS A PROBLEM WITH THE HOLDOUT CALCULATIONS -->
 
 
 ## Summarizing models
@@ -215,9 +216,14 @@ select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_hol
 <!-- WORKING UP TO THIS POINT ON 11/2 -->
 
 
-<!-- And now we can do the same for all the other models -->
+<!-- And now we can do the same for all the other models. -->
 
-<!-- <!-- [TODO - HERE SHOULD ACTUALLY CREATE ONE COLUMN FOR TEST AND ONE FOR TRAIN!] --> -->
+<!-- ```{r} -->
+
+<!-- ``` -->
+
+
+<!-- Now add metrics -->
 
 <!-- ```{r add_metrics_rest} -->
 <!-- cryptodata_nested <- mutate(cryptodata_nested, -->
@@ -375,6 +381,6 @@ select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_hol
 
 
 
-<!-- <!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS AND WRITE THE SAME INFO TO THE DB] --> -->
+<!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS AND WRITE THE SAME INFO TO THE DB] -->
 
 
