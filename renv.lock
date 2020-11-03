@@ -30,6 +30,13 @@
       "Repository": "CRAN",
       "Hash": "85738c69035e67ec4b484a5e02640ef6"
     },
+    "FNN": {
+      "Package": "FNN",
+      "Version": "1.1.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b56998fff55e4a4b4860ad6e8c67e0f9"
+    },
     "KernSmooth": {
       "Package": "KernSmooth",
       "Version": "2.23-16",
@@ -141,6 +148,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "50c838a310445e954bc13f26f26a6ecf"
+    },
+    "automap": {
+      "Package": "automap",
+      "Version": "1.0-14",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7db350883cbbf8ca18fcfbf7a987261c"
     },
     "av": {
       "Package": "av",
@@ -588,6 +602,13 @@
       "Repository": "CRAN",
       "Hash": "7d7f283939f563670a697165b2cf5560"
     },
+    "gstat": {
+      "Package": "gstat",
+      "Version": "2.0-6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "64ca0abd70da633cb51d15724d2468b3"
+    },
     "gtable": {
       "Package": "gtable",
       "Version": "0.3.0",
@@ -644,12 +665,33 @@
       "Repository": "CRAN",
       "Hash": "a525aba14184fec243f9eaec62fbed43"
     },
+    "hydroGOF": {
+      "Package": "hydroGOF",
+      "Version": "0.4-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ecedb8a896ab3b8bfba1ada302cad308"
+    },
+    "hydroTSM": {
+      "Package": "hydroTSM",
+      "Version": "0.6-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "abf70416b83fb954e713cf180df9a11f"
+    },
     "ini": {
       "Package": "ini",
       "Version": "0.3.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "6154ec2223172bce8162d4153cda21f7"
+    },
+    "intervals": {
+      "Package": "intervals",
+      "Version": "0.15.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "079e6e04c6aafe087aba89f93311d8ba"
     },
     "ipred": {
       "Package": "ipred",
@@ -1092,6 +1134,13 @@
       "Repository": "CRAN",
       "Hash": "b06bfb3504cc8a4579fd5567646f745b"
     },
+    "reshape": {
+      "Package": "reshape",
+      "Version": "0.8.8",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0f4d941129e00ed34a7d192b1da7ccef"
+    },
     "reshape2": {
       "Package": "reshape2",
       "Version": "1.4.3",
@@ -1217,6 +1266,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "a44a3cebab900c0f77e16804f361468e"
+    },
+    "spacetime": {
+      "Package": "spacetime",
+      "Version": "1.2-3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c56bf34ead17cdd551eb2e2bf0e4bc74"
     },
     "statmod": {
       "Package": "statmod",
@@ -1407,6 +1463,13 @@
       "Repository": "CRAN",
       "Hash": "6c85f015dee9cc7710ddd20f86881f58"
     },
+    "xts": {
+      "Package": "xts",
+      "Version": "0.12.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ca2fd4ad8ef78cca3aa2b30f992798a8"
+    },
     "yaml": {
       "Package": "yaml",
       "Version": "2.2.1",
@@ -1420,6 +1483,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "caa73cdca1a87e5f2617915c8809f207"
+    },
+    "zoo": {
+      "Package": "zoo",
+      "Version": "1.8-8",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c2ea03282caa1f6972dc84fc5bf671cc"
     }
   }
 }
