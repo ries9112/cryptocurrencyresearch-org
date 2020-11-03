@@ -1,9 +1,6 @@
 # Evaluate Model Performance{#evaluate-model-performance}
 
 
-<!-- NOTE 11/2: LOTS OF PROGRESS, BUT HOLDOUT NEEDS TO BE FIXED! Holdout right now is WRONG, need to grab the last price from train_data of split == 4!! ONCE I MAKE THAT UPDATE, EVERYTHING CORRECTLY STANDARDIZED AND READY TO CALC FOR ALL OTHER MODELS-->
-
-
 ## Summarizing models
 
 <!-- [TODO - HERE add notes on using **postResample()** and explain that if you think about it all you need to evaluate a model is the predictions made (on data never seen by the model) ] -->
@@ -75,12 +72,32 @@ Now overwrite the old predictions:
 cryptodata_nested <- mutate(cryptodata_nested,
                             lm_test_predictions = ifelse(split < 5,
                                                          map2(train_data, lm_test_predictions, last_train_price),
-                                                         NA),
-                            # Holdout for all splits (UPDATE THIS, NEED TRAIN PRICE OF 4th SPLIT)
-                            lm_holdout_predictions = ifelse(split < 5,
-                                             map2(test_data, lm_holdout_predictions, last_train_price),
-                                             map2(train_data, lm_holdout_predictions, last_train_price)))
+                                                         NA))
 ```
+
+Do the same for the holdout. For all of holdout need to take last price point of 5th training split.
+```{r}
+cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
+                                    lm_holdout_predictions = map2(train_data, lm_holdout_predictions, last_train_price))
+```
+
+Join the holdout data to all rows based on the cryptocurrency symbol alone:
+```{r}
+cryptodata_nested <- left_join(cryptodata_nested, 
+                               select(cryptodata_nested_holdout, symbol, lm_holdout_predictions),
+                               by='symbol')
+# Remove unwanted columns
+cryptodata_nested <- select(cryptodata_nested, -lm_holdout_predictions.x, -split.y)
+# Rename the columns kept
+cryptodata_nested <- rename(cryptodata_nested, 
+                            lm_holdout_predictions = 'lm_holdout_predictions.y',
+                            split = 'split.x')
+# Reset the correct grouping structure
+cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
+```
+
+
+
 <!-- [TODO - CLEAN UP EXPLANATIONS HERE!] -->
 
 ```{r}
@@ -116,11 +133,29 @@ Use the new function to create the new column `actuals`:
 cryptodata_nested <- mutate(cryptodata_nested,
                             actuals_test = ifelse(split < 5,
                                              map2(train_data, test_data, actuals_create),
-                                             NA),
-                            actuals_holdout = ifelse(split < 5,
-                                             map2(test_data, holdout_data, actuals_create),
-                                             map2(train_data, holdout_data, actuals_create)))
+                                             NA))
 ```
+
+
+Again, for the holdout we need the price from the training data of the 5th split 
+```{r}
+cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
+                                    actuals_holdout = map2(train_data, holdout_data, actuals_create))
+```
+
+Join the holdout data to all rows based on the cryptocurrency symbol alone:
+```{r}
+cryptodata_nested <- left_join(cryptodata_nested, 
+                               select(cryptodata_nested_holdout, symbol, actuals_holdout),
+                               by='symbol')
+# Remove unwanted columns
+cryptodata_nested <- select(cryptodata_nested, -split.y)
+# Rename the columns kept
+cryptodata_nested <- rename(cryptodata_nested, split = 'split.x')
+# Reset the correct grouping structure
+cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
+```
+
 
 Now we can convert the new `actuals` to express the `price_usd` as a % change relative to the previous value using adapting the function from earlier:
 ```{r}
@@ -187,6 +222,10 @@ Look at the results:
 select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout)
 ```
 
+Out of `r nrow(cryptodata_nested)` groups, `r count(ungroup(filter(cryptodata_nested, lm_rmse_test >= lm_rmse_holdout)))$n` had an equal or lower RMSE score for the holdout than the test set.
+
+
+
 ### Calculate R^2
 
 Now we can do the same for the R Squared metric:
@@ -210,15 +249,15 @@ cryptodata_nested <- mutate(cryptodata_nested,
 ```
 
 
-Look at the results:
+Look at the results. Wrapping them in `print(n=500)` overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations).
 ```{r}
-select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout)
+print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), n=500)
 ```
 
 <!-- WORKING UP TO THIS POINT ON 11/2 -->
 
 
-<!-- And now we can do the same for all the other models. -->
+<!-- And now we can do the same for all the other models (REMEMBER holdout step for all to get price from 5th train split first) -->
 
 <!-- ```{r} -->
 

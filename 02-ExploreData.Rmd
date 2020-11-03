@@ -7,8 +7,6 @@ The first thing we will need to do is download the latest data. We will do this 
 First, we will need to connect to a public GitHub repository (anyone can post their code to the GitHub website and make a "repository" with code for their project) and ***register*** the ***board*** that the data is ***pinned*** to by using the **`board_register()`** function:
 
 ```{r hitBTC_register}
-library(pins)
-library(skimr)
 board_register(name = "pins_board", url = "https://raw.githubusercontent.com/predictcrypto/pins/master/", board = "datatxt")
 ```
 

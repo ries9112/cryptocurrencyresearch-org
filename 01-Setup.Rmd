@@ -65,26 +65,29 @@ library(pacman)
 Install other packages:
 
 ```{r install_all_other_packages}
-p_load('pins','tidyverse','skimr','tsibble','doParallel','DT', 'caret','anytime','httr','jsonlite', # Data Exploration + Data Prep
-       'ggTimeSeries','gifski','av', 'magick', 'ggthemes', 'plotly', 'ggpubr', # Visualization
-       'ggforce','gganimate', 'transformr', # Visualization continued
-       'xgboost','gbm','deepnet') # Predictive Modeling
+p_load('pins', 'skimr', 'DT', # Data Exploration 
+       'tidyverse', 'tsibble', 'anytime', 'httr', 'jsonlite', # Data Prep
+       'ggTimeSeries', 'gifski', 'av', 'magick', 'ggthemes', 'plotly', # Visualization
+       'ggpubr', 'ggforce', 'gganimate', 'transformr', # Visualization continued
+       'caret', 'doParallel', 'xgboost', 'gbm', 'deepnet', # Predictive Modeling
+       'hydroGOF') # Evaluate Model Performance
 ```
+***It is normal for this step to take a long time, as it will install every package you will need to follow along with the rest of the tutorial.*** The next time you run this command it would be much faster because it would skip installing the already installed packages.
 
 Nice work! Now you have everything you need to [follow along with this example](#overview).
 
-### GitHub Repository
+<!-- ### GitHub Repository (KEEP OR DEL?) -->
 
-Because this document is produced through a free **C**ontinuous **I**ntegration (CI) tool called **GitHub Actions**, it is also really easy for anyone to use the same code on their own computer to produce this document using the latest available data (or even automate their own process).
+<!-- Because this document is produced through a free **C**ontinuous **I**ntegration (CI) tool called **GitHub Actions**, it is also really easy for anyone to use the same code on their own computer to produce this document using the latest available data (or even automate their own process). -->
 
-If you wanted to render this document in its entirety yourself, here is how you would do it using the application RStudio:
+<!-- If you wanted to render this document in its entirety yourself, here is how you would do it using the application RStudio: -->
 
-1.  Create a copy of the GitHub project on your own computer by clicking on the button in the top right of the user interface to create a **New Project**: <!-- [TODO - ADD SCREENSHOT] -->
+<!-- 1.  Create a copy of the GitHub project on your own computer by clicking on the button in the top right of the user interface to create a **New Project**: <!-- [TODO - ADD SCREENSHOT] --> -->
 
-2.  Run the code **`install.packages('bookdown')`** to install the [**Bookdown**]{style="color: orange;"} package.
+<!-- 2.  Run the code **`install.packages('bookdown')`** to install the [**Bookdown**]{style="color: orange;"} package. -->
 
-3.  Now you can run this document you are currently seeing on your own computer by running the command **`bookdown::render_book('index.Rmd')`**, which should take about one hour to execute. Once it is finished, the results will update in the \*\*\_book\*\* folder, and you can view the document by clicking on any .html file contained within that folder.
+<!-- 3.  Now you can run this document you are currently seeing on your own computer by running the command **`bookdown::render_book('index.Rmd')`**, which should take about one hour to execute. Once it is finished, the results will update in the \*\*\_book\*\* folder, and you can view the document by clicking on any .html file contained within that folder. -->
 
-    -   You can find more information around using and editing the **bookdown** format here: https://bookdown.org/yihui/bookdown/introduction.html
-    
-    - Feel free to open an **issue** on the GitHub Repository if you are running into any problems: https://github.com/ries9112/cryptocurrencyresearch-org/issues
+<!--     -   You can find more information around using and editing the **bookdown** format here: https://bookdown.org/yihui/bookdown/introduction.html -->
+
+<!--     - Feel free to open an **issue** on the GitHub Repository if you are running into any problems: https://github.com/ries9112/cryptocurrencyresearch-org/issues -->
