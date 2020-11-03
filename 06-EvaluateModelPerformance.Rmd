@@ -5,10 +5,6 @@
 
 <!-- [TODO - HERE add notes on using **postResample()** and explain that if you think about it all you need to evaluate a model is the predictions made (on data never seen by the model) ] -->
 
-<!-- [TODO - NOTE 10/28 - postResample() produces a ton of NULL values!! Could calculate R^2 correlation between values of predictions and observations extracting it out of lm() models! So making lm() model between predictions and actuals: 
-m <- lm(cryptodata_nested$lm_test_predictions[[1]] ~ cryptodata_nested$test_data[[1]]$target_price_24h) -->
-<!-- summary(m)$r.squared ] -->
-
 Example for one model:
 ```{r caret_post_resample_example}
 postResample(pred = cryptodata_nested$lm_test_predictions[[1]], 
@@ -46,9 +42,9 @@ The **RMSE**
 
 
 
-### Adjust Prices
+## Adjust Prices
 
-<!-- [TODO - NEED TO MAKE SURE RMSE IS STANDARDIZED HERE!] -->
+<!-- [TODO - add note on first doing lm only?] -->
 
 Because cryptocurrencies can vary dramatically in their prices with some trading in the tens of thousands of dollars and others trading for less than a cent, we need to make sure to standardize the RMSE columns to provide a fair comparison for the metric.
 
@@ -60,7 +56,7 @@ This step is particularly tedious, but it is important. As with the rest of this
 ```
 
 
-#### Add Last Price
+### Add Last Price
 
 <!-- [TODO - write better] -->
 
@@ -81,7 +77,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
                                                          NA))
 ```
 
-##### Holdout
+#### Holdout
 
 Do the same for the holdout. For all of holdout need to take last price point of 5th training split.
 ```{r}
@@ -105,7 +101,7 @@ cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
 ```
 
 
-#### Convert to Percentage
+### Convert to Percentage Change
 
 <!-- [TODO - CLEAN UP EXPLANATIONS HERE!] -->
 
@@ -129,7 +125,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             lm_holdout_predictions = map(lm_holdout_predictions, standardize_perc_change))
 ```
 
-#### Actuals
+### Actuals
 
 Now do the same thing to the actual prices. Let's make a new column called **actuals** containing the real price values (rather than the predicted ones):
 ```{r}
@@ -146,7 +142,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
                                              NA))
 ```
 
-##### Holdout
+#### Holdout
 
 Again, for the holdout we need the price from the training data of the 5th split 
 ```{r}
@@ -167,7 +163,7 @@ cryptodata_nested <- rename(cryptodata_nested, split = 'split.x')
 cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
 ```
 
-#### Actuals as % Change
+### Actuals as % Change
 
 Now we can convert the new `actuals` to express the `price_usd` as a % change relative to the previous value using adapting the function from earlier:
 ```{r}
@@ -188,7 +184,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 
 
-### Review Summary Statistics
+## Review Summary Statistics
 
 Now that we standardized the price to show the percentage change relative to the previous period instead of the price in dollars, we can actually compare the summary statistics across all cryptocurrencies and have it be a fair comparison.
 
@@ -266,47 +262,127 @@ print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_r
 <!-- WORKING UP TO THIS POINT ON 11/2 -->
 
 
-<!-- And now we can do the same for all the other models (REMEMBER holdout step for all to get price from 5th train split first) -->
+## Adjust Prices - All Models
 
-<!-- ```{r} -->
+<!-- [TODO - OR IS IT BETTER TO DO ALL AT ONCE ABOVE?] -->
 
-<!-- ``` -->
+### Add Last Price
+And now we can do the same for all the other models 
+
+```{r}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            xgb_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, xgb_test_predictions, last_train_price),
+                                                         NA),
+                            xgbTree_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, xgbTree_test_predictions, last_train_price),
+                                                         NA),
+                            nnet_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, nnet_test_predictions, last_train_price),
+                                                         NA))
+```
+
+##### Holdout
+
+(REMEMBER holdout step for all to get price from 5th train split first)
+
+```{r}
+cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
+                                    xgb_holdout_predictions = map2(train_data, xgb_holdout_predictions, last_train_price),
+                                    xgbTree_holdout_predictions = map2(train_data, xgbTree_holdout_predictions, last_train_price),
+                                    nnet_holdout_predictions = map2(train_data, nnet_holdout_predictions, last_train_price))
+```
+
+Join the holdout data to all rows based on the cryptocurrency symbol alone:
+```{r}
+cryptodata_nested <- left_join(cryptodata_nested, 
+                               select(cryptodata_nested_holdout, symbol, 
+                                      xgb_holdout_predictions, xgbTree_holdout_predictions, nnet_holdout_predictions),
+                               by='symbol')
+# Remove unwanted columns
+cryptodata_nested <- select(cryptodata_nested, -xgb_holdout_predictions.x, 
+                            -xgbTree_holdout_predictions.x, -nnet_holdout_predictions.x, -split.y)
+# Rename the columns kept
+cryptodata_nested <- rename(cryptodata_nested, 
+                            xgb_holdout_predictions = 'xgb_holdout_predictions.y',
+                            xgbTree_holdout_predictions = 'xgbTree_holdout_predictions.y',
+                            nnet_holdout_predictions = 'nnet_holdout_predictions.y',
+                            split = 'split.x')
+# Reset the correct grouping structure
+cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
+```
+
+### Convert to % Change
+
+Overwrite the old predictions with the new predictions adjusted as a percentage now:
+```{r target_adjust_all_models}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            xgb_test_predictions = ifelse(split < 5,
+                                                         map(xgb_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # Holdout for all splits
+                            xgb_holdout_predictions = map(xgb_holdout_predictions, standardize_perc_change),
+                            # xgbTree
+                            xgbTree_test_predictions = ifelse(split < 5,
+                                                         map(xgbTree_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # Holdout for all splits
+                            xgbTree_holdout_predictions = map(xgbTree_holdout_predictions, standardize_perc_change),
+                            # nnet
+                            nnet_test_predictions = ifelse(split < 5,
+                                                         map(nnet_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # Holdout for all splits
+                            nnet_holdout_predictions = map(nnet_holdout_predictions, standardize_perc_change))
+```
 
 
-<!-- Now add metrics -->
 
-<!-- ```{r add_metrics_rest} -->
-<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
-<!--                             # XGBoost - RMSE - Test -->
-<!--                             xgb_rmse_test = unlist(map2(xgb_test_predictions, test_data, evaluate_preds_rmse)), -->
-<!--                             # And holdout: -->
-<!--                             xgb_rmse_holdout = unlist(map2(xgb_holdout_predictions, holdout_data,evaluate_preds_rmse)), -->
-<!--                             # XGBoost - R^2 - Test -->
-<!--                             xgb_rsq_test = unlist(map2(xgb_test_predictions, test_data, evaluate_preds_rsq)), -->
-<!--                             # And holdout: -->
-<!--                             xgb_rsq_holdout = map2(xgb_holdout_predictions, holdout_data, evaluate_preds_rsq), -->
-<!--                             # XGBoost Trees - RMSE - Test -->
-<!--                             xgbTree_rmse_test = unlist(map2(xgbTree_test_predictions, test_data, evaluate_preds_rmse)), -->
-<!--                             # And holdout: -->
-<!--                             xgbTree_rmse_holdout = unlist(map2(xgbTree_holdout_predictions, holdout_data, evaluate_preds_rmse)), -->
-<!--                             # XGBoost Trees - R^2 - Test -->
-<!--                             xgbTree_rsq_test = unlist(map2(xgbTree_test_predictions, test_data, evaluate_preds_rsq)), -->
-<!--                             # And holdout: -->
-<!--                             xgbTree_rsq_holdout = unlist(map2(xgbTree_holdout_predictions, holdout_data, evaluate_preds_rsq)), -->
-<!--                             # Neural Network - RMSE - Test -->
-<!--                             nnet_rmse_test = unlist(map2(nnet_test_predictions, test_data, evaluate_preds_rmse)), -->
-<!--                             # And holdout: -->
-<!--                             nnet_rmse_holdout = unlist(map2(nnet_holdout_predictions, holdout_data, evaluate_preds_rmse)), -->
-<!--                             # Neural Network - R^2 - Test -->
-<!--                             nnet_rsq_test = unlist(map2(nnet_test_predictions, test_data, evaluate_preds_rsq)), -->
-<!--                             # And holdout: -->
-<!--                             nnet_rsq_holdout = unlist(map2(nnet_holdout_predictions, holdout_data, evaluate_preds_rsq))) -->
+### Add Metrics
 
-<!-- ``` -->
+```{r add_metrics_rest}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            # XGBoost - RMSE - Test
+                            xgb_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(xgb_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            # And holdout:
+                            xgb_rmse_holdout = unlist(map2(xgb_holdout_predictions, actuals_holdout ,evaluate_preds_rmse)),
+                            # XGBoost - R^2 - Test
+                            xgb_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(xgb_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            # And holdout:
+                            xgb_rsq_holdout = map2(xgb_holdout_predictions, actuals_holdout, evaluate_preds_rsq),
+                            # XGBoost Trees - RMSE - Test
+                            xgbTree_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(xgbTree_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            # And holdout:
+                            xgbTree_rmse_holdout = unlist(map2(xgbTree_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
+                            # XGBoost Trees - R^2 - Test
+                            xgbTree_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(xgbTree_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            # And holdout:
+                            xgbTree_rsq_holdout = unlist(map2(xgbTree_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
+                            # Neural Network - RMSE - Test
+                            nnet_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(nnet_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            # And holdout:
+                            nnet_rmse_holdout = unlist(map2(nnet_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
+                            # Neural Network - R^2 - Test
+                            nnet_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(nnet_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            # And holdout:
+                            nnet_rsq_holdout = unlist(map2(nnet_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))
+```
 
 <!-- Now we have RMSE values for every model created for every cryptocurrency and split of the data: -->
 <!-- ```{r} -->
-<!-- rmse_scores <- select(cryptodata_nested, lm_rmse, xgb_rmse, xgbTree_rmse, nnet_rmse) -->
+<!-- rmse_scores <- select(cryptodata_nested, lm_rmse_test, xgb_rmse_test, xgbTree_rmse_test, nnet_rmse_test) -->
 <!-- # Show RMSE scores -->
 <!-- rmse_scores -->
 <!-- ``` -->
@@ -318,119 +394,222 @@ print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_r
 <!-- rsq_scores -->
 <!-- ``` -->
 
+## Eval RMSE
 
-<!-- ### New Section -->
+<!-- [TODO - Title?] -->
 
-<!-- <!-- [TODO - Title?] --> -->
-
-<!-- Now for each model we will create a new column giving the average RMSE and R^2 for the 4 cross-validation split, and a separate column to give the score for the holdout. -->
-<!-- ```{r} -->
-<!-- rmse_scores <- mutate(cryptodata_nested, -->
-<!--                       lm = mean(lm_rmse, na.rm = T), -->
-<!--                       xgb = mean(xgb_rmse, na.rm = T), -->
-<!--                       xgbTree = mean(xgbTree_rmse, na.rm = T), -->
-<!--                       nnet = mean(nnet_rmse, na.rm = T)) -->
-<!-- ``` -->
-
-<!-- Now we can use the `gather()` function to summarize the columns as rows: -->
-<!-- ```{r gather_rmse} -->
-<!-- rmse_scores <- unique(gather(select(rmse_scores, lm:nnet), 'model', 'rmse', c(-symbol,-split))) -->
-<!-- ``` -->
+New object without split column `cryptodata_metrics`:
+```{r}
+cryptodata_metrics <- group_by(select(ungroup(cryptodata_nested),-split),symbol)
+```
 
 
-<!-- Now the same for the R^2 -->
-<!-- ```{r} -->
-<!-- rsq_scores <- mutate(cryptodata_nested, -->
-<!--                       lm = mean(lm_rsq, na.rm = T), -->
-<!--                       xgb = mean(xgb_rsq, na.rm = T), -->
-<!--                       xgbTree = mean(xgbTree_rsq, na.rm = T), -->
-<!--                       nnet = mean(nnet_rsq, na.rm = T)) -->
-<!-- ``` -->
+### Test
 
-<!-- Now we can use the `gather()` function to summarize the columns as rows: -->
-<!-- ```{r gather_rsq} -->
-<!-- rsq_scores <- unique(gather(select(rsq_scores, lm:nnet), 'model', 'rsq', c(-symbol,-split))) -->
-<!-- ``` -->
+Now for each model we will create a new column giving the average RMSE for the 4 cross-validation test splits:
+```{r}
+rmse_test <- mutate(cryptodata_metrics,
+                      lm = mean(lm_rmse_test, na.rm = T),
+                      xgb = mean(xgb_rmse_test, na.rm = T),
+                      xgbTree = mean(xgbTree_rmse_test, na.rm = T),
+                      nnet = mean(nnet_rmse_test, na.rm = T))
+```
+
+Now we can use the `gather()` function to summarize the columns as rows:
+```{r gather_rmse}
+rmse_test <- unique(gather(select(rmse_test, lm:nnet), 'model', 'rmse', -symbol))
+# Show results
+rmse_test
+```
+
+Now tag the results as having been for the test set
+```{r}
+rmse_test$eval_set <- 'test'
+```
+
+### Holdout
+
+Do the same for the holdout set
+```{r}
+rmse_holdout <- mutate(cryptodata_metrics,
+                      lm = mean(lm_rmse_holdout, na.rm = T),
+                      xgb = mean(xgb_rmse_holdout, na.rm = T),
+                      xgbTree = mean(xgbTree_rmse_holdout, na.rm = T),
+                      nnet = mean(nnet_rmse_holdout, na.rm = T))
+```
+
+Now we can use the `gather()` function to summarize the columns as rows:
+```{r gather_rmse_holdout}
+rmse_holdout <- unique(gather(select(rmse_holdout, lm:nnet), 'model', 'rmse', -symbol))
+# Show results
+rmse_holdout
+```
+
+Now tag the results as having been for the holdout set
+```{r}
+rmse_holdout$eval_set <- 'holdout'
+```
+
+### Union Results
+
+```{r}
+rmse_scores <- union(rmse_test, rmse_holdout)
+```
 
 
-<!-- ## Visualize Results -->
+## Eval R^2
+
+### Test
+
+For each model we will create a new column giving the average R^2 for the 4 cross-validation test splits:
+```{r}
+rsq_test <- mutate(cryptodata_metrics,
+                      lm = mean(lm_rsq_test, na.rm = T),
+                      xgb = mean(xgb_rsq_test, na.rm = T),
+                      xgbTree = mean(xgbTree_rsq_test, na.rm = T),
+                      nnet = mean(nnet_rsq_test, na.rm = T))
+```
+
+Now we can use the `gather()` function to summarize the columns as rows:
+```{r gather_rsq}
+rsq_test <- unique(gather(select(rsq_test, lm:nnet), 'model', 'rsq', -symbol))
+# Show results
+rsq_test
+```
+
+Now tag the results as having been for the test set
+```{r}
+rsq_test$eval_set <- 'test'
+```
+
+### Holdout
+
+Do the same for the holdout set
+```{r}
+rsq_holdout <- mutate(cryptodata_metrics,
+                      lm = mean(lm_rsq_holdout, na.rm = T),
+                      xgb = mean(xgb_rsq_holdout, na.rm = T),
+                      xgbTree = mean(xgbTree_rsq_holdout, na.rm = T),
+                      nnet = mean(nnet_rsq_holdout, na.rm = T))
+```
+
+Now we can use the `gather()` function to summarize the columns as rows:
+```{r gather_rsq_holdout}
+rsq_holdout <- unique(gather(select(rsq_holdout, lm:nnet), 'model', 'rsq', -symbol))
+# Show results
+rsq_holdout
+```
+
+Now tag the results as having been for the holdout set
+```{r}
+rsq_holdout$eval_set <- 'holdout'
+```
+
+### Union Results
+
+```{r}
+rsq_scores <- union(rsq_test, rsq_holdout)
+```
 
 
-<!-- ### RMSE Visualization -->
+## Visualize Results
 
-<!-- Now we can take the same tools we learned in the [Visualization section from earlier](#visualization) and visualize the results of the models. -->
+
+### RMSE Visualization
+
+Now we can take the same tools we learned in the [Visualization section from earlier](#visualization) and visualize the results of the models.
 
 <!-- ```{r} -->
 <!-- ggplot(rmse_scores, aes(x=split, y=rmse, color = model)) + -->
 <!--   geom_boxplot() + -->
 <!--   geom_point() + -->
-<!--   facet_wrap(~split) -->
+<!--   ylim(c(0,50)) + -->
+<!--   facet_wrap(~eval_set) -->
 <!-- ``` -->
 
 
 
 
-<!-- ### Both -->
+### Both
 
-<!-- #### Join Datasets -->
+#### Join Datasets
 
-<!-- First join the two -->
-<!-- ```{r} -->
-<!-- plot_scores <- merge(rmse_scores, rsq_scores) -->
+First join the two
+```{r}
+plot_scores <- merge(rmse_scores, rsq_scores)
+```
+
+#### Plot Results
+
+<!-- [TODO - ADJUST THESE SOME MORE] -->
+
+```{r}
+ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
+  geom_point() +
+  ylim(c(0,50))
+```
+
+ADA only
+```{r}
+ggplot(filter(plot_scores, symbol == 'ADA'), aes(x=rsq, y=rmse, color = model)) +
+  geom_point() +
+  facet_wrap(~eval_set)
+```
+
+
+Now by the cryptocurrency
+```{r}
+ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
+  geom_point() +
+  geom_smooth() +
+  ylim(c(0,50)) +
+  facet_wrap(~symbol)
+```
+
+### Results by the Cryptocurrency
+
+<!-- [TODO - UNCOMMENT THE CODE BELOW TO UPLOAD DATA TO PINS. ADD R LINE TO SET ENVIRONMENTAL VARIABLES BEFORE RUNNING BOOK!] -->
+
+<!-- ```{r upload_results_pin, include=F} -->
+<!-- source('pins_key.R') -->
+<!-- # register board -->
+<!-- board_register("github", repo = "predictcrypto/pins", token=Sys.getenv("pins_key")) -->
+<!-- # Add current date -->
+<!-- plot_scores$last_refreshed <- Sys.time() -->
+<!-- # pin data -->
+<!-- pin(plot_scores, board='github', name='crypto_tutorial_results_latest') -->
 <!-- ``` -->
 
-<!-- #### Plot Results -->
+<!-- TODO - INCLUDE SHINYAPP HERE: -->
+```{r metrics_by_crypto_shinyapp}
+knitr::include_app('https://predictcrypto.shinyapps.io/tutorial_latest_model_summary/', height = '600px')
+```
 
-<!-- <!-- [TODO - ADJUST THESE SOME MORE] --> -->
-
-<!-- ```{r} -->
-<!-- ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) + -->
-<!--   geom_point() + -->
-<!--   geom_smooth() -->
-<!-- ``` -->
-
-
-<!-- ```{r} -->
-<!-- ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) + -->
-<!--   geom_boxplot() + -->
-<!--   geom_point() + -->
-<!--   facet_wrap(~split) -->
-<!-- ``` -->
-
-
-<!-- Now by the cryptocurrency -->
-<!-- ```{r} -->
-<!-- ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) + -->
-<!--   geom_point() + -->
-<!--   geom_smooth() + -->
-<!--   facet_wrap(~symbol) -->
-<!-- ``` -->
-
-<!-- ### Results by the Cryptocurrency -->
-
-<!-- <!-- [TODO - UNCOMMENT THE CODE BELOW TO UPLOAD DATA TO PINS] --> -->
-
-<!-- <!-- ```{r upload_results_pin, include=F} --> -->
-<!-- <!-- source('pins_key.R') --> -->
-<!-- <!-- # register board --> -->
-<!-- <!-- board_register("github", repo = "predictcrypto/pins", token=Sys.getenv("pins_key")) --> -->
-<!-- <!-- # Add current date --> -->
-<!-- <!-- plot_scores$last_refreshed <- Sys.time() --> -->
-<!-- <!-- # pin data --> -->
-<!-- <!-- pin(plot_scores, board='github', name='crypto_tutorial_results_latest') --> -->
-<!-- <!-- ``` --> -->
-
-<!-- <!-- TODO - INCLUDE SHINYAPP HERE: --> -->
-<!-- ```{r metrics_by_crypto_shinyapp} -->
-<!-- knitr::include_app('https://predictcrypto.shinyapps.io/tutorial_latest_model_summary/', height = '600px') -->
-<!-- ``` -->
-
-<!-- The app shown above also has a button to **Show Code**. If you were to copy and paste that code into an RStudio session on your computer into a file with the .Rmd file extension and you then *Knit* the file, the same exact app should show up on your computer, no logins or setup outside of the packages required for the code to run; RStudio should automatically prompt you to install packages that are not currently installed on your computer. -->
-<!-- <!-- [TODO - MAKE THE TEXT ABOVE AN INFO NOTE (NOT WARNING, JUST AN i FOR INFO)] --> -->
+The app shown above also has a button to **Show Code**. If you were to copy and paste that code into an RStudio session on your computer into a file with the .Rmd file extension and you then *Knit* the file, the same exact app should show up on your computer, no logins or setup outside of the packages required for the code to run; RStudio should automatically prompt you to install packages that are not currently installed on your computer.
+<!-- [TODO - MAKE THE TEXT ABOVE AN INFO NOTE (NOT WARNING, JUST AN i FOR INFO)] -->
 
 
 
 
-<!-- <!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS AND WRITE THE SAME INFO TO THE DB] --> -->
+<!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS AND WRITE THE SAME INFO TO THE DB] -->
+
+
+
+
+
+
+<!-- SECRET: SAVE METRICS INTO MLFLOW -->
+```{r mlflow, include=F}
+
+```
+
+
+
+
+
+
+
+
+
 
 

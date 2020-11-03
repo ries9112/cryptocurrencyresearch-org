@@ -173,7 +173,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             xgb_test_predictions =  map2(xgb_model,
                                                     test_data,
                                                     make_predictions),
-                            
+                            # holdout
                             xgb_holdout_predictions =  map2(xgb_model,
                                                        holdout_data,
                                                        make_predictions),
@@ -181,6 +181,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             xgbTree_test_predictions =  map2(xgbTree_model,
                                                         test_data,
                                                         make_predictions),
+                            # holdout
                             xgbTree_holdout_predictions =  map2(xgbTree_model,
                                                            holdout_data,
                                                            make_predictions),
@@ -188,7 +189,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             nnet_test_predictions =  map2(nnet_model,
                                                      test_data,
                                                      make_predictions),
-                            
+                            # holdout
                             nnet_holdout_predictions =  map2(nnet_model,
                                                         holdout_data,
                                                         make_predictions))
@@ -203,3 +204,5 @@ stopCluster(cl)
 ## Traditional Timeseries
 
 <!-- [TODO - HERE TALK ABOUT ARIMA AND ETS AND MAKE MODELS! KEEP SAME STRUCTURE AND WILL BE ABLE TO DO postResample()] -->
+
+<!-- [TODO - AFTERWARDS ALSO NEED TO ADD NEW STEPS INTO NEXT SECTION!] -->
