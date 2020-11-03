@@ -46,7 +46,7 @@ The **RMSE**
 
 
 
-### Adjust RMSE
+### Adjust Prices
 
 <!-- [TODO - NEED TO MAKE SURE RMSE IS STANDARDIZED HERE!] -->
 
@@ -55,10 +55,16 @@ Because cryptocurrencies can vary dramatically in their prices with some trading
 Therefore, before using the `postResample()` function, let's convert both the predictions and the target to be the % change in price over the 24 hour period, rather than the change in price ($).
 
 
-#### Predictions Adjustment
-First we will adjust the predictions to instead of being predictions for the price in dollars, will be % change relative to the previous price.
+```{block2, type='infoicon'}
+This step is particularly tedious, but it is important. As with the rest of this tutorial, try to understand what we are doing and why even if you find the code overwhelming. All we are doing in this "Adjust Prices" section is we are adjusting all of the prices to be represented as percentage change between observations, which will allow us to draw a fair comparison of the metrics across all cryptocurrencies, which would not be possible using the prices themselves.
+```
 
-<!-- [TODO - ADD note about tedious step-by-step and understanding what's happening and why] -->
+
+#### Add Last Price
+
+<!-- [TODO - write better] -->
+
+In order to convert the first prediction made to be a percentage, we need to know the previous price. 
 
 Function to add last_price_train column and append it to the predictions made so we can calculate the % change of the first element, before later removing the value not associated with the predictions:
 ```{r}
@@ -74,6 +80,8 @@ cryptodata_nested <- mutate(cryptodata_nested,
                                                          map2(train_data, lm_test_predictions, last_train_price),
                                                          NA))
 ```
+
+##### Holdout
 
 Do the same for the holdout. For all of holdout need to take last price point of 5th training split.
 ```{r}
@@ -97,6 +105,7 @@ cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
 ```
 
 
+#### Convert to Percentage
 
 <!-- [TODO - CLEAN UP EXPLANATIONS HERE!] -->
 
@@ -120,6 +129,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             lm_holdout_predictions = map(lm_holdout_predictions, standardize_perc_change))
 ```
 
+#### Actuals
 
 Now do the same thing to the actual prices. Let's make a new column called **actuals** containing the real price values (rather than the predicted ones):
 ```{r}
@@ -136,6 +146,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
                                              NA))
 ```
 
+##### Holdout
 
 Again, for the holdout we need the price from the training data of the 5th split 
 ```{r}
@@ -156,6 +167,7 @@ cryptodata_nested <- rename(cryptodata_nested, split = 'split.x')
 cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
 ```
 
+#### Actuals as % Change
 
 Now we can convert the new `actuals` to express the `price_usd` as a % change relative to the previous value using adapting the function from earlier:
 ```{r}
@@ -174,13 +186,9 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             actuals_holdout = map(actuals_holdout, actuals_perc_change))
 ```
 
-Now also need to do the same for the holdout. This time we need to create a column with the `holdout_actuals` which will have data associated with all rows, but only show the actuals from the **holdout** split, which is the data for split number 5.
 
 
-<!-- [TODO - Make sure to do this!] -->
-
-
-#### Review Summary Statistics
+### Review Summary Statistics
 
 Now that we standardized the price to show the percentage change relative to the previous period instead of the price in dollars, we can actually compare the summary statistics across all cryptocurrencies and have it be a fair comparison.
 
@@ -191,6 +199,7 @@ hydroGOF::rmse(cryptodata_nested$lm_test_predictions[[1]],
                na.rm=T)
 ```
 
+<!-- [TODO - Here add note on using rmse function from hydroGOF package so we can use the na.rm=T argument, would otherwise get NA when a single value is NA. Also explain caveat of that.] -->
 
 
 ### Calculate RMSE
