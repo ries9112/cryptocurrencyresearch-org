@@ -14,13 +14,15 @@ Let's break this down step by step.
 
 ***"start with ggplot(), supply a dataset and aesthetic mapping (with aes())***
 
+Using the `ggplot()` function we supply the dataset first, and then define the aesthetic mapping (the visual properties of the chart) as having the `date_time_utc` on the x-axis, and the `price_usd` on the y-axis:
+
 ```{r ggplot_blank}
 ggplot(data = cryptodata, aes(x = date_time_utc, y = price_usd))
 ```
 
-The chart now shows up but is blank because we need to perform an additional step ***"You then add on layers (like `geom_point()` or `geom_histogram()`)..."***
+We were expecting a chart showing price over time, but the chart now shows up but is blank because we need to perform an additional step to determine how the data points are actually shown on the chart: ***"You then add on layers (like `geom_point()` or `geom_histogram()`)..."***
 
-We can take the exact same code as above and add ***+ `geom_point()`***
+We can take the exact same code as above and add ***+ `geom_point()`*** to show the data on the chart as points:
 
 ```{r ggplot_geom_point}
 ggplot(data = cryptodata, aes(x = date_time_utc, y = price_usd)) +
@@ -28,11 +30,15 @@ ggplot(data = cryptodata, aes(x = date_time_utc, y = price_usd)) +
        geom_point()
 ```
 
-The most expensive cryptocurrency being shown, `r subset(cryptodata, price_usd == max(cryptodata$price_usd))$symbol` in this case, makes it difficult to take a look at any of the other ones. Let's try *zooming-in* on a single one by using the same code but making an adjustment to the `data` parameter to only show data for the cryptocurrency with the symbol *ETH*, first let's filter the data down to those results only:
+The most expensive cryptocurrency being shown, `r subset(cryptodata, price_usd == max(cryptodata$price_usd))$symbol` in this case, makes it difficult to take a look at any of the other ones. Let's try *zooming-in* on a single one by using the same code but making an adjustment to the `data` parameter to only show data for the cryptocurrency with the symbol **ETH**.
+
+Let's filter the data down to the *ETH* cryptocurrency only and make the new dataset `eth_data`:
 
 ```{r ETH_subset}
 eth_data <- subset(cryptodata, symbol == 'ETH')
 ```
+
+We can now use the exact same code from earlier supplying the new filtered dataset for the `data` argument:
 
 ```{r ggplot_ETH}
 ggplot(data = eth_data, 
@@ -40,7 +46,7 @@ ggplot(data = eth_data,
        geom_point()
 ```
 
-*The axis automatically adjusted to the new data.*
+<!-- *The axis automatically adjusted to the new data.* -->
 
 This is better, but geom\_point() might not be the best choice for this chart, let's change `geom_point` with `geom_line` and see what that looks like:
 
@@ -63,12 +69,16 @@ We can add a line showing the trend over time:
 
 ```{r ggplot_ETH_lm_relationship}
 crypto_chart <- crypto_chart + stat_smooth()
+```
+
+And we can show the new results by calling the `crypto_chart` object again:
+```{r}
 crypto_chart
 ```
 
 One particularly nice aspect of using the ggplot framework, is that we can keep adding as many elements and transformations to the chart as we would like with no limitations.
 
-We will not save the next result, but to illustrate this point, we can add a new line showing a linear regression fit going through the data using `stat_smooth(method = 'lm')`. And let's also show the individual points in green to show we can keep layering things as much as we want.
+We will not save the result shown below this time, but to illustrate this point, we can add a new line showing a linear regression fit going through the data using `stat_smooth(method = 'lm')`. And let's also show the individual points in green. We could keep layering things on as much as we want:
 
 ```{r}
 crypto_chart + 
@@ -168,6 +178,7 @@ crypto_chart <- crypto_chart +
                   geom_mark_ellipse(aes(filter = price_usd == max(price_usd),
                           label = date_time_utc,
                           description = paste0('Price spike to $', price_usd))) +
+                  # Now the same to circle the minimum price:
                   geom_mark_ellipse(aes(filter = price_usd == min(price_usd),
                           label = date_time_utc,
                           description = paste0('Price drop to $', price_usd)))
