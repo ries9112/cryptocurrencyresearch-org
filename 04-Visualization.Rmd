@@ -190,10 +190,11 @@ We can also extend the functionality of ggplot by using the `gganimate` [@R-ggan
 ```{r first_gganimate, message=FALSE, warning=FALSE, error=TRUE}
 animated_prices <- ggplot(data = mutate(cryptodata, groups=symbol),
                           aes(x = date_time_utc, y = price_usd)) +
-                          geom_point() +
-                          transition_states(groups) +
-                          stat_smooth() +
+                          geom_line() +
+                          theme_economist() +
+                          transition_states(groups) + 
                           ggtitle('Price Over Time',subtitle = '{closest_state}') +
+                          stat_smooth() +
                           view_follow() # this adjusts the axis based on the group
 # Show animation (slowed to 1 frame per second):
 animate(animated_prices,fps=1)
