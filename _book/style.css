@@ -30,8 +30,8 @@ pre code {
 .book .book-summary {
   position: absolute;
   top: 0;
-  left: -270px;
-  width: 270px;
+  left: -300px;
+  width: 30px;
   bottom: 0;
   z-index: 1;
   color: #FFFFFF;
@@ -99,7 +99,7 @@ pre code {
 }
 
 pre {
-  max-height: 900px;
+  max-height: 600px;
   overflow-y: auto;
 }
 
