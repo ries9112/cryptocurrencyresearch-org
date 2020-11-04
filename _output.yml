@@ -6,6 +6,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Cryptocurrency Research</a></li>
       after: |
+        <li><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="blank"><img src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" width="80"></a></li>
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 bookdown::pdf_book:
   includes:

@@ -8,6 +8,8 @@ bibliography:
 - packages_two.bib
 biblio-style: apalike
 link-citations: yes
+view: https://github.com/ries9112/cryptocurrencyresearch-org/blob/master/%s
+edit: https://github.com/ries9112/cryptocurrencyresearch-org/edit/master/%s
 ---
 
 # Introduction {#introduction}
