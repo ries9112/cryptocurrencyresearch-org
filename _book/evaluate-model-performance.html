@@ -327,20 +327,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="evaluate-model-performance.html#cb100-1" aria-hidden="true"></a><span class="kw">postResample</span>(<span class="dt">pred =</span> cryptodata_nested<span class="op">$</span>lm_test_predictions[[<span class="dv">1</span>]], </span>
 <span id="cb100-2"><a href="evaluate-model-performance.html#cb100-2" aria-hidden="true"></a>             <span class="dt">obs =</span> cryptodata_nested<span class="op">$</span>test_data[[<span class="dv">1</span>]]<span class="op">$</span>target_price_24h)</span></code></pre></div>
 <pre><code>##      RMSE  Rsquared       MAE 
-## 0.5328484 0.1117787 0.3849576</code></pre>
+## 0.5295418 0.1330962 0.3814626</code></pre>
 <p>We can extract the first element to return the <strong>RMSE</strong> metric, and the second element for the <strong>R Squared (R^2)</strong> metric. We are using <strong><code>[[1]]</code></strong> to extract the first element of the <span style="color: blue;"><strong>lm_test_predictions</strong></span> and <span style="color: blue;"><strong>test_data</strong></span> and compare the predictions to the actual value of the <span style="color: blue;"><strong>target_price24h</strong></span> column.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="evaluate-model-performance.html#cb102-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&#39;Now showing RMSE example:&#39;</span>, <span class="kw">postResample</span>(<span class="dt">pred =</span> cryptodata_nested<span class="op">$</span>lm_test_predictions[[<span class="dv">1</span>]], </span>
 <span id="cb102-2"><a href="evaluate-model-performance.html#cb102-2" aria-hidden="true"></a>                                                      <span class="dt">obs =</span> cryptodata_nested<span class="op">$</span>test_data[[<span class="dv">1</span>]]<span class="op">$</span>target_price_24h)[[<span class="dv">1</span>]]))</span></code></pre></div>
-<pre><code>## [1] &quot;Now showing RMSE example: 0.532848373154689&quot;</code></pre>
+<pre><code>## [1] &quot;Now showing RMSE example: 0.529541790673164&quot;</code></pre>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="evaluate-model-performance.html#cb104-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&#39;Now showing R Squared example:&#39;</span>, <span class="kw">postResample</span>(<span class="dt">pred =</span> cryptodata_nested<span class="op">$</span>lm_test_predictions[[<span class="dv">1</span>]], </span>
 <span id="cb104-2"><a href="evaluate-model-performance.html#cb104-2" aria-hidden="true"></a>                                                           <span class="dt">obs =</span> cryptodata_nested<span class="op">$</span>test_data[[<span class="dv">1</span>]]<span class="op">$</span>target_price_24h)[[<span class="dv">2</span>]]))</span></code></pre></div>
-<pre><code>## [1] &quot;Now showing R Squared example: 0.111778661301665&quot;</code></pre>
+<pre><code>## [1] &quot;Now showing R Squared example: 0.13309619303999&quot;</code></pre>
 <p>This model used the earliest subset of the data available for the cryptocurrency. How does the same model used to predict this older subset of the data perform when applied to the most recent subset of the data?</p>
 <p>We can get the same summary of results on the <strong>holdout</strong>:</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="evaluate-model-performance.html#cb106-1" aria-hidden="true"></a><span class="kw">postResample</span>(<span class="dt">pred =</span> cryptodata_nested<span class="op">$</span>lm_holdout_predictions[[<span class="dv">1</span>]], </span>
 <span id="cb106-2"><a href="evaluate-model-performance.html#cb106-2" aria-hidden="true"></a>             <span class="dt">obs =</span> cryptodata_nested<span class="op">$</span>holdout_data[[<span class="dv">1</span>]]<span class="op">$</span>target_price_24h)</span></code></pre></div>
-<pre><code>##       RMSE   Rsquared        MAE 
-## 0.24567509 0.02834838 0.20116010</code></pre>
+<pre><code>##      RMSE  Rsquared       MAE 
+## 0.1878374 0.1296550 0.1383679</code></pre>
 <!-- If we wrote a [*for loop*](https://r4ds.had.co.nz/iteration.html#for-loops) to iterate through all the options we would get the same results using an **object oriented approach**, this has to do with coding styles and preferences and generally speaking there are many ways of doing the same things in programming. -->
 <div id="comparing-metrics" class="section level3" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Comparing Metrics</h3>
@@ -457,7 +457,7 @@ This step is particularly tedious, but it is important. As with the rest of this
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="evaluate-model-performance.html#cb120-1" aria-hidden="true"></a>hydroGOF<span class="op">::</span><span class="kw">rmse</span>(cryptodata_nested<span class="op">$</span>lm_test_predictions[[<span class="dv">1</span>]], </span>
 <span id="cb120-2"><a href="evaluate-model-performance.html#cb120-2" aria-hidden="true"></a>               cryptodata_nested<span class="op">$</span>actuals_test[[<span class="dv">1</span>]], </span>
 <span id="cb120-3"><a href="evaluate-model-performance.html#cb120-3" aria-hidden="true"></a>               <span class="dt">na.rm=</span>T)</span></code></pre></div>
-<pre><code>## [1] 1.809865</code></pre>
+<pre><code>## [1] 1.799863</code></pre>
 <!-- [TODO - Here add note on using rmse function from hydroGOF package so we can use the na.rm=T argument, would otherwise get NA when a single value is NA. Also explain caveat of that.] -->
 <div id="calculate-rmse" class="section level3" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> Calculate RMSE</h3>
@@ -476,22 +476,22 @@ This step is particularly tedious, but it is important. As with the rest of this
 <!-- [TODO - Add explanation for ifelse() to add rmse based on test or holdout] -->
 <p>Look at the results:</p>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="evaluate-model-performance.html#cb124-1" aria-hidden="true"></a><span class="kw">select</span>(cryptodata_nested, lm_rmse_test, lm_rmse_holdout)</span></code></pre></div>
-<pre><code>## [90m# A tibble: 240 x 4[39m
-## [90m# Groups:   symbol, split [240][39m
+<pre><code>## [90m# A tibble: 245 x 4[39m
+## [90m# Groups:   symbol, split [245][39m
 ##    symbol split lm_rmse_test lm_rmse_holdout
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m        [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m BTG        1        1.81            0.907
-## [90m 2[39m VET        1        1.04            1.94 
-## [90m 3[39m IHF        1        0.748           6.60 
-## [90m 4[39m DGB        1        1.53            1.06 
-## [90m 5[39m LTC        1        0.832           1.20 
+## [90m 1[39m BTG        1        1.80            0.987
+## [90m 2[39m VET        1        1.04            2.00 
+## [90m 3[39m IHF        1        0.742           6.61 
+## [90m 4[39m DGB        1        1.54            1.33 
+## [90m 5[39m LTC        1        0.844           1.17 
 ## [90m 6[39m NUT        1        1.70            0.380
-## [90m 7[39m NEXO       1        2.03            1.82 
-## [90m 8[39m XMR        1        0.714           1.50 
-## [90m 9[39m VIB        1        1.02            3.89 
-## [90m10[39m XDN        1        1.22            3.41 
-## [90m# … with 230 more rows[39m</code></pre>
-<p>Out of 240 groups, 73 had an equal or lower RMSE score for the holdout than the test set.</p>
+## [90m 7[39m NEXO       1        2.02            1.87 
+## [90m 8[39m XMR        1        0.726           1.68 
+## [90m 9[39m VIB        1        1.03            5.01 
+## [90m10[39m XDN        1        1.22            3.31 
+## [90m# … with 235 more rows[39m</code></pre>
+<p>Out of 245 groups, 81 had an equal or lower RMSE score for the holdout than the test set.</p>
 </div>
 <div id="calculate-r2" class="section level3" number="7.3.2">
 <h3><span class="header-section-number">7.3.2</span> Calculate R^2</h3>
@@ -508,250 +508,255 @@ This step is particularly tedious, but it is important. As with the rest of this
 <span id="cb127-5"><a href="evaluate-model-performance.html#cb127-5" aria-hidden="true"></a>                            <span class="dt">lm_rsq_holdout =</span> <span class="kw">unlist</span>(<span class="kw">map2</span>(lm_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))</span></code></pre></div>
 <p>Look at the results. Wrapping them in <code>print(n=500)</code> overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations).</p>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="evaluate-model-performance.html#cb128-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">select</span>(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), <span class="dt">n=</span><span class="dv">500</span>)</span></code></pre></div>
-<pre><code>## [90m# A tibble: 240 x 6[39m
-## [90m# Groups:   symbol, split [240][39m
-##     symbol split lm_rmse_test lm_rmse_holdout  lm_rsq_test lm_rsq_holdout
-##     [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m        [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m        [3m[90m&lt;dbl&gt;[39m[23m          [3m[90m&lt;dbl&gt;[39m[23m
-## [90m  1[39m BTG        1      1.81            0.907    0.390           0.006[4m1[24m[4m7[24m   
-## [90m  2[39m VET        1      1.04            1.94     0.421           0.969     
-## [90m  3[39m IHF        1      0.748           6.60     0.000[4m0[24m[4m4[24m[4m0[24m5       0.008[4m0[24m[4m1[24m   
-## [90m  4[39m DGB        1      1.53            1.06     0.041[4m0[24m          0.002[4m3[24m[4m8[24m   
-## [90m  5[39m LTC        1      0.832           1.20     0.193           0.023[4m4[24m    
-## [90m  6[39m NUT        1      1.70            0.380    0.008[4m1[24m[4m6[24m         0.136     
-## [90m  7[39m NEXO       1      2.03            1.82     0.326           0.018[4m9[24m    
-## [90m  8[39m XMR        1      0.714           1.50     0.094[4m4[24m          0.022[4m5[24m    
-## [90m  9[39m VIB        1      1.02            3.89     0.240           0.418     
-## [90m 10[39m XDN        1      1.22            3.41     0.551           0.070[4m8[24m    
-## [90m 11[39m XNS        1      0.864          13.1      1               0.087[4m8[24m    
-## [90m 12[39m REP        1      3.99            2.83     0.011[4m5[24m          0.151     
-## [90m 13[39m BAT        1      1.80            0.897    0.537           0.003[4m9[24m[4m4[24m   
-## [90m 14[39m BTC        1      0.473           0.777    0.165           0.010[4m0[24m    
-## [90m 15[39m DCR        1      1.58            1.51     0.423           0.007[4m3[24m[4m2[24m   
-## [90m 16[39m ENJ        1      2.14            1.35     0.002[4m2[24m[4m1[24m         0.025[4m7[24m    
-## [90m 17[39m XEM        1      3.45            1.52     0.000[4m0[24m[4m0[24m[4m2[24m58      0.002[4m3[24m[4m4[24m   
-## [90m 18[39m HT         1      1.49            1.34     0.093[4m9[24m          0.000[4m0[24m[4m0[24m[4m4[24m79
-## [90m 19[39m EOS        1      1.38            0.978    0.129           0.003[4m5[24m[4m9[24m   
-## [90m 20[39m EDG        1      3.77            8.56     0.144           0.152     
-## [90m 21[39m SRN        1      2.46          [31mNaN[39m        0.018[4m3[24m         [31mNA[39m         
-## [90m 22[39m CUR        1      0.015[4m2[24m          0.001[4m2[24m[4m1[24m  0.035[4m6[24m          0.377     
-## [90m 23[39m XVG        1      1.24            0.786    0.009[4m6[24m[4m4[24m         0.015[4m0[24m    
-## [90m 24[39m NCT        1      1.07          [31mNaN[39m        0.855          [31mNA[39m         
-## [90m 25[39m BRD        1      0.729           2.44     0.078[4m4[24m          0.061[4m2[24m    
-## [90m 26[39m NCT        2      2.80          [31mNaN[39m        0.538          [31mNA[39m         
-## [90m 27[39m IHF        2      0.760           6.60     0.101           0.008[4m0[24m[4m1[24m   
-## [90m 28[39m CUR        2      0.009[4m0[24m[4m5[24m         0.001[4m2[24m[4m1[24m  0.881           0.377     
-## [90m 29[39m REP        2      3.40            2.83     0.101           0.151     
-## [90m 30[39m VIB        2      2.50            3.89     0.106           0.418     
-## [90m 31[39m XVG        2      2.13            0.786    0.016[4m5[24m          0.015[4m0[24m    
-## [90m 32[39m NUT        2      1.49            0.380    0.031[4m7[24m          0.136     
-## [90m 33[39m BTG        2      1.02            0.907    0.026[4m4[24m          0.006[4m1[24m[4m7[24m   
-## [90m 34[39m VET        2      1.74            1.94     0.012[4m0[24m          0.969     
-## [90m 35[39m XEM        2      1.66            1.52     0.004[4m0[24m[4m7[24m         0.002[4m3[24m[4m4[24m   
-## [90m 36[39m ZEC        1      1.62            1.17     0.116           0.075[4m1[24m    
-## [90m 37[39m XNS        2    [31mNaN[39m              13.1     [31mNA[39m               0.087[4m8[24m    
-## [90m 38[39m HT         2      0.796           1.34     0.109           0.000[4m0[24m[4m0[24m[4m4[24m79
-## [90m 39[39m XDN        2      0.694           3.41     0.227           0.070[4m8[24m    
-## [90m 40[39m EOS        2      0.771           0.978    0.007[4m1[24m[4m0[24m         0.003[4m5[24m[4m9[24m   
-## [90m 41[39m ENJ        2      1.45            1.35     0.001[4m6[24m[4m5[24m         0.025[4m7[24m    
-## [90m 42[39m NEXO       2      1.14            1.82     0.004[4m7[24m[4m7[24m         0.018[4m9[24m    
-## [90m 43[39m DGB        2      1.03            1.06     0.025[4m0[24m          0.002[4m3[24m[4m8[24m   
-## [90m 44[39m XMR        2      0.837           1.50     0.000[4m9[24m[4m2[24m[4m3[24m        0.022[4m5[24m    
-## [90m 45[39m EDG        2     23.8             8.56     0.023[4m1[24m          0.152     
-## [90m 46[39m LTC        2      0.855           1.20     0.020[4m5[24m          0.023[4m4[24m    
-## [90m 47[39m BTC        2      0.513           0.777    0.000[4m6[24m[4m7[24m[4m5[24m        0.010[4m0[24m    
-## [90m 48[39m BAT        2      1.08            0.897    0.017[4m2[24m          0.003[4m9[24m[4m4[24m   
-## [90m 49[39m DCR        2      1.07            1.51     0.007[4m0[24m[4m6[24m         0.007[4m3[24m[4m2[24m   
-## [90m 50[39m SRN        2      3.77          [31mNaN[39m        0.193          [31mNA[39m         
-## [90m 51[39m BRD        2    [31mNaN[39m               2.44    [31mNA[39m               0.061[4m2[24m    
-## [90m 52[39m NCT        3      1.63          [31mNaN[39m        0.960          [31mNA[39m         
-## [90m 53[39m IHF        3      0.349           6.60     0.469           0.008[4m0[24m[4m1[24m   
-## [90m 54[39m CUR        3      9.68            0.001[4m2[24m[4m1[24m  0.075[4m5[24m          0.377     
-## [90m 55[39m REP        3      0.877           2.83     0.022[4m8[24m          0.151     
-## [90m 56[39m CBC        1      0.613           7.27     0.612           0.008[4m6[24m[4m0[24m   
-## [90m 57[39m BNT        1      1.28            1.66     0.195           0.004[4m8[24m[4m4[24m   
-## [90m 58[39m MANA       1      0.914           1.27     0.000[4m5[24m[4m4[24m[4m6[24m        0.092[4m1[24m    
-## [90m 59[39m OAX        1      0.918           8.63     0.422           0.181     
-## [90m 60[39m ZRX        1      1.06            1.26     0.011[4m4[24m          0.001[4m4[24m[4m0[24m   
-## [90m 61[39m TRX        1      1.08            1.09     0.021[4m1[24m          0.017[4m7[24m    
-## [90m 62[39m BSV        1      0.613           1.31     0.016[4m7[24m          0.010[4m3[24m    
-## [90m 63[39m SUB        1      2.88           24.7      0.367          [31mNA[39m         
-## [90m 64[39m BTT        1      1.00            0.722    0.019[4m8[24m          0.073[4m6[24m    
-## [90m 65[39m SMART      1      1.84            0.825    0.040[4m4[24m          0.037[4m2[24m    
-## [90m 66[39m ETP        1      1.05            0.850    0.256           0.035[4m1[24m    
-## [90m 67[39m CRO        1      0.397           1.27     0.002[4m7[24m[4m0[24m         0.136     
-## [90m 68[39m VIB        3      5.67            3.89     0.983           0.418     
-## [90m 69[39m XVG        3      2.30            0.786    0.086[4m5[24m          0.015[4m0[24m    
-## [90m 70[39m NUT        3      0.456           0.380    0.247           0.136     
-## [90m 71[39m BTG        3      0.572           0.907    0.018[4m9[24m          0.006[4m1[24m[4m7[24m   
-## [90m 72[39m VET        3      1.28            1.94     0.060[4m3[24m          0.969     
-## [90m 73[39m XEM        3      1.29            1.52     0.279           0.002[4m3[24m[4m4[24m   
-## [90m 74[39m SRN        3      5.14          [31mNaN[39m        0.106          [31mNA[39m         
-## [90m 75[39m HT         3      0.438           1.34     0.070[4m7[24m          0.000[4m0[24m[4m0[24m[4m4[24m79
-## [90m 76[39m EOS        3      0.719           0.978    0.001[4m1[24m[4m3[24m         0.003[4m5[24m[4m9[24m   
-## [90m 77[39m ENJ        3      5.12            1.35     0.270           0.025[4m7[24m    
-## [90m 78[39m XDN        3      0.133           3.41     0.887           0.070[4m8[24m    
-## [90m 79[39m NEXO       3      1.08            1.82     0.278           0.018[4m9[24m    
-## [90m 80[39m XMR        3      1.14            1.50     0.390           0.022[4m5[24m    
-## [90m 81[39m DGB        3      1.41            1.06     0.296           0.002[4m3[24m[4m8[24m   
-## [90m 82[39m BTC        3      0.456           0.777    0.004[4m5[24m[4m2[24m         0.010[4m0[24m    
-## [90m 83[39m EDG        3     31.4             8.56     0.056[4m4[24m          0.152     
-## [90m 84[39m BAT        3      1.05            0.897    0.184           0.003[4m9[24m[4m4[24m   
-## [90m 85[39m DCR        3      0.680           1.51     0.036[4m5[24m          0.007[4m3[24m[4m2[24m   
-## [90m 86[39m LTC        3      0.611           1.20     0.026[4m6[24m          0.023[4m4[24m    
-## [90m 87[39m ZEC        2      0.859           1.17     0.004[4m7[24m[4m2[24m         0.075[4m1[24m    
-## [90m 88[39m SUB        2    [31mNaN[39m              24.7     [31mNA[39m              [31mNA[39m         
-## [90m 89[39m BNT        2      3.21            1.66     0.028[4m7[24m          0.004[4m8[24m[4m4[24m   
-## [90m 90[39m CRO        2    [31mNaN[39m               1.27    [31mNA[39m               0.136     
-## [90m 91[39m OAX        2     22.0             8.63     0.040[4m5[24m          0.181     
-## [90m 92[39m TRX        2      0.699           1.09     0.121           0.017[4m7[24m    
-## [90m 93[39m BSV        2      2.13            1.31     0.225           0.010[4m3[24m    
-## [90m 94[39m MANA       2      2.13            1.27     0.020[4m0[24m          0.092[4m1[24m    
-## [90m 95[39m SMART      2      0.376           0.825    0.062[4m8[24m          0.037[4m2[24m    
-## [90m 96[39m ETP        2      1.09            0.850    0.023[4m4[24m          0.035[4m1[24m    
-## [90m 97[39m BTT        2      1.24            0.722    0.683           0.073[4m6[24m    
-## [90m 98[39m ZRX        2      1.20            1.26     0.055[4m2[24m          0.001[4m4[24m[4m0[24m   
-## [90m 99[39m CBC        2      6.79            7.27     0.030[4m3[24m          0.008[4m6[24m[4m0[24m   
-## [90m100[39m ZEC        3      1.22            1.17     0.054[4m1[24m          0.075[4m1[24m    
-## [90m101[39m CHZ        1      1.48            1.92     0.039[4m0[24m          0.015[4m2[24m    
-## [90m102[39m ADA        1      1.86            1.33     0.000[4m5[24m[4m4[24m[4m3[24m        0.020[4m1[24m    
-## [90m103[39m ARDR       1      1.99            1.38     0.025[4m1[24m          0.002[4m7[24m[4m1[24m   
-## [90m104[39m SOLO       1      1.02            5.50     0.074[4m7[24m          0.034[4m0[24m    
-## [90m105[39m ZAP        1      3.82           10.4      0.000[4m0[24m[4m0[24m[4m0[24m718     0.074[4m0[24m    
-## [90m106[39m IPX        1      2.90          [31mNaN[39m        0.056[4m0[24m         [31mNA[39m         
-## [90m107[39m KNC        1      2.50            1.08     0.004[4m3[24m[4m5[24m         0.052[4m2[24m    
-## [90m108[39m XPR        1      0.480           3.20     0.069[4m8[24m          0.051[4m0[24m    
-## [90m109[39m KMD        1      0.998           1.26     0.034[4m6[24m          0.023[4m3[24m    
-## [90m110[39m XVG        4      0.678           0.786    0.890           0.015[4m0[24m    
-## [90m111[39m VIB        4      3.69            3.89    [31mNA[39m               0.418     
-## [90m112[39m BRD        3      4.09            2.44     0.251           0.061[4m2[24m    
-## [90m113[39m NUT        4      3.17            0.380    0.010[4m0[24m          0.136     
-## [90m114[39m VET        4      1.23            1.94     0.007[4m1[24m[4m4[24m         0.969     
-## [90m115[39m BTG        4    [31mNaN[39m               0.907   [31mNA[39m               0.006[4m1[24m[4m7[24m   
-## [90m116[39m XNS        3      2.47           13.1      0.402           0.087[4m8[24m    
-## [90m117[39m SRN        4     13.1           [31mNaN[39m        0.000[4m8[24m[4m5[24m[4m1[24m       [31mNA[39m         
-## [90m118[39m XEM        4      1.27            1.52     0.100           0.002[4m3[24m[4m4[24m   
-## [90m119[39m HT         4      0.926           1.34     0.053[4m0[24m          0.000[4m0[24m[4m0[24m[4m4[24m79
-## [90m120[39m EOS        4      0.462           0.978    0.014[4m9[24m          0.003[4m5[24m[4m9[24m   
-## [90m121[39m XDN        4      4.05            3.41     0.012[4m2[24m          0.070[4m8[24m    
-## [90m122[39m BNT        3      3.39            1.66    [31mNA[39m               0.004[4m8[24m[4m4[24m   
-## [90m123[39m ENJ        4      8.38            1.35     0.255           0.025[4m7[24m    
-## [90m124[39m CRO        3      0.417           1.27     1               0.136     
-## [90m125[39m OAX        3      0.282           8.63     0.001[4m0[24m[4m4[24m         0.181     
-## [90m126[39m SUB        3     20.3            24.7      0.883          [31mNA[39m         
-## [90m127[39m XMR        4      0.918           1.50     0.000[4m0[24m[4m0[24m[4m0[24m838     0.022[4m5[24m    
-## [90m128[39m BTC        4      0.450           0.777    0.010[4m4[24m          0.010[4m0[24m    
-## [90m129[39m EDG        4     35.3             8.56     0.105           0.152     
-## [90m130[39m BAT        4      2.58            0.897    0.082[4m7[24m          0.003[4m9[24m[4m4[24m   
-## [90m131[39m DGB        4      2.59            1.06     0.001[4m2[24m[4m5[24m         0.002[4m3[24m[4m8[24m   
-## [90m132[39m TRX        3      0.783           1.09     0.010[4m4[24m          0.017[4m7[24m    
-## [90m133[39m LTC        4      1.15            1.20     0.030[4m4[24m          0.023[4m4[24m    
-## [90m134[39m NEXO       4      2.46            1.82     0.209           0.018[4m9[24m    
-## [90m135[39m MANA       3      1.08            1.27     0.328           0.092[4m1[24m    
-## [90m136[39m DCR        4      1.62            1.51     0.003[4m8[24m[4m0[24m         0.007[4m3[24m[4m2[24m   
-## [90m137[39m BSV        3      0.785           1.31     0.097[4m6[24m          0.010[4m3[24m    
-## [90m138[39m ETP        3      0.699           0.850    0.021[4m2[24m          0.035[4m1[24m    
-## [90m139[39m BTT        3      1.11            0.722    0.007[4m4[24m[4m7[24m         0.073[4m6[24m    
-## [90m140[39m SMART      3      1.78            0.825    0.002[4m3[24m[4m5[24m         0.037[4m2[24m    
-## [90m141[39m ZRX        3      1.04            1.26     0.068[4m5[24m          0.001[4m4[24m[4m0[24m   
-## [90m142[39m CBC        3      2.22            7.27     0.067[4m9[24m          0.008[4m6[24m[4m0[24m   
-## [90m143[39m ZAP        2      4.42           10.4      0.096[4m8[24m          0.074[4m0[24m    
-## [90m144[39m CUR        4      0.048[4m9[24m          0.001[4m2[24m[4m1[24m  0.219           0.377     
-## [90m145[39m KNC        2      1.18            1.08     0.047[4m4[24m          0.052[4m2[24m    
-## [90m146[39m IHF        4      0.430           6.60     0.050[4m9[24m          0.008[4m0[24m[4m1[24m   
-## [90m147[39m IPX        2    [31mNaN[39m             [31mNaN[39m       [31mNA[39m              [31mNA[39m         
-## [90m148[39m ARDR       2      3.54            1.38     0.056[4m5[24m          0.002[4m7[24m[4m1[24m   
-## [90m149[39m CHZ        2      1.09            1.92     0.007[4m2[24m[4m7[24m         0.015[4m2[24m    
-## [90m150[39m SOLO       2      6.52            5.50     0.107           0.034[4m0[24m    
-## [90m151[39m XPR        2      0.894           3.20     0.032[4m2[24m          0.051[4m0[24m    
-## [90m152[39m KMD        2      0.791           1.26     0.342           0.023[4m3[24m    
-## [90m153[39m ADA        2      1.75            1.33     0.058[4m7[24m          0.020[4m1[24m    
-## [90m154[39m NCT        4      0.661         [31mNaN[39m        0.453          [31mNA[39m         
-## [90m155[39m YFI        1      2.23            2.17     0.648           0.423     
-## [90m156[39m REP        4      1.15            2.83     0.019[4m4[24m          0.151     
-## [90m157[39m BRD        4      3.04            2.44     0.061[4m3[24m          0.061[4m2[24m    
-## [90m158[39m ZAP        3      2.19           10.4      0.787           0.074[4m0[24m    
-## [90m159[39m XNS        4      5.65           13.1      0.004[4m1[24m[4m1[24m         0.087[4m8[24m    
-## [90m160[39m KNC        3      0.512           1.08     0.379           0.052[4m2[24m    
-## [90m161[39m YFI        2      1.53            2.17     0.724           0.423     
-## [90m162[39m OAX        4      2.60            8.63     0.780           0.181     
-## [90m163[39m ARDR       3     10.0             1.38     0.000[4m3[24m[4m2[24m[4m0[24m        0.002[4m7[24m[4m1[24m   
-## [90m164[39m CHZ        3      0.508           1.92     0.049[4m4[24m          0.015[4m2[24m    
-## [90m165[39m SOLO       3      0.611           5.50     0.438           0.034[4m0[24m    
-## [90m166[39m XPR        3      0.668           3.20     0.485           0.051[4m0[24m    
-## [90m167[39m ADA        3      0.538           1.33     0.314           0.020[4m1[24m    
-## [90m168[39m TRX        4      0.157           1.09    [31mNA[39m               0.017[4m7[24m    
-## [90m169[39m KMD        3      1.90            1.26     0.070[4m9[24m          0.023[4m3[24m    
-## [90m170[39m MANA       4      1.57            1.27     0.003[4m7[24m[4m9[24m         0.092[4m1[24m    
-## [90m171[39m SMART      4      1.92            0.825    0.024[4m8[24m          0.037[4m2[24m    
-## [90m172[39m SUB        4      2.79           24.7      0.118          [31mNA[39m         
-## [90m173[39m BTT        4      0.760           0.722    0.108           0.073[4m6[24m    
-## [90m174[39m ETP        4      1.45            0.850    0.085[4m7[24m          0.035[4m1[24m    
-## [90m175[39m IPX        3      2.26          [31mNaN[39m        0.000[4m8[24m[4m1[24m[4m4[24m       [31mNA[39m         
-## [90m176[39m ZRX        4      0.640           1.26     0.088[4m0[24m          0.001[4m4[24m[4m0[24m   
-## [90m177[39m BNT        4      0.916           1.66     0.877           0.004[4m8[24m[4m4[24m   
-## [90m178[39m CBC        4      3.17            7.27     0.090[4m7[24m          0.008[4m6[24m[4m0[24m   
-## [90m179[39m CRO        4      0.808           1.27     0.222           0.136     
-## [90m180[39m BSV        4      0.762           1.31     0.012[4m0[24m          0.010[4m3[24m    
-## [90m181[39m VET        5     [31mNA[39m               1.94    [31mNA[39m               0.969     
-## [90m182[39m CUR        5     [31mNA[39m               0.001[4m2[24m[4m1[24m [31mNA[39m               0.377     
-## [90m183[39m XVG        5     [31mNA[39m               0.786   [31mNA[39m               0.015[4m0[24m    
-## [90m184[39m SRN        5     [31mNA[39m             [31mNaN[39m       [31mNA[39m              [31mNA[39m         
-## [90m185[39m NUT        5     [31mNA[39m               0.380   [31mNA[39m               0.136     
-## [90m186[39m IHF        5     [31mNA[39m               6.60    [31mNA[39m               0.008[4m0[24m[4m1[24m   
-## [90m187[39m VIB        5     [31mNA[39m               3.89    [31mNA[39m               0.418     
-## [90m188[39m YFI        3      1.96            2.17     0.000[4m6[24m[4m5[24m[4m6[24m        0.423     
-## [90m189[39m EOS        5     [31mNA[39m               0.978   [31mNA[39m               0.003[4m5[24m[4m9[24m   
-## [90m190[39m ENJ        5     [31mNA[39m               1.35    [31mNA[39m               0.025[4m7[24m    
-## [90m191[39m XDN        5     [31mNA[39m               3.41    [31mNA[39m               0.070[4m8[24m    
-## [90m192[39m XMR        5     [31mNA[39m               1.50    [31mNA[39m               0.022[4m5[24m    
-## [90m193[39m NEXO       5     [31mNA[39m               1.82    [31mNA[39m               0.018[4m9[24m    
-## [90m194[39m BAT        5     [31mNA[39m               0.897   [31mNA[39m               0.003[4m9[24m[4m4[24m   
-## [90m195[39m EDG        5     [31mNA[39m               8.56    [31mNA[39m               0.152     
-## [90m196[39m BTC        5     [31mNA[39m               0.777   [31mNA[39m               0.010[4m0[24m    
-## [90m197[39m DGB        5     [31mNA[39m               1.06    [31mNA[39m               0.002[4m3[24m[4m8[24m   
-## [90m198[39m LTC        5     [31mNA[39m               1.20    [31mNA[39m               0.023[4m4[24m    
-## [90m199[39m HT         5     [31mNA[39m               1.34    [31mNA[39m               0.000[4m0[24m[4m0[24m[4m4[24m79
-## [90m200[39m BTG        5     [31mNA[39m               0.907   [31mNA[39m               0.006[4m1[24m[4m7[24m   
-## [90m201[39m DCR        5     [31mNA[39m               1.51    [31mNA[39m               0.007[4m3[24m[4m2[24m   
-## [90m202[39m XEM        5     [31mNA[39m               1.52    [31mNA[39m               0.002[4m3[24m[4m4[24m   
-## [90m203[39m KNC        4      0.426           1.08     1               0.052[4m2[24m    
-## [90m204[39m SOLO       4      1.61            5.50     0.740           0.034[4m0[24m    
-## [90m205[39m XPR        4      4.54            3.20     0.073[4m5[24m          0.051[4m0[24m    
-## [90m206[39m CHZ        4      0.549           1.92     0.184           0.015[4m2[24m    
-## [90m207[39m ADA        4      0.835           1.33     0.232           0.020[4m1[24m    
-## [90m208[39m ARDR       4      3.23            1.38     0.087[4m0[24m          0.002[4m7[24m[4m1[24m   
-## [90m209[39m ZAP        4      0.517          10.4      0.138           0.074[4m0[24m    
-## [90m210[39m NCT        5     [31mNA[39m             [31mNaN[39m       [31mNA[39m              [31mNA[39m         
-## [90m211[39m ZEC        4      1.04            1.17     0.273           0.075[4m1[24m    
-## [90m212[39m KMD        4      4.48            1.26     0.292           0.023[4m3[24m    
-## [90m213[39m IPX        4      5.07          [31mNaN[39m        0.230          [31mNA[39m         
-## [90m214[39m REP        5     [31mNA[39m               2.83    [31mNA[39m               0.151     
-## [90m215[39m XNS        5     [31mNA[39m              13.1     [31mNA[39m               0.087[4m8[24m    
-## [90m216[39m BRD        5     [31mNA[39m               2.44    [31mNA[39m               0.061[4m2[24m    
-## [90m217[39m SUB        5     [31mNA[39m              24.7     [31mNA[39m              [31mNA[39m         
-## [90m218[39m YFI        4      2.43            2.17     0.487           0.423     
-## [90m219[39m BTT        5     [31mNA[39m               0.722   [31mNA[39m               0.073[4m6[24m    
-## [90m220[39m ETP        5     [31mNA[39m               0.850   [31mNA[39m               0.035[4m1[24m    
-## [90m221[39m CBC        5     [31mNA[39m               7.27    [31mNA[39m               0.008[4m6[24m[4m0[24m   
-## [90m222[39m ZRX        5     [31mNA[39m               1.26    [31mNA[39m               0.001[4m4[24m[4m0[24m   
-## [90m223[39m SMART      5     [31mNA[39m               0.825   [31mNA[39m               0.037[4m2[24m    
-## [90m224[39m BSV        5     [31mNA[39m               1.31    [31mNA[39m               0.010[4m3[24m    
-## [90m225[39m MANA       5     [31mNA[39m               1.27    [31mNA[39m               0.092[4m1[24m    
-## [90m226[39m TRX        5     [31mNA[39m               1.09    [31mNA[39m               0.017[4m7[24m    
-## [90m227[39m OAX        5     [31mNA[39m               8.63    [31mNA[39m               0.181     
-## [90m228[39m BNT        5     [31mNA[39m               1.66    [31mNA[39m               0.004[4m8[24m[4m4[24m   
-## [90m229[39m CRO        5     [31mNA[39m               1.27    [31mNA[39m               0.136     
-## [90m230[39m IPX        5     [31mNA[39m             [31mNaN[39m       [31mNA[39m              [31mNA[39m         
-## [90m231[39m ZAP        5     [31mNA[39m              10.4     [31mNA[39m               0.074[4m0[24m    
-## [90m232[39m CHZ        5     [31mNA[39m               1.92    [31mNA[39m               0.015[4m2[24m    
-## [90m233[39m XPR        5     [31mNA[39m               3.20    [31mNA[39m               0.051[4m0[24m    
-## [90m234[39m SOLO       5     [31mNA[39m               5.50    [31mNA[39m               0.034[4m0[24m    
-## [90m235[39m ADA        5     [31mNA[39m               1.33    [31mNA[39m               0.020[4m1[24m    
-## [90m236[39m ARDR       5     [31mNA[39m               1.38    [31mNA[39m               0.002[4m7[24m[4m1[24m   
-## [90m237[39m KNC        5     [31mNA[39m               1.08    [31mNA[39m               0.052[4m2[24m    
-## [90m238[39m ZEC        5     [31mNA[39m               1.17    [31mNA[39m               0.075[4m1[24m    
-## [90m239[39m KMD        5     [31mNA[39m               1.26    [31mNA[39m               0.023[4m3[24m    
-## [90m240[39m YFI        5     [31mNA[39m               2.17    [31mNA[39m               0.423</code></pre>
+<pre><code>## [90m# A tibble: 245 x 6[39m
+## [90m# Groups:   symbol, split [245][39m
+##     symbol split lm_rmse_test lm_rmse_holdout lm_rsq_test lm_rsq_holdout
+##     [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m        [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m       [3m[90m&lt;dbl&gt;[39m[23m          [3m[90m&lt;dbl&gt;[39m[23m
+## [90m  1[39m BTG        1      1.80            0.987     0.414           0.013[4m0[24m  
+## [90m  2[39m VET        1      1.04            2.00      0.323           0.976   
+## [90m  3[39m IHF        1      0.742           6.61      0.000[4m2[24m[4m7[24m[4m4[24m        0.007[4m8[24m[4m5[24m 
+## [90m  4[39m DGB        1      1.54            1.33      0.011[4m1[24m          0.001[4m8[24m[4m0[24m 
+## [90m  5[39m LTC        1      0.844           1.17      0.250           0.017[4m5[24m  
+## [90m  6[39m NUT        1      1.70            0.380     0.008[4m1[24m[4m6[24m         0.136   
+## [90m  7[39m NEXO       1      2.02            1.87      0.425           0.005[4m2[24m[4m0[24m 
+## [90m  8[39m XMR        1      0.726           1.68      0.069[4m7[24m          0.000[4m4[24m[4m0[24m[4m3[24m
+## [90m  9[39m VIB        1      1.03            5.01      0.327           0.537   
+## [90m 10[39m XDN        1      1.22            3.31      0.567           0.089[4m5[24m  
+## [90m 11[39m XNS        1      0.864          12.6       1               0.092[4m0[24m  
+## [90m 12[39m REP        1      4.07            2.87      0.110           0.164   
+## [90m 13[39m BAT        1      1.79            0.942     0.000[4m2[24m[4m8[24m[4m2[24m        0.006[4m2[24m[4m0[24m 
+## [90m 14[39m BTC        1      0.475           0.886     0.189           0.025[4m3[24m  
+## [90m 15[39m DCR        1      1.64            1.63      0.000[4m3[24m[4m3[24m[4m5[24m        0.011[4m9[24m  
+## [90m 16[39m ENJ        1      2.13            1.32      0.023[4m1[24m          0.037[4m4[24m  
+## [90m 17[39m XEM        1      2.95            1.50      0.000[4m0[24m[4m1[24m[4m0[24m2       0.002[4m5[24m[4m2[24m 
+## [90m 18[39m HT         1      1.51            1.41      0.139           0.000[4m2[24m[4m2[24m[4m5[24m
+## [90m 19[39m EOS        1      1.39            0.986     0.198           0.007[4m0[24m[4m6[24m 
+## [90m 20[39m EDG        1      3.67            8.39      0.139           0.128   
+## [90m 21[39m SRN        1      2.52            7.40      0.010[4m5[24m          0.406   
+## [90m 22[39m CUR        1      0.014[4m9[24m          0.001[4m3[24m[4m6[24m   0.172           0.010[4m9[24m  
+## [90m 23[39m XVG        1      1.40            0.958     0.044[4m5[24m          0.010[4m3[24m  
+## [90m 24[39m NCT        1      1.18          [31mNaN[39m         0.908          [31mNA[39m       
+## [90m 25[39m BRD        1      0.716           2.37      0.060[4m2[24m          0.060[4m7[24m  
+## [90m 26[39m NCT        2      2.75          [31mNaN[39m         0.449          [31mNA[39m       
+## [90m 27[39m IHF        2      1.59            6.61      0.003[4m5[24m[4m4[24m         0.007[4m8[24m[4m5[24m 
+## [90m 28[39m CUR        2      0.008[4m8[24m[4m5[24m         0.001[4m3[24m[4m6[24m   0.945           0.010[4m9[24m  
+## [90m 29[39m REP        2      2.50            2.87      0.008[4m7[24m[4m8[24m         0.164   
+## [90m 30[39m VIB        2      2.65            5.01      0.221           0.537   
+## [90m 31[39m XVG        2      2.09            0.958     0.002[4m5[24m[4m9[24m         0.010[4m3[24m  
+## [90m 32[39m NUT        2      1.49            0.380     0.031[4m7[24m          0.136   
+## [90m 33[39m BTG        2      1.11            0.987     0.004[4m4[24m[4m7[24m         0.013[4m0[24m  
+## [90m 34[39m VET        2      1.53            2.00      0.128           0.976   
+## [90m 35[39m ZEC        1      1.53            0.698     0.393           0.021[4m1[24m  
+## [90m 36[39m XEM        2      1.62            1.50      0.000[4m9[24m[4m7[24m[4m0[24m        0.002[4m5[24m[4m2[24m 
+## [90m 37[39m HT         2      0.785           1.41      0.104           0.000[4m2[24m[4m2[24m[4m5[24m
+## [90m 38[39m XDN        2      0.698           3.31      0.019[4m1[24m          0.089[4m5[24m  
+## [90m 39[39m XNS        2      1.61           12.6       0.826           0.092[4m0[24m  
+## [90m 40[39m ENJ        2      1.43            1.32      0.007[4m6[24m[4m7[24m         0.037[4m4[24m  
+## [90m 41[39m EOS        2      0.763           0.986     0.015[4m4[24m          0.007[4m0[24m[4m6[24m 
+## [90m 42[39m NEXO       2      1.12            1.87      0.228           0.005[4m2[24m[4m0[24m 
+## [90m 43[39m DGB        2      1.10            1.33      0.051[4m8[24m          0.001[4m8[24m[4m0[24m 
+## [90m 44[39m XMR        2      0.859           1.68      0.050[4m5[24m          0.000[4m4[24m[4m0[24m[4m3[24m
+## [90m 45[39m EDG        2     24.1             8.39      0.024[4m2[24m          0.128   
+## [90m 46[39m LTC        2      0.842           1.17      0.014[4m9[24m          0.017[4m5[24m  
+## [90m 47[39m BTC        2      0.518           0.886     0.002[4m2[24m[4m6[24m         0.025[4m3[24m  
+## [90m 48[39m SRN        2      3.73            7.40      0.179           0.406   
+## [90m 49[39m BAT        2      1.01            0.942     0.018[4m7[24m          0.006[4m2[24m[4m0[24m 
+## [90m 50[39m DCR        2      1.15            1.63      0.001[4m6[24m[4m0[24m         0.011[4m9[24m  
+## [90m 51[39m BRD        2    [31mNaN[39m               2.37     [31mNA[39m               0.060[4m7[24m  
+## [90m 52[39m NCT        3      3.31          [31mNaN[39m         0.080[4m5[24m         [31mNA[39m       
+## [90m 53[39m IHF        3      0.341           6.61      0.477           0.007[4m8[24m[4m5[24m 
+## [90m 54[39m CUR        3      9.62            0.001[4m3[24m[4m6[24m   0.074[4m2[24m          0.010[4m9[24m  
+## [90m 55[39m REP        3      0.937           2.87      0.063[4m6[24m          0.164   
+## [90m 56[39m CBC        1      0.589           3.54      0.606           0.019[4m6[24m  
+## [90m 57[39m BNT        1      1.54            1.83      0.542           0.002[4m8[24m[4m0[24m 
+## [90m 58[39m MANA       1      0.878           1.39      0.030[4m7[24m          0.053[4m7[24m  
+## [90m 59[39m OAX        1      0.907           9.24      0.422           0.147   
+## [90m 60[39m ZRX        1      1.09            0.708     0.535           0.025[4m2[24m  
+## [90m 61[39m TRX        1      1.11            1.05      0.008[4m6[24m[4m6[24m         0.020[4m9[24m  
+## [90m 62[39m BSV        1      0.632           1.23      0.005[4m6[24m[4m2[24m         0.035[4m1[24m  
+## [90m 63[39m SUB        1      2.99          [31mNaN[39m         0.241          [31mNA[39m       
+## [90m 64[39m BTT        1      0.959           0.768     0.162           0.070[4m3[24m  
+## [90m 65[39m SMART      1      1.89            0.912     0.015[4m7[24m          0.084[4m7[24m  
+## [90m 66[39m ETP        1      1.06            0.915     0.320           0.000[4m3[24m[4m6[24m[4m9[24m
+## [90m 67[39m CRO        1      0.353           1.32      0.384           0.184   
+## [90m 68[39m VIB        3      5.67            5.01      0.983           0.537   
+## [90m 69[39m ELF        1      0.197           0.744     0.252           0.025[4m0[24m  
+## [90m 70[39m XVG        3      2.34            0.958     0.086[4m5[24m          0.010[4m3[24m  
+## [90m 71[39m NUT        3      0.456           0.380     0.247           0.136   
+## [90m 72[39m BTG        3      0.473           0.987     0.061[4m9[24m          0.013[4m0[24m  
+## [90m 73[39m VET        3      1.24            2.00      0.152           0.976   
+## [90m 74[39m XEM        3      1.38            1.50      0.526           0.002[4m5[24m[4m2[24m 
+## [90m 75[39m SRN        3      4.98            7.40      0.106           0.406   
+## [90m 76[39m HT         3      0.414           1.41      0.064[4m1[24m          0.000[4m2[24m[4m2[24m[4m5[24m
+## [90m 77[39m EOS        3      0.600           0.986     0.069[4m5[24m          0.007[4m0[24m[4m6[24m 
+## [90m 78[39m ENJ        3      4.96            1.32      0.070[4m9[24m          0.037[4m4[24m  
+## [90m 79[39m XDN        3      0.253           3.31      0.019[4m8[24m          0.089[4m5[24m  
+## [90m 80[39m NEXO       3      1.58            1.87      0.193           0.005[4m2[24m[4m0[24m 
+## [90m 81[39m XMR        3      1.24            1.68      0.429           0.000[4m4[24m[4m0[24m[4m3[24m
+## [90m 82[39m DGB        3      1.44            1.33      0.594           0.001[4m8[24m[4m0[24m 
+## [90m 83[39m BTC        3      0.442           0.886     0.002[4m0[24m[4m9[24m         0.025[4m3[24m  
+## [90m 84[39m EDG        3     29.0             8.39      0.067[4m1[24m          0.128   
+## [90m 85[39m LTC        3      0.615           1.17      0.006[4m8[24m[4m9[24m         0.017[4m5[24m  
+## [90m 86[39m BAT        3      1.67            0.942     0.027[4m0[24m          0.006[4m2[24m[4m0[24m 
+## [90m 87[39m DCR        3      0.787           1.63      0.020[4m0[24m          0.011[4m9[24m  
+## [90m 88[39m ZEC        2      0.739           0.698     0.060[4m2[24m          0.021[4m1[24m  
+## [90m 89[39m SUB        2    [31mNaN[39m             [31mNaN[39m        [31mNA[39m              [31mNA[39m       
+## [90m 90[39m CRO        2    [31mNaN[39m               1.32     [31mNA[39m               0.184   
+## [90m 91[39m BNT        2      3.41            1.83      0.042[4m6[24m          0.002[4m8[24m[4m0[24m 
+## [90m 92[39m OAX        2     21.8             9.24      0.040[4m4[24m          0.147   
+## [90m 93[39m TRX        2      0.551           1.05      0.030[4m7[24m          0.020[4m9[24m  
+## [90m 94[39m BSV        2      2.29            1.23      0.173           0.035[4m1[24m  
+## [90m 95[39m SMART      2      0.974           0.912     0.188           0.084[4m7[24m  
+## [90m 96[39m ETP        2      1.09            0.915     0.022[4m2[24m          0.000[4m3[24m[4m6[24m[4m9[24m
+## [90m 97[39m MANA       2      2.39            1.39      0.320           0.053[4m7[24m  
+## [90m 98[39m BTT        2      1.37            0.768     0.436           0.070[4m3[24m  
+## [90m 99[39m ZRX        2      1.19            0.708     0.045[4m4[24m          0.025[4m2[24m  
+## [90m100[39m CBC        2      7.87            3.54      0.054[4m6[24m          0.019[4m6[24m  
+## [90m101[39m ELF        2    [31mNaN[39m               0.744    [31mNA[39m               0.025[4m0[24m  
+## [90m102[39m ZEC        3      1.26            0.698     0.069[4m5[24m          0.021[4m1[24m  
+## [90m103[39m CHZ        1      1.41            1.72      0.022[4m8[24m          0.019[4m8[24m  
+## [90m104[39m ADA        1      1.77            1.18      0.007[4m4[24m[4m0[24m         0.046[4m0[24m  
+## [90m105[39m ARDR       1      1.36            0.826     0.008[4m6[24m[4m8[24m         0.000[4m7[24m[4m1[24m[4m0[24m
+## [90m106[39m SOLO       1      0.997           5.38      0.072[4m9[24m          0.011[4m1[24m  
+## [90m107[39m ZAP        1      4.02            5.12      0.113           0.008[4m1[24m[4m6[24m 
+## [90m108[39m IPX        1      2.88          [31mNaN[39m         0.008[4m2[24m[4m3[24m        [31mNA[39m       
+## [90m109[39m KNC        1      2.36            0.847     0.018[4m3[24m          0.006[4m4[24m[4m1[24m 
+## [90m110[39m XPR        1      0.554           3.59      0.165           0.274   
+## [90m111[39m KMD        1      0.697           1.06      0.006[4m6[24m[4m5[24m         0.077[4m7[24m  
+## [90m112[39m XVG        4      0.448           0.958     0.461           0.010[4m3[24m  
+## [90m113[39m BRD        3      4.12            2.37      0.243           0.060[4m7[24m  
+## [90m114[39m VIB        4      3.69            5.01     [31mNA[39m               0.537   
+## [90m115[39m NUT        4      3.17            0.380     0.010[4m0[24m          0.136   
+## [90m116[39m VET        4      1.17            2.00      0.004[4m1[24m[4m0[24m         0.976   
+## [90m117[39m BTG        4      0.185           0.987     1               0.013[4m0[24m  
+## [90m118[39m XNS        3      2.17           12.6       0.114           0.092[4m0[24m  
+## [90m119[39m SRN        4     13.5             7.40      0.005[4m1[24m[4m0[24m         0.406   
+## [90m120[39m XEM        4      1.22            1.50      0.000[4m2[24m[4m4[24m[4m3[24m        0.002[4m5[24m[4m2[24m 
+## [90m121[39m HT         4      0.923           1.41      0.482           0.000[4m2[24m[4m2[24m[4m5[24m
+## [90m122[39m EOS        4      0.388           0.986     0.000[4m4[24m[4m2[24m[4m0[24m        0.007[4m0[24m[4m6[24m 
+## [90m123[39m XDN        4      4.14            3.31      0.275           0.089[4m5[24m  
+## [90m124[39m BNT        3      3.39            1.83     [31mNA[39m               0.002[4m8[24m[4m0[24m 
+## [90m125[39m ENJ        4      8.67            1.32      0.294           0.037[4m4[24m  
+## [90m126[39m SUB        3     29.5           [31mNaN[39m         0.278          [31mNA[39m       
+## [90m127[39m OAX        3      0.249           9.24      0.028[4m5[24m          0.147   
+## [90m128[39m CRO        3    [31mNaN[39m               1.32     [31mNA[39m               0.184   
+## [90m129[39m XMR        4      0.936           1.68      0.246           0.000[4m4[24m[4m0[24m[4m3[24m
+## [90m130[39m TRX        3      0.785           1.05      0.020[4m6[24m          0.020[4m9[24m  
+## [90m131[39m BTC        4      0.445           0.886     0.003[4m2[24m[4m0[24m         0.025[4m3[24m  
+## [90m132[39m EDG        4     33.3             8.39      0.133           0.128   
+## [90m133[39m DGB        4      2.46            1.33      0.000[4m0[24m[4m7[24m[4m9[24m4       0.001[4m8[24m[4m0[24m 
+## [90m134[39m LTC        4      1.15            1.17      0.029[4m6[24m          0.017[4m5[24m  
+## [90m135[39m BAT        4      2.61            0.942     0.105           0.006[4m2[24m[4m0[24m 
+## [90m136[39m NEXO       4      2.38            1.87      0.069[4m9[24m          0.005[4m2[24m[4m0[24m 
+## [90m137[39m MANA       3      1.06            1.39      0.018[4m9[24m          0.053[4m7[24m  
+## [90m138[39m ETP        3      0.638           0.915     0.003[4m5[24m[4m2[24m         0.000[4m3[24m[4m6[24m[4m9[24m
+## [90m139[39m BSV        3      0.731           1.23      0.095[4m9[24m          0.035[4m1[24m  
+## [90m140[39m BTT        3      1.18            0.768     0.001[4m2[24m[4m3[24m         0.070[4m3[24m  
+## [90m141[39m DCR        4      1.60            1.63      0.011[4m4[24m          0.011[4m9[24m  
+## [90m142[39m SMART      3      1.60            0.912     0.021[4m6[24m          0.084[4m7[24m  
+## [90m143[39m ZRX        3      1.03            0.708     0.031[4m2[24m          0.025[4m2[24m  
+## [90m144[39m CBC        3      2.28            3.54      0.045[4m0[24m          0.019[4m6[24m  
+## [90m145[39m ZAP        2      4.31            5.12      0.082[4m4[24m          0.008[4m1[24m[4m6[24m 
+## [90m146[39m ELF        3      0.640           0.744     0.994           0.025[4m0[24m  
+## [90m147[39m CUR        4      0.045[4m6[24m          0.001[4m3[24m[4m6[24m   0.527           0.010[4m9[24m  
+## [90m148[39m KNC        2      1.16            0.847     0.010[4m9[24m          0.006[4m4[24m[4m1[24m 
+## [90m149[39m IPX        2    [31mNaN[39m             [31mNaN[39m        [31mNA[39m              [31mNA[39m       
+## [90m150[39m ARDR       2      3.53            0.826     0.011[4m1[24m          0.000[4m7[24m[4m1[24m[4m0[24m
+## [90m151[39m CHZ        2      0.996           1.72      0.050[4m7[24m          0.019[4m8[24m  
+## [90m152[39m SOLO       2      6.52            5.38      0.112           0.011[4m1[24m  
+## [90m153[39m XPR        2      0.972           3.59      0.012[4m9[24m          0.274   
+## [90m154[39m KMD        2      0.575           1.06      0.191           0.077[4m7[24m  
+## [90m155[39m ADA        2      1.50            1.18      0.002[4m0[24m[4m5[24m         0.046[4m0[24m  
+## [90m156[39m IHF        4      0.425           6.61      0.019[4m4[24m          0.007[4m8[24m[4m5[24m 
+## [90m157[39m NCT        4      0.633         [31mNaN[39m         0.496          [31mNA[39m       
+## [90m158[39m YFI        1      2.61            1.70      0.357           0.451   
+## [90m159[39m REP        4      1.06            2.87      0.014[4m0[24m          0.164   
+## [90m160[39m BRD        4      0.732           2.37      0.078[4m4[24m          0.060[4m7[24m  
+## [90m161[39m ZAP        3      2.15            5.12      0.754           0.008[4m1[24m[4m6[24m 
+## [90m162[39m KNC        3      0.487           0.847     0.281           0.006[4m4[24m[4m1[24m 
+## [90m163[39m XNS        4      4.79           12.6       0.302           0.092[4m0[24m  
+## [90m164[39m YFI        2      3.10            1.70      0.037[4m9[24m          0.451   
+## [90m165[39m ARDR       3      7.78            0.826     0.434           0.000[4m7[24m[4m1[24m[4m0[24m
+## [90m166[39m CHZ        3      0.481           1.72      0.023[4m3[24m          0.019[4m8[24m  
+## [90m167[39m SOLO       3      1.50            5.38      0.001[4m1[24m[4m5[24m         0.011[4m1[24m  
+## [90m168[39m XPR        3      0.875           3.59      0.016[4m5[24m          0.274   
+## [90m169[39m ADA        3      0.668           1.18      0.402           0.046[4m0[24m  
+## [90m170[39m OAX        4      2.05            9.24      0.646           0.147   
+## [90m171[39m TRX        4      0.422           1.05      0.068[4m3[24m          0.020[4m9[24m  
+## [90m172[39m KMD        3      1.85            1.06      0.002[4m0[24m[4m0[24m         0.077[4m7[24m  
+## [90m173[39m MANA       4      1.50            1.39      0.002[4m6[24m[4m5[24m         0.053[4m7[24m  
+## [90m174[39m SMART      4      1.80            0.912     0.041[4m5[24m          0.084[4m7[24m  
+## [90m175[39m IPX        3      0.826         [31mNaN[39m         0.030[4m6[24m         [31mNA[39m       
+## [90m176[39m ETP        4      1.18            0.915     0.102           0.000[4m3[24m[4m6[24m[4m9[24m
+## [90m177[39m SUB        4      3.16          [31mNaN[39m         0.206          [31mNA[39m       
+## [90m178[39m BTT        4      0.798           0.768     0.003[4m5[24m[4m6[24m         0.070[4m3[24m  
+## [90m179[39m ZRX        4      0.673           0.708     0.035[4m6[24m          0.025[4m2[24m  
+## [90m180[39m BNT        4      1.23            1.83      0.745           0.002[4m8[24m[4m0[24m 
+## [90m181[39m CBC        4      3.31            3.54      0.077[4m0[24m          0.019[4m6[24m  
+## [90m182[39m CRO        4      0.983           1.32      0.100           0.184   
+## [90m183[39m BSV        4      1.10            1.23      0.005[4m0[24m[4m1[24m         0.035[4m1[24m  
+## [90m184[39m VET        5     [31mNA[39m               2.00     [31mNA[39m               0.976   
+## [90m185[39m CUR        5     [31mNA[39m               0.001[4m3[24m[4m6[24m  [31mNA[39m               0.010[4m9[24m  
+## [90m186[39m SRN        5     [31mNA[39m               7.40     [31mNA[39m               0.406   
+## [90m187[39m XVG        5     [31mNA[39m               0.958    [31mNA[39m               0.010[4m3[24m  
+## [90m188[39m NUT        5     [31mNA[39m               0.380    [31mNA[39m               0.136   
+## [90m189[39m ELF        4      0.880           0.744     0.002[4m1[24m[4m7[24m         0.025[4m0[24m  
+## [90m190[39m IHF        5     [31mNA[39m               6.61     [31mNA[39m               0.007[4m8[24m[4m5[24m 
+## [90m191[39m VIB        5     [31mNA[39m               5.01     [31mNA[39m               0.537   
+## [90m192[39m YFI        3      2.35            1.70      0.041[4m9[24m          0.451   
+## [90m193[39m EOS        5     [31mNA[39m               0.986    [31mNA[39m               0.007[4m0[24m[4m6[24m 
+## [90m194[39m ENJ        5     [31mNA[39m               1.32     [31mNA[39m               0.037[4m4[24m  
+## [90m195[39m XDN        5     [31mNA[39m               3.31     [31mNA[39m               0.089[4m5[24m  
+## [90m196[39m XMR        5     [31mNA[39m               1.68     [31mNA[39m               0.000[4m4[24m[4m0[24m[4m3[24m
+## [90m197[39m EDG        5     [31mNA[39m               8.39     [31mNA[39m               0.128   
+## [90m198[39m BTC        5     [31mNA[39m               0.886    [31mNA[39m               0.025[4m3[24m  
+## [90m199[39m DGB        5     [31mNA[39m               1.33     [31mNA[39m               0.001[4m8[24m[4m0[24m 
+## [90m200[39m LTC        5     [31mNA[39m               1.17     [31mNA[39m               0.017[4m5[24m  
+## [90m201[39m HT         5     [31mNA[39m               1.41     [31mNA[39m               0.000[4m2[24m[4m2[24m[4m5[24m
+## [90m202[39m NEXO       5     [31mNA[39m               1.87     [31mNA[39m               0.005[4m2[24m[4m0[24m 
+## [90m203[39m BTG        5     [31mNA[39m               0.987    [31mNA[39m               0.013[4m0[24m  
+## [90m204[39m BAT        5     [31mNA[39m               0.942    [31mNA[39m               0.006[4m2[24m[4m0[24m 
+## [90m205[39m DCR        5     [31mNA[39m               1.63     [31mNA[39m               0.011[4m9[24m  
+## [90m206[39m XEM        5     [31mNA[39m               1.50     [31mNA[39m               0.002[4m5[24m[4m2[24m 
+## [90m207[39m KNC        4      0.216           0.847     1               0.006[4m4[24m[4m1[24m 
+## [90m208[39m SOLO       4      3.67            5.38      0.015[4m7[24m          0.011[4m1[24m  
+## [90m209[39m XPR        4      1.73            3.59      0.608           0.274   
+## [90m210[39m CHZ        4      0.599           1.72      0.399           0.019[4m8[24m  
+## [90m211[39m ADA        4      0.964           1.18      0.160           0.046[4m0[24m  
+## [90m212[39m ARDR       4      3.27            0.826     0.095[4m1[24m          0.000[4m7[24m[4m1[24m[4m0[24m
+## [90m213[39m ZAP        4      0.496           5.12      0.230           0.008[4m1[24m[4m6[24m 
+## [90m214[39m NCT        5     [31mNA[39m             [31mNaN[39m        [31mNA[39m              [31mNA[39m       
+## [90m215[39m KMD        4      3.19            1.06      0.118           0.077[4m7[24m  
+## [90m216[39m ZEC        4      1.10            0.698     0.007[4m3[24m[4m6[24m         0.021[4m1[24m  
+## [90m217[39m IPX        4      2.86          [31mNaN[39m         0.040[4m7[24m         [31mNA[39m       
+## [90m218[39m REP        5     [31mNA[39m               2.87     [31mNA[39m               0.164   
+## [90m219[39m XNS        5     [31mNA[39m              12.6      [31mNA[39m               0.092[4m0[24m  
+## [90m220[39m BRD        5     [31mNA[39m               2.37     [31mNA[39m               0.060[4m7[24m  
+## [90m221[39m SUB        5     [31mNA[39m             [31mNaN[39m        [31mNA[39m              [31mNA[39m       
+## [90m222[39m YFI        4      2.55            1.70      0.427           0.451   
+## [90m223[39m BTT        5     [31mNA[39m               0.768    [31mNA[39m               0.070[4m3[24m  
+## [90m224[39m ETP        5     [31mNA[39m               0.915    [31mNA[39m               0.000[4m3[24m[4m6[24m[4m9[24m
+## [90m225[39m ZRX        5     [31mNA[39m               0.708    [31mNA[39m               0.025[4m2[24m  
+## [90m226[39m SMART      5     [31mNA[39m               0.912    [31mNA[39m               0.084[4m7[24m  
+## [90m227[39m CBC        5     [31mNA[39m               3.54     [31mNA[39m               0.019[4m6[24m  
+## [90m228[39m BSV        5     [31mNA[39m               1.23     [31mNA[39m               0.035[4m1[24m  
+## [90m229[39m MANA       5     [31mNA[39m               1.39     [31mNA[39m               0.053[4m7[24m  
+## [90m230[39m TRX        5     [31mNA[39m               1.05     [31mNA[39m               0.020[4m9[24m  
+## [90m231[39m OAX        5     [31mNA[39m               9.24     [31mNA[39m               0.147   
+## [90m232[39m BNT        5     [31mNA[39m               1.83     [31mNA[39m               0.002[4m8[24m[4m0[24m 
+## [90m233[39m CRO        5     [31mNA[39m               1.32     [31mNA[39m               0.184   
+## [90m234[39m ELF        5     [31mNA[39m               0.744    [31mNA[39m               0.025[4m0[24m  
+## [90m235[39m IPX        5     [31mNA[39m             [31mNaN[39m        [31mNA[39m              [31mNA[39m       
+## [90m236[39m CHZ        5     [31mNA[39m               1.72     [31mNA[39m               0.019[4m8[24m  
+## [90m237[39m XPR        5     [31mNA[39m               3.59     [31mNA[39m               0.274   
+## [90m238[39m SOLO       5     [31mNA[39m               5.38     [31mNA[39m               0.011[4m1[24m  
+## [90m239[39m ADA        5     [31mNA[39m               1.18     [31mNA[39m               0.046[4m0[24m  
+## [90m240[39m ARDR       5     [31mNA[39m               0.826    [31mNA[39m               0.000[4m7[24m[4m1[24m[4m0[24m
+## [90m241[39m KNC        5     [31mNA[39m               0.847    [31mNA[39m               0.006[4m4[24m[4m1[24m 
+## [90m242[39m ZAP        5     [31mNA[39m               5.12     [31mNA[39m               0.008[4m1[24m[4m6[24m 
+## [90m243[39m KMD        5     [31mNA[39m               1.06     [31mNA[39m               0.077[4m7[24m  
+## [90m244[39m ZEC        5     [31mNA[39m               0.698    [31mNA[39m               0.021[4m1[24m  
+## [90m245[39m YFI        5     [31mNA[39m               1.70     [31mNA[39m               0.451</code></pre>
 <!-- WORKING UP TO THIS POINT ON 11/2 -->
 </div>
 </div>
@@ -888,21 +893,21 @@ This step is particularly tedious, but it is important. As with the rest of this
 <div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="evaluate-model-performance.html#cb137-1" aria-hidden="true"></a>rmse_test &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">gather</span>(<span class="kw">select</span>(rmse_test, lm<span class="op">:</span>nnet), <span class="st">&#39;model&#39;</span>, <span class="st">&#39;rmse&#39;</span>, <span class="op">-</span>symbol))</span>
 <span id="cb137-2"><a href="evaluate-model-performance.html#cb137-2" aria-hidden="true"></a><span class="co"># Show results</span></span>
 <span id="cb137-3"><a href="evaluate-model-performance.html#cb137-3" aria-hidden="true"></a>rmse_test</span></code></pre></div>
-<pre><code>## [90m# A tibble: 192 x 3[39m
-## [90m# Groups:   symbol [48][39m
+<pre><code>## [90m# A tibble: 196 x 3[39m
+## [90m# Groups:   symbol [49][39m
 ##    symbol model  rmse
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m BTG    lm    1.14 
-## [90m 2[39m VET    lm    1.32 
-## [90m 3[39m IHF    lm    0.572
-## [90m 4[39m DGB    lm    1.64 
-## [90m 5[39m LTC    lm    0.863
+## [90m 1[39m BTG    lm    0.891
+## [90m 2[39m VET    lm    1.24 
+## [90m 3[39m IHF    lm    0.774
+## [90m 4[39m DGB    lm    1.63 
+## [90m 5[39m LTC    lm    0.862
 ## [90m 6[39m NUT    lm    1.71 
-## [90m 7[39m NEXO   lm    1.68 
-## [90m 8[39m XMR    lm    0.903
-## [90m 9[39m VIB    lm    3.22 
-## [90m10[39m XDN    lm    1.52 
-## [90m# … with 182 more rows[39m</code></pre>
+## [90m 7[39m NEXO   lm    1.77 
+## [90m 8[39m XMR    lm    0.941
+## [90m 9[39m VIB    lm    3.26 
+## [90m10[39m XDN    lm    1.58 
+## [90m# … with 186 more rows[39m</code></pre>
 <p>Now tag the results as having been for the test set</p>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="evaluate-model-performance.html#cb139-1" aria-hidden="true"></a>rmse_test<span class="op">$</span>eval_set &lt;-<span class="st"> &#39;test&#39;</span></span></code></pre></div>
 </div>
@@ -918,21 +923,21 @@ This step is particularly tedious, but it is important. As with the rest of this
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="evaluate-model-performance.html#cb141-1" aria-hidden="true"></a>rmse_holdout &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">gather</span>(<span class="kw">select</span>(rmse_holdout, lm<span class="op">:</span>nnet), <span class="st">&#39;model&#39;</span>, <span class="st">&#39;rmse&#39;</span>, <span class="op">-</span>symbol))</span>
 <span id="cb141-2"><a href="evaluate-model-performance.html#cb141-2" aria-hidden="true"></a><span class="co"># Show results</span></span>
 <span id="cb141-3"><a href="evaluate-model-performance.html#cb141-3" aria-hidden="true"></a>rmse_holdout</span></code></pre></div>
-<pre><code>## [90m# A tibble: 192 x 3[39m
-## [90m# Groups:   symbol [48][39m
+<pre><code>## [90m# A tibble: 196 x 3[39m
+## [90m# Groups:   symbol [49][39m
 ##    symbol model  rmse
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m BTG    lm    0.907
-## [90m 2[39m VET    lm    1.94 
-## [90m 3[39m IHF    lm    6.60 
-## [90m 4[39m DGB    lm    1.06 
-## [90m 5[39m LTC    lm    1.20 
+## [90m 1[39m BTG    lm    0.987
+## [90m 2[39m VET    lm    2.00 
+## [90m 3[39m IHF    lm    6.61 
+## [90m 4[39m DGB    lm    1.33 
+## [90m 5[39m LTC    lm    1.17 
 ## [90m 6[39m NUT    lm    0.380
-## [90m 7[39m NEXO   lm    1.82 
-## [90m 8[39m XMR    lm    1.50 
-## [90m 9[39m VIB    lm    3.89 
-## [90m10[39m XDN    lm    3.41 
-## [90m# … with 182 more rows[39m</code></pre>
+## [90m 7[39m NEXO   lm    1.87 
+## [90m 8[39m XMR    lm    1.68 
+## [90m 9[39m VIB    lm    5.01 
+## [90m10[39m XDN    lm    3.31 
+## [90m# … with 186 more rows[39m</code></pre>
 <p>Now tag the results as having been for the holdout set</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="evaluate-model-performance.html#cb143-1" aria-hidden="true"></a>rmse_holdout<span class="op">$</span>eval_set &lt;-<span class="st"> &#39;holdout&#39;</span></span></code></pre></div>
 </div>
@@ -955,21 +960,21 @@ This step is particularly tedious, but it is important. As with the rest of this
 <div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="evaluate-model-performance.html#cb146-1" aria-hidden="true"></a>rsq_test &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">gather</span>(<span class="kw">select</span>(rsq_test, lm<span class="op">:</span>nnet), <span class="st">&#39;model&#39;</span>, <span class="st">&#39;rsq&#39;</span>, <span class="op">-</span>symbol))</span>
 <span id="cb146-2"><a href="evaluate-model-performance.html#cb146-2" aria-hidden="true"></a><span class="co"># Show results</span></span>
 <span id="cb146-3"><a href="evaluate-model-performance.html#cb146-3" aria-hidden="true"></a>rsq_test</span></code></pre></div>
-<pre><code>## [90m# A tibble: 192 x 3[39m
-## [90m# Groups:   symbol [48][39m
+<pre><code>## [90m# A tibble: 196 x 3[39m
+## [90m# Groups:   symbol [49][39m
 ##    symbol model    rsq
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m BTG    lm    0.145 
-## [90m 2[39m VET    lm    0.125 
-## [90m 3[39m IHF    lm    0.155 
-## [90m 4[39m DGB    lm    0.090[4m9[24m
-## [90m 5[39m LTC    lm    0.067[4m6[24m
+## [90m 1[39m BTG    lm    0.370 
+## [90m 2[39m VET    lm    0.152 
+## [90m 3[39m IHF    lm    0.125 
+## [90m 4[39m DGB    lm    0.164 
+## [90m 5[39m LTC    lm    0.075[4m4[24m
 ## [90m 6[39m NUT    lm    0.074[4m3[24m
-## [90m 7[39m NEXO   lm    0.205 
-## [90m 8[39m XMR    lm    0.121 
-## [90m 9[39m VIB    lm    0.443 
-## [90m10[39m XDN    lm    0.419 
-## [90m# … with 182 more rows[39m</code></pre>
+## [90m 7[39m NEXO   lm    0.229 
+## [90m 8[39m XMR    lm    0.199 
+## [90m 9[39m VIB    lm    0.510 
+## [90m10[39m XDN    lm    0.220 
+## [90m# … with 186 more rows[39m</code></pre>
 <p>Now tag the results as having been for the test set</p>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="evaluate-model-performance.html#cb148-1" aria-hidden="true"></a>rsq_test<span class="op">$</span>eval_set &lt;-<span class="st"> &#39;test&#39;</span></span></code></pre></div>
 </div>
@@ -985,21 +990,21 @@ This step is particularly tedious, but it is important. As with the rest of this
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="evaluate-model-performance.html#cb150-1" aria-hidden="true"></a>rsq_holdout &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">gather</span>(<span class="kw">select</span>(rsq_holdout, lm<span class="op">:</span>nnet), <span class="st">&#39;model&#39;</span>, <span class="st">&#39;rsq&#39;</span>, <span class="op">-</span>symbol))</span>
 <span id="cb150-2"><a href="evaluate-model-performance.html#cb150-2" aria-hidden="true"></a><span class="co"># Show results</span></span>
 <span id="cb150-3"><a href="evaluate-model-performance.html#cb150-3" aria-hidden="true"></a>rsq_holdout</span></code></pre></div>
-<pre><code>## [90m# A tibble: 192 x 3[39m
-## [90m# Groups:   symbol [48][39m
-##    symbol model     rsq
-##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m   [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m BTG    lm    0.006[4m1[24m[4m7[24m
-## [90m 2[39m VET    lm    0.969  
-## [90m 3[39m IHF    lm    0.008[4m0[24m[4m1[24m
-## [90m 4[39m DGB    lm    0.002[4m3[24m[4m8[24m
-## [90m 5[39m LTC    lm    0.023[4m4[24m 
-## [90m 6[39m NUT    lm    0.136  
-## [90m 7[39m NEXO   lm    0.018[4m9[24m 
-## [90m 8[39m XMR    lm    0.022[4m5[24m 
-## [90m 9[39m VIB    lm    0.418  
-## [90m10[39m XDN    lm    0.070[4m8[24m 
-## [90m# … with 182 more rows[39m</code></pre>
+<pre><code>## [90m# A tibble: 196 x 3[39m
+## [90m# Groups:   symbol [49][39m
+##    symbol model      rsq
+##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;dbl&gt;[39m[23m
+## [90m 1[39m BTG    lm    0.013[4m0[24m  
+## [90m 2[39m VET    lm    0.976   
+## [90m 3[39m IHF    lm    0.007[4m8[24m[4m5[24m 
+## [90m 4[39m DGB    lm    0.001[4m8[24m[4m0[24m 
+## [90m 5[39m LTC    lm    0.017[4m5[24m  
+## [90m 6[39m NUT    lm    0.136   
+## [90m 7[39m NEXO   lm    0.005[4m2[24m[4m0[24m 
+## [90m 8[39m XMR    lm    0.000[4m4[24m[4m0[24m[4m3[24m
+## [90m 9[39m VIB    lm    0.537   
+## [90m10[39m XDN    lm    0.089[4m5[24m  
+## [90m# … with 186 more rows[39m</code></pre>
 <p>Now tag the results as having been for the holdout set</p>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="evaluate-model-performance.html#cb152-1" aria-hidden="true"></a>rsq_holdout<span class="op">$</span>eval_set &lt;-<span class="st"> &#39;holdout&#39;</span></span></code></pre></div>
 </div>
