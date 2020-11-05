@@ -546,7 +546,7 @@ plot_scores <- merge(rmse_scores, rsq_scores)
 ```{r}
 ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
   geom_point() +
-  ylim(c(0,50))
+  ylim(c(0,10))
 ```
 
 ADA only
@@ -562,7 +562,7 @@ Now by the cryptocurrency
 ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
   geom_point() +
   geom_smooth() +
-  ylim(c(0,50)) +
+  ylim(c(0,10)) +
   facet_wrap(~symbol)
 ```
 
@@ -570,18 +570,17 @@ ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
 
 <!-- [TODO - UNCOMMENT THE CODE BELOW TO UPLOAD DATA TO PINS. ADD R LINE TO SET ENVIRONMENTAL VARIABLES BEFORE RUNNING BOOK!] -->
 
-<!-- ```{r upload_results_pin, include=F} -->
-<!-- source('pins_key.R') -->
-<!-- # register board -->
-<!-- board_register("github", repo = "predictcrypto/pins", token=Sys.getenv("pins_key")) -->
-<!-- # Add current date -->
-<!-- plot_scores$last_refreshed <- Sys.time() -->
-<!-- # pin data -->
-<!-- pin(plot_scores, board='github', name='crypto_tutorial_results_latest') -->
-<!-- ``` -->
+```{r upload_results_pin, include=F}
+# register board
+board_register("github", repo = "predictcrypto/pins", token=Sys.getenv("pins_key"))
+# Add current date
+plot_scores$last_refreshed <- Sys.time()
+# pin data
+pin(plot_scores, board='github', name='crypto_tutorial_results_latest')
+```
 
 <!-- TODO - INCLUDE SHINYAPP HERE: -->
-```{r metrics_by_crypto_shinyapp}
+```{r metrics_by_crypto_shinyapp, include=F}
 knitr::include_app('https://predictcrypto.shinyapps.io/tutorial_latest_model_summary/', height = '600px')
 ```
 
