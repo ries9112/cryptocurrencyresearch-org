@@ -11,9 +11,6 @@ bookdown::gitbook:
     view: 
       link: https://github.com/ries9112/cryptocurrencyresearch-org/blob/master/%s
       text: "View Code on GitHub"
-    edit:
-      link: https://github.com/ries9112/cryptocurrencyresearch-org/edit/master/%s
-      text: "Edit on GitHub"
     sharing:
       facebook: yes
       twitter: yes
