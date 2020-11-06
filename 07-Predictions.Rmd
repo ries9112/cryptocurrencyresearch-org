@@ -93,16 +93,6 @@ for (i in 1:nrow(predictions)){
 predictions <- predictions %>% gather('model','prediction', nnet:xgboost) %>% group_by(name, model, exchange, split)
 ```
 
-<!-- AVERAGE PREDICTIONS FROM SPLITS (EVENTUALLY WEIGH LAST SPLIT MORE) -->
-
-```{r, error=TRUE}
-results <- predictions %>% group_by(name, model, exchange) %>% mutate(average_prediction = mean(prediction)) %>% select(average_prediction) %>% unique()
-# Exclude values outside of reasonable range
-results <- filter(results, average_prediction > -80, average_prediction < 100)
-# Average overall
-average_results <- mean(results$average_prediction, na.rm=T)
-```
-
 <!-- FIND TOP MODELS TO USE -->
 
 ```{r last_chunk_before_trades, error=TRUE}
@@ -336,6 +326,42 @@ client.rebalance(
 # Extract to write to pins through R
 usd_balance = balance['balances']
 first_symbol = balance['balances'][0]['symbol']
+```
+
+
+```{r pin_shrimpy_balance, error=TRUE}
+# register board
+board_register("github", repo = "predictcrypto/pins", token=Sys.getenv("pins_key"))
+# initialize usd_balance
+usd_balance <- py$usd_balance
+# initialize balance_sum
+balance_usd_sum <- 0
+# add balances up
+if (length(balance_usd) == 1 ){
+  balance_usd_sum <- balance_usd_sum + usd_balance[[1]]$usdValue
+} else {
+  for (i in 1:length(usd_balance)){
+  balance_usd_sum <- balance_usd_sum + usd_balance[[i]]$usdValue
+}
+}
+# Add Exchange
+balance_usd_sum$exchange <- 'HitBTC'
+# Add date and date_time
+balance_usd_sum$date_utc <- format(Sys.Date(), tz='UTC')
+balance_usd_sum$date_time_utc <- format(Sys.time(), tz="UTC",usetz=TRUE)
+# Add Coinmarketcap info
+coinmarketcapr::setup(Sys.getenv("coinmarketcapr_key"))
+# Add market cap info
+balance_usd_sum$current_market_cap <- get_global_marketcap(currency = 'USD')$USD_total_market_cap
+# Add BTC dominance
+balance_usd_sum$BTC_dominance <- get_global_marketcap(currency = 'USD')$btc_dominance
+
+# Add average prediction overall <- TODO!
+# balance_usd_sum$average_prediction_overall <- average_results
+
+
+# pin data
+pin(balance_usd_sum, board='github', name='shrimpy_latest_balance')
 ```
 
 
