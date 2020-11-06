@@ -570,14 +570,14 @@ ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
 
 <!-- [TODO - UNCOMMENT THE CODE BELOW TO UPLOAD DATA TO PINS. ADD R LINE TO SET ENVIRONMENTAL VARIABLES BEFORE RUNNING BOOK!] -->
 
-<!-- ```{r upload_results_pin, include=F} -->
-<!-- # register board -->
-<!-- board_register("github", repo = "predictcrypto/pins", token=Sys.getenv("pins_key")) -->
-<!-- # Add current date -->
-<!-- plot_scores$last_refreshed <- Sys.time() -->
-<!-- # pin data -->
-<!-- pin(plot_scores, board='github', name='crypto_tutorial_results_latest') -->
-<!-- ``` -->
+```{r upload_results_pin, include=F, error=TRUE}
+# register board
+board_register("github", repo = "predictcrypto/pins", token=Sys.getenv("pins_key"))
+# Add current date
+plot_scores$last_refreshed <- Sys.time()
+# pin data
+pin(plot_scores, board='github', name='crypto_tutorial_results_latest')
+```
 
 <!-- TODO - INCLUDE SHINYAPP HERE: -->
 ```{r metrics_by_crypto_shinyapp, include=F}

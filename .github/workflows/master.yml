@@ -1,7 +1,7 @@
 name: Run Crypto Tutorial
 on:
   schedule:
-    - cron: '05 05,17,19 * * *'
+    - cron: '05 05,17 * * *'
       
 jobs:
   build:
@@ -28,7 +28,7 @@ jobs:
       - name: Render Book
         run: |-
           Rscript -e "Sys.setenv('pins_key' = '${{secrets.PAT_PINS}}', 'shrimpy_public' = '${{secrets.SHRIMPY_PUBLIC}}', 'shrimpy_private' = '${{secrets.SHRIMPY_PRIVATE}}', 'shrimpy_user' = '${{secrets.SHRIMPY_USER}}', 'shrimpy_account_id' = '${{secrets.SHRIMPY_ACCOUNT_ID}}', 'coinmarketcapr_key' = '${{secrets.COINMARKETCAPR}}')"
-          Rscript -e "bookdown::render_book('index.Rmd', clean_envir = FALSE, clean = FALSE, envir = parent.frame())"
+          Rscript -e "bookdown::render_book('index.Rmd', clean_envir = FALSE, envir = parent.frame())"
       - name: Snapshot renv to update lockfile
         run: |-
           Rscript -e "renv::snapshot()"
