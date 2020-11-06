@@ -27,7 +27,7 @@ jobs:
           Rscript -e "renv::restore()"
       - name: Render Book
         run: |-
-          Rscript -e "Sys.setenv('pins_key' = '${{secrets.PAT_PINS}}', 'mlflow_uri' = '${{secrets.MLFLOW_URI}}', 'mlflow_user' = '${{secrets.MLFLOW_USER}}', 'mlflow_pswd' = '${{secrets.MLFLOW_PSWD}}')"
+          Rscript -e "Sys.setenv('pins_key' = '${{secrets.PAT_PINS}}', 'shrimpy_public' = '${{secrets.SHRIMPY_PUBLIC}}', 'shrimpy_private' = '${{secrets.SHRIMPY_PRIVATE}}', 'shrimpy_user' = '${{secrets.SHRIMPY_USER}}', 'shrimpy_account_id' = '${{secrets.SHRIMPY_ACCOUNT_ID}}')"
           Rscript -e "bookdown::render_book('index.Rmd', clean_envir = FALSE)"
       - name: Snapshot renv to update lockfile
         run: |-

@@ -590,20 +590,11 @@ The app shown above also has a button to **Show Code**. If you were to copy and 
 
 
 
-<!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS AND WRITE THE SAME INFO TO THE DB] -->
+<!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS. NEED TO RUN EXPERIMENT TO SEE IF CAN RUN WITH GITHUB ACTIONS OR IF NEED TO INSTALL PYTHON FIRST: https://www.mlflow.org/docs/latest/R-api.html#examples] -->
 
-
-
-
-
-
-<!-- SECRET: SAVE METRICS INTO MLFLOW -->
-```{r mlflow, include=F}
+```{r}
 
 ```
-
-
-
 
 
 

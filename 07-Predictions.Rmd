@@ -1,0 +1,351 @@
+# Predictions
+
+<!-- Here import new `messarir` package and use it to pull latest data -->
+
+<!-- ```{r pull_predictions_messarir} -->
+
+<!-- library(messarir) -->
+
+<!-- # Pull latest data: -->
+
+<!-- messari_new_predictions <- latest_data(messari_api_key) -->
+
+<!-- # Show dataset: -->
+
+<!-- messari_new_predictions -->
+
+<!-- ``` -->
+
+<!-- Left join to models dataframe -->
+
+<!-- NEW TO JUST GET TRADES UP AND RUNNING BELOW: -->
+
+<!-- <!-- WAIT UNTIL 6TH MINUTE OF THE HOUR BEFORE MOVING ON -->
+
+```{r} 
+while(substr(Sys.time(), 15,16) != '06'){ Sys.sleep(15)}
+```
+
+<!-- REPLICATE ALL DATA PREP STEPS:  -->
+
+```{r, error=TRUE}
+# HitBTC Data:
+board_register(name = "pins_board", url = "https://raw.githubusercontent.com/predictcrypto/pins/master/", board = "datatxt")
+# pull pins
+HitBTC <- pin_get(name = "hitBTC_orderbook")
+# Make sure only one unique pkey returned (could have two different quote_currency):
+HitBTC <- distinct(HitBTC, pkey, .keep_all = T)
+```
+
+
+
+<!-- MAKE PREDICTIONS -->
+
+```{r, error=TRUE}
+# Example:
+# predict(predictions$xgboost_model[[1]], newdata=predictions$prediction_data[[1]])
+# Exclude nulls
+predictions <- filter(predictions, split > 0)
+# Remove rows with missing models or prediction data
+# IMPORTANT NOTE 09/30 - CODE IS FAILING IN STEP BELOW! HAVEN'T FIGURED OUT ISSUE, BUT PROBABLY MISSING DATA OR MODEL FOR ONE OF THE ROWS?
+# How about removing any rows with nulls for the whole row?
+predictions <- na.omit(predictions)
+# IMPORTANT NOTE 10/03/2020: FOR SOME REASON STOPS WORKING, NOTHING ABOUT THE DATA SEEMS TO BE MISSING
+# predictions <- head(predictions,8)
+# Add new column with predictions:
+# Neural Network:
+predictions <- do(predictions, mutate(., predictions_nnet = predict(.$nnet_model, newdata=.$prediction_data)))
+# extract value from list
+for (i in 1:nrow(predictions)){
+  # ADDED STEP TO FIX DATA ISSUES LATER ON!
+  if (length(predictions$predictions_nnet[i][[1]]) < 1){
+    predictions <- predictions[-i,]
+  } else{
+    predictions$nnet[i] <- predictions$predictions_nnet[i][[1]]
+  }
+}
+# XGBOOST:
+for (i in 1:nrow(predictions)){
+    tryCatch({
+        predictions$xgboost[i] <- predict(predictions$xgboost_model[[i]], newdata=predictions$prediction_data[[i]])
+    }, error=function(e){})
+    
+}
+# Linear:
+for (i in 1:nrow(predictions)){
+    tryCatch({
+        predictions$linear[i] <- predict(predictions$linear_model[[i]], newdata=predictions$prediction_data[[i]])
+    }, error=function(e){})
+}
+# Cubist:
+for (i in 1:nrow(predictions)){
+    tryCatch({
+        predictions$cubist[i] <- predict(predictions$cubist_model[[i]], newdata=predictions$prediction_data[[i]])
+    }, error=function(e){})
+}
+# gbm:
+for (i in 1:nrow(predictions)){
+    tryCatch({
+        predictions$gbm[i] <- predict(predictions$gbm_model[[i]], newdata=predictions$prediction_data[[i]])
+    }, error=function(e){})
+}
+# Gather data
+predictions <- predictions %>% gather('model','prediction', nnet:xgboost) %>% group_by(name, model, exchange, split)
+```
+
+<!-- AVERAGE PREDICTIONS FROM SPLITS (EVENTUALLY WEIGH LAST SPLIT MORE) -->
+
+```{r, error=TRUE}
+results <- predictions %>% group_by(name, model, exchange) %>% mutate(average_prediction = mean(prediction)) %>% select(average_prediction) %>% unique()
+# Exclude values outside of reasonable range
+results <- filter(results, average_prediction > -80, average_prediction < 100)
+# Average overall
+average_results <- mean(results$average_prediction, na.rm=T)
+```
+
+<!-- FIND TOP MODELS TO USE -->
+
+```{r last_chunk_before_trades, error=TRUE}
+# first exclude crazy results for RSME
+average_scores <- filter(average_scores, avg_RMSE > -50, avg_RMSE < 50)
+# then find cryptocurrencies with best RMSE scores across the board
+best_ones <- average_scores %>% 
+                ungroup() %>% 
+                group_by(name, model, exchange) %>% 
+                mutate(avg_RMSE = mean(avg_RMSE, na.rm=T)) %>% 
+                distinct(name, model, exchange, avg_RMSE) %>% 
+                arrange(avg_RMSE) 
+                # uncomment below to only keep 50 most accurate models
+                #head(50)
+# Adjust models naming convention
+best_ones$model <- gsub('_rmse','', best_ones$model)
+# Find best trades to make
+trades <- merge(best_ones, results, by= c('name', 'model', 'exchange'))
+# Find the average score by cryptocurrency overall
+trades <- trades %>% 
+            ungroup %>% 
+            group_by(name, exchange) %>% 
+            mutate(average_prediction_by_crypto = mean(average_prediction))
+# Any positive predictions? Find those where prediction more positive than average RMSE
+trades <- filter(trades, average_prediction > avg_RMSE, average_prediction_by_crypto > avg_RMSE) %>% distinct(name, .keep_all=T)
+# Sort by most favorable
+trades <- trades %>% arrange(-average_prediction_by_crypto)
+# Backup trades to write to db
+trades_backup <- trades
+# Add symbols back in 
+trades <- merge(trades, messari, by='name')
+# Get symbols for top predictions
+if(nrow(trades) > 4){
+  fifthPrediction <- trades$symbol[[5]]
+  fourthPrediction <- trades$symbol[[4]]
+  thirdPrediction <- trades$symbol[[3]]
+  secondPrediction <- trades$symbol[[2]]
+  topPrediction <- trades$symbol[[1]]
+} else if(nrow(trades) > 3){
+  fifthPrediction <- 'None'
+  fourthPrediction <- trades$symbol[[4]]
+  thirdPrediction <- trades$symbol[[3]]
+  secondPrediction <- trades$symbol[[2]]
+  topPrediction <- trades$symbol[[1]]
+} else if(nrow(trades) > 2){
+  fifthPrediction <- 'None'
+  fourthPrediction <- 'None'
+  thirdPrediction <- trades$symbol[[3]]
+  secondPrediction <- trades$symbol[[2]]
+  topPrediction <- trades$symbol[[1]]
+} else if(nrow(trades) > 1){
+  fifthPrediction <- 'None'
+  fourthPrediction <- 'None'
+  thirdPrediction <- 'None'
+  secondPrediction <- trades$symbol[[2]]
+  topPrediction <- trades$symbol[[1]]
+} else if(nrow(trades) > 0){
+  fifthPrediction <- 'None'
+  fourthPrediction <- 'None'
+  thirdPrediction <- 'None'
+  secondPrediction <- 'None'
+  topPrediction <- trades$symbol[[1]]
+}
+# import reticulate for Python code below
+library(reticulate)
+public_key <- Sys.getenv("shrimpy_public")
+secret_key <- Sys.getenv("shrimpy_private")
+user_id <- Sys.getenv("shrimpy_user")
+account_id <- Sys.getenv("shrimpy_account_id")
+```
+
+## Make Trades
+
+```{python, echo=F, error=TRUE}
+import shrimpy
+public_key = r.public_key
+secret_key = r.secret_key
+user_id_opt = r.user_id
+account_id_opt = r.account_id
+client = shrimpy.ShrimpyApiClient(public_key, secret_key)
+# ticker = client.get_ticker('binance')
+# print(ticker)
+#View the rebalancing strategy
+strategy = client.get_strategy(
+    user_id_opt, # user_id
+    account_id_opt  # account_id
+)
+print(strategy)
+if(len(str(r.topPrediction)) > 0 ):
+  topPrediction_linear = r.topPrediction
+if(len(str(r.secondPrediction)) > 0 ):
+  secondPrediction_linear = r.secondPrediction
+  
+if(len(str(r.thirdPrediction)) > 0 ):
+  thirdPrediction_linear = r.thirdPrediction
+  
+if(len(str(r.fourthPrediction)) > 0 ):
+  fourthPrediction_linear = r.fourthPrediction
+  
+if(len(str(r.fifthPrediction)) > 0 ):
+  fifthPrediction_linear = r.fifthPrediction
+  
+if(len(str(r.average_results)) > 0 ):
+  average_results = r.average_results
+# Only run code if there is a top prediction
+if(len(str(r.topPrediction)) > 0 ):
+  # Show old strategy
+  oldStrategy = client.get_strategy(
+      user_id_opt, # user_id
+      account_id_opt                                   # account_id
+  )
+  print(oldStrategy)
+  
+  if average_results > 0 and topPrediction_linear != "None" and secondPrediction_linear != "None" and thirdPrediction_linear != "None" and fourthPrediction_linear != "None" and fifthPrediction_linear != "None":
+    client.set_strategy(
+        user_id_opt,   # user_id
+        account_id_opt ,                                   # account_id
+        {
+            'isDynamic': False,
+            'allocations': [
+                { 'symbol': topPrediction_linear, 'percent': '30' },
+                { 'symbol': secondPrediction_linear, 'percent': '20' },
+                { 'symbol': thirdPrediction_linear, 'percent': '20' },
+                { 'symbol': fourthPrediction_linear, 'percent': '15' },
+                { 'symbol': fifthPrediction_linear, 'percent': '15' }
+            ]
+        }
+    )
+  elif average_results > 0 and topPrediction_linear != "None" and secondPrediction_linear != "None" and thirdPrediction_linear != "None" and fourthPrediction_linear != "None":
+    client.set_strategy(
+        user_id_opt,   # user_id
+        account_id_opt ,                                   # account_id
+        {
+            'isDynamic': False,
+            'allocations': [
+                { 'symbol': topPrediction_linear, 'percent': '33' },
+                { 'symbol': secondPrediction_linear, 'percent': '27' },
+                { 'symbol': thirdPrediction_linear, 'percent': '23' },
+                { 'symbol': fourthPrediction_linear, 'percent': '17' }
+            ]
+        }
+    )
+  elif average_results > 0 and topPrediction_linear != "None" and secondPrediction_linear != "None" and thirdPrediction_linear != "None" and fourthPrediction_linear != "None":
+    client.set_strategy(
+        user_id_opt,   # user_id
+        account_id_opt ,                                   # account_id
+        {
+            'isDynamic': False,
+            'allocations': [
+                { 'symbol': topPrediction_linear, 'percent': '33' },
+                { 'symbol': secondPrediction_linear, 'percent': '27' },
+                { 'symbol': thirdPrediction_linear, 'percent': '23' },
+                { 'symbol': fourthPrediction_linear, 'percent': '17' }
+            ]
+        }
+    )
+  elif average_results > 0 and topPrediction_linear != "None" and secondPrediction_linear != "None" and thirdPrediction_linear != "None":
+    client.set_strategy(
+        user_id_opt,   # user_id
+        account_id_opt ,                                   # account_id
+        {
+            'isDynamic': False,
+            'allocations': [
+                { 'symbol': topPrediction_linear, 'percent': '40' },
+                { 'symbol': secondPrediction_linear, 'percent': '35' },
+                { 'symbol': thirdPrediction_linear, 'percent': '25' }
+            ]
+        }
+    )
+  elif average_results > -0.5 and topPrediction_linear != "None" and secondPrediction_linear != "None":
+    client.set_strategy(
+        user_id_opt,   # user_id
+        account_id_opt ,                                   # account_id
+        {
+            'isDynamic': False,
+            'allocations': [
+                { 'symbol': topPrediction_linear, 'percent': '20' },
+                { 'symbol': secondPrediction_linear, 'percent': '10' },
+                { 'symbol': 'TUSD', 'percent': '70' }
+            ]
+        }
+    )
+  elif average_results > -1 and topPrediction_linear != "None":
+    client.set_strategy(
+        user_id_opt,   # user_id
+        account_id_opt ,                                   # account_id
+        {
+            'isDynamic': False,
+            'allocations': [
+                { 'symbol': topPrediction_linear, 'percent': '15' },
+                { 'symbol': 'TUSD', 'percent': '85' }
+            ]
+        }
+    )
+  else:
+    client.set_strategy(
+        user_id_opt,   # user_id
+        account_id_opt ,                                   # account_id
+        {
+            'isDynamic': False,
+            'allocations': [
+                { 'symbol': 'TUSD', 'percent': '100' }
+            ]
+        }
+    )
+elif(len(r.topPrediction) > 0 ):
+  client.set_strategy(
+        user_id_opt,   # user_id
+        account_id_opt ,                                   # account_id
+        {
+            'isDynamic': False,
+            'allocations': [
+                { 'symbol': 'TUSD', 'percent': '100' }
+            ]
+        }
+    )
+  
+strategy = client.get_strategy(
+    user_id_opt,   # user_id
+    account_id_opt
+)
+balance = client.get_balance(
+    user_id_opt,   # user_id
+    account_id_opt
+)
+# Start rebalance
+client.rebalance(
+    user_id_opt, # user_id
+    account_id_opt                                     # account_id
+)
+# Extract to write to pins through R
+usd_balance = balance['balances']
+first_symbol = balance['balances'][0]['symbol']
+```
+
+
+
+
+## Explain Predictions
+
+<!-- [TODO - ADD HERE] -->
+
+
+
+
+
