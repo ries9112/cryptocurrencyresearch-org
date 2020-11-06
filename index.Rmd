@@ -153,8 +153,7 @@ knitr::include_graphics("images/TheEconomicsOfReproducibilityInPreclinicalRe.pdf
 Reproducibility as discussed in the paper embedded above relates to many aspects of the specific field of preclinical research, but in their work they identified 4 main categories that drove costs associated with irreproducibility as it pertains to preclinical research in the United States: 
 
 <!-- [TODO - REFRESH SCREENSHOT (was dark, + make better circle)] -->
-![Fig 2. Estimated US preclinical research spend and categories of errors that contribute to irreproducibility.
-Note that the percentage value of error for each category is the midpoint of the high and low prevalence estimates for that category divided (weighted) by the sum of all midpoint error rates (see S1 Dataset). Source: Chakma et al. [18] and the American Association for the Advancement of Science (AAAS) [19]. ](images/IrreproducibilityCosts.PNG)
+![](images/IrreproducibilityCosts.PNG)
 
 <!-- [TODO - ADD note on focusing on this aspect, which is shared across many many disciplines] -->
 
