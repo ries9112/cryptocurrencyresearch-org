@@ -144,7 +144,7 @@ Reproducibility is especially important for research in many fields, but is a va
 <!-- Reproducibility is all about making the life of anyone who needs to run the analysis as simple as possible, including and especially for the author herself. This document  -->
 <!-- because if important discoveries are made others will want to perform their own experiments and analysis before they start being accepted as fact. -->
 
-Not being transparent about the methodology and data (when possible) used when doing research is a quantifiable cost that should be avoided. A study conducted in 2015 for example approximated that for preclinical research (mostly on pharmaceuticals) alone the economy suffers a cost of $28 Billion a year associated with non-reproducible research in the United States [@freedman_economics_2015]:
+Not being transparent about the methodology and data (when possible) used is a quantifiable cost that should be avoided, both in research and in business. A study conducted in 2015 for example approximated that for preclinical research (mostly on pharmaceuticals) alone the economy suffers a cost of $28 Billion a year associated with non-reproducible research in the United States [@freedman_economics_2015]:
 
 ```{r out.height = "460px", out.width='800px', echo=F}
 knitr::include_graphics("images/TheEconomicsOfReproducibilityInPreclinicalRe.pdf")
@@ -158,6 +158,8 @@ Reproducibility as discussed in the paper embedded above relates to many aspects
 <!-- [TODO - ADD note on focusing on this aspect, which is shared across many many disciplines] -->
 
 The "Data Analysis and Reporting" aspect of a project is shared across many disciplines. As it related to preclinical research, in their breakdown they attribute roughly $7.19 Billion of the costs of irreproducible preclinical research to data analysis and reporting, which could potentially be avoided through the usage of open source tools.
+
+<!-- In business reproducibility can be really valuable as well, being able to run an analysis with the click of a button can save a business a lot of money, and the open source tools available through R and Python  -->
 
 As of 2020, the most popular way of sharing open source work is through a website called [**GitHub**](https://github.com/)
 
