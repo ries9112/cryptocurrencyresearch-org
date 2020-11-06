@@ -30,7 +30,7 @@ ggplot(data = cryptodata, aes(x = date_time_utc, y = price_usd)) +
        geom_point()
 ```
 
-The most expensive cryptocurrency being shown, `r subset(cryptodata, price_usd == max(cryptodata$price_usd))$symbol` in this case, makes it difficult to take a look at any of the other ones. Let's try *zooming-in* on a single one by using the same code but making an adjustment to the `data` parameter to only show data for the cryptocurrency with the symbol **ETH**.
+The most expensive cryptocurrency being shown, "`r subset(cryptodata, price_usd == max(cryptodata$price_usd))$symbol`" in this case, makes it difficult to take a look at any of the other ones. Let's try *zooming-in* on a single one by using the same code but making an adjustment to the `data` parameter to only show data for the cryptocurrency with the symbol **ETH**.
 
 Let's filter the data down to the *ETH* cryptocurrency only and make the new dataset `eth_data`:
 

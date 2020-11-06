@@ -65,8 +65,8 @@ library(pacman)
 Install other packages:
 
 ```{r install_all_other_packages}
-p_load('pins', 'skimr', 'DT', # Data Exploration 
-       'tidyverse', 'tsibble', 'anytime', 'httr', 'jsonlite', # Data Prep
+p_load('pins', 'skimr', 'DT', 'httr', 'jsonlite', # Data Exploration 
+       'tidyverse', 'tsibble', 'anytime', # Data Prep
        'ggTimeSeries', 'gifski', 'av', 'magick', 'ggthemes', 'plotly', # Visualization
        'ggpubr', 'ggforce', 'gganimate', 'transformr', # Visualization continued
        'caret', 'doParallel', 'xgboost', 'gbm', 'deepnet', # Predictive Modeling
@@ -82,7 +82,7 @@ Nice work! Now you have everything you need to [follow along with this example](
 
 <!-- If you wanted to render this document in its entirety yourself, here is how you would do it using the application RStudio: -->
 
-<!-- 1.  Create a copy of the GitHub project on your own computer by clicking on the button in the top right of the user interface to create a **New Project**: <!-- [TODO - ADD SCREENSHOT] --> -->
+<!-- 1.  Create a copy of the GitHub project on your own computer by clicking on the button in the top right of the user interface to create a **New Project**: <!-- [TODO - ADD SCREENSHOT] -->
 
 <!-- 2.  Run the code **`install.packages('bookdown')`** to install the [**Bookdown**]{style="color: orange;"} package. -->
 

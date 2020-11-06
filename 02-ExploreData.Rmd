@@ -104,21 +104,28 @@ Move on to the [next section](#data-prep), where we make the adjustments necessa
 
 [TODO - HERE add notes on data source]
 
-This section is optional. The data is pulled without an authentication requirement. See the example code below for an actual example of how the data was sourced. Below is an example for the Ethereum (ETH) cryptocurrency. The data is collected by iterating through all cryptocurrency options one by one at the start of every hour. 
+This section is optional for anyone who wants to know the exact process behind the data used. The data is pulled without authentication requirements. See the example code below for an actual example of how the data was sourced. Below is an example for the Ethereum (ETH) cryptocurrency. The data is collected by iterating through all cryptocurrency options one by one at the start of every hour. 
 
 ```{r orderbooks_live_example}
 get_response_content <- function(api_response) {
-  httr::content(api_response,
-                type = "text",
-                encoding = "UTF-8") %>%
-    jsonlite::fromJSON(simplifyDataFrame = FALSE)
+  fromJSON(content(api_response,
+                   type = "text",
+                   encoding = "UTF-8"),
+          simplifyDataFrame = FALSE)
 }
-
-# Get the data
-example_data <- httr::GET("https://api.hitbtc.com/api/2/public/orderbook/ETHUSD", query=list(limit=5))
-# Show data
-get_response_content(example_data)
 ```
+
+```{r show_orderbooks_live_example}
+get_response_content(GET("https://api.hitbtc.com/api/2/public/orderbook/ETHUSD",
+                         query=list(limit=5)))
+```
+
+
+Once the snapshot of the order books data is collected... [TODO - ADD]
+
+<!-- [TODO - HERE ADD GRAPHIC DRAWN ON IPAD] -->
+
+
 
 
 

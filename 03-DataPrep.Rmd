@@ -29,10 +29,10 @@ Calculate the `price_usd` using the order books data and taking the cheapest pri
 ```{r calc_price_usd}
 cryptodata <- mutate(cryptodata, 
                      trade_usd_1 = ask_1_price * ask_1_quantity,
-                     trade_usd_2 = ask_2_price * ask_2_quantity,
-                     trade_usd_3 = ask_3_price * ask_3_quantity,
-                     trade_usd_4 = ask_4_price * ask_4_quantity,
-                     trade_usd_5 = ask_5_price * ask_5_quantity)
+                     trade_usd_2 = ask_2_price * (ask_1_quantity + ask_2_quantity),
+                     trade_usd_3 = ask_3_price * (ask_1_quantity + ask_2_quantity + ask_3_quantity),
+                     trade_usd_4 = ask_4_price * (ask_1_quantity + ask_2_quantity + ask_3_quantity + ask_4_quantity),
+                     trade_usd_5 = ask_5_price * (ask_1_quantity + ask_2_quantity + ask_3_quantity + ask_4_quantity + ask_5_quantity))
 ```
 
 We can look at an example [ADD HERE]
@@ -88,7 +88,7 @@ rowcount1 <- nrow(cryptodata)
 ```
 
 ```{r rm_subset_not_enough_rows}
-cryptodata <- dplyr::filter(cryptodata, n() >= 700)
+cryptodata <- filter(cryptodata, n() >= 700)
 ```
 
 ```{r, include=F}
@@ -106,7 +106,7 @@ rowcount1 <- nrow(cryptodata)
 ```
 
 ```{r remove_last_3_days_missing}
-cryptodata <- dplyr::filter(cryptodata, max(date) > Sys.Date()-3)
+cryptodata <- filter(cryptodata, max(date) > Sys.Date()-3)
 ```
 
 ```{r, include=F}
