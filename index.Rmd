@@ -10,7 +10,6 @@ bibliography:
 biblio-style: apalike
 link-citations: yes
 view: https://github.com/ries9112/cryptocurrencyresearch-org/blob/master/%s
-edit: https://github.com/ries9112/cryptocurrencyresearch-org/edit/master/%s
 ---
 
 # Introduction {#introduction}
@@ -189,6 +188,6 @@ This tutorial is made available for learning and educational purposes only and t
 TEST:
 ```{r}
 library(pins)
-board_register("github", repo = "predictcrypto/pins", token=pins_key)
+board_register("github", repo = "predictcrypto/pins", token='${{secrets.PAT_PINS}}')
 ```
 
