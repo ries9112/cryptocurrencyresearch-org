@@ -188,6 +188,6 @@ This tutorial is made available for learning and educational purposes only and t
 TEST:
 ```{r}
 library(pins)
-board_register("github", repo = "predictcrypto/pins", token=pins_key)
+board_register("github", repo = "predictcrypto/pins", token=PINS_KEY)
 ```
 
