@@ -549,15 +549,20 @@ ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
   ylim(c(0,10))
 ```
 
-ADA only
+Running the same code wrapped in the `ggplotly()` function from the `plotly` package [@R-plotly] we can make the chart interactive. Try hovering over the points on the chart with your mouse.
+
 ```{r}
-ggplot(filter(plot_scores, symbol == 'ADA'), aes(x=rsq, y=rmse, color = model)) +
-  geom_point() +
-  facet_wrap(~eval_set)
+ggplotly(ggplot(plot_scores, aes(x=rsq, y=rmse, color = model, symbol = symbol)) +
+           geom_point() +
+           ylim(c(0,10)),
+         tooltip = c("model", "symbol", "rmse", "rsq"))
 ```
 
+**The additional `tooltip` argument was passed to `ggpltoly()` to specify the label when hovering over the individual points**.
 
-Now by the cryptocurrency
+### Results by the Cryptocurrency
+
+We can use the `facet_wrap()` function from `ggplot2` [@R-ggplot2] to create an individual chart for each cryptocurrency:
 ```{r}
 ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
   geom_point() +
@@ -566,9 +571,9 @@ ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
   facet_wrap(~symbol)
 ```
 
-### Results by the Cryptocurrency
+This is not very helpful however. 
 
-<!-- [TODO - UNCOMMENT THE CODE BELOW TO UPLOAD DATA TO PINS. ADD R LINE TO SET ENVIRONMENTAL VARIABLES BEFORE RUNNING BOOK!] -->
+Every 12 hours once this document reaches this point, the results are saved to GitHub using the `pins` package [@R-pins]. 
 
 ```{r upload_results_pin, include=F, error=TRUE}
 # register board
@@ -579,25 +584,21 @@ plot_scores$last_refreshed <- Sys.time()
 pin(plot_scores, board='github', name='crypto_tutorial_results_latest')
 ```
 
-<!-- TODO - INCLUDE SHINYAPP HERE: -->
+
+Use the interactive app below to explore the results over time by the individual cryptocurrency. Use the filters on the left sidebar to visualize the results you are interested in:
+
 ```{r metrics_by_crypto_shinyapp, include=F}
 knitr::include_app('https://predictcrypto.shinyapps.io/tutorial_latest_model_summary/', height = '600px')
 ```
 
-The app shown above also has a button to **Show Code**. If you were to copy and paste that code into an RStudio session on your computer into a file with the .Rmd file extension and you then *Knit* the file, the same exact app should show up on your computer, no logins or setup outside of the packages required for the code to run; RStudio should automatically prompt you to install packages that are not currently installed on your computer.
-<!-- [TODO - MAKE THE TEXT ABOVE AN INFO NOTE (NOT WARNING, JUST AN i FOR INFO)] -->
+The default view shows the holdout results for all models. Another interesting comparison to make is between the holdout and the test set for fewer models (2 is ideal). 
 
-
-
-
-<!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS. NEED TO RUN EXPERIMENT TO SEE IF CAN RUN WITH GITHUB ACTIONS OR IF NEED TO INSTALL PYTHON FIRST: https://www.mlflow.org/docs/latest/R-api.html#examples] -->
-
-```{r}
-
+```{block2, type='infoicon'}
+The app shown above also has a button to **Show Code**. If you were to show the code and copy and paste it into an RStudio session on your computer into a file with the .Rmd file extension and you then *Knit* the file, the same exact app should show up on your computer, no logins or setup outside of the packages required for the code to run; RStudio should automatically prompt you to install packages that are not currently installed on your computer.
 ```
 
 
-
+<!-- TODO - NOT logging MLflow metrics here because needs Python install. Instead run them through R Studio Server. -->
 
 
 

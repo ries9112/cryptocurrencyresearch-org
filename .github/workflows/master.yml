@@ -1,7 +1,7 @@
 name: Run Crypto Tutorial
 on:
   schedule:
-    - cron: '45 05,17,06 * * *'
+    - cron: '05 05,17 * * *'
 
 jobs:
   build:
@@ -39,5 +39,5 @@ jobs:
           git config --local user.email "ries9112@colorado.edu"
           git config --local user.name "ries9112"
           git add .
-          git commit -m "Add html output from CI process" -a
+          git commit -m "Refresh entire book from CI automated process" -a
           git push https://ries9112:${{secrets.GITHUB_TOKEN}}@github.com/ries9112/cryptocurrencyresearch-org.git HEAD:master --force
