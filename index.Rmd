@@ -134,9 +134,9 @@ How will we generate predictive models to predict cryptocurrency prices? At a hi
 
 One of the objectives of this document is to showcase the power of [reproducibility]{style="color: purple;"}. The term itself is defined in different ways:
 
--   We can think of something as reproducible if anyone can run the exact same analysis and end up with our exact same results. This is how the [high-level version](#high-level-version) works.
+-   We can think of something as reproducible if anyone can run the exact same analysis and end up with our exact same results. This is how the [high-level version of the tutorial](#high-level-version) works.
 
--   Depending on our definition, we may consider something reproducible if we can run the same analysis that is shown on a newer subset of the data without running into problems. This is how this version works, where the analysis done on your own computer would be 1-12 hours newer than the one shown on this document.
+-   Depending on our definition, we may consider something reproducible if we can run the same analysis that is shown on a newer subset of the data without running into problems. This is how this version works, where the analysis done on your own computer would be between 1 and 12 hours newer than the one shown on this document.
 
 ### The cost of non-reproducible research
 
@@ -185,8 +185,10 @@ This tutorial is made available for learning and educational purposes only and t
 
 <!-- REMEMBER OTHER SPECIAL BLOCK TYPE IS CALLED "rmdcaution" USE THESE TO DRAW ATTENTION TO ANYTHING IMPORTANT! -->
 
+
 TEST:
 ```{r}
+library(pins)
 board_register("github", repo = "predictcrypto/pins", token=pins_key)
 ```
 
