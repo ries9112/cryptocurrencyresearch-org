@@ -25,6 +25,8 @@ knitr::opts_chunk$set(widgetframe_widgets_dir = 'widgets' )
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 # Try getting rid of extra unwanted outputs
 knitr::opts_knit$set(progress=FALSE, verbose = FALSE)
+# Avoid scientific notation
+options(scipen=999)
 ```
 
 **(this book is a work in progress and is NOT ready)**
@@ -63,7 +65,7 @@ This document is the tutorial itself, but in order to make the tutorial more acc
 
 If you are not very familiar with programming in either R or Python, or are not sure what cryptocurrencies are, you should **definitely** work your way through the [high-level version first](https://cryptocurrencyresearch.org/high-level/). If you are an intermediate programmer we still recommend the [high-level version first](https://cryptocurrencyresearch.org/high-level/).
 
-Below is an embedded version of the high-level version, but we recommend using any of the links above to view it in its own window. Once in its own window it can be full-screened by pressing on the **f** button on your keyboard.
+Below is an embedded version of the high-level version, you can click on the presentation below and press the **`f`** button on your keyboard to full-screen it, or use any of the links above to view it in its own window:
 
 ```{r embed_high-level, echo=F}
 knitr::include_url("https://cryptocurrencyresearch.org/high-level/")
@@ -84,8 +86,6 @@ When following along with the high-level tutorial embedded above, the results wi
 <!-- -   **Hosung (intermediate)**: Hosung is a statistician who learned to use R 10 years ago. He has heard of the tidyverse, but doesn't regularly use it in his work and he usually sticks to base R as his preference. Hosung should review the example explaining the pipe operator and the tidyverse [when it comes up in the next section](https://cryptocurrencyresearch.org/setup.html#tidy-example). Hosung does not care much for cryptocurrencies specifically, but is interested in learning new tools to use for his work in R and getting some useful boilerplate code. Hosung would want to start with the [**high-level version of this tutorial**](https://cryptocurrencyresearch.org/high-level/) and later return to the [**detailed tutorial**](https://cryptocurrencyresearch.org/index.html#introduction). -->
 
 <!-- -   **Jessica (expert)**: Jessica is a business analyst who has experience with both R and the Tidyverse and uses the pipe operator (%\>%) regularly. Jessica should [**move onto the next section**](#introduction) for the detailed tutorial. -->
-
--   Whenever text is **`highlighted this way`**, that means it is a snippet of **R code**, which will usually be done to bring attention to specific parts of the code.
 
 <!-- ### Approach taken -->
 
@@ -112,6 +112,7 @@ Are you a Bob, Hosung, or Jessica below? This section provides an example of how
 -   When a **term** is particularly common in machine learning or data science, we will call it out with [purple text]{style="color: purple;"}, but only the first time it appears.
 
 -   Whenever text is **`highlighted this way`**, that means it is a snippet of R code, which will usually be done to bring attention to specific parts of the code.
+
 
 ## Plan of Attack
 
@@ -183,4 +184,5 @@ This tutorial is made available for learning and educational purposes only and t
 ```
 
 <!-- REMEMBER OTHER SPECIAL BLOCK TYPE IS CALLED "rmdcaution" USE THESE TO DRAW ATTENTION TO ANYTHING IMPORTANT! -->
+
 

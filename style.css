@@ -91,9 +91,8 @@ pre code {
 
 
 
-
 .scroll-lim {
-  max-height: 300px;
+  max-height: 350px;
   overflow-y: auto;
   background-color: inherit;
 }
@@ -104,5 +103,5 @@ pre {
 }
 
 pre[class] {
-  max-height: 300px;
+  max-height: 350px;
 }
