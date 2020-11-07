@@ -2,7 +2,7 @@ name: Run Crypto Tutorial
 on:
   schedule:
     - cron: '33 05,17,01 * * *'
-      
+
 jobs:
   build:
     runs-on: macOS-10.15
