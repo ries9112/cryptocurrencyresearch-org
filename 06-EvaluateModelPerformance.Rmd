@@ -1,600 +1,600 @@
-<!-- # Evaluate Model Performance{#evaluate-model-performance} -->
+# Evaluate Model Performance{#evaluate-model-performance}
 
 
-<!-- ## Summarizing models -->
+## Summarizing models
 
-<!-- <!-- [TODO - HERE add notes on using **postResample()** and explain that if you think about it all you need to evaluate a model is the predictions made (on data never seen by the model) ] --> -->
+<!-- [TODO - HERE add notes on using **postResample()** and explain that if you think about it all you need to evaluate a model is the predictions made (on data never seen by the model) ] -->
 
-<!-- Example for one model: -->
-<!-- ```{r caret_post_resample_example} -->
-<!-- postResample(pred = cryptodata_nested$lm_test_predictions[[1]],  -->
-<!--              obs = cryptodata_nested$test_data[[1]]$target_price_24h) -->
+Example for one model:
+```{r caret_post_resample_example}
+postResample(pred = cryptodata_nested$lm_test_predictions[[1]], 
+             obs = cryptodata_nested$test_data[[1]]$target_price_24h)
+```
+
+We can extract the first element to return the **RMSE** metric, and the second element for the **R Squared (R^2)** metric. We are using **`[[1]]`** to extract the first element of the [**lm_test_predictions**]{style="color: blue;"} and [**test_data**]{style="color: blue;"} and compare the predictions to the actual value of the [**target_price24h**]{style="color: blue;"} column.
+
+```{r}
+print(paste('Now showing RMSE example:', postResample(pred = cryptodata_nested$lm_test_predictions[[1]], 
+                                                      obs = cryptodata_nested$test_data[[1]]$target_price_24h)[[1]]))
+```
+
+```{r}
+print(paste('Now showing R Squared example:', postResample(pred = cryptodata_nested$lm_test_predictions[[1]], 
+                                                           obs = cryptodata_nested$test_data[[1]]$target_price_24h)[[2]]))
+```
+
+This model used the earliest subset of the data available for the `r cryptodata_nested$test_data[[1]]$symbol` cryptocurrency. How does the same model used to predict this older subset of the data perform when applied to the most recent subset of the data? 
+
+We can get the same summary of results on the **holdout**:
+```{r caret_post_resample_example_holdout}
+postResample(pred = cryptodata_nested$lm_holdout_predictions[[1]], 
+             obs = cryptodata_nested$holdout_data[[1]]$target_price_24h)
+```
+<!-- If we wrote a [*for loop*](https://r4ds.had.co.nz/iteration.html#for-loops) to iterate through all the options we would get the same results using an **object oriented approach**, this has to do with coding styles and preferences and generally speaking there are many ways of doing the same things in programming. -->
+
+### Comparing Metrics
+
+How do these two results compare and why is this comparison important?
+
+The **RMSE**
+
+<!-- [TODO - ADD HERE explaining RMSE and R^2 metrics and how we will use them to standardize the way we evaluate the effectiveness of a model. We are looking to avoid using models where the results looked good for the test data but then perform much worse than that initial expectation when looking at the holdout results] -->
+
+
+
+## Adjust Prices
+
+<!-- [TODO - add note on first doing lm only?] -->
+
+Because cryptocurrencies can vary dramatically in their prices with some trading in the tens of thousands of dollars and others trading for less than a cent, we need to make sure to standardize the RMSE columns to provide a fair comparison for the metric.
+
+Therefore, before using the `postResample()` function, let's convert both the predictions and the target to be the % change in price over the 24 hour period, rather than the change in price ($).
+
+
+```{block2, type='infoicon'}
+This step is particularly tedious, but it is important. As with the rest of this tutorial, try to understand what we are doing and why even if you find the code overwhelming. All we are doing in this "Adjust Prices" section is we are adjusting all of the prices to be represented as percentage change between observations, which will allow us to draw a fair comparison of the metrics across all cryptocurrencies, which would not be possible using the prices themselves.
+```
+
+
+### Add Last Price
+
+<!-- [TODO - write better] -->
+
+In order to convert the first prediction made to be a percentage, we need to know the previous price. 
+
+Function to add last_price_train column and append it to the predictions made so we can calculate the % change of the first element, before later removing the value not associated with the predictions:
+```{r}
+last_train_price <- function(train_data, predictions){
+  c(tail(train_data$price_usd,1), predictions)
+}
+```
+
+Now overwrite the old predictions:
+```{r}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            lm_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, lm_test_predictions, last_train_price),
+                                                         NA))
+```
+
+#### Holdout
+
+Do the same for the holdout. For all of holdout need to take last price point of 5th training split.
+```{r}
+cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
+                                    lm_holdout_predictions = map2(train_data, lm_holdout_predictions, last_train_price))
+```
+
+Join the holdout data to all rows based on the cryptocurrency symbol alone:
+```{r}
+cryptodata_nested <- left_join(cryptodata_nested, 
+                               select(cryptodata_nested_holdout, symbol, lm_holdout_predictions),
+                               by='symbol')
+# Remove unwanted columns
+cryptodata_nested <- select(cryptodata_nested, -lm_holdout_predictions.x, -split.y)
+# Rename the columns kept
+cryptodata_nested <- rename(cryptodata_nested, 
+                            lm_holdout_predictions = 'lm_holdout_predictions.y',
+                            split = 'split.x')
+# Reset the correct grouping structure
+cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
+```
+
+
+### Convert to Percentage Change
+
+<!-- [TODO - CLEAN UP EXPLANATIONS HERE!] -->
+
+```{r}
+standardize_perc_change <- function(predictions){
+  results <- (diff(c(lag(predictions, 1), predictions)) / lag(predictions, 1))*100
+  # Exclude the first element, next element will be % change of first prediction
+  tail(head(results, length(predictions)), length(predictions)-1)
+}
+```
+
+<!-- [TODO - Show formula? It's (diff(V1, V2)/abs(V1))*100] -->
+
+Overwrite the old predictions with the new predictions adjusted as a percentage now:
+```{r target_adjust_test}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            lm_test_predictions = ifelse(split < 5,
+                                                         map(lm_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # Holdout for all splits
+                            lm_holdout_predictions = map(lm_holdout_predictions, standardize_perc_change))
+```
+
+### Actuals
+
+Now do the same thing to the actual prices. Let's make a new column called **actuals** containing the real price values (rather than the predicted ones):
+```{r}
+actuals_create <- function(train_data, test_data){
+  c(tail(train_data$price_usd,1), as.numeric(unlist(select(test_data, price_usd))))
+}
+```
+
+Use the new function to create the new column `actuals`:
+```{r}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            actuals_test = ifelse(split < 5,
+                                             map2(train_data, test_data, actuals_create),
+                                             NA))
+```
+
+#### Holdout
+
+Again, for the holdout we need the price from the training data of the 5th split 
+```{r}
+cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
+                                    actuals_holdout = map2(train_data, holdout_data, actuals_create))
+```
+
+Join the holdout data to all rows based on the cryptocurrency symbol alone:
+```{r}
+cryptodata_nested <- left_join(cryptodata_nested, 
+                               select(cryptodata_nested_holdout, symbol, actuals_holdout),
+                               by='symbol')
+# Remove unwanted columns
+cryptodata_nested <- select(cryptodata_nested, -split.y)
+# Rename the columns kept
+cryptodata_nested <- rename(cryptodata_nested, split = 'split.x')
+# Reset the correct grouping structure
+cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
+```
+
+### Actuals as % Change
+
+Now we can convert the new `actuals` to express the `price_usd` as a % change relative to the previous value using adapting the function from earlier:
+```{r}
+actuals_perc_change <- function(predictions){
+  results <- (diff(c(lag(predictions, 1), predictions)) / lag(predictions, 1))*100
+  # Exclude the first element, next element will be % change of first prediction
+  tail(head(results, length(predictions)), length(predictions)-1)
+}
+```
+
+```{r}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            actuals_test = ifelse(split < 5,
+                                             map(actuals_test, actuals_perc_change),
+                                             NA),
+                            actuals_holdout = map(actuals_holdout, actuals_perc_change))
+```
+
+
+
+## Review Summary Statistics
+
+Now that we standardized the price to show the percentage change relative to the previous period instead of the price in dollars, we can actually compare the summary statistics across all cryptocurrencies and have it be a fair comparison.
+
+Let's get the same statistic as we did at the beginning of this section, but this time on the standardized values:
+```{r}
+hydroGOF::rmse(cryptodata_nested$lm_test_predictions[[1]], 
+               cryptodata_nested$actuals_test[[1]], 
+               na.rm=T)
+```
+
+<!-- [TODO - Here add note on using rmse function from hydroGOF package so we can use the na.rm=T argument, would otherwise get NA when a single value is NA. Also explain caveat of that.] -->
+
+
+### Calculate RMSE
+
+Now make a function to get the RMSE metric for all models:
+
+```{r evaluate_rmse_function}
+evaluate_preds_rmse <- function(predictions, actuals){
+
+  hydroGOF::rmse(predictions, actuals, na.rm=T)
+
+}
+```
+
+Now we can use map2() to use it to get the RMSE metric for both the test data and the holdout:
+```{r add_rmse}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            lm_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(lm_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            lm_rmse_holdout = unlist(map2(lm_holdout_predictions, actuals_holdout, evaluate_preds_rmse)))
+```
+
+
+<!-- [TODO - Add explanation for ifelse() to add rmse based on test or holdout] -->
+
+Look at the results:
+```{r}
+select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout)
+```
+
+Out of `r nrow(cryptodata_nested)` groups, `r count(ungroup(filter(cryptodata_nested, lm_rmse_test >= lm_rmse_holdout)))$n` had an equal or lower RMSE score for the holdout than the test set.
+
+
+
+### Calculate R^2
+
+Now we can do the same for the R Squared metric:
+
+```{r evaluate_rsquared_function}
+evaluate_preds_rsq <- function(predictions, actuals){
+
+  postResample(pred = predictions, obs = actuals)[[2]]
+
+}
+```
+
+
+
+```{r add_rsq}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            lm_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(lm_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            lm_rsq_holdout = unlist(map2(lm_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))
+```
+
+
+Look at the results. Wrapping them in `print(n=500)` overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations).
+```{r}
+print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), n=500)
+```
+
+<!-- WORKING UP TO THIS POINT ON 11/2 -->
+
+
+## Adjust Prices - All Models
+
+<!-- [TODO - OR IS IT BETTER TO DO ALL AT ONCE ABOVE?] -->
+
+### Add Last Price
+And now we can do the same for all the other models 
+
+```{r}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            xgb_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, xgb_test_predictions, last_train_price),
+                                                         NA),
+                            xgbTree_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, xgbTree_test_predictions, last_train_price),
+                                                         NA),
+                            nnet_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, nnet_test_predictions, last_train_price),
+                                                         NA))
+```
+
+##### Holdout
+
+(REMEMBER holdout step for all to get price from 5th train split first)
+
+```{r}
+cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
+                                    xgb_holdout_predictions = map2(train_data, xgb_holdout_predictions, last_train_price),
+                                    xgbTree_holdout_predictions = map2(train_data, xgbTree_holdout_predictions, last_train_price),
+                                    nnet_holdout_predictions = map2(train_data, nnet_holdout_predictions, last_train_price))
+```
+
+Join the holdout data to all rows based on the cryptocurrency symbol alone:
+```{r}
+cryptodata_nested <- left_join(cryptodata_nested, 
+                               select(cryptodata_nested_holdout, symbol, 
+                                      xgb_holdout_predictions, xgbTree_holdout_predictions, nnet_holdout_predictions),
+                               by='symbol')
+# Remove unwanted columns
+cryptodata_nested <- select(cryptodata_nested, -xgb_holdout_predictions.x, 
+                            -xgbTree_holdout_predictions.x, -nnet_holdout_predictions.x, -split.y)
+# Rename the columns kept
+cryptodata_nested <- rename(cryptodata_nested, 
+                            xgb_holdout_predictions = 'xgb_holdout_predictions.y',
+                            xgbTree_holdout_predictions = 'xgbTree_holdout_predictions.y',
+                            nnet_holdout_predictions = 'nnet_holdout_predictions.y',
+                            split = 'split.x')
+# Reset the correct grouping structure
+cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
+```
+
+### Convert to % Change
+
+Overwrite the old predictions with the new predictions adjusted as a percentage now:
+```{r target_adjust_all_models}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            xgb_test_predictions = ifelse(split < 5,
+                                                         map(xgb_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # Holdout for all splits
+                            xgb_holdout_predictions = map(xgb_holdout_predictions, standardize_perc_change),
+                            # xgbTree
+                            xgbTree_test_predictions = ifelse(split < 5,
+                                                         map(xgbTree_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # Holdout for all splits
+                            xgbTree_holdout_predictions = map(xgbTree_holdout_predictions, standardize_perc_change),
+                            # nnet
+                            nnet_test_predictions = ifelse(split < 5,
+                                                         map(nnet_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # Holdout for all splits
+                            nnet_holdout_predictions = map(nnet_holdout_predictions, standardize_perc_change))
+```
+
+
+
+### Add Metrics
+
+```{r add_metrics_rest}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            # XGBoost - RMSE - Test
+                            xgb_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(xgb_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            # And holdout:
+                            xgb_rmse_holdout = unlist(map2(xgb_holdout_predictions, actuals_holdout ,evaluate_preds_rmse)),
+                            # XGBoost - R^2 - Test
+                            xgb_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(xgb_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            # And holdout:
+                            xgb_rsq_holdout = map2(xgb_holdout_predictions, actuals_holdout, evaluate_preds_rsq),
+                            # XGBoost Trees - RMSE - Test
+                            xgbTree_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(xgbTree_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            # And holdout:
+                            xgbTree_rmse_holdout = unlist(map2(xgbTree_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
+                            # XGBoost Trees - R^2 - Test
+                            xgbTree_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(xgbTree_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            # And holdout:
+                            xgbTree_rsq_holdout = unlist(map2(xgbTree_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
+                            # Neural Network - RMSE - Test
+                            nnet_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(nnet_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            # And holdout:
+                            nnet_rmse_holdout = unlist(map2(nnet_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
+                            # Neural Network - R^2 - Test
+                            nnet_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(nnet_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            # And holdout:
+                            nnet_rsq_holdout = unlist(map2(nnet_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))
+```
+
+<!-- Now we have RMSE values for every model created for every cryptocurrency and split of the data: -->
+<!-- ```{r} -->
+<!-- rmse_scores <- select(cryptodata_nested, lm_rmse_test, xgb_rmse_test, xgbTree_rmse_test, nnet_rmse_test) -->
+<!-- # Show RMSE scores -->
+<!-- rmse_scores -->
 <!-- ``` -->
 
-<!-- We can extract the first element to return the **RMSE** metric, and the second element for the **R Squared (R^2)** metric. We are using **`[[1]]`** to extract the first element of the [**lm_test_predictions**]{style="color: blue;"} and [**test_data**]{style="color: blue;"} and compare the predictions to the actual value of the [**target_price24h**]{style="color: blue;"} column. -->
+<!-- And the R Squared values: -->
+<!-- ```{r} -->
+<!-- rsq_scores <- select(cryptodata_nested, lm_rsq, xgb_rsq, xgbTree_rsq, nnet_rsq) -->
+<!-- # Show R^2 scores -->
+<!-- rsq_scores -->
+<!-- ``` -->
+
+## Eval RMSE
+
+<!-- [TODO - Title?] -->
+
+New object without split column `cryptodata_metrics`:
+```{r}
+cryptodata_metrics <- group_by(select(ungroup(cryptodata_nested),-split),symbol)
+```
+
+
+### Test
+
+Now for each model we will create a new column giving the average RMSE for the 4 cross-validation test splits:
+```{r}
+rmse_test <- mutate(cryptodata_metrics,
+                      lm = mean(lm_rmse_test, na.rm = T),
+                      xgb = mean(xgb_rmse_test, na.rm = T),
+                      xgbTree = mean(xgbTree_rmse_test, na.rm = T),
+                      nnet = mean(nnet_rmse_test, na.rm = T))
+```
+
+Now we can use the `gather()` function to summarize the columns as rows:
+```{r gather_rmse}
+rmse_test <- unique(gather(select(rmse_test, lm:nnet), 'model', 'rmse', -symbol))
+# Show results
+rmse_test
+```
+
+Now tag the results as having been for the test set
+```{r}
+rmse_test$eval_set <- 'test'
+```
+
+### Holdout
+
+Do the same for the holdout set
+```{r}
+rmse_holdout <- mutate(cryptodata_metrics,
+                      lm = mean(lm_rmse_holdout, na.rm = T),
+                      xgb = mean(xgb_rmse_holdout, na.rm = T),
+                      xgbTree = mean(xgbTree_rmse_holdout, na.rm = T),
+                      nnet = mean(nnet_rmse_holdout, na.rm = T))
+```
+
+Now we can use the `gather()` function to summarize the columns as rows:
+```{r gather_rmse_holdout}
+rmse_holdout <- unique(gather(select(rmse_holdout, lm:nnet), 'model', 'rmse', -symbol))
+# Show results
+rmse_holdout
+```
+
+Now tag the results as having been for the holdout set
+```{r}
+rmse_holdout$eval_set <- 'holdout'
+```
+
+### Union Results
+
+```{r}
+rmse_scores <- union(rmse_test, rmse_holdout)
+```
+
+
+## Eval R^2
+
+### Test
+
+For each model we will create a new column giving the average R^2 for the 4 cross-validation test splits:
+```{r}
+rsq_test <- mutate(cryptodata_metrics,
+                      lm = mean(lm_rsq_test, na.rm = T),
+                      xgb = mean(xgb_rsq_test, na.rm = T),
+                      xgbTree = mean(xgbTree_rsq_test, na.rm = T),
+                      nnet = mean(nnet_rsq_test, na.rm = T))
+```
+
+Now we can use the `gather()` function to summarize the columns as rows:
+```{r gather_rsq}
+rsq_test <- unique(gather(select(rsq_test, lm:nnet), 'model', 'rsq', -symbol))
+# Show results
+rsq_test
+```
+
+Now tag the results as having been for the test set
+```{r}
+rsq_test$eval_set <- 'test'
+```
+
+### Holdout
+
+Do the same for the holdout set
+```{r}
+rsq_holdout <- mutate(cryptodata_metrics,
+                      lm = mean(lm_rsq_holdout, na.rm = T),
+                      xgb = mean(xgb_rsq_holdout, na.rm = T),
+                      xgbTree = mean(xgbTree_rsq_holdout, na.rm = T),
+                      nnet = mean(nnet_rsq_holdout, na.rm = T))
+```
+
+Now we can use the `gather()` function to summarize the columns as rows:
+```{r gather_rsq_holdout}
+rsq_holdout <- unique(gather(select(rsq_holdout, lm:nnet), 'model', 'rsq', -symbol))
+# Show results
+rsq_holdout
+```
+
+Now tag the results as having been for the holdout set
+```{r}
+rsq_holdout$eval_set <- 'holdout'
+```
+
+### Union Results
+
+```{r}
+rsq_scores <- union(rsq_test, rsq_holdout)
+```
+
+
+## Visualize Results
+
+
+### RMSE Visualization
+
+Now we can take the same tools we learned in the [Visualization section from earlier](#visualization) and visualize the results of the models.
 
 <!-- ```{r} -->
-<!-- print(paste('Now showing RMSE example:', postResample(pred = cryptodata_nested$lm_test_predictions[[1]],  -->
-<!--                                                       obs = cryptodata_nested$test_data[[1]]$target_price_24h)[[1]])) -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- print(paste('Now showing R Squared example:', postResample(pred = cryptodata_nested$lm_test_predictions[[1]],  -->
-<!--                                                            obs = cryptodata_nested$test_data[[1]]$target_price_24h)[[2]])) -->
-<!-- ``` -->
-
-<!-- This model used the earliest subset of the data available for the `r cryptodata_nested$test_data[[1]]$symbol` cryptocurrency. How does the same model used to predict this older subset of the data perform when applied to the most recent subset of the data?  -->
-
-<!-- We can get the same summary of results on the **holdout**: -->
-<!-- ```{r caret_post_resample_example_holdout} -->
-<!-- postResample(pred = cryptodata_nested$lm_holdout_predictions[[1]],  -->
-<!--              obs = cryptodata_nested$holdout_data[[1]]$target_price_24h) -->
-<!-- ``` -->
-<!-- <!-- If we wrote a [*for loop*](https://r4ds.had.co.nz/iteration.html#for-loops) to iterate through all the options we would get the same results using an **object oriented approach**, this has to do with coding styles and preferences and generally speaking there are many ways of doing the same things in programming. --> -->
-
-<!-- ### Comparing Metrics -->
-
-<!-- How do these two results compare and why is this comparison important? -->
-
-<!-- The **RMSE** -->
-
-<!-- <!-- [TODO - ADD HERE explaining RMSE and R^2 metrics and how we will use them to standardize the way we evaluate the effectiveness of a model. We are looking to avoid using models where the results looked good for the test data but then perform much worse than that initial expectation when looking at the holdout results] --> -->
-
-
-
-<!-- ## Adjust Prices -->
-
-<!-- <!-- [TODO - add note on first doing lm only?] --> -->
-
-<!-- Because cryptocurrencies can vary dramatically in their prices with some trading in the tens of thousands of dollars and others trading for less than a cent, we need to make sure to standardize the RMSE columns to provide a fair comparison for the metric. -->
-
-<!-- Therefore, before using the `postResample()` function, let's convert both the predictions and the target to be the % change in price over the 24 hour period, rather than the change in price ($). -->
-
-
-<!-- ```{block2, type='infoicon'} -->
-<!-- This step is particularly tedious, but it is important. As with the rest of this tutorial, try to understand what we are doing and why even if you find the code overwhelming. All we are doing in this "Adjust Prices" section is we are adjusting all of the prices to be represented as percentage change between observations, which will allow us to draw a fair comparison of the metrics across all cryptocurrencies, which would not be possible using the prices themselves. -->
-<!-- ``` -->
-
-
-<!-- ### Add Last Price -->
-
-<!-- <!-- [TODO - write better] --> -->
-
-<!-- In order to convert the first prediction made to be a percentage, we need to know the previous price.  -->
-
-<!-- Function to add last_price_train column and append it to the predictions made so we can calculate the % change of the first element, before later removing the value not associated with the predictions: -->
-<!-- ```{r} -->
-<!-- last_train_price <- function(train_data, predictions){ -->
-<!--   c(tail(train_data$price_usd,1), predictions) -->
-<!-- } -->
-<!-- ``` -->
-
-<!-- Now overwrite the old predictions: -->
-<!-- ```{r} -->
-<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
-<!--                             lm_test_predictions = ifelse(split < 5, -->
-<!--                                                          map2(train_data, lm_test_predictions, last_train_price), -->
-<!--                                                          NA)) -->
-<!-- ``` -->
-
-<!-- #### Holdout -->
-
-<!-- Do the same for the holdout. For all of holdout need to take last price point of 5th training split. -->
-<!-- ```{r} -->
-<!-- cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5), -->
-<!--                                     lm_holdout_predictions = map2(train_data, lm_holdout_predictions, last_train_price)) -->
-<!-- ``` -->
-
-<!-- Join the holdout data to all rows based on the cryptocurrency symbol alone: -->
-<!-- ```{r} -->
-<!-- cryptodata_nested <- left_join(cryptodata_nested,  -->
-<!--                                select(cryptodata_nested_holdout, symbol, lm_holdout_predictions), -->
-<!--                                by='symbol') -->
-<!-- # Remove unwanted columns -->
-<!-- cryptodata_nested <- select(cryptodata_nested, -lm_holdout_predictions.x, -split.y) -->
-<!-- # Rename the columns kept -->
-<!-- cryptodata_nested <- rename(cryptodata_nested,  -->
-<!--                             lm_holdout_predictions = 'lm_holdout_predictions.y', -->
-<!--                             split = 'split.x') -->
-<!-- # Reset the correct grouping structure -->
-<!-- cryptodata_nested <- group_by(cryptodata_nested, symbol, split) -->
-<!-- ``` -->
-
-
-<!-- ### Convert to Percentage Change -->
-
-<!-- <!-- [TODO - CLEAN UP EXPLANATIONS HERE!] --> -->
-
-<!-- ```{r} -->
-<!-- standardize_perc_change <- function(predictions){ -->
-<!--   results <- (diff(c(lag(predictions, 1), predictions)) / lag(predictions, 1))*100 -->
-<!--   # Exclude the first element, next element will be % change of first prediction -->
-<!--   tail(head(results, length(predictions)), length(predictions)-1) -->
-<!-- } -->
-<!-- ``` -->
-
-<!-- <!-- [TODO - Show formula? It's (diff(V1, V2)/abs(V1))*100] --> -->
-
-<!-- Overwrite the old predictions with the new predictions adjusted as a percentage now: -->
-<!-- ```{r target_adjust_test} -->
-<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
-<!--                             lm_test_predictions = ifelse(split < 5, -->
-<!--                                                          map(lm_test_predictions, standardize_perc_change), -->
-<!--                                                          NA), -->
-<!--                             # Holdout for all splits -->
-<!--                             lm_holdout_predictions = map(lm_holdout_predictions, standardize_perc_change)) -->
-<!-- ``` -->
-
-<!-- ### Actuals -->
-
-<!-- Now do the same thing to the actual prices. Let's make a new column called **actuals** containing the real price values (rather than the predicted ones): -->
-<!-- ```{r} -->
-<!-- actuals_create <- function(train_data, test_data){ -->
-<!--   c(tail(train_data$price_usd,1), as.numeric(unlist(select(test_data, price_usd)))) -->
-<!-- } -->
-<!-- ``` -->
-
-<!-- Use the new function to create the new column `actuals`: -->
-<!-- ```{r} -->
-<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
-<!--                             actuals_test = ifelse(split < 5, -->
-<!--                                              map2(train_data, test_data, actuals_create), -->
-<!--                                              NA)) -->
-<!-- ``` -->
-
-<!-- #### Holdout -->
-
-<!-- Again, for the holdout we need the price from the training data of the 5th split  -->
-<!-- ```{r} -->
-<!-- cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5), -->
-<!--                                     actuals_holdout = map2(train_data, holdout_data, actuals_create)) -->
-<!-- ``` -->
-
-<!-- Join the holdout data to all rows based on the cryptocurrency symbol alone: -->
-<!-- ```{r} -->
-<!-- cryptodata_nested <- left_join(cryptodata_nested,  -->
-<!--                                select(cryptodata_nested_holdout, symbol, actuals_holdout), -->
-<!--                                by='symbol') -->
-<!-- # Remove unwanted columns -->
-<!-- cryptodata_nested <- select(cryptodata_nested, -split.y) -->
-<!-- # Rename the columns kept -->
-<!-- cryptodata_nested <- rename(cryptodata_nested, split = 'split.x') -->
-<!-- # Reset the correct grouping structure -->
-<!-- cryptodata_nested <- group_by(cryptodata_nested, symbol, split) -->
-<!-- ``` -->
-
-<!-- ### Actuals as % Change -->
-
-<!-- Now we can convert the new `actuals` to express the `price_usd` as a % change relative to the previous value using adapting the function from earlier: -->
-<!-- ```{r} -->
-<!-- actuals_perc_change <- function(predictions){ -->
-<!--   results <- (diff(c(lag(predictions, 1), predictions)) / lag(predictions, 1))*100 -->
-<!--   # Exclude the first element, next element will be % change of first prediction -->
-<!--   tail(head(results, length(predictions)), length(predictions)-1) -->
-<!-- } -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
-<!--                             actuals_test = ifelse(split < 5, -->
-<!--                                              map(actuals_test, actuals_perc_change), -->
-<!--                                              NA), -->
-<!--                             actuals_holdout = map(actuals_holdout, actuals_perc_change)) -->
-<!-- ``` -->
-
-
-
-<!-- ## Review Summary Statistics -->
-
-<!-- Now that we standardized the price to show the percentage change relative to the previous period instead of the price in dollars, we can actually compare the summary statistics across all cryptocurrencies and have it be a fair comparison. -->
-
-<!-- Let's get the same statistic as we did at the beginning of this section, but this time on the standardized values: -->
-<!-- ```{r} -->
-<!-- hydroGOF::rmse(cryptodata_nested$lm_test_predictions[[1]],  -->
-<!--                cryptodata_nested$actuals_test[[1]],  -->
-<!--                na.rm=T) -->
-<!-- ``` -->
-
-<!-- <!-- [TODO - Here add note on using rmse function from hydroGOF package so we can use the na.rm=T argument, would otherwise get NA when a single value is NA. Also explain caveat of that.] --> -->
-
-
-<!-- ### Calculate RMSE -->
-
-<!-- Now make a function to get the RMSE metric for all models: -->
-
-<!-- ```{r evaluate_rmse_function} -->
-<!-- evaluate_preds_rmse <- function(predictions, actuals){ -->
-
-<!--   hydroGOF::rmse(predictions, actuals, na.rm=T) -->
-
-<!-- } -->
-<!-- ``` -->
-
-<!-- Now we can use map2() to use it to get the RMSE metric for both the test data and the holdout: -->
-<!-- ```{r add_rmse} -->
-<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
-<!--                             lm_rmse_test = unlist(ifelse(split < 5, -->
-<!--                                                          map2(lm_test_predictions, actuals_test, evaluate_preds_rmse), -->
-<!--                                                          NA)), -->
-<!--                             lm_rmse_holdout = unlist(map2(lm_holdout_predictions, actuals_holdout, evaluate_preds_rmse))) -->
-<!-- ``` -->
-
-
-<!-- <!-- [TODO - Add explanation for ifelse() to add rmse based on test or holdout] --> -->
-
-<!-- Look at the results: -->
-<!-- ```{r} -->
-<!-- select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout) -->
-<!-- ``` -->
-
-<!-- Out of `r nrow(cryptodata_nested)` groups, `r count(ungroup(filter(cryptodata_nested, lm_rmse_test >= lm_rmse_holdout)))$n` had an equal or lower RMSE score for the holdout than the test set. -->
-
-
-
-<!-- ### Calculate R^2 -->
-
-<!-- Now we can do the same for the R Squared metric: -->
-
-<!-- ```{r evaluate_rsquared_function} -->
-<!-- evaluate_preds_rsq <- function(predictions, actuals){ -->
-
-<!--   postResample(pred = predictions, obs = actuals)[[2]] -->
-
-<!-- } -->
-<!-- ``` -->
-
-
-
-<!-- ```{r add_rsq} -->
-<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
-<!--                             lm_rsq_test = unlist(ifelse(split < 5, -->
-<!--                                                          map2(lm_test_predictions, actuals_test, evaluate_preds_rsq), -->
-<!--                                                          NA)), -->
-<!--                             lm_rsq_holdout = unlist(map2(lm_holdout_predictions, actuals_holdout, evaluate_preds_rsq))) -->
-<!-- ``` -->
-
-
-<!-- Look at the results. Wrapping them in `print(n=500)` overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations). -->
-<!-- ```{r} -->
-<!-- print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), n=500) -->
-<!-- ``` -->
-
-<!-- <!-- WORKING UP TO THIS POINT ON 11/2 --> -->
-
-
-<!-- ## Adjust Prices - All Models -->
-
-<!-- <!-- [TODO - OR IS IT BETTER TO DO ALL AT ONCE ABOVE?] --> -->
-
-<!-- ### Add Last Price -->
-<!-- And now we can do the same for all the other models  -->
-
-<!-- ```{r} -->
-<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
-<!--                             xgb_test_predictions = ifelse(split < 5, -->
-<!--                                                          map2(train_data, xgb_test_predictions, last_train_price), -->
-<!--                                                          NA), -->
-<!--                             xgbTree_test_predictions = ifelse(split < 5, -->
-<!--                                                          map2(train_data, xgbTree_test_predictions, last_train_price), -->
-<!--                                                          NA), -->
-<!--                             nnet_test_predictions = ifelse(split < 5, -->
-<!--                                                          map2(train_data, nnet_test_predictions, last_train_price), -->
-<!--                                                          NA)) -->
-<!-- ``` -->
-
-<!-- ##### Holdout -->
-
-<!-- (REMEMBER holdout step for all to get price from 5th train split first) -->
-
-<!-- ```{r} -->
-<!-- cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5), -->
-<!--                                     xgb_holdout_predictions = map2(train_data, xgb_holdout_predictions, last_train_price), -->
-<!--                                     xgbTree_holdout_predictions = map2(train_data, xgbTree_holdout_predictions, last_train_price), -->
-<!--                                     nnet_holdout_predictions = map2(train_data, nnet_holdout_predictions, last_train_price)) -->
-<!-- ``` -->
-
-<!-- Join the holdout data to all rows based on the cryptocurrency symbol alone: -->
-<!-- ```{r} -->
-<!-- cryptodata_nested <- left_join(cryptodata_nested,  -->
-<!--                                select(cryptodata_nested_holdout, symbol,  -->
-<!--                                       xgb_holdout_predictions, xgbTree_holdout_predictions, nnet_holdout_predictions), -->
-<!--                                by='symbol') -->
-<!-- # Remove unwanted columns -->
-<!-- cryptodata_nested <- select(cryptodata_nested, -xgb_holdout_predictions.x,  -->
-<!--                             -xgbTree_holdout_predictions.x, -nnet_holdout_predictions.x, -split.y) -->
-<!-- # Rename the columns kept -->
-<!-- cryptodata_nested <- rename(cryptodata_nested,  -->
-<!--                             xgb_holdout_predictions = 'xgb_holdout_predictions.y', -->
-<!--                             xgbTree_holdout_predictions = 'xgbTree_holdout_predictions.y', -->
-<!--                             nnet_holdout_predictions = 'nnet_holdout_predictions.y', -->
-<!--                             split = 'split.x') -->
-<!-- # Reset the correct grouping structure -->
-<!-- cryptodata_nested <- group_by(cryptodata_nested, symbol, split) -->
-<!-- ``` -->
-
-<!-- ### Convert to % Change -->
-
-<!-- Overwrite the old predictions with the new predictions adjusted as a percentage now: -->
-<!-- ```{r target_adjust_all_models} -->
-<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
-<!--                             xgb_test_predictions = ifelse(split < 5, -->
-<!--                                                          map(xgb_test_predictions, standardize_perc_change), -->
-<!--                                                          NA), -->
-<!--                             # Holdout for all splits -->
-<!--                             xgb_holdout_predictions = map(xgb_holdout_predictions, standardize_perc_change), -->
-<!--                             # xgbTree -->
-<!--                             xgbTree_test_predictions = ifelse(split < 5, -->
-<!--                                                          map(xgbTree_test_predictions, standardize_perc_change), -->
-<!--                                                          NA), -->
-<!--                             # Holdout for all splits -->
-<!--                             xgbTree_holdout_predictions = map(xgbTree_holdout_predictions, standardize_perc_change), -->
-<!--                             # nnet -->
-<!--                             nnet_test_predictions = ifelse(split < 5, -->
-<!--                                                          map(nnet_test_predictions, standardize_perc_change), -->
-<!--                                                          NA), -->
-<!--                             # Holdout for all splits -->
-<!--                             nnet_holdout_predictions = map(nnet_holdout_predictions, standardize_perc_change)) -->
-<!-- ``` -->
-
-
-
-<!-- ### Add Metrics -->
-
-<!-- ```{r add_metrics_rest} -->
-<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
-<!--                             # XGBoost - RMSE - Test -->
-<!--                             xgb_rmse_test = unlist(ifelse(split < 5, -->
-<!--                                                          map2(xgb_test_predictions, actuals_test, evaluate_preds_rmse), -->
-<!--                                                          NA)), -->
-<!--                             # And holdout: -->
-<!--                             xgb_rmse_holdout = unlist(map2(xgb_holdout_predictions, actuals_holdout ,evaluate_preds_rmse)), -->
-<!--                             # XGBoost - R^2 - Test -->
-<!--                             xgb_rsq_test = unlist(ifelse(split < 5, -->
-<!--                                                          map2(xgb_test_predictions, actuals_test, evaluate_preds_rsq), -->
-<!--                                                          NA)), -->
-<!--                             # And holdout: -->
-<!--                             xgb_rsq_holdout = map2(xgb_holdout_predictions, actuals_holdout, evaluate_preds_rsq), -->
-<!--                             # XGBoost Trees - RMSE - Test -->
-<!--                             xgbTree_rmse_test = unlist(ifelse(split < 5, -->
-<!--                                                          map2(xgbTree_test_predictions, actuals_test, evaluate_preds_rmse), -->
-<!--                                                          NA)), -->
-<!--                             # And holdout: -->
-<!--                             xgbTree_rmse_holdout = unlist(map2(xgbTree_holdout_predictions, actuals_holdout, evaluate_preds_rmse)), -->
-<!--                             # XGBoost Trees - R^2 - Test -->
-<!--                             xgbTree_rsq_test = unlist(ifelse(split < 5, -->
-<!--                                                          map2(xgbTree_test_predictions, actuals_test, evaluate_preds_rsq), -->
-<!--                                                          NA)), -->
-<!--                             # And holdout: -->
-<!--                             xgbTree_rsq_holdout = unlist(map2(xgbTree_holdout_predictions, actuals_holdout, evaluate_preds_rsq)), -->
-<!--                             # Neural Network - RMSE - Test -->
-<!--                             nnet_rmse_test = unlist(ifelse(split < 5, -->
-<!--                                                          map2(nnet_test_predictions, actuals_test, evaluate_preds_rmse), -->
-<!--                                                          NA)), -->
-<!--                             # And holdout: -->
-<!--                             nnet_rmse_holdout = unlist(map2(nnet_holdout_predictions, actuals_holdout, evaluate_preds_rmse)), -->
-<!--                             # Neural Network - R^2 - Test -->
-<!--                             nnet_rsq_test = unlist(ifelse(split < 5, -->
-<!--                                                          map2(nnet_test_predictions, actuals_test, evaluate_preds_rsq), -->
-<!--                                                          NA)), -->
-<!--                             # And holdout: -->
-<!--                             nnet_rsq_holdout = unlist(map2(nnet_holdout_predictions, actuals_holdout, evaluate_preds_rsq))) -->
-<!-- ``` -->
-
-<!-- <!-- Now we have RMSE values for every model created for every cryptocurrency and split of the data: --> -->
-<!-- <!-- ```{r} --> -->
-<!-- <!-- rmse_scores <- select(cryptodata_nested, lm_rmse_test, xgb_rmse_test, xgbTree_rmse_test, nnet_rmse_test) --> -->
-<!-- <!-- # Show RMSE scores --> -->
-<!-- <!-- rmse_scores --> -->
-<!-- <!-- ``` --> -->
-
-<!-- <!-- And the R Squared values: --> -->
-<!-- <!-- ```{r} --> -->
-<!-- <!-- rsq_scores <- select(cryptodata_nested, lm_rsq, xgb_rsq, xgbTree_rsq, nnet_rsq) --> -->
-<!-- <!-- # Show R^2 scores --> -->
-<!-- <!-- rsq_scores --> -->
-<!-- <!-- ``` --> -->
-
-<!-- ## Eval RMSE -->
-
-<!-- <!-- [TODO - Title?] --> -->
-
-<!-- New object without split column `cryptodata_metrics`: -->
-<!-- ```{r} -->
-<!-- cryptodata_metrics <- group_by(select(ungroup(cryptodata_nested),-split),symbol) -->
-<!-- ``` -->
-
-
-<!-- ### Test -->
-
-<!-- Now for each model we will create a new column giving the average RMSE for the 4 cross-validation test splits: -->
-<!-- ```{r} -->
-<!-- rmse_test <- mutate(cryptodata_metrics, -->
-<!--                       lm = mean(lm_rmse_test, na.rm = T), -->
-<!--                       xgb = mean(xgb_rmse_test, na.rm = T), -->
-<!--                       xgbTree = mean(xgbTree_rmse_test, na.rm = T), -->
-<!--                       nnet = mean(nnet_rmse_test, na.rm = T)) -->
-<!-- ``` -->
-
-<!-- Now we can use the `gather()` function to summarize the columns as rows: -->
-<!-- ```{r gather_rmse} -->
-<!-- rmse_test <- unique(gather(select(rmse_test, lm:nnet), 'model', 'rmse', -symbol)) -->
-<!-- # Show results -->
-<!-- rmse_test -->
-<!-- ``` -->
-
-<!-- Now tag the results as having been for the test set -->
-<!-- ```{r} -->
-<!-- rmse_test$eval_set <- 'test' -->
-<!-- ``` -->
-
-<!-- ### Holdout -->
-
-<!-- Do the same for the holdout set -->
-<!-- ```{r} -->
-<!-- rmse_holdout <- mutate(cryptodata_metrics, -->
-<!--                       lm = mean(lm_rmse_holdout, na.rm = T), -->
-<!--                       xgb = mean(xgb_rmse_holdout, na.rm = T), -->
-<!--                       xgbTree = mean(xgbTree_rmse_holdout, na.rm = T), -->
-<!--                       nnet = mean(nnet_rmse_holdout, na.rm = T)) -->
-<!-- ``` -->
-
-<!-- Now we can use the `gather()` function to summarize the columns as rows: -->
-<!-- ```{r gather_rmse_holdout} -->
-<!-- rmse_holdout <- unique(gather(select(rmse_holdout, lm:nnet), 'model', 'rmse', -symbol)) -->
-<!-- # Show results -->
-<!-- rmse_holdout -->
-<!-- ``` -->
-
-<!-- Now tag the results as having been for the holdout set -->
-<!-- ```{r} -->
-<!-- rmse_holdout$eval_set <- 'holdout' -->
-<!-- ``` -->
-
-<!-- ### Union Results -->
-
-<!-- ```{r} -->
-<!-- rmse_scores <- union(rmse_test, rmse_holdout) -->
-<!-- ``` -->
-
-
-<!-- ## Eval R^2 -->
-
-<!-- ### Test -->
-
-<!-- For each model we will create a new column giving the average R^2 for the 4 cross-validation test splits: -->
-<!-- ```{r} -->
-<!-- rsq_test <- mutate(cryptodata_metrics, -->
-<!--                       lm = mean(lm_rsq_test, na.rm = T), -->
-<!--                       xgb = mean(xgb_rsq_test, na.rm = T), -->
-<!--                       xgbTree = mean(xgbTree_rsq_test, na.rm = T), -->
-<!--                       nnet = mean(nnet_rsq_test, na.rm = T)) -->
-<!-- ``` -->
-
-<!-- Now we can use the `gather()` function to summarize the columns as rows: -->
-<!-- ```{r gather_rsq} -->
-<!-- rsq_test <- unique(gather(select(rsq_test, lm:nnet), 'model', 'rsq', -symbol)) -->
-<!-- # Show results -->
-<!-- rsq_test -->
-<!-- ``` -->
-
-<!-- Now tag the results as having been for the test set -->
-<!-- ```{r} -->
-<!-- rsq_test$eval_set <- 'test' -->
-<!-- ``` -->
-
-<!-- ### Holdout -->
-
-<!-- Do the same for the holdout set -->
-<!-- ```{r} -->
-<!-- rsq_holdout <- mutate(cryptodata_metrics, -->
-<!--                       lm = mean(lm_rsq_holdout, na.rm = T), -->
-<!--                       xgb = mean(xgb_rsq_holdout, na.rm = T), -->
-<!--                       xgbTree = mean(xgbTree_rsq_holdout, na.rm = T), -->
-<!--                       nnet = mean(nnet_rsq_holdout, na.rm = T)) -->
-<!-- ``` -->
-
-<!-- Now we can use the `gather()` function to summarize the columns as rows: -->
-<!-- ```{r gather_rsq_holdout} -->
-<!-- rsq_holdout <- unique(gather(select(rsq_holdout, lm:nnet), 'model', 'rsq', -symbol)) -->
-<!-- # Show results -->
-<!-- rsq_holdout -->
-<!-- ``` -->
-
-<!-- Now tag the results as having been for the holdout set -->
-<!-- ```{r} -->
-<!-- rsq_holdout$eval_set <- 'holdout' -->
-<!-- ``` -->
-
-<!-- ### Union Results -->
-
-<!-- ```{r} -->
-<!-- rsq_scores <- union(rsq_test, rsq_holdout) -->
-<!-- ``` -->
-
-
-<!-- ## Visualize Results -->
-
-
-<!-- ### RMSE Visualization -->
-
-<!-- Now we can take the same tools we learned in the [Visualization section from earlier](#visualization) and visualize the results of the models. -->
-
-<!-- <!-- ```{r} --> -->
-<!-- <!-- ggplot(rmse_scores, aes(x=split, y=rmse, color = model)) + --> -->
-<!-- <!--   geom_boxplot() + --> -->
-<!-- <!--   geom_point() + --> -->
-<!-- <!--   ylim(c(0,50)) + --> -->
-<!-- <!--   facet_wrap(~eval_set) --> -->
-<!-- <!-- ``` --> -->
-
-
-
-
-<!-- ### Both -->
-
-<!-- #### Join Datasets -->
-
-<!-- First join the two -->
-<!-- ```{r} -->
-<!-- plot_scores <- merge(rmse_scores, rsq_scores) -->
-<!-- ``` -->
-
-<!-- #### Plot Results -->
-
-<!-- <!-- [TODO - ADJUST THESE SOME MORE] --> -->
-
-<!-- ```{r} -->
-<!-- ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) + -->
+<!-- ggplot(rmse_scores, aes(x=split, y=rmse, color = model)) + -->
+<!--   geom_boxplot() + -->
 <!--   geom_point() + -->
-<!--   ylim(c(0,10)) -->
-<!-- ``` -->
-
-<!-- ADA only -->
-<!-- ```{r} -->
-<!-- ggplot(filter(plot_scores, symbol == 'ADA'), aes(x=rsq, y=rmse, color = model)) + -->
-<!--   geom_point() + -->
+<!--   ylim(c(0,50)) + -->
 <!--   facet_wrap(~eval_set) -->
 <!-- ``` -->
 
 
-<!-- Now by the cryptocurrency -->
-<!-- ```{r} -->
-<!-- ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) + -->
-<!--   geom_point() + -->
-<!--   geom_smooth() + -->
-<!--   ylim(c(0,10)) + -->
-<!--   facet_wrap(~symbol) -->
+
+
+### Both
+
+#### Join Datasets
+
+First join the two
+```{r}
+plot_scores <- merge(rmse_scores, rsq_scores)
+```
+
+#### Plot Results
+
+<!-- [TODO - ADJUST THESE SOME MORE] -->
+
+```{r}
+ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
+  geom_point() +
+  ylim(c(0,10))
+```
+
+ADA only
+```{r}
+ggplot(filter(plot_scores, symbol == 'ADA'), aes(x=rsq, y=rmse, color = model)) +
+  geom_point() +
+  facet_wrap(~eval_set)
+```
+
+
+Now by the cryptocurrency
+```{r}
+ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
+  geom_point() +
+  geom_smooth() +
+  ylim(c(0,10)) +
+  facet_wrap(~symbol)
+```
+
+### Results by the Cryptocurrency
+
+<!-- [TODO - UNCOMMENT THE CODE BELOW TO UPLOAD DATA TO PINS. ADD R LINE TO SET ENVIRONMENTAL VARIABLES BEFORE RUNNING BOOK!] -->
+
+<!-- ```{r upload_results_pin, include=F, error=TRUE} -->
+<!-- # register board -->
+<!-- board_register("github", repo = "predictcrypto/pins", token=Sys.getenv("pins_key")) -->
+<!-- # Add current date -->
+<!-- plot_scores$last_refreshed <- Sys.time() -->
+<!-- # pin data -->
+<!-- pin(plot_scores, board='github', name='crypto_tutorial_results_latest') -->
 <!-- ``` -->
 
-<!-- ### Results by the Cryptocurrency -->
+<!-- TODO - INCLUDE SHINYAPP HERE: -->
+```{r metrics_by_crypto_shinyapp, include=F}
+knitr::include_app('https://predictcrypto.shinyapps.io/tutorial_latest_model_summary/', height = '600px')
+```
 
-<!-- <!-- [TODO - UNCOMMENT THE CODE BELOW TO UPLOAD DATA TO PINS. ADD R LINE TO SET ENVIRONMENTAL VARIABLES BEFORE RUNNING BOOK!] --> -->
-
-<!-- <!-- ```{r upload_results_pin, include=F, error=TRUE} --> -->
-<!-- <!-- # register board --> -->
-<!-- <!-- board_register("github", repo = "predictcrypto/pins", token=Sys.getenv("pins_key")) --> -->
-<!-- <!-- # Add current date --> -->
-<!-- <!-- plot_scores$last_refreshed <- Sys.time() --> -->
-<!-- <!-- # pin data --> -->
-<!-- <!-- pin(plot_scores, board='github', name='crypto_tutorial_results_latest') --> -->
-<!-- <!-- ``` --> -->
-
-<!-- <!-- TODO - INCLUDE SHINYAPP HERE: --> -->
-<!-- ```{r metrics_by_crypto_shinyapp, include=F} -->
-<!-- knitr::include_app('https://predictcrypto.shinyapps.io/tutorial_latest_model_summary/', height = '600px') -->
-<!-- ``` -->
-
-<!-- The app shown above also has a button to **Show Code**. If you were to copy and paste that code into an RStudio session on your computer into a file with the .Rmd file extension and you then *Knit* the file, the same exact app should show up on your computer, no logins or setup outside of the packages required for the code to run; RStudio should automatically prompt you to install packages that are not currently installed on your computer. -->
-<!-- <!-- [TODO - MAKE THE TEXT ABOVE AN INFO NOTE (NOT WARNING, JUST AN i FOR INFO)] --> -->
+The app shown above also has a button to **Show Code**. If you were to copy and paste that code into an RStudio session on your computer into a file with the .Rmd file extension and you then *Knit* the file, the same exact app should show up on your computer, no logins or setup outside of the packages required for the code to run; RStudio should automatically prompt you to install packages that are not currently installed on your computer.
+<!-- [TODO - MAKE THE TEXT ABOVE AN INFO NOTE (NOT WARNING, JUST AN i FOR INFO)] -->
 
 
 
 
-<!-- <!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS. NEED TO RUN EXPERIMENT TO SEE IF CAN RUN WITH GITHUB ACTIONS OR IF NEED TO INSTALL PYTHON FIRST: https://www.mlflow.org/docs/latest/R-api.html#examples] --> -->
+<!-- [TODO - HERE ALSO REMEMBER TO LOG MLFLOW METRICS. NEED TO RUN EXPERIMENT TO SEE IF CAN RUN WITH GITHUB ACTIONS OR IF NEED TO INSTALL PYTHON FIRST: https://www.mlflow.org/docs/latest/R-api.html#examples] -->
 
-<!-- ```{r} -->
+```{r}
 
-<!-- ``` -->
+```
 
 
 

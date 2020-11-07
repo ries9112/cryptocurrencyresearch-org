@@ -184,10 +184,3 @@ This tutorial is made available for learning and educational purposes only and t
 
 <!-- REMEMBER OTHER SPECIAL BLOCK TYPE IS CALLED "rmdcaution" USE THESE TO DRAW ATTENTION TO ANYTHING IMPORTANT! -->
 
-
-TEST:
-```{r}
-library(pins)
-board_register("github", repo = "predictcrypto/pins", token = pins_key)
-```
-

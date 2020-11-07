@@ -21,9 +21,9 @@ knitr::write_bib(c(.packages()), "packages.bib")
 
 ### Time Series Section
 
-- https://stackoverflow.com/questions/42820696/using-prophet-package-to-predict-by-group-in-dataframe-in-r
+- https://stackoverflow.com/questions/42820696/using-prophet-package-to-predict-by-group-in-dataframe-in-r 
 
 - ... add rest here
 
 
-## Packages used and cited
+## R Packages Used
