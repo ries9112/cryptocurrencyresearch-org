@@ -1,7 +1,7 @@
 name: Run Crypto Tutorial
 on:
   schedule:
-    - cron: '35 05,17,04 * * *'
+    - cron: '46 05,17,04 * * *'
 
 jobs:
   build:
@@ -26,8 +26,6 @@ jobs:
           Rscript -e 'renv::consent(provided = TRUE)'
           Rscript -e "renv::restore()"
       - name: Render Book
-        env:
-          PINS_KEY = '${{secrets.PAT_PINS}}'
         run: |-
           Rscript -e "pins_key <- '${{secrets.PAT_PINS}}'#convert to variables like left one 'shrimpy_public' = '${{secrets.SHRIMPY_PUBLIC}}', 'shrimpy_private' = '${{secrets.SHRIMPY_PRIVATE}}', 'shrimpy_user' = '${{secrets.SHRIMPY_USER}}', 'shrimpy_account_id' = '${{secrets.SHRIMPY_ACCOUNT_ID}}', 'coinmarketcapr_key' = '${{secrets.COINMARKETCAPR}}')"
           Rscript -e "bookdown::render_book('index.Rmd', clean = FALSE)"
