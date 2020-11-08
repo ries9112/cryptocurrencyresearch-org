@@ -632,7 +632,7 @@ The app shown above also has a button to **Show Code**. If you were to show the 
 
 We can pull the same data into this R session using the `pin_get()` function:
 ```{r}
-metrics_historical <- pin_get(name = "crypto_tutorial_results_latest")
+metrics_historical <- pin_get(name = "full_metrics")
 ```
 
 The data is limited to metrics for runs from the past 30 days and includes new data every 12 hours. Using the tools we used in the [data prep section](#data-prep), we can answer a couple more questions.
@@ -674,7 +674,7 @@ ggplot(best_models, aes(model, rmse, fill = eval_set)) +
 ```{r}
 ggplot(best_models, aes(model, rsq, fill = eval_set)) + 
   geom_bar(stat = "identity", position = 'dodge') +
-  ggtitle('RMSE by Model', 'Comparing Test and Holdout')
+  ggtitle('R^2 by Model', 'Comparing Test and Holdout')
 ```
 
 
@@ -687,7 +687,7 @@ ggplot(best_models, aes(model, rsq, fill = eval_set)) +
 **Overall**, which **cryptocurrency** has the best metrics for all runs from the last 30 days?
 
 #### Summarize the data
-```{r summarize_best_cryptos}
+```{r summarize_best_cryptos, class.output="scroll-lim"}
 # First create grouped data
 predictable_cryptos <- group_by(metrics_historical, symbol, eval_set)
 # Now summarize the data

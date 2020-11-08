@@ -304,11 +304,11 @@ Move on to the next slide (right arrow key `r emo::ji('right arrow')`) to get st
 
 ## Pins Package
 
-<span style="font-size: 95%;">
-The first package we will use is the [**pins**]{style="color: #ae7b11;"} package to retrieve the data that we will be working with.
+<span style="font-size: 90%;">
+The first package we will use is the [**pins**]{style="color: #ae7b11;"} package [[@R-pins]](#pins-citation) to retrieve the data that we will be working with.
 </span>
 
-<span style="font-size: 95%;">
+<span style="font-size: 90%;">
 First, we will need to connect to a public [GitHub repository]{style="color: purple;"} (anyone can post their code to the GitHub website and make a "repository" with code for their project) and ***register*** the ***board*** that the data is ***pinned*** to by using the [**board\_register()**]{style="color: green;"} function:
 </span>
 
@@ -316,7 +316,7 @@ First, we will need to connect to a public [GitHub repository]{style="color: pur
 board_register(name = "pins_board", url = "https://raw.githubusercontent.com/predictcrypto/pins/master/", board = "datatxt")
 ```
 
-<span style="font-size: 95%;">
+<span style="font-size: 90%;">
 By running the [board\_register()]{style="color: green;"} command on the URL where the data is located, we will be able to ***"ask"*** for any dataset available on the board (in the next slide).
 </span>
 
@@ -665,9 +665,9 @@ Also remember that if you do not know what a function does, you can put it insid
 
 # Visualizing Data
 
-<small> The [**ggplot2**]{style="color: #ae7b11;"} package is the standard when it comes to making plots in R. The ***gg*** in [**ggplot2**]{style="color: #ae7b11;"} stands for the ***Grammar of Graphics***, which is essentially the idea that many different types of charts share the same underlying building blocks, and that they can be put together in different ways to make charts that look very different from each other. [In Hadley Wickham's (the creator of ggplot2) own words,](https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/) "a pie chart is just a bar chart drawn in polar coordinates", "They look very different, but in terms of the grammar they have a lot of underlying similarities."</small>
+<small> The [**ggplot2**]{style="color: #ae7b11;"} package [[@R-ggplot2]](#ggplot-citation) is the standard when it comes to making plots in R. The ***gg*** in [**ggplot2**]{style="color: #ae7b11;"} stands for the ***Grammar of Graphics***, which is essentially the idea that many different types of charts share the same underlying building blocks, and that they can be put together in different ways to make charts that look very different from each other. [In Hadley Wickham's (the creator of ggplot2) own words,](https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/) "a pie chart is just a bar chart drawn in polar coordinates", "They look very different, but in terms of the grammar they have a lot of underlying similarities."</small>
 
-[![Illustration by Allison Horst](C:/Users/ries9/Documents/Research-Paper-Example/images/ggplot2_masterpiece.png){width="47%"}](https://ggplot2.tidyverse.org/)
+[![Illustration by Allison Horst](C:/Users/ries9/Documents/Research-Paper-Example/images/ggplot2_masterpiece.png){width="44%"}](https://ggplot2.tidyverse.org/)
 
 <small>*Illustration by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)*</small>
 
@@ -773,25 +773,29 @@ animate(animated_chart, fps=2, height = 350, width =500)
 <!-- ``` -->
 
 
-
 # Predictive Models
 
-Now we can start thinking about how we will make predictions into the future. We will take information/data observed in the past, and use it to make forecasts about the future. Each row in the data already comes with the <span style="color: purple;">**target variable**</span>, meaning what we want to predict. The column <span style="color: blue;">**Target24HourClose**</span> is the only information in the dataset that refers to a point in the future. It is really important to make sure that all the data we are using to make predictions would actually be available at the time we want to perform a new prediction. If that were not the case, we would have <span style="color: purple;">***target leakage***</span>, which may give us the impression the models are much better than they actually are. [Click here to read more about this idea](https://www.datarobot.com/wiki/target-leakage/#:~:text=It%20happens%20when%20you%20train,you%20collect%20in%20the%20future.&text=To%20avoid%20target%20leakage%2C%20omit,time%20of%20the%20target%20outcome.).
+<span style="font-size: 65%;">
+Now we can start thinking about how we will make predictions into the future. We will take information/data observed in the past, and use it to make forecasts about the future. Each row in the data already comes with the <span style="color: purple;">**target variable**</span>, meaning what we want to predict. The column <span style="color: blue;">**Target24HourClose**</span> is the only information in the dataset that refers to a point in the future. It is **really important** to make sure that all the data we are using to make predictions would actually be available at the time we want to perform a new prediction. If the model was trained on information only available once it was too late to act on it, we might run into <span style="color: purple;">***target leakage***</span>, which may give us the impression the models are much better than they actually are. [Click here to read more about this idea](https://www.datarobot.com/wiki/target-leakage/#:~:text=It%20happens%20when%20you%20train,you%20collect%20in%20the%20future.&text=To%20avoid%20target%20leakage%2C%20omit,time%20of%20the%20target%20outcome.), and how this is similar to having the answer sheet to an exam and how it would not help on the next different exam; we want the model to have a proper understanding of the problem rather than one answer sheet. **Beware results that are too good to be true** and always double check your work!
+</span>
+
 
 ## Overview
 
 Therefore, we will:
 
-<small>
-1. Take data from the past, where all columns are associated with a specific point in time, with the exception of the <span style="color: blue;">**Target24HourClose**</span> column, which represents the price of the cryptocurrency 24 hours in the future relative to the rest of the columns.
+<span style="font-size: 65%;">
+1. Take data from the past, where all columns are associated with a specific point in time, with the exception of the <span style="color: blue;">**Target24HourClose**</span> column, which represents the price of the cryptocurrency 24 hours in the future relative to the rest of the columns. </span>
 
-2. Choose a model, which will determine the approach the computer will take to draw statistical relationships between the columns.
+<span style="font-size: 65%;">
+2. Choose a model, which will determine the approach the computer will take to draw statistical relationships between the columns. </span>
 
-3. Consider ways of reducing the risk of real-world results not matching the accuracy of the original model's results.
+<span style="font-size: 65%;">
+3. Consider ways of reducing the risk of real-world results not matching the accuracy of the original model's results. </span>
 
-4. Make forecasts about the future.
+<span style="font-size: 65%;">
+4. Make forecasts about the future. </span>
 
-</small>
 
 We will start with a simple <span style="color: purple;">***linear regression***</span> model in the slide below ⬇️
 
@@ -805,14 +809,14 @@ lm(data = cryptodata_train, formula = "Target24HourClose ~ .")
 
 ## "lm" model - Continued
 
-<span style="font-size: 75%;">
+<span style="font-size: 70%;">
 In the previous slide, we were able to make a linear regression model by using the function <span style="color: green;">**lm()**</span> and specifying the data to be used as <span style="color: blue;">**cryptodata_train**</span>, and the formula as predicting the <span style="color: blue;">**Target24HourClose** </span> and using (**~**) all other variables (represented by the **period "."**). Here is the code again for reference:</span>
 
 ```{r make_lm_ref, eval=F}
 lm(data = cryptodata_train, formula = "Target24HourClose ~ .")
 ```
 
-<span style="font-size: 60%;">
+<span style="font-size: 55%;">
 If we wanted to implement a different model, there may be different structural requirements to the data used by the model, and we may have more parameters to adjust, so in some cases it may not be very straightforward to implement a different model, even though we intend to use the same dataset and the same prediction formula predicting the <span style="color: blue;">**Target24HourClose** </span> column using all other columns. Instead of figuring out the implementation of different models, we can use a framework that has standardized the usage of many models using the <span style="color: #ae7b11;">**caret**</span> package.</span>
 
 <!-- The elements we specified for this model wouldn't be different for a more complex predictive model, but the implementation would usu -->
@@ -834,25 +838,23 @@ If we wanted to implement a different model, there may be different structural r
 When making predictive models, some functions we will use next will involve some degree of randomness. Computers are not ***truly*** random, we will not dive into this topic here, but essentially we can control the randomness by specifying a number on which the randomness depends on, and get the same "random" results by doing so. Without this step, the results on your computer might be slightly different than the ones shown here. We can make sure the results are the same (and reproducible) by running the function from base R <span style="color: green;">**set.seed()**</span>:
 </span>
 
-```{r}
+```{r set_seed}
 set.seed(123) # arbitrarily set to 123, can be any number
 ```
 
-This ensures the "randomness" begins from the same starting point on your computer as it does in the example code being shown. [Click here to find out more about this idea](https://stats.stackexchange.com/questions/86285/random-number-set-seedn-in-r).
+<span style="font-size: 60%;">
+This ensures the "randomness" begins from the same starting point on your computer as it does in the example code being shown. [Click here to find out more about this concept](https://stats.stackexchange.com/questions/86285/random-number-set-seedn-in-r). You will see this before training models because there is a degreee of "randomness" involved, and in order to get the same exact results you will need to set the same seed.
+</span>
 
-## set.seed() - continued
+<!-- ## set.seed() - continued -->
 
-<!-- NOTE: IS THIS PROBLEMATIC? Is seed supposed to naturally keep moving? Does it need to be set before each step instead? (I think so?)-->
+<!-- Normally we would set the seed before running a specific piece of code, and we would need to run <span style="color: green;">**set.seed(123)**</span> each time before running the code with the random aspect to it. To make the code more minimal and clear however, let's set the seed for the entire session. All you need to understand about the code below, is that when you run it you will set the seed to be the number 123 for the entire R session instead of once: -->
 
-Normally we would set the seed before running a specific piece of code, and we would need to run <span style="color: green;">**set.seed(123)**</span> each time before running the code with the random aspect to it. To make the code more minimal and clear however, let's set the seed for the entire session. All you need to understand about the code below, is that when you run it you will set the seed to be the number 123 for the entire R session instead of once:
+<!-- ```{r set_seed_whole_session, results=F} -->
+<!-- addTaskCallback(function(...) {set.seed(123);TRUE}) -->
+<!-- ``` -->
 
-```{r set_seed_whole_session, results=F}
-addTaskCallback(function(...) {set.seed(123);TRUE})
-```
-
-***Code sourced from: https://stackoverflow.com/questions/20624698/fixing-set-seed-for-an-entire-session***
-
-<!-- NOTE: IS THIS PROBLEMATIC? Is seed supposed to naturally keep moving? Does it need to be set before each step instead? (I think so?)-->
+<!-- ***Code sourced from: https://stackoverflow.com/questions/20624698/fixing-set-seed-for-an-entire-session*** -->
 
 
 ## Caret Package
@@ -876,6 +878,7 @@ registerDoParallel(cluster)
 
 ## Caret - Simple Linear Regression
 ```{r simple_lm}
+set.seed(123)
 lm_fit <- train(Target24HourClose ~ .,
                     data = cryptodata_train,
                     method = "lm")
@@ -919,6 +922,7 @@ Move on to the next slide below where we keep all the same code, but change the 
 We can use the same code we used when making the linear regression model, but specify the <span style="color: blue;">**method**</span> to be <span style="color: blue;">**xgbLinear**</span> instead of the **lm** value we used before:
 
 ```{r xgboost, message=FALSE, warning=FALSE, class.output="scroll-150"}
+set.seed(123)
 xgb_fit <- train(Target24HourClose ~ . ,
                     data = cryptodata_train,
                     method = "xgbLinear")
@@ -933,6 +937,7 @@ You may have noticed that both outputs said ***Resampling: Bootstrapped (25 reps
 Some models, like a **S**upport **V**ector **M**achine model, need the data to be <span style="color: purple;">***centered***</span> and <span style="color: purple;">***scaled***</span> for each column, [click here to learn why that is the case](https://stats.stackexchange.com/questions/65094/why-scaling-is-important-for-the-linear-svm-classification). We could make this change adding the parameter <span style="color: blue;">**preProc = c("center", "scale")**</span> to the <span style="color: green;">**train()**</span> call:
 
 ```{r svm, class.output="scroll-150"}
+set.seed(123)
 train(Target24HourClose ~ . ,
           data = cryptodata_train,
           method = "svmPoly",
@@ -945,7 +950,7 @@ The output that said ***Resampling: Bootstrapped (25 reps)*** was referring to a
 
 ```{r cross_validate_timeseries}
 train_control <- trainControl(method = "timeslice",
-                              initialWindow = 150*24,
+                              initialWindow = 100*24,
                               horizon = 30*24,
                               fixedWindow = TRUE,
                               number = 5)
@@ -960,8 +965,10 @@ train_control <- trainControl(method = "timeslice",
 
 In the previous slide we set the timeseries cross-validation to take an <span style="color: blue;">**initialWindow**</span> of 150 days (given by 24 hourly time points multiplied by 150 days), and a <span style="color: blue;">**fixedWindow**</span> of 30 days. The parameter <span style="color: blue;">**number = 5**</span> specifies the process should take place on 5 separate occasions. By the end of this process, we end up with 5 separate ***training*** and ***testing*** datasets. If a model works well across 5 separate periods of time, we can have greater confidence things will go well when we apply the model to the real world as well. Next, let's run the XGBoosst model with the specified cross-validation.
 
+
 ## XGBoost with Time-Aware Cross Validation
 ```{r xgboost_cv, message=F, warning=F, class.output="scroll-150"}
+set.seed(123)
 xgb_fit <- train(Target24HourClose ~ . ,
                     data = cryptodata_train,
                     method = "xgbLinear",
@@ -1118,6 +1125,7 @@ Next, we will use the ***fable*** package to create timeseries models. Why is it
 
 All the models made from this point are made using the <span style="color: #ae7b11;">**fable**</span> package. The simplest type of timeseries model we can make, is a <span style="color: purple;">***Naive***</span> model, which simply takes values from the past to forecast the future. Here we make one using the closing price from the previous hour to predict the future closing price:
 ```{r naive_model}
+set.seed(123)
 naive_model <- model(ts_train, naive = NAIVE(Target24HourClose))
 # Show model
 naive_model
@@ -1161,6 +1169,7 @@ Let's create a new object like we did for the naive model earlier, but this time
 <!-- HERE SHOULD ADD SNAIVE(Close) AS WELL, WOULD BE MORE INTERESTING IN FINAL RESULTS! -->
 
 ```{r multiple_ts_models}
+set.seed(123)
 ts_model <- model(ts_train, naive = NAIVE(Close),
                             snaive = SNAIVE(Close),
                             arima = ARIMA(Close))
@@ -1347,55 +1356,85 @@ The **fable** package is specifically designed to work the exact same way no mat
 - Full version of the tutorial: https://cryptocurrencyresearch.org/
 
 
-# References - R Packages
-
-## Pacman
-
-```{r, include=F}
-citation("pacman")
-```
-
-**Rinker, T. W. & Kurkiewicz, D. (2017). pacman: Package Management for R. version 0.5.0. Buffalo, New York. http://github.com/trinker/pacman**
-
-## Pins
-
-```{r, include=F}
-citation("pins")
-```
-
-**Javier Luraschi (2020). pins: Pin, Discover and Share Resources. R package version 0.4.0. https://CRAN.R-project.org/package=pins**
-
-## Tidyverse - Dplyr
-
-```{r, include=F}
-citation('dplyr')
-```
-
-**Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr: A Grammar of Data Manipulation. R package version 1.0.0. https://CRAN.R-project.org/package=dplyr**
-
-## Tidyverse - ggplot2
-
-```{r,include=F}
-citation('ggplot2')
-```
-
-**H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2016.**
-
-
-## tsibble 
-
-**Wang, E, D Cook, and RJ Hyndman (2020). A new tidy data structure to support exploration and modeling of temporal data. Journal of Computational and Graphical Statistics. doi:10.1080/10618600.2019.1695624.**
-
-## Keep adding rest here!
 
 
 # References
 
-... Still need to finish adding websites/articles referenced here
+References on the slide below ⬇️ in the order in which they are referenced throughout this presentation.
+
+## R Package - pacman {#pacman-citation}
+
+Rinker, T. W. & Kurkiewicz, D. (2017). pacman: Package Management for R. version 0.5.0. Buffalo, New York. http://github.com/trinker/pacman
+
+</br>
+
+http://trinker.github.io/pacman/
+
+
+## R Package - pins {#pins-citation}
+
+<!-- ```{r pins_citation} -->
+<!-- citation("pins") -->
+<!-- ``` -->
+
+</br>
+
+Javier Luraschi (2020). pins: Pin, Discover and Share Resources. R package version 0.4.0. https://CRAN.R-project.org/package=pins
+  
+</br>
+
+https://pins.rstudio.com/
+
 
 ## Illustrations by Allison Horst
 
-[Illustrations from](https://github.com/allisonhorst/stats-illustrations)
+</br>
+
+https://github.com/allisonhorst/stats-illustrations
+
+
+## R Package - dplyr {#dplyr-citation}
+
+</br>
+
+Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr: A Grammar of Data Manipulation. R package version 1.0.2. https://CRAN.R-project.org/package=dplyr
+  
+</br>
+  
+https://dplyr.tidyverse.org
+
+
+## R Package - ggplot2 {#ggplot-citation}
+
+</br>
+
+H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2016.
+  
+</br>
+  
+https://ggplot2.tidyverse.org
+
+## R Package - caret {caret-citation}
+
+</br>
+
+Max Kuhn (2020). caret: Classification and Regression Training. R package version 6.0-86. https://CRAN.R-project.org/package=caret
+
+</br>
+
+http://topepo.github.io/caret/
+
+
+## R Package - tsibble {#tsibble-citation}
+
+</br>
+
+Wang, E, D Cook, and RJ Hyndman (2020). A new tidy data structure to support exploration and modeling of temporal data. Journal of Computational and Graphical Statistics. https://doi.org/10.1080/10618600.2019.1695624.
+
+</br>
+
+https://tsibble.tidyverts.org/
+
 
 ## Timeseries
 
@@ -1411,17 +1450,14 @@ citation('ggplot2')
 ## ADD HERE...
 
 
-
-
-Other resources used:
-
-- https://online.stat.psu.edu/stat200/lesson/4/4.2
-
+  
 
 
 <!-- ```{r stop_cluster} -->
 <!-- stopCluster(cluster) -->
 <!-- ``` -->
+
+
 
 
 

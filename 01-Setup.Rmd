@@ -70,7 +70,7 @@ p_load('pins', 'skimr', 'DT', 'httr', 'jsonlite', # Data Exploration
        'ggTimeSeries', 'gifski', 'av', 'magick', 'ggthemes', 'plotly', # Visualization
        'ggpubr', 'ggforce', 'gganimate', 'transformr', # Visualization continued
        'caret', 'doParallel', 'xgboost', 'gbm', 'deepnet', # Predictive Modeling
-       'hydroGOF', 'formattable') # Evaluate Model Performance
+       'hydroGOF', 'formattable', 'knitr') # Evaluate Model Performance
 ```
 ***It is normal for this step to take a long time, as it will install every package you will need to follow along with the rest of the tutorial.*** The next time you run this command it would be much faster because it would skip installing the already installed packages.
 
