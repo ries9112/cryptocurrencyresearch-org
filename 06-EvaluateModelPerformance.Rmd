@@ -476,7 +476,7 @@ rmse_holdout$eval_set <- 'holdout'
 rmse_scores <- union(rmse_test, rmse_holdout)
 ```
 
-## Eval R\^2
+## Eval $R^2$
 
 ### Test
 
@@ -612,6 +612,8 @@ plot_scores$last_refreshed <- Sys.time()
 pin(plot_scores, board='github', name='crypto_tutorial_results_latest')
 ```
 
+
+### Interactive Dashboard
 Use the interactive app below to explore the results over time by the individual cryptocurrency. Use the filters on the left sidebar to visualize the results you are interested in:
 
 ```{r metrics_by_crypto_shinyapp, out.height = "600px", out.width='100%', echo=F}
@@ -669,7 +671,7 @@ ggplot(best_models, aes(model, rmse, fill = eval_set)) +
 <!--            ggtitle('RMSE by Model', 'Comparing Test and Holdout') ) -->
 <!-- ``` -->
 
-#### Plot R^2 by Model
+#### Plot $R^2$ by Model
 
 ```{r}
 ggplot(best_models, aes(model, rsq, fill = eval_set)) + 
@@ -714,11 +716,13 @@ formattable(predictable_cryptos, list(rmse = color_tile("#71CA97", "red"),
 #### Summarize the data
 ```{r summarize_accuracy_over_time}
 # First create grouped data
-accuracy_over_time <- group_by(metrics_historical, last_refreshed)
+accuracy_over_time <- group_by(metrics_historical, date_utc)
 # Now summarize the data
 accuracy_over_time <- summarize(accuracy_over_time, 
                                 rmse = mean(rmse, na.rm=T),
                                 rsq  = mean(rsq, na.rm=T))
+# Ungroup data
+accuracy_over_time <- ungroup(accuracy_over_time)
 # Show results
 accuracy_over_time
 ```
@@ -726,29 +730,29 @@ accuracy_over_time
 #### Plot Metrics
 
 ```{r plot_accuracy_over_time}
-ggplot(accuracy_over_time, aes(x = last_refreshed, y = rmse, rsq = rsq)) +
+ggplot(accuracy_over_time, aes(x = date_utc, y = rmse, rsq = rsq, group = 1)) +
   # Add both a red point and a red line for RMSE metric
   geom_point(color = 'red', size = 2) +
   geom_line(color = 'red', size = 1) +
   # Also add R^2 to the plot in dark green
-  geom_point(aes(x = last_refreshed, y = rsq), color = 'dark green', size = 2) +
-  geom_line(aes(x = last_refreshed, y = rsq), color = 'dark green', size = 1)
+  geom_point(aes(x = date_utc, y = rsq), color = 'dark green', size = 2) +
+  geom_line(aes(x = date_utc, y = rsq), color = 'dark green', size = 1)
 ```
 
 <!-- Plotly version: -->
 <!-- ```{r plotly_accuracy_over_time} -->
 <!-- ggplotly( -->
-<!--   ggplot(accuracy_over_time, aes(x = last_refreshed, y = rmse, rsq = rsq)) + -->
+<!--   ggplot(accuracy_over_time, aes(x = date_utc, y = rmse, rsq = rsq)) + -->
 <!--     # Add both a red point and a red line for RMSE metric -->
 <!--     geom_point(color = 'red', size = 2) + -->
 <!--     geom_line(color = 'red', size = 1) + -->
 <!--     # Also add R^2 to the plot in dark green -->
-<!--     geom_point(aes(x = last_refreshed, y = rsq), color = 'dark green', size = 2) + -->
-<!--     geom_line(aes(x = last_refreshed, y = rsq), color = 'dark green', size = 1) -->
+<!--     geom_point(aes(x = date_utc, y = rsq), color = 'dark green', size = 2) + -->
+<!--     geom_line(aes(x = date_utc, y = rsq), color = 'dark green', size = 1) -->
 <!--   ) -->
 <!-- ``` -->
 
-
+[Refer back to the interactive dashboard](#interactive-dashboard) to take a more specific subset of results instead of the aggregate analysis shown above.
 
 
 

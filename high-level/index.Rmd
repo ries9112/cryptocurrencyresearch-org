@@ -1,5 +1,5 @@
 ---
-title: "Cryptocurrency Research - Reproducible Example"
+title: "<a href='https://cryptocurrencyresearch.org/'>cryptocurrencyresearch</a> </br> </br> High-Level Tutorial"
 output: 
   revealjs::revealjs_presentation:
     theme: sky
@@ -22,10 +22,6 @@ knitr::opts_chunk$set(cache = TRUE)
 # Introduction
 
 Welcome to this tutorial on supervised machine learning in the R programming language. This is the high-level version of a <a href="https://cryptocurrencyresearch.org/" target="_blank">more detailed tutorial</a>.
-
-<!-- In this tutorial we will go through the process of predicting prices for a cryptocurrency using supervised machine learning. These results never change, and this is the high-level version of a <a href="https://cryptocurrencyresearch.org/" target="_blank">more detailed tutorial</a>. -->
-
-<!-- Welcome to the more high-level version of the <a href="https://cryptocurrencyresearch.org/" target="_blank">predictive analytics tutorial on using supervised machine learning to make predictions on the cryptocurrency markets</a>. -->
 
 **You can navigate between topics with the right and left arrow keys, and press on the down key to learn more about each topic.**
 
@@ -89,6 +85,20 @@ Machine Learning is the process of [***training***]{style="color: purple;"} a co
 
 The *Supervised* part of supervised machine learning refers to the fact that the data was observed in the past, and provides us information regarding both the inputs (independent variables) and the outcome (dependent variable, also known as the [target variable]{style="color: purple;"}). [Click here for a more in-depth explanation of the different branches of machine learning](https://machinelearningmastery.com/types-of-learning-in-machine-learning/).
 
+## What are Cryptocurrencies?
+
+A cryptocurrency is usually defined as a digital currency based on [blockchain technology]{style="color: purple;"} which has properties that make it difficult to be exploited. The most famous and original cryptocurrency is [Bitcoin]{style="color: purple;"}, you can [view the original whitepaper for it here](https://bitcoin.org/bitcoin.pdf).
+
+Cryptocurrencies can be traded on [cryptocurrency exchanges](https://coinmarketcap.com/rankings/exchanges/), and unlike the stock market they are available for trading 24/7. In this tutorial we will use data for the second most well known cryptocurrency, which is called **Ethereum** and goes by the trading ticker symbol of **ETH**. 
+
+
+## Recommended Usage
+
+- We recommend viewing the presentation in full-screen by pressing the **`f`** key on your keyboard.
+
+- Each slide has a unique link. If you click on a hyperlink and lose track of which slide you were on, go back to the previous page using your web browser: 
+![](C:/Users/ries9/Documents/GitHub/cryptocurrencyresearch-org/images/back_button.PNG)\
+
 Go to the next slide (**right** arrow key `r emo::ji('right arrow')`) to get started!
 
 # R Interface
@@ -103,7 +113,7 @@ The R programming language is a free computer application that [can be downloade
 
 [Whenever you open the **RStudio** application for the first time, you will be brought to a ***new R session*** that should look like this:]{style="font-size: 95%;"}
 
-![](C:/Users/ries9/Documents/Research-Paper-Example/images/rstudio_interface.PNG){width="800"}
+![](C:/Users/ries9/Documents/GitHub/cryptocurrencyresearch-org/images/rstudio_interface.PNG){width="800"}
 
 ## R Sessions - Continued {#r-sessions-continued}
 
@@ -119,7 +129,7 @@ Keep going below ⬇️ to learn more.
 
 ## R Sessions - Continued
 
-![](C:/Users/ries9/Documents/Research-Paper-Example/images/rstudio_interface_annotated.PNG)
+![](C:/Users/ries9/Documents/GitHub/cryptocurrencyresearch-org/images/rstudio_interface_annotated.PNG)
 
 [**1.** When we run code in this presentation as shown in the [previous slide ⬆️](#r-sessions-continued), it is equivalent to running the code in your **console** in RStudio, which is where the ***\>*** symbol is inside the red highlighted area.]{style="font-size: 55%;"}
 
@@ -129,7 +139,7 @@ Keep going below ⬇️ to learn more.
 
 [When we start a new R session, for example when we open RStudio, the environment should be empty (as displayed in the top right pane of the previous screenshot). We can create new objects by naming them whatever we would like, and using an arrow to assign the object some kind of value:]{style="font-size: 65%;"}
 
-![](C:/Users/ries9/Documents/Research-Paper-Example/images/rstudio_assign_variable_2.PNG){width="705"}
+![](C:/Users/ries9/Documents/GitHub/cryptocurrencyresearch-org/images/rstudio_assign_variable_2.PNG){width="705"}
 
 ## R Objects - Continued
 
@@ -165,7 +175,7 @@ Different functions have different [**parameters**]{style="color: purple;"}, whi
 
 [But what if you don't know how to use a function? R has some excellent resources available, and in most cases you can figure out the answers to most usage questions directly inside of R by running the **help()** function on any other function. When packages are installed, they will come with documentation that can be opened this way. The last section tends to be the most useful and includes useful examples of using the function.]{style="font-size: 65%;"}
 
-![](C:/Users/ries9/Documents/Research-Paper-Example/images/rstudio_help.PNG){width="529"}
+![](C:/Users/ries9/Documents/GitHub/cryptocurrencyresearch-org/images/rstudio_help.PNG){width="529"}
 
 ## Move on
 
@@ -266,7 +276,7 @@ A package only needs to be installed once, but needs to be imported into each ne
 
 <!-- the `pacman` package, which will allow us to install the remaining packages in a "smarter" way, where if you already have a package in your library, it will not be installed again. -->
 
-We can install the package called [**pacman**]{style="color: #ae7b11;"} using `install.packages()`:
+We can install the package called [**pacman**]{style="color: #ae7b11;"} [[@R-pacman]](#pacman-citation) using [install.packages()]{style="color: green;"}:
 
 ```{r pacman_install, eval=F}
 install.packages("pacman")
@@ -317,7 +327,7 @@ board_register(name = "pins_board", url = "https://raw.githubusercontent.com/pre
 ```
 
 <span style="font-size: 90%;">
-By running the [board\_register()]{style="color: green;"} command on the URL where the data is located, we will be able to ***"ask"*** for any dataset available on the board (in the next slide).
+By running the [board\_register()]{style="color: green;"} command on the URL where the data is located, we will be able to ***"ask"*** for any dataset available on the board (in the next slide ⬇️).
 </span>
 
 ## Pull Data
@@ -366,15 +376,15 @@ datatable(select(head(arrange(cryptodata, Date), 100), DateTime, Date:Target24Ho
 
 <small>*Only 100 rows of data are made available in the table above as an example*</small>
 
-## Data Alternative - BTC
+<!-- ## Data Alternative - BTC -->
 
-We also made a similar dataset available for the Bitcoin (BTC) cryptocurrency. If you wanted to run the same analysis on Bitcoin instead of Ethereum, you could run this command instead:
+<!-- We also made a similar dataset available for the Bitcoin (BTC) cryptocurrency. If you wanted to run the same analysis on Bitcoin instead of Ethereum, you could run this command instead: -->
 
-```{r pull_cryptodata_data_reprex_BTC_option, eval=F}
-cryptodata <- pin_get(name = "cryptodatadownload_BTC_Binance", board = "pins_board")
-```
+<!-- ```{r pull_cryptodata_data_reprex_BTC_option, eval=F} -->
+<!-- cryptodata <- pin_get(name = "cryptodatadownload_BTC_Binance", board = "pins_board") -->
+<!-- ``` -->
 
-Keep in mind that this tutorial will **only be reproducible if you enter** ***ETH\_Binance*** **for the `name` parameter**. Otherwise your code would run, but from the perspective of the Bitcoin cryptocurrency rather than the analysis we are performing on the Ethereum cryptocurrency in this tutorial.
+<!-- Keep in mind that this tutorial will **only be reproducible if you enter** ***ETH\_Binance*** **for the `name` parameter**. Otherwise your code would run, but from the perspective of the Bitcoin cryptocurrency rather than the analysis we are performing on the Ethereum cryptocurrency in this tutorial. -->
 
 <!-- ## More Data Alternatives -->
 
@@ -477,7 +487,7 @@ What does "cleaning data" look like more specifically? Data tends to have issues
 
 -   **Are there any inconsistencies in the data?** Do the outliers make sense or is there a data capture issue of some kind? Are there typos if the data is manually entered?
 
-There are tools that can help answer all of these questions, in the [full version](https://cryptocurrencyresearch.org/) of this tutorial, we cover some functionality found in the [[**skimr**]{style="color: #ae7b11;"} package](https://github.com/ropensci/skimr). After we have made sure we are working with a clean dataset, we can do some [***data engineering***]{style="color: purple;"} to try and improve the accuracy of the models we will be making by adding new information that might be relevant to the problem at hand, which is what we will be doing in the next step when we add the new [**Volatility**]{style="color: blue;"} column to the data.
+There are tools that can help answer all of these questions, in the [full version](https://cryptocurrencyresearch.org/) of this tutorial, we cover some functionality found in the [[**skimr**]{style="color: #ae7b11;"} package](https://github.com/ropensci/skimr). After we have made sure we are working with a clean dataset, we can do some [***data engineering***]{style="color: purple;"} to try and improve the accuracy of the models we will be making by adding new information that might be relevant to the problem at hand, which is what we will be doing in the next step when we add the new [**spread**]{style="color: blue;"} column to the data.
 
 </small>
 
@@ -489,7 +499,9 @@ In the [full version of this tutorial](https://cryptocurrencyresearch.org/) we d
 
 ## Dplyr Package
 
-There are resources and tools out there that are very effective for cleaning and manipulating data. We recommend starting with the [**dplyr**]{style="color: #ae7b11;"} package if working in R, which is what we used to clean the data. Because this is such a useful tool in R, we included a brief example using the [**mutate()**]{style="color: green;"} function to add a new column to the data that calculates the **volatility** for each row.
+<span style="font-size: 80%;">
+There are resources and tools out there that are very effective for cleaning and manipulating data. We recommend starting with the [**dplyr**]{style="color: #ae7b11;"} package [[@R-dplyr]](#dplyr-citation) if working in R, which is what we used to clean the data. Because this is such a useful tool in R, we included a brief example using the [**mutate()**]{style="color: green;"} function to add a new column to the data that calculates the **spread** for each row, which we will define as the percent difference between the [Low]{style="color: blue;"} and the [High]{style="color: blue;"} prices.
+</span>
 
 <!-- We used the `mutate()` function to calculate the **`CloseLag...`** and **`Target24HourClose`** fields, but have omitted those steps from this tutorial to keep things more focused on the predictive analytics process instead of providing data preparation steps that are not relevant to many problems. Please refer to the **[data dictionary](#data-dictionary)** to understand what these columns represent and how they were calculated.-->
 
@@ -497,7 +509,7 @@ There are resources and tools out there that are very effective for cleaning and
 
 ## Mutate Function - dplyr
 
-<small>The [**dplyr**]{style="color: #ae7b11;"} package from the [tidyverse](https://www.tidyverse.org/) is very useful for cleaning and manipulating data. Using the [**mutate()**]{style="color: green;"} function from [**dplyr**]{style="color: #ae7b11;"}, we can add a new column to the data according to a formula that gets applied to each row. For example, we could create add a brand new column (C) to our data by taking the sum of two columns (A+B) like illustrated below:</small>
+<small>The [**dplyr**]{style="color: #ae7b11;"} package from the [[tidyverse](https://www.tidyverse.org/)]{style="color: #ae7b11;"} [[@R-tidyverse]](#tidyverse-citation) is very useful for cleaning and manipulating data. Using the [**mutate()**]{style="color: green;"} function from [**dplyr**]{style="color: #ae7b11;"}, we can add a new column to the data according to a formula that gets applied to each row. For example, we could create add a brand new column (C) to our data by taking the sum of two columns (A+B) like illustrated below:</small>
 
 <!-- ```{r, eval=F} -->
 
@@ -505,7 +517,7 @@ There are resources and tools out there that are very effective for cleaning and
 
 <!-- ``` -->
 
-[![Illustration by Allison Horst](C:/Users/ries9/Documents/Research-Paper-Example/images/dplyr_mutate.png){width="48%"}](https://dplyr.tidyverse.org/reference/mutate.html)
+[![Illustration by Allison Horst](C:/Users/ries9/Documents/GitHub/cryptocurrencyresearch-org/images/dplyr_mutate.png){width="48%"}](https://dplyr.tidyverse.org/reference/mutate.html)
 
 <small>*Illustration by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)*</small>
 
@@ -559,32 +571,35 @@ There are resources and tools out there that are very effective for cleaning and
 
 <!-- ``` -->
 
-## Add Volatility
+## Add Spread
 
-Using [**mutate()**]{style="color: green;"} we can add a new column called [**Volatility**]{style="color: blue;"}, which tracks the percent difference between the [Low]{style="color: blue;"} price and the [High]{style="color: blue;"} price at each hourly datapoint as an absolute value:
+Using [**mutate()**]{style="color: green;"} we can add a new column called [**spread**]{style="color: blue;"}, which tracks the percent difference between the [Low]{style="color: blue;"} price and the [High]{style="color: blue;"} price at each hourly datapoint as an absolute value:
 
-```{r add_volatility}
-cryptodata <- mutate(cryptodata, Volatility = abs(((High - Low)/Low)*100))
+```{r add_spread}
+cryptodata <- mutate(cryptodata, spread = abs(((High - Low)/Low)*100))
 ```
 
-<!-- , and overwrote `cryptodata` with the result:  -->
-
-```{css, echo=FALSE}
-pre[class] {
-  max-height: 150px;
-}
-```
-
+<!-- Here css code to create scrollable output code boxes instead of printing really long outputs -->
 ```{css, echo=FALSE}
 .scroll-150 {
   max-height: 150px;
   overflow-y: auto;
   background-color: inherit;
 }
+.scroll-200 {
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: inherit;
+}
+.scroll-300 {
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: inherit;
+}
 ```
 
 ```{r, class.output="scroll-150"}
-select(cryptodata, DateTime, Low, High, Volatility) #Show results (only columns of interest)
+select(cryptodata, DateTime, Low, High, spread) #Show results (only columns of interest)
 ```
 
 <!-- ## Add Target Variable -->
@@ -621,7 +636,7 @@ select(cryptodata, DateTime, Low, High, Volatility) #Show results (only columns 
 
 ## Remove Symbol Column
 
-In the previous slide we checked we calculated the Volatility correctly by only returning the relevant columns using the [**select()**]{style="color: green;"} function. The column named [Symbol]{style="color: blue;"} in the dataset always has a consistent value of **ETH** and adds no value when making predictions, so we can remove the column very easily using the [**select()**]{style="color: green;"} function again, but this time using it to remove a column from the data:
+In the previous slide we checked we calculated the spread correctly by only returning the relevant columns using the [**select()**]{style="color: green;"} function. The column named [Symbol]{style="color: blue;"} in the dataset always has a consistent value of **ETH** and adds no value when making predictions, so we can remove the column very easily using the [**select()**]{style="color: green;"} function again, but this time using it to remove a column from the data:
 
 ```{r remove_symbol}
 cryptodata <- select(cryptodata, -Symbol)
@@ -629,27 +644,42 @@ cryptodata <- select(cryptodata, -Symbol)
 
 ## Train/Test Split
 
-When we make predictive models, we would not want to make important real life decisions based on those models without having a good idea of how effective the methodology actually is, and ensuring no mistakes were made. We will likely never get a 100% accurate representation of what the model will actually perform like in the real world without actually tracking those results over time, but there are ways for us to get a sense of whether something works or not ahead of time. Here, we are taking the simplest of those approaches by training our models on the earlier 80% of the data, and testing the accuracy of those models on the remaining 20% new unseen data to start evaluating how good the models are. <!-- Later on we will discuss a slightly better way called ***cross validation***. -->
+<span style="font-size: 56%;">
+When we make predictive models, we would not want to make important real life decisions based on those models without having a good idea of how effective the methodology actually is, and ensuring no mistakes were made. We will likely never get a 100% accurate representation of what the model will actually perform like in the real world without actually tracking those results over time, but there are ways for us to get a sense of whether something works or not ahead of time. Here, we are taking the simplest of those approaches by training our models on the earlier 80% of the data, and testing the accuracy of those models on the remaining 20% new unseen data to start evaluating how good the models are. This is an important step! You should **never trust a model that has not been tested outside of the data it was trained on**, and understanding those results first. 
+</span>
+
+<span style="font-size: 56%;">
+Later we will introduce a more powerful way of doing this called [**cross validation**]{style="color: #purple;"} which repeats the process over random samples of the data. Because our data is captured over a period of time, we will consider *when* the data was collected in the way we split, and do [**time aware cross validation**]{style="color: #purple;"}.
+</span>
+
+<!-- Later on we will discuss a slightly better way called ***cross validation***. -->
 
 ## Train/Test Split - Continued
 
-<span style="font-size: 80%;">
-As a last step, let's split the data into a [**train**]{style="color: purple;"} and [**test**]{style="color: purple;"} dataset. We will build the models on the earlier 80% of the data, and assess how well the models perform on the last 20% of the data:
-</span>
+<small>
+Let's split the data into a [**train**]{style="color: purple;"} and [**test**]{style="color: purple;"} dataset. We will build the models on the earlier 80% of the data, and assess how well the models perform on the last 20% of the data. For now this is a simplified version of the process, which will ultimately split the data into more subsets and consider the specific date on which the data was collected in those splits.
+</small>
 
 ```{r}
+# Take first 80% of rows to make train data
 cryptodata_train <- head(cryptodata, as.integer(nrow(cryptodata)*.8))
-```
-
-And the test data:
-
-```{r}
+# Use the other 20% for the test data
 cryptodata_test <- tail(cryptodata, as.integer(nrow(cryptodata)*.2))
 ```
 
-<span style="font-size: 65%;">
-The first piece of code is taking the first 80% of the rows, and the second line for **cryptodata\_test** creates the object taking the last 20% of the rows of [**cryptodata**]{style="color: blue;"} (which was already sorted ahead of time from the earliest to the latest datapoint).
-</span>
+<small>
+The first piece of code is taking the first 80% of the rows, and the second line for **cryptodata\_test** creates the object taking the last 20% of the rows of [**cryptodata**]{style="color: blue;"} (which was already sorted ahead of time from the earliest to the latest datapoint). 
+
+- [nrow()]{style="color: green;"} returns the total number of rows in the data.
+
+- [as.integer()]{style="color: green;"} removes decimals from `nrow(cryptodata)*.8)`.
+
+- [head()]{style="color: green;"} returns the specified number of elements based on the other two operations.
+
+- [tail()]{style="color: green;"} does the opposite of [head()]{style="color: green;"} and gets the last elements.
+
+</small>
+
 
 <!-- ## A Note on overfitting -->
 
@@ -667,7 +697,7 @@ Also remember that if you do not know what a function does, you can put it insid
 
 <small> The [**ggplot2**]{style="color: #ae7b11;"} package [[@R-ggplot2]](#ggplot-citation) is the standard when it comes to making plots in R. The ***gg*** in [**ggplot2**]{style="color: #ae7b11;"} stands for the ***Grammar of Graphics***, which is essentially the idea that many different types of charts share the same underlying building blocks, and that they can be put together in different ways to make charts that look very different from each other. [In Hadley Wickham's (the creator of ggplot2) own words,](https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/) "a pie chart is just a bar chart drawn in polar coordinates", "They look very different, but in terms of the grammar they have a lot of underlying similarities."</small>
 
-[![Illustration by Allison Horst](C:/Users/ries9/Documents/Research-Paper-Example/images/ggplot2_masterpiece.png){width="44%"}](https://ggplot2.tidyverse.org/)
+[![Illustration by Allison Horst](C:/Users/ries9/Documents/GitHub/cryptocurrencyresearch-org/images/ggplot2_masterpiece.png){width="44%"}](https://ggplot2.tidyverse.org/)
 
 <small>*Illustration by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)*</small>
 
@@ -730,7 +760,7 @@ knitr::include_url("https://exts.ggplot2.tidyverse.org/gallery/",
 
 ## Extension - ggthemes
 
-For example, we could use the [**ggthemes**]{style="color: #ae7b11;"} package (installed and loaded previously) to change the look of the chart:
+For example, we could use the [**ggthemes**]{style="color: #ae7b11;"} package, [[@R-ggthemes]](#ggthemes-citation) which was [installed and loaded previously](#use-pacman), to change the look of the chart:
 
 ```{r ggplot_theme, fig.width=4.5, fig.height=3.5}
 price_chart + theme_economist()
@@ -748,10 +778,13 @@ price_chart + theme_economist()
 
 ## Extension - gganimate
 
-We cannot cover all these extensions in detail here, but as one last example here we use the [**gganimate**]{style="color: #ae7b11;"} package (also installed and loaded in a previous step) to create an animation that iterates through each date and adjusts the axis relative to the current data:
+We cannot cover all these extensions in detail here, but as one last example here we use the [**transition_states()**]{style="color: green;"} function from the [**gganimate**]{style="color: #ae7b11;"} package [[@R-gganimate]](#gganimate-citation) to create an animation that iterates through each date and adjusts the axis relative to the current data:
 
 ```{r gganimate_show}
-animated_chart <- price_chart + transition_states(Date) + view_follow() + geom_point()
+animated_chart <- price_chart + 
+                      transition_states(Date) + 
+                      view_follow() + 
+                      geom_point()
 ```
 
 View the results in the slide below ⬇️
@@ -761,10 +794,10 @@ View the results in the slide below ⬇️
 <!-- The object **`animated_chart`** is now an animated GIF showing many charts: -->
 
 ```{r animate_chart}
-animate(animated_chart, fps=2, height = 350, width =500)
+animate(animated_chart, fps = 1, height = 320, width = 450)
 ```
 
-<small> We wrapped [**animated\_chart**]{style="color: blue;"} in the function [**animate()**]{style="color: green;"} to slow down and resize the GIF shown. We will stop here, but we encourage you to keep exploring the possibilities of [**ggplot2**]{style="color: #ae7b11;"}. Move on to the next slide `r emo::ji('right arrow')` to start making predictive models! </small>
+<small> We wrapped [**animated\_chart**]{style="color: blue;"} in the function [**animate()**]{style="color: green;"} to slow down and resize the GIF shown. We will stop here, but we encourage you to keep exploring the possibilities of [**ggplot2**]{style="color: #ae7b11;"} in the [full version of the tutorial](https://cryptocurrencyresearch.org/visualization.html). Move on to the next slide `r emo::ji('right arrow')` to start making predictive models! </small>
 
 <!-- ```{r gganimate_run, echo=F, fig.width=2.8, fig.height=2} -->
 
@@ -809,14 +842,14 @@ lm(data = cryptodata_train, formula = "Target24HourClose ~ .")
 
 ## "lm" model - Continued
 
-<span style="font-size: 70%;">
-In the previous slide, we were able to make a linear regression model by using the function <span style="color: green;">**lm()**</span> and specifying the data to be used as <span style="color: blue;">**cryptodata_train**</span>, and the formula as predicting the <span style="color: blue;">**Target24HourClose** </span> and using (**~**) all other variables (represented by the **period "."**). Here is the code again for reference:</span>
+<span style="font-size: 60%;">
+In the previous slide, we were able to make a linear regression model by using the function <span style="color: green;">**lm()**</span> [[@R-stats]](#base-citation) and specifying the data to be used as <span style="color: blue;">**cryptodata_train**</span>, and the formula as predicting the <span style="color: blue;">**Target24HourClose** </span> and using (**~**) all other variables (represented by the **period "."**). Here is the code again for reference:</span>
 
 ```{r make_lm_ref, eval=F}
 lm(data = cryptodata_train, formula = "Target24HourClose ~ .")
 ```
 
-<span style="font-size: 55%;">
+<span style="font-size: 50%;">
 If we wanted to implement a different model, there may be different structural requirements to the data used by the model, and we may have more parameters to adjust, so in some cases it may not be very straightforward to implement a different model, even though we intend to use the same dataset and the same prediction formula predicting the <span style="color: blue;">**Target24HourClose** </span> column using all other columns. Instead of figuring out the implementation of different models, we can use a framework that has standardized the usage of many models using the <span style="color: #ae7b11;">**caret**</span> package.</span>
 
 <!-- The elements we specified for this model wouldn't be different for a more complex predictive model, but the implementation would usu -->
@@ -865,7 +898,7 @@ If we [think back to the approach we took with <span style="color: #ae7b11;">ggp
 
 ## Caret Package - Continued
 
-The caret package is one of [several solutions](https://parsnip.tidymodels.org/) to resolve the problem described in the previous slide. It allows the user to specify the data, variables to use and everything else that would not change regardless of the model we want to use. As a separate parameter, we can specify which modeling framework to use (i.e. linear regression). Different models will have different parameters, and we will be able to adjust those parameters depending on the model, or leave those blank to use the sensible default values set by the [creator of the package](https://rstudio.com/speakers/max-kuhn/).
+The [**caret**]{style="color: #ae7b11;"} package [[@R-caret]](#caret-citation) is one of [several solutions](https://parsnip.tidymodels.org/) to resolve the problem described in the previous slide. It allows the user to specify the data, variables to use and everything else that would not change regardless of the model we want to use. As a separate parameter, we can specify which modeling framework to use (i.e. linear regression). Different models will have different parameters, and we will be able to adjust those parameters depending on the model, or leave those blank to use the sensible default values set by the [creator of the package](https://rstudio.com/speakers/max-kuhn/).
 
 See this idea in action in the slide below ⬇️
 
@@ -888,17 +921,19 @@ lm_fit
 
 ## "Method" Options
 
+<span style="font-size: 80%;">
 You can find the entire list of models supported by caret, as well as the <span style="color: blue;">**method**</span> value to enter to produce the specified model at the page below:
+</span>
 
-```{r show_caret_models_list, echo=F}
+```{r show_caret_models_list, echo=F, out.width='90%', out.height='400px'}
 knitr::include_url("https://topepo.github.io/caret/available-models.html",
-  height = "600px")
+  height = "400px")
 ```
 *[https://topepo.github.io/caret/available-models.html](https://topepo.github.io/caret/available-models.html)*
 
 ## 
 
-![](C:/Users/ries9/Documents/Research-Paper-Example/images/AvailableModels_InDepth.png)
+![](C:/Users/ries9/Documents/GitHub/cryptocurrencyresearch-org/images/AvailableModels_InDepth.png)
 
 The website from the previous slide is all you need in order to make any of the 238 (currently) available model choices. The columns circled and labeled as **1** and **2** are explained on the next slide below ⬇️
 
@@ -908,18 +943,20 @@ The website from the previous slide is all you need in order to make any of the 
 
 <!-- ^Removed: This is the option as you would write it in your code for the **`train()`** function of the **`caret`** package.  -->
 
-2. **Libraries:** This tells us what packages need to be installed for the model to be able to run. Before we would be able to run the model on the first row of the screenshot, we would need to install the required package by running <span style="color: green;">**install.packages("fastAdaboost")**</span> (for the highlighted model) or else we would run into an error when training the model.
+2. **Libraries:** This tells us what packages need to be installed in the R session before the model is able to run. Before we would be able to run the model on the first row of the screenshot, we would need to install the required package by running <span style="color: green;">**install.packages("fastAdaboost")**</span> (for the highlighted model) or else we would run into an error when training the model.
 
 
 ## XGBoost
 
-The <span style="color: purple;">**XGBoost**</span> predictive modeling framework has proven itself to be very powerful in recent years on a variety of different problems, so that's the next model we will make. XGBoost stands for E**x**treme **G**radient **B**oosting, which is a mathematical concept we won't tackle in this tutorial, but you can learn more about the high-level idea and how this model uses it in the context of <span style="color: purple;">***Decision Tree Ensembles***</span> here: https://xgboost.readthedocs.io/en/latest/tutorials/model.html
+The <span style="color: purple;">**XGBoost**</span> predictive modeling framework [[@R-xgboost]](#xgboost-citation) has proven itself to be very powerful in recent years on a variety of different problems, so that's the next model we will make. XGBoost stands for E**x**treme **G**radient **B**oosting, which is a mathematical concept we won't tackle in this tutorial, but you can learn more about the high-level idea and how this model uses it in the context of <span style="color: purple;">***Decision Tree Ensembles***</span> here: https://xgboost.readthedocs.io/en/latest/tutorials/model.html
 
 Move on to the next slide below where we keep all the same code, but change the <span style="color: blue;">**method**</span> to make an XGBoost model.
 
 ## XGBoost - Caret
 
+<span style="font-size: 70%;">
 We can use the same code we used when making the linear regression model, but specify the <span style="color: blue;">**method**</span> to be <span style="color: blue;">**xgbLinear**</span> instead of the **lm** value we used before:
+</span>
 
 ```{r xgboost, message=FALSE, warning=FALSE, class.output="scroll-150"}
 set.seed(123)
@@ -930,7 +967,9 @@ xgb_fit <- train(Target24HourClose ~ . ,
 xgb_fit
 ```
 
-You may have noticed that both outputs said ***Resampling: Bootstrapped (25 reps)***. This is because of a default value on an additional option of <span style="color: green;">**train()**</span>, go to the next slide below to learn more about additional options/functionality.
+<small>
+You may have noticed that both outputs say ***Resampling: Bootstrapped (25 reps)***. This is because of a default value on an additional option of <span style="color: green;">**train()**</span>, go to the next slide below to learn more about additional options/functionality.
+</small>
 
 ## Caret Additional Options
 
@@ -956,18 +995,18 @@ train_control <- trainControl(method = "timeslice",
                               number = 5)
 ```
 
-[![](C:/Users/ries9/Documents/Research-Paper-Example/images/caret_cross_validate.png){width=62%}](https://topepo.github.io/caret/data-splitting.html#data-splitting-for-time-series)
+[![](C:/Users/ries9/Documents/GitHub/cryptocurrencyresearch-org/images/caret_cross_validate.png){width=62%}](https://topepo.github.io/caret/data-splitting.html#data-splitting-for-time-series)
 
 <small>
 *Source: https://topepo.github.io/caret/data-splitting.html#data-splitting-for-time-series*</small>
 
 ## Cross Validation for timeseries
 
-In the previous slide we set the timeseries cross-validation to take an <span style="color: blue;">**initialWindow**</span> of 150 days (given by 24 hourly time points multiplied by 150 days), and a <span style="color: blue;">**fixedWindow**</span> of 30 days. The parameter <span style="color: blue;">**number = 5**</span> specifies the process should take place on 5 separate occasions. By the end of this process, we end up with 5 separate ***training*** and ***testing*** datasets. If a model works well across 5 separate periods of time, we can have greater confidence things will go well when we apply the model to the real world as well. Next, let's run the XGBoosst model with the specified cross-validation.
+In the previous slide we set the timeseries cross-validation to take an <span style="color: blue;">**initialWindow**</span> of 100 days (given by 24 hourly time points multiplied by 100 days), and a <span style="color: blue;">**fixedWindow**</span> of 30 days. The parameter <span style="color: blue;">**number = 5**</span> specifies the process should take place on 5 separate occasions. Consult the [image in the previous slide](#cross-validation-for-timeseries) to understand what the other two parameters do. By the end of this process, we end up with 5 separate ***training*** and ***testing*** datasets. If a model works well across 5 separate periods of time, we can have greater confidence things will go well when we apply the model to the real world as well, and that there are no mistakes in the process. Next, let's run the XGBoosst model with the specified cross-validation.
 
 
 ## XGBoost with Time-Aware Cross Validation
-```{r xgboost_cv, message=F, warning=F, class.output="scroll-150"}
+```{r xgboost_cv, message=F, warning=F, class.output="scroll-300"}
 set.seed(123)
 xgb_fit <- train(Target24HourClose ~ . ,
                     data = cryptodata_train,
@@ -982,7 +1021,7 @@ xgb_fit
 
 We will not discuss this at length here, but because we are able to assess the accuracy of the models we make by creating a test set with data that the model has never seen before, we could keep making slight changes to the parameters used by the models. What is the ideal number of trees for the XGBoost model to have? It might be the default value specified by the <span style="color: #ae7b11;">**caret**</span> package, but an alternative approach would be to specify a range we find to be sensible, and have the computer iterate over the range to find the most optimal solution. You can read more about hyperparameter tuning in <span style="color: #ae7b11;">**caret**</span> here: https://topepo.github.io/caret/model-training-and-tuning.html
 
-## Hypterparameter tuning
+## Hyperparameter tuning - Cont.
 
 Caret as a default behavior will perform hyperparameter tuning, we can view the results by accessing the column of the ***fitted model*** we made for XGBoost that is called <span style="color: blue;">***bestTune***</span>. To do this, we start with the <span style="color: blue;">**xgb_fit**</span> object followed by a dollar sign and the name <span style="color: blue;">**bestTune**</span> to indicate we want to return the table with the best found values for the different parameters:
 
@@ -1002,13 +1041,15 @@ xgb_pred <- predict(xgb_fit, newdata = cryptodata_test)
 
 ## Evaluate Model Performance
 
-<span style="font-size: 70%;">
+<span style="font-size: 62%;">
 Because we actually know what really happened for the target variable in the test data we used in the previous step, we can get a good idea of how good the model performed on a dataset it has never seen before. We do this to avoid <span style="color: purple;">**overfitting**</span>, which is the idea that the model may work really well on the training data we provided, but not on the new data that we want to predictions on. If the performance on the test set is good, that is a good sign. If the data is split into several subsets and each subset has consistent results for the training and test datasets, that is an even better sign the model may perform as expected. Read more about measuring performance here: https://topepo.github.io/caret/measuring-performance.html
 </span>
 
 ```{r accuracy_measures}
 postResample(pred = xgb_pred, obs = cryptodata_test$Close)
 ```
+
+<!-- [TODO - KEEP GOING!] -->
 
 ## Error Metrics
 
@@ -1020,6 +1061,8 @@ In the previous slide, by using the  <span style="color: green;">**postResample(
 2.  <span style="color: purple;">**RMSE**</span>: The **R**oot **M**ean **S**quared **E**rror takes the **square root of the average squared errors** and behaves slightly differently than MAE depending on the magnitude of the error, but would always be larger or equal to MAE. You can learn more about the differences between the two here: https://medium.com/human-in-a-machine-world/mae-and-rmse-which-metric-is-better-e60ac3bde13d
 
 3.<span style="color: purple;">**Rsquared**</span>: The **R Squared** metric gives us a general indication of how informative the independent variables are in relation to the dependent variable (<span style="color: blue;">**Target24HourClose**</span>), where a perfect score of 1.0 would suggest the price movements of the dependent variable are completely explained by the independent variables and a score of 0 would suggest the opposite. This metric should be taken with a grain of salt, but taken in conjunction with the RMSE or MAE error metrics it can be informative. Learn more about R Squared here: https://www.investopedia.com/terms/r/r-squared.asp
+
+In the [full-version of the tutorial](https://cryptocurrencyresearch.org/evaluate-model-performance.html#eval-rmse), we will compare the scores for the RMSE and $R^2$ metrics across many cryptocurrencies and models over time.
 
 </small>
 
@@ -1042,15 +1085,15 @@ In the previous section, we performed the cross-validation relative to the date 
 
 ## The "tsibble" data structure
 
-<span style="font-size: 97%;">
-Up to this point, when we referred to tabular data, we were working with a data structure called <span style="color: purple;">**tibble**</span>. **Hadley Wickham** is the creator of packages we have gone over like <span style="color: #ae7b11;">dplyr</span>, <span style="color: #ae7b11;">ggplot2</span> and many others, including the <span style="color: #ae7b11;">**tibble**</span> package. The default way for R to read tabular data is as a <span style="color: purple;">**dataframe**</span>, which can be converted to a ***tibble*** and viceversa. The main difference between the two, is a tibble will show the results in a much neater fashion when there are many columns and/or rows. Next, we will convert the data from being a **tibble** to a <span style="color: purple;">**t*****s*****ibble**</span> (notice the extra ***s***), which will be recognized as a time series dataset that was collected over an even time interval, and will have many useful properties for the time series analysis we will perform next.
+<span style="font-size: 90%;">
+Up to this point, when we referred to tabular data, we were working with a data structure called <span style="color: purple;">**tibble**</span>. **Hadley Wickham** is the creator of packages we have gone over like <span style="color: #ae7b11;">dplyr</span>, <span style="color: #ae7b11;">ggplot2</span> and many others, including the <span style="color: #ae7b11;">**tibble**</span> package. The default way for R to read tabular data is as a <span style="color: purple;">**dataframe**</span>, which can be converted to a ***tibble*** and viceversa. The main difference between the two, is a tibble will show the results in a much neater fashion when there are many columns and/or rows. Next, we will convert the data from being a **tibble** to a <span style="color: purple;">**t*****s*****ibble**</span> (notice the extra ***s***) [[@R-tsibble]](#tsibble-citation), which will be recognized as a time series dataset that was collected over an even time interval, and will have many useful properties for the time series analysis we will perform next.
 </span>
 
 
 ## Make a "tsibble"
 
 <span style="font-size: 80%;">
-We can create a <span style="color: #ae7b11;">**tsibble**</span> object using the <span style="color: blue;">**as_tsibble()**</span> function, and using the <span style="color: blue;">**DateTime** field as the <span style="color: blue;">**index**</span> of the tsibble:</span>
+We can create a <span style="color: #ae7b11;">**tsibble**</span> object using the <span style="color: green;">**as_tsibble()**</span> function, and using the <span style="color: blue;">**DateTime**</span> field as the <span style="color: blue;">**index**</span> of the tsibble:</span>
 ```{r make_tsibble}
 cryptodata_ts <- as_tsibble(cryptodata, index = DateTime)
 ```
@@ -1060,7 +1103,7 @@ The index represents the Date/Time field of when the data was collected. If we w
 
 ## tsibble preview
 
-If we print the new object that we created in the previous slide <span style="color: blue;">**cryptodata_ts**</span>, the top of the output will now show the text **"A tsibble: 22,847 x 18 [1h] \<UTC\>"** which specifies the dimensions (rows X columns), 1 hour intervals between rows, and the UTC timezone:
+If we print the new object that we created in the previous slide <span style="color: blue;">**cryptodata_ts**</span>, the top of the output will now show the text **"A tsibble: 5,111 x 18 [1h] \<UTC\>"** which specifies the dimensions (rows X columns), 1 hour intervals between rows, and the UTC timezone:
 
 ```{r show_cryptodata_ts, class.output="scroll-150"}
 cryptodata_ts
@@ -1076,7 +1119,7 @@ has_gaps(cryptodata_ts)
 
 ## Dealing with gaps - Continued
 
-We can find the gaps using the <span style="color: green;">**scan_gaps()**</span> function:
+We can find the specific gaps (if there are any) using the <span style="color: green;">**scan_gaps()**</span> function:
 ```{r scan_gaps}
 scan_gaps(cryptodata_ts)
 ```
@@ -1086,40 +1129,40 @@ And we can turn these missing values into **explicit** missing values that the t
 cryptodata_ts <- fill_gaps(cryptodata_ts)
 ```
 
-## fill_gaps recap
+## fill gaps recap
 
-When we created the **tsibble**, we specified an <span style="color: blue;">index</span>, which allowed the function to figure out our data is in 1 hour intervals. It was also able to figure out the range of the data. Based on that information, it is able to detect that we have 1 gap in our timeseries dataset. We were able to add this missing row of data using <span style="color: green;">**fill_gaps()**</span>, which explicitly defines the row as missing and avoids issues moving forward. Printing the new overwritten version of <span style="color: blue;">**cryptodata_ts**</span>, the dimensions have changed to have 1 additional row (22,848):
-```{r show_cryptodata_ts_additional_row}
+<span style="font-size: 62%;">
+When we created the <span style="color: #ae7b11;">**tsibble**</span>, we specified an <span style="color: blue;">index</span>, which allowed the function to figure out our data is in 1 hour intervals. It was also able to figure out the range of the data. Based on that information, it is able to detect that we have 1 gap in our timeseries dataset. We were able to add this missing row of data using <span style="color: green;">**fill_gaps()**</span>, which explicitly defines the row as missing and avoids issues moving forward. Printing the new overwritten version of <span style="color: blue;">**cryptodata_ts**</span>, the dimensions have changed to have 1 additional row (5,112):
+</span>
+
+```{r show_cryptodata_ts_additional_row, class.output="scroll-150"}
 cryptodata_ts
 ```
 
 ## Train/Test Split
 
+<span style="font-size: 83%;">
 As a last step, let's again split the data into a **train** and **test** dataset. We will build the models on the earlier 80% of the data, and assess how well the models perform on the last 20% of the data:
+</span>
 
 ```{r}
+# Take first 80% of rows to make train data
 ts_train <- head(cryptodata_ts, as.integer(nrow(cryptodata)*.8))
-```
-
-And the test data:
-```{r}
+# Use the other 20% for the test data
 ts_test <- tail(cryptodata_ts, as.integer(nrow(cryptodata)*.2))
 ```
 
+<span style="font-size: 80%;">
+[As was already discussed, this is an example to illustrate the idea behind creating a train/test split to assess the performance of the models on data that the model has not seen before (trained on "train" data, and assessed on "test" data), but in practice a more complicated implementation using cross validation is much more effective.](#traintest-split)
+</span>
 
 # Timeseries Predictive Modeling
 
-Next, we will use the ***fable*** package to create timeseries models. Why is it called fable?
-
-"
+Next, we will use the <span style="color: #ae7b11;">**fable** </span> package [[@R-fable]](#fable-citation) to create timeseries models. Why is it called fable?
 
 1. It makes **f**orecasting t**able**s
 
-2. A fable is like a forecast: it's never true, but it tells you something important about reality
-
-" 
-
--***Rob J Hyndman***
+2. "A fable is like a forecast: it's never true, but it tells you something important about reality" - ***Rob J Hyndman*** [New York Open Statistical Programming Meetup](https://youtu.be/yx6OQ-8HofU?t=2484)
 
 ## Building a model
 
@@ -1164,11 +1207,13 @@ Previously we defined the **target variable** as the closing price 24 hour in th
 
 ## Make multiple models
 
+<span style="font-size: 80%;">
 Let's create a new object like we did for the naive model earlier, but this time including a naive model, a snaive model and an <span style="color: purple;">**ARIMA**</span> model (which will be explained next) at the same time:
+</span>
 
 <!-- HERE SHOULD ADD SNAIVE(Close) AS WELL, WOULD BE MORE INTERESTING IN FINAL RESULTS! -->
 
-```{r multiple_ts_models}
+```{r multiple_ts_models, class.output="scroll-150"}
 set.seed(123)
 ts_model <- model(ts_train, naive = NAIVE(Close),
                             snaive = SNAIVE(Close),
@@ -1198,11 +1243,11 @@ A nonseasonal ARIMA model is classified as an "ARIMA(p,d,q)" model, where:
 
 ## ARIMA - Fable Documentation
 
-![non-seasonal components](C:/Users/ries9/Documents/Research-Paper-Example/images/arima_pdq.png)
+![non-seasonal components](C:/Users/ries9/Documents/GitHub/cryptocurrencyresearch-org/images/arima_pdq.png)
 
 ## ARIMA - Fable Documentation
 
-![seasonal components](C:/Users/ries9/Documents/Research-Paper-Example/images/arima_pdq_caps.png)
+![seasonal components](C:/Users/ries9/Documents/GitHub/cryptocurrencyresearch-org/images/arima_pdq_caps.png)
 
 ## ARIMA Terms
 
@@ -1222,17 +1267,17 @@ In the previous slide, the output showed three auto-regressive terms, and two se
 ts_model
 ```
 
-The ARIMA model has terms as described earlier for **(p, d, q)(P, D, Q)**, shown above as <span style="color: blue;">**(3,1,0)(2,0,0)**</span>. This summarizes the ARIMA model go to the next slide to get a better understanding of what this tells us.
+The ARIMA model has terms as described earlier for **(p, d, q)(P, D, Q)**, shown above as <span style="color: blue;">**(0,1,4)(0,0,1)**</span>. This summarizes the ARIMA model go to the next slide to get a better understanding of what this tells us.
 
 ## ARIMA Terms - Continued
 
-![](C:/Users/ries9/Documents/Research-Paper-Example/images/arima_labelled.PNG)
+![](C:/Users/ries9/Documents/GitHub/cryptocurrencyresearch-org/images/arima_labelled.PNG){width='72%'}
 
 <!-- As labeled in red above: -->
 
-1. The <span style="color: green;">**ARIMA()**</span> function we used automatically picked a value for <span style="color: blue;">**p**</span> of **3**, meaning there are three non-seasonal auto-regressive terms (as seen two slides back).
+1. The <span style="color: green;">**ARIMA()**</span> function we used automatically picked a value for <span style="color: blue;">**p**</span> of **0**, meaning there are no non-seasonal auto-regressive terms [(as seen two slides back)](#arima-terms).
 
-2. The <span style="color: blue;">**d**</span> term was set to one, meaning the data was differenced once to try and achieve stationarity (a note on that in two slides).
+2. The <span style="color: blue;">**d**</span> term was set to **1**, meaning the data was differenced once to try and achieve stationarity [(a note on that in two slides)](#a-note-on-stationarity).
 
 3. The <span style="color: blue;">**P**</span> term was set to a value of two, indicating there are two seasonal auto-regressive terms.
 <!-- (which is why we saw the terms ***sar1*** and ***sar2*** when we used the command **`tidy(ts_models)`**) -->
@@ -1243,14 +1288,18 @@ The ARIMA model has terms as described earlier for **(p, d, q)(P, D, Q)**, shown
 
 ## ARIMA Terms - Simplified
 
+<span style="font-size: 95%;">
 ARIMA will add new variables for the specified terms <span style="color: blue;">**p, P**</span> and <span style="color: blue;">**q, Q**</span>, which could have been manually set as well. When the parameter <span style="color: blue;">**p**</span> is equal to three, that means the model will calculate and leverage three new columns each being the previous value of the <span style="color: blue;">**Close**</span> column one, two, and three rows/hours in the past. The difference for the <span style="color: blue;">**P**</span> parameter, is the fact that the lagged values are added looking at the previous <span style="color: purple;">**seasonal**</span> value, where instead of taking the value from the previous hour, it would take the value from last quarter. The <span style="color: blue;">**q**</span> term on the other hand, would add new columns with <span style="color: purple;">**M**oving **A**verages</span> (the **MA** of ARIMA) averaging the value of the <span style="color: blue;">**Close**</span> column over a specified number of hours in the past (quarters when using <span style="color: blue;">**Q**</span> instead of <span style="color: blue;">**q**</span>).
+</span>
 
 
 ## A note on stationarity
 
+<span style="font-size: 93%;">
 Please note that ARIMA works best on data with <span style="color: purple;">**stationary**</span> trends, meaning a time series with a mean and variance that is constant over time (**which this data is not**). The **I** in ARIMA refers to the <span style="color: blue;">**d, D**</span> terms, which determine how much of an adjustment to make (if any) to the data to make it stationary. If you had data that was clearly non-stationary, an <span style="color: purple;">ETS</span> model may be more appropriate, we will not cover it here, but you can learn more about ETS models here: https://fable.tidyverts.org/reference/ETS.html
 
 There are ways of making both models and selecting the one with the better cross-validation results, or you can find an example of testing the stationarity of your data here: https://rpubs.com/richkt/269797
+</span>
 
 <!-- It is also important to note that in the previous slide we saw the **d**, **Q**, **D** terms were set to 0 meaning these terms were not used, which means we actually made an ARI model, since the MA refers to the **d** and **D** terms and neither is present. -->
 
@@ -1273,7 +1322,7 @@ ts_forecasts <- forecast(ts_model, h = '30 days')
 
 The new object contains hourly forecasts for a 30 day period for both models:
 
-```{r forecasts_results, echo=F}
+```{r forecasts_results, echo=F, class.output="scroll-200"}
 ts_forecasts
 ```
 
@@ -1293,8 +1342,8 @@ See the output in the slide below. Learn more about confidence intervals: https:
 select(hilo(ts_forecasts, level = c(70, 95)), `70%`, `95%`)
 ```
 
-<span style="font-size: 85%;">
-You could read the results in the first row of the output as: *we are 70% confident the price on 2020-01-31 14:00:00 will be between about \$168 and \$188, and we are 95% confident it will be between \$159 and \$197*. As we look at predictions farther out into the future, we will have a larger range of values because it becomes harder for us to be very confident.</span>
+<span style="font-size: 78%;">
+You could read the results in the first row of the output as: *we are 70% confident the price on 2020-06-19 10:00:00 will be between \$226 and \$233, and we are 95% confident it will be between \$223 and \$236 based on data we have observed in the past*. As we look at predictions farther out into the future, we will have a larger range of values because it becomes harder for us to be very confident.</span>
 
 ## Plot Forecasts
 
@@ -1321,8 +1370,8 @@ Anytime we make a chart in using <span style="color: green;">**gglot()**</span>,
 ```{r ts_plot_average_forecasts_plotly, fig.width=6.5, fig.height=4.5, echo=F}
 ggplotly(ggplot(ts_forecasts, aes(x=DateTime, y=.mean, color=.model)) +
            geom_line() + 
-           xlim(c(as.POSIXct('2020-01-31 14:00:00', format = "%Y-%m-%d %H:%M:%S"),
-     as.POSIXct('2020-02-05 00:00:00', format = "%Y-%m-%d %H:%M:%S"))))
+           xlim(c(as.POSIXct('2020-06-25 14:00:00', format = "%Y-%m-%d %H:%M:%S"),
+     as.POSIXct('2020-06-30 00:00:00', format = "%Y-%m-%d %H:%M:%S"))))
 ```
 
 
@@ -1343,24 +1392,30 @@ ggplotly(ggplot(ts_forecasts, aes(x=DateTime, y=.mean, color=.model)) +
 accuracy(ts_forecasts, ts_test)
 ```
 
-<!-- ## Visually compare results -->
-
-
-## Note
-
-The **fable** package is specifically designed to work the exact same way no matter how many different models you would like to make or how many cryptocurrency you would like to model. Head over to the [full version of the tutorial](https://cryptocurrencyresearch.org/) to see these ideas applied to a more "complete" approach to predicting prices on the cryptocurrency markets.
+[Refer to this previous slide for more information on the error metrics.](#error-metrics)
 
 
 # Next steps
 
-- Full version of the tutorial: https://cryptocurrencyresearch.org/
+You now have all the building-blocks you need to tackle the full-version of the tutorial!
 
+</br>
+
+**https://cryptocurrencyresearch.org/**
+
+</br>
+
+Click on the link above to use these tools to run a similar analysis on the latest cryptocurrency data (updated every 12 hours) for many cryptocurrencies at once.
+
+<!-- Click the link above for a more practical  -->
 
 
 
 # References
 
-References on the slide below ⬇️ in the order in which they are referenced throughout this presentation.
+</br>
+
+References start on the slide below ⬇️ and appear in the same order in which they are referenced throughout this presentation.
 
 ## R Package - pacman {#pacman-citation}
 
@@ -1403,6 +1458,16 @@ Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr:
   
 https://dplyr.tidyverse.org
 
+## R Package - tidyverse {#tidyverse-citation}
+
+</br>
+
+Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, https://doi.org/10.21105/joss.01686
+  
+</br>
+  
+https://tidyverse.org
+
 
 ## R Package - ggplot2 {#ggplot-citation}
 
@@ -1414,7 +1479,29 @@ H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New Yor
   
 https://ggplot2.tidyverse.org
 
-## R Package - caret {caret-citation}
+## R Package - ggthemes {#ggthemes-citation}
+
+</br>
+
+Jeffrey B. Arnold (2019). ggthemes: Extra Themes, Scales and Geoms for 'ggplot2'. R package version 4.2.0. https://CRAN.R-project.org/package=ggthemes
+  
+</br>
+  
+https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/
+
+
+## R Package - gganimate {#gganimate-citation}
+
+</br>
+
+Thomas Lin Pedersen and David Robinson (2020). gganimate: A Grammar of Animated Graphics. R package version 1.0.5. https://CRAN.R-project.org/package=gganimate
+  
+</br>
+  
+https://gganimate.com/index.html
+
+
+## R Package - caret {#caret-citation}
 
 </br>
 
@@ -1423,6 +1510,19 @@ Max Kuhn (2020). caret: Classification and Regression Training. R package versio
 </br>
 
 http://topepo.github.io/caret/
+
+## R Package - xgboost {#xgboost-citation}
+
+</br>
+
+Tianqi Chen, Tong He, Michael Benesty, Vadim Khotilovich, Yuan Tang, Hyunsu Cho, Kailong Chen, Rory
+  Mitchell, Ignacio Cano, Tianyi Zhou, Mu Li, Junyuan Xie, Min Lin, Yifeng Geng and Yutian Li (2020).
+  xgboost: Extreme Gradient Boosting. R package version 1.0.0.2.
+  https://CRAN.R-project.org/package=xgboost
+  
+</br>
+
+https://xgboost.readthedocs.io/en/latest/#
 
 
 ## R Package - tsibble {#tsibble-citation}
@@ -1435,29 +1535,86 @@ Wang, E, D Cook, and RJ Hyndman (2020). A new tidy data structure to support exp
 
 https://tsibble.tidyverts.org/
 
+## R Package - fable {#fable-citation}
+
+</br>
+
+Mitchell O'Hara-Wild, Rob Hyndman and Earo Wang (2020). fable: Forecasting Models for Tidy Time Series. R package version 0.2.1. https://CRAN.R-project.org/package=fable
+
+</br>
+
+https://fable.tidyverts.org/
 
 ## Timeseries
 
-- https://www.tandfonline.com/doi/full/10.1080/10618600.2019.1695624
+- Wang, Earo, et al. “A New Tidy Data Structure to Support Exploration and Modeling of Temporal Data.” Journal of Computational and Graphical Statistics, vol. 29, no. 3, 2020, pp. 466–478., [doi:10.1080/10618600.2019.1695624](https://doi.org/10.1080/10618600.2019.1695624)
 
 - https://rstudio.com/resources/rstudioconf-2019/melt-the-clock-tidy-time-series-analysis/
 
-## ARIMA 
+- https://people.duke.edu/~rnau/411arim.htm
 
-- add resources used
+- https://medium.com/@kfoofw/the-i-in-arima-modelling-and-random-walk-time-series-1fb29271e2c1
+
+- https://rpubs.com/richkt/269797
+
+- https://online.stat.psu.edu/stat200/lesson/4/4.2
+
+## R Markdown
+
+This document was produced using R Markdown.
+
+</br>
+
+JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi and Kevin Ushey and Aron Atkins and Hadley Wickham and Joe Cheng and Winston Chang and Richard Iannone (2020). rmarkdown: Dynamic Documents for R. R package version 2.1. URL https://rmarkdown.rstudio.com.
+
+Yihui Xie and J.J. Allaire and Garrett Grolemund (2018). R Markdown: The Definitive Guide. Chapman and Hall/CRC. ISBN 9781138359338. URL https://bookdown.org/yihui/rmarkdown.
+
+## Reveal Js
+
+This presentation was created using the R Markdown implementation of the Reveal JS library.
+
+</br>
+
+Hakim El Hattab and JJ Allaire (2017). revealjs: R Markdown Format for 'reveal.js' Presentations. R package version 0.9. https://CRAN.R-project.org/package=revealjs
+
+</br>
+
+https://revealjs.com/
 
 
-## ADD HERE...
+## Base R {#base-citation}
 
+</br>
 
-  
+[@R-base]. R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/. 
 
+</br>
 
-<!-- ```{r stop_cluster} -->
+https://cran.r-project.org/
+
+## Session Information
+
+Here are the details relating to the R session that last ran this tutorial:
+
+```{r, class.output="scroll-300"}
+sessionInfo()
+```
+
+<!-- Add a bunch of line breaks to remove automatic citations at the end since I am manually hyperlinking them (doesn't work well with presentation format otherwise) -->
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+<!-- Stop do parallel cluster -->
+
+<!-- ```{r stop_cluster, include=F} -->
 <!-- stopCluster(cluster) -->
 <!-- ``` -->
-
-
 
 
 
