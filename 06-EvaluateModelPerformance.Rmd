@@ -601,8 +601,6 @@ ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
   facet_wrap(~symbol)
 ```
 
-This is not very helpful however.
-
 Every 12 hours once this document reaches this point, the results are saved to GitHub using the `pins` package [@R-pins], and a separate script creates the complete dataset over time. You won't be able to run the code shown below (nor do you have a reason to):
 
 ```{r upload_results_pin, error=TRUE}
@@ -689,7 +687,7 @@ ggplot(best_models, aes(model, rsq, fill = eval_set)) +
 **Overall**, which **cryptocurrency** has the best metrics for all runs from the last 30 days?
 
 #### Summarize the data
-```{r summarize_best_models}
+```{r summarize_best_cryptos}
 # First create grouped data
 predictable_cryptos <- group_by(metrics_historical, symbol, eval_set)
 # Now summarize the data
@@ -705,11 +703,8 @@ predictable_cryptos
 Show data using the `formattable` package [@R-formattable] to color code 
 ```{r}
 formattable(predictable_cryptos, list(rmse = color_tile("#71CA97", "red"),
-                                     rsq = color_tile("firebrick1", "#71CA97") ) )
+                                     rsq = color_tile("firebrick1", "#71CA97")))
 ```
-
-
-
 
 
 ### Accuracy Over Time
@@ -740,18 +735,18 @@ ggplot(accuracy_over_time, aes(x = last_refreshed, y = rmse, rsq = rsq)) +
   geom_line(aes(x = last_refreshed, y = rsq), color = 'dark green', size = 1)
 ```
 
-Plotly version:
-```{r plotly_accuracy_over_time}
-ggplotly(
-  ggplot(accuracy_over_time, aes(x = last_refreshed, y = rmse, rsq = rsq)) +
-    # Add both a red point and a red line for RMSE metric
-    geom_point(color = 'red', size = 2) +
-    geom_line(color = 'red', size = 1) +
-    # Also add R^2 to the plot in dark green
-    geom_point(aes(x = last_refreshed, y = rsq), color = 'dark green', size = 2) +
-    geom_line(aes(x = last_refreshed, y = rsq), color = 'dark green', size = 1)
-  )
-```
+<!-- Plotly version: -->
+<!-- ```{r plotly_accuracy_over_time} -->
+<!-- ggplotly( -->
+<!--   ggplot(accuracy_over_time, aes(x = last_refreshed, y = rmse, rsq = rsq)) + -->
+<!--     # Add both a red point and a red line for RMSE metric -->
+<!--     geom_point(color = 'red', size = 2) + -->
+<!--     geom_line(color = 'red', size = 1) + -->
+<!--     # Also add R^2 to the plot in dark green -->
+<!--     geom_point(aes(x = last_refreshed, y = rsq), color = 'dark green', size = 2) + -->
+<!--     geom_line(aes(x = last_refreshed, y = rsq), color = 'dark green', size = 1) -->
+<!--   ) -->
+<!-- ``` -->
 
 
 
