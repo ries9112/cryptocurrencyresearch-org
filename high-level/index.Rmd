@@ -1,0 +1,756 @@
+---
+title: "Cryptocurrency Research - Reproducible Example"
+output: 
+  revealjs::revealjs_presentation:
+    theme: sky
+    self_contained: true
+---
+
+```{r cache_all, include=FALSE}
+# Once I'm done making edits get rid of the cache by commenting out the line below
+knitr::opts_chunk$set(cache = F)
+# automatically format all the code chunks
+# knitr::opts_chunk$set(tidy = F)
+# THIS IS SIMPLER + PRESENTATION VERSION
+
+# REMEMBER THIS IF NEED TO RESIZE OR COLOR TEXT:
+# <span style="color: red; font-size: 10pt">**[Hourly]**</span
+```
+
+# Introduction
+
+Welcome to this tutorial on supervised machine learning in the R programming language. This is the high-level version of a <a href="https://cryptocurrencyresearch.org/" target="_blank">more detailed tutorial</a>.
+
+<!-- In this tutorial we will go through the process of predicting prices for a cryptocurrency using supervised machine learning. These results never change, and this is the high-level version of a <a href="https://cryptocurrencyresearch.org/" target="_blank">more detailed tutorial</a>. -->
+
+<!-- Welcome to the more high-level version of the <a href="https://cryptocurrencyresearch.org/" target="_blank">predictive analytics tutorial on using supervised machine learning to make predictions on the cryptocurrency markets</a>. -->
+
+**You can navigate between topics with the right and left arrow keys, and press on the down key to learn more about each topic.**
+
+You can also press on the **`"o"`** or **`"esc"`** keys on your keyboard for an overview of the slides that can be help with navigation. Press **`"f"`** to switch to full-screen.
+
+**Press on the down arrow key on your keyboard for an overview of what you will learn by following along with the tutorial.**
+
+## Overview
+
+-   Whenever an **R package** is referenced, the text will be [colored orange]{style="color: #ae7b11;"}. We will discuss ***R packages*** and the rest of the terms below later on in this presentation.
+
+-   Whenever a **function** is referenced, it will be [colored green]{style="color: green;"}.
+
+-   Whenever an **R object** is referenced, it will be [colored blue]{style="color: blue;"}. We will also refer to the **parameters** of functions in [blue]{style="color: blue;"}.
+
+-   When a **term** is particularly common in machine learning or data science, we will call it out with [purple text]{style="color: purple;"}, but only the first time it appears.
+
+## Overview - Continued
+
+[You do not need pre-existing R knowledge to follow along, but you should familiar with working with data (even if only in Excel). **Here is what we will cover:**]{style="font-size: 70%;"}
+
+-   You will gain a better understanding of how to install and load packages in R.
+
+-   You will get an introduction to the [tidyverse]{style="color: #ae7b11;"} by learning about data manipulation and visualizations.
+
+-   You will learn to make many different types of [supervised machine learning models]{style="color: purple;"} using a standardized approach using the [caret]{style="color: #ae7b11;"} package.
+
+-   Finally, you will learn how to use [tidy tools for time series analysis](https://tidyverts.org/) ([tsibble]{style="color: #ae7b11;"} and [fable]{style="color: #ae7b11;"}.) <!-- , which are powerful and straightforward. -->
+
+## This Version
+
+-   This version of the tutorial is meant to be fully [reproducible]{style="color: purple;"}, meaning the results will never change and by running the code as outlined you will always get the exact same results outlined here. <!-- The <a href="https://cryptocurrencyresearch.org/" target="_blank">full version</a> on the other hand, refreshes every 12 hours adding the new 12 hours of data to the analysis each time. -->
+
+-   The second main difference, is in this version we only deal with the historical prices for one cryptocurrency, while in the full version we make independent predictive models for each one on fresh data every 12 hours.
+
+-   This problem itself has also been simplified, here we don't deal with all nuances relating to a cryptocurrency's price.
+
+<!-- **This version does not take a viable approach to predicting cryptocurrency prices. There are many considerations that we ignore in this version and only deal with in the [full version](https://cryptocurrencyresearch.org/) of the tutorial. This tutorial is meant to provide helpful boiler-plate code that can be used for many different problems, rather than the specific problem of predicting cryptocurrency prices, like the [full version](https://cryptocurrencyresearch.org/) attempts to do.**  -->
+
+<!-- Some key steps that are not taken in this higher-level version, include not taking a specific price at a specific exchange -->
+
+<!-- Press the right arrow key to move on to the next topic.  -->
+
+<!-- You can navigate between topics with the right and left arrow keys, and press on the down key to learn more about each topic. -->
+
+<!-- ## Who is this tutorial for? -->
+
+<!-- - This tutorial is meant for people who regularly deal with data, but think doing predictive modeling is too difficult or complex.  -->
+
+<!-- - You do not necessarily need to be proficient in R to follow along, although that is certainly helpful. -->
+
+## What is Machine Learning?
+
+<!-- ^ could make title purple too -->
+
+Making forecasts about the future using data from the past using a process called [**Supervised Machine Learning**]{style="color: purple;"} has become increasingly easier over the past decade, and has become a clearly defined step-by-step process that any professional who regularly works with data can follow along with.
+
+Machine Learning is the process of [***training***]{style="color: purple;"} a computer to find an answer within clearly defined rules. We provide a machine learning algorithm data about the past and outline the "rules" to work within, and the model looks for statistical structure (depending on the specific model used) that can be used to make [**forecasts**]{style="color: purple;"} about the future.
+
+## Supervised Machine Learning
+
+The *Supervised* part of supervised machine learning refers to the fact that the data was observed in the past, and provides us information regarding both the inputs (independent variables) and the outcome (dependent variable, also known as the [target variable]{style="color: purple;"}). [Click here for a more in-depth explanation of the different branches of machine learning](https://machinelearningmastery.com/types-of-learning-in-machine-learning/).
+
+Go to the next slide (**right** arrow key `r emo::ji('right arrow')`) to get started!
+
+# R Interface
+
+This section will provide a very basic overview of what it actually means to use the R programming language. We will start by covering what an ***R session*** is and how to get started. **If you have already used R and RStudio in the past, feel free to skip the section below.**
+
+## R and RStudio {#r-and-rstudio}
+
+The R programming language is a free computer application that [can be downloaded from the internet](https://www.r-project.org/). Anyone using R should be aware of **RStudio**, which is a different computer application that [can also be downloaded for free online](https://rstudio.com/products/rstudio/download/#download). RStudio makes programming in R a much better experience and is a tool anyone using R should be familiar with. After installing these two programs, anyone is ready to start programming in R and follow along with this tutorial.
+
+## R Sessions
+
+[Whenever you open the **RStudio** application for the first time, you will be brought to a ***new R session*** that should look like this:]{style="font-size: 95%;"}
+
+![](C:/Users/ries9/Documents/Research-Paper-Example/images/rstudio_interface.PNG){width="800"}
+
+## R Sessions - Continued {#r-sessions-continued}
+
+Throughout this tutorial, we will show pieces of R code that execute as part of this presentation (which was created in a tool called [R Markdown]{style="color: purple;"} within RStudio that you do not need to worry about):
+
+```{r hello_from_R}
+print("Hello from R!")
+```
+
+The output above shows the result of the code we ran, where the number **[1]** indicates this is the first value of the output.
+
+Keep going below ⬇️ to learn more.
+
+## R Sessions - Continued
+
+![](C:/Users/ries9/Documents/Research-Paper-Example/images/rstudio_interface_annotated.PNG)
+
+[**1.** When we run code in this presentation as shown in the [previous slide ⬆️](#r-sessions-continued), it is equivalent to running the code in your **console** in RStudio, which is where the ***\>*** symbol is inside the red highlighted area.]{style="font-size: 55%;"}
+
+[**2.** If you wanted to save your code to use in a new R session once you close the program, you would need to create a new file in the top left corner of RStudio.]{style="font-size: 55%;"}
+
+## R Objects
+
+[When we start a new R session, for example when we open RStudio, the environment should be empty (as displayed in the top right pane of the previous screenshot). We can create new objects by naming them whatever we would like, and using an arrow to assign the object some kind of value:]{style="font-size: 65%;"}
+
+![](C:/Users/ries9/Documents/Research-Paper-Example/images/rstudio_assign_variable_2.PNG){width="705"}
+
+## R Objects - Continued
+
+[Whenever we run a command in R, we have the option of saving the result in the R environment. For example, we can create a new object called words]{style="font-size: 75%;"}:
+
+```{r make_words_obj}
+words <- "this object stores text"
+```
+
+[We could have shown the results directly and not saved the results as a variable. Savings results as R objects is helpful for approaching a problem step-by-step. We can show the results that we saved by running a command with the name of the object:]{style="font-size: 75%;"}
+
+```{r show_words_obj}
+words
+```
+
+</span>
+
+<!-- ## R Objects - Continued -->
+
+<!-- We can save new objects from new objects -->
+
+## R Functions
+
+When we want to perform some kind of operation on an R object, we will use a [function]{style="color: purple;"}. Earlier, when we ran the command **print("Hello from R!")**, we asked R to [**print()**]{style="color: green;"} the text "Hello from R!".
+
+A new R session has many functions available to it, but the default functionality pales in comparison to the number of functions that have been created by R users over the years. We can load functions created by other users and researchers by installing a **package** on our computer and loading the functionality in the R session, which we will review in detail in a [later section](#what-are-packages).
+
+## R Functions - continued
+
+Different functions have different [**parameters**]{style="color: purple;"}, which are the inputs for a function. Some functions require more inputs than others to work. The [**print()**]{style="color: green;"} function for example only requires us to input one parameter for what we want to ***print*** in the output. Many other functions however, require more inputs and will not work with a single input provided. In many cases, the function will have [default values]{style="color: purple;"} for a parameter, that way if no selection is made by the user the default behavior will be used, and if the user makes a selection then the selection overrides the default behavior.
+
+## R - Getting Help
+
+[But what if you don't know how to use a function? R has some excellent resources available, and in most cases you can figure out the answers to most usage questions directly inside of R by running the **help()** function on any other function. When packages are installed, they will come with documentation that can be opened this way. The last section tends to be the most useful and includes useful examples of using the function.]{style="font-size: 65%;"}
+
+![](C:/Users/ries9/Documents/Research-Paper-Example/images/rstudio_help.PNG){width="529"}
+
+## Move on
+
+There is a lot more to cover in terms of "how do I program in R?", but this is all the knowledge you need to be able to follow along with this tutorial.
+
+Move on to the next section by pressing the right arrow key on your keyboard `r emo::ji('right arrow')`
+
+# Disclaimer
+
+**This tutorial is made available for learning and educational purposes only and the information to follow does not constitute trading advice in any way shape or form.** We avoid giving any advice when it comes to trading strategies, as this is a very complex ecosystem that is out of the scope of this tutorial; we make no attempt in this regard, and if this, rather than data science, is your interest, your time would be better spent following a different tutorial that aims to answer those questions.
+
+# Follow Along With the code
+
+As code comes up and is explained, we recommend that you run it yourself on your computer as well. You can run the code by following the installation instructions as outlined in the steps below.
+
+**Alternatively, you can** <a href="https://mybinder.org/v2/gh/ries9112/high-level-reprex-jupyter.git/master" target="_blank">**click here to run the code in the cloud without having to worry about installing anything** </a>.
+
+<!-- If you are familiar with the [RStudio](https://rstudio.com/) interface, you can [**click here to run the code in the cloud and in RStudio**](https://mybinder.org/v2/gh/ries9112/high-level-reprex-jupyter.git/master?urlpath=rstudio/master) -->
+
+## Setup R Environment
+
+In order to follow along with this tutorial, you will need to install additional R packages. At this point you will need to have R and RStudio installed [as previously outlined](#r-and-rstudio). This tutorial is for beginners, and each step is clearly explained. If you do not, [follow these instructions](https://www.youtube.com/watch?v=cX532N_XLIs) first.
+
+**If you do not want to install and run R on your computer, you can instead [click here to run the code in a cloud environment](https://mybinder.org/v2/gh/ries9112/high-level-reprex-jupyter/f74b9ab4b500c6b2cc0ebb0e48985c4be03a97ba)**.
+
+**Press on the down arrow key ⬇️ on your keyboard for instructions on how to setup your machine to follow along with this R programming example.**
+
+```{r initialSetup_needs_adjusting, message=FALSE, warning=FALSE, include=F}
+library(bookdown)
+library(knitr)
+library(tictoc)
+library(DT)
+#library(devtools)
+# library(dplyr)
+# install_github("ries9112/PredictCrypto")
+#library(PredictCrypto) #import with eval=F later
+options(scipen=999) # disable scientific notation
+
+# change wd to show images
+setwd("~/Research-Paper-Example")
+# start timer
+tic('whole process time')
+```
+
+<!-- If you want to follow along from your own computer, please follow the steps that follow on your own machine. After following these setup instructions you will be able to follow along with the rest of the steps in this analysis. -->
+
+<!-- ## Installing Packages  (Sure about removing this?) -->
+
+<!-- One of the main tools that we will be using in this tutorial is the `tidyverse`. -->
+
+<!-- We can install the `tidyverse` package by running the command `install.packages('tidyverse')`: -->
+
+<!-- ```{r tidy_install, eval=F} -->
+
+<!-- install.packages('tidyverse') -->
+
+<!-- ``` -->
+
+<!-- As of writing this, the ***core tidyverse*** is comprised of [8 different packages](https://www.tidyverse.org/packages/) and includes most if not all of the tools you would need for your daily data analysis work. By running the command `install.packages('tidyverse')` you installed each one. From this collection we will mostly leverage [`dplyr`](https://dplyr.tidyverse.org/) for data manipulation and [`ggplot2`](https://ggplot2.tidyverse.org/) for visualizations in this tutorial. -->
+
+<!-- ## The tidyverse -->
+
+<!-- ## Import the tidyverse -->
+
+<!-- The previous command `install.packages('tidyverse')` installed all packages that are part of the tidyverse, but before we can use the contents of those packages we also need to run the line `library(tidyverse)` to import them into the current R session. We could also import the packages individually, for example by running `library(dplyr)`, but let's import all of them at once into the R session: -->
+
+<!-- ```{r import_tidyverse, warning=FALSE} -->
+
+<!-- library(tidyverse) -->
+
+<!-- ``` -->
+
+## What are packages? {#what-are-packages}
+
+Packages are collections of functions and data that other users have made shareable. We can install these packages into our own library of R tools and load them into our R session, which can enable us to write powerful code with minimal effort compared to writing the same code without the additional packages. Many packages are simply time savers for things we could do with the default/base functionality of R, but sometimes if we want to do something like make a static chart interactive when hovering over points on the chart, we are better off using a package someone already came up with rather than re-invent the wheel.
+
+Keep going below ⬇️ to learn how to install R packages.
+
+## Installing Packages
+
+We can install packages to extend the functionality of what we can do in R. As a first step, we will need to run the command [**`install.packages()`**:]{style="color: green;"}
+
+```{r, eval=F}
+install.packages("package_name")
+```
+
+We only need to install any given package once on any given computer, kind of like installing an application (like RStudio or Google Chrome) once.
+
+## Using Packages With library()
+
+After installation, we can use [**library(package)**]{style="color: green;"} to import those packages into the current R session. Each time we open a new session in R, we need to import the packages again using [**library()**]{style="color: green;"}. R has some functionality that is just *there* at startup, which is typically referred to as **base R**. When we want to extend R past what base R has to offer, we need to import the package in the current session by using the function [library()]{style="color: green;"}; if the package/functionality has never been installed on top of your current version of base R, you will first need to first install it with [install.packages()]{style="color: green;"}. 
+
+A package only needs to be installed once, but needs to be imported into each new R session using [library()]{style="color: green;"}.
+
+## Installing a Package Example
+
+<!-- Because you might already have some of the packages we will be using installed on your computer, we can start by installing a package that will help us  -->
+
+<!-- the `pacman` package, which will allow us to install the remaining packages in a "smarter" way, where if you already have a package in your library, it will not be installed again. -->
+
+We can install the package called [**pacman**]{style="color: #ae7b11;"} using `install.packages()`:
+
+```{r pacman_install, eval=F}
+install.packages("pacman")
+```
+
+[**pacman**]{style="color: #ae7b11;"} does not refer to the videogame, and stands for ***package manager***. After we import this package, we will be able to use new functions that come with it. We can use one of those functions to install the remaining packages we will need for the rest of the tutorial. The advantage to using the new function, is the installation will happen in a "smarter" way, where if you already have a package in your library, it will not be installed again.
+
+## Use "pacman"
+
+We can now import the [**pacman**]{style="color: #ae7b11;"} package:
+
+```{r import_pacman, message=FALSE, warning=FALSE}
+library(pacman)
+```
+
+Now we have access to the function [**p\_load()**]{style="color: green;"}:
+
+```{r p_load_packages, message=FALSE, warning=FALSE}
+p_load("pins","dplyr","ggplot2","ggthemes","gganimate","caret","xgboost","kernlab", "tsibble","fabletools","fable","feasts","urca","plotly")
+```
+
+[Running **p\_load()** is equivalent to running [**install.packages()**]{style="color: green;"} on each of the packages listed **(but only when they are not already installed on your computer)**, and then running [library()]{style="color: green;"} for each package in quotes separated by commas to import the functionality from the package into the current R session. **Both commands are wrapped inside the single function call to** [**p\_load()**]{style="color: green;"}.]{style="font-size: 70%;"}
+
+## All Set
+
+If you followed along with the steps as outlined, the code in the upcoming slides should work on your computer when run in the correct order.
+
+Move on to the next slide (right arrow key `r emo::ji('right arrow')`) to get started!
+
+# Get the Data
+
+[When doing an analysis, you would typically start with some kind of tabular data, like an Excel file. An Excel file can be saved with the **csv** extension, which can then easily be read by R using the [**read.csv()**]{style="color: green;"} function. When running the function we can save the results in an R object and start doing the analysis.]{style="font-size: 82%;"} 
+
+[The approach described requires you to download the data to your computer. Rather than having you download the data and place it in the correct folder for your R session to reference, we will take a more unorthodox approach that will let us download the data directly from a specific URL. Do not worry too much about the code in the next two slides outside of the fact that we are retrieving the data from an online resource (instead of the more common local computer storage methodology) and saving the data to an R object.]{style="font-size: 82%;"}
+
+## Pins Package
+
+<span style="font-size: 95%;">
+The first package we will use is the [**pins**]{style="color: #ae7b11;"} package to retrieve the data that we will be working with.
+</span>
+
+<span style="font-size: 95%;">
+First, we will need to connect to a public [GitHub repository]{style="color: purple;"} (anyone can post their code to the GitHub website and make a "repository" with code for their project) and ***register*** the ***board*** that the data is ***pinned*** to by using the [**board\_register()**]{style="color: green;"} function:
+</span>
+
+```{r board_register}
+board_register(name = "pins_board", url = "https://raw.githubusercontent.com/predictcrypto/pins/master/", board = "datatxt")
+```
+
+<span style="font-size: 95%;">
+By running the [board\_register()]{style="color: green;"} command on the URL where the data is located, we will be able to ***"ask"*** for any dataset available on the board (in the next slide).
+</span>
+
+## Pull Data
+
+<span style="font-size: 80%;">
+The previous step created a connection to pull the dataset we will use, don't worry too much about the code on the previous slide, but [you can learn more by clicking here](https://pins.rstudio.com/). Now that we are connected to the **board**, we can use the [**pin\_get()**]{style="color: green;"} function to retrieve the data that we will use for the rest of this tutorial:
+</span>
+
+```{r pull_cryptodata_data_reprex}
+cryptodata <- pin_get(name = "ETH_Binance")
+```
+
+<span style="font-size: 80%;">
+The dataset named ***ETH\_Binance*** is data relating to the cryptocurrency **Ethereum (ETH)** on the **Binance** exchange and was downloaded from the website [**https://cryptodatadownload.com/**](https://cryptodatadownload.com/){.uri}.
+</span>
+
+<span style="font-size: 80%;">
+We will be working with hourly data for the **date range from 2020-01-01 to 2020-07-31**.
+</span>
+
+## Data Source
+
+The data is made available by the website ***cryptodatadownload.com***:
+
+```{r show_cryptodatadownload, echo=F}
+knitr::include_url("https://www.cryptodatadownload.com/about",
+  height = "500px")
+```
+
+## Original Data Source
+
+The data was originally sourced from the link for the **ETH/USD** pair and the [**[Hourly]**]{style="color: red;"} option found below:
+
+```{r download_datasets_embed, echo=F}
+knitr::include_url("https://www.cryptodatadownload.com/data/binance/",
+  height = "500px")
+```
+
+## Data Preview
+
+```{r show_cryptodata1, echo=F, message=FALSE, warning=FALSE}
+library(DT)
+datatable(select(head(arrange(cryptodata, desc(Date)), 100), DateTime, Date:Target24HourClose),  style = "default", 
+          options = list(scrollX = TRUE, pageLength=6, lengthMenu = c(1,2,3), dom='t'), rownames = F)
+```
+
+<small>*Only the most recent 100 rows of data are made available in the table above.*</small>
+
+## Data Alternative - BTC
+
+We also made a similar dataset available for the Bitcoin (BTC) cryptocurrency. If you wanted to run the same analysis on Bitcoin instead of Ethereum, you could run this command instead:
+
+```{r pull_cryptodata_data_reprex_BTC_option, eval=F}
+cryptodata <- pin_get(name = "cryptodatadownload_BTC_Binance", board = "pins_board")
+```
+
+Keep in mind that this tutorial will **only be reproducible if you enter** ***ETH\_Binance*** **for the `name` parameter**. Otherwise your code would run, but from the perspective of the Bitcoin cryptocurrency rather than the analysis we are performing on the Ethereum cryptocurrency in this tutorial.
+
+<!-- ## More Data Alternatives -->
+
+<!-- There are options for the `name` parameter:  -->
+
+<!-- - cryptodatadownload_LTC_Binance -->
+
+<!-- - cryptodatadownload_NEO_Binance (Still need to add this one in) -->
+
+<!-- - ... Add one more? -->
+
+<!-- Again, keep in mind that this tutorial will only be reproducible if you enter the name **`ETH_Binance`** for the **`name** parameter, but feel free to get as much practice as you would like looking at a different cryptocurrency. -->
+
+<!-- WON"T FIT <small>In the [full version of the tutorial](https://cryptocurrencyresearch.org/), we model many cryptocurrencies independently at the same time, in this tutorial we only handle one cryptocurrency (Ethereum) </small>  -->
+
+<!-- ## Reproducible Example{#reprex} -->
+
+<!-- This is a fully reproducible example that does not change over time. Meaning, if you were to come back to this static document in 6 months, it would look completely identical. The [full version is the only one that refreshes every 12 hours](https://cryptocurrencyresearch.org/). -->
+
+<!-- The dataset is comprised of `r as.numeric(max(cryptodata$date) - min(cryptodata$date))` days worth of hourly data starting from `r min(cryptodata$date)` and ending `r max(cryptodata$date)`. -->
+
+<!-- Go to the next slide to learn more about the data we will be using in this example. -->
+
+# Documentation
+
+**The data we will be using was downloaded from [cryptodatadownload.com](https://cryptodatadownload.com/).** This is [***tidy data***](https://tidyr.tidyverse.org/articles/tidy-data.html), meaning:
+
+1.  Every column is a variable.
+
+2.  Every row is an observation.
+
+3.  Every cell is a single value.
+
+The cryptocurrency's price is **recorded in one hour intervals** and includes `r max(cryptodata$Date)-min(cryptodata$Date)` days worth of data. Each row summarizes pricing information relating to the cryptocurrency over the specified 1 hour period (the very last field shows the date and the time associated with the row).
+
+<!-- SHOULD I MAKE THE DATETIME FIELD THE SECOND FIELD? -->
+
+## Data Dictionary {#data-dictionary}
+
+<!-- The data is made up of the following columns: -->
+
+-   [**Date**]{style="color: blue;"}: The date on which the data was collected in the **UTC timezone**.
+-   [**Symbol**]{style="color: blue;"}: The cryptocurrency associated with the row of data. "ETH" stands for the "Ethereum" cryptocurrency.
+-   [**Open**]{style="color: blue;"}: The price of the cryptocurrency in US Dollars (\$) **at the start of the hour**.
+-   [**High**]{style="color: blue;"}: The highest price during the course of the hour associated with the row of daa in US Dollars.
+-   [**Low**]{style="color: blue;"}: The lowest price during the course of the hour associated with the row of data inUS Dollars.
+-   [**Close**]{style="color: blue;"}: The price of the cryptocurrency in US Dollars (\$) **at the end of the hour.**
+
+## Data Dictionary - Continued
+
+-   [**VolumeUSDT**]{style="color: blue;"}: The total trading volume associated with the one hour period associated with the row of data.
+-   [**CloseLag1Hour**]{style="color: blue;"}: The value of the field Close, offset by 1 hour into the past, meaing the Close price ofthe cryptocurrency 1 hour earlier in US Dollars (\$).
+-   [**CloseLag12Hour**]{style="color: blue;"}: The Close price of the cryptocurrency 12 hours earlier in US Dolars (\$)
+-   [**CloseLag24Hour**]{style="color: blue;"}: The Close price of the cryptocurrency 24 hours earlier in US Dolars (\$)
+-   [**CloseLag3Day**]{style="color: blue;"}: The Close price of the cryptocurrency 3 days earlier in US Dollars (\$)
+-   [**CloseLag7Day**]{style="color: blue;"}: The Close price of the cryptocurrency 7 days earlier in US Dollars (\$).
+
+## Data Dictionary - Continued
+
+-   [**CloseLag14Day**]{style="color: blue;"}: The Close price of the cryptocurrency 14 days earlier in US Dollars (\$)
+-   [**CloseLag30Day**]{style="color: blue;"}: The Close price of the cryptocurrency 30 days earlier in US Dollars (\$)
+-   [**CloseLag90Day**]{style="color: blue;"}: The Close price of the cryptocurrency 90 days earlier in US Dollars (\$)
+-   [**CloseLag120Day**]{style="color: blue;"}: The Close price of the cryptocurrency 120 days earlier in US Dollars (\$).
+-   [**Target24HourClose**]{style="color: blue;"}: The value of the field Close, offset by **24 hours into the future**.
+-   [**DateTime**]{style="color: blue;"}: The date and time that the data was collected in the **UTC timezone**.
+
+# Data Preview
+
+```{r show_cryptodata, echo=F, message=FALSE, warning=FALSE}
+datatable(head(arrange(cryptodata, desc(Date)), 100),  style = "default", 
+          options = list(scrollX = TRUE, pageLength=2, lengthMenu = c(1,2,3), dom='t'), rownames = F)
+```
+
+<small>Only 100 rows shown. If you are unclear on what a particular column might be, you can refer to the [previous section, which contains a data dictionary describing each column.](#data-dictionary) </small>
+
+## What is the goal?
+
+[Before we start even cleaning the data, it's important to establish ***what*** we want to do, as the steps we take may very well depend on those intentions.]{style="font-size: 85%;"} [Our goal, is to predict the future price of the cryptocurrency called **Ethereum**. For any given hour, we are given the **Open**]{style="font-size: 85%;"} price at the start of the hour, the [**Close**]{style="color: blue;"} price at the end of the hour, the lowest and highest prices for the given hour, the volume associated with the hour of trading, as well as the Close price from the previous hour, previous 12 hours, and 7 other ***lagged*** variables. We want to be able to draw relationships between these variables in order to predict the value of the field called [**Target24HourClose**]{style="color: blue;"}, which is the [**Close**]{style="color: blue;"} price 24 hours into the future relative to the rest of the columns in the data.
+
+# Data Prep {#data-prep}
+
+Data preparation is an essential step for effective predictive modeling. Not all datasets are created equal, and the quality of the models we are able to make will only ever be as good as the quality of the data itself. [***Cleaning***]{style="color: purple;"} a dataset can mean many different things depending on the problem at hand, and unfortunately we are unable to cover them all here; this tutorial focuses on the predictive modeling side of things, so **the data provided has already been cleaned beforehand**, but we still introduce some useful tools in the section below.
+
+## Cleaning Data - Overview
+
+What does "cleaning data" look like more specifically? Data tends to have issues, and before we start deriving insights from it, we usually need to fix those issues, which is what we mean by ***cleaning the data***. Some examples: <small>
+
+-   **Are the columns of the dataset the correct data types (i.e. numeric, string, etc..)?**
+
+-   **Are there any missing ([null]{style="color: purple;"}** **) values?** What proportion of all rows? What is the context behind them? Is this problematic in terms of what you end goal is? Are there any duplicate
+
+-   **Are there any inconsistencies in the data?** Do the outliers make sense or is there a data capture issue of some kind? Are there typos if the data is manually entered?
+
+There are tools that can help answer all of these questions, in the [full version](https://cryptocurrencyresearch.org/) of this tutorial, we cover some functionality found in the [[**skimr**]{style="color: #ae7b11;"} package](https://github.com/ropensci/skimr). After we have made sure we are working with a clean dataset, we can do some [***data engineering***]{style="color: purple;"} to try and improve the accuracy of the models we will be making by adding new information that might be relevant to the problem at hand, which is what we will be doing in the next step when we add the new [**Volatility**]{style="color: blue;"} column to the data.
+
+</small>
+
+## Exploratory Data Analysis
+
+It is worth mentioning that [**E**xploratory **D**ata **A**nalysis (EDA)]{style="color: purple;"} is the important process by which you figure out ***what*** about the data needs to be ***cleaned*** and adjusted, but we are not covering it in this tutorial, and these steps have already been taken care of. You can find an excellent guide to EDA here: <https://r4ds.had.co.nz/exploratory-data-analysis.html>
+
+In the [full version of this tutorial](https://cryptocurrencyresearch.org/) we do more EDA because new data is added every 12 hours and we need to make sure there are no issues across all \~90 columns, while here we are providing a dataset that will never change and we have already cleaned ahead of time.
+
+## Dplyr Package
+
+There are resources and tools out there that are very effective for cleaning and manipulating data. We recommend starting with the [**dplyr**]{style="color: #ae7b11;"} package if working in R, which is what we used to clean the data. Because this is such a useful tool in R, we included a brief example using the [**mutate()**]{style="color: green;"} function to add a new column to the data that calculates the **volatility** for each row.
+
+<!-- We used the `mutate()` function to calculate the **`CloseLag...`** and **`Target24HourClose`** fields, but have omitted those steps from this tutorial to keep things more focused on the predictive analytics process instead of providing data preparation steps that are not relevant to many problems. Please refer to the **[data dictionary](#data-dictionary)** to understand what these columns represent and how they were calculated.-->
+
+</small>
+
+## Mutate Function - dplyr
+
+<small>The [**dplyr**]{style="color: #ae7b11;"} package from the [tidyverse](https://www.tidyverse.org/) is very useful for cleaning and manipulating data. Using the [**mutate()**]{style="color: green;"} function from [**dplyr**]{style="color: #ae7b11;"}, we can add a new column to the data according to a formula that gets applied to each row. For example, we could create add a brand new column (C) to our data by taking the sum of two columns (A+B) like illustrated below:</small>
+
+<!-- ```{r, eval=F} -->
+
+<!-- mutate(cryptodata, sum_example = Open + High) -->
+
+<!-- ``` -->
+
+[![Illustration by Allison Horst](C:/Users/ries9/Documents/Research-Paper-Example/images/dplyr_mutate.png){width="48%"}](https://dplyr.tidyverse.org/reference/mutate.html)
+
+<small>*Illustration by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)*</small>
+
+<!-- ## Add Lagged Prices -->
+
+<!-- ```{r lagged_prices} -->
+
+<!-- cryptodata <- mutate(cryptodata, CloseLag1Hour = lag(Close, n = 1)) -->
+
+<!-- ``` -->
+
+<!-- <small>In the code above, we used the function `mutate()` on the object `cryptodata` to create a new column called `Lag1Hour`, which contains the *Close* price from 1 hour earlier. The `lag()` function is also from `dplyr` and allows us to offset values by one row, which in our case is equivalent to one hour. See the table below to use the DateTime field to compare the original `Close` price to the `Lag1Hour` Close price:</small> -->
+
+<!-- ```{r lagged_prices_show, echo=F} -->
+
+<!-- datatable(select(head(arrange(cryptodata, desc(Date)), 2000), DateTime, Close, CloseLag1Hour),  style = "default",  -->
+
+<!--           options = list(scrollX = TRUE, pageLength=2, lengthMenu = c(1,2,3)), rownames = F) -->
+
+<!-- ``` -->
+
+<!-- ## More lagged prices -->
+
+<!-- <small>Let's also add lagged prices for a 12 hour, 24 hour, 3 day, 7 day, 14 day, 30 day, 90 day and 120 day period as new columns:</small> -->
+
+<!-- ```{r lagged_prices_all} -->
+
+<!-- cryptodata <- mutate(cryptodata, CloseLag12Hour = lag(Close, n = 12), -->
+
+<!--                                  CloseLag24Hour = lag(Close, n = 24), -->
+
+<!--                                  CloseLag3Day = lag(Close, n = 72), -->
+
+<!--                                  CloseLag7Day = lag(Close, n = 168), -->
+
+<!--                                  CloseLag14Day = lag(Close, n = 336), -->
+
+<!--                                  CloseLag30Day = lag(Close, n = 720), -->
+
+<!--                                  CloseLag90Day = lag(Close, n = 2160), -->
+
+<!--                                  CloseLag120Day = lag(Close, n = 2880)) -->
+
+<!-- ``` -->
+
+<!-- ```{r lagged_prices_show_all, echo=F} -->
+
+<!-- datatable(select(head(arrange(cryptodata, desc(Date)), 2000), DateTime, Close, CloseLag1Hour, CloseLag12Hour, CloseLag24Hour, CloseLag3Day, CloseLag7Day, CloseLag14Day, CloseLag30Day, CloseLag90Day, CloseLag120Day),  style = "default",  -->
+
+<!--           options = list(scrollX = TRUE, pageLength=2, lengthMenu = c(1,2,3)), rownames = F) -->
+
+<!-- ``` -->
+
+## Add Volatility
+
+Using [**mutate()**]{style="color: green;"} we can add a new column called [**Volatility**]{style="color: blue;"}, which tracks the percent difference between the [Low]{style="color: blue;"} price and the [High]{style="color: blue;"} price at each hourly datapoint as an absolute value:
+
+```{r add_volatility}
+cryptodata <- mutate(cryptodata, Volatility = abs(((High - Low)/Low)*100))
+```
+
+<!-- , and overwrote `cryptodata` with the result:  -->
+
+```{css, echo=FALSE}
+pre[class] {
+  max-height: 150px;
+}
+```
+
+```{css, echo=FALSE}
+.scroll-150 {
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: inherit;
+}
+```
+
+```{r, class.output="scroll-150"}
+select(cryptodata, DateTime, Low, High, Volatility) #Show results (only columns of interest)
+```
+
+<!-- ## Add Target Variable -->
+
+<!-- <small>We will also need to worry about what we are actually trying to predict. For this tutorial, we will be making price predictions for 24 hours into the future, so we will need to calculate a new column containing those outcomes, as well. We can do that by taking the same code as before and changing the `lag()` function with `lead()`:</small> -->
+
+<!-- ```{r add_target} -->
+
+<!-- cryptodata <- mutate(cryptodata, Target24HourClose = lead(Close, n = 24)) -->
+
+<!-- ``` -->
+
+<!-- ```{r lagged_prices_show_all_w_target, echo=F} -->
+
+<!-- datatable(select(tail(head(arrange(cryptodata, Date), 3000),2000), DateTime, Close, CloseLag24Hour,  Target24HourClose),  style = "default",  -->
+
+<!--           options = list(scrollX = TRUE, pageLength=2, lengthMenu = c(1,2,3)), rownames = F) -->
+
+<!-- ``` -->
+
+<!-- ## Remove NA's -->
+
+<!-- <!-- HERE NEED TO REMOVE ROWS WITH NA VALUES FOR TARGET! CARET WON'T WORK OTHERWISE. -->
+
+<!-- The [**`dplyr`**](https://dplyr.tidyverse.org/) package has ***a lot*** of functionality that we will not cover here, but let's use the `drop_na()` function to get rid of rows with null values to run into less issues when making the predictive models. -->
+
+<!-- ```{r} -->
+
+<!-- cryptodata <- drop_na(cryptodata) #, Target24HourClose) -->
+
+<!-- ``` -->
+
+<!-- We now have everything we need to produce the predictive models. Before making the predictive models however, let's spend some time learning how to visualize data. -->
+
+## Remove Symbol Column
+
+In the previous slide we checked we calculated the Volatility correctly by only returning the relevant columns using the [**select()**]{style="color: green;"} function. The column named [Symbol]{style="color: blue;"} in the dataset always has a consistent value of ***ETH*** and adds no value when making predictions, so we can remove the column very easily using the [**select()**]{style="color: green;"} function again, but this time using it to remove a column from the data:
+
+```{r remove_symbol}
+cryptodata <- select(cryptodata, -Symbol)
+```
+
+## Train/Test Split
+
+When we make predictive models, we would not want to make important real life decisions based on those models without having a good idea of how effective the methodology actually is, and ensuring no mistakes were made. We will likely never get a 100% accurate representation of what the model will actually perform like in the real world without actually tracking those results over time, but there are ways for us to get a sense of whether something works or not ahead of time. Here, we are taking the simplest of those approaches by training our models on the earlier 80% of the data, and testing the accuracy of those models on the remaining 20% new unseen data to start evaluating how good the models are. <!-- Later on we will discuss a slightly better way called ***cross validation***. -->
+
+## Train/Test Split - Continued
+
+As a last step, let's split the data into a [**train**]{style="color: purple;"} and [**test**]{style="color: purple;"} dataset. We will build the models on the earlier 80% of the data, and assess how well the models perform on the last 20% of the data:
+
+```{r}
+cryptodata_train <- head(cryptodata, as.integer(nrow(cryptodata)*.8))
+```
+
+And the test data:
+
+```{r}
+cryptodata_test <- tail(cryptodata, as.integer(nrow(cryptodata)*.2))
+```
+
+[The first piece of code is taking the first 80% of the rows, and the second line for **cryptodata\_test**]{style="font-size: 65%;"} creates the object taking the last 20% of the rows of [**cryptodata**]{style="color: blue;"} (which was already sorted ahead of time from the earliest to the latest datapoint).
+
+<!-- ## A Note on overfitting -->
+
+<!-- (below isn't very accurate to what overfitting actually is) -->
+
+<!-- There are some situations that tend to be problematic. One such scenario, is one where the model ***seems*** to perform extremely well, but doesn't work as expected when used in a practical context. One reason for this kind of <span style="color: purple;"> overfitting</span>  -->
+
+## Helpful Resources
+
+As previously mentioned, we omitted data cleaning/preparation steps as they might not be relevant to all predictive analytics problems. If you are looking for a good resource for these types of problems, look no further than "STAT 545": [**https://stat545.com/**](https://stat545.com/){.uri} which takes the opposite approach of what we are doing here, and "is about everything that comes up during data analysis except for statistical modelling and inference."
+
+Also remember that if you do not know what a function does, you can put it inside of the function [**help()**]{style="color: green;"} to open the documentation associated with the function. You can learn more about [help()]{style="color: green;"} here: <https://www.r-project.org/help.html>
+
+# Visualizing Data
+
+<small> The [**ggplot2**]{style="color: #ae7b11;"} package is the standard when it comes to making plots in R. The ***gg*** in [**ggplot2**]{style="color: #ae7b11;"} stands for the ***Grammar of Graphics***, which is essentially the idea that many different types of charts share the same underlying building blocks, and that they can be put together in different ways to make charts that look very different from each other. [In Hadley Wickham's (the creator of ggplot2) own words,](https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/) "a pie chart is just a bar chart drawn in polar coordinates", "They look very different, but in terms of the grammar they have a lot of underlying similarities."</small>
+
+[![Illustration by Allison Horst](C:/Users/ries9/Documents/Research-Paper-Example/images/ggplot2_masterpiece.png){width="50%"}](https://ggplot2.tidyverse.org/)
+
+<small>*Illustration by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)*</small>
+
+## Basics - ggplot2
+
+[So how does **ggplot2**]{style="font-size: 75%;"} actually work? According to the [official documentation](https://ggplot2.tidyverse.org/), ***"...start with*** [***ggplot()***]{style="color: green;"}***, supply a dataset and aesthetic mapping (with*** [***aes()***]{style="color: green;"}***)...***
+
+```{r ggplot_blank, fig.width=3, fig.height=2}
+price_chart <- ggplot(data = cryptodata, aes(x = DateTime, y = Close))
+# Show chart:
+price_chart
+```
+
+<small> Here we specified which data to use and which variables we are interested in plotting, find out about specifying a [***geom***]{style="color: purple;"} to visually represent the points in the slide below ⬇️</small>
+
+## ggplot - Add geom
+
+<small>In the previous slide, we got a blank chart, but that was not due to an error. Up to this point, we have specified the data as being [**cryptodata**]{style="color: blue;"}, and we assigned the x-axis to the variable [**DateTime**]{style="color: blue;"} and the y-axis to the variable [**Close**]{style="color: blue;"}, but we have not yet specified ***how*** to plot the information. Should the points be shown as dots? Lines? Bars? We can specify the shape by adding a ***geom***, in this case a line using [**geom\_line()**]{style="color: green;"}. You can find many more ***geom*** types here: <https://ggplot2.tidyverse.org/reference/> </small></small>
+
+<!-- adjust font size above? -->
+
+```{r ggplot_point, fig.width=4.5, fig.height=2.7}
+price_chart <- price_chart + geom_line()
+# Show chart
+price_chart
+```
+
+## ggplot add title
+
+<small> The main takeaway, is that we don't need to re-build every aspect of a chart when we want to produce something that looks different. We can keep building a chart one piece at a time, and change those pieces when we have to. Here is another example adding a title:</small>
+
+```{r ggplot_title, fig.width=4.5, fig.height=2.5}
+price_chart <- price_chart + ggtitle('Price ($) Over Time - Ethereum')
+# Show chart
+price_chart
+```
+
+<small> We could of course do the same to rename the x and y axis. The package [**ggplot2**]{style="color: #ae7b11;"} is much more than that however, go to the slide below to learn about how the functionality of the [**ggplot2**]{style="color: #ae7b11;"} package can be extended further.</small>
+
+## Extending ggplot2
+
+<small> The [**ggplot2**]{style="color: #ae7b11;"} package has official frameworks on how it can be extended, and the R community has developed several very useful extensions, which allow for things like and interactive charts. You can find a pretty comprehensive list of useful extensions here: <https://exts.ggplot2.tidyverse.org/> </small>
+
+```{r show_ggplot_extensions, echo=F}
+knitr::include_url("https://exts.ggplot2.tidyverse.org/gallery/",
+  height = "480px")
+```
+
+<!-- ## Interactive Chart Example -->
+
+<!-- One neat way to extend the functionality of a chart we've made using **`ggplot`**, is by using the **`ggplotly()`** function from the **`plotly()`** package: -->
+
+<!-- ```{r plotly} -->
+
+<!-- ggplotly(price_chart) -->
+
+<!-- ``` -->
+
+## Extension - ggthemes
+
+For example, we could use the [**ggthemes**]{style="color: #ae7b11;"} package (installed and loaded previously) to change the look of the chart:
+
+```{r ggplot_theme, fig.width=4.5, fig.height=3.5}
+price_chart + theme_economist()
+```
+
+<!-- ## Extensions - plotly -->
+
+<!-- ```{r ggplotly, fig.width=4.5, fig.height=3.5} -->
+
+<!-- library(plotly) -->
+
+<!-- ggplotly(price_chart + theme_economist()) -->
+
+<!-- ``` -->
+
+## Extension - gganimate
+
+We cannot cover all these extensions in detail here, but as one last example here we use the [**gganimate**]{style="color: #ae7b11;"} package (also installed and loaded in a previous step) to create an animation that iterates through each date and adjusts the axis relative to the current data:
+
+```{r gganimate_show}
+animated_chart <- price_chart + transition_states(Date) + view_follow() + geom_point()
+```
+
+View the results in the slide below ⬇️
+
+## gganimate results
+
+<!-- The object **`animated_chart`** is now an animated GIF showing many charts: -->
+
+```{r animate_chart}
+animate(animated_chart, fps=2, height = 350, width =500)
+```
+
+<small> We wrapped [**animated\_chart**]{style="color: blue;"} in the function [**animate()**]{style="color: green;"} to slow down and resize the GIF shown. We will stop here, but we encourage you to keep exploring the possibilities of [**ggplot2**]{style="color: #ae7b11;"}. Move on to the next slide `r emo::ji('right arrow')` to start making predictive models! </small>
+
+<!-- ```{r gganimate_run, echo=F, fig.width=2.8, fig.height=2} -->
+
+<!-- animate(price_chart + transition_states(Date) + view_follow() + geom_point(),fps=1) -->
+
+<!-- ``` -->
