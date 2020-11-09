@@ -1,27 +1,5 @@
 # Explore the Data {#explore-data}
 
-
-```{r load_pacman}
-library(pacman)
-```
-
-[**pacman**]{style="color: #ae7b11;"} does not refer to the videogame, and stands for [***pac***]{style="color: #ae7b11;"}***kage*** [***man***]{style="color: #ae7b11;"}***ager***. After we importing this package, we can now use new functions that come with it. 
-
-DELETE STUFF ABOVE THIS
-
-### Install All Other Packages
-We can use [**p_load()**]{style="color: #green;"} to install the remaining packages we will need for the rest of the tutorial. The advantage to using the new function, is the installation will happen in a “smarter” way, where **if you already have a package in your library, it will not be installed again**.
-
-
-```{r install_all_other_packages}
-p_load('pins', 'skimr', 'DT', 'httr', 'jsonlite', # Data Exploration 
-       'tidyverse', 'tsibble', 'anytime', # Data Prep
-       'ggTimeSeries', 'gifski', 'av', 'magick', 'ggthemes', 'plotly', # Visualization
-       'ggpubr', 'ggforce', 'gganimate', 'transformr', # Visualization continued
-       'caret', 'doParallel', 'xgboost', 'gbm', 'deepnet', # Predictive Modeling
-       'hydroGOF', 'formattable', 'knitr') # Evaluate Model Performance
-```
-
 ## Pull the Data
 
 The first thing we will need to do is download the latest data. We will do this by using the [**pins**]{style="color: #ae7b11;"} package [@R-pins], which has already been loaded into our session [in the previous section](#installing-and-loading-packages).
@@ -76,13 +54,13 @@ The data is collected once per hour. Each row is an observation of an individual
 
 ## The definition of a "price" {#the-definition-of-a-price}
 
-When we are talking about the price of a cryptocurrency, there are several different ways to define it. Most people check cryptocurrency prices on websites that aggregate data across thousands of exchanges, and have ways of computing a global average that represents the current price of the cryptocurrency. This is what happens on the very popular website coinmarketcap.com, but is this the correct approach for our use case?
+When we are talking about the price of a cryptocurrency, there are several different ways to define it and there is a lot more than meets the eye. Most people check cryptocurrency "prices" on websites that aggregate data across thousands of exchanges, and have ways of computing a global average that represents the current "price" of the cryptocurrency. This is what happens on the very popular website coinmarketcap.com, but is this the correct approach for our use case?
 
 Before we even start programming, a crucial step of any successful predictive modeling process is defining the problem in a way that makes sense in relation to the actions we are looking to take. If we are looking to trade a specific cryptocurrency on a specific exchange, using the global average price is not going to be the best approach because we might create a model that believes we could have traded at certain prices when this was actually not the case. If this was the only data available we could certainly try and extrapolate trends across all exchanges and countries, but a better alternative available to us is to define the price as the price that we could have **actually purchased** the cryptocurrency at. If we are interested in purchasing a cryptocurrency, we should consider data for the price we could have actually purchased it at.
 
 ### Order Book
 
-A cryptocurrency exchange has a constantly evolving [[***order book***]{style="color: purple;"}](https://www.investopedia.com/terms/o/order-book.asp), where traders can post specific trades they want to make to either sell or buy a cryptocurrency specifying the price and quantity. When someone posts a trade to sell a cryptocurrency at a price that someone else is looking to purchase it at, a trade between the two parties will take place.
+A cryptocurrency exchange works by having a constantly evolving [[***order book***]{style="color: purple;"}](https://www.investopedia.com/terms/o/order-book.asp), where traders can post specific trades they want to make to either sell or buy a cryptocurrency specifying the price and quantity. When someone posts a trade to sell a cryptocurrency at a price that someone else is looking to purchase it at, a trade between the two parties will take place.
 
 **You can find the live order book for the exchange we will be using here: <https://hitbtc.com/btc-to-usdt>**
 
@@ -96,10 +74,12 @@ Here, the x-axis shows the price of the cryptocurrency, with the lower prices on
 
 In the screenshot above, around the \$13,000 price point the market essentially "runs out" of people willing to buy the cryptocurrency, and shows us how much people are willing to sell at the higher price points. The screenshot shows there are many orders that are waiting to be fulfilled, around the \$12,500 price point shown for example the chart tells us if we wanted to buy the cryptocurrency BTC at that price, about 1,500 BTC would have to be sold for more expensive prices before the order was triggered. The market will aggregate trades people want to perform based on the given prices, and fulfill orders from the orderbook of pending trades. The price at which the two sides of the orderbook converge is the price we could currently trade the cryptocurrency on this exchange at.
 
-Because the price works this way, we couldn't simply buy 1,500 BTC at the \$13,000 price point because we would run out of people who are willing to sell their BTC at that price point, and to fulfill the entire order we would need to pay more than what we would consider to be the "price" depending on how much we were looking to purchase. **This is [one of the many reasons for why any positive results shown here wouldn't necessarily produce an effective trading strategy if put into practice in the real world](#considerations). There is a meaningful difference between predicting price movements for the cryptocurrency markets, and actually performing effective trades, so please just have fun and experiment with the data but hold back the urge to use this data to perform real trades**.
+Because the price works this way, we couldn't simply buy 1,500 BTC at the \$13,000 price point because we would run out of people who are willing to sell their BTC at that price point, and to fulfill the entire order we would need to pay more than what we would consider to be the "price" depending on how much we were looking to purchase. **This is [one of the MANY reasons for why any positive results shown here wouldn't necessarily produce an effective trading strategy if put into practice in the real world](#considerations). There is a meaningful difference between predicting price movements for the cryptocurrency markets, and actually performing effective trades, so please experiment and play around with the data as much as you'd like, but hold back the urge to use this data to perform real trades.**
 
 
 #### Live Order Book
+
+Below the Market Depth Chart we can see q
 
 <!-- [TODO - FINISH THIS, ADD DETAILS AROUND ORDER BOOK WITH NEW SCREENSHOT] -->
 
@@ -111,7 +91,7 @@ In order to make predictive models to predict the price of a cryptocurrency, we 
 
 ## Data Quality {#data-quality}
 
-Before jumping into actually cleaning your data, it's worth spending time doing some [**Exploratory Data Analysis (EDA)**]{style="color: purple;"}, which is the process of analyzing the data itself for issues before starting on any other process. Most data science and business problems will require you to have a deep understanding of your dataset and all of its caveats and issues, and without those fundamental problems understood and accounted for no model will make sense. In our case this understanding mostly comes from understanding how the price of a cryptocurrency is defined, which [we reviewed above](#the-definition-of-a-price), and there isn't too much else for us to worry about in terms of the quality of the raw data, but in other cases doing EDA will be a more involved process doing things like visualizing the different columns of the data. There are a *lot* of tools that can be used for this, but as an example we can use one of the [packages we already imported into the R session in the setup section](#installing-and-loading-packages) called [**skimr**]{style="color: orange;"}[@R-skimr] to get a quick overview/summary of the "quality" of the different columns that make up the data.
+Before jumping into actually cleaning your data, it's worth spending time doing some [**Exploratory Data Analysis (EDA)**]{style="color: purple;"}, which is the process of analyzing the data itself for issues before starting on any other process. Most data science and business problems will require you to have a deep understanding of your dataset and all of its caveats and issues, and without those fundamental problems understood and accounted for no model will make sense. In our case this understanding mostly comes from understanding how the price of a cryptocurrency is defined, which [we reviewed above](#the-definition-of-a-price), and there isn't too much else for us to worry about in terms of the quality of the raw data, but in other cases doing EDA will be a more involved process doing things like visualizing the different columns of the data. There are a *lot* of tools that can be used for this, but as an example we can use one of the [packages we already imported into the R session in the setup section](#installing-and-loading-packages) called [**skimr**]{style="color: #ae7b11;"} [@R-skimr] to get a quick overview/summary of the "quality" of the different columns that make up the data.
 
 We can use the [**skim()**]{style="color: green;"} function on the `cryptodata` dataframe to get a summary of the data to help locate any potential data quality issues:
 
@@ -127,22 +107,27 @@ Move on to the [next section](#data-prep), where we make the adjustments necessa
 
 <!-- [TODO - HERE add notes on data source] -->
 
-**This section is optional for anyone who wants to know the** ***exact*** **process behind the data used**. The data is pulled without authentication requirements. See the example code below for an actual example of how the data was sourced. Below is an example for the Ethereum (ETH) cryptocurrency. The data is collected by iterating through all cryptocurrency options one by one at the start of every hour.
+**This section is optional for anyone who wants to know the** ***exact*** **process behind the data used**. The data is pulled without authentication requirements using a public API endpoint made available by the HitBTC cryptocurrency exchange. See the code below for an actual example of how the data was sourced that runs every time this document runs. Below is an example pulling the Ethereum (ETH) cryptocurrency, if you followed the [setup steps](#install-all-other-packages) you should be able to run the code for yourself to pull the live order book data.
 
-```{r orderbooks_live_example}
-get_response_content <- function(api_response) {
-  fromJSON(content(api_response,
-                   type = "text",
-                   encoding = "UTF-8"),
-          simplifyDataFrame = FALSE)
-}
-```
+<!-- ```{r orderbooks_live_example_function} -->
+<!-- get_response_content <- function(api_response) { -->
+<!--   fromJSON(content(api_response, -->
+<!--                    type = "text", -->
+<!--                    encoding = "UTF-8"), -->
+<!--           simplifyDataFrame = FALSE) -->
+<!-- } -->
+<!-- ``` -->
 
 ```{r show_orderbooks_live_example}
-get_response_content(GET("https://api.hitbtc.com/api/2/public/orderbook/ETHUSD",
-                         query=list(limit=5)))
+fromJSON(content(GET("https://api.hitbtc.com/api/2/public/orderbook/ETHUSD",
+                     query=list(limit=5)),
+                 type = "text",
+                 encoding = "UTF-8"))
 ```
+
+The data is collected by a script running on a private server that iterates through all cryptocurrency options one by one at the start of every hour, and writes all of the data to a private database. Once the data is in the database, a different script gets kicked off every hour to publish the latest data from the database to the publicly available data source [discussed at the beginning of this section](#pull-the-data).
 
 Once the snapshot of the order books data is collected... [TODO - ADD]
 
-***The chart shown below will be outlined digitally***: ![](images/data_lifecycle.png){width="600"}
+***The chart shown below will be outlined digitally very soon (this is a note for Kai and Chandler)***: 
+![](images/data_lifecycle.png){width="600"}

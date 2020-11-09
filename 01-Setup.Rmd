@@ -4,7 +4,7 @@ Every part of this document can be run on any computer either through a cloud no
 
 You can also follow along with the tutorial without running the individual steps yourself. In that case, [**you can move on to the next page where the tutorial actually begins**](#overview).
 
-## Option 1 - Run in the Cloud
+## Option 1 - Run in the Cloud {#run-in-the-cloud}
 
 If you do not currently have R and RStudio installed on your computer, you can run all of the code from your web browser one step at a time here: <a href="https://gesis.mybinder.org/binder/v2/gh/ries9112/Research-Paper-Example/0a23077a85848af214976c87d7d5d2472df700ee?filepath=Jupyter%2FCryptocurrency%20Research.ipynb" target="_blank">**this mobile friendly link**</a>.
 
