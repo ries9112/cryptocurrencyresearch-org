@@ -127,7 +127,5 @@ fromJSON(content(GET("https://api.hitbtc.com/api/2/public/orderbook/ETHUSD",
 
 The data is collected by a script running on a private server that iterates through all cryptocurrency options one by one at the start of every hour, and writes all of the data to a private database. Once the data is in the database, a different script gets kicked off every hour to publish the latest data from the database to the publicly available data source [discussed at the beginning of this section](#pull-the-data).
 
-Once the snapshot of the order books data is collected... [TODO - ADD]
-
 ***The chart shown below will be outlined digitally very soon (this is a note for Kai and Chandler)***: 
 ![](images/data_lifecycle.png){width="600"}

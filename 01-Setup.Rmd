@@ -74,7 +74,7 @@ library(pacman)
 We can use [**p_load()**]{style="color: #green;"} to install the remaining packages we will need for the rest of the tutorial. The advantage to using the new function, is the installation will happen in a “smarter” way, where **if you already have a package in your library, it will not be installed again**.
 
 
-```{r install_all_other_packages}
+```{r install_all_other_packages, warning=F, message=F}
 p_load('pins', 'skimr', 'DT', 'httr', 'jsonlite', # Data Exploration 
        'tidyverse', 'tsibble', 'anytime', # Data Prep
        'ggTimeSeries', 'gifski', 'av', 'magick', 'ggthemes', 'plotly', # Visualization
