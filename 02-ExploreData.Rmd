@@ -74,14 +74,16 @@ Here, the x-axis shows the price of the cryptocurrency, with the lower prices on
 
 In the screenshot above, around the \$13,000 price point the market essentially "runs out" of people willing to buy the cryptocurrency, and shows us how much people are willing to sell at the higher price points. The screenshot shows there are many orders that are waiting to be fulfilled, around the \$12,500 price point shown for example the chart tells us if we wanted to buy the cryptocurrency BTC at that price, about 1,500 BTC would have to be sold for more expensive prices before the order was triggered. The market will aggregate trades people want to perform based on the given prices, and fulfill orders from the orderbook of pending trades. The price at which the two sides of the orderbook converge is the price we could currently trade the cryptocurrency on this exchange at.
 
-Because the price works this way, we couldn't simply buy 1,500 BTC at the \$13,000 price point because we would run out of people who are willing to sell their BTC at that price point, and to fulfill the entire order we would need to pay more than what we would consider to be the "price" depending on how much we were looking to purchase. **This is [one of the MANY reasons for why any positive results shown here wouldn't necessarily produce an effective trading strategy if put into practice in the real world](#considerations). There is a meaningful difference between predicting price movements for the cryptocurrency markets, and actually performing effective trades, so please experiment and play around with the data as much as you'd like, but hold back the urge to use this data to perform real trades.**
+Because the price works this way, we couldn't simply buy 1,500 BTC at the \$13,000 price point because we would run out of people who are willing to sell their BTC at that price point, and to fulfill the entire order we would need to pay more than what we would consider to be the "price" depending on how much we were looking to purchase. **This is [one of the many reasons for why any positive results shown here wouldn't necessarily produce an effective trading strategy if put into practice in the real world](#considerations). There is a meaningful difference between predicting price movements for the cryptocurrency markets, and actually performing effective trades, so please experiment and play around with the data as much as you'd like, but hold back the urge to use this data to perform real trades.**
 
 
 #### Live Order Book
 
-Below the Market Depth Chart we can see q
+Below the Market Depth Chart we can find the actual data relating to the order books visualized above:
 
-<!-- [TODO - FINISH THIS, ADD DETAILS AROUND ORDER BOOK WITH NEW SCREENSHOT] -->
+![](images/orderbook_ex_zoomed.PNG)
+
+**The data we will be working with is comprised by the top 5 price points of the order book on each side**. We have access to the 5 highest [**bid**]{style="color: purple;"} prices (on the side looking to buy), and the 5 lowest [**ask**]{style="color: purple;"} prices (from traders looking to sell). In relation to the screenshot above, the data we are using would be made up of the first 5 rows shown only.
 
 ### In Summary
 
@@ -93,21 +95,19 @@ In order to make predictive models to predict the price of a cryptocurrency, we 
 
 Before jumping into actually cleaning your data, it's worth spending time doing some [**Exploratory Data Analysis (EDA)**]{style="color: purple;"}, which is the process of analyzing the data itself for issues before starting on any other process. Most data science and business problems will require you to have a deep understanding of your dataset and all of its caveats and issues, and without those fundamental problems understood and accounted for no model will make sense. In our case this understanding mostly comes from understanding how the price of a cryptocurrency is defined, which [we reviewed above](#the-definition-of-a-price), and there isn't too much else for us to worry about in terms of the quality of the raw data, but in other cases doing EDA will be a more involved process doing things like visualizing the different columns of the data. There are a *lot* of tools that can be used for this, but as an example we can use one of the [packages we already imported into the R session in the setup section](#installing-and-loading-packages) called [**skimr**]{style="color: #ae7b11;"} [@R-skimr] to get a quick overview/summary of the "quality" of the different columns that make up the data.
 
-We can use the [**skim()**]{style="color: green;"} function on the `cryptodata` dataframe to get a summary of the data to help locate any potential data quality issues:
+We can use the [**skim()**]{style="color: green;"} function on the [cryptodata]{style="color: blue;"} dataframe to get a summary of the data to help locate any potential data quality issues:
 
 ```{r skimr}
 skim(cryptodata)
 ```
 
-This summary helps us understand things like how many null values are present in a given column and how those values are distributed. In this case there shouldn't be any major data quality issues, for example the majority of values should not be NA/missing. If you are noticing something different
+This summary helps us understand things like how many rows with missing values there are in a given column, or how the values are distributed. In this case there shouldn't be any major data quality issues, for example the majority of values should not be NA/missing. If you are noticing something different please [create an issue on the GitHub repository for the project](https://github.com/ries9112/cryptocurrencyresearch-org/issues).
 
-Move on to the [next section](#data-prep), where we make the adjustments necessary to the data before we can start making visualizations and predictive models.
+One more optional section below for anyone who wants even more specific details around the entire process by which the data is collected and made available. Move on to the [next section](#data-prep), where we make the adjustments necessary to the data before we can start making visualizations and predictive models.
 
 ## Data Source Additional Details
 
-<!-- [TODO - HERE add notes on data source] -->
-
-**This section is optional for anyone who wants to know the** ***exact*** **process behind the data used**. The data is pulled without authentication requirements using a public API endpoint made available by the HitBTC cryptocurrency exchange. See the code below for an actual example of how the data was sourced that runs every time this document runs. Below is an example pulling the Ethereum (ETH) cryptocurrency, if you followed the [setup steps](#install-all-other-packages) you should be able to run the code for yourself to pull the live order book data.
+**This section is optional for anyone who wants to know the** ***exact*** **process of how the data is sourced and refreshed**. The data is pulled without authentication requirements using a public API endpoint made available by the HitBTC cryptocurrency exchange (the one we are using). See the code below for an actual example of how the data was sourced that runs every time this document runs. Below is an example pulling the Ethereum (ETH) cryptocurrency, if you followed the [setup steps](#install-all-other-packages) you should be able to run the code for yourself to pull the live order book data.
 
 <!-- ```{r orderbooks_live_example_function} -->
 <!-- get_response_content <- function(api_response) { -->
