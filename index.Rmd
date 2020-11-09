@@ -1,7 +1,7 @@
 ---
 title: "Cryptocurrency Research"
 date: '`r paste("Last Updated:<br/>",Sys.time())`'
-output: bookdown::gitbook
+site: bookdown::gitbook
 documentclass: book
 bibliography:
 - packages.bib

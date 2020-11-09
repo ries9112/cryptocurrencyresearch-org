@@ -1,5 +1,5 @@
 ---
-title: "<a href='https://cryptocurrencyresearch.org/'>cryptocurrencyresearch</a> </br> </br> High-Level Tutorial"
+title: "cryptocurrencyresearch </br> </br> </br> High-Level Tutorial"
 output: 
   revealjs::revealjs_presentation:
     includes:
