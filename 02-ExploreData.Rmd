@@ -1,5 +1,24 @@
 # Explore the Data {#explore-data}
 
+```{r load_pacman}
+library(pacman)
+```
+
+[**pacman**]{style="color: #ae7b11;"} does not refer to the videogame, and stands for [***pac***]{style="color: #ae7b11;"}***kage*** [***man***]{style="color: #ae7b11;"}***ager***. After we importing this package, we can now use new functions that come with it. 
+
+### Install All Other Packages
+We can use [**p_load()**]{style="color: green;"} to install the remaining packages we will need for the rest of the tutorial. The advantage to using the new function, is the installation will happen in a “smarter” way, where **if you already have a package in your library, it will not be installed again**.
+
+
+```{r install_all_other_packages, warning=F, message=F}
+p_load('pins', 'skimr', 'DT', 'httr', 'jsonlite', # Data Exploration 
+       'tidyverse', 'tsibble', 'anytime', # Data Prep
+       'ggTimeSeries', 'gifski', 'av', 'magick', 'ggthemes', 'plotly', # Visualization
+       'ggpubr', 'ggforce', 'gganimate', 'transformr', # Visualization continued
+       'caret', 'doParallel', 'xgboost', 'gbm', 'deepnet', # Predictive Modeling
+       'hydroGOF', 'formattable', 'knitr') # Evaluate Model Performance
+```
+
 ## Pull the Data
 
 The first thing we will need to do is download the latest data. We will do this by using the [**pins**]{style="color: #ae7b11;"} package [@R-pins], which has already been loaded into our session [in the previous section](#installing-and-loading-packages).
@@ -70,9 +89,9 @@ From that page you can scroll down to view specific information relating to the 
 #### Market Depth
 Let's focus on the **Market Depth Chart** for now: ![](images/market_depth_chart.PNG)
 
-Here, the x-axis shows the price of the cryptocurrency, with the lower prices on the left and the higher ones on the right, while the y-axis shows the cumulative volume (here in terms of Bitcoins) of orders that could currently be triggered on each side.
+Here, the x-axis shows the price of the cryptocurrency, with the lower prices on the left and the higher ones on the right, while the y-axis shows the cumulative volume (here in terms of Bitcoins) of orders that could currently be triggered on each side (the "liquidity" of the market).
 
-In the screenshot above, around the \$13,000 price point the market essentially "runs out" of people willing to buy the cryptocurrency, and shows us how much people are willing to sell at the higher price points. The screenshot shows there are many orders that are waiting to be fulfilled, around the \$12,500 price point shown for example the chart tells us if we wanted to buy the cryptocurrency BTC at that price, about 1,500 BTC would have to be sold for more expensive prices before the order was triggered. The market will aggregate trades people want to perform based on the given prices, and fulfill orders from the orderbook of pending trades. The price at which the two sides of the orderbook converge is the price we could currently trade the cryptocurrency on this exchange at.
+In the screenshot above, around the \$13,000 price point the market essentially "runs out" of people willing to buy the cryptocurrency, and for prices past that point people are looking to sell the asset. The screenshot shows there are many orders that are waiting to be fulfilled, around the \$12,500 price point shown for example the chart tells us that if we wanted to buy the cryptocurrency BTC at that price there would have to be about 1,500 BTC sold for more expensive prices before the order was triggered. The market will fulfill trades that are posted to the order book and match buyers and sellers. The price at which the two sides of the orderbook converge is the price we could currently trade the cryptocurrency on this exchange at.
 
 Because the price works this way, we couldn't simply buy 1,500 BTC at the \$13,000 price point because we would run out of people who are willing to sell their BTC at that price point, and to fulfill the entire order we would need to pay more than what we would consider to be the "price" depending on how much we were looking to purchase. **This is [one of the many reasons for why any positive results shown here wouldn't necessarily produce an effective trading strategy if put into practice in the real world](#considerations). There is a meaningful difference between predicting price movements for the cryptocurrency markets, and actually performing effective trades, so please experiment and play around with the data as much as you'd like, but hold back the urge to use this data to perform real trades.**
 
@@ -107,7 +126,9 @@ One more optional section below for anyone who wants even more specific details 
 
 ## Data Source Additional Details
 
-**This section is optional for anyone who wants to know the** ***exact*** **process of how the data is sourced and refreshed**. The data is pulled without authentication requirements using a public API endpoint made available by the HitBTC cryptocurrency exchange (the one we are using). See the code below for an actual example of how the data was sourced that runs every time this document runs. Below is an example pulling the Ethereum (ETH) cryptocurrency, if you followed the [setup steps](#install-all-other-packages) you should be able to run the code for yourself to pull the live order book data.
+**This section is optional for anyone who wants to know the** ***exact*** **process of how the data is sourced and refreshed**. 
+
+The data is pulled without authentication requirements using a public API endpoint made available by the HitBTC cryptocurrency exchange (the one we are using). See the code below for an actual example of how the data was sourced that runs every time this document runs. Below is an example pulling the Ethereum (ETH) cryptocurrency, if you followed the [setup steps](#install-all-other-packages) you should be able to run the code below for yourself to pull the live order book data:
 
 <!-- ```{r orderbooks_live_example_function} -->
 <!-- get_response_content <- function(api_response) { -->
@@ -125,7 +146,7 @@ fromJSON(content(GET("https://api.hitbtc.com/api/2/public/orderbook/ETHUSD",
                  encoding = "UTF-8"))
 ```
 
-The data is collected by a script running on a private server that iterates through all cryptocurrency options one by one at the start of every hour, and writes all of the data to a private database. Once the data is in the database, a different script gets kicked off every hour to publish the latest data from the database to the publicly available data source [discussed at the beginning of this section](#pull-the-data).
+The data is collected by a script running on a private server (RStudio) that iterates through all cryptocurrency options one by one at the start of every hour, and writes all of the data to a private database. Once the data is in the database, a different script gets kicked off every hour to publish the latest data from the database to the publicly available data source [discussed at the beginning of this section](#pull-the-data).
 
 ***The chart shown below will be outlined digitally very soon (this is a note for Kai and Chandler)***: 
 ![](images/data_lifecycle.png){width="600"}
