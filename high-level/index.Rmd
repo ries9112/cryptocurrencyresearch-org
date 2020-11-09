@@ -2,6 +2,8 @@
 title: "<a href='https://cryptocurrencyresearch.org/'>cryptocurrencyresearch</a> </br> </br> High-Level Tutorial"
 output: 
   revealjs::revealjs_presentation:
+    includes:
+      in_header: [hypothesis.html, google_analytics.html]
     theme: sky
     self_contained: true
 bibliography:

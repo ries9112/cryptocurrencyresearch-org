@@ -1,12 +1,7 @@
 ---
 title: "Cryptocurrency Research"
 date: '`r paste("Last Updated:<br/>",Sys.time())`'
-site: 
-  bookdown::bookdown_site:
-    includes:
-      in_header: [hypothesis.html, google_analytics.html]
-      before_body: open_review_block.html
-  css: style.css
+output: bookdown::gitbook
 documentclass: book
 bibliography:
 - packages.bib

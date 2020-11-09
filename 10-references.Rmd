@@ -1,10 +1,18 @@
 # References
 
-The **bookdown** package [@R-bookdown] was used to produce this document, which was built on top of R Markdown and **knitr** [@xie2015].
+## Document Format
+
+The **bookdown** package [@R-bookdown] was used to produce this document, which was built on top of **R Markdown** [@R-rmarkdown] and **knitr** [@R-knitr].
+
+<!-- [TODO - ADJUST TO HAVE ONE FOR EACH ONE] -->
 
 ```{r write_bib_packages, message=FALSE, warning=FALSE}
 knitr::write_bib(c(.packages()), "packages.bib")
 ```
+
+## Open Review Toolkit {#open-review-toolkit-ref}
+
+Thanks to [Ben Marwick](https://github.com/benmarwick) for outlining how to use the [Open Review Toolkit](https://www.openreviewtoolkit.org/) in bookdown to collect feedback on the document: https://benmarwick.github.io/bookdown-ort/mods.html#open-review-block
 
 ## Resources Used
 
