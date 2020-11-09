@@ -357,7 +357,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
                                                          map2(xgb_test_predictions, actuals_test, evaluate_preds_rsq),
                                                          NA)),
                             # And holdout:
-                            xgb_rsq_holdout = map2(xgb_holdout_predictions, actuals_holdout, evaluate_preds_rsq),
+                            xgb_rsq_holdout = unlist(map2(xgb_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
                             # XGBoost Trees - RMSE - Test
                             xgbTree_rmse_test = unlist(ifelse(split < 5,
                                                          map2(xgbTree_test_predictions, actuals_test, evaluate_preds_rmse),
