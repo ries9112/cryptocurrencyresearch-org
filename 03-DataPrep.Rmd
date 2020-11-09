@@ -398,7 +398,7 @@ Now let's get to a list of cryptocurrency symbols where the minimum standard dev
 
 ```{r}
 minimum_sd <- filter(distinct(mutate(group_by(ungroup(find_zero_var), symbol),
-                                     min_sd = min(min_sd, na.rm=T)), min_sd),min_sd < 0.000001)$symbol
+                                     min_sd = min(min_sd, na.rm=T)), min_sd),min_sd < 0.00001)$symbol
 # Show result
 minimum_sd
 ```

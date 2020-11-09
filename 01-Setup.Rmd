@@ -1,6 +1,6 @@
 # Setup and Installation {#setup}
 
-Every part of this document can be run on any computer that has R installed
+Every part of this document can be run on any computer either through a cloud notebook or locally.
 
 You can also follow along with the tutorial without running the individual steps yourself. In that case, [**you can move on to the next page where the tutorial actually begins**](#overview).
 
@@ -48,21 +48,31 @@ You can run your code directly through the **Console** (what you are prompted to
 
 You will then be able to save your document with the .R extension on your computer and re-run your code line by line.
 
-### Installing and Loading Packages {#installing-and-loading-packages}
+### Install and Load Packages {#installing-and-loading-packages}
 
-[ADD HERE] describe how to install packages, what they are, etc... like high-level version.
+Packages are collections of functions and data that other users have made shareable outside of the functionality provided by the *base* functionality of R that comes pre-loaded every time a new session is started. We can install these packages into our own library of R tools and load them into our R session, which can enable us to write powerful code with minimal effort compared to writing the same code without the additional packages. Many packages are simply time savers for things we could do with the default/base functionality of R, but sometimes if we want to do something like make a static chart interactive when hovering over points on the chart, we are better off using a package someone already came up with rather than re-inventing the wheel for a difficult task.
+
+### Install Pacman
+
+Let's start by installing the [**pacman**]{style="color: #ae7b11;"} package [@R-pacman] using the function [**install.packages()**]{style="color: green;"}:
 
 ```{r install_pacman, eval=F}
 install.packages('pacman')
 ```
+We only need to install any given package once on any given computer, kind of like installing an application (like RStudio or Google Chrome) once before being able to use it. When you boot-up your computer it doesn't open every application you have installed and similarly here we choose what functionality we need for our current session by importing packages. All functionality that is made available at the start (foundational functions like [mean()]{style="color: green;"} and [max()]{style="color: green;"}) of an R session is referred to as *Base R*, functionality from other packages needs to be loaded using the [**library()**]{style="color: green;"} function.
 
-Load pacman:
+### Load Pacman
+We can load the [**pacman**]{style="color: #ae7b11;"} package using the [**library()**]{style="color: green;"} function:
 
 ```{r load_pacman}
 library(pacman)
 ```
 
-Install other packages:
+[**pacman**]{style="color: #ae7b11;"} does not refer to the videogame, and stands for [***pac***]{style="color: #ae7b11;"}***kage*** [***man***]{style="color: #ae7b11;"}***ager***. After we importing this package, we can now use new functions that come with it. 
+
+### Install All Other Packages
+We can use [**p_load()**]{style="color: #green;"} to install the remaining packages we will need for the rest of the tutorial. The advantage to using the new function, is the installation will happen in a “smarter” way, where **if you already have a package in your library, it will not be installed again**.
+
 
 ```{r install_all_other_packages}
 p_load('pins', 'skimr', 'DT', 'httr', 'jsonlite', # Data Exploration 
@@ -74,9 +84,11 @@ p_load('pins', 'skimr', 'DT', 'httr', 'jsonlite', # Data Exploration
 ```
 ***It is normal for this step to take a long time, as it will install every package you will need to follow along with the rest of the tutorial.*** The next time you run this command it would be much faster because it would skip installing the already installed packages.
 
-Nice work! Now you have everything you need to [follow along with this example](#overview).
+Running **p\_load()** is equivalent to running [**install.packages()**]{style="color: green;"} on each of the packages listed **(but only when they are not already installed on your computer)**, and then running [library()]{style="color: green;"} for each package in quotes separated by commas to import the functionality from the package into the current R session. **Both commands are wrapped inside the single function call to** [**p\_load()**]{style="color: green;"}. We could run each command individually using base R and create our own logic to only install packages not currently installed, but we are better off using a package that has already been developed and scrutinized by many expert programmers; the same goes for complex statistical models, we don't need to create things from scratch if we understand how to properly use tools developed by the open source community. Open source tools have become particularly good in recent years and can be used for any kind of work, including commercial work, most large corporations have started using open source tools available through R and Python.
 
-<!-- ### GitHub Repository (KEEP OR DEL?) -->
+Nice work! Now you have everything you need to [follow along with this example](#overview) ➡️.
+
+<!-- ### GitHub (KEEP OR DEL?) -->
 
 <!-- Because this document is produced through a free **C**ontinuous **I**ntegration (CI) tool called **GitHub Actions**, it is also really easy for anyone to use the same code on their own computer to produce this document using the latest available data (or even automate their own process). -->
 

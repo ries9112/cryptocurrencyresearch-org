@@ -29,8 +29,6 @@ knitr::opts_knit$set(progress=FALSE, verbose = FALSE)
 options(scipen=999)
 ```
 
-**(this book is a work in progress and is NOT ready)**
-
 Welcome to this programming tutorial on machine learning!
 
 In this tutorial we will use the latest data from the cryptocurrency markets to provide a hands-on and complete example that anyone can follow along with.
@@ -39,7 +37,7 @@ In this tutorial we will use the latest data from the cryptocurrency markets to 
 
 -   You will learn about the value of "reproducible" research.
 
--   In this tutorial you will primarily learn about tools for the R programming language developed by [RStudio](https://rstudio.com/) and more specifically the [tidyverse](https://www.tidyverse.org/). If you are not familiar with these open source products, don't worry. We'll introduce these throughout the tutorial as needed.
+-   In this tutorial you will primarily learn about tools for the R programming language developed by [RStudio](https://rstudio.com/) and more specifically the [`tidyverse`](https://www.tidyverse.org/). If you are not familiar with these open source products, don't worry. We'll introduce these throughout the tutorial as needed.
 
 -   The focus of the tutorial is on supervised machine learning, a process for building models that can predict future events, such as cryptocurrency prices. You will learn how to use the [`caret`](https://topepo.github.io/caret/index.html) package to make many different predictive models, and tools to evaluate their performance.
 
@@ -63,7 +61,7 @@ This document is the tutorial itself, but in order to make the tutorial more acc
 
 ### High-Level Version {#high-level-version}
 
-We recommend for everyone to run the code in the [high-level version first](https://cryptocurrencyresearch.org/high-level/). If you are not very familiar with programming in either R or Python, or are not sure what cryptocurrencies are, you should **definitely** work your way through the [high-level version first](https://cryptocurrencyresearch.org/high-level/).
+We recommend for everyone to run the code in the [high-level version first](https://cryptocurrencyresearch.org/high-level/) to get more comfortable with the tools we will be using. If you are not very familiar with programming in either R or Python, or are not sure what cryptocurrencies are, you should **definitely** work your way through the [high-level version first](https://cryptocurrencyresearch.org/high-level/).
 
 Below is an embedded version of the high-level version, you can click on the presentation below and press the **`f`** button on your keyboard to full-screen it, or use any of the links above to view it in its own window:
 
@@ -75,18 +73,6 @@ knitr::include_url("https://cryptocurrencyresearch.org/high-level/")
 When following along with the high-level tutorial embedded above, the results will be completely reproducible and the document is static and does not update over time meaning your results will exactly match those shown. The document you are currently reading this text on on the other hand updates every 12 hours. You will be able to access the same data source, but it updates hourly by the 8th minute of every hour with the most recent data, so this document and your results won't perfectly match.
 ```
 
-<!-- ## Who is this example for? -->
-
-<!-- Are you a Bob, Hosung, or Jessica below? This section provides more information on how to proceed with this tutorial. -->
-
-<!-- -   **Bob (beginner)**: Bob is someone who understands the idea of predictive analytics at a high level and has heard of cryptocurrencies and is interested in learning more about both, but he has never used R. Bob would want to first [learn the basics of the R programming language](https://predictcrypto.org/r-basics-tutorial). Afterwards, like Hosung, he might decide to [opt for the more high-level version of this tutorial](https://cryptocurrencyresearch.org/high-level/). -->
-
-<!--     -   Bob might benefit from the book ["R for Data Science"](https://r4ds.had.co.nz/) and DataCamp's free ["Introduction to R"](https://www.datacamp.com/courses/free-introduction-to-r) course are great resources as well. Both are available for free online. -->
-
-<!-- -   **Hosung (intermediate)**: Hosung is a statistician who learned to use R 10 years ago. He has heard of the tidyverse, but doesn't regularly use it in his work and he usually sticks to base R as his preference. Hosung should review the example explaining the pipe operator and the tidyverse [when it comes up in the next section](https://cryptocurrencyresearch.org/setup.html#tidy-example). Hosung does not care much for cryptocurrencies specifically, but is interested in learning new tools to use for his work in R and getting some useful boilerplate code. Hosung would want to start with the [**high-level version of this tutorial**](https://cryptocurrencyresearch.org/high-level/) and later return to the [**detailed tutorial**](https://cryptocurrencyresearch.org/index.html#introduction). -->
-
-<!-- -   **Jessica (expert)**: Jessica is a business analyst who has experience with both R and the Tidyverse and uses the pipe operator (%\>%) regularly. Jessica should [**move onto the next section**](#introduction) for the detailed tutorial. -->
-
 <!-- ### Approach taken -->
 
 <!-- It is also worth mentioning that we will be taking a very practical approach to machine learning. Because we are modeling many cryptocurrencies independently at the same time and the dataset evolves as time passes, it becomes difficult to make a decision across the board in terms of what the "best model" to use is because it may change based on the specific cryptocurrency in question and/or over time. -->
@@ -94,8 +80,6 @@ When following along with the high-level tutorial embedded above, the results wi
 <!-- [TODO - KEEP ADDING HERE?] -->
 
 ## Format Notes
-
-Are you a Bob, Hosung, or Jessica below? This section provides an example of how different users may want to approach the tutorial differently based on their levels of experience.
 
 -   You can hide the sidebar on the left by pressing the ***s*** key on your keyboard.
 
@@ -130,9 +114,20 @@ How will we generate predictive models to predict cryptocurrency prices? At a hi
 
 6.  [Evaluate the performance of the models](#evaluate-model-performance). Before we can use the predictive models to make predictions on the latest data, we need to understand how well we expect them to perform, which is also essential in detecting issues.
 
+## Who is this example for?
+
+Are you a Bob, Hosung, or Jessica below? This section provides more information on how to proceed with this tutorial.
+
+-   **Bob (beginner)**: Bob is someone who understands the idea of predictive analytics at a high level and has heard of cryptocurrencies and is interested in learning more about both, but he has never used R. Bob would want to [opt for the more high-level version of this tutorial](https://cryptocurrencyresearch.org/high-level/). Bob might benefit from reading the free book ["R for Data Science"](https://r4ds.had.co.nz/) as well before attempting this tutorial.
+
+-   **Hosung (intermediate)**: Hosung is a statistician who learned to use R 10 years ago. He has heard of the tidyverse, but doesn't regularly use it in his work and he usually sticks to base R as his preference. Hosung should start with the [**high-level version of this tutorial**](https://cryptocurrencyresearch.org/high-level/) and later return to this version.
+
+-   **Jessica (expert)**: Jessica is a business analyst who has experience with both R and the Tidyverse and uses the pipe operator (**`%\>%`**) regularly. Jessica should skim over the high-level version before [**moving onto the next section**](#introduction) for the detailed tutorial.
+
+
 ## Reproducibility
 
-One of the objectives of this document is to showcase the power of [reproducibility]{style="color: purple;"}. The term itself is defined in different ways:
+One of the objectives of this document is to showcase the power of [**reproducibility**]{style="color: purple;"}. This tutorial does not provide coded examples on making code reproducible, but it's worth a quick discussion. The term itself is defined in different ways:
 
 -   We can think of something as reproducible if anyone can run the exact same analysis and end up with our exact same results. This is how the [high-level version of the tutorial](#high-level-version) works.
 
@@ -140,7 +135,7 @@ One of the objectives of this document is to showcase the power of [reproducibil
 
 ### The cost of non-reproducible research
 
-Reproducibility is especially important for research in many fields, but is a valuable tool for anyone who works with data. If you work with Excel files or any kind of data, there are tools to be aware of that can save you a lot of time and money. Even if you do things that are "more involved", for example using your data to run your analysis separately and then putting together a presentation with screenshots of your results with commentary, this is also something you can automate for the future. If you do any kind of repeated manual process in Excel, chances are you would be better off creating a script that you can simply kick off to generate new results. 
+Reproducibility is especially important for research in many fields, but is a valuable tool for anyone who works with data, even within a large corporation. If you work with Excel files or any kind of data, there are tools to be aware of that can save you a lot of time and money. Even if you do things that are "more involved", for example using your data to run your analysis separately and then putting together a presentation with screenshots of your results with commentary, this is also something you can automate for the future. If you do any kind of repeated manual process in Excel, chances are you would be better off creating a script that you can simply kick off to generate new results. 
 <!-- Reproducibility is all about making the life of anyone who needs to run the analysis as simple as possible, including and especially for the author herself. This document  -->
 <!-- because if important discoveries are made others will want to perform their own experiments and analysis before they start being accepted as fact. -->
 
@@ -152,22 +147,19 @@ knitr::include_graphics("images/TheEconomicsOfReproducibilityInPreclinicalRe.pdf
 
 Reproducibility as discussed in the paper embedded above relates to many aspects of the specific field of preclinical research, but in their work they identified 4 main categories that drove costs associated with irreproducibility as it pertains to preclinical research in the United States: 
 
-<!-- [TODO - REFRESH SCREENSHOT (was dark, + make better circle)] -->
 ![](images/IrreproducibilityCosts.PNG)
 
-<!-- [TODO - ADD note on focusing on this aspect, which is shared across many many disciplines] -->
-
-The "Data Analysis and Reporting" aspect of a project is shared across many disciplines. As it related to preclinical research, in their breakdown they attribute roughly $7.19 Billion of the costs of irreproducible preclinical research to data analysis and reporting, which could potentially be avoided through the usage of open source tools.
+The "Data Analysis and Reporting" aspect of a project is shared across many disciplines. As it related to preclinical research, in their breakdown they attribute roughly $7.19 Billion of the costs of irreproducible preclinical research to data analysis and reporting, which could potentially be avoided through the usage of open source tools that we are utilizing for this tutorial. These costs should pale in comparison to the other three categories, and this example is meant to show that there currently exists a costly lack of awareness around these tools; the tutorial itself is meant as an example to showcase the power of these free tools.
 
 <!-- In business reproducibility can be really valuable as well, being able to run an analysis with the click of a button can save a business a lot of money, and the open source tools available through R and Python  -->
 
-As of 2020, the most popular way of sharing open source work is through a website called [**GitHub**](https://github.com/)
+As of 2020, the most popular way of sharing open source data science work is through a website called [[**GitHub**](https://github.com/)]{style="color: purple;"} which allows users to publicly share their code and do much more, this document gets refreshed using a tool called [[**Github Actions**](https://github.com/features/actions)]{style="color: purple;"}
 
 <!-- [TODO - INTRODUCE GITHUB HERE] -->
 
 ### GitHub Repository
 
-This tutorial has a public [**GitHub Repository**]{style="color: purple;"} associated with it, which is not only a website for us to easily distribute all the code behind this document for others to view and use, but also where it actually runs. Every 12 hours, a process gets kicked off on the page associated with our project on GitHub.com and refreshes these results. Anyone can view the latest runs as they execute over time here: <https://github.com/ries9112/cryptocurrencyresearch-org/actions>
+This tutorial has a public **GitHub** [**Repository**]{style="color: purple;"} associated with it, which is not only a website for us to easily distribute all the code behind this document for others to view and use, but also where it actually runs. By clicking on the option that looks like an eye in the options given at the top of the document, you can view the raw code for the page you are currently viewing on the GitHub repository. Every 12 hours, a process gets kicked off on the page associated with our project on GitHub.com and refreshes these results. Anyone can view the latest runs as they execute over time here: <https://github.com/ries9112/cryptocurrencyresearch-org/actions>
 
 In the [next section](#setup) we will talk more about the GitHub Repository for this tutorial, for now you can check on the latest run history for this document, which is expected to update every 12 hours every day: <https://github.com/ries9112/cryptocurrencyresearch-org/actions>
 
