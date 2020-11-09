@@ -500,7 +500,7 @@ In the [full version of this tutorial](https://cryptocurrencyresearch.org/) we d
 ## Dplyr Package
 
 <span style="font-size: 80%;">
-There are resources and tools out there that are very effective for cleaning and manipulating data. We recommend starting with the [**dplyr**]{style="color: #ae7b11;"} package [[@R-dplyr]](#dplyr-citation) if working in R, which is what we used to clean the data. Because this is such a useful tool in R, we included a brief example using the [**mutate()**]{style="color: green;"} function to add a new column to the data that calculates the **spread** for each row, which we will define as the percent difference between the [Low]{style="color: blue;"} and the [High]{style="color: blue;"} prices.
+There are resources and tools out there that are very effective for cleaning and manipulating data. We recommend starting with the [**dplyr**]{style="color: #ae7b11;"} package [[@R-dplyr]](#dplyr-citation) if working in R, which is what we used to clean the data. Because this is such a useful tool in R, we included a brief example using the [**mutate()**]{style="color: green;"} function to add a new column to the data that calculates the [**spread**]{style="color: blue;"} for each row, which we will define as the percent difference between the [Low]{style="color: blue;"} and the [High]{style="color: blue;"} prices.
 </span>
 
 <!-- We used the `mutate()` function to calculate the **`CloseLag...`** and **`Target24HourClose`** fields, but have omitted those steps from this tutorial to keep things more focused on the predictive analytics process instead of providing data preparation steps that are not relevant to many problems. Please refer to the **[data dictionary](#data-dictionary)** to understand what these columns represent and how they were calculated.-->
@@ -1160,7 +1160,7 @@ ts_test <- tail(cryptodata_ts, as.integer(nrow(cryptodata)*.2))
 
 Next, we will use the <span style="color: #ae7b11;">**fable** </span> package [[@R-fable]](#fable-citation) to create timeseries models. Why is it called fable?
 
-1. It makes **f**orecasting t**able**s
+1. It makes <span style="color: #ae7b11;">**f**</span>orecasting t<span style="color: #ae7b11;">**able**</span>s
 
 2. "A fable is like a forecast: it's never true, but it tells you something important about reality" - ***Rob J Hyndman*** [New York Open Statistical Programming Meetup](https://youtu.be/yx6OQ-8HofU?t=2484)
 
@@ -1199,7 +1199,8 @@ augment(naive_model)
 
 ## A note on the target variable
 
-Previously we defined the **target variable** as the closing price 24 hour in the future relative to the rest of the variables; this time we are using tools that "understand" time, and after making a model we will be able to make a forecast for however long in the future we would like. This time therefore, we will assume all columns reference the same exact point in time, we will pick the one we are interested in predicting (**the** ***Close*** **price**), and make a forecast that goes as far out as we need it to. Therefore, we will switch to the **Close** price as our target variable, and be very careful to **not** include the variable called ***Target24HourClose*** as a dependent variable, or we would run into <span style="color: purple;">**target leak**</span> and end up with a meaningless model.
+<span style="font-size: 96%;">
+Previously we defined the **target variable** as the closing price 24 hour in the future relative to the rest of the variables; this time we are using tools that "understand" time, and after making a model we will be able to make a forecast for however long in the future we would like. This time therefore, we will assume all columns reference the same exact point in time, we will pick the one we are interested in predicting (**the** ***Close*** **price**), and make a forecast that goes as far out as we need it to. Therefore, we will switch to the **Close** price as our target variable, and be very careful to **not** include the variable called ***Target24HourClose*** as a dependent variable, or we would run into <span style="color: purple;">**target leak**</span> and end up with a meaningless model. </span>
 <!-- [as explained in a previous slide](#a-note-on-overfitting). -->
 
 <!-- Previously we outlined our formula as **Target24HourClose ~ .**, which means we specified the Target24HourClose variable as the dependent variable, and all other columns (denoted as a period ".") as the independent/predictor variables. When doing this, we were including the  -->
