@@ -5,6 +5,7 @@ site:
   bookdown::bookdown_site:
     includes:
       in_header: [hypothesis.html, google_analytics.html]
+  css: style.css
 documentclass: book
 bibliography:
 - packages.bib
