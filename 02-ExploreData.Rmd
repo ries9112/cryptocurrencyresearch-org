@@ -1,24 +1,5 @@
 # Explore the Data {#explore-data}
 
-```{r load_pacman}
-library(pacman)
-```
-
-[**pacman**]{style="color: #ae7b11;"} does not refer to the videogame, and stands for [***pac***]{style="color: #ae7b11;"}***kage*** [***man***]{style="color: #ae7b11;"}***ager***. After we importing this package, we can now use new functions that come with it. 
-
-### Install All Other Packages
-We can use [**p_load()**]{style="color: green;"} to install the remaining packages we will need for the rest of the tutorial. The advantage to using the new function, is the installation will happen in a “smarter” way, where **if you already have a package in your library, it will not be installed again**.
-
-
-```{r install_all_other_packages, warning=F, message=F}
-p_load('pins', 'skimr', 'DT', 'httr', 'jsonlite', # Data Exploration 
-       'tidyverse', 'tsibble', 'anytime', # Data Prep
-       'ggTimeSeries', 'gifski', 'av', 'magick', 'ggthemes', 'plotly', # Visualization
-       'ggpubr', 'ggforce', 'gganimate', 'transformr', # Visualization continued
-       'caret', 'doParallel', 'xgboost', 'gbm', 'deepnet', # Predictive Modeling
-       'hydroGOF', 'formattable', 'knitr') # Evaluate Model Performance
-```
-
 ## Pull the Data
 
 The first thing we will need to do is download the latest data. We will do this by using the [**pins**]{style="color: #ae7b11;"} package [@R-pins], which has already been loaded into our session [in the previous section](#installing-and-loading-packages).
