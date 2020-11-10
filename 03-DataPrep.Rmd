@@ -72,7 +72,7 @@ cryptodata <- mutate(cryptodata,
 <!-- rowcount2 <- nrow(cryptodata) -->
 <!-- ``` -->
 
-This step removed `r rowcount1-rowcount2` rows on the latest run.
+<!-- This step removed `r rowcount1-rowcount2` rows on the latest run. -->
 
 Let's also remove any rows that have Null values for the new [**price_usd**]{style="color: blue;"} field [like we did for the [**date_time_utc**]{style="color: blue;"} field in a previous step](#remove-nulls). These will mostly be made up of rows where the value of trades through the 5th lowest ask price was lower than \$15.
 
@@ -129,7 +129,7 @@ What happens if a new cryptocurrency gets added to the cryptocurrency exchange? 
 To ensure we have a reasonable amount of data for each individual cryptocurrency, let's filter out any cryptocurrencies that don't have at least 1,000 observations using the [**filter()**]{style="color: green;"} function:
 
 ```{r, include=F}
-rowcount1 <- nrow(cryptodata)
+nrow1 <- nrow(cryptodata)
 cryptocount1 <- nrow(count(cryptodata))
 ```
 
@@ -138,18 +138,18 @@ cryptodata <- filter(cryptodata, n() >= 1000)
 ```
 
 ```{r, include=F}
-rowcount2 <- nrow(cryptodata)
+nrow2 <- nrow(cryptodata)
 cryptocount2 <- nrow(count(cryptodata))
 ```
 
-The number of rows for the `cryptodata` dataset before the filtering step was `r rowcount1` and is now `r rowcount2`. This step removed `r cryptocount1-cryptocount2` cryptocurrencies from the analysis that did not have enough observations associated with them.
+The number of rows for the `cryptodata` dataset before the filtering step was `r nrow1` and is now `r nrow2`. This step removed `r cryptocount1-cryptocount2` cryptocurrencies from the analysis that did not have enough observations associated with them.
 
 ### Remove symbols without data from the last 3 days
 
 If there was no data collected for a cryptocurrency over the last 3 day period, let's exclude that asset from the dataset since we are only looking to model data that is currently flowing through the process. If an asset is removed from the exchange (if a project is a scam for example) or is no longer being actively captured by the data collection process, we can't make new predictions for it, so might as well exclude these ahead of time as well.
 
 ```{r, include=F}
-rowcount1 <- nrow(cryptodata)
+nrow1 <- nrow(cryptodata)
 ```
 
 ```{r remove_last_3_days_missing}
@@ -157,10 +157,10 @@ cryptodata <- filter(cryptodata, max(date) > Sys.Date()-3)
 ```
 
 ```{r, include=F}
-rowcount2 <- nrow(cryptodata)
+nrow1 <- nrow(cryptodata)
 ```
 
-The number of rows for the `cryptodata` dataset before this filtering step was `r rowcount1` and is now `r rowcount2`.
+The number of rows for the `cryptodata` dataset before this filtering step was `r nrow1` and is now `r nrow2`.
 
 ## Calculate Target
 
@@ -210,19 +210,19 @@ cryptodata
 
 Now we can use the [**fill_gaps()**]{style="color: green;"} function from the [**tsibble**]{style="color: #ae7b11;"} package to fill any gaps found in the data, as being implicitly Null. Meaning, we will add these rows into the data with NA values for everything except for the date time field. This will allow us to safely compute the target price found 24 hours into the future relative to when each row was collected.
 
-```{r rowcount1, include=F}
-rowcount1 <- nrow(cryptodata)
+```{r, include=F}
+nrow1 <- nrow(cryptodata)
 ```
 
 ```{r fill_gaps}
 cryptodata <- fill_gaps(cryptodata)
 ```
 
-```{r rowcount2, include=F}
-rowcount2 <- nrow(cryptodata)
+```{r, include=F}
+nrow2 <- nrow(cryptodata)
 ```
 
-Now looking at the data again, there are `r rowcount2-rowcount1` additional rows that were added as implicitly missing in the data:
+Now looking at the data again, there are `r nrow2-nrow1` additional rows that were added as implicitly missing in the data:
 
 ```{r show_filled_cryptodata}
 cryptodata
@@ -311,7 +311,19 @@ In our context, it is also important to consider the date/time aspect of the dat
 
 Because of the issues just discussed above, we will need to make sure that the train data was always collected before the test data was. This is what we mean by "time aware".
 
-We will then use "cross validation" in the sense that we will create 5 different train/test splits to assess the accuracy of the models. From those 5, we will take the test split containing the most recent data, and consider this to be our [**holdout dataset**]{style="color: purple;"}. The holdout dataset represents the most recent version of the world that we can compare the performance of the models against, and will give us an additional way of assessing their accuracy.
+We will then use "cross validation" in the sense that we will create **5 different train/test splits to assess the accuracy of the models**. From those 5, we will take the test split containing the most recent data, and consider this to be our [**holdout dataset**]{style="color: purple;"}. The holdout dataset represents the most recent version of the world that we can compare the performance of the models against, and will give us an additional way of assessing their accuracy.
+
+This will leave us with:
+
+- 5 train datasets to build predictive models from.
+
+- 4 test datasets to assess the performance of the first 4 trained models against. Is the model able to predict price movements accurately and consistently when trained and tested on 4 independent subsets of the data?
+
+- 1 holdout dataset to assess the performance of all 5 trained models. How accurate are the models at predicting the most recent subset of the data that we can assess?
+
+**The explanation above is really important to understand!** The code and implementation of this step specifically not so much, however. Focus on understanding the idea conceptually as outlined above rather than understanding the code used below.
+
+In the code below we are adding two new columns. First the [**split**]{style="color: blue;"}, which assigns each observation a number 1 through 5 of the cross validation split that the data belongs to based on when it was collected.
 
 
 We will not walk through the steps below in detail outside of the comments left throughout the code...ADD
