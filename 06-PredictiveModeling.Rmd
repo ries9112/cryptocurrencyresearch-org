@@ -1,12 +1,18 @@
 # Predictive Modeling {#predictive-modeling}
 
-## What is it?
-
-<!-- [TODO - Here talk about how models are meant to give us a simpler version of the world that we can extrapolate the information we need out of, but most models don't expect to be perfect so our job is to understand the expected levels of accuracy and put them to the test before we actually make any conclusive decision edit and add] -->
+We finally have everything we need to start making predictive models now that the [data has been cleaned](#data-prep) and we have come up with a [gameplan to understand the efficacy of the models](#model-validation-plan).
 
 ## Example Simple Model {#example-simple-model}
 
-...First need to run example normal lm model, etc...
+We can start by making a simple [**linear regression** model](https://en.wikipedia.org/wiki/Linear_regression):
+
+```{r lm_model, class.output="scroll-lim"}
+lm(formula = target_price_24h ~ ., data = cryptodata)
+```
+
+We defined the [**formula**]{style="color: blue;"} for the model as **`target_price_24h ~ .`**, which means that we are want to make predictions for the [**target_price_24h**]{style="color: blue;"} field, and use (**`~`**) every other column found in the data (**`.`**). In other words, we specified a model that uses the [**target_price_24h**]{style="color: blue;"} field as the [dependent variable](https://en.wikipedia.org/wiki/Dependent_and_independent_variables), and all other columns (**`.`**) as the [independent variables](https://en.wikipedia.org/wiki/Dependent_and_independent_variables). Meaning, we are looking to predict the [**target_price_24h**]{style="color: blue;"}, which is the only column that refers to the future, and use all the information available at the time the rest of the data was collected in order to infer statistical relationships that can help us forecast the future values of the [**target_price_24h**]{style="color: blue;"} field when it is still unknown on new data that we want to make new predictions for.
+
+In the example above we used the [**cryptodata**]{style="color: blue;"} object which contained all the non-nested data, and was a big oversimplification of the process we will actually use. 
 
 ### Using Functional Programming {#using-functional-programming}
 
@@ -14,7 +20,7 @@
 
 ```{r}
 linear_model <- function(df){
-  lm(price_usd ~ . -date_time_utc -date, data = df)
+  lm(target_price_24h ~ . -date_time_utc -date, data = df)
 }
 ```
 
@@ -45,7 +51,7 @@ Here use Caret + purrr to make models
 ```{r}
 linear_model_caret <- function(df){
 
-  train(price_usd ~ . -date_time_utc -date, data = df,
+  train(target_price_24h ~ . -date_time_utc -date, data = df,
         method = 'lm',
         trControl=trainControl(method="none"))
 
@@ -59,7 +65,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             lm_model = map(train_data, linear_model_caret))
 ```
 
-### Cross Validation
+### Cross Validation {#cross-validation-preds}
 
 Within each split we created, we can set caret to perform an additional cross-validation step to allow it to do a minimal level of automated hyperparameter tuning as it creates the models (the more we do the longer it will take).
 
@@ -76,7 +82,7 @@ Now create more generalized version
 ```{r}
 model_caret <- function(df, method_choice){
 
-  train(price_usd ~ . -date_time_utc -date, data = df,
+  train(target_price_24h ~ . -date_time_utc -date, data = df,
         method = method_choice,
         trControl=fitControl)
 
