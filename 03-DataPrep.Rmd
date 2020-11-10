@@ -298,9 +298,13 @@ There are several advantages to writing code *the* ***tidy*** *way*, but while s
 
 ## Cross Validation
 
-Next is a step that is essential in helping us understand how accurate the models we make actually are.
+Next is a step that is essential in helping us understand how accurate the models we make actually are. When we make predictive models, we would not want to make important real life decisions based on those models without having a good idea of how effective the methodology actually is, and ensuring no mistakes were made. We will likely never get a 100% accurate representation of what the model will actually perform like in the real world without actually tracking those results over time, but there are ways for us to get a sense of whether something works or not ahead of time. 
+
+The simplest method of doing this is to take a larger majority of the data and assign it to be the [**train dataset**]{style="color: purple;"}, which the predictive models use to learn the statistical patterns in the data that can then be used to make predictions about the future. Then using the rest of the data which has not yet been seen, which is the [**test dataset**]{style="color: purple;"}, we can assess if the statistical models work on the new data in the way that we would expect based on the results obtained on the train dataset. If the results are consistent between the two, this is a good sign. If the results on the test data are much worse than those obtained on the train data, this could be a sign of [[**overfitting**]{style="color: purple;"}](https://en.wikipedia.org/wiki/Overfitting) which means the model created overspecialized itself on the training data, and it is not very good at predicting new data because it learned the exact patterns of the training data instead of understanding the actual relationships between the different variables.
 
 (explain step below)
+
+We will not walk through the steps below in detail outside of the comments left throughout the code...ADD
 
 <!-- [TODO - Here will also need to explain that we are taking this process very step by step and focusing on doing this correctly, but in a tool used later on to make models (caret) this functionality is available without having to set this up, so don't worry about this being hard-coded to our specific needs.] -->
 
