@@ -93,7 +93,8 @@ Of course we can add other components that make a visualization effective, let's
 crypto_chart <- crypto_chart +
                   ggtitle(paste('Price Change Over Time -', eth_data$symbol),
                           subtitle = paste('Most recent data collected on:', 
-                                           max(eth_data$date_time_utc))) + 
+                                           max(eth_data$date_time_utc),
+                                           '(UTC)')) + 
                   xlab('Date Time (UTC)') +
                   ylab('Price ($)')
 # display the new chart

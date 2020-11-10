@@ -1,7 +1,7 @@
 name: Run Crypto Tutorial
 on:
   schedule:
-    - cron: '35 05,06,17 * * *'
+    - cron: '05 05,17 * * *'
 
 jobs:
   build:
