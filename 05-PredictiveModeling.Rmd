@@ -209,9 +209,9 @@ stopCluster(cl)
 
 
 
-### Convert to tsibble {#convert-to-tsibble-pred-model}
+<!-- ### Convert to tsibble {#convert-to-tsibble-pred-model} -->
 
-Repeat the steps we performed in the [Data Prep section to convert the data to the [**tsibble**]{style="color: blue;"} format](#convert-to-tsibble):
+<!-- Repeat the steps we performed in the [Data Prep section to convert the data to the [**tsibble**]{style="color: blue;"} format](#convert-to-tsibble): -->
 
 <!-- STEPS BELOW NEED TO BE CONVERTED FOR NESTED DATA USING FUNCTIONAL PROGRAMMING -->
 <!-- ```{r} -->
