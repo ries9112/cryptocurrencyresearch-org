@@ -702,10 +702,11 @@ predictable_cryptos <- arrange(predictable_cryptos, desc(rsq))
 predictable_cryptos
 ```
 
-Show data using the `formattable` package [@R-formattable] to color code 
+Show the top 15 most predictable cryptocurrencies (according to the $R^2$) using the `formattable` package [@R-formattable] to color code the cells:
 ```{r, class.output="scroll-lim"}
-formattable(predictable_cryptos, list(rmse = color_tile("#71CA97", "red"),
-                                     rsq = color_tile("firebrick1", "#71CA97")))
+formattable(head(predictable_cryptos ,15), 
+            list(rmse = color_tile("#71CA97", "red"),
+                 rsq = color_tile("firebrick1", "#71CA97")))
 ```
 
 

@@ -2,13 +2,15 @@
 
 ## What is it?
 
-<!-- [TODO - Here talk about how models are meant to give us a simpler version of the world that we can extrapolate the information we need out of, but most models don't expect to be perfect so our job is to understand the expected levels of accuracy and put them to the test before we actually make any conclusive descision... edit and add] -->
+<!-- [TODO - Here talk about how models are meant to give us a simpler version of the world that we can extrapolate the information we need out of, but most models don't expect to be perfect so our job is to understand the expected levels of accuracy and put them to the test before we actually make any conclusive decision edit and add] -->
 
 ## Example Simple Model
 
 ...First need to run example normal lm model, etc...
 
 ### Using Functional Programming {#using-functional-programming}
+
+<!-- [TODO - Explain here] -->
 
 ```{r}
 linear_model <- function(df){
@@ -62,10 +64,8 @@ cryptodata_nested <- mutate(cryptodata_nested,
 Within each split we created, we can set caret to perform an additional cross-validation step to allow it to do a minimal level of automated hyperparameter tuning as it creates the models (the more we do the longer it will take).
 
 ```{r}
-fitControl <- trainControl(## 3-fold CV
-                           method = "repeatedcv",
+fitControl <- trainControl(method = "repeatedcv",
                            number = 3,
-                           ## repeated three times
                            repeats = 3)
 ```
 
@@ -89,14 +89,14 @@ Will now need to use map2()
 
 ```{r}
 cryptodata_nested <- mutate(cryptodata_nested, 
-                            xgb_model = map2(train_data, "xgbLinear",model_caret))
+                            xgb_model = map2(train_data, "xgbLinear", model_caret))
 ```
 
 Can also make a tree based XGBoost model:
 
 ```{r}
 cryptodata_nested <- mutate(cryptodata_nested, 
-                            xgbTree_model = map2(train_data, "xgbTree",model_caret))
+                            xgbTree_model = map2(train_data, "xgbTree", model_caret))
 ```
 
 [TODO - Reference xgboost documentation. Can I embed it? <https://xgboost.readthedocs.io/en/latest/parameter.html>]
@@ -206,3 +206,23 @@ stopCluster(cl)
 <!-- [TODO - HERE TALK ABOUT ARIMA AND ETS AND MAKE MODELS! KEEP SAME STRUCTURE AND WILL BE ABLE TO DO postResample()] -->
 
 <!-- [TODO - AFTERWARDS ALSO NEED TO ADD NEW STEPS INTO NEXT SECTION!] -->
+
+
+
+### Convert to tsibble {#convert-to-tsibble-pred-model}
+
+Repeat the steps we performed in the [Data Prep section to convert the data to the [**tsibble**]{style="color: blue;"} format](#convert-to-tsibble):
+
+<!-- STEPS BELOW NEED TO BE CONVERTED FOR NESTED DATA USING FUNCTIONAL PROGRAMMING -->
+<!-- ```{r} -->
+<!-- cryptodata <- mutate(cryptodata, ts_index = anytime(paste0(pkDummy,':00:00'))) -->
+<!-- # Distinct data by ts_index and symbol -->
+<!-- cryptodata <- distinct(cryptodata, symbol, ts_index, .keep_all=TRUE) -->
+<!-- # Convert to tsibble -->
+<!-- cryptodata <- as_tsibble(cryptodata, index = ts_index, key = symbol) -->
+<!-- ``` -->
+
+
+
+
+

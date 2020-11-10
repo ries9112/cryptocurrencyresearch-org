@@ -1,28 +1,24 @@
 # Visualization `r emo::ji('chart_decreasing')`
 
-<!-- NOTE 09/27: REVAMP THIS SECTION, ANSWER QUESTIONS ABOUT THE DATA MORE -->
-
-<!-- NOTE 05/24: I'm thinking should calculate % change just for visualization purposes just here, but what if we avoid that completely and instead make the tutorial on visualizing price over time for BTC first and then creating gganimate tutorial to iterate over the rest? Just keep it to ggplot2 + extensions + gganimate tutorial here, no need to make a million visualizations. Would be good to add rayshader too, but add that as a stretch goal for later. -->
-
-Making visualizations using `ggplot2` is one of the very best tools available in the R ecosystem. The ***gg*** in `ggplot2` stands for the ***Grammar of Graphics***, which is essentially the idea that many different types of charts share the same underlying building blocks, and that they can be put together in different ways to make charts that look very different from each other. [In Hadley's own words,](https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/) "a pie chart is just a bar chart drawn in polar coordinates", "They look very different, but in terms of the grammar they have a lot of underlying similarities."
+Making visualizations using the [**ggplot2**]{style="color: #ae7b11;"} package [@R-ggplot2] is one of the very best tools available in the R ecosystem. The ***gg*** in [**ggplot2**]{style="color: #ae7b11;"} stands for the [***Grammar of Graphics***]{style="color: purple;"}, which is essentially the idea that many different types of charts share the same underlying building blocks, and that they can be put together in different ways to make charts that look very different from each other. [In Hadley Wickham's (the creator of the package) own words,](https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/) ***"a pie chart is just a bar chart drawn in polar coordinates", "They look very different, but in terms of the grammar they have a lot of underlying similarities."***
 
 ## Basics - ggplot2
 
-So how does `ggplot2` actually work? ***"...in most cases you start with `ggplot()`, supply a dataset and aesthetic mapping (with `aes()`). You then add on layers (like `geom_point()` or `geom_histogram()`), scales (like `scale_colour_brewer()`), faceting specifications (like `facet_wrap()`) and coordinate systems (like `coord_flip()`)."*** - [ggplot2.tidyverse.org/](https://ggplot2.tidyverse.org/).
+So how does [**ggplot2**]{style="color: #ae7b11;"} actually work? ***"...in most cases you start with [**ggplot()**]{style="color: green;"}, supply a dataset and aesthetic mapping (with [**aes()**]{style="color: green;"}). You then add on layers (like [**geom_point()**]{style="color: green;"} or [**geom_histogram()**]{style="color: green;"}), scales (like [**scale_colour_brewer()**]{style="color: green;"}), faceting specifications (like [**facet_wrap()**]{style="color: green;"}) and coordinate systems (like [**coord_flip()**]{style="color: green;"})."*** - [ggplot2.tidyverse.org/](https://ggplot2.tidyverse.org/).
 
 Let's break this down step by step.
 
-***"start with ggplot(), supply a dataset and aesthetic mapping (with aes())***
+***"start with [**ggplot()**]{style="color: green;"}, supply a dataset and aesthetic mapping (with [**aes()**]{style="color: green;"})***
 
-Using the `ggplot()` function we supply the dataset first, and then define the aesthetic mapping (the visual properties of the chart) as having the `date_time_utc` on the x-axis, and the `price_usd` on the y-axis:
+Using the [**ggplot()**]{style="color: green;"} function we supply the dataset first, and then define the aesthetic mapping (the visual properties of the chart) as having the [**date_time_utc**]{style="color: blue;"} on the x-axis, and the [**price_usd**]{style="color: blue;"} on the y-axis:
 
 ```{r ggplot_blank}
 ggplot(data = cryptodata, aes(x = date_time_utc, y = price_usd))
 ```
 
-We were expecting a chart showing price over time, but the chart now shows up but is blank because we need to perform an additional step to determine how the data points are actually shown on the chart: ***"You then add on layers (like `geom_point()` or `geom_histogram()`)..."***
+We were expecting a chart showing price over time, but the chart now shows up but is blank because we need to perform an additional step to determine how the data points are actually shown on the chart: ***"You then add on layers (like [**geom_point()**]{style="color: green;"} or [**geom_histogram()**]{style="color: green;"})..."***
 
-We can take the exact same code as above and add ***+ `geom_point()`*** to show the data on the chart as points:
+We can take the exact same code as above and add ***+ [**geom_point()**]{style="color: green;"}*** to show the data on the chart as points:
 
 ```{r ggplot_geom_point}
 ggplot(data = cryptodata, aes(x = date_time_utc, y = price_usd)) +
@@ -30,15 +26,15 @@ ggplot(data = cryptodata, aes(x = date_time_utc, y = price_usd)) +
        geom_point()
 ```
 
-The most expensive cryptocurrency being shown, "`r subset(cryptodata, price_usd == max(cryptodata$price_usd))$symbol`" in this case, makes it difficult to take a look at any of the other ones. Let's try *zooming-in* on a single one by using the same code but making an adjustment to the `data` parameter to only show data for the cryptocurrency with the symbol **ETH**.
+The most expensive cryptocurrency being shown, "`r subset(cryptodata, price_usd == max(cryptodata$price_usd))$symbol`" in this case, makes it difficult to take a look at any of the other ones. Let's try *zooming-in* on a single one by using the same code but making an adjustment to the [**data**]{style="color: blue;"} parameter to only show data for the cryptocurrency with the symbol **ETH**.
 
-Let's filter the data down to the *ETH* cryptocurrency only and make the new dataset `eth_data`:
+Let's filter the data down to the *ETH* cryptocurrency only and make the new dataset [**eth_data**]{style="color: blue;"}:
 
 ```{r ETH_subset}
 eth_data <- subset(cryptodata, symbol == 'ETH')
 ```
 
-We can now use the exact same code from earlier supplying the new filtered dataset for the `data` argument:
+We can now use the exact same code from earlier supplying the new filtered dataset for the [**data**]{style="color: blue;"} argument:
 
 ```{r ggplot_ETH}
 ggplot(data = eth_data, 
@@ -48,7 +44,7 @@ ggplot(data = eth_data,
 
 <!-- *The axis automatically adjusted to the new data.* -->
 
-This is better, but geom\_point() might not be the best choice for this chart, let's change `geom_point` with `geom_line` and see what that looks like:
+This is better, but [**geom_point()**]{style="color: green;"} might not be the best choice for this chart, let's change [**geom_point()**]{style="color: green;"} to instead be [**geom_line()**]{style="color: green;"} and see what that looks like:
 
 ```{r ggplot_ETH_line}
 ggplot(data = eth_data, 
@@ -57,7 +53,7 @@ ggplot(data = eth_data,
        geom_line()
 ```
 
-Let's save the results as an object called `crypto_chart`:
+Let's save the results as an object called [**crypto_chart**]{style="color: blue;"}:
 
 ```{r}
 crypto_chart <- ggplot(data = eth_data, 
@@ -65,13 +61,13 @@ crypto_chart <- ggplot(data = eth_data,
                        geom_line()
 ```
 
-We can add a line showing the trend over time:
+We can add a line showing the trend over time adding [**stat_smooth()**]{style="color: green;"} to the chart:
 
 ```{r ggplot_ETH_lm_relationship}
 crypto_chart <- crypto_chart + stat_smooth()
 ```
 
-And we can show the new results by calling the `crypto_chart` object again:
+And we can show the new results by calling the [**crypto_chart**]{style="color: blue;"} object again:
 
 ```{r}
 crypto_chart
@@ -79,7 +75,7 @@ crypto_chart
 
 One particularly nice aspect of using the ggplot framework, is that we can keep adding as many elements and transformations to the chart as we would like with no limitations.
 
-We will not save the result shown below this time, but to illustrate this point, we can add a new line showing a linear regression fit going through the data using `stat_smooth(method = 'lm')`. And let's also show the individual points in green. We could keep layering things on as much as we want:
+We will not save the result shown below this time, but to illustrate this point, we can add a new line showing a linear regression fit going through the data using **`stat_smooth(method = 'lm')`**. And let's also show the individual points in green. We could keep layering things on as much as we want:
 
 ```{r}
 crypto_chart + 
@@ -89,9 +85,9 @@ crypto_chart +
         geom_point(color='dark green', size=0.8)
 ```
 
-By not providing any `method` option, the `stat_smooth()` function defaults to use the `method` called [`loess`, which shows the local trends](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/loess), while the `lm` model fits the best fitting linear regression line for the data as a whole.
+By not providing any [**method**]{style="color: blue;"} option, the [**stat_smooth()**]{style="color: green;"} function defaults to use the [**method**]{style="color: blue;"} called [**`loess`**, which shows the local trends](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/loess), while the **`lm`** model fits the best fitting linear regression line for the data as a whole.
 
-Of course we can add other components that make a visualization effective, let's add labels to the chart now:
+Of course we can add other components that make a visualization effective, let's add labels to the chart now using [**xlab()**]{style="color: green;"} and [**ylab()**]{style="color: green;"}:
 
 ```{r ggplot_labels}
 crypto_chart <- crypto_chart +
@@ -104,7 +100,7 @@ crypto_chart <- crypto_chart +
 crypto_chart
 ```
 
-The `ggplot2` package comes with a large amount of functionality. You can find a full reference of the functions you can use here:
+The [**ggplot2**]{style="color: #ae7b11;"} package comes with a large amount of functionality. You can find a full reference of the functions you can use here:
 
 ```{r show_ggplot2_ref, echo=F}
 knitr::include_url("https://ggplot2.tidyverse.org/reference/")
@@ -112,13 +108,13 @@ knitr::include_url("https://ggplot2.tidyverse.org/reference/")
 
 [*https://ggplot2.tidyverse.org/reference/*](https://ggplot2.tidyverse.org/reference/){.uri}
 
-What makes the `ggplot2` package **even better** is the fact that [it also comes with a framework for anyone to develop their own extensions](https://cran.r-project.org/web/packages/ggplot2/vignettes/extending-ggplot2.html). Meaning there is a lot more functionality that the community has created that can be added in importing other packages that provide extensions to ggplot.
+What makes the [**ggplot2**]{style="color: #ae7b11;"} package **even better** is the fact that [it also comes with a framework for anyone to develop their own extensions](https://cran.r-project.org/web/packages/ggplot2/vignettes/extending-ggplot2.html). Meaning there is a lot more functionality that the community has created that can be added in importing other packages that provide extensions to ggplot.
 
 ## Using Extensions
 
 ### ggthemes
 
-To use an extension, we just need to import it into our R session like we did with `ggplot2` and the rest of the packages we want to use. We [already loaded the `ggthemes` [@R-ggthemes] package in the Setup section](#setup) so we do not need to run `library(ggthemes)` to import the package into the session.
+To use an extension, we just need to import it into our R session like we did with [**ggplot2**]{style="color: #ae7b11;"} and the rest of the packages we want to use. We [already loaded the [**ggthemes**]{style="color: #ae7b11;"} [@R-ggthemes] package in the Setup section](#setup) so we do not need to run **`library(ggthemes)`** to import the package into the session.
 
 We can apply a *theme* to the chart now and change the way it looks:
 
@@ -128,7 +124,7 @@ crypto_chart <- crypto_chart + theme_economist()
 crypto_chart
 ```
 
-See below for a full list of themes you can test. If you followed to this point try running the code `crypto_chart + theme_excel()` or any of the other options listed below instead of `+ theme_excel()`:
+See below for a full list of themes you can test. If you followed to this point try running the code **`crypto_chart + theme_excel()`** or any of the other options listed below instead of **`+ theme_excel()`**:
 
 ```{r show_ggthemes_site, echo=F}
 knitr::include_url("https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/", height = '500px' )
@@ -138,15 +134,15 @@ knitr::include_url("https://yutannihilation.github.io/allYourFigureAreBelongToUs
 
 ### plotly
 
-In some cases, it's helpful to make a chart responsive to a cursor hovering over it. We can convert any ggplot into an interactive chart by using the `plotly`[@R-plotly] package, and it is super easy!
+In some cases, it's helpful to make a chart responsive to a cursor hovering over it. We can convert any ggplot into an interactive chart by using the [**plotly**]{style="color: #ae7b11;"} [@R-plotly] package, and it is super easy!
 
-We already imported the `plotly` package [in the setup section](#setup), so all we need to do is wrap our chart in the function `ggplotly()`:
+We already imported the [**plotly**]{style="color: #ae7b11;"} package [in the setup section](#setup), so all we need to do is wrap our chart in the function [**ggplotly()**]{style="color: green;"}:
 
 ```{r plotly, message=FALSE, warning=FALSE}
 ggplotly(crypto_chart)
 ```
 
-**Use your mouse to hover over specific points on the chart above**. Also notice that we did not overwrite the `crypto_chart` object, but are just displaying the results.
+**Use your mouse to hover over specific points on the chart above**. Also notice that we did not overwrite the [**crypto_chart**]{style="color: blue;"} object, but are just displaying the results.
 
 If you are not looking to convert a ggplot to be interactive, plotly also provides its own framework for making charts from scratch, you can find out more about it here:
 
@@ -160,7 +156,7 @@ knitr::include_url("https://plotly.com/r/")
 
 ### ggpubr
 
-The `ggpubr` [@R-ggpubr] extension provides a lot of functionality that we won't cover here, but one function we can use from this extension is `stat_cor()`, which allows us to add a correlation coefficient (R) and p-value to the chart.
+The [**ggpubr**]{style="color: #ae7b11;"} [@R-ggpubr] extension provides a lot of functionality that we won't cover here, but one function we can use from this extension is [**stat_cor**]{style="color: green;"}, which allows us to add a correlation coefficient (R) and p-value to the chart.
 
 ```{r ggpubr, message=FALSE, warning=FALSE, error=TRUE}
 crypto_chart <- crypto_chart + stat_cor()
@@ -172,7 +168,7 @@ We will dive deeper into these metrics in [the section where we evaluate the per
 
 ### ggforce
 
-The `ggforce` package [@R-ggforce] is a useful tool for annotating charts. We can annotate outliers for example:
+The [**ggforce**]{style="color: #ae7b11;"} package [@R-ggforce] is a useful tool for annotating charts. We can annotate outliers for example:
 
 ```{r add_ggforce_annotations, error=TRUE}
 crypto_chart +
@@ -185,7 +181,7 @@ crypto_chart +
                               description = paste0('Price drop to $', price_usd)))
 ```
 
-When using the `geom_mark_ellipse()` function we are passing the `data` argument, the `label` and the `description` through the `aes()` function. We are marking two points, one for the minimum price during the time period, and one for the maximum price. For the first point we filter the data to only the point where the `price_usd` was equal to the `max(price_usd)` and add the labels accordingly. The same is done for the second point, but showing the lowest price point for the given date range.
+When using the [**geom_mark_ellipse()**]{style="color: green;"} function we are passing the [**data**]{style="color: blue;"} argument, the [**label**]{style="color: blue;"} and the [**description**]{style="color: blue;"} through the [**aes()**]{style="color: green;"} function. We are marking two points, one for the minimum price during the time period, and one for the maximum price. For the first point we filter the data to only the point where the [**price_usd**]{style="color: blue;"} was equal to the **`max(price_usd)`** and add the labels accordingly. The same is done for the second point, but showing the lowest price point for the given date range.
 
 Now view the new chart:
 
@@ -197,7 +193,7 @@ Notice that this chart is specifically annotated around these points, but we nev
 
 ### gganimate
 
-We can also extend the functionality of ggplot by using the `gganimate` [@R-gganimate] package, which allows us to create an animated GIF that iterates over groups in the data through the use of the `transition_states()` function.
+We can also extend the functionality of ggplot by using the [**gganimate**]{style="color: #ae7b11;"} [@R-gganimate] package, which allows us to create an animated GIF that iterates over groups in the data through the use of the [**transition_states()**]{style="color: green;"} function.
 
 ```{r first_gganimate, message=FALSE, warning=FALSE, error=TRUE}
 animated_prices <- ggplot(data = mutate(cryptodata, groups=symbol),
@@ -212,26 +208,26 @@ animated_prices <- ggplot(data = mutate(cryptodata, groups=symbol),
 animate(animated_prices,fps=1)
 ```
 
-We recommend consulting this documentation for simple and straightforward examples on using gganimate: <https://gganimate.com/articles/gganimate.html>
+We recommend consulting this documentation for simple and straightforward examples on using [**gganimate**]{style="color: #ae7b11;"}: <https://gganimate.com/articles/gganimate.html>
 
 ### ggTimeSeries
 
-The `ggTimeSeries` [@R-ggTimeSeries] package has functionality that is helpful in plotting time series data. We can create a calendar heatmap of the price over time using the `ggplot_calendar_heatmap()` function.
+The [**ggTimeSeries**]{style="color: #ae7b11;"} [@R-ggTimeSeries] package has functionality that is helpful in plotting time series data. We can create a calendar heatmap of the price over time using the [**ggplot_calendar_heatmap()**]{style="color: green;"} function:
 
 ```{r ggtimeseries_heatmap, error=TRUE}
 calendar_heatmap <- ggplot_calendar_heatmap(eth_data,'date_time_utc','price_usd') #or do target_percent_change here?
 calendar_heatmap
 ```
 
-*DoW on the y-axis stands for Day Of the Week*
+*DoW on the y-axis stands for **D**ay **o**f the **W**eek*
 
 To read this chart in the correct date order start from the top left and work your way down and to the right once you reach the bottom of the column. The lighter the color the higher the price on the specific day.
 
 ### Rayshader
 
-The previous chart is helpful, but a color scale like that can be a bit difficult to interpret. We could convert the previous chart into a 3d figure that is easier to visually interpret by using the amazing `rayshader` [@R-rayshader] package. <!-- [TODO - NEED TO MANUALLY FIX THIS CITATION! Add new .bib file, right now just packages.bib which is automatically overwritten each time.] -->
+The previous chart is helpful, but a color scale like that can be a bit difficult to interpret. We could convert the previous chart into a 3d figure that is easier to visually interpret by using the amazing [**rayshader**]{style="color: #ae7b11;"} [@R-rayshader] package.
 
-**This document runs automatically through GitHub Actions, which [does not have a graphical environment to run the code below](https://github.community/t/installation-of-xquartz-not-found/139804), which prevents it from refreshing the results with the latest data. We are showing old results for the Rayshader section below. If you have gotten to this point, run the code below yourself on the latest data to see this amazing package in action!**
+**This document runs automatically through GitHub Actions, which [does not have a graphical environment to run the code below](https://github.community/t/installation-of-xquartz-not-found/139804), which prevents it from refreshing the results with the latest data. We are showing old results for the [**rayshader**]{style="color: #ae7b11;"} section below. If you have gotten to this point, it is worth running the code below yourself on the latest data to see this amazing package in action!**
 
 ```{r rayshader_cal_heatmap, eval=FALSE}
 # First remove the title from the legend to avoid visual issues
@@ -267,5 +263,9 @@ rgl.close()
 
 ![](rayshader_video.mp4)
 
-Awesome! Move on to the [next section](#predictive-modeling) to start making predictive models for the data..
+We also recommend checking out the [incredible work done by Tyler Morgan Wall on his website using [**rayshader**]{style="color: #ae7b11;"} and [**rayrender**]{style="color: #ae7b11;"}](https://www.tylermw.com/).
+
+</br>
+
+Awesome work! Move on to the [next section](#predictive-modeling) ➡️ to start making predictive models for the data.
 

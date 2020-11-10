@@ -151,7 +151,7 @@ Our goal is to be able to make predictions on the price of each cryptocurrency 2
 
 To do this we can create a new column in the data that is the [**price_usd**]{style="color: blue;"} offset by 24 rows (one for each hour), but before we can do that we need to make sure there are no gaps anywhere in the data.
 
-### Convert to tsibble
+### Convert to tsibble {#convert-to-tsibble}
 
 We can fill any gaps in the data using the [**tsibble**]{style="color: #ae7b11;"} package [@R-tsibble], which was covered in more detail in the [high level version of the tutorial](https://cryptocurrencyresearch.org/high-level/#/timeseries-data-prep).
 
@@ -464,9 +464,6 @@ minimum_sd <- filter(distinct(mutate(group_by(ungroup(find_zero_var), symbol),
 minimum_sd
 ```
 
-<!-- [TODO - 0.0001 isn't a super perfect cutoff, small prices will have low standard deviation because not standardized, but will live with some cryptos with suuuper small prices being excluded] -->
-
-
 Now we can remove these symbols from appearing in the dataset:
 
 ```{r}
@@ -475,23 +472,6 @@ cryptodata <- filter(cryptodata, !(symbol %in% minimum_sd))
 
 In the code above we match all rows where the symbol is part of the [**minimum_sd**]{style="color: blue;"} object with the list of cryptocurrency symbols to remove from the data, and we then negate the selection using the [**!**]{style="color: blue;"} operator to only keep rows with symbols not in the list we found.
 
-<!-- Ugh wish I could write it like this: -->
-
-<!-- ```{r} -->
-
-<!-- find_zero_var %>% #start with data -->
-
-<!--   ungroup() %>% #ungroup -->
-
-<!--   group_by(symbol) %>% #re-group by symbol -->
-
-<!--   mutate(min_sd = min(min_sd)) %>% #find the minimum by the symbol -->
-
-<!--   select(min_sd) %>% #only keep symbol and min_sd -->
-
-<!--   distinct() #distinct  -->
-
-<!-- ``` -->
 
 ## Nest data
 
@@ -499,15 +479,16 @@ In the code above we match all rows where the symbol is part of the [**minimum_s
 
 ... explain goal and method
 
-... First make sure groupings are correct
+- The approach used in dealing with many nested datasets based on groups was guided in great part by [the work published by Hadley Wickham on the subject](https://r4ds.had.co.nz/many-models.html) [@R_for_data_science]
 
-<!-- [TODO - Reference Hadley's book chapter and video as references here] -->
+
+... First update the way the data is grouped:
 
 ```{r group_for_nest}
 cryptodata <- group_by(cryptodata, symbol, split, training)
 ```
 
-Example nesting data:
+Here is an example of what happens when we [**nest()**]{style="color: green;"} the data:
 
 ```{r make_nested_ex}
 nest(cryptodata) 
@@ -521,7 +502,6 @@ cryptodata_train <- rename(nest(filter(cryptodata, training=='train')), train_da
 cryptodata_train <- select(ungroup(cryptodata_train, training), -training)
 # Fix issues with individual groups of the data
 cryptodata_train$train_data <- lapply(cryptodata_train$train_data, na.omit)
-# Remove elements with no rows after na.omit step. CONFIRM THIS WORKS!!!
 # First add new column with nrow of train dataset
 cryptodata_train <- group_by(ungroup(mutate(rowwise(cryptodata_train), train_rows = nrow(train_data))), symbol, split)
 # Remove all symbols where their train data has less than 20 rows at least once
@@ -564,7 +544,7 @@ cryptodata_nested
 ```
 
 
-<!-- [TODO - ADD HERE - Intro to Visualization and explain we will use grouped data in PredictiveModeling] -->
+Phew... that was a handful! Data Preparation and cleaning is rarely a non-time consuming process. Now that we finished though, we can get to the fun parts! Move on to the next section ➡️ to learn some amazing tools to visualize data.
 
 
 
