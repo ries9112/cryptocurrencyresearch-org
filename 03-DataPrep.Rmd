@@ -80,7 +80,7 @@ Let's also remove any rows that have Null values for the new [**price_usd**]{sty
 nrow1 <- nrow(cryptodata)
 ```
 
-```{r omit_nulls_datetime}
+```{r omit_nulls_price_usd}
 cryptodata <- filter(cryptodata, !is.na(price_usd))
 ```
 
@@ -300,9 +300,19 @@ There are several advantages to writing code *the* ***tidy*** *way*, but while s
 
 Next is a step that is essential in helping us understand how accurate the models we make actually are. When we make predictive models, we would not want to make important real life decisions based on those models without having a good idea of how effective the methodology actually is, and ensuring no mistakes were made. We will likely never get a 100% accurate representation of what the model will actually perform like in the real world without actually tracking those results over time, but there are ways for us to get a sense of whether something works or not ahead of time. 
 
-The simplest method of doing this is to take a larger majority of the data and assign it to be the [**train dataset**]{style="color: purple;"}, which the predictive models use to learn the statistical patterns in the data that can then be used to make predictions about the future. Then using the rest of the data which has not yet been seen, which is the [**test dataset**]{style="color: purple;"}, we can assess if the statistical models work on the new data in the way that we would expect based on the results obtained on the train dataset. If the results are consistent between the two, this is a good sign. If the results on the test data are much worse than those obtained on the train data, this could be a sign of [[**overfitting**]{style="color: purple;"}](https://en.wikipedia.org/wiki/Overfitting) which means the model created overspecialized itself on the training data, and it is not very good at predicting new data because it learned the exact patterns of the training data instead of understanding the actual relationships between the different variables.
 
-(explain step below)
+### Testing Models
+
+The simplest method of getting a sense of the efficacy of a predictive model is to take a majority of the data (usually around 80% of the observations) and assign it to be the [**train dataset**]{style="color: purple;"}, which the predictive models use to learn the statistical patterns in the data that can then be used to make predictions about the future. Using the rest of the data which has not yet been seen by the statistical models (referred to as the [**test dataset**]{style="color: purple;"}), we can assess if the statistical models work on the new data in the way that we would expect based on the results obtained on the train dataset. If the results are consistent between the two, this is a good sign. If we do this multiple times (a process referred to as [**cross validation**]{style="color: purple;"}) we have even more information at our disposal to understand how good the model is at predicting data it has not seen before. If the results on the test data are much worse than those obtained on the train data, this could be a sign of [[**overfitting**]{style="color: purple;"}](https://en.wikipedia.org/wiki/Overfitting) which means the model created overspecialized itself on the training data, and it is not very good at predicting new data because it learned the exact patterns of the training data instead of understanding the actual relationships between the different variables. **Always beware of results that are too good to be true. It is more likely a mistake was made somewhere in the process**. This is a longer discussion in its own right, but it is also important to consider how the data used to trained the model will be utilized in the context of making a new prediction; if a variable used to train the model is not available when making a new prediction, that is simply not going to work. 
+
+In our context, it is also important to consider the date/time aspect of the data. For example, if we used data later into the future for the train dataset relative to the test data, could this give the model more information that would actually be available to it when it is time to make a new prediction? It absolutely could because the columns with the lagged prices represent prices from the past, which could be "giving away the solution" to the test data in a way that could not be leveraged when it is time to make new predictions. Therefore, when splitting the data into train/test datasets we will keep track of when the data was collected using [**time aware cross validation**]{style="color: purple;"}.
+
+### Time Aware Cross Validation
+
+Because of the issues just discussed above, we will need to make sure that the train data was always collected before the test data was. This is what we mean by "time aware".
+
+We will then use "cross validation" in the sense that we will create 5 different train/test splits to assess the accuracy of the models. From those 5, we will take the test split containing the most recent data, and consider this to be our [**holdout dataset**]{style="color: purple;"}. The holdout dataset represents the most recent version of the world that we can compare the performance of the models against, and will give us an additional way of assessing their accuracy.
+
 
 We will not walk through the steps below in detail outside of the comments left throughout the code...ADD
 
@@ -312,7 +322,7 @@ We will not walk through the steps below in detail outside of the comments left 
 
 (should explain why in our case we made our own method because needed to pick size of each split based on the individual cryptocurrency and we were not finding anything that worked well for us. Many different ways of doing this, but most important thing is to understand the goal of why we are doing this and not forgetting the importance of actually confirming the trained models work well on data outside of their own, and helping them avoid being overly trained to data from a given time period)
 
-NEW CV METHOD - need to explain:
+
 
 ```{r ts_cross_validation, class.output="scroll-lim"}
 # Remove rows with null date_time_utc to exclude missing data from next steps
