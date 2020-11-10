@@ -4,7 +4,7 @@
 
 <!-- [TODO - Here talk about how models are meant to give us a simpler version of the world that we can extrapolate the information we need out of, but most models don't expect to be perfect so our job is to understand the expected levels of accuracy and put them to the test before we actually make any conclusive decision edit and add] -->
 
-## Example Simple Model
+## Example Simple Model {#example-simple-model}
 
 ...First need to run example normal lm model, etc...
 

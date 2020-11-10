@@ -85,23 +85,32 @@ crypto_chart +
         geom_point(color='dark green', size=0.8)
 ```
 
-By not providing any [**method**]{style="color: blue;"} option, the [**stat_smooth()**]{style="color: green;"} function defaults to use the [**method**]{style="color: blue;"} called [**`loess`**, which shows the local trends](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/loess), while the **`lm`** model fits the best fitting linear regression line for the data as a whole.
+By not providing any [**method**]{style="color: blue;"} option, the [**stat_smooth()**]{style="color: green;"} function defaults to use the [**method**]{style="color: blue;"} called [**`loess`**, which shows the local trends](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/loess), while the **`lm`** model fits the best fitting linear regression line for the data as a whole. The results shown above were not used to overwrite the [**crypto_chart**]{style="color: blue;"} object.
 
-Of course we can add other components that make a visualization effective, let's add labels to the chart now using [**xlab()**]{style="color: green;"} and [**ylab()**]{style="color: green;"}:
+Before doing some additional formatting to the [**crypto_chart**]{style="color: blue;"} object, let's show one more example adding a new [red]{style="color: red;"} line for the [**target_price_24h**]{style="color: blue;"} column which we will aim to [predict in the predictive modeling section](#predictive-modeling), as well as an [orange]{style="color: orange;"} line showing the price 3 days in the past using the column [**lagged_price_3d**]{style="color: blue;"}. Again, we are **not overwriting** the results for the [**crypto_chart**]{style="color: blue;"} object:
+```{r chart_target_and_lagged}
+crypto_chart + 
+        # red line showing target
+        geom_line(aes(x=date_time_utc, y = target_price_24h), color = 'red') + 
+        # orange line showing price 3 days before
+        geom_line(aes(x=date_time_utc, y = lagged_price_3d), color = 'orange')
+```
+
+It is of course important to add other components that make a visualization effective, let's add labels to the chart now using [**xlab()**]{style="color: green;"} and [**ylab()**]{style="color: green;"}, as well as [**ggtitle()**]{style="color: green;"} to add a title and subtitle:
 
 ```{r ggplot_labels}
 crypto_chart <- crypto_chart +
+                  xlab('Date Time (UTC)') +
+                  ylab('Price ($)') +
                   ggtitle(paste('Price Change Over Time -', eth_data$symbol),
                           subtitle = paste('Most recent data collected on:', 
                                            max(eth_data$date_time_utc),
-                                           '(UTC)')) + 
-                  xlab('Date Time (UTC)') +
-                  ylab('Price ($)')
+                                           '(UTC)'))
 # display the new chart
 crypto_chart
 ```
 
-The [**ggplot2**]{style="color: #ae7b11;"} package comes with a large amount of functionality. You can find a full reference of the functions you can use here:
+The [**ggplot2**]{style="color: #ae7b11;"} package comes with a large amount of functionality that we are not coming even close to covering here. You can find a full reference of the functions you can use here:
 
 ```{r show_ggplot2_ref, echo=F}
 knitr::include_url("https://ggplot2.tidyverse.org/reference/")
@@ -268,5 +277,5 @@ We also recommend checking out the [incredible work done by Tyler Morgan Wall on
 
 </br>
 
-Awesome work! Move on to the [next section](#predictive-modeling) ➡️ to start making predictive models for the data.
+Awesome work! Move on to the [next section](#model-validation-plan) ➡️ to start focusing our attention on making predictive models.
 
