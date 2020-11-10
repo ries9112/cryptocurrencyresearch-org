@@ -57,23 +57,6 @@ cryptodata <- mutate(cryptodata,
                        cryptodata$trade_usd_5 >= 15 ~ cryptodata$ask_5_price))
 ```
 
-<!-- 11/09 - MAKE SURE IT'S OK TO HAVE COMMENTED OUT THIS STEP -->
-<!-- Now remove rows where we couldn't find a price above \$15 for any of the 5 cheapest orders in the order book. -->
-
-<!-- ```{r, include=F} -->
-<!-- rowcount1 <- nrow(cryptodata) -->
-<!-- ``` -->
-
-<!-- ```{r remove_null_price_usd} -->
-<!-- cryptodata <- na.omit(cryptodata) -->
-<!-- ``` -->
-
-<!-- ```{r, include=F} -->
-<!-- rowcount2 <- nrow(cryptodata) -->
-<!-- ``` -->
-
-<!-- This step removed `r rowcount1-rowcount2` rows on the latest run. -->
-
 Let's also remove any rows that have Null values for the new [**price_usd**]{style="color: blue;"} field [like we did for the [**date_time_utc**]{style="color: blue;"} field in a previous step](#remove-nulls). These will mostly be made up of rows where the value of trades through the 5th lowest ask price was lower than \$15.
 
 ```{r, include=F}
@@ -325,16 +308,7 @@ This will leave us with:
 
 In the code below we are adding two new columns. First the [**split**]{style="color: blue;"}, which assigns each observation a number 1 through 5 of the cross validation split that the data belongs to based on when it was collected. Then the [**training**]{style="color: blue;"} column, which identifies each row as being part of the **train**, **test**, or **holdout** data of the given [**split**]{style="color: blue;"}.
 
-
-We will not walk through the steps below in detail outside of the comments left throughout the code...ADD
-
-<!-- [TODO - Here will also need to explain that we are taking this process very step by step and focusing on doing this correctly, but in a tool used later on to make models (caret) this functionality is available without having to set this up, so don't worry about this being hard-coded to our specific needs.] -->
-
-<!-- [TODO - ^ OR might be a good opportunity to explain how to write a function] -->
-
-(should explain why in our case we made our own method because needed to pick size of each split based on the individual cryptocurrency and we were not finding anything that worked well for us. Many different ways of doing this, but most important thing is to understand the goal of why we are doing this and not forgetting the importance of actually confirming the trained models work well on data outside of their own, and helping them avoid being overly trained to data from a given time period)
-
-
+We will not walk through the steps of the code below in detail outside of the comments left throughout the code because we would rather focus our attention on the conceptual understanding for this step as outlined above. There are many ways of doing time aware cross validation, but none worked particularly well for the way we wanted to outline the next sections, so we made our own and it's not important to understand how this is working, but it is also not that complex and uses the same tools used up to this point in this section. [See this section of the high-level tutorial for an approach that can be used on datasets outside of the one used in this tutorial](https://cryptocurrencyresearch.org/high-level/#/cross-validation-for-timeseries), and is compatible with the tools used in the predictive modeling section of both versions.
 
 ```{r ts_cross_validation, class.output="scroll-lim"}
 # Remove rows with null date_time_utc to exclude missing data from next steps
@@ -393,36 +367,36 @@ Our data now has the new columns `training` (*train*, *test* or *holdout*) and `
 select(cryptodata, training, split)
 ```
 
-*Notice that even though we left `symbol` variables out of our selection, because it is part of the way we grouped our data, it was added back in with the message "Adding missing grouping variables `symbol`". The data is tied to its groupings when performing all operations until we use `ungroup()` to undo them.*
+*Notice that even though we left `symbol` variables out of our selection, but because it is part of the way we grouped our data, it was added back in with the message "Adding missing grouping variables `symbol`". The data is tied to its groupings when performing all operations until we use [**ungroup()**]{style="color: green;"} to undo them.*
 
-Let's add the new `split` column to the way the data is grouped:
+Let's add the new [**split**]{style="color: blue;"} column to the way the data is grouped:
 
 ```{r}
 cryptodata <- group_by(cryptodata, symbol, split)
 ```
 
-The new field `split`, helps us split the data into 5 different datasets based on the date, and contains a number from 1-5. The new field `training` flags the data as being part of the ***train*** dataset, or the ***test*** (or ***holdout*** for the first split) dataset for each of the 5 splits/datasets.
+The new field [**split**]{style="color: blue;"}, helps us split the data into 5 different datasets based on the date, and contains a number from 1-5. The new field [**training**]{style="color: blue;"} flags the data as being part of the ***train*** dataset, or the ***test***, or the ***holdout*** (for the first split) dataset for each of the 5 splits/datasets.
 
-Running the same code as before with `tail()` added, we should see rows associated with the test data of the 5th split (again remember, each of the 5 splits has a training and testing dataset):
+Running the same code as before with [**tail()**]{style="color: green;"} added, we can see rows associated with the test data of the 5th split (again remember, each of the 5 splits has a training and testing dataset):
 
 ```{r cross_validate_preview_tail}
 tail( select(cryptodata, training, split) )
 ```
 
-The easiest way to understand these groupings, is to visualize them. In the next section, you will learn powerful tools for visualizing data in R. Do not worry if you do not understand the code below and are not familiar with `ggplot()`, **we will explain this framework in the [next section](#visualization), for now review the charts below and try to follow along with the way we are grouping the data for the predictive models by looking at what the x and y axis represent, as well as the colors**. On the x-axis we are plotting the DateTime of when a data point was collected, and on the y-axis the `split` (1-5) as described in this section. The data is then colored based on the category assigned for the `training` variable ("train","test" or "holdout").
+The easiest way to understand these groupings, is to visualize them. In the [next section](#visualization), you will learn powerful tools for visualizing data in R. Do not worry if you do not understand the code below and are not familiar with the [**ggplot2**]{style="color: #ae7b11;"} package, **we will explain this awesome framework in the [next section](#visualization), for now review the charts below and try to follow along conceptually with the way we are grouping the data for the predictive models by looking at what the x and y axis represent, as well as the colors**. On the x-axis we are plotting the DateTime of when a data point was collected, and on the y-axis the `split` (1-5) as described in this section. The data is then colored based on the category assigned for the `training` variable ("train","test" or "holdout").
 
-We can visualize the new grouping variables:
+We can visualize the new grouping variables (again, don't worry about the code itself, it will be [explained in detail the next section](#visualization):
 
 ```{r cv_groupings_visualized}
 groups_chart <- ggplot(cryptodata,
                        aes(x = date_time_utc, y = split, color = training)) +
-                       geom_point() #+
-                       #scale_y_reverse()
+                       geom_point()
 # now show the chart we just saved:
 groups_chart
 ```
 
-The chart above looks strange, we can view the results for the **BTC** cryptocurrency by running the same code as above, but instead of visualizing the dataset as a whole `cryptodata`, we will limit the data using `filter(cryptodata, symbol == "BTC")`. This time we are not saving these results as an R object.
+The chart above looks strange because it includes all cryptocurrencies when they are treated indipendently. We can view the results for the **BTC** cryptocurrency only by running the same code as above, but instead of visualizing the dataset in its entirety, filtering the data using **`filter(cryptodata, symbol == "BTC")`**, which will give us a much better impression of the breakdown that has been created:
+
 ```{r}
 ggplot(filter(cryptodata, symbol == 'BTC'), 
        aes(x = date_time_utc,
@@ -431,12 +405,11 @@ ggplot(filter(cryptodata, symbol == 'BTC'),
   geom_point()
 ```
 
-The code above might seem difficult, but there is a standardized mathod to using these tools that is relatively easy to learn as we will see in the [next section](#visualization).
+The code above might seem difficult, but there is a standardized mathod to using these tools that is relatively easy to learn as we will see in the [next section](#visualization), and they are surprisingly extendable.
 
-We can check on the groupings for each cryptocurrency by animating the `cryptodata` object:
+We can check on the groupings for each cryptocurrency by animating the [**cryptodata**]{style="color: blue;"} object. ***This is another tool that we will walk through in the [next section](#visualization):***
 
 ```{r animate_groupings, message=FALSE, warning=FALSE}
-library(gganimate)
 animated_chart <- groups_chart +
     transition_states(symbol) +
     ggtitle('Now showing: {closest_state}')
@@ -445,8 +418,6 @@ animate(animated_chart, fps = 2)
 ```
 
 <!-- The fps needs to be 1, 2, or any number divisible by 2 or the code won't work -->
-
-***This is another tool that we will walk through in the [next section](#visualization).***
 
 It can be a bit hard to tell how many data points there are because they end up looking like lines. Let's change the plot to use `geom_jitter()` instead of `geom_point()`, which will manually offset the points and give us a better impression of how many data points there are:
 
@@ -465,13 +436,13 @@ Now that we have split the data into many different subsets, those subsets thems
 
 One of the first models we will make is a simple linear model. The regular R function for this will not work if the data contains any columns that have "zero variance", meaning the value of the column never changes throughout the data being given to the model. Therefore, let's fix any issues relating to zero variance columns in any dataset before we change the structure of the data in the step after this one.
 
-First change the grouping of the data, we are interested in calculating the zero variance based on the `symbol`, `split` and `training` fields.
+First change the grouping of the data, we are interested in calculating the zero variance based on the [**symbol**]{style="color: blue;"}, [**split**]{style="color: blue;"}, and [**training**]{style="color: blue;"} fields:
 ```{r}
 cryptodata <- group_by(cryptodata, symbol, split, training)
 ```
 
 
-Now let's create a new object called `find_zero_var` which shows the value of the minimum standard deviation across all columns and calculated based on the grouping of symbol, split and train.
+Now let's create a new object called [**find_zero_var**]{style="color: blue;"} which shows the value of the minimum standard deviation across all columns and calculated based on the grouping of symbol, split and train:
 ```{r}
 find_zero_var <- select(mutate(cryptodata, min_sd = min(sd(price_usd, na.rm=T), 
                                                         sd(target_price_24h, na.rm=T),
@@ -485,11 +456,10 @@ find_zero_var <- select(mutate(cryptodata, min_sd = min(sd(price_usd, na.rm=T),
 find_zero_var
 ```
 
-Now let's get to a list of cryptocurrency symbols where the minimum standard deviation across all columns for all splits of the data is 0, which is the list of cryptocurrencies to remove from the data.
-
+Now let's get to a list of cryptocurrency symbols where the minimum standard deviation across all columns for all splits of the data is 0, which is the list of cryptocurrencies we want to later remove from the data:
 ```{r}
 minimum_sd <- filter(distinct(mutate(group_by(ungroup(find_zero_var), symbol),
-                                     min_sd = min(min_sd, na.rm=T)), min_sd),min_sd < 0.00001)$symbol
+                                     min_sd = min(min_sd, na.rm=T)), min_sd),min_sd < 0.0001)$symbol
 # Show result
 minimum_sd
 ```
@@ -503,7 +473,7 @@ Now we can remove these symbols from appearing in the dataset:
 cryptodata <- filter(cryptodata, !(symbol %in% minimum_sd)) 
 ```
 
-In the code above we match all rows where the symbol is part of the `minimum_sd` object with the list of cryptocurrency symbols to remove from the data, and we then negate the selection using the `!` operator to only keep rows with symbols not in the list we found.
+In the code above we match all rows where the symbol is part of the [**minimum_sd**]{style="color: blue;"} object with the list of cryptocurrency symbols to remove from the data, and we then negate the selection using the [**!**]{style="color: blue;"} operator to only keep rows with symbols not in the list we found.
 
 <!-- Ugh wish I could write it like this: -->
 
@@ -525,7 +495,7 @@ In the code above we match all rows where the symbol is part of the `minimum_sd`
 
 ## Nest data
 
-[ADD HERE]
+<!-- [TODO - ADD HERE] -->
 
 ... explain goal and method
 
@@ -594,94 +564,7 @@ cryptodata_nested
 ```
 
 
-[ADD HERE - Intro to Visualization and explain we will use grouped data in PredictiveModeling]
+<!-- [TODO - ADD HERE - Intro to Visualization and explain we will use grouped data in PredictiveModeling] -->
 
-[ADD HERE - Worth mentioning the fact that some data will be higher quality, etc...? Give more background on those steps as "catch-alls"?]
 
-## Functional Programming
 
-[TODO - ADD HERE]
-
-<!-- https://youtu.be/rz3_FDVt9eg?t=1407  -->
-
-<!-- [TODO - EXPLAIN THINGS A LOT MORE HERE] -->
-
-<!-- ### Fix Data by Split -->
-
-<!-- Now that we have split the data into many different subsets, those subsets themselves may have issues that prevent the predictive models from working as expected. -->
-
-<!-- #### Zero Variance -->
-
-<!-- One of the first models we will make is a simple linear model. The regular R function for this will not work if the data contains any columns that have "zero variance", meaning the value of the column never changes throughout the data being given to the model. Therefore, let's fix the zero variance issue programmatically for the train and test data of all datasets. -->
-
-<!-- We will use the `skimr` package that we introduced in the [previous section](#explore-data) in order to find any columns where this problem is present, and we will then use that list to remove those columns from the data. -->
-
-<!-- First, let's get the code to work the way it should on the first nested elements of the data as an example to apply to all other nested datasets. -->
-
-<!-- We can find columns that have at least a 98% completion rate using a combination of `skim()` and `filter()`: -->
-
-<!-- ```{r} -->
-
-<!-- filter(skim(cryptodata_nested$train_data[[1]]), complete_rate > 0.02) -->
-
-<!-- ``` -->
-
-<!-- And extract the variable names by adding `$skim_variable` to the end of the result to return the results for that column only since that is what we are interested in. We will save the result in the object `example_variables` so we can use it in the next step. -->
-
-<!-- ```{r} -->
-
-<!-- example_variables <- filter(skim(cryptodata_nested$train_data[[1]]),  -->
-
-<!--                             complete_rate > 0.02)$skim_variable -->
-
-<!-- # Show the new object -->
-
-<!-- example_variables -->
-
-<!-- ``` -->
-
-<!-- Now we can use that information to only keep these columns in the train data: -->
-
-<!-- ```{r} -->
-
-<!-- cryptodata_nested$train_data[[1]][, example_variables] -->
-
-<!-- ``` -->
-
-<!-- Great! Hopefully this change was not necessary on the first nested dataset. Now we need to apply the same idea to create a function that we can apply to all nested datasets -->
-
-<!-- <!-- [TODO - Explain this step and process using map() better!] -->
-
---\>
-
-<!-- ```{r} -->
-
-<!-- remove_zero_var <- function(df){ -->
-
-<!--   df[, filter(skim(df), complete_rate > 0.02)$skim_variable] -->
-
-<!-- } -->
-
-<!-- ``` -->
-
-<!-- Now the function can be used in conjunction with the `map()` and `mutate()` functions to apply the function on each of the nested datasets and overwrite the old results with the new ones: -->
-
-<!-- ```{r} -->
-
-<!-- cryptodata_nested <- mutate(cryptodata_nested,  -->
-
-<!--                             train_data = map(train_data, remove_zero_var)) -->
-
-<!-- ``` -->
-
-<!-- Now we need to do the same for the test data, but skipping over the empty  -->
-
-<!-- [TODO - HERE AM I SKIPPING OVER EMPTY ONES OR KEEP TEST_AND_HOLDOUT AND TRAIN? SO NO NULL ROW ELEMENTS] -->
-
-<!-- ```{r} -->
-
-<!-- cryptodata_nested <- mutate(cryptodata_nested,  -->
-
-<!--                             test_data = case_when(class(test_data)[[1]] == 'tbl_df' ~ map(test_data, remove_zero_var))) -->
-
-<!-- ``` -->
