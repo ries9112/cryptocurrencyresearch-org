@@ -497,7 +497,7 @@ There are tools that can help answer all of these questions, in the [full versio
 
 It is worth mentioning that [**E**xploratory **D**ata **A**nalysis (EDA)]{style="color: purple;"} is the important process by which you figure out ***what*** about the data needs to be ***cleaned*** and adjusted, but we are not covering it in this tutorial, and these steps have already been taken care of. You can find an excellent guide to EDA here: <https://r4ds.had.co.nz/exploratory-data-analysis.html>
 
-In the [full version of this tutorial](https://cryptocurrencyresearch.org/) we do more EDA because new data is added every 12 hours and we need to make sure there are no issues across all \~90 columns, while here we are providing a dataset that will never change and we have already cleaned ahead of time.
+In the [full version of this tutorial we are a bit more thoughtful around EDA](https://cryptocurrencyresearch.org/explore-data.html#data-quality).
 
 ## Dplyr Package
 
