@@ -1,30 +1,34 @@
 # Data Prep {#data-prep}
 
-[ADD HERE]
+Next we will do some data cleaning to make sure our data is in the format we need it to be in. For a gentler introduction to data prep using the [**dplyr**]{style="color: #ae7b11;"} package [@R-dplyr] [consult the high-level version](https://cryptocurrencyresearch.org/high-level/#/data-prep).
 
-## Remove Nulls
+## Remove Nulls {#remove-nulls}
 
-[ADD HERE]
+First off, we aren't able to do anything at all with a row of data if we don't know ***when*** the data was collected. The specific price doesn't matter if we can't tie it to a timestamp, given by the [**date_time_utc**]{style="color: blue;"} field. 
 
-(because we can't do anything without ask_1_price or date_time_utc at the very least being there)
+We can exclude all rows where the [**date_time_utc**]{style="color: blue;"} field has a Null (missing) value by using the [**filter()**]{style="color: green;"} function from the [**dplyr**]{style="color: #ae7b11;"} package:
 
-Remove any rows where the `ask_1_price` is Null:
-```{r omit_nulls_ask1price}
-cryptodata <- cryptodata[!is.na(cryptodata$ask_1_price), ]
+```{r, include=F}
+nrow1 <- nrow(cryptodata)
 ```
 
-And when the `date_time_utc` is Null:
 ```{r omit_nulls_datetime}
-cryptodata <- cryptodata[!is.na(cryptodata$date_time_utc), ]
+cryptodata <- filter(cryptodata, !is.na(date_time_utc))
 ```
+
+```{r, include=F}
+nrow2 <- nrow(cryptodata)
+```
+
+This step removed `r nrow1-nrow2` rows from the data on the latest run (`r Sys.Date()`). The [**is.na()**]{style="color: green;"} function finds all cases where the [**date_time_utc**]{style="color: blue;"} field has a Null value. The function is preceded by the [**!**]{style="color: blue;"} operator, which tells the [**filter()**]{style="color: green;"} function to exclude these rows from the data.
+
+By the same logic, if we don't know what the price was for any of the rows, the whole row of data is useless and should be removed. But how will we define the price of a cryptocurrency?
 
 ## Calculate `price_usd` Column
 
-[ADD HERE]
+In the [previous section we discussed the intricacies of a cryptocurrency's price](#the-definition-of-a-price). We could complicate our definition of a price by considering both the [**bid**]{style="color: blue;"} and [**ask**]{style="color: blue;"} prices from the perspective of someone who wants to perform trades, but [**this is not a trading tutorial**](#considerations). Instead, we will define the price of a cryptocurrency as the price we could purchase it for. We will calculate the [**price_usd**]{style="color: blue;"} field using the cheapest price available from the [**ask**]{style="color: blue;"} side where at least \$15 worth of the cryptocurrency are being sold.
 
-Calculate the `price_usd` using the order books data and taking the cheapest price available from the **ask** side where at least \$15 worth of the cryptocurrency are being sold.
-
-[ADD HERE]
+Therefore, let's figure out the lowest price from the order book data that would allow us to purchase at least \$15 worth of the cryptocurrency. To do this, for each [**ask**]{style="color: blue;"} price and quantity, let's figure out the value of the trade in US Dollars. We can create each of the new [**trade_usd**]{style="color: blue;"} columns using the [**mutate()**]{style="color: green;"} function. The [**trade_usd_1**]{style="color: blue;"} should be calculated as the [**ask_1_price**]{style="color: blue;"} multiplied by the [**ask_1_quantity**]{style="color: blue;"}. The next one [**trade_usd_1**]{style="color: blue;"} should consider the [**ask_2_price**]{style="color: blue;"}, but be multiplied by the sum of [**ask_1_quantity**]{style="color: blue;"} and [**ask_2_quantity**]{style="color: blue;"} because at the [**ask_2_price**]{style="color: blue;"} pricepoint we can also purchase the quantity available at the [**ask_1_price**]{style="color: blue;"} pricepoint:
 
 ```{r calc_price_usd}
 cryptodata <- mutate(cryptodata, 
@@ -35,8 +39,7 @@ cryptodata <- mutate(cryptodata,
                      trade_usd_5 = ask_5_price * (ask_1_quantity + ask_2_quantity + ask_3_quantity + ask_4_quantity + ask_5_quantity))
 ```
 
-We can look at an example [ADD HERE]
-
+We can confirm that the [**trade_usd_1**]{style="color: blue;"} field 
 ```{r}
 head(select(cryptodata, symbol, date_time_utc, ask_1_price, ask_1_quantity, trade_usd_1))
 ```
@@ -68,6 +71,25 @@ rowcount2 <- nrow(cryptodata)
 ```
 
 This step removed `r rowcount1-rowcount2` rows on the latest run.
+
+Let's also remove any rows that have Null values for the new [**price_usd**]{style="color: blue;"} field [like we did for the [**date_time_utc**]{style="color: blue;"} field in a previous step](#remove-nulls).
+
+```{r, include=F}
+nrow1 <- nrow(cryptodata)
+```
+
+```{r omit_nulls_datetime}
+cryptodata <- filter(cryptodata, !is.na(price_usd))
+```
+
+```{r, include=F}
+nrow2 <- nrow(cryptodata)
+```
+
+This step removed `r nrow1-nrow2` rows on the latest run.
+
+
+
 
 ## Clean Data by Group
 
