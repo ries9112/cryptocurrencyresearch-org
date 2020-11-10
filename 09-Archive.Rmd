@@ -18,5 +18,3 @@ Below is an archive of this same document from different dates:
 
 [May 18, 2020 - Morning](https://5ec27a599a31b90007d45f5e--researchpaper.netlify.app/)
 
-
-<!-- ^ TODO - IS PART AFTER "5ec" THE COMMIT? IS THERE A WAY TO DYNAMICALLY ADD TO THIS LIST? -->

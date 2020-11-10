@@ -271,7 +271,7 @@ cryptodata %>%
   # Select columns to display
   select(ts_index, price_usd, lagged_price_1h, lagged_price_24h, target_price_24h) %>% 
   # Show the last 30 elements of the data
-  tail(30)
+  tail(30) %>% 
   # Show all 30 elements instead of the default 10 for a tibble dataframe
   print(n = 30)
 ```

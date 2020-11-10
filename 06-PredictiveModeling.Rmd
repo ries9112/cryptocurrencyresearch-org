@@ -96,18 +96,18 @@ And we can view the summarized contents of the first trained model:
 cryptodata_nested$lm_model[[1]]
 ```
 
-<!-- SEE SECTION COMMENTED OUT BELOW FOR OPTIONS ON HYPERPARAMTER TUNING: -->
-<!-- ### Cross Validation {#cross-validation-preds}  -->
 
-<!-- In the previous output, we saw the output said: ***Resampling: None*** because when building the function we specified we did not want any resampling for the [**trControl**]{style="color: blue;"} argument of the [**train()**]{style="color: green;"} function. Within each split of the data however, we can create three separate additional cross validation splits, which will allow the [**caret**]{style="color: #ae7b11;"} package to do some [**hyperparameter**]{style="color: blue;"} tuning, which is the process by which it will  -->
+### Cross Validation {#cross-validation-preds}
 
-<!-- Within each split we created, we can set caret to perform an additional cross-validation step to allow it to do a minimal level of automated hyperparameter tuning as it creates the models (the more we do the longer it will take). -->
+In the previous output, we saw the output said: ***Resampling: None*** because when building the function we specified we did not want any resampling for the [**trControl**]{style="color: blue;"} argument of the [**train()**]{style="color: green;"} function. Within each split of the data however, we can create three separate additional cross validation splits, which will allow the [**caret**]{style="color: #ae7b11;"} package to do some minimal [**hyperparameter**]{style="color: blue;"} tuning, which is the process by which it will test different options for the parameters (which vary based on the specific model being used) to find the most optimal combination of them.
 
-<!-- ```{r} -->
-<!-- fitControl <- trainControl(method = "repeatedcv", -->
-<!--                            number = 3, -->
-<!--                            repeats = 3) -->
-<!-- ``` -->
+Within each split we created, we can set caret to perform an additional cross-validation step to allow it to do a minimal level of automated hyperparameter tuning as it creates the models (the more we do the longer it will take).
+
+```{r}
+fitControl <- trainControl(method = "repeatedcv",
+                           number = 3,
+                           repeats = 3)
+```
 
 ### Generalize the Function
 
@@ -115,10 +115,10 @@ We can adapt the [function we built earlier for the linear regression models usi
 
 ```{r}
 model_caret <- function(df, method_choice){
-
+# NEW TEST WITH TIME-AWARE CROSS VALIDATION
   train(target_price_24h ~ . -date_time_utc -date, data = df,
         method = method_choice,
-        trControl=trainControl(method="none"))
+        trControl=fitControl)
 
 }
 ```

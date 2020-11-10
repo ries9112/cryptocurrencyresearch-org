@@ -1,6 +1,6 @@
 # Evaluate Model Performance {#evaluate-model-performance}
 
-Now for the fun part, we get to see the results of our hard work! There are some additional data preparation steps we need to take before we can visualize the results in aggregate; if you are just looking for the charts showing the results they are [shown later on in the "Visualize Results" section below](#visualize-results).
+Now we get to see the results of our hard work! There are some additional data preparation steps we need to take before we can visualize the results in aggregate; if you are just looking for the charts showing the results they are [shown later on in the "Visualize Results" section below](#visualize-results).
 
 ## Summarizing models
 
@@ -702,8 +702,16 @@ predictable_cryptos <- arrange(predictable_cryptos, desc(rsq))
 predictable_cryptos
 ```
 
+```{css, echo=FALSE}
+.scroll-100 {
+  max-height: 100px;
+  overflow-y: auto;
+  background-color: inherit;
+}
+```
+
 Show the top 15 most predictable cryptocurrencies (according to the $R^2$) using the `formattable` package [@R-formattable] to color code the cells:
-```{r, class.output="scroll-lim"}
+```{r, class.output="scroll-100"}
 formattable(head(predictable_cryptos ,15), 
             list(rmse = color_tile("#71CA97", "red"),
                  rsq = color_tile("firebrick1", "#71CA97")))
