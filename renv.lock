@@ -397,7 +397,7 @@
       "RemoteUsername": "hadley",
       "RemoteRef": "master",
       "RemoteSha": "3f03b11491ce3d6fc5601e210927eff73bf8e350",
-      "Hash": "5ece31a6c0f94811e6bef59482d87164"
+      "Hash": "5a9b94668993886f1f6c24f6424732c7"
     },
     "evaluate": {
       "Package": "evaluate",
