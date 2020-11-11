@@ -292,7 +292,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>10</b> Archive</a><ul>
 <li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#may-2020"><i class="fa fa-check"></i><b>10.1</b> May 2020</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a></li>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a><ul>
+<li class="chapter" data-level="11.1" data-path="references.html"><a href="references.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
+<li class="chapter" data-level="11.2" data-path="references.html"><a href="references.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
+<li class="chapter" data-level="11.3" data-path="references.html"><a href="references.html#visualization-section"><i class="fa fa-check"></i><b>11.3</b> Visualization Section</a></li>
+<li class="chapter" data-level="11.4" data-path="references.html"><a href="references.html#time-series-section"><i class="fa fa-check"></i><b>11.4</b> Time Series Section</a></li>
+<li class="chapter" data-level="11.5" data-path="references.html"><a href="references.html#r-packages-used"><i class="fa fa-check"></i><b>11.5</b> R Packages Used</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="blank"><img src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" width="80"></a></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -316,7 +322,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="references" class="section level1">
 <h1><span class="header-section-number">Section - 11</span> References</h1>
-<p>Test removing end</p>
+<div id="document-format" class="section level2">
+<h2><span class="header-section-number">11.1</span> Document Format</h2>
+<p>The <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown" role="doc-biblioref">2020</a><a href="#ref-R-bookdown" role="doc-biblioref">a</a>)</span> was used to produce this document, which was built on top of <strong>R Markdown</strong> <span class="citation">(Xie, Allaire, and Grolemund <a href="#ref-R-rmarkdown" role="doc-biblioref">2018</a>)</span> and <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-R-knitr" role="doc-biblioref">2020</a><a href="#ref-R-knitr" role="doc-biblioref">b</a>)</span>.</p>
+<!-- [TODO - ADJUST TO HAVE ONE FOR EACH ONE] -->
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="references.html#cb195-1"></a>knitr<span class="op">::</span><span class="kw">write_bib</span>(<span class="kw">c</span>(<span class="kw">.packages</span>()), <span class="st">&quot;packages.bib&quot;</span>)</span></code></pre></div>
+</div>
+<div id="open-review-toolkit-ref" class="section level2">
+<h2><span class="header-section-number">11.2</span> Open Review Toolkit</h2>
+<p>Thanks to <a href="https://github.com/benmarwick">Ben Marwick</a> for outlining how to use the <a href="https://www.openreviewtoolkit.org/">Open Review Toolkit</a> in bookdown to collect feedback on the document: <a href="https://benmarwick.github.io/bookdown-ort/mods.html#open-review-block" class="uri">https://benmarwick.github.io/bookdown-ort/mods.html#open-review-block</a></p>
+</div>
+<div id="visualization-section" class="section level2">
+<h2><span class="header-section-number">11.3</span> Visualization Section</h2>
+<ul>
+<li><p><a href="https://www.rayshader.com/" class="uri">https://www.rayshader.com/</a></p></li>
+<li><p><a href="https://github.com/yutannihilation/gghighlight" class="uri">https://github.com/yutannihilation/gghighlight</a></p>
+<ul>
+<li><a href="https://github.com/njtierney/rstudioconf20/blob/master/slides/index.Rmd" class="uri">https://github.com/njtierney/rstudioconf20/blob/master/slides/index.Rmd</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="time-series-section" class="section level2">
+<h2><span class="header-section-number">11.4</span> Time Series Section</h2>
+<ul>
+<li><p><a href="https://stackoverflow.com/questions/42820696/using-prophet-package-to-predict-by-group-in-dataframe-in-r" class="uri">https://stackoverflow.com/questions/42820696/using-prophet-package-to-predict-by-group-in-dataframe-in-r</a></p></li>
+<li><p>… add rest here</p></li>
+</ul>
+</div>
+<div id="r-packages-used" class="section level2">
+<h2><span class="header-section-number">11.5</span> R Packages Used</h2>
 
 <div id="refs" class="references">
 <div>
@@ -371,8 +405,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. 1st ed. O’Reilly Media, Inc.</p>
 </div>
 <div>
+<p>Xie, Yihui. 2020a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.</p>
+</div>
+<div>
+<p>———. 2020b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.</p>
+</div>
+<div>
 <p>Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. <em>R Markdown: The Definitive Guide</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/rmarkdown">https://bookdown.org/yihui/rmarkdown</a>.</p>
 </div>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-bookdown">
+<p>Xie, Yihui. 2020a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.</p>
+</div>
+<div id="ref-R-knitr">
+<p>Xie, Yihui. 2020b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.</p>
+</div>
+<div id="ref-R-rmarkdown">
+<p>Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. <em>R Markdown: The Definitive Guide</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/rmarkdown">https://bookdown.org/yihui/rmarkdown</a>.</p>
 </div>
 </div>
             </section>
