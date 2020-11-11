@@ -1,20 +1,16 @@
 name: Run Crypto Tutorial
 on:
   schedule:
-    - cron: '26 01,05,17 * * *'
+    - cron: '50 01,05,17 * * *'
 
 jobs:
   build:
-    runs-on: macOS-10.15
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - uses: r-lib/actions/setup-tinytex@v1
-      - name: Install pandoc and pandoc citeproc
-        run: |
-          brew install pandoc
-          brew install pandoc-citeproc
       - name: Cache R packages
         if: runner.os != 'Windows'
         uses: actions/cache@v2
