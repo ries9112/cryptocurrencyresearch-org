@@ -292,13 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>10</b> Archive</a><ul>
 <li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#may-2020"><i class="fa fa-check"></i><b>10.1</b> May 2020</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a><ul>
-<li class="chapter" data-level="11.1" data-path="references.html"><a href="references.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
-<li class="chapter" data-level="11.2" data-path="references.html"><a href="references.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
-<li class="chapter" data-level="11.3" data-path="references.html"><a href="references.html#visualization-section"><i class="fa fa-check"></i><b>11.3</b> Visualization Section</a></li>
-<li class="chapter" data-level="11.4" data-path="references.html"><a href="references.html#time-series-section"><i class="fa fa-check"></i><b>11.4</b> Time Series Section</a></li>
-<li class="chapter" data-level="11.5" data-path="references.html"><a href="references.html#r-packages-used"><i class="fa fa-check"></i><b>11.5</b> R Packages Used</a></li>
-</ul></li>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="blank"><img src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" width="80"></a></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -327,23 +321,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.1</span> Remove Nulls</h2>
 <p>First off, we aren’t able to do anything at all with a row of data if we don’t know <strong><em>when</em></strong> the data was collected. The specific price doesn’t matter if we can’t tie it to a timestamp, given by the <span style="color: blue;"><strong>date_time_utc</strong></span> field.</p>
 <p>We can exclude all rows where the <span style="color: blue;"><strong>date_time_utc</strong></span> field has a Null (missing) value by using the <span style="color: green;"><strong>filter()</strong></span> function from the <span style="color: #ae7b11;"><strong>dplyr</strong></span> package:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-prep.html#cb10-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="op">!</span><span class="kw">is.na</span>(date_time_utc))</span></code></pre></div>
-<p>This step removed 613 rows from the data on the latest run (2020-11-11). The <span style="color: green;"><strong>is.na()</strong></span> function finds all cases where the <span style="color: blue;"><strong>date_time_utc</strong></span> field has a Null value. The function is preceded by the <span style="color: blue;"><strong>!</strong></span> operator, which tells the <span style="color: green;"><strong>filter()</strong></span> function to exclude these rows from the data.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-prep.html#cb9-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="op">!</span><span class="kw">is.na</span>(date_time_utc))</span></code></pre></div>
+<p>This step removed 617 rows from the data on the latest run (2020-11-11). The <span style="color: green;"><strong>is.na()</strong></span> function finds all cases where the <span style="color: blue;"><strong>date_time_utc</strong></span> field has a Null value. The function is preceded by the <span style="color: blue;"><strong>!</strong></span> operator, which tells the <span style="color: green;"><strong>filter()</strong></span> function to exclude these rows from the data.</p>
 <p>By the same logic, if we don’t know what the price was for any of the rows, the whole row of data is useless and should be removed. But how will we define the price of a cryptocurrency?</p>
 </div>
 <div id="calculate-price_usd-column" class="section level2">
 <h2><span class="header-section-number">4.2</span> Calculate <code>price_usd</code> Column</h2>
 <p>In the <a href="explore-data.html#the-definition-of-a-price">previous section we discussed the intricacies of a cryptocurrency’s price</a>. We could complicate our definition of a price by considering both the <span style="color: blue;"><strong>bid</strong></span> and <span style="color: blue;"><strong>ask</strong></span> prices from the perspective of someone who wants to perform trades, but <a href="considerations.html#considerations"><strong>this is not a trading tutorial</strong></a>. Instead, we will define the price of a cryptocurrency as the price we could purchase it for. We will calculate the <span style="color: blue;"><strong>price_usd</strong></span> field using the cheapest price available from the <span style="color: blue;"><strong>ask</strong></span> side where at least $15 worth of the cryptocurrency are being sold.</p>
 <p>Therefore, let’s figure out the lowest price from the order book data that would allow us to purchase at least $15 worth of the cryptocurrency. To do this, for each <span style="color: blue;"><strong>ask</strong></span> price and quantity, let’s figure out the value of the trade in US Dollars. We can create each of the new <span style="color: blue;"><strong>trade_usd</strong></span> columns using the <span style="color: green;"><strong>mutate()</strong></span> function. The <span style="color: blue;"><strong>trade_usd_1</strong></span> should be calculated as the <span style="color: blue;"><strong>ask_1_price</strong></span> multiplied by the <span style="color: blue;"><strong>ask_1_quantity</strong></span>. The next one <span style="color: blue;"><strong>trade_usd_1</strong></span> should consider the <span style="color: blue;"><strong>ask_2_price</strong></span>, but be multiplied by the sum of <span style="color: blue;"><strong>ask_1_quantity</strong></span> and <span style="color: blue;"><strong>ask_2_quantity</strong></span> because at the <span style="color: blue;"><strong>ask_2_price</strong></span> pricepoint we can also purchase the quantity available at the <span style="color: blue;"><strong>ask_1_price</strong></span> pricepoint:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-prep.html#cb11-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
-<span id="cb11-2"><a href="data-prep.html#cb11-2"></a>                     <span class="dt">trade_usd_1 =</span> ask_<span class="dv">1</span>_price <span class="op">*</span><span class="st"> </span>ask_<span class="dv">1</span>_quantity,</span>
-<span id="cb11-3"><a href="data-prep.html#cb11-3"></a>                     <span class="dt">trade_usd_2 =</span> ask_<span class="dv">2</span>_price <span class="op">*</span><span class="st"> </span>(ask_<span class="dv">1</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity),</span>
-<span id="cb11-4"><a href="data-prep.html#cb11-4"></a>                     <span class="dt">trade_usd_3 =</span> ask_<span class="dv">3</span>_price <span class="op">*</span><span class="st"> </span>(ask_<span class="dv">1</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">3</span>_quantity),</span>
-<span id="cb11-5"><a href="data-prep.html#cb11-5"></a>                     <span class="dt">trade_usd_4 =</span> ask_<span class="dv">4</span>_price <span class="op">*</span><span class="st"> </span>(ask_<span class="dv">1</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">3</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">4</span>_quantity),</span>
-<span id="cb11-6"><a href="data-prep.html#cb11-6"></a>                     <span class="dt">trade_usd_5 =</span> ask_<span class="dv">5</span>_price <span class="op">*</span><span class="st"> </span>(ask_<span class="dv">1</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">3</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">4</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">5</span>_quantity))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-prep.html#cb10-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
+<span id="cb10-2"><a href="data-prep.html#cb10-2"></a>                     <span class="dt">trade_usd_1 =</span> ask_<span class="dv">1</span>_price <span class="op">*</span><span class="st"> </span>ask_<span class="dv">1</span>_quantity,</span>
+<span id="cb10-3"><a href="data-prep.html#cb10-3"></a>                     <span class="dt">trade_usd_2 =</span> ask_<span class="dv">2</span>_price <span class="op">*</span><span class="st"> </span>(ask_<span class="dv">1</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity),</span>
+<span id="cb10-4"><a href="data-prep.html#cb10-4"></a>                     <span class="dt">trade_usd_3 =</span> ask_<span class="dv">3</span>_price <span class="op">*</span><span class="st"> </span>(ask_<span class="dv">1</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">3</span>_quantity),</span>
+<span id="cb10-5"><a href="data-prep.html#cb10-5"></a>                     <span class="dt">trade_usd_4 =</span> ask_<span class="dv">4</span>_price <span class="op">*</span><span class="st"> </span>(ask_<span class="dv">1</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">3</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">4</span>_quantity),</span>
+<span id="cb10-6"><a href="data-prep.html#cb10-6"></a>                     <span class="dt">trade_usd_5 =</span> ask_<span class="dv">5</span>_price <span class="op">*</span><span class="st"> </span>(ask_<span class="dv">1</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">3</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">4</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">5</span>_quantity))</span></code></pre></div>
 <!-- *For a more in-depth explanation of how [**mutate()**]{style="color: green;"} works, [see the high-level version of the tutorial](https://cryptocurrencyresearch.org/high-level/#/mutate-function---dplyr)* -->
 <p>We can confirm that the <span style="color: blue;"><strong>trade_usd_1</strong></span> field is calculating the $ value of the lowest ask price ans quantity:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-prep.html#cb12-1"></a><span class="kw">head</span>(<span class="kw">select</span>(cryptodata, symbol, date_time_utc, ask_<span class="dv">1</span>_price, ask_<span class="dv">1</span>_quantity, trade_usd_<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-prep.html#cb11-1"></a><span class="kw">head</span>(<span class="kw">select</span>(cryptodata, symbol, date_time_utc, ask_<span class="dv">1</span>_price, ask_<span class="dv">1</span>_quantity, trade_usd_<span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## [90m# A tibble: 6 x 5[39m
 ##   symbol date_time_utc       ask_1_price ask_1_quantity trade_usd_1
 ##   [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                    [3m[90m&lt;dbl&gt;[39m[23m          [3m[90m&lt;dbl&gt;[39m[23m       [3m[90m&lt;dbl&gt;[39m[23m
@@ -354,39 +348,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m5[39m BSV    2020-11-11 [90m00:00:03[39m     157.             0.6          94.3
 ## [90m6[39m ADA    2020-11-11 [90m00:00:04[39m       0.106        775            82.0</code></pre>
 <p>Now we can use the <span style="color: green;"><strong>mutate()</strong></span> function to create the new field <span style="color: blue;"><strong>price_usd</strong></span> and find the lowest price at which we could have purchased at least $15 worth of the cryptocurrency. We can use the <span style="color: green;"><strong>case_when()</strong></span> function to find the first <span style="color: blue;"><strong>trade_usd</strong></span> value that is greater or equal to 15, and assign the correct <span style="color: blue;"><strong>ask_price</strong></span> for the new column <span style="color: blue;"><strong>price_usd</strong></span>:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-prep.html#cb14-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
-<span id="cb14-2"><a href="data-prep.html#cb14-2"></a>                     <span class="dt">price_usd =</span> <span class="kw">case_when</span>(</span>
-<span id="cb14-3"><a href="data-prep.html#cb14-3"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">1</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">1</span>_price,</span>
-<span id="cb14-4"><a href="data-prep.html#cb14-4"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">2</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">2</span>_price,</span>
-<span id="cb14-5"><a href="data-prep.html#cb14-5"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">3</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">3</span>_price,</span>
-<span id="cb14-6"><a href="data-prep.html#cb14-6"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">4</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">4</span>_price,</span>
-<span id="cb14-7"><a href="data-prep.html#cb14-7"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">5</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">5</span>_price))</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="data-prep.html#cb13-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
+<span id="cb13-2"><a href="data-prep.html#cb13-2"></a>                     <span class="dt">price_usd =</span> <span class="kw">case_when</span>(</span>
+<span id="cb13-3"><a href="data-prep.html#cb13-3"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">1</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">1</span>_price,</span>
+<span id="cb13-4"><a href="data-prep.html#cb13-4"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">2</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">2</span>_price,</span>
+<span id="cb13-5"><a href="data-prep.html#cb13-5"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">3</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">3</span>_price,</span>
+<span id="cb13-6"><a href="data-prep.html#cb13-6"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">4</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">4</span>_price,</span>
+<span id="cb13-7"><a href="data-prep.html#cb13-7"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">5</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">5</span>_price))</span></code></pre></div>
 <p>Let’s also remove any rows that have Null values for the new <span style="color: blue;"><strong>price_usd</strong></span> field <a href="data-prep.html#remove-nulls">like we did for the <span style="color: blue;"><strong>date_time_utc</strong></span> field in a previous step</a>. These will mostly be made up of rows where the value of trades through the 5th lowest ask price was lower than $15.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-prep.html#cb15-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="op">!</span><span class="kw">is.na</span>(price_usd))</span></code></pre></div>
-<p>This step removed 14531 rows on the latest run.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-prep.html#cb14-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="op">!</span><span class="kw">is.na</span>(price_usd))</span></code></pre></div>
+<p>This step removed 14556 rows on the latest run.</p>
 </div>
 <div id="clean-data-by-group" class="section level2">
 <h2><span class="header-section-number">4.3</span> Clean Data by Group</h2>
 <p>In the <a href="https://cryptocurrencyresearch.org/high-level/">high-level version of this tutorial</a> we only dealt with one cryptocurrency. In this version however, we will be creating independent models for each cryptocurrency. Because of this, <strong>we need to ensure data quality not only for the data as a whole, but also for the data associated with each individual cryptocurrency</strong>. Instead of considering all rows when applying a transformation, we can <span style="color: purple;"><strong>group</strong></span> the data by the individual cryptocurrency and apply the transformation to each group. This will only work with compatible functions from <span style="color: #ae7b11;"><strong>dplyr</strong></span> and the <span style="color: #ae7b11;"><strong>tidyverse</strong></span>.</p>
 <p>For example, we could count the number of observations by running the <span style="color: green;"><strong>count()</strong></span> function on the data:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-prep.html#cb16-1"></a><span class="kw">count</span>(cryptodata)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-prep.html#cb15-1"></a><span class="kw">count</span>(cryptodata)</span></code></pre></div>
 <pre><code>## [90m# A tibble: 1 x 1[39m
 ##        n
 ##    [3m[90m&lt;int&gt;[39m[23m
-## [90m1[39m [4m2[24m[4m2[24m[4m2[24m170</code></pre>
+## [90m1[39m [4m2[24m[4m2[24m[4m2[24m586</code></pre>
 <p>But what if we wanted to know how many observations in the data are associated with each cryptocurrency separately?</p>
 <p>We can group the data using the <span style="color: green;"><strong>group_by()</strong></span> function from the <span style="color: #ae7b11;"><strong>dplyr</strong></span> package and group the data by the cryptocurrency <span style="color: blue;"><strong>symbol</strong></span>:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-prep.html#cb18-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-prep.html#cb17-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol)</span></code></pre></div>
 <p>Now if we run the same operation using the <span style="color: green;"><strong>count()</strong></span> function, the operation is performed grouped by the cryptocurrency symbol:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="data-prep.html#cb19-1"></a><span class="kw">count</span>(cryptodata)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-prep.html#cb18-1"></a><span class="kw">count</span>(cryptodata)</span></code></pre></div>
 <pre><code>## [90m# A tibble: 216 x 2[39m
 ## [90m# Groups:   symbol [216][39m
 ##    symbol     n
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;int&gt;[39m[23m
 ## [90m 1[39m AAB     [4m1[24m072
-## [90m 2[39m ACAT    [4m1[24m831
-## [90m 3[39m ACT     [4m1[24m590
-## [90m 4[39m ADA     [4m1[24m114
+## [90m 2[39m ACAT    [4m1[24m835
+## [90m 3[39m ACT     [4m1[24m594
+## [90m 4[39m ADA     [4m1[24m118
 ## [90m 5[39m ADX      393
 ## [90m 6[39m ADXN     665
 ## [90m 7[39m ALGO       1
@@ -395,24 +389,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m10[39m APL      701
 ## [90m# … with 206 more rows[39m</code></pre>
 <p>We can remove the grouping at any point by running the <span style="color: green;"><strong>ungroup()</strong></span> function:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-prep.html#cb21-1"></a><span class="kw">count</span>(<span class="kw">ungroup</span>(cryptodata))</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-prep.html#cb20-1"></a><span class="kw">count</span>(<span class="kw">ungroup</span>(cryptodata))</span></code></pre></div>
 <pre><code>## [90m# A tibble: 1 x 1[39m
 ##        n
 ##    [3m[90m&lt;int&gt;[39m[23m
-## [90m1[39m [4m2[24m[4m2[24m[4m2[24m170</code></pre>
+## [90m1[39m [4m2[24m[4m2[24m[4m2[24m586</code></pre>
 <div id="remove-symbols-without-enough-rows" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Remove symbols without enough rows</h3>
 <p>Because this dataset evolves over time, we will need to be proactive about issues that may arise even if they aren’t currently a problem.</p>
 <p>What happens if a new cryptocurrency gets added to the cryptocurrency exchange? If we only had a couple days of data for an asset, not only would that not be enough information to build effective predictive models, but we may run into actual errors since the data will be further split into more groups to validate the results of the models against several datasets using <span style="color: purple;"><strong>cross validation</strong></span>, more to come on that later.</p>
 <p>To ensure we have a reasonable amount of data for each individual cryptocurrency, let’s filter out any cryptocurrencies that don’t have at least 1,000 observations using the <span style="color: green;"><strong>filter()</strong></span> function:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-prep.html#cb23-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="kw">n</span>() <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1000</span>)</span></code></pre></div>
-<p>The number of rows for the <code>cryptodata</code> dataset before the filtering step was 222170 and is now 177959. This step removed 96 cryptocurrencies from the analysis that did not have enough observations associated with them.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-prep.html#cb22-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="kw">n</span>() <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1000</span>)</span></code></pre></div>
+<p>The number of rows for the <code>cryptodata</code> dataset before the filtering step was 222586 and is now 178312. This step removed 96 cryptocurrencies from the analysis that did not have enough observations associated with them.</p>
 </div>
 <div id="remove-symbols-without-data-from-the-last-3-days" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> Remove symbols without data from the last 3 days</h3>
 <p>If there was no data collected for a cryptocurrency over the last 3 day period, let’s exclude that asset from the dataset since we are only looking to model data that is currently flowing through the process. If an asset is removed from the exchange (if a project is a scam for example) or is no longer being actively captured by the data collection process, we can’t make new predictions for it, so might as well exclude these ahead of time as well.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-prep.html#cb24-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="kw">max</span>(date) <span class="op">&gt;</span><span class="st"> </span><span class="kw">Sys.Date</span>()<span class="op">-</span><span class="dv">3</span>)</span></code></pre></div>
-<p>The number of rows for the <code>cryptodata</code> dataset before this filtering step was 149611 and is now 177959.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-prep.html#cb23-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="kw">max</span>(date) <span class="op">&gt;</span><span class="st"> </span><span class="kw">Sys.Date</span>()<span class="op">-</span><span class="dv">3</span>)</span></code></pre></div>
+<p>The number of rows for the <code>cryptodata</code> dataset before this filtering step was 149964 and is now 178312.</p>
 </div>
 </div>
 <div id="calculate-target" class="section level2">
@@ -426,14 +420,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">4.4.1.1</span> Convert to hourly data</h4>
 <p>The data we are using was collected between the 0th and the 5th minute of every hour; it is collected in the same order every hour to try and get the timing as consistent as possible for each cryptocurrency, but the cadence is not exactly one hour. Therefore, if we convert the data now to a <span style="color: blue;"><strong>tsibble</strong></span> object, it would recognize the data as being collected on the wrong cadence.</p>
 <p>To fix this issue, let’s create a new column called <span style="color: blue;"><strong>ts_index</strong></span> using the <span style="color: green;"><strong>mutate()</strong></span> function which will keep the information relating to the date and hour collected, but generalize the minutes and seconds as “00:00”, which will be correctly recognized by the <span style="color: #ae7b11;"><strong>tsibble</strong></span> package as being data collected on an hourly basis. The <span style="color: blue;"><strong>pkDummy</strong></span> field contains the date and hour, so we can add the text “:00:00” to the end of that field, and then convert the new string to a date time object using the <span style="color: green;"><strong>anytime()</strong></span> function from the <span style="color: #ae7b11;"><strong>anytime</strong></span> package <span class="citation">(Eddelbuettel <a href="#ref-R-anytime" role="doc-biblioref">2020</a>)</span>:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="data-prep.html#cb25-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, <span class="dt">ts_index =</span> <span class="kw">anytime</span>(<span class="kw">paste0</span>(pkDummy,<span class="st">&#39;:00:00&#39;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-prep.html#cb24-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, <span class="dt">ts_index =</span> <span class="kw">anytime</span>(<span class="kw">paste0</span>(pkDummy,<span class="st">&#39;:00:00&#39;</span>)))</span></code></pre></div>
 <p>Before we can convert the data to be a <span style="color: blue;"><strong>tsibble</strong></span> and easily fill in the gaps, we also need to make sure there are no duplicate values in the <span style="color: blue;"><strong>ts_index</strong></span> column for each cryptocurrency. There shouldn’t be any duplicates, but just in case any make their way into the data somehow, we can use the <span style="color: green;"><strong>distinct()</strong></span> function from the <span style="color: #ae7b11;"><strong>dplyr</strong></span> package to prevent the issue from potentially arising:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-prep.html#cb26-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">distinct</span>(cryptodata, symbol, ts_index, <span class="dt">.keep_all=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="data-prep.html#cb25-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">distinct</span>(cryptodata, symbol, ts_index, <span class="dt">.keep_all=</span><span class="ot">TRUE</span>)</span></code></pre></div>
 <p>Now we can finally convert the table to a <span style="color: blue;"><strong>tsibble</strong></span> data type by using the <span style="color: green;"><strong>as_tsibble()</strong></span> function from the <span style="color: #ae7b11;"><strong>tsibble</strong></span> package <span class="citation">(Wang et al. <a href="#ref-R-tsibble" role="doc-biblioref">2020</a>)</span>, and providing the <span style="color: blue;"><strong>symbol</strong></span> column for the <span style="color: blue;"><strong>key</strong></span> parameter to preserve the grouped structure:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-prep.html#cb27-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">as_tsibble</span>(cryptodata, <span class="dt">index =</span> ts_index, <span class="dt">key =</span> symbol)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-prep.html#cb26-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">as_tsibble</span>(cryptodata, <span class="dt">index =</span> ts_index, <span class="dt">key =</span> symbol)</span></code></pre></div>
 <p>Notice how the preview of the data below looks a bit different from the summary we were seeing up to this point, and now it says “A tsibble”, and next to the table dimensions says <strong>[1h]</strong>, indicating the observations are 1 hour apart from each other. The second row tells us the “Key” of the <span style="color: blue;"><strong>tsibble</strong></span> is the <span style="color: blue;"><strong>symbol</strong></span> column</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-prep.html#cb28-1"></a>cryptodata</span></code></pre></div>
-<pre><code>## [90m# A tsibble: 149,391 x 34 [1h] &lt;UTC&gt;[39m
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-prep.html#cb27-1"></a>cryptodata</span></code></pre></div>
+<pre><code>## [90m# A tsibble: 149,744 x 34 [1h] &lt;UTC&gt;[39m
 ## [90m# Key:       symbol [96][39m
 ## [90m# Groups:    symbol [96][39m
 ##    pair  symbol quote_currency ask_1_price ask_1_quantity ask_2_price
@@ -448,7 +442,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m 8[39m AABU… AAB    USD                  0.390           104.       0.390
 ## [90m 9[39m AABU… AAB    USD                  0.390           104.       0.390
 ## [90m10[39m AABU… AAB    USD                  0.390           104.       0.390
-## [90m# … with 149,381 more rows, and 28 more variables: ask_2_quantity [3m[90m&lt;dbl&gt;[90m[23m,[39m
+## [90m# … with 149,734 more rows, and 28 more variables: ask_2_quantity [3m[90m&lt;dbl&gt;[90m[23m,[39m
 ## [90m#   ask_3_price [3m[90m&lt;dbl&gt;[90m[23m, ask_3_quantity [3m[90m&lt;dbl&gt;[90m[23m, ask_4_price [3m[90m&lt;dbl&gt;[90m[23m,[39m
 ## [90m#   ask_4_quantity [3m[90m&lt;dbl&gt;[90m[23m, ask_5_price [3m[90m&lt;dbl&gt;[90m[23m, ask_5_quantity [3m[90m&lt;dbl&gt;[90m[23m,[39m
 ## [90m#   bid_1_price [3m[90m&lt;dbl&gt;[90m[23m, bid_1_quantity [3m[90m&lt;dbl&gt;[90m[23m, bid_2_price [3m[90m&lt;dbl&gt;[90m[23m,[39m
@@ -467,10 +461,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="fill-gaps" class="section level3">
 <h3><span class="header-section-number">4.4.2</span> Fill gaps</h3>
 <p>Now we can use the <span style="color: green;"><strong>fill_gaps()</strong></span> function from the <span style="color: #ae7b11;"><strong>tsibble</strong></span> package to fill any gaps found in the data, as being implicitly Null. Meaning, we will add these rows into the data with NA values for everything except for the date time field. This will allow us to safely compute the target price found 24 hours into the future relative to when each row was collected.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-prep.html#cb30-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">fill_gaps</span>(cryptodata)</span></code></pre></div>
-<p>Now looking at the data again, there are 20157 additional rows that were added as implicitly missing in the data:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="data-prep.html#cb31-1"></a>cryptodata</span></code></pre></div>
-<pre><code>## [90m# A tsibble: 169,548 x 34 [1h] &lt;UTC&gt;[39m
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-prep.html#cb29-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">fill_gaps</span>(cryptodata)</span></code></pre></div>
+<p>Now looking at the data again, there are 20170 additional rows that were added as implicitly missing in the data:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-prep.html#cb30-1"></a>cryptodata</span></code></pre></div>
+<pre><code>## [90m# A tsibble: 169,914 x 34 [1h] &lt;UTC&gt;[39m
 ## [90m# Key:       symbol [96][39m
 ## [90m# Groups:    symbol [96][39m
 ##    pair  symbol quote_currency ask_1_price ask_1_quantity ask_2_price
@@ -485,7 +479,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m 8[39m AABU… AAB    USD                  0.390           104.       0.390
 ## [90m 9[39m AABU… AAB    USD                  0.390           104.       0.390
 ## [90m10[39m AABU… AAB    USD                  0.390           104.       0.390
-## [90m# … with 169,538 more rows, and 28 more variables: ask_2_quantity [3m[90m&lt;dbl&gt;[90m[23m,[39m
+## [90m# … with 169,904 more rows, and 28 more variables: ask_2_quantity [3m[90m&lt;dbl&gt;[90m[23m,[39m
 ## [90m#   ask_3_price [3m[90m&lt;dbl&gt;[90m[23m, ask_3_quantity [3m[90m&lt;dbl&gt;[90m[23m, ask_4_price [3m[90m&lt;dbl&gt;[90m[23m,[39m
 ## [90m#   ask_4_quantity [3m[90m&lt;dbl&gt;[90m[23m, ask_5_price [3m[90m&lt;dbl&gt;[90m[23m, ask_5_quantity [3m[90m&lt;dbl&gt;[90m[23m,[39m
 ## [90m#   bid_1_price [3m[90m&lt;dbl&gt;[90m[23m, bid_1_quantity [3m[90m&lt;dbl&gt;[90m[23m, bid_2_price [3m[90m&lt;dbl&gt;[90m[23m,[39m
@@ -495,32 +489,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m#   pkey [3m[90m&lt;chr&gt;[90m[23m, trade_usd_1 [3m[90m&lt;dbl&gt;[90m[23m, trade_usd_2 [3m[90m&lt;dbl&gt;[90m[23m, trade_usd_3 [3m[90m&lt;dbl&gt;[90m[23m,[39m
 ## [90m#   trade_usd_4 [3m[90m&lt;dbl&gt;[90m[23m, trade_usd_5 [3m[90m&lt;dbl&gt;[90m[23m, price_usd [3m[90m&lt;dbl&gt;[90m[23m, ts_index [3m[90m&lt;dttm&gt;[90m[23m[39m</code></pre>
 <p>Now that all of the gaps have been filled in, let’s convert the data back to be in the structure of a <a href="https://tibble.tidyverse.org/"><span style="color: #ae7b11;"><strong>tibble</strong></span></a>, which is the data structure that supports the <a href="data-prep.html#clean-data-by-group">grouping structure we discussed previously</a>, and let’s group the data by the <span style="color: blue;"><strong>symbol</strong></span> again:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="data-prep.html#cb33-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(<span class="kw">as_tibble</span>(cryptodata), symbol)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="data-prep.html#cb32-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(<span class="kw">as_tibble</span>(cryptodata), symbol)</span></code></pre></div>
 </div>
 <div id="calculate-target-1" class="section level3">
 <h3><span class="header-section-number">4.4.3</span> Calculate Target</h3>
 <p>Now we finally have everything we need to calculate the <strong>target variable</strong> containing the price 24 hours into the future relative to when the data was collected. We can use the usual <span style="color: green;"><strong>mutate()</strong></span> function to add a new column to the data called <span style="color: blue;"><strong>target_price_24h</strong></span>, and use the <span style="color: green;"><strong>lead()</strong></span> function from <span style="color: #ae7b11;"><strong>dplyr</strong></span> to offset the <span style="color: blue;"><strong>price_usd</strong></span> column by 24 hours:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-prep.html#cb34-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
-<span id="cb34-2"><a href="data-prep.html#cb34-2"></a>                     <span class="dt">target_price_24h =</span> <span class="kw">lead</span>(price_usd, <span class="dv">24</span>, <span class="dt">order_by=</span>ts_index))</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="data-prep.html#cb33-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
+<span id="cb33-2"><a href="data-prep.html#cb33-2"></a>                     <span class="dt">target_price_24h =</span> <span class="kw">lead</span>(price_usd, <span class="dv">24</span>, <span class="dt">order_by=</span>ts_index))</span></code></pre></div>
 </div>
 <div id="calculate-lagged-prices" class="section level3">
 <h3><span class="header-section-number">4.4.4</span> Calculate Lagged Prices</h3>
 <p>What about doing the opposite? If we added a new column showing the price from 24 hours earlier, could the price movement between then and when the data was collected help us predict where the price is headed next? If the price has gone down significantly over the previous 24 hours, is the price for the next 24 hours more likely to increase or decrease? What if the price has gone down significantly over the previous 24 hours, but has increased significantly since the past hour?</p>
 <p>These relationships around the sensitivity of a price to recent price changes may help our models come up with more accurate forecasts about the future, so let’s go ahead and add some lagged prices using the same methodology used to calculate the target variable, but this time using the <span style="color: green;"><strong>lag()</strong></span> function to get past observations instead of the <span style="color: green;"><strong>lead()</strong></span> function used before:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="data-prep.html#cb35-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata,</span>
-<span id="cb35-2"><a href="data-prep.html#cb35-2"></a>                     <span class="dt">lagged_price_1h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">1</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb35-3"><a href="data-prep.html#cb35-3"></a>                     <span class="dt">lagged_price_2h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">2</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb35-4"><a href="data-prep.html#cb35-4"></a>                     <span class="dt">lagged_price_3h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">3</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb35-5"><a href="data-prep.html#cb35-5"></a>                     <span class="dt">lagged_price_6h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">6</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb35-6"><a href="data-prep.html#cb35-6"></a>                     <span class="dt">lagged_price_12h =</span> <span class="kw">lag</span>(price_usd, <span class="dv">12</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb35-7"><a href="data-prep.html#cb35-7"></a>                     <span class="dt">lagged_price_24h =</span> <span class="kw">lag</span>(price_usd, <span class="dv">24</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb35-8"><a href="data-prep.html#cb35-8"></a>                     <span class="dt">lagged_price_3d  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">24</span><span class="op">*</span><span class="dv">3</span>, <span class="dt">order_by=</span>ts_index))</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-prep.html#cb34-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata,</span>
+<span id="cb34-2"><a href="data-prep.html#cb34-2"></a>                     <span class="dt">lagged_price_1h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">1</span>, <span class="dt">order_by=</span>ts_index),</span>
+<span id="cb34-3"><a href="data-prep.html#cb34-3"></a>                     <span class="dt">lagged_price_2h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">2</span>, <span class="dt">order_by=</span>ts_index),</span>
+<span id="cb34-4"><a href="data-prep.html#cb34-4"></a>                     <span class="dt">lagged_price_3h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">3</span>, <span class="dt">order_by=</span>ts_index),</span>
+<span id="cb34-5"><a href="data-prep.html#cb34-5"></a>                     <span class="dt">lagged_price_6h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">6</span>, <span class="dt">order_by=</span>ts_index),</span>
+<span id="cb34-6"><a href="data-prep.html#cb34-6"></a>                     <span class="dt">lagged_price_12h =</span> <span class="kw">lag</span>(price_usd, <span class="dv">12</span>, <span class="dt">order_by=</span>ts_index),</span>
+<span id="cb34-7"><a href="data-prep.html#cb34-7"></a>                     <span class="dt">lagged_price_24h =</span> <span class="kw">lag</span>(price_usd, <span class="dv">24</span>, <span class="dt">order_by=</span>ts_index),</span>
+<span id="cb34-8"><a href="data-prep.html#cb34-8"></a>                     <span class="dt">lagged_price_3d  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">24</span><span class="op">*</span><span class="dv">3</span>, <span class="dt">order_by=</span>ts_index))</span></code></pre></div>
 <p><em>This step can be thought of as <span style="color: purple;"><strong>data engineering</strong></span> more than data cleaning, because rather than fixing an issue we are enhancing the dataset with columns that may help with the forecasts.</em></p>
 <p>Let’s view an example of the oldest 30 rows of data associated with the Bitcoin cryptocurrency (<code>symbol == "BTC"</code>). With the oldest data starting from the top, the <span style="color: blue;"><strong>lagged_price_1h</strong></span> field should have a NA value for the first row because we don’t have any prices before that point. By that same logic, the <span style="color: blue;"><strong>lagged_price_24h</strong></span> column should be missing the first 24 values and have the last 6 values showing the first 6 rows of the <span style="color: blue;"><strong>price_usd</strong></span> column. The <span style="color: blue;"><strong>target_price_24h</strong></span> would values for the oldest data because the opposite is true and we don’t know the values for data for the most recent 24 rows of the data:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="data-prep.html#cb36-1"></a><span class="kw">print</span>(<span class="kw">select</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>), </span>
-<span id="cb36-2"><a href="data-prep.html#cb36-2"></a>             ts_index, price_usd, lagged_price_1h, </span>
-<span id="cb36-3"><a href="data-prep.html#cb36-3"></a>             lagged_price_24h, target_price_24h), <span class="dt">n=</span><span class="dv">30</span>)</span></code></pre></div>
-<pre><code>## [90m# A tibble: 2,230 x 6[39m
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="data-prep.html#cb35-1"></a><span class="kw">print</span>(<span class="kw">select</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>), </span>
+<span id="cb35-2"><a href="data-prep.html#cb35-2"></a>             ts_index, price_usd, lagged_price_1h, </span>
+<span id="cb35-3"><a href="data-prep.html#cb35-3"></a>             lagged_price_24h, target_price_24h), <span class="dt">n=</span><span class="dv">30</span>)</span></code></pre></div>
+<pre><code>## [90m# A tibble: 2,234 x 6[39m
 ## [90m# Groups:   symbol [1][39m
 ##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
@@ -554,91 +548,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m28[39m BTC    2020-08-11 [90m07:00:00[39m    [4m1[24m[4m1[24m774.          [4m1[24m[4m1[24m847.           [4m1[24m[4m1[24m994.
 ## [90m29[39m BTC    2020-08-11 [90m08:00:00[39m    [4m1[24m[4m1[24m761.          [4m1[24m[4m1[24m774.           [4m1[24m[4m1[24m984.
 ## [90m30[39m BTC    2020-08-11 [90m09:00:00[39m    [4m1[24m[4m1[24m753.          [4m1[24m[4m1[24m761.           [4m1[24m[4m1[24m962.
-## [90m# … with 2,200 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
+## [90m# … with 2,204 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
 <p>We can wrap the code used above in the <span style="color: green;"><strong>tail()</strong></span> function to show the most recent data and see the opposite dynamic with the new fields we created:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="data-prep.html#cb38-1"></a><span class="kw">print</span>(<span class="kw">tail</span>(<span class="kw">select</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>), </span>
-<span id="cb38-2"><a href="data-prep.html#cb38-2"></a>                  ts_index, price_usd, lagged_price_1h, </span>
-<span id="cb38-3"><a href="data-prep.html#cb38-3"></a>                  lagged_price_24h, target_price_24h),<span class="dv">30</span>), <span class="dt">n=</span><span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="data-prep.html#cb37-1"></a><span class="kw">print</span>(<span class="kw">tail</span>(<span class="kw">select</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>), </span>
+<span id="cb37-2"><a href="data-prep.html#cb37-2"></a>                  ts_index, price_usd, lagged_price_1h, </span>
+<span id="cb37-3"><a href="data-prep.html#cb37-3"></a>                  lagged_price_24h, target_price_24h),<span class="dv">30</span>), <span class="dt">n=</span><span class="dv">30</span>)</span></code></pre></div>
 <pre><code>## [90m# A tibble: 30 x 6[39m
 ## [90m# Groups:   symbol [1][39m
 ##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m BTC    2020-11-09 [90m20:00:00[39m    [4m1[24m[4m5[24m359.          [4m1[24m[4m5[24m314.           [4m1[24m[4m5[24m343.
-## [90m 2[39m BTC    2020-11-09 [90m21:00:00[39m    [4m1[24m[4m5[24m371.          [4m1[24m[4m5[24m359.           [4m1[24m[4m5[24m373.
-## [90m 3[39m BTC    2020-11-09 [90m22:00:00[39m    [4m1[24m[4m5[24m365.          [4m1[24m[4m5[24m371.           [4m1[24m[4m5[24m326.
-## [90m 4[39m BTC    2020-11-09 [90m23:00:00[39m    [4m1[24m[4m5[24m241.          [4m1[24m[4m5[24m365.           [4m1[24m[4m5[24m505.
-## [90m 5[39m BTC    2020-11-10 [90m00:00:00[39m    [4m1[24m[4m5[24m327.          [4m1[24m[4m5[24m241.           [4m1[24m[4m5[24m481.
-## [90m 6[39m BTC    2020-11-10 [90m01:00:00[39m    [4m1[24m[4m5[24m299           [4m1[24m[4m5[24m327.           [4m1[24m[4m5[24m548 
-## [90m 7[39m BTC    2020-11-10 [90m02:00:00[39m    [4m1[24m[4m5[24m388.          [4m1[24m[4m5[24m299            [4m1[24m[4m5[24m513.
-## [90m 8[39m BTC    2020-11-10 [90m03:00:00[39m    [4m1[24m[4m5[24m339.          [4m1[24m[4m5[24m388.           [4m1[24m[4m5[24m466.
-## [90m 9[39m BTC    2020-11-10 [90m04:00:00[39m    [4m1[24m[4m5[24m335.          [4m1[24m[4m5[24m339.           [4m1[24m[4m5[24m433.
-## [90m10[39m BTC    2020-11-10 [90m05:00:00[39m    [4m1[24m[4m5[24m390.          [4m1[24m[4m5[24m335.           [4m1[24m[4m5[24m381.
-## [90m11[39m BTC    2020-11-10 [90m06:00:00[39m    [4m1[24m[4m5[24m362.          [4m1[24m[4m5[24m390.           [4m1[24m[4m5[24m468.
-## [90m12[39m BTC    2020-11-10 [90m07:00:00[39m    [4m1[24m[4m5[24m281.          [4m1[24m[4m5[24m362.           [4m1[24m[4m5[24m376.
-## [90m13[39m BTC    2020-11-10 [90m08:00:00[39m    [4m1[24m[4m5[24m283.          [4m1[24m[4m5[24m281.           [4m1[24m[4m5[24m312.
-## [90m14[39m BTC    2020-11-10 [90m09:00:00[39m    [4m1[24m[4m5[24m370.          [4m1[24m[4m5[24m283.           [4m1[24m[4m5[24m400.
-## [90m15[39m BTC    2020-11-10 [90m10:00:00[39m    [4m1[24m[4m5[24m385.          [4m1[24m[4m5[24m370.           [4m1[24m[4m5[24m408.
-## [90m16[39m BTC    2020-11-10 [90m11:00:00[39m    [4m1[24m[4m5[24m309.          [4m1[24m[4m5[24m385.           [4m1[24m[4m5[24m474.
-## [90m17[39m BTC    2020-11-10 [90m12:00:00[39m    [4m1[24m[4m5[24m274.          [4m1[24m[4m5[24m309.           [4m1[24m[4m5[24m803.
-## [90m18[39m BTC    2020-11-10 [90m13:00:00[39m    [4m1[24m[4m5[24m283.          [4m1[24m[4m5[24m274.           [4m1[24m[4m5[24m569.
-## [90m19[39m BTC    2020-11-10 [90m14:00:00[39m    [4m1[24m[4m5[24m305.          [4m1[24m[4m5[24m283.           [4m1[24m[4m5[24m282.
-## [90m20[39m BTC    2020-11-10 [90m15:00:00[39m    [4m1[24m[4m5[24m220.          [4m1[24m[4m5[24m305.           [4m1[24m[4m5[24m104.
-## [90m21[39m BTC    2020-11-10 [90m16:00:00[39m    [4m1[24m[4m5[24m162.          [4m1[24m[4m5[24m220.           [4m1[24m[4m5[24m006.
-## [90m22[39m BTC    2020-11-10 [90m17:00:00[39m    [4m1[24m[4m5[24m243.          [4m1[24m[4m5[24m162.           [4m1[24m[4m5[24m108.
-## [90m23[39m BTC    2020-11-10 [90m18:00:00[39m    [4m1[24m[4m5[24m312.          [4m1[24m[4m5[24m243.           [4m1[24m[4m5[24m227.
-## [90m24[39m BTC    2020-11-10 [90m19:00:00[39m    [4m1[24m[4m5[24m266.          [4m1[24m[4m5[24m312.           [4m1[24m[4m5[24m314.
-## [90m25[39m BTC    2020-11-10 [90m20:00:00[39m    [4m1[24m[4m5[24m299.          [4m1[24m[4m5[24m266.           [4m1[24m[4m5[24m359.
-## [90m26[39m BTC    2020-11-10 [90m21:00:00[39m    [4m1[24m[4m5[24m285.          [4m1[24m[4m5[24m299.           [4m1[24m[4m5[24m371.
-## [90m27[39m BTC    2020-11-10 [90m22:00:00[39m    [4m1[24m[4m5[24m376.          [4m1[24m[4m5[24m285.           [4m1[24m[4m5[24m365.
-## [90m28[39m BTC    2020-11-10 [90m23:00:00[39m    [4m1[24m[4m5[24m365.          [4m1[24m[4m5[24m376.           [4m1[24m[4m5[24m241.
-## [90m29[39m BTC    2020-11-11 [90m00:00:00[39m    [4m1[24m[4m5[24m295.          [4m1[24m[4m5[24m365.           [4m1[24m[4m5[24m327.
-## [90m30[39m BTC    2020-11-11 [90m01:00:00[39m    [4m1[24m[4m5[24m473.          [4m1[24m[4m5[24m295.           [4m1[24m[4m5[24m299 
+## [90m 1[39m BTC    2020-11-10 [90m00:00:00[39m    [4m1[24m[4m5[24m327.          [4m1[24m[4m5[24m241.           [4m1[24m[4m5[24m481.
+## [90m 2[39m BTC    2020-11-10 [90m01:00:00[39m    [4m1[24m[4m5[24m299           [4m1[24m[4m5[24m327.           [4m1[24m[4m5[24m548 
+## [90m 3[39m BTC    2020-11-10 [90m02:00:00[39m    [4m1[24m[4m5[24m388.          [4m1[24m[4m5[24m299            [4m1[24m[4m5[24m513.
+## [90m 4[39m BTC    2020-11-10 [90m03:00:00[39m    [4m1[24m[4m5[24m339.          [4m1[24m[4m5[24m388.           [4m1[24m[4m5[24m466.
+## [90m 5[39m BTC    2020-11-10 [90m04:00:00[39m    [4m1[24m[4m5[24m335.          [4m1[24m[4m5[24m339.           [4m1[24m[4m5[24m433.
+## [90m 6[39m BTC    2020-11-10 [90m05:00:00[39m    [4m1[24m[4m5[24m390.          [4m1[24m[4m5[24m335.           [4m1[24m[4m5[24m381.
+## [90m 7[39m BTC    2020-11-10 [90m06:00:00[39m    [4m1[24m[4m5[24m362.          [4m1[24m[4m5[24m390.           [4m1[24m[4m5[24m468.
+## [90m 8[39m BTC    2020-11-10 [90m07:00:00[39m    [4m1[24m[4m5[24m281.          [4m1[24m[4m5[24m362.           [4m1[24m[4m5[24m376.
+## [90m 9[39m BTC    2020-11-10 [90m08:00:00[39m    [4m1[24m[4m5[24m283.          [4m1[24m[4m5[24m281.           [4m1[24m[4m5[24m312.
+## [90m10[39m BTC    2020-11-10 [90m09:00:00[39m    [4m1[24m[4m5[24m370.          [4m1[24m[4m5[24m283.           [4m1[24m[4m5[24m400.
+## [90m11[39m BTC    2020-11-10 [90m10:00:00[39m    [4m1[24m[4m5[24m385.          [4m1[24m[4m5[24m370.           [4m1[24m[4m5[24m408.
+## [90m12[39m BTC    2020-11-10 [90m11:00:00[39m    [4m1[24m[4m5[24m309.          [4m1[24m[4m5[24m385.           [4m1[24m[4m5[24m474.
+## [90m13[39m BTC    2020-11-10 [90m12:00:00[39m    [4m1[24m[4m5[24m274.          [4m1[24m[4m5[24m309.           [4m1[24m[4m5[24m803.
+## [90m14[39m BTC    2020-11-10 [90m13:00:00[39m    [4m1[24m[4m5[24m283.          [4m1[24m[4m5[24m274.           [4m1[24m[4m5[24m569.
+## [90m15[39m BTC    2020-11-10 [90m14:00:00[39m    [4m1[24m[4m5[24m305.          [4m1[24m[4m5[24m283.           [4m1[24m[4m5[24m282.
+## [90m16[39m BTC    2020-11-10 [90m15:00:00[39m    [4m1[24m[4m5[24m220.          [4m1[24m[4m5[24m305.           [4m1[24m[4m5[24m104.
+## [90m17[39m BTC    2020-11-10 [90m16:00:00[39m    [4m1[24m[4m5[24m162.          [4m1[24m[4m5[24m220.           [4m1[24m[4m5[24m006.
+## [90m18[39m BTC    2020-11-10 [90m17:00:00[39m    [4m1[24m[4m5[24m243.          [4m1[24m[4m5[24m162.           [4m1[24m[4m5[24m108.
+## [90m19[39m BTC    2020-11-10 [90m18:00:00[39m    [4m1[24m[4m5[24m312.          [4m1[24m[4m5[24m243.           [4m1[24m[4m5[24m227.
+## [90m20[39m BTC    2020-11-10 [90m19:00:00[39m    [4m1[24m[4m5[24m266.          [4m1[24m[4m5[24m312.           [4m1[24m[4m5[24m314.
+## [90m21[39m BTC    2020-11-10 [90m20:00:00[39m    [4m1[24m[4m5[24m299.          [4m1[24m[4m5[24m266.           [4m1[24m[4m5[24m359.
+## [90m22[39m BTC    2020-11-10 [90m21:00:00[39m    [4m1[24m[4m5[24m285.          [4m1[24m[4m5[24m299.           [4m1[24m[4m5[24m371.
+## [90m23[39m BTC    2020-11-10 [90m22:00:00[39m    [4m1[24m[4m5[24m376.          [4m1[24m[4m5[24m285.           [4m1[24m[4m5[24m365.
+## [90m24[39m BTC    2020-11-10 [90m23:00:00[39m    [4m1[24m[4m5[24m365.          [4m1[24m[4m5[24m376.           [4m1[24m[4m5[24m241.
+## [90m25[39m BTC    2020-11-11 [90m00:00:00[39m    [4m1[24m[4m5[24m295.          [4m1[24m[4m5[24m365.           [4m1[24m[4m5[24m327.
+## [90m26[39m BTC    2020-11-11 [90m01:00:00[39m    [4m1[24m[4m5[24m473.          [4m1[24m[4m5[24m295.           [4m1[24m[4m5[24m299 
+## [90m27[39m BTC    2020-11-11 [90m02:00:00[39m    [4m1[24m[4m5[24m433.          [4m1[24m[4m5[24m473.           [4m1[24m[4m5[24m388.
+## [90m28[39m BTC    2020-11-11 [90m03:00:00[39m    [4m1[24m[4m5[24m393.          [4m1[24m[4m5[24m433.           [4m1[24m[4m5[24m339.
+## [90m29[39m BTC    2020-11-11 [90m04:00:00[39m    [4m1[24m[4m5[24m405.          [4m1[24m[4m5[24m393.           [4m1[24m[4m5[24m335.
+## [90m30[39m BTC    2020-11-11 [90m05:00:00[39m    [4m1[24m[4m5[24m370.          [4m1[24m[4m5[24m405.           [4m1[24m[4m5[24m390.
 ## [90m# … with 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
 <p>Reading the code shown above is less than ideal. One of the more popular tools introduced by the <a href="https://www.tidyverse.org/">tidyverse</a> is the <span style="color: purple;"><strong>%&gt;%</strong></span> operator, which works by starting with the object/data you want to make changes to first, and then apply each transformation step by step. It’s simply a way of re-writing the same code in a way that is easier to read by splitting the way the function is called rather than adding functions onto each other into a single line that becomes really hard to read. In the example above it becomes difficult to keep track of where things begin, the order of operations, and the parameters associated with the specific functions. Compare that to the code below:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="data-prep.html#cb40-1"></a><span class="co"># Start with the object/data to manipulate</span></span>
-<span id="cb40-2"><a href="data-prep.html#cb40-2"></a>cryptodata <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb40-3"><a href="data-prep.html#cb40-3"></a><span class="st">  </span><span class="co"># Filter the data to only the BTC symbol</span></span>
-<span id="cb40-4"><a href="data-prep.html#cb40-4"></a><span class="st">  </span><span class="kw">filter</span>(symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb40-5"><a href="data-prep.html#cb40-5"></a><span class="st">  </span><span class="co"># Select columns to display</span></span>
-<span id="cb40-6"><a href="data-prep.html#cb40-6"></a><span class="st">  </span><span class="kw">select</span>(ts_index, price_usd, lagged_price_1h, lagged_price_24h, target_price_24h) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb40-7"><a href="data-prep.html#cb40-7"></a><span class="st">  </span><span class="co"># Show the last 30 elements of the data</span></span>
-<span id="cb40-8"><a href="data-prep.html#cb40-8"></a><span class="st">  </span><span class="kw">tail</span>(<span class="dv">30</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb40-9"><a href="data-prep.html#cb40-9"></a><span class="st">  </span><span class="co"># Show all 30 elements instead of the default 10 for a tibble dataframe</span></span>
-<span id="cb40-10"><a href="data-prep.html#cb40-10"></a><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="data-prep.html#cb39-1"></a><span class="co"># Start with the object/data to manipulate</span></span>
+<span id="cb39-2"><a href="data-prep.html#cb39-2"></a>cryptodata <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb39-3"><a href="data-prep.html#cb39-3"></a><span class="st">  </span><span class="co"># Filter the data to only the BTC symbol</span></span>
+<span id="cb39-4"><a href="data-prep.html#cb39-4"></a><span class="st">  </span><span class="kw">filter</span>(symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb39-5"><a href="data-prep.html#cb39-5"></a><span class="st">  </span><span class="co"># Select columns to display</span></span>
+<span id="cb39-6"><a href="data-prep.html#cb39-6"></a><span class="st">  </span><span class="kw">select</span>(ts_index, price_usd, lagged_price_1h, lagged_price_24h, target_price_24h) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb39-7"><a href="data-prep.html#cb39-7"></a><span class="st">  </span><span class="co"># Show the last 30 elements of the data</span></span>
+<span id="cb39-8"><a href="data-prep.html#cb39-8"></a><span class="st">  </span><span class="kw">tail</span>(<span class="dv">30</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb39-9"><a href="data-prep.html#cb39-9"></a><span class="st">  </span><span class="co"># Show all 30 elements instead of the default 10 for a tibble dataframe</span></span>
+<span id="cb39-10"><a href="data-prep.html#cb39-10"></a><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="dv">30</span>)</span></code></pre></div>
 <pre><code>## [90m# A tibble: 30 x 6[39m
 ## [90m# Groups:   symbol [1][39m
 ##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m BTC    2020-11-09 [90m20:00:00[39m    [4m1[24m[4m5[24m359.          [4m1[24m[4m5[24m314.           [4m1[24m[4m5[24m343.
-## [90m 2[39m BTC    2020-11-09 [90m21:00:00[39m    [4m1[24m[4m5[24m371.          [4m1[24m[4m5[24m359.           [4m1[24m[4m5[24m373.
-## [90m 3[39m BTC    2020-11-09 [90m22:00:00[39m    [4m1[24m[4m5[24m365.          [4m1[24m[4m5[24m371.           [4m1[24m[4m5[24m326.
-## [90m 4[39m BTC    2020-11-09 [90m23:00:00[39m    [4m1[24m[4m5[24m241.          [4m1[24m[4m5[24m365.           [4m1[24m[4m5[24m505.
-## [90m 5[39m BTC    2020-11-10 [90m00:00:00[39m    [4m1[24m[4m5[24m327.          [4m1[24m[4m5[24m241.           [4m1[24m[4m5[24m481.
-## [90m 6[39m BTC    2020-11-10 [90m01:00:00[39m    [4m1[24m[4m5[24m299           [4m1[24m[4m5[24m327.           [4m1[24m[4m5[24m548 
-## [90m 7[39m BTC    2020-11-10 [90m02:00:00[39m    [4m1[24m[4m5[24m388.          [4m1[24m[4m5[24m299            [4m1[24m[4m5[24m513.
-## [90m 8[39m BTC    2020-11-10 [90m03:00:00[39m    [4m1[24m[4m5[24m339.          [4m1[24m[4m5[24m388.           [4m1[24m[4m5[24m466.
-## [90m 9[39m BTC    2020-11-10 [90m04:00:00[39m    [4m1[24m[4m5[24m335.          [4m1[24m[4m5[24m339.           [4m1[24m[4m5[24m433.
-## [90m10[39m BTC    2020-11-10 [90m05:00:00[39m    [4m1[24m[4m5[24m390.          [4m1[24m[4m5[24m335.           [4m1[24m[4m5[24m381.
-## [90m11[39m BTC    2020-11-10 [90m06:00:00[39m    [4m1[24m[4m5[24m362.          [4m1[24m[4m5[24m390.           [4m1[24m[4m5[24m468.
-## [90m12[39m BTC    2020-11-10 [90m07:00:00[39m    [4m1[24m[4m5[24m281.          [4m1[24m[4m5[24m362.           [4m1[24m[4m5[24m376.
-## [90m13[39m BTC    2020-11-10 [90m08:00:00[39m    [4m1[24m[4m5[24m283.          [4m1[24m[4m5[24m281.           [4m1[24m[4m5[24m312.
-## [90m14[39m BTC    2020-11-10 [90m09:00:00[39m    [4m1[24m[4m5[24m370.          [4m1[24m[4m5[24m283.           [4m1[24m[4m5[24m400.
-## [90m15[39m BTC    2020-11-10 [90m10:00:00[39m    [4m1[24m[4m5[24m385.          [4m1[24m[4m5[24m370.           [4m1[24m[4m5[24m408.
-## [90m16[39m BTC    2020-11-10 [90m11:00:00[39m    [4m1[24m[4m5[24m309.          [4m1[24m[4m5[24m385.           [4m1[24m[4m5[24m474.
-## [90m17[39m BTC    2020-11-10 [90m12:00:00[39m    [4m1[24m[4m5[24m274.          [4m1[24m[4m5[24m309.           [4m1[24m[4m5[24m803.
-## [90m18[39m BTC    2020-11-10 [90m13:00:00[39m    [4m1[24m[4m5[24m283.          [4m1[24m[4m5[24m274.           [4m1[24m[4m5[24m569.
-## [90m19[39m BTC    2020-11-10 [90m14:00:00[39m    [4m1[24m[4m5[24m305.          [4m1[24m[4m5[24m283.           [4m1[24m[4m5[24m282.
-## [90m20[39m BTC    2020-11-10 [90m15:00:00[39m    [4m1[24m[4m5[24m220.          [4m1[24m[4m5[24m305.           [4m1[24m[4m5[24m104.
-## [90m21[39m BTC    2020-11-10 [90m16:00:00[39m    [4m1[24m[4m5[24m162.          [4m1[24m[4m5[24m220.           [4m1[24m[4m5[24m006.
-## [90m22[39m BTC    2020-11-10 [90m17:00:00[39m    [4m1[24m[4m5[24m243.          [4m1[24m[4m5[24m162.           [4m1[24m[4m5[24m108.
-## [90m23[39m BTC    2020-11-10 [90m18:00:00[39m    [4m1[24m[4m5[24m312.          [4m1[24m[4m5[24m243.           [4m1[24m[4m5[24m227.
-## [90m24[39m BTC    2020-11-10 [90m19:00:00[39m    [4m1[24m[4m5[24m266.          [4m1[24m[4m5[24m312.           [4m1[24m[4m5[24m314.
-## [90m25[39m BTC    2020-11-10 [90m20:00:00[39m    [4m1[24m[4m5[24m299.          [4m1[24m[4m5[24m266.           [4m1[24m[4m5[24m359.
-## [90m26[39m BTC    2020-11-10 [90m21:00:00[39m    [4m1[24m[4m5[24m285.          [4m1[24m[4m5[24m299.           [4m1[24m[4m5[24m371.
-## [90m27[39m BTC    2020-11-10 [90m22:00:00[39m    [4m1[24m[4m5[24m376.          [4m1[24m[4m5[24m285.           [4m1[24m[4m5[24m365.
-## [90m28[39m BTC    2020-11-10 [90m23:00:00[39m    [4m1[24m[4m5[24m365.          [4m1[24m[4m5[24m376.           [4m1[24m[4m5[24m241.
-## [90m29[39m BTC    2020-11-11 [90m00:00:00[39m    [4m1[24m[4m5[24m295.          [4m1[24m[4m5[24m365.           [4m1[24m[4m5[24m327.
-## [90m30[39m BTC    2020-11-11 [90m01:00:00[39m    [4m1[24m[4m5[24m473.          [4m1[24m[4m5[24m295.           [4m1[24m[4m5[24m299 
+## [90m 1[39m BTC    2020-11-10 [90m00:00:00[39m    [4m1[24m[4m5[24m327.          [4m1[24m[4m5[24m241.           [4m1[24m[4m5[24m481.
+## [90m 2[39m BTC    2020-11-10 [90m01:00:00[39m    [4m1[24m[4m5[24m299           [4m1[24m[4m5[24m327.           [4m1[24m[4m5[24m548 
+## [90m 3[39m BTC    2020-11-10 [90m02:00:00[39m    [4m1[24m[4m5[24m388.          [4m1[24m[4m5[24m299            [4m1[24m[4m5[24m513.
+## [90m 4[39m BTC    2020-11-10 [90m03:00:00[39m    [4m1[24m[4m5[24m339.          [4m1[24m[4m5[24m388.           [4m1[24m[4m5[24m466.
+## [90m 5[39m BTC    2020-11-10 [90m04:00:00[39m    [4m1[24m[4m5[24m335.          [4m1[24m[4m5[24m339.           [4m1[24m[4m5[24m433.
+## [90m 6[39m BTC    2020-11-10 [90m05:00:00[39m    [4m1[24m[4m5[24m390.          [4m1[24m[4m5[24m335.           [4m1[24m[4m5[24m381.
+## [90m 7[39m BTC    2020-11-10 [90m06:00:00[39m    [4m1[24m[4m5[24m362.          [4m1[24m[4m5[24m390.           [4m1[24m[4m5[24m468.
+## [90m 8[39m BTC    2020-11-10 [90m07:00:00[39m    [4m1[24m[4m5[24m281.          [4m1[24m[4m5[24m362.           [4m1[24m[4m5[24m376.
+## [90m 9[39m BTC    2020-11-10 [90m08:00:00[39m    [4m1[24m[4m5[24m283.          [4m1[24m[4m5[24m281.           [4m1[24m[4m5[24m312.
+## [90m10[39m BTC    2020-11-10 [90m09:00:00[39m    [4m1[24m[4m5[24m370.          [4m1[24m[4m5[24m283.           [4m1[24m[4m5[24m400.
+## [90m11[39m BTC    2020-11-10 [90m10:00:00[39m    [4m1[24m[4m5[24m385.          [4m1[24m[4m5[24m370.           [4m1[24m[4m5[24m408.
+## [90m12[39m BTC    2020-11-10 [90m11:00:00[39m    [4m1[24m[4m5[24m309.          [4m1[24m[4m5[24m385.           [4m1[24m[4m5[24m474.
+## [90m13[39m BTC    2020-11-10 [90m12:00:00[39m    [4m1[24m[4m5[24m274.          [4m1[24m[4m5[24m309.           [4m1[24m[4m5[24m803.
+## [90m14[39m BTC    2020-11-10 [90m13:00:00[39m    [4m1[24m[4m5[24m283.          [4m1[24m[4m5[24m274.           [4m1[24m[4m5[24m569.
+## [90m15[39m BTC    2020-11-10 [90m14:00:00[39m    [4m1[24m[4m5[24m305.          [4m1[24m[4m5[24m283.           [4m1[24m[4m5[24m282.
+## [90m16[39m BTC    2020-11-10 [90m15:00:00[39m    [4m1[24m[4m5[24m220.          [4m1[24m[4m5[24m305.           [4m1[24m[4m5[24m104.
+## [90m17[39m BTC    2020-11-10 [90m16:00:00[39m    [4m1[24m[4m5[24m162.          [4m1[24m[4m5[24m220.           [4m1[24m[4m5[24m006.
+## [90m18[39m BTC    2020-11-10 [90m17:00:00[39m    [4m1[24m[4m5[24m243.          [4m1[24m[4m5[24m162.           [4m1[24m[4m5[24m108.
+## [90m19[39m BTC    2020-11-10 [90m18:00:00[39m    [4m1[24m[4m5[24m312.          [4m1[24m[4m5[24m243.           [4m1[24m[4m5[24m227.
+## [90m20[39m BTC    2020-11-10 [90m19:00:00[39m    [4m1[24m[4m5[24m266.          [4m1[24m[4m5[24m312.           [4m1[24m[4m5[24m314.
+## [90m21[39m BTC    2020-11-10 [90m20:00:00[39m    [4m1[24m[4m5[24m299.          [4m1[24m[4m5[24m266.           [4m1[24m[4m5[24m359.
+## [90m22[39m BTC    2020-11-10 [90m21:00:00[39m    [4m1[24m[4m5[24m285.          [4m1[24m[4m5[24m299.           [4m1[24m[4m5[24m371.
+## [90m23[39m BTC    2020-11-10 [90m22:00:00[39m    [4m1[24m[4m5[24m376.          [4m1[24m[4m5[24m285.           [4m1[24m[4m5[24m365.
+## [90m24[39m BTC    2020-11-10 [90m23:00:00[39m    [4m1[24m[4m5[24m365.          [4m1[24m[4m5[24m376.           [4m1[24m[4m5[24m241.
+## [90m25[39m BTC    2020-11-11 [90m00:00:00[39m    [4m1[24m[4m5[24m295.          [4m1[24m[4m5[24m365.           [4m1[24m[4m5[24m327.
+## [90m26[39m BTC    2020-11-11 [90m01:00:00[39m    [4m1[24m[4m5[24m473.          [4m1[24m[4m5[24m295.           [4m1[24m[4m5[24m299 
+## [90m27[39m BTC    2020-11-11 [90m02:00:00[39m    [4m1[24m[4m5[24m433.          [4m1[24m[4m5[24m473.           [4m1[24m[4m5[24m388.
+## [90m28[39m BTC    2020-11-11 [90m03:00:00[39m    [4m1[24m[4m5[24m393.          [4m1[24m[4m5[24m433.           [4m1[24m[4m5[24m339.
+## [90m29[39m BTC    2020-11-11 [90m04:00:00[39m    [4m1[24m[4m5[24m405.          [4m1[24m[4m5[24m393.           [4m1[24m[4m5[24m335.
+## [90m30[39m BTC    2020-11-11 [90m05:00:00[39m    [4m1[24m[4m5[24m370.          [4m1[24m[4m5[24m405.           [4m1[24m[4m5[24m390.
 ## [90m# … with 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
 <p>There are several advantages to writing code <em>the</em> <strong><em>tidy</em></strong> <em>way</em>, but while some love it others hate it, so we won’t force anyone to have to understand how the <strong>%&gt;%</strong> operator works and we have stayed away from its use for the rest of the code shown, but we do encourage the use of this tool: <a href="https://magrittr.tidyverse.org/reference/pipe.html" class="uri">https://magrittr.tidyverse.org/reference/pipe.html</a></p>
 <p></br></p>
