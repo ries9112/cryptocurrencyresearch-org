@@ -115,7 +115,7 @@ We can adapt the [function we built earlier for the linear regression models usi
 
 ```{r}
 model_caret <- function(df, method_choice){
-# NEW TEST WITH TIME-AWARE CROSS VALIDATION
+  
   train(target_price_24h ~ . -date_time_utc -date, data = df,
         method = method_choice,
         trControl=fitControl)

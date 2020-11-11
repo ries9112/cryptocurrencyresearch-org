@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Section - 4 Data Prep | Cryptocurrency Research</title>
   <meta name="description" content="Section - 4 Data Prep | Cryptocurrency Research" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Section - 4 Data Prep | Cryptocurrency Research" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,7 @@
   
 <link rel="prev" href="explore-data.html"/>
 <link rel="next" href="visualization.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,8 +49,6 @@
 
 
 
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="libs/datatables-binding-0.15/datatables.js"></script>
@@ -63,6 +61,16 @@
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script async defer src="https://hypothes.is/embed.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1RJSX0YETF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1RJSX0YETF');
+</script>
 
 
 <style type="text/css">
@@ -154,16 +162,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#format-notes"><i class="fa fa-check"></i><b>1.3</b> Format Notes</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#plan-of-attack"><i class="fa fa-check"></i><b>1.4</b> Plan of Attack</a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#github-repository"><i class="fa fa-check"></i><b>1.5</b> GitHub Repository</a></li>
-<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#disclaimer"><i class="fa fa-check"></i><b>1.6</b> Disclaimer</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#who-is-this-example-for"><i class="fa fa-check"></i><b>1.5</b> Who is this example for?</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#reproducibility"><i class="fa fa-check"></i><b>1.6</b> Reproducibility</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="index.html"><a href="index.html#the-cost-of-non-reproducible-research"><i class="fa fa-check"></i><b>1.6.1</b> The cost of non-reproducible research</a></li>
+<li class="chapter" data-level="1.6.2" data-path="index.html"><a href="index.html#github"><i class="fa fa-check"></i><b>1.6.2</b> GitHub</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#disclaimer"><i class="fa fa-check"></i><b>1.7</b> Disclaimer</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>2</b> Setup and Installation</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="setup.html"><a href="setup.html#option-1---run-in-the-cloud"><i class="fa fa-check"></i><b>2.1</b> Option 1 - Run in the Cloud</a></li>
+<li class="chapter" data-level="2.1" data-path="setup.html"><a href="setup.html#run-in-the-cloud"><i class="fa fa-check"></i><b>2.1</b> Option 1 - Run in the Cloud</a></li>
 <li class="chapter" data-level="2.2" data-path="setup.html"><a href="setup.html#option-2---run-locally"><i class="fa fa-check"></i><b>2.2</b> Option 2 - Run Locally</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="setup.html"><a href="setup.html#setup-r"><i class="fa fa-check"></i><b>2.2.1</b> Setup R</a></li>
-<li class="chapter" data-level="2.2.2" data-path="setup.html"><a href="setup.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>2.2.2</b> Installing and Loading Packages</a></li>
+<li class="chapter" data-level="2.2.2" data-path="setup.html"><a href="setup.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>2.2.2</b> Install and Load Packages</a></li>
+<li class="chapter" data-level="2.2.3" data-path="setup.html"><a href="setup.html#install-pacman"><i class="fa fa-check"></i><b>2.2.3</b> Install Pacman</a></li>
+<li class="chapter" data-level="2.2.4" data-path="setup.html"><a href="setup.html#load-pacman"><i class="fa fa-check"></i><b>2.2.4</b> Load Pacman</a></li>
+<li class="chapter" data-level="2.2.5" data-path="setup.html"><a href="setup.html#install-all-other-packages"><i class="fa fa-check"></i><b>2.2.5</b> Install All Other Packages</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="explore-data.html"><a href="explore-data.html"><i class="fa fa-check"></i><b>3</b> Explore the Data</a>
@@ -172,10 +188,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="explore-data.html"><a href="explore-data.html#data-preview"><i class="fa fa-check"></i><b>3.2</b> Data Preview</a></li>
 <li class="chapter" data-level="3.3" data-path="explore-data.html"><a href="explore-data.html#the-definition-of-a-price"><i class="fa fa-check"></i><b>3.3</b> The definition of a “price”</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="explore-data.html"><a href="explore-data.html#in-summary"><i class="fa fa-check"></i><b>3.3.1</b> In Summary</a></li>
+<li class="chapter" data-level="3.3.1" data-path="explore-data.html"><a href="explore-data.html#order-book"><i class="fa fa-check"></i><b>3.3.1</b> Order Book</a></li>
+<li class="chapter" data-level="3.3.2" data-path="explore-data.html"><a href="explore-data.html#in-summary"><i class="fa fa-check"></i><b>3.3.2</b> In Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="explore-data.html"><a href="explore-data.html#data-quality"><i class="fa fa-check"></i><b>3.4</b> Data Quality</a></li>
-<li class="chapter" data-level="3.5" data-path="explore-data.html"><a href="explore-data.html#data-source-details"><i class="fa fa-check"></i><b>3.5</b> Data Source Details</a></li>
+<li class="chapter" data-level="3.5" data-path="explore-data.html"><a href="explore-data.html#data-source-additional-details"><i class="fa fa-check"></i><b>3.5</b> Data Source Additional Details</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-prep.html"><a href="data-prep.html"><i class="fa fa-check"></i><b>4</b> Data Prep</a>
 <ul>
@@ -188,19 +205,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="data-prep.html"><a href="data-prep.html#calculate-target"><i class="fa fa-check"></i><b>4.4</b> Calculate Target</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="data-prep.html"><a href="data-prep.html#any-gaps"><i class="fa fa-check"></i><b>4.4.1</b> Any gaps?</a></li>
-<li class="chapter" data-level="4.4.2" data-path="data-prep.html"><a href="data-prep.html#convert-to-tsibble"><i class="fa fa-check"></i><b>4.4.2</b> Convert to tsibble</a></li>
-<li class="chapter" data-level="4.4.3" data-path="data-prep.html"><a href="data-prep.html#scan-gaps"><i class="fa fa-check"></i><b>4.4.3</b> Scan gaps</a></li>
-<li class="chapter" data-level="4.4.4" data-path="data-prep.html"><a href="data-prep.html#fill-gaps"><i class="fa fa-check"></i><b>4.4.4</b> Fill gaps</a></li>
-<li class="chapter" data-level="4.4.5" data-path="data-prep.html"><a href="data-prep.html#calculate-target-1"><i class="fa fa-check"></i><b>4.4.5</b> Calculate Target</a></li>
+<li class="chapter" data-level="4.4.1" data-path="data-prep.html"><a href="data-prep.html#convert-to-tsibble"><i class="fa fa-check"></i><b>4.4.1</b> Convert to tsibble</a></li>
+<li class="chapter" data-level="4.4.2" data-path="data-prep.html"><a href="data-prep.html#fill-gaps"><i class="fa fa-check"></i><b>4.4.2</b> Fill gaps</a></li>
+<li class="chapter" data-level="4.4.3" data-path="data-prep.html"><a href="data-prep.html#calculate-target-1"><i class="fa fa-check"></i><b>4.4.3</b> Calculate Target</a></li>
+<li class="chapter" data-level="4.4.4" data-path="data-prep.html"><a href="data-prep.html#calculate-lagged-prices"><i class="fa fa-check"></i><b>4.4.4</b> Calculate Lagged Prices</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="data-prep.html"><a href="data-prep.html#cross-validation"><i class="fa fa-check"></i><b>4.5</b> Cross Validation</a></li>
-<li class="chapter" data-level="4.6" data-path="data-prep.html"><a href="data-prep.html#fix-data-by-split"><i class="fa fa-check"></i><b>4.6</b> Fix Data by Split</a>
-<ul>
-<li class="chapter" data-level="4.6.1" data-path="data-prep.html"><a href="data-prep.html#zero-variance"><i class="fa fa-check"></i><b>4.6.1</b> Zero Variance</a></li>
-</ul></li>
-<li class="chapter" data-level="4.7" data-path="data-prep.html"><a href="data-prep.html#nest-data"><i class="fa fa-check"></i><b>4.7</b> Nest data</a></li>
-<li class="chapter" data-level="4.8" data-path="data-prep.html"><a href="data-prep.html#functional-programming"><i class="fa fa-check"></i><b>4.8</b> Functional Programming</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization 📉</a>
 <ul>
@@ -216,86 +225,107 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.7" data-path="visualization.html"><a href="visualization.html#rayshader"><i class="fa fa-check"></i><b>5.2.7</b> Rayshader</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>6</b> Predictive Modeling</a>
+<li class="chapter" data-level="6" data-path="model-validation-plan.html"><a href="model-validation-plan.html"><i class="fa fa-check"></i><b>6</b> Model Validation Plan</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#what-is-it"><i class="fa fa-check"></i><b>6.1</b> What is it?</a></li>
-<li class="chapter" data-level="6.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#example-simple-model"><i class="fa fa-check"></i><b>6.2</b> Example Simple Model</a>
+<li class="chapter" data-level="6.1" data-path="model-validation-plan.html"><a href="model-validation-plan.html#testing-models"><i class="fa fa-check"></i><b>6.1</b> Testing Models</a></li>
+<li class="chapter" data-level="6.2" data-path="model-validation-plan.html"><a href="model-validation-plan.html#cross-validation"><i class="fa fa-check"></i><b>6.2</b> Cross Validation</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#using-functional-programming"><i class="fa fa-check"></i><b>6.2.1</b> Using Functional Programming</a></li>
+<li class="chapter" data-level="6.2.1" data-path="model-validation-plan.html"><a href="model-validation-plan.html#time-aware-cross-validation"><i class="fa fa-check"></i><b>6.2.1</b> Time Aware Cross Validation</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#caret"><i class="fa fa-check"></i><b>6.3</b> Caret</a>
+<li class="chapter" data-level="6.3" data-path="model-validation-plan.html"><a href="model-validation-plan.html#fix-data-by-split"><i class="fa fa-check"></i><b>6.3</b> Fix Data by Split</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#parallel-processing"><i class="fa fa-check"></i><b>6.3.1</b> Parallel Processing</a></li>
-<li class="chapter" data-level="6.3.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#functional-programming---here-or-elsewhere"><i class="fa fa-check"></i><b>6.3.2</b> Functional Programming - here or elsewhere?</a></li>
-<li class="chapter" data-level="6.3.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cross-validation-1"><i class="fa fa-check"></i><b>6.3.3</b> Cross Validation</a></li>
-<li class="chapter" data-level="6.3.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#xgboost-models"><i class="fa fa-check"></i><b>6.3.4</b> XGBoost models</a></li>
-<li class="chapter" data-level="6.3.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#all-other-models"><i class="fa fa-check"></i><b>6.3.5</b> All Other Models</a></li>
+<li class="chapter" data-level="6.3.1" data-path="model-validation-plan.html"><a href="model-validation-plan.html#zero-variance"><i class="fa fa-check"></i><b>6.3.1</b> Zero Variance</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#make-predictions"><i class="fa fa-check"></i><b>6.4</b> Make Predictions</a></li>
-<li class="chapter" data-level="6.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#traditional-timeseries"><i class="fa fa-check"></i><b>6.5</b> Traditional Timeseries</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html"><i class="fa fa-check"></i><b>7</b> Evaluate Model Performance</a>
+<li class="chapter" data-level="6.4" data-path="model-validation-plan.html"><a href="model-validation-plan.html#nest-data"><i class="fa fa-check"></i><b>6.4</b> Nest data</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#summarizing-models"><i class="fa fa-check"></i><b>7.1</b> Summarizing models</a>
-<ul>
-<li class="chapter" data-level="7.1.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#comparing-metrics"><i class="fa fa-check"></i><b>7.1.1</b> Comparing Metrics</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#adjust-prices"><i class="fa fa-check"></i><b>7.2</b> Adjust Prices</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#add-last-price"><i class="fa fa-check"></i><b>7.2.1</b> Add Last Price</a></li>
-<li class="chapter" data-level="7.2.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#convert-to-percentage-change"><i class="fa fa-check"></i><b>7.2.2</b> Convert to Percentage Change</a></li>
-<li class="chapter" data-level="7.2.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#actuals"><i class="fa fa-check"></i><b>7.2.3</b> Actuals</a></li>
-<li class="chapter" data-level="7.2.4" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#actuals-as-change"><i class="fa fa-check"></i><b>7.2.4</b> Actuals as % Change</a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#review-summary-statistics"><i class="fa fa-check"></i><b>7.3</b> Review Summary Statistics</a>
-<ul>
-<li class="chapter" data-level="7.3.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#calculate-rmse"><i class="fa fa-check"></i><b>7.3.1</b> Calculate RMSE</a></li>
-<li class="chapter" data-level="7.3.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#calculate-r2"><i class="fa fa-check"></i><b>7.3.2</b> Calculate R^2</a></li>
-</ul></li>
-<li class="chapter" data-level="7.4" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#adjust-prices---all-models"><i class="fa fa-check"></i><b>7.4</b> Adjust Prices - All Models</a>
-<ul>
-<li class="chapter" data-level="7.4.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#add-last-price-1"><i class="fa fa-check"></i><b>7.4.1</b> Add Last Price</a></li>
-<li class="chapter" data-level="7.4.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#convert-to-change"><i class="fa fa-check"></i><b>7.4.2</b> Convert to % Change</a></li>
-<li class="chapter" data-level="7.4.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#add-metrics"><i class="fa fa-check"></i><b>7.4.3</b> Add Metrics</a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#eval-rmse"><i class="fa fa-check"></i><b>7.5</b> Eval RMSE</a>
-<ul>
-<li class="chapter" data-level="7.5.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#test"><i class="fa fa-check"></i><b>7.5.1</b> Test</a></li>
-<li class="chapter" data-level="7.5.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#holdout-3"><i class="fa fa-check"></i><b>7.5.2</b> Holdout</a></li>
-<li class="chapter" data-level="7.5.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#union-results"><i class="fa fa-check"></i><b>7.5.3</b> Union Results</a></li>
-</ul></li>
-<li class="chapter" data-level="7.6" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#eval-r2"><i class="fa fa-check"></i><b>7.6</b> Eval R^2</a>
-<ul>
-<li class="chapter" data-level="7.6.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#test-1"><i class="fa fa-check"></i><b>7.6.1</b> Test</a></li>
-<li class="chapter" data-level="7.6.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#holdout-4"><i class="fa fa-check"></i><b>7.6.2</b> Holdout</a></li>
-<li class="chapter" data-level="7.6.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#union-results-1"><i class="fa fa-check"></i><b>7.6.3</b> Union Results</a></li>
-</ul></li>
-<li class="chapter" data-level="7.7" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#visualize-results"><i class="fa fa-check"></i><b>7.7</b> Visualize Results</a>
-<ul>
-<li class="chapter" data-level="7.7.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#rmse-visualization"><i class="fa fa-check"></i><b>7.7.1</b> RMSE Visualization</a></li>
-<li class="chapter" data-level="7.7.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#both"><i class="fa fa-check"></i><b>7.7.2</b> Both</a></li>
-<li class="chapter" data-level="7.7.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#results-by-the-cryptocurrency"><i class="fa fa-check"></i><b>7.7.3</b> Results by the Cryptocurrency</a></li>
+<li class="chapter" data-level="6.4.1" data-path="model-validation-plan.html"><a href="model-validation-plan.html#join-results"><i class="fa fa-check"></i><b>6.4.1</b> Join Results</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a></li>
-<li class="chapter" data-level="9" data-path="predictions.html"><a href="predictions.html"><i class="fa fa-check"></i><b>9</b> Predictions</a></li>
-<li class="chapter" data-level="10" data-path="explain-predictions.html"><a href="explain-predictions.html"><i class="fa fa-check"></i><b>10</b> Explain Predictions</a></li>
-<li class="chapter" data-level="11" data-path="considerations.html"><a href="considerations.html"><i class="fa fa-check"></i><b>11</b> Considerations</a>
+<li class="chapter" data-level="7" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>7</b> Predictive Modeling</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="considerations.html"><a href="considerations.html#session-information"><i class="fa fa-check"></i><b>11.1</b> Session Information</a></li>
+<li class="chapter" data-level="7.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#example-simple-model"><i class="fa fa-check"></i><b>7.1</b> Example Simple Model</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#using-functional-programming"><i class="fa fa-check"></i><b>7.1.1</b> Using Functional Programming</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>12</b> Archive</a>
+<li class="chapter" data-level="7.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#caret"><i class="fa fa-check"></i><b>7.2</b> Caret</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="archive.html"><a href="archive.html#may-2020"><i class="fa fa-check"></i><b>12.1</b> May 2020</a></li>
+<li class="chapter" data-level="7.2.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#parallel-processing"><i class="fa fa-check"></i><b>7.2.1</b> Parallel Processing</a></li>
+<li class="chapter" data-level="7.2.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#more-functional-programming"><i class="fa fa-check"></i><b>7.2.2</b> More Functional Programming</a></li>
+<li class="chapter" data-level="7.2.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cross-validation-preds"><i class="fa fa-check"></i><b>7.2.3</b> Cross Validation</a></li>
+<li class="chapter" data-level="7.2.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#generalize-the-function"><i class="fa fa-check"></i><b>7.2.4</b> Generalize the Function</a></li>
+<li class="chapter" data-level="7.2.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#xgboost-models"><i class="fa fa-check"></i><b>7.2.5</b> XGBoost models</a></li>
+<li class="chapter" data-level="7.2.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#neural-network-models"><i class="fa fa-check"></i><b>7.2.6</b> Neural Network Models</a></li>
+<li class="chapter" data-level="7.2.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#caret-options"><i class="fa fa-check"></i><b>7.2.7</b> Caret Options</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>13</b> References</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="references.html"><a href="references.html#resources-used"><i class="fa fa-check"></i><b>13.1</b> Resources Used</a>
-<ul>
-<li class="chapter" data-level="13.1.1" data-path="references.html"><a href="references.html#visualization-section"><i class="fa fa-check"></i><b>13.1.1</b> Visualization Section</a></li>
-<li class="chapter" data-level="13.1.2" data-path="references.html"><a href="references.html#time-series-section"><i class="fa fa-check"></i><b>13.1.2</b> Time Series Section</a></li>
+<li class="chapter" data-level="7.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#make-predictions"><i class="fa fa-check"></i><b>7.3</b> Make Predictions</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="references.html"><a href="references.html#packages-used-and-cited"><i class="fa fa-check"></i><b>13.2</b> Packages used and cited</a></li>
+<li class="chapter" data-level="8" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html"><i class="fa fa-check"></i><b>8</b> Evaluate Model Performance</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#summarizing-models"><i class="fa fa-check"></i><b>8.1</b> Summarizing models</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#comparing-metrics"><i class="fa fa-check"></i><b>8.1.1</b> Comparing Metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#data-prep---adjust-prices"><i class="fa fa-check"></i><b>8.2</b> Data Prep - Adjust Prices</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#add-last-price"><i class="fa fa-check"></i><b>8.2.1</b> Add Last Price</a></li>
+<li class="chapter" data-level="8.2.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#convert-to-percentage-change"><i class="fa fa-check"></i><b>8.2.2</b> Convert to Percentage Change</a></li>
+<li class="chapter" data-level="8.2.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#actuals"><i class="fa fa-check"></i><b>8.2.3</b> Actuals</a></li>
+<li class="chapter" data-level="8.2.4" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#actuals-as-change"><i class="fa fa-check"></i><b>8.2.4</b> Actuals as % Change</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#review-summary-statistics"><i class="fa fa-check"></i><b>8.3</b> Review Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#calculate-rmse"><i class="fa fa-check"></i><b>8.3.1</b> Calculate RMSE</a></li>
+<li class="chapter" data-level="8.3.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#calculate-r2"><i class="fa fa-check"></i><b>8.3.2</b> Calculate R^2</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#adjust-prices---all-models"><i class="fa fa-check"></i><b>8.4</b> Adjust Prices - All Models</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#add-last-price-1"><i class="fa fa-check"></i><b>8.4.1</b> Add Last Price</a></li>
+<li class="chapter" data-level="8.4.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#convert-to-change"><i class="fa fa-check"></i><b>8.4.2</b> Convert to % Change</a></li>
+<li class="chapter" data-level="8.4.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#add-metrics"><i class="fa fa-check"></i><b>8.4.3</b> Add Metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#eval-rmse"><i class="fa fa-check"></i><b>8.5</b> Eval RMSE</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#test"><i class="fa fa-check"></i><b>8.5.1</b> Test</a></li>
+<li class="chapter" data-level="8.5.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#holdout-3"><i class="fa fa-check"></i><b>8.5.2</b> Holdout</a></li>
+<li class="chapter" data-level="8.5.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#union-results"><i class="fa fa-check"></i><b>8.5.3</b> Union Results</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#eval-r2"><i class="fa fa-check"></i><b>8.6</b> Eval R^2</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#test-1"><i class="fa fa-check"></i><b>8.6.1</b> Test</a></li>
+<li class="chapter" data-level="8.6.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#holdout-4"><i class="fa fa-check"></i><b>8.6.2</b> Holdout</a></li>
+<li class="chapter" data-level="8.6.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#union-results-1"><i class="fa fa-check"></i><b>8.6.3</b> Union Results</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#visualize-results"><i class="fa fa-check"></i><b>8.7</b> Visualize Results</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#rmse-visualization"><i class="fa fa-check"></i><b>8.7.1</b> RMSE Visualization</a></li>
+<li class="chapter" data-level="8.7.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#both"><i class="fa fa-check"></i><b>8.7.2</b> Both</a></li>
+<li class="chapter" data-level="8.7.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#results-by-the-cryptocurrency"><i class="fa fa-check"></i><b>8.7.3</b> Results by the Cryptocurrency</a></li>
+<li class="chapter" data-level="8.7.4" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#interactive-dashboard"><i class="fa fa-check"></i><b>8.7.4</b> Interactive Dashboard</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#visualizations---historical-metrics"><i class="fa fa-check"></i><b>8.8</b> Visualizations - Historical Metrics</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#best-models"><i class="fa fa-check"></i><b>8.8.1</b> Best Models</a></li>
+<li class="chapter" data-level="8.8.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#most-predictable-cryptocurrency"><i class="fa fa-check"></i><b>8.8.2</b> Most Predictable Cryptocurrency</a></li>
+<li class="chapter" data-level="8.8.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#accuracy-over-time"><i class="fa fa-check"></i><b>8.8.3</b> Accuracy Over Time</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#making-predictions"><i class="fa fa-check"></i><b>8.9</b> Making Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="considerations.html"><a href="considerations.html"><i class="fa fa-check"></i><b>9</b> Considerations</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="considerations.html"><a href="considerations.html#not-a-trading-tutorial"><i class="fa fa-check"></i><b>9.1</b> Not a trading tutorial</a></li>
+<li class="chapter" data-level="9.2" data-path="considerations.html"><a href="considerations.html#session-information"><i class="fa fa-check"></i><b>9.2</b> Session Information</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>10</b> Archive</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#may-2020"><i class="fa fa-check"></i><b>10.1</b> May 2020</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="references.html"><a href="references.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
+<li class="chapter" data-level="11.2" data-path="references.html"><a href="references.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
+<li class="chapter" data-level="11.3" data-path="references.html"><a href="references.html#visualization-section"><i class="fa fa-check"></i><b>11.3</b> Visualization Section</a></li>
+<li class="chapter" data-level="11.4" data-path="references.html"><a href="references.html#time-series-section"><i class="fa fa-check"></i><b>11.4</b> Time Series Section</a></li>
+<li class="chapter" data-level="11.5" data-path="references.html"><a href="references.html#r-packages-used"><i class="fa fa-check"></i><b>11.5</b> R Packages Used</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="blank"><img src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" width="80"></a></li>
@@ -320,613 +350,328 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-prep" class="section level1" number="4">
 <h1><span class="header-section-number">Section - 4</span> Data Prep</h1>
-<p>[ADD HERE]</p>
+<p>Next we will do some data cleaning to make sure our data is in the format we need it to be in. For a gentler introduction to data prep using the <span style="color: #ae7b11;"><strong>dplyr</strong></span> package <span class="citation">(Wickham, François, et al. <a href="#ref-R-dplyr" role="doc-biblioref">2020</a>)</span> <a href="https://cryptocurrencyresearch.org/high-level/#/data-prep">consult the high-level version</a>.</p>
 <div id="remove-nulls" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Remove Nulls</h2>
-<p>[ADD HERE]</p>
-<p>(because we can’t do anything without ask_1_price or date_time_utc at the very least being there)</p>
-<p>Remove any rows where the <code>ask_1_price</code> is Null:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-prep.html#cb9-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span>cryptodata[<span class="op">!</span><span class="kw">is.na</span>(cryptodata<span class="op">$</span>ask_<span class="dv">1</span>_price), ]</span></code></pre></div>
-<p>And when the <code>date_time_utc</code> is Null:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-prep.html#cb10-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span>cryptodata[<span class="op">!</span><span class="kw">is.na</span>(cryptodata<span class="op">$</span>date_time_utc), ]</span></code></pre></div>
+<p>First off, we aren’t able to do anything at all with a row of data if we don’t know <strong><em>when</em></strong> the data was collected. The specific price doesn’t matter if we can’t tie it to a timestamp, given by the <span style="color: blue;"><strong>date_time_utc</strong></span> field.</p>
+<p>We can exclude all rows where the <span style="color: blue;"><strong>date_time_utc</strong></span> field has a Null (missing) value by using the <span style="color: green;"><strong>filter()</strong></span> function from the <span style="color: #ae7b11;"><strong>dplyr</strong></span> package:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-prep.html#cb9-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="op">!</span><span class="kw">is.na</span>(date_time_utc))</span></code></pre></div>
+<p>This step removed 612 rows from the data on the latest run (2020-11-10). The <span style="color: green;"><strong>is.na()</strong></span> function finds all cases where the <span style="color: blue;"><strong>date_time_utc</strong></span> field has a Null value. The function is preceded by the <span style="color: blue;"><strong>!</strong></span> operator, which tells the <span style="color: green;"><strong>filter()</strong></span> function to exclude these rows from the data.</p>
+<p>By the same logic, if we don’t know what the price was for any of the rows, the whole row of data is useless and should be removed. But how will we define the price of a cryptocurrency?</p>
 </div>
 <div id="calculate-price_usd-column" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Calculate <code>price_usd</code> Column</h2>
-<p>[ADD HERE]</p>
-<p>Calculate the <code>price_usd</code> using the order books data and taking the cheapest price available from the <strong>ask</strong> side where at least $15 worth of the cryptocurrency are being sold.</p>
-<p>[ADD HERE]</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-prep.html#cb11-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
-<span id="cb11-2"><a href="data-prep.html#cb11-2" aria-hidden="true"></a>                     <span class="dt">trade_usd_1 =</span> ask_<span class="dv">1</span>_price <span class="op">*</span><span class="st"> </span>ask_<span class="dv">1</span>_quantity,</span>
-<span id="cb11-3"><a href="data-prep.html#cb11-3" aria-hidden="true"></a>                     <span class="dt">trade_usd_2 =</span> ask_<span class="dv">2</span>_price <span class="op">*</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity,</span>
-<span id="cb11-4"><a href="data-prep.html#cb11-4" aria-hidden="true"></a>                     <span class="dt">trade_usd_3 =</span> ask_<span class="dv">3</span>_price <span class="op">*</span><span class="st"> </span>ask_<span class="dv">3</span>_quantity,</span>
-<span id="cb11-5"><a href="data-prep.html#cb11-5" aria-hidden="true"></a>                     <span class="dt">trade_usd_4 =</span> ask_<span class="dv">4</span>_price <span class="op">*</span><span class="st"> </span>ask_<span class="dv">4</span>_quantity,</span>
-<span id="cb11-6"><a href="data-prep.html#cb11-6" aria-hidden="true"></a>                     <span class="dt">trade_usd_5 =</span> ask_<span class="dv">5</span>_price <span class="op">*</span><span class="st"> </span>ask_<span class="dv">5</span>_quantity)</span></code></pre></div>
-<p>We can look at an example [ADD HERE]</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-prep.html#cb12-1" aria-hidden="true"></a><span class="kw">head</span>(<span class="kw">select</span>(cryptodata, symbol, date_time_utc, ask_<span class="dv">1</span>_price, ask_<span class="dv">1</span>_quantity, trade_usd_<span class="dv">1</span>))</span></code></pre></div>
-<pre><code>## [90m# A tibble: 6 x 5[39m
+<p>In the <a href="explore-data.html#the-definition-of-a-price">previous section we discussed the intricacies of a cryptocurrency’s price</a>. We could complicate our definition of a price by considering both the <span style="color: blue;"><strong>bid</strong></span> and <span style="color: blue;"><strong>ask</strong></span> prices from the perspective of someone who wants to perform trades, but <a href="considerations.html#considerations"><strong>this is not a trading tutorial</strong></a>. Instead, we will define the price of a cryptocurrency as the price we could purchase it for. We will calculate the <span style="color: blue;"><strong>price_usd</strong></span> field using the cheapest price available from the <span style="color: blue;"><strong>ask</strong></span> side where at least $15 worth of the cryptocurrency are being sold.</p>
+<p>Therefore, let’s figure out the lowest price from the order book data that would allow us to purchase at least $15 worth of the cryptocurrency. To do this, for each <span style="color: blue;"><strong>ask</strong></span> price and quantity, let’s figure out the value of the trade in US Dollars. We can create each of the new <span style="color: blue;"><strong>trade_usd</strong></span> columns using the <span style="color: green;"><strong>mutate()</strong></span> function. The <span style="color: blue;"><strong>trade_usd_1</strong></span> should be calculated as the <span style="color: blue;"><strong>ask_1_price</strong></span> multiplied by the <span style="color: blue;"><strong>ask_1_quantity</strong></span>. The next one <span style="color: blue;"><strong>trade_usd_1</strong></span> should consider the <span style="color: blue;"><strong>ask_2_price</strong></span>, but be multiplied by the sum of <span style="color: blue;"><strong>ask_1_quantity</strong></span> and <span style="color: blue;"><strong>ask_2_quantity</strong></span> because at the <span style="color: blue;"><strong>ask_2_price</strong></span> pricepoint we can also purchase the quantity available at the <span style="color: blue;"><strong>ask_1_price</strong></span> pricepoint:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-prep.html#cb10-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
+<span id="cb10-2"><a href="data-prep.html#cb10-2"></a>                     <span class="dt">trade_usd_1 =</span> ask_<span class="dv">1</span>_price <span class="op">*</span><span class="st"> </span>ask_<span class="dv">1</span>_quantity,</span>
+<span id="cb10-3"><a href="data-prep.html#cb10-3"></a>                     <span class="dt">trade_usd_2 =</span> ask_<span class="dv">2</span>_price <span class="op">*</span><span class="st"> </span>(ask_<span class="dv">1</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity),</span>
+<span id="cb10-4"><a href="data-prep.html#cb10-4"></a>                     <span class="dt">trade_usd_3 =</span> ask_<span class="dv">3</span>_price <span class="op">*</span><span class="st"> </span>(ask_<span class="dv">1</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">3</span>_quantity),</span>
+<span id="cb10-5"><a href="data-prep.html#cb10-5"></a>                     <span class="dt">trade_usd_4 =</span> ask_<span class="dv">4</span>_price <span class="op">*</span><span class="st"> </span>(ask_<span class="dv">1</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">3</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">4</span>_quantity),</span>
+<span id="cb10-6"><a href="data-prep.html#cb10-6"></a>                     <span class="dt">trade_usd_5 =</span> ask_<span class="dv">5</span>_price <span class="op">*</span><span class="st"> </span>(ask_<span class="dv">1</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">2</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">3</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">4</span>_quantity <span class="op">+</span><span class="st"> </span>ask_<span class="dv">5</span>_quantity))</span></code></pre></div>
+<!-- *For a more in-depth explanation of how [**mutate()**]{style="color: green;"} works, [see the high-level version of the tutorial](https://cryptocurrencyresearch.org/high-level/#/mutate-function---dplyr)* -->
+<p>We can confirm that the <span style="color: blue;"><strong>trade_usd_1</strong></span> field is calculating the $ value of the lowest ask price ans quantity:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-prep.html#cb11-1"></a><span class="kw">head</span>(<span class="kw">select</span>(cryptodata, symbol, date_time_utc, ask_<span class="dv">1</span>_price, ask_<span class="dv">1</span>_quantity, trade_usd_<span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
 ##   symbol date_time_utc       ask_1_price ask_1_quantity trade_usd_1
-##   [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                    [3m[90m&lt;dbl&gt;[39m[23m          [3m[90m&lt;dbl&gt;[39m[23m       [3m[90m&lt;dbl&gt;[39m[23m
-## [90m1[39m BTC    2020-11-05 [90m00:00:00[39m  [4m1[24m[4m4[24m148.             2         [4m2[24m[4m8[24m295.  
-## [90m2[39m ETH    2020-11-05 [90m00:00:01[39m    403.             0.007[4m4[24m        2.98
-## [90m3[39m EOS    2020-11-05 [90m00:00:01[39m      2.35          70           165.  
-## [90m4[39m LTC    2020-11-05 [90m00:00:02[39m     54.7           60          [4m3[24m282.  
-## [90m5[39m BSV    2020-11-05 [90m00:00:03[39m    152.             0.6          90.9 
-## [90m6[39m ADA    2020-11-05 [90m00:00:04[39m      0.095[4m6[24m       775            74.1</code></pre>
-<p>If none of the top 5 orders on the order book ask side are for at least $15, exclude the row. [ADD HERE]</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-prep.html#cb14-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
-<span id="cb14-2"><a href="data-prep.html#cb14-2" aria-hidden="true"></a>                     <span class="dt">price_usd =</span> <span class="kw">case_when</span>(</span>
-<span id="cb14-3"><a href="data-prep.html#cb14-3" aria-hidden="true"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">1</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">1</span>_price,</span>
-<span id="cb14-4"><a href="data-prep.html#cb14-4" aria-hidden="true"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">2</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">2</span>_price,</span>
-<span id="cb14-5"><a href="data-prep.html#cb14-5" aria-hidden="true"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">3</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">3</span>_price,</span>
-<span id="cb14-6"><a href="data-prep.html#cb14-6" aria-hidden="true"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">4</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">4</span>_price,</span>
-<span id="cb14-7"><a href="data-prep.html#cb14-7" aria-hidden="true"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">5</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">5</span>_price))</span></code></pre></div>
-<p>Now remove rows where we couldn’t find a price above $15 for any of the 5 cheapest orders in the order book.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-prep.html#cb15-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">na.omit</span>(cryptodata)</span></code></pre></div>
-<p>This step removed 23553 rows on the latest run.</p>
+##   &lt;chr&gt;  &lt;dttm&gt;                    &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;
+## 1 BTC    2020-11-09 17:00:00   15327.             0.108      1663. 
+## 2 ETH    2020-11-09 17:00:01     444.             0.665       295. 
+## 3 EOS    2020-11-09 17:00:01       2.50         600          1499. 
+## 4 LTC    2020-11-09 17:00:02      59.3           60          3555. 
+## 5 BSV    2020-11-09 17:00:03     160.             0.6          96.1
+## 6 ADA    2020-11-09 17:00:04       0.106        775            81.9</code></pre>
+<p>Now we can use the <span style="color: green;"><strong>mutate()</strong></span> function to create the new field <span style="color: blue;"><strong>price_usd</strong></span> and find the lowest price at which we could have purchased at least $15 worth of the cryptocurrency. We can use the <span style="color: green;"><strong>case_when()</strong></span> function to find the first <span style="color: blue;"><strong>trade_usd</strong></span> value that is greater or equal to 15, and assign the correct <span style="color: blue;"><strong>ask_price</strong></span> for the new column <span style="color: blue;"><strong>price_usd</strong></span>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="data-prep.html#cb13-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
+<span id="cb13-2"><a href="data-prep.html#cb13-2"></a>                     <span class="dt">price_usd =</span> <span class="kw">case_when</span>(</span>
+<span id="cb13-3"><a href="data-prep.html#cb13-3"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">1</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">1</span>_price,</span>
+<span id="cb13-4"><a href="data-prep.html#cb13-4"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">2</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">2</span>_price,</span>
+<span id="cb13-5"><a href="data-prep.html#cb13-5"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">3</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">3</span>_price,</span>
+<span id="cb13-6"><a href="data-prep.html#cb13-6"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">4</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">4</span>_price,</span>
+<span id="cb13-7"><a href="data-prep.html#cb13-7"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">5</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">5</span>_price))</span></code></pre></div>
+<p>Let’s also remove any rows that have Null values for the new <span style="color: blue;"><strong>price_usd</strong></span> field <a href="data-prep.html#remove-nulls">like we did for the <span style="color: blue;"><strong>date_time_utc</strong></span> field in a previous step</a>. These will mostly be made up of rows where the value of trades through the 5th lowest ask price was lower than $15.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-prep.html#cb14-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="op">!</span><span class="kw">is.na</span>(price_usd))</span></code></pre></div>
+<p>This step removed 14509 rows on the latest run.</p>
 </div>
 <div id="clean-data-by-group" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Clean Data by Group</h2>
-<p>[ADD HERE]</p>
-<p>…<code>group_by()</code> from the <code>dplyr</code> <span class="citation">(Wickham et al. <a href="#ref-R-dplyr" role="doc-biblioref">2020</a>)</span> package…</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-prep.html#cb16-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol)</span></code></pre></div>
+<p>In the <a href="https://cryptocurrencyresearch.org/high-level/">high-level version of this tutorial</a> we only dealt with one cryptocurrency. In this version however, we will be creating independent models for each cryptocurrency. Because of this, <strong>we need to ensure data quality not only for the data as a whole, but also for the data associated with each individual cryptocurrency</strong>. Instead of considering all rows when applying a transformation, we can <span style="color: purple;"><strong>group</strong></span> the data by the individual cryptocurrency and apply the transformation to each group. This will only work with compatible functions from <span style="color: #ae7b11;"><strong>dplyr</strong></span> and the <span style="color: #ae7b11;"><strong>tidyverse</strong></span>.</p>
+<p>For example, we could count the number of observations by running the <span style="color: green;"><strong>count()</strong></span> function on the data:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-prep.html#cb15-1"></a><span class="kw">count</span>(cryptodata)</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##        n
+##    &lt;int&gt;
+## 1 221747</code></pre>
+<p>But what if we wanted to know how many observations in the data are associated with each cryptocurrency separately?</p>
+<p>We can group the data using the <span style="color: green;"><strong>group_by()</strong></span> function from the <span style="color: #ae7b11;"><strong>dplyr</strong></span> package and group the data by the cryptocurrency <span style="color: blue;"><strong>symbol</strong></span>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-prep.html#cb17-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol)</span></code></pre></div>
+<p>Now if we run the same operation using the <span style="color: green;"><strong>count()</strong></span> function, the operation is performed grouped by the cryptocurrency symbol:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-prep.html#cb18-1"></a><span class="kw">count</span>(cryptodata)</span></code></pre></div>
+<pre><code>## # A tibble: 216 x 2
+## # Groups:   symbol [216]
+##    symbol     n
+##    &lt;chr&gt;  &lt;int&gt;
+##  1 AAB     1069
+##  2 ACAT    1827
+##  3 ACT     1586
+##  4 ADA     1110
+##  5 ADX      393
+##  6 ADXN     665
+##  7 ALGO       1
+##  8 AMB      557
+##  9 AMM     1014
+## 10 APL      701
+## # ... with 206 more rows</code></pre>
+<p>We can remove the grouping at any point by running the <span style="color: green;"><strong>ungroup()</strong></span> function:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-prep.html#cb20-1"></a><span class="kw">count</span>(<span class="kw">ungroup</span>(cryptodata))</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##        n
+##    &lt;int&gt;
+## 1 221747</code></pre>
 <div id="remove-symbols-without-enough-rows" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Remove symbols without enough rows</h3>
-<p>[ADD HERE]</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-prep.html#cb17-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(cryptodata, <span class="kw">n</span>() <span class="op">&gt;=</span><span class="st"> </span><span class="dv">700</span>)</span></code></pre></div>
-<p>The number of rows for the <code>cryptodata</code> dataset before the filtering step was 199034 and is now 174459.</p>
+<p>Because this dataset evolves over time, we will need to be proactive about issues that may arise even if they aren’t currently a problem.</p>
+<p>What happens if a new cryptocurrency gets added to the cryptocurrency exchange? If we only had a couple days of data for an asset, not only would that not be enough information to build effective predictive models, but we may run into actual errors since the data will be further split into more groups to validate the results of the models against several datasets using <span style="color: purple;"><strong>cross validation</strong></span>, more to come on that later.</p>
+<p>To ensure we have a reasonable amount of data for each individual cryptocurrency, let’s filter out any cryptocurrencies that don’t have at least 1,000 observations using the <span style="color: green;"><strong>filter()</strong></span> function:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-prep.html#cb22-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="kw">n</span>() <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1000</span>)</span></code></pre></div>
+<p>The number of rows for the <code>cryptodata</code> dataset before the filtering step was 221747 and is now 177598. This step removed 96 cryptocurrencies from the analysis that did not have enough observations associated with them.</p>
 </div>
 <div id="remove-symbols-without-data-from-the-last-3-days" class="section level3" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Remove symbols without data from the last 3 days</h3>
 <p>If there was no data collected for a cryptocurrency over the last 3 day period, let’s exclude that asset from the dataset since we are only looking to model data that is currently flowing through the process. If an asset is removed from the exchange (if a project is a scam for example) or is no longer being actively captured by the data collection process, we can’t make new predictions for it, so might as well exclude these ahead of time as well.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-prep.html#cb18-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(cryptodata, <span class="kw">max</span>(date) <span class="op">&gt;</span><span class="st"> </span><span class="kw">Sys.Date</span>()<span class="op">-</span><span class="dv">3</span>)</span></code></pre></div>
-<p>The number of rows for the <code>cryptodata</code> dataset before this filtering step was 174459 and is now 134393.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-prep.html#cb23-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="kw">max</span>(date) <span class="op">&gt;</span><span class="st"> </span><span class="kw">Sys.Date</span>()<span class="op">-</span><span class="dv">3</span>)</span></code></pre></div>
+<p>The number of rows for the <code>cryptodata</code> dataset before this filtering step was 149250 and is now 177598.</p>
 </div>
 </div>
 <div id="calculate-target" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Calculate Target</h2>
-<p>[TODO - ADD HERE]</p>
-<div id="any-gaps" class="section level3" number="4.4.1">
-<h3><span class="header-section-number">4.4.1</span> Any gaps?</h3>
-<p>[TODO - ADD HERE]</p>
+<p>Our goal is to be able to make predictions on the price of each cryptocurrency 24 hours into the future from when the data was collected. Therefore, the <span style="color: purple;"><strong>target variable</strong></span> that we will be using as <em>what we want to predict</em> for the predictive models, is the price 24 hours into the future relative to when the data was collected.</p>
+<p>To do this we can create a new column in the data that is the <span style="color: blue;"><strong>price_usd</strong></span> offset by 24 rows (one for each hour), but before we can do that we need to make sure there are no gaps anywhere in the data.</p>
+<div id="convert-to-tsibble" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Convert to tsibble</h3>
+<p>We can fill any gaps in the data using the <span style="color: #ae7b11;"><strong>tsibble</strong></span> package <span class="citation">(Wang et al. <a href="#ref-R-tsibble" role="doc-biblioref">2020</a>)</span>, which was covered in more detail in the <a href="https://cryptocurrencyresearch.org/high-level/#/timeseries-data-prep">high level version of the tutorial</a>.</p>
+<div id="convert-to-hourly-data" class="section level4" number="4.4.1.1">
+<h4><span class="header-section-number">4.4.1.1</span> Convert to hourly data</h4>
+<p>The data we are using was collected between the 0th and the 5th minute of every hour; it is collected in the same order every hour to try and get the timing as consistent as possible for each cryptocurrency, but the cadence is not exactly one hour. Therefore, if we convert the data now to a <span style="color: blue;"><strong>tsibble</strong></span> object, it would recognize the data as being collected on the wrong cadence.</p>
+<p>To fix this issue, let’s create a new column called <span style="color: blue;"><strong>ts_index</strong></span> using the <span style="color: green;"><strong>mutate()</strong></span> function which will keep the information relating to the date and hour collected, but generalize the minutes and seconds as “00:00”, which will be correctly recognized by the <span style="color: #ae7b11;"><strong>tsibble</strong></span> package as being data collected on an hourly basis. The <span style="color: blue;"><strong>pkDummy</strong></span> field contains the date and hour, so we can add the text “:00:00” to the end of that field, and then convert the new string to a date time object using the <span style="color: green;"><strong>anytime()</strong></span> function from the <span style="color: #ae7b11;"><strong>anytime</strong></span> package <span class="citation">(Eddelbuettel <a href="#ref-R-anytime" role="doc-biblioref">2020</a>)</span>:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-prep.html#cb24-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, <span class="dt">ts_index =</span> <span class="kw">anytime</span>(<span class="kw">paste0</span>(pkDummy,<span class="st">&#39;:00:00&#39;</span>)))</span></code></pre></div>
+<p>Before we can convert the data to be a <span style="color: blue;"><strong>tsibble</strong></span> and easily fill in the gaps, we also need to make sure there are no duplicate values in the <span style="color: blue;"><strong>ts_index</strong></span> column for each cryptocurrency. There shouldn’t be any duplicates, but just in case any make their way into the data somehow, we can use the <span style="color: green;"><strong>distinct()</strong></span> function from the <span style="color: #ae7b11;"><strong>dplyr</strong></span> package to prevent the issue from potentially arising:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="data-prep.html#cb25-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">distinct</span>(cryptodata, symbol, ts_index, <span class="dt">.keep_all=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p>Now we can finally convert the table to a <span style="color: blue;"><strong>tsibble</strong></span> data type by using the <span style="color: green;"><strong>as_tsibble()</strong></span> function from the <span style="color: #ae7b11;"><strong>tsibble</strong></span> package <span class="citation">(Wang et al. <a href="#ref-R-tsibble" role="doc-biblioref">2020</a>)</span>, and providing the <span style="color: blue;"><strong>symbol</strong></span> column for the <span style="color: blue;"><strong>key</strong></span> parameter to preserve the grouped structure:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-prep.html#cb26-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">as_tsibble</span>(cryptodata, <span class="dt">index =</span> ts_index, <span class="dt">key =</span> symbol)</span></code></pre></div>
+<p>Notice how the preview of the data below looks a bit different from the summary we were seeing up to this point, and now it says “A tsibble”, and next to the table dimensions says <strong>[1h]</strong>, indicating the observations are 1 hour apart from each other. The second row tells us the “Key” of the <span style="color: blue;"><strong>tsibble</strong></span> is the <span style="color: blue;"><strong>symbol</strong></span> column</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-prep.html#cb27-1"></a>cryptodata</span></code></pre></div>
+<pre><code>## # A tsibble: 149,030 x 34 [1h] &lt;America/Denver&gt;
+## # Key:       symbol [96]
+## # Groups:    symbol [96]
+##    pair  symbol quote_currency ask_1_price ask_1_quantity ask_2_price ask_2_quantity ask_3_price ask_3_quantity
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;                &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
+##  1 AABU~ AAB    USD                  0.390           104.       0.39           320         0.621            4.5
+##  2 AABU~ AAB    USD                  0.390           104.       0.39           320         0.619            4.5
+##  3 AABU~ AAB    USD                  0.390           104.       0.39           320         0.618            4.5
+##  4 AABU~ AAB    USD                  0.390           104.       0.39           320         0.617            4.5
+##  5 AABU~ AAB    USD                  0.390           104.       0.39           320         0.615            4.5
+##  6 AABU~ AAB    USD                  0.390           104.       0.39           320         0.614            4.5
+##  7 AABU~ AAB    USD                  0.390           104.       0.39           320         0.613            4.5
+##  8 AABU~ AAB    USD                  0.390           104.       0.390           45.3       0.39           320  
+##  9 AABU~ AAB    USD                  0.390           104.       0.390           45.3       0.39           320  
+## 10 AABU~ AAB    USD                  0.390           104.       0.390           45.3       0.39           320  
+## # ... with 149,020 more rows, and 25 more variables: ask_4_price &lt;dbl&gt;, ask_4_quantity &lt;dbl&gt;, ask_5_price &lt;dbl&gt;,
+## #   ask_5_quantity &lt;dbl&gt;, bid_1_price &lt;dbl&gt;, bid_1_quantity &lt;dbl&gt;, bid_2_price &lt;dbl&gt;, bid_2_quantity &lt;dbl&gt;,
+## #   bid_3_price &lt;dbl&gt;, bid_3_quantity &lt;dbl&gt;, bid_4_price &lt;dbl&gt;, bid_4_quantity &lt;dbl&gt;, bid_5_price &lt;dbl&gt;,
+## #   bid_5_quantity &lt;dbl&gt;, date_time_utc &lt;dttm&gt;, date &lt;date&gt;, pkDummy &lt;chr&gt;, pkey &lt;chr&gt;, trade_usd_1 &lt;dbl&gt;,
+## #   trade_usd_2 &lt;dbl&gt;, trade_usd_3 &lt;dbl&gt;, trade_usd_4 &lt;dbl&gt;, trade_usd_5 &lt;dbl&gt;, price_usd &lt;dbl&gt;, ts_index &lt;dttm&gt;</code></pre>
+<!-- ### Scan gaps -->
+<!-- Now we can use the [**scan_gaps()**]{style="color: green;"} function to return   -->
+<!-- ```{r} -->
+<!-- scan_gaps(cryptodata) -->
+<!-- ``` -->
 </div>
-<div id="convert-to-tsibble" class="section level3" number="4.4.2">
-<h3><span class="header-section-number">4.4.2</span> Convert to tsibble</h3>
-<p>… the <code>tsibble</code> package <span class="citation">(Wang et al. <a href="#ref-R-tsibble" role="doc-biblioref">2020</a>)</span>…</p>
-<div id="convert-to-hourly-data-and-get-rid-of-minutes-and-seconds" class="section level4" number="4.4.2.1">
-<h4><span class="header-section-number">4.4.2.1</span> Convert to hourly data and get rid of minutes and seconds</h4>
-<p>… <code>anytime()</code> from the <code>anytime</code> package <span class="citation">(Eddelbuettel <a href="#ref-R-anytime" role="doc-biblioref">2020</a>)</span>…</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="data-prep.html#cb19-1" aria-hidden="true"></a>cryptodata<span class="op">$</span>ts_index &lt;-<span class="st"> </span><span class="kw">anytime</span>(<span class="kw">paste0</span>(cryptodata<span class="op">$</span>pkDummy,<span class="st">&#39;:00:00&#39;</span>)) </span></code></pre></div>
-<p>… <code>distinct()</code> from the <code>dplyr</code> package <span class="citation">(Wickham et al. <a href="#ref-R-dplyr" role="doc-biblioref">2020</a>)</span>…</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-prep.html#cb20-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">distinct</span>(cryptodata, symbol, ts_index, <span class="dt">.keep_all=</span><span class="ot">TRUE</span>)</span></code></pre></div>
-<p>… <code>as_tsibble()</code> from the <code>tsibble</code> package <span class="citation">(Wang et al. <a href="#ref-R-tsibble" role="doc-biblioref">2020</a>)</span>…</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-prep.html#cb21-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">as_tsibble</span>(cryptodata, <span class="dt">index=</span>ts_index, <span class="dt">key=</span>symbol)</span></code></pre></div>
 </div>
+<div id="fill-gaps" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Fill gaps</h3>
+<p>Now we can use the <span style="color: green;"><strong>fill_gaps()</strong></span> function from the <span style="color: #ae7b11;"><strong>tsibble</strong></span> package to fill any gaps found in the data, as being implicitly Null. Meaning, we will add these rows into the data with NA values for everything except for the date time field. This will allow us to safely compute the target price found 24 hours into the future relative to when each row was collected.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-prep.html#cb29-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">fill_gaps</span>(cryptodata)</span></code></pre></div>
+<p>Now looking at the data again, there are 20243 additional rows that were added as implicitly missing in the data:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-prep.html#cb30-1"></a>cryptodata</span></code></pre></div>
+<pre><code>## # A tsibble: 169,273 x 34 [1h] &lt;America/Denver&gt;
+## # Key:       symbol [96]
+## # Groups:    symbol [96]
+##    pair  symbol quote_currency ask_1_price ask_1_quantity ask_2_price ask_2_quantity ask_3_price ask_3_quantity
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;                &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
+##  1 AABU~ AAB    USD                  0.390           104.       0.39           320         0.621            4.5
+##  2 AABU~ AAB    USD                  0.390           104.       0.39           320         0.619            4.5
+##  3 AABU~ AAB    USD                  0.390           104.       0.39           320         0.618            4.5
+##  4 AABU~ AAB    USD                  0.390           104.       0.39           320         0.617            4.5
+##  5 AABU~ AAB    USD                  0.390           104.       0.39           320         0.615            4.5
+##  6 AABU~ AAB    USD                  0.390           104.       0.39           320         0.614            4.5
+##  7 AABU~ AAB    USD                  0.390           104.       0.39           320         0.613            4.5
+##  8 AABU~ AAB    USD                  0.390           104.       0.390           45.3       0.39           320  
+##  9 AABU~ AAB    USD                  0.390           104.       0.390           45.3       0.39           320  
+## 10 AABU~ AAB    USD                  0.390           104.       0.390           45.3       0.39           320  
+## # ... with 169,263 more rows, and 25 more variables: ask_4_price &lt;dbl&gt;, ask_4_quantity &lt;dbl&gt;, ask_5_price &lt;dbl&gt;,
+## #   ask_5_quantity &lt;dbl&gt;, bid_1_price &lt;dbl&gt;, bid_1_quantity &lt;dbl&gt;, bid_2_price &lt;dbl&gt;, bid_2_quantity &lt;dbl&gt;,
+## #   bid_3_price &lt;dbl&gt;, bid_3_quantity &lt;dbl&gt;, bid_4_price &lt;dbl&gt;, bid_4_quantity &lt;dbl&gt;, bid_5_price &lt;dbl&gt;,
+## #   bid_5_quantity &lt;dbl&gt;, date_time_utc &lt;dttm&gt;, date &lt;date&gt;, pkDummy &lt;chr&gt;, pkey &lt;chr&gt;, trade_usd_1 &lt;dbl&gt;,
+## #   trade_usd_2 &lt;dbl&gt;, trade_usd_3 &lt;dbl&gt;, trade_usd_4 &lt;dbl&gt;, trade_usd_5 &lt;dbl&gt;, price_usd &lt;dbl&gt;, ts_index &lt;dttm&gt;</code></pre>
+<p>Now that all of the gaps have been filled in, let’s convert the data back to be in the structure of a <a href="https://tibble.tidyverse.org/"><span style="color: #ae7b11;"><strong>tibble</strong></span></a>, which is the data structure that supports the <a href="data-prep.html#clean-data-by-group">grouping structure we discussed previously</a>, and let’s group the data by the <span style="color: blue;"><strong>symbol</strong></span> again:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="data-prep.html#cb32-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(<span class="kw">as_tibble</span>(cryptodata), symbol)</span></code></pre></div>
 </div>
-<div id="scan-gaps" class="section level3" number="4.4.3">
-<h3><span class="header-section-number">4.4.3</span> Scan gaps</h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-prep.html#cb22-1" aria-hidden="true"></a><span class="kw">scan_gaps</span>(cryptodata)</span></code></pre></div>
-<pre><code>## [90m# A tsibble: 23,134 x 2 [1h] &lt;UTC&gt;[39m
-## [90m# Key:       symbol [97][39m
-##    symbol ts_index           
-##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m             
-## [90m 1[39m AAB    2020-10-16 [90m22:00:00[39m
-## [90m 2[39m AAB    2020-10-16 [90m23:00:00[39m
-## [90m 3[39m AAB    2020-10-17 [90m00:00:00[39m
-## [90m 4[39m AAB    2020-10-17 [90m01:00:00[39m
-## [90m 5[39m AAB    2020-10-17 [90m02:00:00[39m
-## [90m 6[39m AAB    2020-10-17 [90m03:00:00[39m
-## [90m 7[39m AAB    2020-10-17 [90m04:00:00[39m
-## [90m 8[39m AAB    2020-10-17 [90m05:00:00[39m
-## [90m 9[39m AAB    2020-10-17 [90m06:00:00[39m
-## [90m10[39m AAB    2020-10-17 [90m07:00:00[39m
-## [90m# … with 23,124 more rows[39m</code></pre>
+<div id="calculate-target-1" class="section level3" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Calculate Target</h3>
+<p>Now we finally have everything we need to calculate the <strong>target variable</strong> containing the price 24 hours into the future relative to when the data was collected. We can use the usual <span style="color: green;"><strong>mutate()</strong></span> function to add a new column to the data called <span style="color: blue;"><strong>target_price_24h</strong></span>, and use the <span style="color: green;"><strong>lead()</strong></span> function from <span style="color: #ae7b11;"><strong>dplyr</strong></span> to offset the <span style="color: blue;"><strong>price_usd</strong></span> column by 24 hours:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="data-prep.html#cb33-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
+<span id="cb33-2"><a href="data-prep.html#cb33-2"></a>                     <span class="dt">target_price_24h =</span> <span class="kw">lead</span>(price_usd, <span class="dv">24</span>, <span class="dt">order_by=</span>ts_index))</span></code></pre></div>
 </div>
-<div id="fill-gaps" class="section level3" number="4.4.4">
-<h3><span class="header-section-number">4.4.4</span> Fill gaps</h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-prep.html#cb24-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">fill_gaps</span>(cryptodata)</span></code></pre></div>
-<p>Now looking at the data again, there are 23134 additional rows that were added as implicitly missing in the data:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="data-prep.html#cb25-1" aria-hidden="true"></a>cryptodata</span></code></pre></div>
-<pre><code>## [90m# A tsibble: 157,316 x 34 [1h] &lt;UTC&gt;[39m
-## [90m# Key:       symbol [97][39m
-## [90m# Groups:    symbol [97][39m
-##    pair  symbol quote_currency ask_1_price ask_1_quantity ask_2_price
-##    [3m[90m&lt;chr&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m                [3m[90m&lt;dbl&gt;[39m[23m          [3m[90m&lt;dbl&gt;[39m[23m       [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m AABU… AAB    USD                  0.390           104.       0.39 
-## [90m 2[39m AABU… AAB    USD                  0.390           104.       0.39 
-## [90m 3[39m AABU… AAB    USD                  0.390           104.       0.39 
-## [90m 4[39m AABU… AAB    USD                  0.390           104.       0.39 
-## [90m 5[39m AABU… AAB    USD                  0.390           104.       0.39 
-## [90m 6[39m AABU… AAB    USD                  0.390           104.       0.39 
-## [90m 7[39m AABU… AAB    USD                  0.390           104.       0.39 
-## [90m 8[39m AABU… AAB    USD                  0.390           104.       0.390
-## [90m 9[39m AABU… AAB    USD                  0.390           104.       0.390
-## [90m10[39m AABU… AAB    USD                  0.390           104.       0.390
-## [90m# … with 157,306 more rows, and 28 more variables: ask_2_quantity [3m[90m&lt;dbl&gt;[90m[23m,[39m
-## [90m#   ask_3_price [3m[90m&lt;dbl&gt;[90m[23m, ask_3_quantity [3m[90m&lt;dbl&gt;[90m[23m, ask_4_price [3m[90m&lt;dbl&gt;[90m[23m,[39m
-## [90m#   ask_4_quantity [3m[90m&lt;dbl&gt;[90m[23m, ask_5_price [3m[90m&lt;dbl&gt;[90m[23m, ask_5_quantity [3m[90m&lt;dbl&gt;[90m[23m,[39m
-## [90m#   bid_1_price [3m[90m&lt;dbl&gt;[90m[23m, bid_1_quantity [3m[90m&lt;dbl&gt;[90m[23m, bid_2_price [3m[90m&lt;dbl&gt;[90m[23m,[39m
-## [90m#   bid_2_quantity [3m[90m&lt;dbl&gt;[90m[23m, bid_3_price [3m[90m&lt;dbl&gt;[90m[23m, bid_3_quantity [3m[90m&lt;dbl&gt;[90m[23m,[39m
-## [90m#   bid_4_price [3m[90m&lt;dbl&gt;[90m[23m, bid_4_quantity [3m[90m&lt;dbl&gt;[90m[23m, bid_5_price [3m[90m&lt;dbl&gt;[90m[23m,[39m
-## [90m#   bid_5_quantity [3m[90m&lt;dbl&gt;[90m[23m, date_time_utc [3m[90m&lt;dttm&gt;[90m[23m, date [3m[90m&lt;date&gt;[90m[23m, pkDummy [3m[90m&lt;chr&gt;[90m[23m,[39m
-## [90m#   pkey [3m[90m&lt;chr&gt;[90m[23m, trade_usd_1 [3m[90m&lt;dbl&gt;[90m[23m, trade_usd_2 [3m[90m&lt;dbl&gt;[90m[23m, trade_usd_3 [3m[90m&lt;dbl&gt;[90m[23m,[39m
-## [90m#   trade_usd_4 [3m[90m&lt;dbl&gt;[90m[23m, trade_usd_5 [3m[90m&lt;dbl&gt;[90m[23m, price_usd [3m[90m&lt;dbl&gt;[90m[23m, ts_index [3m[90m&lt;dttm&gt;[90m[23m[39m</code></pre>
-<p>For now, let’s convert the data back to a <code>tibble</code> instead of a <code>tsibble</code>:
-<!-- [TODO - EXPLAIN THIS - GROUPINGS NOT BY TIME, BUT BY SYMBOL] --></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-prep.html#cb27-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(<span class="kw">as_tibble</span>(cryptodata), symbol)</span></code></pre></div>
-</div>
-<div id="calculate-target-1" class="section level3" number="4.4.5">
-<h3><span class="header-section-number">4.4.5</span> Calculate Target</h3>
-<p>[ADD HERE]</p>
-<p>Also adding lagged variables here! [ADD HERE]</p>
-<p>…<code>mutate()</code> from the <code>dplyr</code> <span class="citation">(Wickham et al. <a href="#ref-R-dplyr" role="doc-biblioref">2020</a>)</span> package…</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-prep.html#cb28-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
-<span id="cb28-2"><a href="data-prep.html#cb28-2" aria-hidden="true"></a>                     <span class="dt">target_price_24h =</span> <span class="kw">lead</span>(price_usd, <span class="dv">24</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb28-3"><a href="data-prep.html#cb28-3" aria-hidden="true"></a>                     <span class="co"># Now all the lagged variables:</span></span>
-<span id="cb28-4"><a href="data-prep.html#cb28-4" aria-hidden="true"></a>                     <span class="dt">lagged_price_1h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">1</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb28-5"><a href="data-prep.html#cb28-5" aria-hidden="true"></a>                     <span class="dt">lagged_price_2h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">2</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb28-6"><a href="data-prep.html#cb28-6" aria-hidden="true"></a>                     <span class="dt">lagged_price_3h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">3</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb28-7"><a href="data-prep.html#cb28-7" aria-hidden="true"></a>                     <span class="dt">lagged_price_6h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">6</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb28-8"><a href="data-prep.html#cb28-8" aria-hidden="true"></a>                     <span class="dt">lagged_price_12h =</span> <span class="kw">lag</span>(price_usd, <span class="dv">12</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb28-9"><a href="data-prep.html#cb28-9" aria-hidden="true"></a>                     <span class="dt">lagged_price_24h =</span> <span class="kw">lag</span>(price_usd, <span class="dv">24</span>, <span class="dt">order_by=</span>ts_index),</span>
-<span id="cb28-10"><a href="data-prep.html#cb28-10" aria-hidden="true"></a>                     <span class="dt">lagged_price_3d  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">24</span><span class="op">*</span><span class="dv">3</span>, <span class="dt">order_by=</span>ts_index))</span></code></pre></div>
-<p>Here is an example showing the results for the subset of data related to the Bitcoin cryptocurrency (using <code>symbol == 'BTC'</code>) showing 30 rows and the relevant columns we just calculated:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-prep.html#cb29-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">select</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>),ts_index, price_usd, lagged_price_1h, lagged_price_24h, target_price_24h), <span class="dt">n=</span><span class="dv">30</span>)</span></code></pre></div>
-<pre><code>## [90m# A tibble: 2,102 x 6[39m
-## [90m# Groups:   symbol [1][39m
-##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
-##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m BTC    2020-08-10 [90m04:00:00[39m    [4m1[24m[4m1[24m997.             [31mNA[39m               [31mNA[39m 
-## [90m 2[39m BTC    2020-08-10 [90m05:00:00[39m    [4m1[24m[4m1[24m986.          [4m1[24m[4m1[24m997.              [31mNA[39m 
-## [90m 3[39m BTC    2020-08-10 [90m06:00:00[39m    [4m1[24m[4m1[24m973.          [4m1[24m[4m1[24m986.              [31mNA[39m 
-## [90m 4[39m BTC    2020-08-10 [90m07:00:00[39m    [4m1[24m[4m1[24m994.          [4m1[24m[4m1[24m973.              [31mNA[39m 
-## [90m 5[39m BTC    2020-08-10 [90m08:00:00[39m    [4m1[24m[4m1[24m984.          [4m1[24m[4m1[24m994.              [31mNA[39m 
-## [90m 6[39m BTC    2020-08-10 [90m09:00:00[39m    [4m1[24m[4m1[24m962.          [4m1[24m[4m1[24m984.              [31mNA[39m 
-## [90m 7[39m BTC    2020-08-10 [90m10:00:00[39m    [4m1[24m[4m1[24m989.          [4m1[24m[4m1[24m962.              [31mNA[39m 
-## [90m 8[39m BTC    2020-08-10 [90m11:00:00[39m    [4m1[24m[4m1[24m709.          [4m1[24m[4m1[24m989.              [31mNA[39m 
-## [90m 9[39m BTC    2020-08-10 [90m12:00:00[39m    [4m1[24m[4m1[24m721.          [4m1[24m[4m1[24m709.              [31mNA[39m 
-## [90m10[39m BTC    2020-08-10 [90m13:00:00[39m    [4m1[24m[4m1[24m890.          [4m1[24m[4m1[24m721.              [31mNA[39m 
-## [90m11[39m BTC    2020-08-10 [90m14:00:00[39m    [4m1[24m[4m1[24m908.          [4m1[24m[4m1[24m890.              [31mNA[39m 
-## [90m12[39m BTC    2020-08-10 [90m15:00:00[39m    [4m1[24m[4m1[24m889.          [4m1[24m[4m1[24m908.              [31mNA[39m 
-## [90m13[39m BTC    2020-08-10 [90m16:00:00[39m    [4m1[24m[4m1[24m918.          [4m1[24m[4m1[24m889.              [31mNA[39m 
-## [90m14[39m BTC    2020-08-10 [90m17:00:00[39m    [4m1[24m[4m1[24m855.          [4m1[24m[4m1[24m918.              [31mNA[39m 
-## [90m15[39m BTC    2020-08-10 [90m18:00:00[39m    [4m1[24m[4m1[24m887.          [4m1[24m[4m1[24m855.              [31mNA[39m 
-## [90m16[39m BTC    2020-08-10 [90m19:00:00[39m    [4m1[24m[4m1[24m878.          [4m1[24m[4m1[24m887.              [31mNA[39m 
-## [90m17[39m BTC    2020-08-10 [90m20:00:00[39m    [4m1[24m[4m1[24m855.          [4m1[24m[4m1[24m878.              [31mNA[39m 
-## [90m18[39m BTC    2020-08-10 [90m21:00:00[39m    [4m1[24m[4m1[24m847.          [4m1[24m[4m1[24m855.              [31mNA[39m 
-## [90m19[39m BTC    2020-08-10 [90m22:00:00[39m    [4m1[24m[4m1[24m820.          [4m1[24m[4m1[24m847.              [31mNA[39m 
-## [90m20[39m BTC    2020-08-10 [90m23:00:00[39m    [4m1[24m[4m1[24m805.          [4m1[24m[4m1[24m820.              [31mNA[39m 
-## [90m21[39m BTC    2020-08-11 [90m00:00:00[39m    [4m1[24m[4m1[24m906.          [4m1[24m[4m1[24m805.              [31mNA[39m 
-## [90m22[39m BTC    2020-08-11 [90m01:00:00[39m    [4m1[24m[4m1[24m863.          [4m1[24m[4m1[24m906.              [31mNA[39m 
-## [90m23[39m BTC    2020-08-11 [90m02:00:00[39m    [4m1[24m[4m1[24m901.          [4m1[24m[4m1[24m863.              [31mNA[39m 
-## [90m24[39m BTC    2020-08-11 [90m03:00:00[39m    [4m1[24m[4m1[24m868.          [4m1[24m[4m1[24m901.              [31mNA[39m 
-## [90m25[39m BTC    2020-08-11 [90m04:00:00[39m    [4m1[24m[4m1[24m840.          [4m1[24m[4m1[24m868.           [4m1[24m[4m1[24m997.
-## [90m26[39m BTC    2020-08-11 [90m05:00:00[39m    [4m1[24m[4m1[24m820.          [4m1[24m[4m1[24m840.           [4m1[24m[4m1[24m986.
-## [90m27[39m BTC    2020-08-11 [90m06:00:00[39m    [4m1[24m[4m1[24m847.          [4m1[24m[4m1[24m820.           [4m1[24m[4m1[24m973.
-## [90m28[39m BTC    2020-08-11 [90m07:00:00[39m    [4m1[24m[4m1[24m774.          [4m1[24m[4m1[24m847.           [4m1[24m[4m1[24m994.
-## [90m29[39m BTC    2020-08-11 [90m08:00:00[39m    [4m1[24m[4m1[24m761.          [4m1[24m[4m1[24m774.           [4m1[24m[4m1[24m984.
-## [90m30[39m BTC    2020-08-11 [90m09:00:00[39m    [4m1[24m[4m1[24m753.          [4m1[24m[4m1[24m761.           [4m1[24m[4m1[24m962.
-## [90m# … with 2,072 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
-<p>The field <code>target_price_24h</code> shows the value of <code>price_usd</code> 24 hours into the future relative to the row of data. All the <code>lagged_</code> fields show the price from the past relative to when the data was collected (where <code>lagged_price_1h</code> shows the price 1 hour before the <code>ts_index</code> timestamp of the data).</p>
-<p>So looking at the <span style="color: green;"><strong>tail()</strong></span> end of the data, we should see 24 rows with no values for <span style="color: blue;"><strong>target_price_24h</strong></span>, while all the <span style="color: blue;"><strong>lagged_price_</strong></span> columns should have values:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="data-prep.html#cb31-1" aria-hidden="true"></a><span class="kw">tail</span>(<span class="kw">print</span>(<span class="kw">select</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>),ts_index, price_usd, lagged_price_1h, lagged_price_24h, target_price_24h), <span class="dt">n=</span><span class="dv">30</span>))</span></code></pre></div>
-<pre><code>## [90m# A tibble: 2,102 x 6[39m
-## [90m# Groups:   symbol [1][39m
-##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
-##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m BTC    2020-08-10 [90m04:00:00[39m    [4m1[24m[4m1[24m997.             [31mNA[39m               [31mNA[39m 
-## [90m 2[39m BTC    2020-08-10 [90m05:00:00[39m    [4m1[24m[4m1[24m986.          [4m1[24m[4m1[24m997.              [31mNA[39m 
-## [90m 3[39m BTC    2020-08-10 [90m06:00:00[39m    [4m1[24m[4m1[24m973.          [4m1[24m[4m1[24m986.              [31mNA[39m 
-## [90m 4[39m BTC    2020-08-10 [90m07:00:00[39m    [4m1[24m[4m1[24m994.          [4m1[24m[4m1[24m973.              [31mNA[39m 
-## [90m 5[39m BTC    2020-08-10 [90m08:00:00[39m    [4m1[24m[4m1[24m984.          [4m1[24m[4m1[24m994.              [31mNA[39m 
-## [90m 6[39m BTC    2020-08-10 [90m09:00:00[39m    [4m1[24m[4m1[24m962.          [4m1[24m[4m1[24m984.              [31mNA[39m 
-## [90m 7[39m BTC    2020-08-10 [90m10:00:00[39m    [4m1[24m[4m1[24m989.          [4m1[24m[4m1[24m962.              [31mNA[39m 
-## [90m 8[39m BTC    2020-08-10 [90m11:00:00[39m    [4m1[24m[4m1[24m709.          [4m1[24m[4m1[24m989.              [31mNA[39m 
-## [90m 9[39m BTC    2020-08-10 [90m12:00:00[39m    [4m1[24m[4m1[24m721.          [4m1[24m[4m1[24m709.              [31mNA[39m 
-## [90m10[39m BTC    2020-08-10 [90m13:00:00[39m    [4m1[24m[4m1[24m890.          [4m1[24m[4m1[24m721.              [31mNA[39m 
-## [90m11[39m BTC    2020-08-10 [90m14:00:00[39m    [4m1[24m[4m1[24m908.          [4m1[24m[4m1[24m890.              [31mNA[39m 
-## [90m12[39m BTC    2020-08-10 [90m15:00:00[39m    [4m1[24m[4m1[24m889.          [4m1[24m[4m1[24m908.              [31mNA[39m 
-## [90m13[39m BTC    2020-08-10 [90m16:00:00[39m    [4m1[24m[4m1[24m918.          [4m1[24m[4m1[24m889.              [31mNA[39m 
-## [90m14[39m BTC    2020-08-10 [90m17:00:00[39m    [4m1[24m[4m1[24m855.          [4m1[24m[4m1[24m918.              [31mNA[39m 
-## [90m15[39m BTC    2020-08-10 [90m18:00:00[39m    [4m1[24m[4m1[24m887.          [4m1[24m[4m1[24m855.              [31mNA[39m 
-## [90m16[39m BTC    2020-08-10 [90m19:00:00[39m    [4m1[24m[4m1[24m878.          [4m1[24m[4m1[24m887.              [31mNA[39m 
-## [90m17[39m BTC    2020-08-10 [90m20:00:00[39m    [4m1[24m[4m1[24m855.          [4m1[24m[4m1[24m878.              [31mNA[39m 
-## [90m18[39m BTC    2020-08-10 [90m21:00:00[39m    [4m1[24m[4m1[24m847.          [4m1[24m[4m1[24m855.              [31mNA[39m 
-## [90m19[39m BTC    2020-08-10 [90m22:00:00[39m    [4m1[24m[4m1[24m820.          [4m1[24m[4m1[24m847.              [31mNA[39m 
-## [90m20[39m BTC    2020-08-10 [90m23:00:00[39m    [4m1[24m[4m1[24m805.          [4m1[24m[4m1[24m820.              [31mNA[39m 
-## [90m21[39m BTC    2020-08-11 [90m00:00:00[39m    [4m1[24m[4m1[24m906.          [4m1[24m[4m1[24m805.              [31mNA[39m 
-## [90m22[39m BTC    2020-08-11 [90m01:00:00[39m    [4m1[24m[4m1[24m863.          [4m1[24m[4m1[24m906.              [31mNA[39m 
-## [90m23[39m BTC    2020-08-11 [90m02:00:00[39m    [4m1[24m[4m1[24m901.          [4m1[24m[4m1[24m863.              [31mNA[39m 
-## [90m24[39m BTC    2020-08-11 [90m03:00:00[39m    [4m1[24m[4m1[24m868.          [4m1[24m[4m1[24m901.              [31mNA[39m 
-## [90m25[39m BTC    2020-08-11 [90m04:00:00[39m    [4m1[24m[4m1[24m840.          [4m1[24m[4m1[24m868.           [4m1[24m[4m1[24m997.
-## [90m26[39m BTC    2020-08-11 [90m05:00:00[39m    [4m1[24m[4m1[24m820.          [4m1[24m[4m1[24m840.           [4m1[24m[4m1[24m986.
-## [90m27[39m BTC    2020-08-11 [90m06:00:00[39m    [4m1[24m[4m1[24m847.          [4m1[24m[4m1[24m820.           [4m1[24m[4m1[24m973.
-## [90m28[39m BTC    2020-08-11 [90m07:00:00[39m    [4m1[24m[4m1[24m774.          [4m1[24m[4m1[24m847.           [4m1[24m[4m1[24m994.
-## [90m29[39m BTC    2020-08-11 [90m08:00:00[39m    [4m1[24m[4m1[24m761.          [4m1[24m[4m1[24m774.           [4m1[24m[4m1[24m984.
-## [90m30[39m BTC    2020-08-11 [90m09:00:00[39m    [4m1[24m[4m1[24m753.          [4m1[24m[4m1[24m761.           [4m1[24m[4m1[24m962.
-## [90m# … with 2,072 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
-<pre><code>## [90m# A tibble: 6 x 6[39m
-## [90m# Groups:   symbol [1][39m
-##   symbol ts_index            price_usd lagged_price_1h lagged_price_24h
-##   [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
-## [90m1[39m BTC    2020-11-05 [90m12:00:00[39m    [4m1[24m[4m4[24m716.          [4m1[24m[4m4[24m650            [4m1[24m[4m3[24m724.
-## [90m2[39m BTC    2020-11-05 [90m13:00:00[39m    [4m1[24m[4m4[24m868.          [4m1[24m[4m4[24m716.           [4m1[24m[4m3[24m828.
-## [90m3[39m BTC    2020-11-05 [90m14:00:00[39m    [4m1[24m[4m4[24m814.          [4m1[24m[4m4[24m868.           [4m1[24m[4m3[24m837.
-## [90m4[39m BTC    2020-11-05 [90m15:00:00[39m    [4m1[24m[4m4[24m897.          [4m1[24m[4m4[24m814.           [4m1[24m[4m3[24m840.
-## [90m5[39m BTC    2020-11-05 [90m16:00:00[39m    [4m1[24m[4m5[24m078.          [4m1[24m[4m4[24m897.           [4m1[24m[4m3[24m914.
-## [90m6[39m BTC    2020-11-05 [90m17:00:00[39m    [4m1[24m[4m5[24m150.          [4m1[24m[4m5[24m078.           [4m1[24m[4m4[24m032.
-## [90m# … with 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
+<div id="calculate-lagged-prices" class="section level3" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> Calculate Lagged Prices</h3>
+<p>What about doing the opposite? If we added a new column showing the price from 24 hours earlier, could the price movement between then and when the data was collected help us predict where the price is headed next? If the price has gone down significantly over the previous 24 hours, is the price for the next 24 hours more likely to increase or decrease? What if the price has gone down significantly over the previous 24 hours, but has increased significantly since the past hour?</p>
+<p>These relationships around the sensitivity of a price to recent price changes may help our models come up with more accurate forecasts about the future, so let’s go ahead and add some lagged prices using the same methodology used to calculate the target variable, but this time using the <span style="color: green;"><strong>lag()</strong></span> function to get past observations instead of the <span style="color: green;"><strong>lead()</strong></span> function used before:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-prep.html#cb34-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata,</span>
+<span id="cb34-2"><a href="data-prep.html#cb34-2"></a>                     <span class="dt">lagged_price_1h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">1</span>, <span class="dt">order_by=</span>ts_index),</span>
+<span id="cb34-3"><a href="data-prep.html#cb34-3"></a>                     <span class="dt">lagged_price_2h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">2</span>, <span class="dt">order_by=</span>ts_index),</span>
+<span id="cb34-4"><a href="data-prep.html#cb34-4"></a>                     <span class="dt">lagged_price_3h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">3</span>, <span class="dt">order_by=</span>ts_index),</span>
+<span id="cb34-5"><a href="data-prep.html#cb34-5"></a>                     <span class="dt">lagged_price_6h  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">6</span>, <span class="dt">order_by=</span>ts_index),</span>
+<span id="cb34-6"><a href="data-prep.html#cb34-6"></a>                     <span class="dt">lagged_price_12h =</span> <span class="kw">lag</span>(price_usd, <span class="dv">12</span>, <span class="dt">order_by=</span>ts_index),</span>
+<span id="cb34-7"><a href="data-prep.html#cb34-7"></a>                     <span class="dt">lagged_price_24h =</span> <span class="kw">lag</span>(price_usd, <span class="dv">24</span>, <span class="dt">order_by=</span>ts_index),</span>
+<span id="cb34-8"><a href="data-prep.html#cb34-8"></a>                     <span class="dt">lagged_price_3d  =</span> <span class="kw">lag</span>(price_usd, <span class="dv">24</span><span class="op">*</span><span class="dv">3</span>, <span class="dt">order_by=</span>ts_index))</span></code></pre></div>
+<p><em>This step can be thought of as <span style="color: purple;"><strong>data engineering</strong></span> more than data cleaning, because rather than fixing an issue we are enhancing the dataset with columns that may help with the forecasts.</em></p>
+<p>Let’s view an example of the oldest 30 rows of data associated with the Bitcoin cryptocurrency (<code>symbol == "BTC"</code>). With the oldest data starting from the top, the <span style="color: blue;"><strong>lagged_price_1h</strong></span> field should have a NA value for the first row because we don’t have any prices before that point. By that same logic, the <span style="color: blue;"><strong>lagged_price_24h</strong></span> column should be missing the first 24 values and have the last 6 values showing the first 6 rows of the <span style="color: blue;"><strong>price_usd</strong></span> column. The <span style="color: blue;"><strong>target_price_24h</strong></span> would values for the oldest data because the opposite is true and we don’t know the values for data for the most recent 24 rows of the data:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="data-prep.html#cb35-1"></a><span class="kw">print</span>(<span class="kw">select</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>), </span>
+<span id="cb35-2"><a href="data-prep.html#cb35-2"></a>             ts_index, price_usd, lagged_price_1h, </span>
+<span id="cb35-3"><a href="data-prep.html#cb35-3"></a>             lagged_price_24h, target_price_24h), <span class="dt">n=</span><span class="dv">30</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 2,227 x 6
+## # Groups:   symbol [1]
+##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h target_price_24h
+##    &lt;chr&gt;  &lt;dttm&gt;                  &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+##  1 BTC    2020-08-10 04:00:00    11997.             NA               NA            11840.
+##  2 BTC    2020-08-10 05:00:00    11986.          11997.              NA            11820.
+##  3 BTC    2020-08-10 06:00:00    11973.          11986.              NA            11847.
+##  4 BTC    2020-08-10 07:00:00    11994.          11973.              NA            11774.
+##  5 BTC    2020-08-10 08:00:00    11984.          11994.              NA            11761.
+##  6 BTC    2020-08-10 09:00:00    11962.          11984.              NA            11753.
+##  7 BTC    2020-08-10 10:00:00    11989.          11962.              NA            11682.
+##  8 BTC    2020-08-10 11:00:00    11709.          11989.              NA            11742.
+##  9 BTC    2020-08-10 12:00:00    11721.          11709.              NA            11713.
+## 10 BTC    2020-08-10 13:00:00    11890.          11721.              NA            11649.
+## 11 BTC    2020-08-10 14:00:00    11908.          11890.              NA            11633.
+## 12 BTC    2020-08-10 15:00:00    11889.          11908.              NA            11559.
+## 13 BTC    2020-08-10 16:00:00    11918.          11889.              NA            11462.
+## 14 BTC    2020-08-10 17:00:00    11855.          11918.              NA            11410.
+## 15 BTC    2020-08-10 18:00:00    11887.          11855.              NA            11476.
+## 16 BTC    2020-08-10 19:00:00    11878.          11887.              NA            11425.
+## 17 BTC    2020-08-10 20:00:00    11855.          11878.              NA            11384.
+## 18 BTC    2020-08-10 21:00:00    11847.          11855.              NA            11166.
+## 19 BTC    2020-08-10 22:00:00    11820.          11847.              NA            11281.
+## 20 BTC    2020-08-10 23:00:00    11805.          11820.              NA            11360.
+## 21 BTC    2020-08-11 00:00:00    11906.          11805.              NA            11373.
+## 22 BTC    2020-08-11 01:00:00    11863.          11906.              NA            11347.
+## 23 BTC    2020-08-11 02:00:00    11901.          11863.              NA            11331.
+## 24 BTC    2020-08-11 03:00:00    11868.          11901.              NA            11267.
+## 25 BTC    2020-08-11 04:00:00    11840.          11868.           11997.           11367.
+## 26 BTC    2020-08-11 05:00:00    11820.          11840.           11986.           11305.
+## 27 BTC    2020-08-11 06:00:00    11847.          11820.           11973.           11238.
+## 28 BTC    2020-08-11 07:00:00    11774.          11847.           11994.           11339.
+## 29 BTC    2020-08-11 08:00:00    11761.          11774.           11984.           11452.
+## 30 BTC    2020-08-11 09:00:00    11753.          11761.           11962.           11454.
+## # ... with 2,197 more rows</code></pre>
+<p>We can wrap the code used above in the <span style="color: green;"><strong>tail()</strong></span> function to show the most recent data and see the opposite dynamic with the new fields we created:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="data-prep.html#cb37-1"></a><span class="kw">print</span>(<span class="kw">tail</span>(<span class="kw">select</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>), </span>
+<span id="cb37-2"><a href="data-prep.html#cb37-2"></a>                  ts_index, price_usd, lagged_price_1h, </span>
+<span id="cb37-3"><a href="data-prep.html#cb37-3"></a>                  lagged_price_24h, target_price_24h),<span class="dv">30</span>), <span class="dt">n=</span><span class="dv">30</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 30 x 6
+## # Groups:   symbol [1]
+##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h target_price_24h
+##    &lt;chr&gt;  &lt;dttm&gt;                  &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+##  1 BTC    2020-11-09 16:00:00    15006.          15104.           15357.           15162.
+##  2 BTC    2020-11-09 17:00:00    15108.          15006.           15391.           15243.
+##  3 BTC    2020-11-09 18:00:00    15227.          15108.           15574.           15312.
+##  4 BTC    2020-11-09 19:00:00    15314.          15227.           15529.           15266.
+##  5 BTC    2020-11-09 20:00:00    15359.          15314.           15343.           15299.
+##  6 BTC    2020-11-09 21:00:00    15371.          15359.           15373.           15285.
+##  7 BTC    2020-11-09 22:00:00    15365.          15371.           15326.              NA 
+##  8 BTC    2020-11-09 23:00:00    15241.          15365.           15505.              NA 
+##  9 BTC    2020-11-10 00:00:00    15327.          15241.           15481.              NA 
+## 10 BTC    2020-11-10 01:00:00    15299           15327.           15548               NA 
+## 11 BTC    2020-11-10 02:00:00    15388.          15299            15513.              NA 
+## 12 BTC    2020-11-10 03:00:00    15339.          15388.           15466.              NA 
+## 13 BTC    2020-11-10 04:00:00    15335.          15339.           15433.              NA 
+## 14 BTC    2020-11-10 05:00:00    15390.          15335.           15381.              NA 
+## 15 BTC    2020-11-10 06:00:00    15362.          15390.           15468.              NA 
+## 16 BTC    2020-11-10 07:00:00    15281.          15362.           15376.              NA 
+## 17 BTC    2020-11-10 08:00:00    15283.          15281.           15312.              NA 
+## 18 BTC    2020-11-10 09:00:00    15370.          15283.           15400.              NA 
+## 19 BTC    2020-11-10 10:00:00    15385.          15370.           15408.              NA 
+## 20 BTC    2020-11-10 11:00:00    15309.          15385.           15474.              NA 
+## 21 BTC    2020-11-10 12:00:00    15274.          15309.           15803.              NA 
+## 22 BTC    2020-11-10 13:00:00    15283.          15274.           15569.              NA 
+## 23 BTC    2020-11-10 14:00:00    15305.          15283.           15282.              NA 
+## 24 BTC    2020-11-10 15:00:00    15220.          15305.           15104.              NA 
+## 25 BTC    2020-11-10 16:00:00    15162.          15220.           15006.              NA 
+## 26 BTC    2020-11-10 17:00:00    15243.          15162.           15108.              NA 
+## 27 BTC    2020-11-10 18:00:00    15312.          15243.           15227.              NA 
+## 28 BTC    2020-11-10 19:00:00    15266.          15312.           15314.              NA 
+## 29 BTC    2020-11-10 20:00:00    15299.          15266.           15359.              NA 
+## 30 BTC    2020-11-10 21:00:00    15285.          15299.           15371.              NA</code></pre>
 <p>Reading the code shown above is less than ideal. One of the more popular tools introduced by the <a href="https://www.tidyverse.org/">tidyverse</a> is the <span style="color: purple;"><strong>%&gt;%</strong></span> operator, which works by starting with the object/data you want to make changes to first, and then apply each transformation step by step. It’s simply a way of re-writing the same code in a way that is easier to read by splitting the way the function is called rather than adding functions onto each other into a single line that becomes really hard to read. In the example above it becomes difficult to keep track of where things begin, the order of operations, and the parameters associated with the specific functions. Compare that to the code below:</p>
-<!-- [TODO - ADD HERE ABOUT PIPE OPERATOR] -->
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-prep.html#cb34-1" aria-hidden="true"></a><span class="co"># Start with the object/data to manipulate</span></span>
-<span id="cb34-2"><a href="data-prep.html#cb34-2" aria-hidden="true"></a>cryptodata <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb34-3"><a href="data-prep.html#cb34-3" aria-hidden="true"></a><span class="st">  </span><span class="co"># Filter the data</span></span>
-<span id="cb34-4"><a href="data-prep.html#cb34-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb34-5"><a href="data-prep.html#cb34-5" aria-hidden="true"></a><span class="st">  </span><span class="co"># Select columns</span></span>
-<span id="cb34-6"><a href="data-prep.html#cb34-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(ts_index, price_usd, lagged_price_1h, lagged_price_24h, target_price_24h) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb34-7"><a href="data-prep.html#cb34-7" aria-hidden="true"></a><span class="st">  </span><span class="co"># Print 30 elements instead of only default 10 for a tibble dataframe</span></span>
-<span id="cb34-8"><a href="data-prep.html#cb34-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="dv">30</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb34-9"><a href="data-prep.html#cb34-9" aria-hidden="true"></a><span class="st">  </span><span class="co"># Show the last 30 elements of the data</span></span>
-<span id="cb34-10"><a href="data-prep.html#cb34-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">tail</span>(<span class="dv">30</span>)</span></code></pre></div>
-<pre><code>## [90m# A tibble: 2,102 x 6[39m
-## [90m# Groups:   symbol [1][39m
-##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
-##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m BTC    2020-08-10 [90m04:00:00[39m    [4m1[24m[4m1[24m997.             [31mNA[39m               [31mNA[39m 
-## [90m 2[39m BTC    2020-08-10 [90m05:00:00[39m    [4m1[24m[4m1[24m986.          [4m1[24m[4m1[24m997.              [31mNA[39m 
-## [90m 3[39m BTC    2020-08-10 [90m06:00:00[39m    [4m1[24m[4m1[24m973.          [4m1[24m[4m1[24m986.              [31mNA[39m 
-## [90m 4[39m BTC    2020-08-10 [90m07:00:00[39m    [4m1[24m[4m1[24m994.          [4m1[24m[4m1[24m973.              [31mNA[39m 
-## [90m 5[39m BTC    2020-08-10 [90m08:00:00[39m    [4m1[24m[4m1[24m984.          [4m1[24m[4m1[24m994.              [31mNA[39m 
-## [90m 6[39m BTC    2020-08-10 [90m09:00:00[39m    [4m1[24m[4m1[24m962.          [4m1[24m[4m1[24m984.              [31mNA[39m 
-## [90m 7[39m BTC    2020-08-10 [90m10:00:00[39m    [4m1[24m[4m1[24m989.          [4m1[24m[4m1[24m962.              [31mNA[39m 
-## [90m 8[39m BTC    2020-08-10 [90m11:00:00[39m    [4m1[24m[4m1[24m709.          [4m1[24m[4m1[24m989.              [31mNA[39m 
-## [90m 9[39m BTC    2020-08-10 [90m12:00:00[39m    [4m1[24m[4m1[24m721.          [4m1[24m[4m1[24m709.              [31mNA[39m 
-## [90m10[39m BTC    2020-08-10 [90m13:00:00[39m    [4m1[24m[4m1[24m890.          [4m1[24m[4m1[24m721.              [31mNA[39m 
-## [90m11[39m BTC    2020-08-10 [90m14:00:00[39m    [4m1[24m[4m1[24m908.          [4m1[24m[4m1[24m890.              [31mNA[39m 
-## [90m12[39m BTC    2020-08-10 [90m15:00:00[39m    [4m1[24m[4m1[24m889.          [4m1[24m[4m1[24m908.              [31mNA[39m 
-## [90m13[39m BTC    2020-08-10 [90m16:00:00[39m    [4m1[24m[4m1[24m918.          [4m1[24m[4m1[24m889.              [31mNA[39m 
-## [90m14[39m BTC    2020-08-10 [90m17:00:00[39m    [4m1[24m[4m1[24m855.          [4m1[24m[4m1[24m918.              [31mNA[39m 
-## [90m15[39m BTC    2020-08-10 [90m18:00:00[39m    [4m1[24m[4m1[24m887.          [4m1[24m[4m1[24m855.              [31mNA[39m 
-## [90m16[39m BTC    2020-08-10 [90m19:00:00[39m    [4m1[24m[4m1[24m878.          [4m1[24m[4m1[24m887.              [31mNA[39m 
-## [90m17[39m BTC    2020-08-10 [90m20:00:00[39m    [4m1[24m[4m1[24m855.          [4m1[24m[4m1[24m878.              [31mNA[39m 
-## [90m18[39m BTC    2020-08-10 [90m21:00:00[39m    [4m1[24m[4m1[24m847.          [4m1[24m[4m1[24m855.              [31mNA[39m 
-## [90m19[39m BTC    2020-08-10 [90m22:00:00[39m    [4m1[24m[4m1[24m820.          [4m1[24m[4m1[24m847.              [31mNA[39m 
-## [90m20[39m BTC    2020-08-10 [90m23:00:00[39m    [4m1[24m[4m1[24m805.          [4m1[24m[4m1[24m820.              [31mNA[39m 
-## [90m21[39m BTC    2020-08-11 [90m00:00:00[39m    [4m1[24m[4m1[24m906.          [4m1[24m[4m1[24m805.              [31mNA[39m 
-## [90m22[39m BTC    2020-08-11 [90m01:00:00[39m    [4m1[24m[4m1[24m863.          [4m1[24m[4m1[24m906.              [31mNA[39m 
-## [90m23[39m BTC    2020-08-11 [90m02:00:00[39m    [4m1[24m[4m1[24m901.          [4m1[24m[4m1[24m863.              [31mNA[39m 
-## [90m24[39m BTC    2020-08-11 [90m03:00:00[39m    [4m1[24m[4m1[24m868.          [4m1[24m[4m1[24m901.              [31mNA[39m 
-## [90m25[39m BTC    2020-08-11 [90m04:00:00[39m    [4m1[24m[4m1[24m840.          [4m1[24m[4m1[24m868.           [4m1[24m[4m1[24m997.
-## [90m26[39m BTC    2020-08-11 [90m05:00:00[39m    [4m1[24m[4m1[24m820.          [4m1[24m[4m1[24m840.           [4m1[24m[4m1[24m986.
-## [90m27[39m BTC    2020-08-11 [90m06:00:00[39m    [4m1[24m[4m1[24m847.          [4m1[24m[4m1[24m820.           [4m1[24m[4m1[24m973.
-## [90m28[39m BTC    2020-08-11 [90m07:00:00[39m    [4m1[24m[4m1[24m774.          [4m1[24m[4m1[24m847.           [4m1[24m[4m1[24m994.
-## [90m29[39m BTC    2020-08-11 [90m08:00:00[39m    [4m1[24m[4m1[24m761.          [4m1[24m[4m1[24m774.           [4m1[24m[4m1[24m984.
-## [90m30[39m BTC    2020-08-11 [90m09:00:00[39m    [4m1[24m[4m1[24m753.          [4m1[24m[4m1[24m761.           [4m1[24m[4m1[24m962.
-## [90m# … with 2,072 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
-<pre><code>## [90m# A tibble: 30 x 6[39m
-## [90m# Groups:   symbol [1][39m
-##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
-##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dttm&gt;[39m[23m                  [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m BTC    2020-11-04 [90m12:00:00[39m    [4m1[24m[4m3[24m724.          [4m1[24m[4m3[24m689.           [4m1[24m[4m3[24m532.
-## [90m 2[39m BTC    2020-11-04 [90m13:00:00[39m    [4m1[24m[4m3[24m828.          [4m1[24m[4m3[24m724.           [4m1[24m[4m3[24m517.
-## [90m 3[39m BTC    2020-11-04 [90m14:00:00[39m    [4m1[24m[4m3[24m837.          [4m1[24m[4m3[24m828.           [4m1[24m[4m3[24m699.
-## [90m 4[39m BTC    2020-11-04 [90m15:00:00[39m    [4m1[24m[4m3[24m840.          [4m1[24m[4m3[24m837.           [4m1[24m[4m3[24m787.
-## [90m 5[39m BTC    2020-11-04 [90m16:00:00[39m    [4m1[24m[4m3[24m914.          [4m1[24m[4m3[24m840.           [4m1[24m[4m3[24m707.
-## [90m 6[39m BTC    2020-11-04 [90m17:00:00[39m    [4m1[24m[4m4[24m032.          [4m1[24m[4m3[24m914.           [4m1[24m[4m3[24m716.
-## [90m 7[39m BTC    2020-11-04 [90m18:00:00[39m    [4m1[24m[4m4[24m072.          [4m1[24m[4m4[24m032.           [4m1[24m[4m3[24m733.
-## [90m 8[39m BTC    2020-11-04 [90m19:00:00[39m    [4m1[24m[4m4[24m090.          [4m1[24m[4m4[24m072.           [4m1[24m[4m3[24m740.
-## [90m 9[39m BTC    2020-11-04 [90m20:00:00[39m    [4m1[24m[4m4[24m106.          [4m1[24m[4m4[24m090.           [4m1[24m[4m3[24m722.
-## [90m10[39m BTC    2020-11-04 [90m21:00:00[39m    [4m1[24m[4m4[24m039.          [4m1[24m[4m4[24m106.           [4m1[24m[4m3[24m732.
-## [90m# … with 20 more rows, and 1 more variable: target_price_24h [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="data-prep.html#cb39-1"></a><span class="co"># Start with the object/data to manipulate</span></span>
+<span id="cb39-2"><a href="data-prep.html#cb39-2"></a>cryptodata <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb39-3"><a href="data-prep.html#cb39-3"></a><span class="st">  </span><span class="co"># Filter the data to only the BTC symbol</span></span>
+<span id="cb39-4"><a href="data-prep.html#cb39-4"></a><span class="st">  </span><span class="kw">filter</span>(symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb39-5"><a href="data-prep.html#cb39-5"></a><span class="st">  </span><span class="co"># Select columns to display</span></span>
+<span id="cb39-6"><a href="data-prep.html#cb39-6"></a><span class="st">  </span><span class="kw">select</span>(ts_index, price_usd, lagged_price_1h, lagged_price_24h, target_price_24h) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb39-7"><a href="data-prep.html#cb39-7"></a><span class="st">  </span><span class="co"># Show the last 30 elements of the data</span></span>
+<span id="cb39-8"><a href="data-prep.html#cb39-8"></a><span class="st">  </span><span class="kw">tail</span>(<span class="dv">30</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb39-9"><a href="data-prep.html#cb39-9"></a><span class="st">  </span><span class="co"># Show all 30 elements instead of the default 10 for a tibble dataframe</span></span>
+<span id="cb39-10"><a href="data-prep.html#cb39-10"></a><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 30 x 6
+## # Groups:   symbol [1]
+##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h target_price_24h
+##    &lt;chr&gt;  &lt;dttm&gt;                  &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+##  1 BTC    2020-11-09 16:00:00    15006.          15104.           15357.           15162.
+##  2 BTC    2020-11-09 17:00:00    15108.          15006.           15391.           15243.
+##  3 BTC    2020-11-09 18:00:00    15227.          15108.           15574.           15312.
+##  4 BTC    2020-11-09 19:00:00    15314.          15227.           15529.           15266.
+##  5 BTC    2020-11-09 20:00:00    15359.          15314.           15343.           15299.
+##  6 BTC    2020-11-09 21:00:00    15371.          15359.           15373.           15285.
+##  7 BTC    2020-11-09 22:00:00    15365.          15371.           15326.              NA 
+##  8 BTC    2020-11-09 23:00:00    15241.          15365.           15505.              NA 
+##  9 BTC    2020-11-10 00:00:00    15327.          15241.           15481.              NA 
+## 10 BTC    2020-11-10 01:00:00    15299           15327.           15548               NA 
+## 11 BTC    2020-11-10 02:00:00    15388.          15299            15513.              NA 
+## 12 BTC    2020-11-10 03:00:00    15339.          15388.           15466.              NA 
+## 13 BTC    2020-11-10 04:00:00    15335.          15339.           15433.              NA 
+## 14 BTC    2020-11-10 05:00:00    15390.          15335.           15381.              NA 
+## 15 BTC    2020-11-10 06:00:00    15362.          15390.           15468.              NA 
+## 16 BTC    2020-11-10 07:00:00    15281.          15362.           15376.              NA 
+## 17 BTC    2020-11-10 08:00:00    15283.          15281.           15312.              NA 
+## 18 BTC    2020-11-10 09:00:00    15370.          15283.           15400.              NA 
+## 19 BTC    2020-11-10 10:00:00    15385.          15370.           15408.              NA 
+## 20 BTC    2020-11-10 11:00:00    15309.          15385.           15474.              NA 
+## 21 BTC    2020-11-10 12:00:00    15274.          15309.           15803.              NA 
+## 22 BTC    2020-11-10 13:00:00    15283.          15274.           15569.              NA 
+## 23 BTC    2020-11-10 14:00:00    15305.          15283.           15282.              NA 
+## 24 BTC    2020-11-10 15:00:00    15220.          15305.           15104.              NA 
+## 25 BTC    2020-11-10 16:00:00    15162.          15220.           15006.              NA 
+## 26 BTC    2020-11-10 17:00:00    15243.          15162.           15108.              NA 
+## 27 BTC    2020-11-10 18:00:00    15312.          15243.           15227.              NA 
+## 28 BTC    2020-11-10 19:00:00    15266.          15312.           15314.              NA 
+## 29 BTC    2020-11-10 20:00:00    15299.          15266.           15359.              NA 
+## 30 BTC    2020-11-10 21:00:00    15285.          15299.           15371.              NA</code></pre>
 <p>There are several advantages to writing code <em>the</em> <strong><em>tidy</em></strong> <em>way</em>, but while some love it others hate it, so we won’t force anyone to have to understand how the <strong>%&gt;%</strong> operator works and we have stayed away from its use for the rest of the code shown, but we do encourage the use of this tool: <a href="https://magrittr.tidyverse.org/reference/pipe.html" class="uri">https://magrittr.tidyverse.org/reference/pipe.html</a></p>
-</div>
-</div>
-<div id="cross-validation" class="section level2" number="4.5">
-<h2><span class="header-section-number">4.5</span> Cross Validation</h2>
-<p>[ADD HERE]</p>
-<p>(explain step below)</p>
-<!-- [TODO - Here will also need to explain that we are taking this process very step by step and focusing on doing this correctly, but in a tool used later on to make models (caret) this functionality is available without having to set this up, so don't worry about this being hard-coded to our specific needs.] -->
-<!-- [TODO - ^ OR might be a good opportunity to explain how to write a function] -->
-<p>NEW CV METHOD - need to explain:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="data-prep.html#cb37-1" aria-hidden="true"></a><span class="co"># Remove rows with null date_time_utc to exclude missing data from next steps</span></span>
-<span id="cb37-2"><a href="data-prep.html#cb37-2" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">drop_na</span>(cryptodata, date_time_utc)</span>
-<span id="cb37-3"><a href="data-prep.html#cb37-3" aria-hidden="true"></a><span class="co"># Counts by symbol</span></span>
-<span id="cb37-4"><a href="data-prep.html#cb37-4" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(<span class="kw">group_by</span>(cryptodata, symbol), <span class="dt">tot_rows =</span> <span class="kw">n</span>())</span>
-<span id="cb37-5"><a href="data-prep.html#cb37-5" aria-hidden="true"></a><span class="co"># Add row index by symbol</span></span>
-<span id="cb37-6"><a href="data-prep.html#cb37-6" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(<span class="kw">arrange</span>(cryptodata, date_time_utc), <span class="dt">row_id =</span> <span class="kw">seq_along</span>(date_time_utc))</span>
-<span id="cb37-7"><a href="data-prep.html#cb37-7" aria-hidden="true"></a><span class="co"># Calculate what rows belong in the first split</span></span>
-<span id="cb37-8"><a href="data-prep.html#cb37-8" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span>cryptodata <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">split_rows_1 =</span> <span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>),</span>
-<span id="cb37-9"><a href="data-prep.html#cb37-9" aria-hidden="true"></a>                                    <span class="dt">split_rows_2 =</span> <span class="kw">as.integer</span>(split_rows_<span class="dv">1</span><span class="op">*</span><span class="dv">2</span>),</span>
-<span id="cb37-10"><a href="data-prep.html#cb37-10" aria-hidden="true"></a>                                    <span class="dt">split_rows_3 =</span> <span class="kw">as.integer</span>(split_rows_<span class="dv">1</span><span class="op">*</span><span class="dv">3</span>),</span>
-<span id="cb37-11"><a href="data-prep.html#cb37-11" aria-hidden="true"></a>                                    <span class="dt">split_rows_4 =</span> <span class="kw">as.integer</span>(split_rows_<span class="dv">1</span><span class="op">*</span><span class="dv">4</span>),</span>
-<span id="cb37-12"><a href="data-prep.html#cb37-12" aria-hidden="true"></a>                                    <span class="dt">split_rows_5 =</span> <span class="kw">as.integer</span>(split_rows_<span class="dv">1</span><span class="op">*</span><span class="dv">5</span>))</span>
-<span id="cb37-13"><a href="data-prep.html#cb37-13" aria-hidden="true"></a><span class="co"># Now calculate what split the current row_id belongs into</span></span>
-<span id="cb37-14"><a href="data-prep.html#cb37-14" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
-<span id="cb37-15"><a href="data-prep.html#cb37-15" aria-hidden="true"></a>                     <span class="dt">split =</span> <span class="kw">case_when</span>(</span>
-<span id="cb37-16"><a href="data-prep.html#cb37-16" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>split_rows_<span class="dv">1</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</span>
-<span id="cb37-17"><a href="data-prep.html#cb37-17" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>split_rows_<span class="dv">2</span> <span class="op">~</span><span class="st"> </span><span class="dv">2</span>,</span>
-<span id="cb37-18"><a href="data-prep.html#cb37-18" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>split_rows_<span class="dv">3</span> <span class="op">~</span><span class="st"> </span><span class="dv">3</span>,</span>
-<span id="cb37-19"><a href="data-prep.html#cb37-19" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>split_rows_<span class="dv">4</span> <span class="op">~</span><span class="st"> </span><span class="dv">4</span>,</span>
-<span id="cb37-20"><a href="data-prep.html#cb37-20" aria-hidden="true"></a>                       row_id <span class="op">&gt;</span><span class="st"> </span>split_rows_<span class="dv">4</span> <span class="op">~</span><span class="st"> </span><span class="dv">5</span>))</span>
-<span id="cb37-21"><a href="data-prep.html#cb37-21" aria-hidden="true"></a><span class="co"># Now figure out train/test groups</span></span>
-<span id="cb37-22"><a href="data-prep.html#cb37-22" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span>cryptodata <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">train_rows_1 =</span> (<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.8</span>,</span>
-<span id="cb37-23"><a href="data-prep.html#cb37-23" aria-hidden="true"></a>                                    <span class="dt">test_rows_1  =</span> train_rows_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>,</span>
-<span id="cb37-24"><a href="data-prep.html#cb37-24" aria-hidden="true"></a>                                    <span class="dt">train_rows_2 =</span> test_rows_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>train_rows_<span class="dv">1</span>,</span>
-<span id="cb37-25"><a href="data-prep.html#cb37-25" aria-hidden="true"></a>                                    <span class="dt">test_rows_2  =</span> train_rows_<span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>,</span>
-<span id="cb37-26"><a href="data-prep.html#cb37-26" aria-hidden="true"></a>                                    <span class="dt">train_rows_3 =</span> test_rows_<span class="dv">2</span> <span class="op">+</span><span class="st"> </span>train_rows_<span class="dv">1</span>,</span>
-<span id="cb37-27"><a href="data-prep.html#cb37-27" aria-hidden="true"></a>                                    <span class="dt">test_rows_3  =</span> train_rows_<span class="dv">3</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>,</span>
-<span id="cb37-28"><a href="data-prep.html#cb37-28" aria-hidden="true"></a>                                    <span class="dt">train_rows_4 =</span> test_rows_<span class="dv">3</span> <span class="op">+</span><span class="st"> </span>train_rows_<span class="dv">1</span>,</span>
-<span id="cb37-29"><a href="data-prep.html#cb37-29" aria-hidden="true"></a>                                    <span class="dt">test_rows_4  =</span> train_rows_<span class="dv">4</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>,</span>
-<span id="cb37-30"><a href="data-prep.html#cb37-30" aria-hidden="true"></a>                                    <span class="dt">train_rows_5 =</span> test_rows_<span class="dv">4</span> <span class="op">+</span><span class="st"> </span>train_rows_<span class="dv">1</span>,</span>
-<span id="cb37-31"><a href="data-prep.html#cb37-31" aria-hidden="true"></a>                                    <span class="dt">test_rows_5  =</span> train_rows_<span class="dv">5</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>)</span>
-<span id="cb37-32"><a href="data-prep.html#cb37-32" aria-hidden="true"></a><span class="co"># Now assign train/test groups</span></span>
-<span id="cb37-33"><a href="data-prep.html#cb37-33" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
-<span id="cb37-34"><a href="data-prep.html#cb37-34" aria-hidden="true"></a>                     <span class="dt">training =</span> <span class="kw">case_when</span>(</span>
-<span id="cb37-35"><a href="data-prep.html#cb37-35" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">1</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
-<span id="cb37-36"><a href="data-prep.html#cb37-36" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>test_rows_<span class="dv">1</span> <span class="op">~</span><span class="st"> &#39;test&#39;</span>,</span>
-<span id="cb37-37"><a href="data-prep.html#cb37-37" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">2</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
-<span id="cb37-38"><a href="data-prep.html#cb37-38" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>test_rows_<span class="dv">2</span> <span class="op">~</span><span class="st"> &#39;test&#39;</span>,</span>
-<span id="cb37-39"><a href="data-prep.html#cb37-39" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">3</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
-<span id="cb37-40"><a href="data-prep.html#cb37-40" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>test_rows_<span class="dv">3</span> <span class="op">~</span><span class="st"> &#39;test&#39;</span>,</span>
-<span id="cb37-41"><a href="data-prep.html#cb37-41" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">4</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
-<span id="cb37-42"><a href="data-prep.html#cb37-42" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>test_rows_<span class="dv">4</span> <span class="op">~</span><span class="st"> &#39;test&#39;</span>,</span>
-<span id="cb37-43"><a href="data-prep.html#cb37-43" aria-hidden="true"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">5</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
-<span id="cb37-44"><a href="data-prep.html#cb37-44" aria-hidden="true"></a>                       row_id <span class="op">&gt;</span><span class="st"> </span>train_rows_<span class="dv">5</span> <span class="op">~</span><span class="st"> &#39;holdout&#39;</span>))</span>
-<span id="cb37-45"><a href="data-prep.html#cb37-45" aria-hidden="true"></a><span class="co"># Remove all columns that are no longer needed now</span></span>
-<span id="cb37-46"><a href="data-prep.html#cb37-46" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">select</span>(cryptodata, <span class="op">-</span>(tot_rows<span class="op">:</span>test_rows_<span class="dv">5</span>), <span class="op">-</span>(trade_usd_<span class="dv">1</span><span class="op">:</span>trade_usd_<span class="dv">5</span>),</span>
-<span id="cb37-47"><a href="data-prep.html#cb37-47" aria-hidden="true"></a>                     <span class="op">-</span>(ask_<span class="dv">1</span>_price<span class="op">:</span>bid_<span class="dv">5</span>_quantity), <span class="op">-</span>pair, <span class="op">-</span>quote_currency, </span>
-<span id="cb37-48"><a href="data-prep.html#cb37-48" aria-hidden="true"></a>                     <span class="op">-</span>pkDummy, <span class="op">-</span>pkey, <span class="op">-</span>ts_index, split)</span></code></pre></div>
-<p>Our data now has the new columns <code>training</code> (<em>train</em>, <em>test</em> or <em>holdout</em>) and <code>split</code> (numbers 1-5) added to it, let’s take a look at the new columns:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="data-prep.html#cb38-1" aria-hidden="true"></a><span class="kw">select</span>(cryptodata, training, split)</span></code></pre></div>
-<pre><code>## [90m# A tibble: 134,182 x 3[39m
-## [90m# Groups:   symbol [97][39m
-##    symbol training split
-##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m LEO    train        1
-## [90m 2[39m GBX    train        1
-## [90m 3[39m ACT    train        1
-## [90m 4[39m MBL    train        1
-## [90m 5[39m BTG    train        1
-## [90m 6[39m ACAT   train        1
-## [90m 7[39m LINK   train        1
-## [90m 8[39m VET    train        1
-## [90m 9[39m IHF    train        1
-## [90m10[39m DGB    train        1
-## [90m# … with 134,172 more rows[39m</code></pre>
-<p><em>Notice that even though we left <code>symbol</code> variables out of our selection, because it is part of the way we grouped our data, it was added back in with the message “Adding missing grouping variables <code>symbol</code>”. The data is tied to its groupings when performing all operations until we use <code>ungroup()</code> to undo them.</em></p>
-<p>Let’s add the new <code>split</code> column to the way the data is grouped:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="data-prep.html#cb40-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol, split)</span></code></pre></div>
-<p>The new field <code>split</code>, helps us split the data into 5 different datasets based on the date, and contains a number from 1-5. The new field <code>training</code> flags the data as being part of the <strong><em>train</em></strong> dataset, or the <strong><em>test</em></strong> (or <strong><em>holdout</em></strong> for the first split) dataset for each of the 5 splits/datasets.</p>
-<p>Running the same code as before with <code>tail()</code> added, we should see rows associated with the test data of the 5th split (again remember, each of the 5 splits has a training and testing dataset):</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="data-prep.html#cb41-1" aria-hidden="true"></a><span class="kw">tail</span>( <span class="kw">select</span>(cryptodata, training, split) )</span></code></pre></div>
-<pre><code>## [90m# A tibble: 6 x 3[39m
-## [90m# Groups:   symbol, split [6][39m
-##   symbol training split
-##   [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;dbl&gt;[39m[23m
-## [90m1[39m IPL    holdout      5
-## [90m2[39m VET    holdout      5
-## [90m3[39m AAB    holdout      5
-## [90m4[39m CRPT   holdout      5
-## [90m5[39m REP    holdout      5
-## [90m6[39m BYTZ   holdout      5</code></pre>
-<p>The easiest way to understand these groupings, is to visualize them. In the next section, you will learn powerful tools for visualizing data in R. Do not worry if you do not understand the code below and are not familiar with <code>ggplot()</code>, <strong>we will explain this framework in the <a href="visualization.html#visualization">next section</a>, for now review the charts below and try to follow along with the way we are grouping the data for the predictive models by looking at what the x and y axis represent, as well as the colors</strong>. On the x-axis we are plotting the DateTime of when a data point was collected, and on the y-axis the <code>split</code> (1-5) as described in this section. The data is then colored based on the category assigned for the <code>training</code> variable (“train”,“test” or “holdout”).</p>
-<p>We can visualize the new grouping variables:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="data-prep.html#cb43-1" aria-hidden="true"></a>groups_chart &lt;-<span class="st"> </span><span class="kw">ggplot</span>(cryptodata,</span>
-<span id="cb43-2"><a href="data-prep.html#cb43-2" aria-hidden="true"></a>                       <span class="kw">aes</span>(<span class="dt">x =</span> date_time_utc, <span class="dt">y =</span> split, <span class="dt">color =</span> training)) <span class="op">+</span></span>
-<span id="cb43-3"><a href="data-prep.html#cb43-3" aria-hidden="true"></a><span class="st">                       </span><span class="kw">geom_point</span>() <span class="co">#+</span></span>
-<span id="cb43-4"><a href="data-prep.html#cb43-4" aria-hidden="true"></a>                       <span class="co">#scale_y_reverse()</span></span>
-<span id="cb43-5"><a href="data-prep.html#cb43-5" aria-hidden="true"></a><span class="co"># now show the chart we just saved:</span></span>
-<span id="cb43-6"><a href="data-prep.html#cb43-6" aria-hidden="true"></a>groups_chart</span></code></pre></div>
-<p><img src="CryptoResearchPaper_files/figure-html/cv_groupings_visualized-1.png" width="672" /></p>
-<p>The chart above looks strange, we can view the results for the <strong>BTC</strong> cryptocurrency by running the same code as above, but instead of visualizing the dataset as a whole <code>cryptodata</code>, we will limit the data using <code>filter(cryptodata, symbol == "BTC")</code>. This time we are not saving these results as an R object.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="data-prep.html#cb44-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>), </span>
-<span id="cb44-2"><a href="data-prep.html#cb44-2" aria-hidden="true"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> date_time_utc,</span>
-<span id="cb44-3"><a href="data-prep.html#cb44-3" aria-hidden="true"></a>           <span class="dt">y =</span> split, </span>
-<span id="cb44-4"><a href="data-prep.html#cb44-4" aria-hidden="true"></a>           <span class="dt">color =</span> training)) <span class="op">+</span></span>
-<span id="cb44-5"><a href="data-prep.html#cb44-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
-<p><img src="CryptoResearchPaper_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<p>The code above might seem difficult, but there is a standardized mathod to using these tools that is relatively easy to learn as we will see in the <a href="visualization.html#visualization">next section</a>.</p>
-<p>We can check on the groupings for each cryptocurrency by animating the <code>cryptodata</code> object:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="data-prep.html#cb45-1" aria-hidden="true"></a><span class="kw">library</span>(gganimate)</span>
-<span id="cb45-2"><a href="data-prep.html#cb45-2" aria-hidden="true"></a>animated_chart &lt;-<span class="st"> </span>groups_chart <span class="op">+</span></span>
-<span id="cb45-3"><a href="data-prep.html#cb45-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">transition_states</span>(symbol) <span class="op">+</span></span>
-<span id="cb45-4"><a href="data-prep.html#cb45-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Now showing: {closest_state}&#39;</span>)</span>
-<span id="cb45-5"><a href="data-prep.html#cb45-5" aria-hidden="true"></a><span class="co"># show the new animated chart</span></span>
-<span id="cb45-6"><a href="data-prep.html#cb45-6" aria-hidden="true"></a><span class="kw">animate</span>(animated_chart, <span class="dt">fps =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="CryptoResearchPaper_files/figure-html/animate_groupings-1.gif" /><!-- --></p>
-<!-- The fps needs to be 1, 2, or any number divisible by 2 or the code won't work -->
-<p><strong><em>This is another tool that we will walk through in the <a href="visualization.html#visualization">next section</a>.</em></strong></p>
-<p>It can be a bit hard to tell how many data points there are because they end up looking like lines. Let’s change the plot to use <code>geom_jitter()</code> instead of <code>geom_point()</code>, which will manually offset the points and give us a better impression of how many data points there are:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="data-prep.html#cb46-1" aria-hidden="true"></a>animated_chart &lt;-<span class="st"> </span>animated_chart <span class="op">+</span></span>
-<span id="cb46-2"><a href="data-prep.html#cb46-2" aria-hidden="true"></a><span class="st">                    </span><span class="kw">geom_jitter</span>()</span>
-<span id="cb46-3"><a href="data-prep.html#cb46-3" aria-hidden="true"></a><span class="co"># show the new animated chart</span></span>
-<span id="cb46-4"><a href="data-prep.html#cb46-4" aria-hidden="true"></a><span class="kw">animate</span>(animated_chart, <span class="dt">fps =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="CryptoResearchPaper_files/figure-html/gganimate_jitter-1.gif" /><!-- --></p>
-</div>
-<div id="fix-data-by-split" class="section level2" number="4.6">
-<h2><span class="header-section-number">4.6</span> Fix Data by Split</h2>
-<p>Now that we have split the data into many different subsets, those subsets themselves may have issues that prevent the predictive models from working as expected.</p>
-<div id="zero-variance" class="section level3" number="4.6.1">
-<h3><span class="header-section-number">4.6.1</span> Zero Variance</h3>
-<p>One of the first models we will make is a simple linear model. The regular R function for this will not work if the data contains any columns that have “zero variance”, meaning the value of the column never changes throughout the data being given to the model. Therefore, let’s fix any issues relating to zero variance columns in any dataset before we change the structure of the data in the step after this one.</p>
-<p>First change the grouping of the data, we are interested in calculating the zero variance based on the <code>symbol</code>, <code>split</code> and <code>training</code> fields.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="data-prep.html#cb47-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol, split, training)</span></code></pre></div>
-<p>Now let’s create a new object called <code>find_zero_var</code> which shows the value of the minimum standard deviation across all columns and calculated based on the grouping of symbol, split and train.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="data-prep.html#cb48-1" aria-hidden="true"></a>find_zero_var &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">mutate</span>(cryptodata, <span class="dt">min_sd =</span> <span class="kw">min</span>(<span class="kw">sd</span>(price_usd, <span class="dt">na.rm=</span>T), </span>
-<span id="cb48-2"><a href="data-prep.html#cb48-2" aria-hidden="true"></a>                                                        <span class="kw">sd</span>(target_price_24h, <span class="dt">na.rm=</span>T),</span>
-<span id="cb48-3"><a href="data-prep.html#cb48-3" aria-hidden="true"></a>                                                        <span class="kw">sd</span>(lagged_price_1h, <span class="dt">na.rm=</span>T), </span>
-<span id="cb48-4"><a href="data-prep.html#cb48-4" aria-hidden="true"></a>                                                        <span class="kw">sd</span>(lagged_price_2h, <span class="dt">na.rm=</span>T),</span>
-<span id="cb48-5"><a href="data-prep.html#cb48-5" aria-hidden="true"></a>                                                        <span class="kw">sd</span>(lagged_price_3h, <span class="dt">na.rm=</span>T), </span>
-<span id="cb48-6"><a href="data-prep.html#cb48-6" aria-hidden="true"></a>                                                        <span class="kw">sd</span>(lagged_price_6h, <span class="dt">na.rm=</span>T),</span>
-<span id="cb48-7"><a href="data-prep.html#cb48-7" aria-hidden="true"></a>                                                        <span class="kw">sd</span>(lagged_price_12h, <span class="dt">na.rm=</span>T), </span>
-<span id="cb48-8"><a href="data-prep.html#cb48-8" aria-hidden="true"></a>                                                        <span class="kw">sd</span>(lagged_price_24h, <span class="dt">na.rm=</span>T))), min_sd)</span>
-<span id="cb48-9"><a href="data-prep.html#cb48-9" aria-hidden="true"></a><span class="co"># Show data</span></span>
-<span id="cb48-10"><a href="data-prep.html#cb48-10" aria-hidden="true"></a>find_zero_var</span></code></pre></div>
-<pre><code>## [90m# A tibble: 134,182 x 4[39m
-## [90m# Groups:   symbol, split, training [970][39m
-##    symbol split training     min_sd
-##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m         [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m LEO        1 train    0.110     
-## [90m 2[39m GBX        1 train    0.002[4m6[24m[4m6[24m   
-## [90m 3[39m ACT        1 train    0.000[4m5[24m[4m8[24m[4m1[24m  
-## [90m 4[39m MBL        1 train    0.000[4m0[24m[4m0[24m[4m6[24m88
-## [90m 5[39m BTG        1 train    0.389     
-## [90m 6[39m ACAT       1 train    0.000[4m0[24m[4m1[24m[4m5[24m2 
-## [90m 7[39m LINK       1 train    1.93      
-## [90m 8[39m VET        1 train    0.000[4m9[24m[4m1[24m[4m3[24m  
-## [90m 9[39m IHF        1 train    0.003[4m2[24m[4m1[24m   
-## [90m10[39m DGB        1 train    0.002[4m1[24m[4m2[24m   
-## [90m# … with 134,172 more rows[39m</code></pre>
-<p>Now let’s get to a list of cryptocurrency symbols where the minimum standard deviation across all columns for all splits of the data is 0, which is the list of cryptocurrencies to remove from the data.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="data-prep.html#cb50-1" aria-hidden="true"></a>minimum_sd &lt;-<span class="st"> </span><span class="kw">filter</span>(<span class="kw">distinct</span>(<span class="kw">mutate</span>(<span class="kw">group_by</span>(<span class="kw">ungroup</span>(find_zero_var), symbol),</span>
-<span id="cb50-2"><a href="data-prep.html#cb50-2" aria-hidden="true"></a>                                     <span class="dt">min_sd =</span> <span class="kw">min</span>(min_sd, <span class="dt">na.rm=</span>T)), min_sd),min_sd <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.000001</span>)<span class="op">$</span>symbol</span>
-<span id="cb50-3"><a href="data-prep.html#cb50-3" aria-hidden="true"></a><span class="co"># Show result</span></span>
-<span id="cb50-4"><a href="data-prep.html#cb50-4" aria-hidden="true"></a>minimum_sd</span></code></pre></div>
-<pre><code>##  [1] &quot;LEO&quot;   &quot;ACT&quot;   &quot;MBL&quot;   &quot;ACAT&quot;  &quot;DENT&quot;  &quot;DAY&quot;   &quot;IPL&quot;   &quot;APPC&quot;  &quot;IHT&quot;  
-## [10] &quot;IQ&quot;    &quot;CDT&quot;   &quot;MESH&quot;  &quot;NAV&quot;   &quot;FDZ&quot;   &quot;REX&quot;   &quot;SPC&quot;   &quot;SBD&quot;   &quot;GST&quot;  
-## [19] &quot;CND&quot;   &quot;MG&quot;    &quot;PHX&quot;   &quot;CUTE&quot;  &quot;BYTZ&quot;  &quot;SENT&quot;  &quot;WAXP&quot;  &quot;BNK&quot;   &quot;CHAT&quot; 
-## [28] &quot;WIKI&quot;  &quot;NEU&quot;   &quot;ECA&quot;   &quot;JST&quot;   &quot;SEELE&quot; &quot;AAB&quot;   &quot;UTT&quot;   &quot;DDR&quot;   &quot;CMCT&quot;</code></pre>
-<!-- [TODO - 0.0001 isn't a super perfect cutoff, small prices will have low standard deviation because not standardized, but will live with some cryptos with suuuper small prices being excluded] -->
-<p>Now we can remove these symbols from appearing in the dataset:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="data-prep.html#cb52-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="op">!</span>(symbol <span class="op">%in%</span><span class="st"> </span>minimum_sd)) </span></code></pre></div>
-<p>In the code above we match all rows where the symbol is part of the <code>minimum_sd</code> object with the list of cryptocurrency symbols to remove from the data, and we then negate the selection using the <code>!</code> operator to only keep rows with symbols not in the list we found.</p>
-<!-- Ugh wish I could write it like this: -->
-<!-- ```{r} -->
-<!-- find_zero_var %>% #start with data -->
-<!--   ungroup() %>% #ungroup -->
-<!--   group_by(symbol) %>% #re-group by symbol -->
-<!--   mutate(min_sd = min(min_sd)) %>% #find the minimum by the symbol -->
-<!--   select(min_sd) %>% #only keep symbol and min_sd -->
-<!--   distinct() #distinct  -->
-<!-- ``` -->
-</div>
-</div>
-<div id="nest-data" class="section level2" number="4.7">
-<h2><span class="header-section-number">4.7</span> Nest data</h2>
-<p>[ADD HERE]</p>
-<p>… explain goal and method</p>
-<p>… First make sure groupings are correct</p>
-<!-- [TODO - Reference Hadley's book chapter and video as references here] -->
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="data-prep.html#cb53-1" aria-hidden="true"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol, split, training)</span></code></pre></div>
-<p>Example nesting data:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="data-prep.html#cb54-1" aria-hidden="true"></a><span class="kw">nest</span>(cryptodata) </span></code></pre></div>
-<pre><code>## [90m# A tibble: 610 x 4[39m
-## [90m# Groups:   symbol, training, split [610][39m
-##    symbol training split data               
-##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m             
-## [90m 1[39m GBX    train        1 [90m&lt;tibble [215 × 11]&gt;[39m
-## [90m 2[39m BTG    train        1 [90m&lt;tibble [310 × 11]&gt;[39m
-## [90m 3[39m LINK   train        1 [90m&lt;tibble [228 × 11]&gt;[39m
-## [90m 4[39m VET    train        1 [90m&lt;tibble [313 × 11]&gt;[39m
-## [90m 5[39m IHF    train        1 [90m&lt;tibble [247 × 11]&gt;[39m
-## [90m 6[39m DGB    train        1 [90m&lt;tibble [335 × 11]&gt;[39m
-## [90m 7[39m RCN    train        1 [90m&lt;tibble [300 × 11]&gt;[39m
-## [90m 8[39m PAXG   train        1 [90m&lt;tibble [196 × 11]&gt;[39m
-## [90m 9[39m LTC    train        1 [90m&lt;tibble [334 × 11]&gt;[39m
-## [90m10[39m NUT    train        1 [90m&lt;tibble [308 × 11]&gt;[39m
-## [90m# … with 600 more rows[39m</code></pre>
-<p>First make training data nested:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="data-prep.html#cb56-1" aria-hidden="true"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, training<span class="op">==</span><span class="st">&#39;train&#39;</span>)), <span class="dt">train_data =</span> <span class="st">&#39;data&#39;</span>)</span>
-<span id="cb56-2"><a href="data-prep.html#cb56-2" aria-hidden="true"></a><span class="co"># Now remove training column</span></span>
-<span id="cb56-3"><a href="data-prep.html#cb56-3" aria-hidden="true"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">ungroup</span>(cryptodata_train, training), <span class="op">-</span>training)</span>
-<span id="cb56-4"><a href="data-prep.html#cb56-4" aria-hidden="true"></a><span class="co"># Fix issues with individual groups of the data</span></span>
-<span id="cb56-5"><a href="data-prep.html#cb56-5" aria-hidden="true"></a>cryptodata_train<span class="op">$</span>train_data &lt;-<span class="st"> </span><span class="kw">lapply</span>(cryptodata_train<span class="op">$</span>train_data, na.omit)</span>
-<span id="cb56-6"><a href="data-prep.html#cb56-6" aria-hidden="true"></a><span class="co"># Remove elements with no rows after na.omit step. CONFIRM THIS WORKS!!!</span></span>
-<span id="cb56-7"><a href="data-prep.html#cb56-7" aria-hidden="true"></a><span class="co"># First add new column with nrow of train dataset</span></span>
-<span id="cb56-8"><a href="data-prep.html#cb56-8" aria-hidden="true"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">group_by</span>(<span class="kw">ungroup</span>(<span class="kw">mutate</span>(<span class="kw">rowwise</span>(cryptodata_train), <span class="dt">train_rows =</span> <span class="kw">nrow</span>(train_data))), symbol, split)</span>
-<span id="cb56-9"><a href="data-prep.html#cb56-9" aria-hidden="true"></a><span class="co"># Remove all symbols where their train data has less than 20 rows at least once</span></span>
-<span id="cb56-10"><a href="data-prep.html#cb56-10" aria-hidden="true"></a>symbols_rm &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">filter</span>(cryptodata_train, split <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>, train_rows <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>)<span class="op">$</span>symbol)</span>
-<span id="cb56-11"><a href="data-prep.html#cb56-11" aria-hidden="true"></a><span class="co"># Remove all data relating to the symbols found above</span></span>
-<span id="cb56-12"><a href="data-prep.html#cb56-12" aria-hidden="true"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata_train, <span class="op">!</span><span class="st"> </span>symbol <span class="op">%in%</span><span class="st"> </span>symbols_rm) <span class="co"># ! is to make %not in% operator</span></span>
-<span id="cb56-13"><a href="data-prep.html#cb56-13" aria-hidden="true"></a><span class="co"># Drop train_rows column</span></span>
-<span id="cb56-14"><a href="data-prep.html#cb56-14" aria-hidden="true"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">select</span>(cryptodata_train, <span class="op">-</span>train_rows)</span></code></pre></div>
-<p>Now nest test data:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="data-prep.html#cb57-1" aria-hidden="true"></a>cryptodata_test &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, training<span class="op">==</span><span class="st">&#39;test&#39;</span>)), <span class="dt">test_data =</span> <span class="st">&#39;data&#39;</span>), <span class="op">-</span>training)</span>
-<span id="cb57-2"><a href="data-prep.html#cb57-2" aria-hidden="true"></a><span class="co"># Now remove training column</span></span>
-<span id="cb57-3"><a href="data-prep.html#cb57-3" aria-hidden="true"></a>cryptodata_test &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">ungroup</span>(cryptodata_test, training), <span class="op">-</span>training)</span></code></pre></div>
-<p>Also do holdout:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="data-prep.html#cb58-1" aria-hidden="true"></a>cryptodata_holdout &lt;-<span class="st"> </span><span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, training<span class="op">==</span><span class="st">&#39;holdout&#39;</span>)), <span class="dt">holdout_data =</span> <span class="st">&#39;data&#39;</span>)</span>
-<span id="cb58-2"><a href="data-prep.html#cb58-2" aria-hidden="true"></a><span class="co"># Remove split and training columns from holdout</span></span>
-<span id="cb58-3"><a href="data-prep.html#cb58-3" aria-hidden="true"></a>cryptodata_holdout &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">ungroup</span>(cryptodata_holdout, split, training), <span class="op">-</span>split, <span class="op">-</span>training)</span></code></pre></div>
-<p>Now join all nested data into the same dataframe</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="data-prep.html#cb59-1" aria-hidden="true"></a><span class="co"># Join train and test</span></span>
-<span id="cb59-2"><a href="data-prep.html#cb59-2" aria-hidden="true"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">left_join</span>(cryptodata_train, cryptodata_test,<span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;symbol&quot;</span>, <span class="st">&quot;split&quot;</span>))</span>
-<span id="cb59-3"><a href="data-prep.html#cb59-3" aria-hidden="true"></a><span class="co"># Join holdout</span></span>
-<span id="cb59-4"><a href="data-prep.html#cb59-4" aria-hidden="true"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">left_join</span>(cryptodata_nested, cryptodata_holdout, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;symbol&quot;</span>))</span></code></pre></div>
-<p>New data:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="data-prep.html#cb60-1" aria-hidden="true"></a>cryptodata_nested</span></code></pre></div>
-<pre><code>## [90m# A tibble: 260 x 5[39m
-## [90m# Groups:   symbol, split [260][39m
-##    symbol split train_data          test_data          holdout_data      
-##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m              [3m[90m&lt;list&gt;[39m[23m             [3m[90m&lt;list&gt;[39m[23m            
-## [90m 1[39m BTG        1 [90m&lt;tibble [223 × 11]&gt;[39m [90m&lt;tibble [78 × 11]&gt;[39m [90m&lt;tibble [82 × 11]&gt;[39m
-## [90m 2[39m VET        1 [90m&lt;tibble [241 × 11]&gt;[39m [90m&lt;tibble [79 × 11]&gt;[39m [90m&lt;tibble [83 × 11]&gt;[39m
-## [90m 3[39m IHF        1 [90m&lt;tibble [163 × 11]&gt;[39m [90m&lt;tibble [62 × 11]&gt;[39m [90m&lt;tibble [63 × 11]&gt;[39m
-## [90m 4[39m DGB        1 [90m&lt;tibble [262 × 11]&gt;[39m [90m&lt;tibble [84 × 11]&gt;[39m [90m&lt;tibble [84 × 11]&gt;[39m
-## [90m 5[39m LTC        1 [90m&lt;tibble [254 × 11]&gt;[39m [90m&lt;tibble [84 × 11]&gt;[39m [90m&lt;tibble [88 × 11]&gt;[39m
-## [90m 6[39m NUT        1 [90m&lt;tibble [236 × 11]&gt;[39m [90m&lt;tibble [77 × 11]&gt;[39m [90m&lt;tibble [80 × 11]&gt;[39m
-## [90m 7[39m NEXO       1 [90m&lt;tibble [259 × 11]&gt;[39m [90m&lt;tibble [84 × 11]&gt;[39m [90m&lt;tibble [86 × 11]&gt;[39m
-## [90m 8[39m XMR        1 [90m&lt;tibble [244 × 11]&gt;[39m [90m&lt;tibble [84 × 11]&gt;[39m [90m&lt;tibble [84 × 11]&gt;[39m
-## [90m 9[39m VIB        1 [90m&lt;tibble [215 × 11]&gt;[39m [90m&lt;tibble [72 × 11]&gt;[39m [90m&lt;tibble [73 × 11]&gt;[39m
-## [90m10[39m XDN        1 [90m&lt;tibble [219 × 11]&gt;[39m [90m&lt;tibble [81 × 11]&gt;[39m [90m&lt;tibble [82 × 11]&gt;[39m
-## [90m# … with 250 more rows[39m</code></pre>
-<p>[ADD HERE - Intro to Visualization and explain we will use grouped data in PredictiveModeling]</p>
-<p>[ADD HERE - Worth mentioning the fact that some data will be higher quality, etc…? Give more background on those steps as “catch-alls”?]</p>
-</div>
-<div id="functional-programming" class="section level2" number="4.8">
-<h2><span class="header-section-number">4.8</span> Functional Programming</h2>
-<p>[TODO - ADD HERE]</p>
-<!-- https://youtu.be/rz3_FDVt9eg?t=1407  -->
-<!-- [TODO - EXPLAIN THINGS A LOT MORE HERE] -->
-<!-- ### Fix Data by Split -->
-<!-- Now that we have split the data into many different subsets, those subsets themselves may have issues that prevent the predictive models from working as expected. -->
-<!-- #### Zero Variance -->
-<!-- One of the first models we will make is a simple linear model. The regular R function for this will not work if the data contains any columns that have "zero variance", meaning the value of the column never changes throughout the data being given to the model. Therefore, let's fix the zero variance issue programmatically for the train and test data of all datasets. -->
-<!-- We will use the `skimr` package that we introduced in the [previous section](#explore-data) in order to find any columns where this problem is present, and we will then use that list to remove those columns from the data. -->
-<!-- First, let's get the code to work the way it should on the first nested elements of the data as an example to apply to all other nested datasets. -->
-<!-- We can find columns that have at least a 98% completion rate using a combination of `skim()` and `filter()`: -->
-<!-- ```{r} -->
-<!-- filter(skim(cryptodata_nested$train_data[[1]]), complete_rate > 0.02) -->
-<!-- ``` -->
-<!-- And extract the variable names by adding `$skim_variable` to the end of the result to return the results for that column only since that is what we are interested in. We will save the result in the object `example_variables` so we can use it in the next step. -->
-<!-- ```{r} -->
-<!-- example_variables <- filter(skim(cryptodata_nested$train_data[[1]]),  -->
-<!--                             complete_rate > 0.02)$skim_variable -->
-<!-- # Show the new object -->
-<!-- example_variables -->
-<!-- ``` -->
-<!-- Now we can use that information to only keep these columns in the train data: -->
-<!-- ```{r} -->
-<!-- cryptodata_nested$train_data[[1]][, example_variables] -->
-<!-- ``` -->
-<!-- Great! Hopefully this change was not necessary on the first nested dataset. Now we need to apply the same idea to create a function that we can apply to all nested datasets -->
-<!-- <!-- [TODO - Explain this step and process using map() better!] -->
-<p>–&gt;</p>
-<!-- ```{r} -->
-<!-- remove_zero_var <- function(df){ -->
-<!--   df[, filter(skim(df), complete_rate > 0.02)$skim_variable] -->
-<!-- } -->
-<!-- ``` -->
-<!-- Now the function can be used in conjunction with the `map()` and `mutate()` functions to apply the function on each of the nested datasets and overwrite the old results with the new ones: -->
-<!-- ```{r} -->
-<!-- cryptodata_nested <- mutate(cryptodata_nested,  -->
-<!--                             train_data = map(train_data, remove_zero_var)) -->
-<!-- ``` -->
-<!-- Now we need to do the same for the test data, but skipping over the empty  -->
-<!-- [TODO - HERE AM I SKIPPING OVER EMPTY ONES OR KEEP TEST_AND_HOLDOUT AND TRAIN? SO NO NULL ROW ELEMENTS] -->
-<!-- ```{r} -->
-<!-- cryptodata_nested <- mutate(cryptodata_nested,  -->
-<!--                             test_data = case_when(class(test_data)[[1]] == 'tbl_df' ~ map(test_data, remove_zero_var))) -->
-<!-- ``` -->
+<p></br></p>
+<p>Move on to the <a href="visualization.html#visualization">next section</a> ➡️ to learn some amazing tools to visualize data.</p>
 
+</div>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-anytime">
-<p>Eddelbuettel, Dirk. 2020. <em>Anytime: Anything to Posixct or Date Converter</em>. <a href="http://dirk.eddelbuettel.com/code/anytime.html">http://dirk.eddelbuettel.com/code/anytime.html</a>.</p>
+<p>Eddelbuettel, Dirk. 2020. <em>Anytime: Anything to ’Posixct’ or ’Date’ Converter</em>. <a href="https://CRAN.R-project.org/package=anytime">https://CRAN.R-project.org/package=anytime</a>.</p>
 </div>
 <div id="ref-R-tsibble">
-<p>Wang, Earo, Di Cook, Rob Hyndman, and Mitchell O’Hara-Wild. 2020. <em>Tsibble: Tidy Temporal Data Frames and Tools</em>. <a href="https://tsibble.tidyverts.org">https://tsibble.tidyverts.org</a>.</p>
+<p>Wang, Earo, Di Cook, Rob Hyndman, and Mitchell O’Hara-Wild. 2020. <em>Tsibble: Tidy Temporal Data Frames and Tools</em>. <a href="https://CRAN.R-project.org/package=tsibble">https://CRAN.R-project.org/package=tsibble</a>.</p>
 </div>
 <div id="ref-R-dplyr">
 <p>Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2020. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.</p>
@@ -969,8 +714,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ries9112/cryptocurrencyresearch-org/edit/master/03-DataPrep.Rmd",
-"text": "Edit on GitHub"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -988,6 +733,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
