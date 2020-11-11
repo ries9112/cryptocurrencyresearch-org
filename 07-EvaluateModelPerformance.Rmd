@@ -601,15 +601,19 @@ ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
   facet_wrap(~symbol)
 ```
 
-Every 12 hours once this document reaches this point, the results are saved to GitHub using the `pins` package [@R-pins], and a separate script creates the complete dataset over time. You won't be able to run the code shown below (nor do you have a reason to):
+<!-- Every 12 hours once this document reaches this point, the results are saved to GitHub using the `pins` package [@R-pins], and a separate script creates the complete dataset over time. You won't be able to run the code shown below (nor do you have a reason to): -->
 
-```{r upload_results_pin, error=TRUE}
+```{r upload_results_pin, error=TRUE, include=FALSE}
 # register board
 board_register("github", repo = "predictcrypto/pins", token=pins_key)
 # Add current date time
 plot_scores$last_refreshed <- Sys.time()
 # pin data
 pin(plot_scores, board='github', name='crypto_tutorial_results_latest')
+# Now create new dataset with the predictions where target price was still unknown
+unknown_prices <- filter(select(unnest(filter(cryptodata_nested, split == 5), cols = c(holdout_data, lm_holdout_predictions, xgb_holdout_predictions, xgbTree_holdout_predictions, nnet_holdout_predictions)), date_time_utc:target_price_24h, lm_holdout_predictions, xgb_holdout_predictions, xgbTree_holdout_predictions, nnet_holdout_predictions), is.na(target_price_24h))
+# Pin the new data
+pin(plot_scores, board='github', name='crypto_tutorial_predictions_unknown_target_latest')
 ```
 
 
