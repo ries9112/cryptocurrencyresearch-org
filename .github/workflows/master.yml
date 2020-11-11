@@ -1,11 +1,11 @@
 name: Run Crypto Tutorial
 on:
   schedule:
-    - cron: '42 02,05,17 * * *'
+    - cron: '45 02,05,17 * * *'
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@v1
