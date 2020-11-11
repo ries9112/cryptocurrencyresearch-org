@@ -292,13 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>10</b> Archive</a><ul>
 <li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#may-2020"><i class="fa fa-check"></i><b>10.1</b> May 2020</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a><ul>
-<li class="chapter" data-level="11.1" data-path="references.html"><a href="references.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
-<li class="chapter" data-level="11.2" data-path="references.html"><a href="references.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
-<li class="chapter" data-level="11.3" data-path="references.html"><a href="references.html#visualization-section"><i class="fa fa-check"></i><b>11.3</b> Visualization Section</a></li>
-<li class="chapter" data-level="11.4" data-path="references.html"><a href="references.html#time-series-section"><i class="fa fa-check"></i><b>11.4</b> Time Series Section</a></li>
-<li class="chapter" data-level="11.5" data-path="references.html"><a href="references.html#r-packages-used"><i class="fa fa-check"></i><b>11.5</b> R Packages Used</a></li>
-</ul></li>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="blank"><img src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" width="80"></a></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -382,9 +376,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-4"><a href="setup.html#cb3-4"></a>       <span class="st">&#39;ggpubr&#39;</span>, <span class="st">&#39;ggforce&#39;</span>, <span class="st">&#39;gganimate&#39;</span>, <span class="st">&#39;transformr&#39;</span>, <span class="co"># Visualization continued</span></span>
 <span id="cb3-5"><a href="setup.html#cb3-5"></a>       <span class="st">&#39;caret&#39;</span>, <span class="st">&#39;doParallel&#39;</span>, <span class="st">&#39;parallel&#39;</span>, <span class="st">&#39;xgboost&#39;</span>, <span class="st">&#39;gbm&#39;</span>, <span class="st">&#39;deepnet&#39;</span>, <span class="co"># Predictive Modeling</span></span>
 <span id="cb3-6"><a href="setup.html#cb3-6"></a>       <span class="st">&#39;hydroGOF&#39;</span>, <span class="st">&#39;formattable&#39;</span>, <span class="st">&#39;knitr&#39;</span>) <span class="co"># Evaluate Model Performance</span></span></code></pre></div>
-<pre><code>## 
-## The downloaded binary packages are in
-##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpzgRJeS/downloaded_packages</code></pre>
 <p><strong><em>It is normal for this step to take a long time, as it will install every package you will need to follow along with the rest of the tutorial.</em></strong> The next time you run this command it would be much faster because it would skip installing the already installed packages.</p>
 <p>Running <strong>p_load()</strong> is equivalent to running <span style="color: green;"><strong>install.packages()</strong></span> on each of the packages listed <strong>(but only when they are not already installed on your computer)</strong>, and then running <span style="color: green;">library()</span> for each package in quotes separated by commas to import the functionality from the package into the current R session. <strong>Both commands are wrapped inside the single function call to</strong> <span style="color: green;"><strong>p_load()</strong></span>. We could run each command individually using base R and create our own logic to only install packages not currently installed, but we are better off using a package that has already been developed and scrutinized by many expert programmers; the same goes for complex statistical models, we don’t need to create things from scratch if we understand how to properly use tools developed by the open source community. Open source tools have become particularly good in recent years and can be used for any kind of work, including commercial work, most large corporations have started using open source tools available through R and Python.</p>
 <p>Nice work! Now you have everything you need to <a href="#overview">follow along with this example</a> ➡️.</p>

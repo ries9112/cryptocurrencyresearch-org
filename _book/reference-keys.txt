@@ -122,8 +122,3 @@ session-information
 archive
 may-2020
 references
-document-format
-open-review-toolkit-ref
-visualization-section
-time-series-section
-r-packages-used
