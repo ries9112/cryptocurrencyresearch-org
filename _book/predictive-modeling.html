@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Section - 7 Predictive Modeling | Cryptocurrency Research</title>
   <meta name="description" content="Section - 7 Predictive Modeling | Cryptocurrency Research" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Section - 7 Predictive Modeling | Cryptocurrency Research" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,6 @@
   
 <link rel="prev" href="model-validation-plan.html"/>
 <link rel="next" href="evaluate-model-performance.html"/>
-<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,6 +48,9 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="libs/datatables-binding-0.15/datatables.js"></script>
@@ -74,17 +76,18 @@
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -104,7 +107,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -153,28 +156,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="index.html">Cryptocurrency Research</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
-<ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#what-will-i-learn"><i class="fa fa-check"></i><b>1.1</b> What will I learn?</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#before-getting-started"><i class="fa fa-check"></i><b>1.2</b> Before Getting Started</a>
-<ul>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#before-getting-started"><i class="fa fa-check"></i><b>1.2</b> Before Getting Started</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#high-level-version"><i class="fa fa-check"></i><b>1.2.1</b> High-Level Version</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#format-notes"><i class="fa fa-check"></i><b>1.3</b> Format Notes</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#plan-of-attack"><i class="fa fa-check"></i><b>1.4</b> Plan of Attack</a></li>
 <li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#who-is-this-example-for"><i class="fa fa-check"></i><b>1.5</b> Who is this example for?</a></li>
-<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#reproducibility"><i class="fa fa-check"></i><b>1.6</b> Reproducibility</a>
-<ul>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#reproducibility"><i class="fa fa-check"></i><b>1.6</b> Reproducibility</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="index.html"><a href="index.html#the-cost-of-non-reproducible-research"><i class="fa fa-check"></i><b>1.6.1</b> The cost of non-reproducible research</a></li>
 <li class="chapter" data-level="1.6.2" data-path="index.html"><a href="index.html#github"><i class="fa fa-check"></i><b>1.6.2</b> GitHub</a></li>
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#disclaimer"><i class="fa fa-check"></i><b>1.7</b> Disclaimer</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>2</b> Setup and Installation</a>
-<ul>
+<li class="chapter" data-level="2" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>2</b> Setup and Installation</a><ul>
 <li class="chapter" data-level="2.1" data-path="setup.html"><a href="setup.html#run-in-the-cloud"><i class="fa fa-check"></i><b>2.1</b> Option 1 - Run in the Cloud</a></li>
-<li class="chapter" data-level="2.2" data-path="setup.html"><a href="setup.html#option-2---run-locally"><i class="fa fa-check"></i><b>2.2</b> Option 2 - Run Locally</a>
-<ul>
+<li class="chapter" data-level="2.2" data-path="setup.html"><a href="setup.html#option-2---run-locally"><i class="fa fa-check"></i><b>2.2</b> Option 2 - Run Locally</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="setup.html"><a href="setup.html#setup-r"><i class="fa fa-check"></i><b>2.2.1</b> Setup R</a></li>
 <li class="chapter" data-level="2.2.2" data-path="setup.html"><a href="setup.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>2.2.2</b> Install and Load Packages</a></li>
 <li class="chapter" data-level="2.2.3" data-path="setup.html"><a href="setup.html#install-pacman"><i class="fa fa-check"></i><b>2.2.3</b> Install Pacman</a></li>
@@ -182,40 +180,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.5" data-path="setup.html"><a href="setup.html#install-all-other-packages"><i class="fa fa-check"></i><b>2.2.5</b> Install All Other Packages</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="explore-data.html"><a href="explore-data.html"><i class="fa fa-check"></i><b>3</b> Explore the Data</a>
-<ul>
+<li class="chapter" data-level="3" data-path="explore-data.html"><a href="explore-data.html"><i class="fa fa-check"></i><b>3</b> Explore the Data</a><ul>
 <li class="chapter" data-level="3.1" data-path="explore-data.html"><a href="explore-data.html#pull-the-data"><i class="fa fa-check"></i><b>3.1</b> Pull the Data</a></li>
 <li class="chapter" data-level="3.2" data-path="explore-data.html"><a href="explore-data.html#data-preview"><i class="fa fa-check"></i><b>3.2</b> Data Preview</a></li>
-<li class="chapter" data-level="3.3" data-path="explore-data.html"><a href="explore-data.html#the-definition-of-a-price"><i class="fa fa-check"></i><b>3.3</b> The definition of a “price”</a>
-<ul>
+<li class="chapter" data-level="3.3" data-path="explore-data.html"><a href="explore-data.html#the-definition-of-a-price"><i class="fa fa-check"></i><b>3.3</b> The definition of a “price”</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="explore-data.html"><a href="explore-data.html#order-book"><i class="fa fa-check"></i><b>3.3.1</b> Order Book</a></li>
 <li class="chapter" data-level="3.3.2" data-path="explore-data.html"><a href="explore-data.html#in-summary"><i class="fa fa-check"></i><b>3.3.2</b> In Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="explore-data.html"><a href="explore-data.html#data-quality"><i class="fa fa-check"></i><b>3.4</b> Data Quality</a></li>
 <li class="chapter" data-level="3.5" data-path="explore-data.html"><a href="explore-data.html#data-source-additional-details"><i class="fa fa-check"></i><b>3.5</b> Data Source Additional Details</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="data-prep.html"><a href="data-prep.html"><i class="fa fa-check"></i><b>4</b> Data Prep</a>
-<ul>
+<li class="chapter" data-level="4" data-path="data-prep.html"><a href="data-prep.html"><i class="fa fa-check"></i><b>4</b> Data Prep</a><ul>
 <li class="chapter" data-level="4.1" data-path="data-prep.html"><a href="data-prep.html#remove-nulls"><i class="fa fa-check"></i><b>4.1</b> Remove Nulls</a></li>
 <li class="chapter" data-level="4.2" data-path="data-prep.html"><a href="data-prep.html#calculate-price_usd-column"><i class="fa fa-check"></i><b>4.2</b> Calculate <code>price_usd</code> Column</a></li>
-<li class="chapter" data-level="4.3" data-path="data-prep.html"><a href="data-prep.html#clean-data-by-group"><i class="fa fa-check"></i><b>4.3</b> Clean Data by Group</a>
-<ul>
+<li class="chapter" data-level="4.3" data-path="data-prep.html"><a href="data-prep.html#clean-data-by-group"><i class="fa fa-check"></i><b>4.3</b> Clean Data by Group</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="data-prep.html"><a href="data-prep.html#remove-symbols-without-enough-rows"><i class="fa fa-check"></i><b>4.3.1</b> Remove symbols without enough rows</a></li>
 <li class="chapter" data-level="4.3.2" data-path="data-prep.html"><a href="data-prep.html#remove-symbols-without-data-from-the-last-3-days"><i class="fa fa-check"></i><b>4.3.2</b> Remove symbols without data from the last 3 days</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="data-prep.html"><a href="data-prep.html#calculate-target"><i class="fa fa-check"></i><b>4.4</b> Calculate Target</a>
-<ul>
+<li class="chapter" data-level="4.4" data-path="data-prep.html"><a href="data-prep.html#calculate-target"><i class="fa fa-check"></i><b>4.4</b> Calculate Target</a><ul>
 <li class="chapter" data-level="4.4.1" data-path="data-prep.html"><a href="data-prep.html#convert-to-tsibble"><i class="fa fa-check"></i><b>4.4.1</b> Convert to tsibble</a></li>
 <li class="chapter" data-level="4.4.2" data-path="data-prep.html"><a href="data-prep.html#fill-gaps"><i class="fa fa-check"></i><b>4.4.2</b> Fill gaps</a></li>
 <li class="chapter" data-level="4.4.3" data-path="data-prep.html"><a href="data-prep.html#calculate-target-1"><i class="fa fa-check"></i><b>4.4.3</b> Calculate Target</a></li>
 <li class="chapter" data-level="4.4.4" data-path="data-prep.html"><a href="data-prep.html#calculate-lagged-prices"><i class="fa fa-check"></i><b>4.4.4</b> Calculate Lagged Prices</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization 📉</a>
-<ul>
+<li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization 📉</a><ul>
 <li class="chapter" data-level="5.1" data-path="visualization.html"><a href="visualization.html#basics---ggplot2"><i class="fa fa-check"></i><b>5.1</b> Basics - ggplot2</a></li>
-<li class="chapter" data-level="5.2" data-path="visualization.html"><a href="visualization.html#using-extensions"><i class="fa fa-check"></i><b>5.2</b> Using Extensions</a>
-<ul>
+<li class="chapter" data-level="5.2" data-path="visualization.html"><a href="visualization.html#using-extensions"><i class="fa fa-check"></i><b>5.2</b> Using Extensions</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="visualization.html"><a href="visualization.html#ggthemes"><i class="fa fa-check"></i><b>5.2.1</b> ggthemes</a></li>
 <li class="chapter" data-level="5.2.2" data-path="visualization.html"><a href="visualization.html#plotly"><i class="fa fa-check"></i><b>5.2.2</b> plotly</a></li>
 <li class="chapter" data-level="5.2.3" data-path="visualization.html"><a href="visualization.html#ggpubr"><i class="fa fa-check"></i><b>5.2.3</b> ggpubr</a></li>
@@ -225,30 +216,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.7" data-path="visualization.html"><a href="visualization.html#rayshader"><i class="fa fa-check"></i><b>5.2.7</b> Rayshader</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="model-validation-plan.html"><a href="model-validation-plan.html"><i class="fa fa-check"></i><b>6</b> Model Validation Plan</a>
-<ul>
+<li class="chapter" data-level="6" data-path="model-validation-plan.html"><a href="model-validation-plan.html"><i class="fa fa-check"></i><b>6</b> Model Validation Plan</a><ul>
 <li class="chapter" data-level="6.1" data-path="model-validation-plan.html"><a href="model-validation-plan.html#testing-models"><i class="fa fa-check"></i><b>6.1</b> Testing Models</a></li>
-<li class="chapter" data-level="6.2" data-path="model-validation-plan.html"><a href="model-validation-plan.html#cross-validation"><i class="fa fa-check"></i><b>6.2</b> Cross Validation</a>
-<ul>
+<li class="chapter" data-level="6.2" data-path="model-validation-plan.html"><a href="model-validation-plan.html#cross-validation"><i class="fa fa-check"></i><b>6.2</b> Cross Validation</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="model-validation-plan.html"><a href="model-validation-plan.html#time-aware-cross-validation"><i class="fa fa-check"></i><b>6.2.1</b> Time Aware Cross Validation</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="model-validation-plan.html"><a href="model-validation-plan.html#fix-data-by-split"><i class="fa fa-check"></i><b>6.3</b> Fix Data by Split</a>
-<ul>
+<li class="chapter" data-level="6.3" data-path="model-validation-plan.html"><a href="model-validation-plan.html#fix-data-by-split"><i class="fa fa-check"></i><b>6.3</b> Fix Data by Split</a><ul>
 <li class="chapter" data-level="6.3.1" data-path="model-validation-plan.html"><a href="model-validation-plan.html#zero-variance"><i class="fa fa-check"></i><b>6.3.1</b> Zero Variance</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="model-validation-plan.html"><a href="model-validation-plan.html#nest-data"><i class="fa fa-check"></i><b>6.4</b> Nest data</a>
-<ul>
+<li class="chapter" data-level="6.4" data-path="model-validation-plan.html"><a href="model-validation-plan.html#nest-data"><i class="fa fa-check"></i><b>6.4</b> Nest data</a><ul>
 <li class="chapter" data-level="6.4.1" data-path="model-validation-plan.html"><a href="model-validation-plan.html#join-results"><i class="fa fa-check"></i><b>6.4.1</b> Join Results</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>7</b> Predictive Modeling</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#example-simple-model"><i class="fa fa-check"></i><b>7.1</b> Example Simple Model</a>
-<ul>
+<li class="chapter" data-level="7" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>7</b> Predictive Modeling</a><ul>
+<li class="chapter" data-level="7.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#example-simple-model"><i class="fa fa-check"></i><b>7.1</b> Example Simple Model</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#using-functional-programming"><i class="fa fa-check"></i><b>7.1.1</b> Using Functional Programming</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#caret"><i class="fa fa-check"></i><b>7.2</b> Caret</a>
-<ul>
+<li class="chapter" data-level="7.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#caret"><i class="fa fa-check"></i><b>7.2</b> Caret</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#parallel-processing"><i class="fa fa-check"></i><b>7.2.1</b> Parallel Processing</a></li>
 <li class="chapter" data-level="7.2.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#more-functional-programming"><i class="fa fa-check"></i><b>7.2.2</b> More Functional Programming</a></li>
 <li class="chapter" data-level="7.2.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cross-validation-preds"><i class="fa fa-check"></i><b>7.2.3</b> Cross Validation</a></li>
@@ -259,68 +243,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#make-predictions"><i class="fa fa-check"></i><b>7.3</b> Make Predictions</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html"><i class="fa fa-check"></i><b>8</b> Evaluate Model Performance</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#summarizing-models"><i class="fa fa-check"></i><b>8.1</b> Summarizing models</a>
-<ul>
+<li class="chapter" data-level="8" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html"><i class="fa fa-check"></i><b>8</b> Evaluate Model Performance</a><ul>
+<li class="chapter" data-level="8.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#summarizing-models"><i class="fa fa-check"></i><b>8.1</b> Summarizing models</a><ul>
 <li class="chapter" data-level="8.1.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#comparing-metrics"><i class="fa fa-check"></i><b>8.1.1</b> Comparing Metrics</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#data-prep---adjust-prices"><i class="fa fa-check"></i><b>8.2</b> Data Prep - Adjust Prices</a>
-<ul>
+<li class="chapter" data-level="8.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#data-prep---adjust-prices"><i class="fa fa-check"></i><b>8.2</b> Data Prep - Adjust Prices</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#add-last-price"><i class="fa fa-check"></i><b>8.2.1</b> Add Last Price</a></li>
 <li class="chapter" data-level="8.2.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#convert-to-percentage-change"><i class="fa fa-check"></i><b>8.2.2</b> Convert to Percentage Change</a></li>
 <li class="chapter" data-level="8.2.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#actuals"><i class="fa fa-check"></i><b>8.2.3</b> Actuals</a></li>
 <li class="chapter" data-level="8.2.4" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#actuals-as-change"><i class="fa fa-check"></i><b>8.2.4</b> Actuals as % Change</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#review-summary-statistics"><i class="fa fa-check"></i><b>8.3</b> Review Summary Statistics</a>
-<ul>
+<li class="chapter" data-level="8.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#review-summary-statistics"><i class="fa fa-check"></i><b>8.3</b> Review Summary Statistics</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#calculate-rmse"><i class="fa fa-check"></i><b>8.3.1</b> Calculate RMSE</a></li>
 <li class="chapter" data-level="8.3.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#calculate-r2"><i class="fa fa-check"></i><b>8.3.2</b> Calculate R^2</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#adjust-prices---all-models"><i class="fa fa-check"></i><b>8.4</b> Adjust Prices - All Models</a>
-<ul>
+<li class="chapter" data-level="8.4" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#adjust-prices---all-models"><i class="fa fa-check"></i><b>8.4</b> Adjust Prices - All Models</a><ul>
 <li class="chapter" data-level="8.4.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#add-last-price-1"><i class="fa fa-check"></i><b>8.4.1</b> Add Last Price</a></li>
 <li class="chapter" data-level="8.4.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#convert-to-change"><i class="fa fa-check"></i><b>8.4.2</b> Convert to % Change</a></li>
 <li class="chapter" data-level="8.4.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#add-metrics"><i class="fa fa-check"></i><b>8.4.3</b> Add Metrics</a></li>
 </ul></li>
-<li class="chapter" data-level="8.5" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#eval-rmse"><i class="fa fa-check"></i><b>8.5</b> Eval RMSE</a>
-<ul>
+<li class="chapter" data-level="8.5" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#eval-rmse"><i class="fa fa-check"></i><b>8.5</b> Eval RMSE</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#test"><i class="fa fa-check"></i><b>8.5.1</b> Test</a></li>
 <li class="chapter" data-level="8.5.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#holdout-3"><i class="fa fa-check"></i><b>8.5.2</b> Holdout</a></li>
 <li class="chapter" data-level="8.5.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#union-results"><i class="fa fa-check"></i><b>8.5.3</b> Union Results</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#eval-r2"><i class="fa fa-check"></i><b>8.6</b> Eval R^2</a>
-<ul>
+<li class="chapter" data-level="8.6" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#eval-r2"><i class="fa fa-check"></i><b>8.6</b> Eval R^2</a><ul>
 <li class="chapter" data-level="8.6.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#test-1"><i class="fa fa-check"></i><b>8.6.1</b> Test</a></li>
 <li class="chapter" data-level="8.6.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#holdout-4"><i class="fa fa-check"></i><b>8.6.2</b> Holdout</a></li>
 <li class="chapter" data-level="8.6.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#union-results-1"><i class="fa fa-check"></i><b>8.6.3</b> Union Results</a></li>
 </ul></li>
-<li class="chapter" data-level="8.7" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#visualize-results"><i class="fa fa-check"></i><b>8.7</b> Visualize Results</a>
-<ul>
+<li class="chapter" data-level="8.7" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#visualize-results"><i class="fa fa-check"></i><b>8.7</b> Visualize Results</a><ul>
 <li class="chapter" data-level="8.7.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#rmse-visualization"><i class="fa fa-check"></i><b>8.7.1</b> RMSE Visualization</a></li>
 <li class="chapter" data-level="8.7.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#both"><i class="fa fa-check"></i><b>8.7.2</b> Both</a></li>
 <li class="chapter" data-level="8.7.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#results-by-the-cryptocurrency"><i class="fa fa-check"></i><b>8.7.3</b> Results by the Cryptocurrency</a></li>
 <li class="chapter" data-level="8.7.4" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#interactive-dashboard"><i class="fa fa-check"></i><b>8.7.4</b> Interactive Dashboard</a></li>
 </ul></li>
-<li class="chapter" data-level="8.8" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#visualizations---historical-metrics"><i class="fa fa-check"></i><b>8.8</b> Visualizations - Historical Metrics</a>
-<ul>
+<li class="chapter" data-level="8.8" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#visualizations---historical-metrics"><i class="fa fa-check"></i><b>8.8</b> Visualizations - Historical Metrics</a><ul>
 <li class="chapter" data-level="8.8.1" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#best-models"><i class="fa fa-check"></i><b>8.8.1</b> Best Models</a></li>
 <li class="chapter" data-level="8.8.2" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#most-predictable-cryptocurrency"><i class="fa fa-check"></i><b>8.8.2</b> Most Predictable Cryptocurrency</a></li>
 <li class="chapter" data-level="8.8.3" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#accuracy-over-time"><i class="fa fa-check"></i><b>8.8.3</b> Accuracy Over Time</a></li>
 </ul></li>
 <li class="chapter" data-level="8.9" data-path="evaluate-model-performance.html"><a href="evaluate-model-performance.html#making-predictions"><i class="fa fa-check"></i><b>8.9</b> Making Predictions</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="considerations.html"><a href="considerations.html"><i class="fa fa-check"></i><b>9</b> Considerations</a>
-<ul>
+<li class="chapter" data-level="9" data-path="considerations.html"><a href="considerations.html"><i class="fa fa-check"></i><b>9</b> Considerations</a><ul>
 <li class="chapter" data-level="9.1" data-path="considerations.html"><a href="considerations.html#not-a-trading-tutorial"><i class="fa fa-check"></i><b>9.1</b> Not a trading tutorial</a></li>
 <li class="chapter" data-level="9.2" data-path="considerations.html"><a href="considerations.html#session-information"><i class="fa fa-check"></i><b>9.2</b> Session Information</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>10</b> Archive</a>
-<ul>
+<li class="chapter" data-level="10" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>10</b> Archive</a><ul>
 <li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#may-2020"><i class="fa fa-check"></i><b>10.1</b> May 2020</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a>
-<ul>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a><ul>
 <li class="chapter" data-level="11.1" data-path="references.html"><a href="references.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
 <li class="chapter" data-level="11.2" data-path="references.html"><a href="references.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
 <li class="chapter" data-level="11.3" data-path="references.html"><a href="references.html#visualization-section"><i class="fa fa-check"></i><b>11.3</b> Visualization Section</a></li>
@@ -348,146 +320,155 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="predictive-modeling" class="section level1" number="7">
+<div id="predictive-modeling" class="section level1">
 <h1><span class="header-section-number">Section - 7</span> Predictive Modeling</h1>
 <p>We finally have everything we need to start making predictive models now that the <a href="data-prep.html#data-prep">data has been cleaned</a> and we have come up with a <a href="model-validation-plan.html#model-validation-plan">gameplan to understand the efficacy of the models</a>.</p>
-<div id="example-simple-model" class="section level2" number="7.1">
+<div id="example-simple-model" class="section level2">
 <h2><span class="header-section-number">7.1</span> Example Simple Model</h2>
 <p>We can start by making a simple <a href="https://en.wikipedia.org/wiki/Linear_regression"><strong>linear regression</strong> model</a>:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="predictive-modeling.html#cb97-1"></a><span class="kw">lm</span>(<span class="dt">formula =</span> target_price_24h <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> cryptodata)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="predictive-modeling.html#cb95-1"></a><span class="kw">lm</span>(<span class="dt">formula =</span> target_price_24h <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> cryptodata)</span></code></pre></div>
 <pre class="scroll-lim"><code>## 
 ## Call:
 ## lm(formula = target_price_24h ~ ., data = cryptodata)
 ## 
 ## Coefficients:
-##      (Intercept)        symbolARDR         symbolAVA         symbolAYA         symbolBAT         symbolBNT  
-##  -5265.625931739       0.022386925       0.060772462       6.026018697       6.475570376       2.328517220  
-##        symbolBRD         symbolBSV         symbolBTC         symbolBTG         symbolBTM         symbolCBC  
-##      4.820847250      -1.092742300    -157.182806671       7.675654397       5.301838772       2.300860186  
-##        symbolCRO         symbolDCR         symbolDGB         symbolEDG         symbolELF         symbolENJ  
-##      2.402619931       6.025783144       6.558864391       6.575851964       1.554589295       6.893345510  
-##        symbolEOS         symbolETH         symbolETP          symbolHT         symbolIPX         symbolKMD  
-##      7.048580238      -3.899175310       2.236495241       7.121948653      -0.013574922      -0.055572133  
-##        symbolKNC        symbolLINK         symbolLTC        symbolMANA        symbolNEXO         symbolRCN  
-##     -0.064920099      10.570462895       5.617588903       2.310765292       6.509443811       7.633794767  
-##        symbolREP        symbolSOLO         symbolSUB         symbolTRX         symbolVET         symbolVIB  
-##      5.915127408       0.016887061       3.174388838       2.399441233       8.309756084       9.120657411  
-##        symbolXEM         symbolXMR         symbolXNS         symbolZAP         symbolZEC         symbolZRX  
-##      7.007355371       5.138046825       3.011167826       0.098201398       0.200542417       2.276918437  
-##    date_time_utc              date         price_usd   lagged_price_1h   lagged_price_2h   lagged_price_3h  
-##      0.000003684      -0.034626670       0.970811648      -0.023136099       0.055651456       0.017614889  
-##  lagged_price_6h  lagged_price_12h  lagged_price_24h   lagged_price_3d      trainingtest     trainingtrain  
-##     -0.008342580       0.048149250      -0.050821272       0.007802289      12.045971350       9.929969972  
-##            split  
-##     -2.680263040</code></pre>
+##      (Intercept)        symbolARDR         symbolAVA         symbolAYA  
+##  -4875.625196068       0.020475095       0.023595308       5.593806650  
+##        symbolBAT         symbolBNT         symbolBRD         symbolBSV  
+##      5.993011806       2.119147375       4.502456410      -1.113402428  
+##        symbolBTC         symbolBTG         symbolBTM         symbolCBC  
+##   -147.558659489       7.087995037       4.877838308       2.139072343  
+##        symbolCRO         symbolDCR         symbolDGB         symbolEDG  
+##      2.228885338       5.564161443       6.069441807       6.085737598  
+##        symbolELF         symbolENJ         symbolEOS         symbolETH  
+##      1.481944598       6.404382444       6.525140386      -3.630724927  
+##        symbolETP          symbolHT         symbolIPX         symbolKMD  
+##      2.083025391       6.585644229       0.059507144      -0.051348711  
+##        symbolKNC        symbolLINK         symbolLTC        symbolMANA  
+##     -0.011448175       9.872921732       5.179178444       2.171908449  
+##       symbolNEXO         symbolRCN         symbolREP        symbolSOLO  
+##      6.025061712       7.086984603       5.497497969       0.015864780  
+##        symbolTRX         symbolVET         symbolVIB         symbolXEM  
+##      2.234174990       7.821831875       8.551709771       6.475733868  
+##        symbolXMR         symbolXNS         symbolZAP         symbolZEC  
+##      4.757836808       2.793887206       0.115111608       0.137890221  
+##        symbolZRX     date_time_utc              date         price_usd  
+##      2.120071209       0.000004605      -0.135120111       0.965531350  
+##  lagged_price_1h   lagged_price_2h   lagged_price_3h   lagged_price_6h  
+##     -0.007053679       0.047435386       0.013819521      -0.002515618  
+## lagged_price_12h  lagged_price_24h   lagged_price_3d      trainingtest  
+##      0.042977476      -0.051083497       0.007703811       9.761861505  
+##    trainingtrain             split  
+##      7.348213141      -2.443570893</code></pre>
 <p>We defined the <span style="color: blue;"><strong>formula</strong></span> for the model as <strong><code>target_price_24h ~ .</code></strong>, which means that we are want to make predictions for the <span style="color: blue;"><strong>target_price_24h</strong></span> field, and use (<strong><code>~</code></strong>) every other column found in the data (<strong><code>.</code></strong>). In other words, we specified a model that uses the <span style="color: blue;"><strong>target_price_24h</strong></span> field as the <a href="https://en.wikipedia.org/wiki/Dependent_and_independent_variables">dependent variable</a>, and all other columns (<strong><code>.</code></strong>) as the <a href="https://en.wikipedia.org/wiki/Dependent_and_independent_variables">independent variables</a>. Meaning, we are looking to predict the <span style="color: blue;"><strong>target_price_24h</strong></span>, which is the only column that refers to the future, and use all the information available at the time the rest of the data was collected in order to infer statistical relationships that can help us forecast the future values of the <span style="color: blue;"><strong>target_price_24h</strong></span> field when it is still unknown on new data that we want to make new predictions for.</p>
 <p>In the example above we used the <span style="color: blue;"><strong>cryptodata</strong></span> object which contained all the non-nested data, and was a big oversimplification of the process we will actually use.</p>
-<div id="using-functional-programming" class="section level3" number="7.1.1">
+<div id="using-functional-programming" class="section level3">
 <h3><span class="header-section-number">7.1.1</span> Using Functional Programming</h3>
 <!-- There are several approaches we could take in order to create the models [according to the plan outlined in the previous section](#model-validation-plan). As previously mentioned, the steps taken below use a similar approach to [the work published by Hadley Wickham on the subject](https://r4ds.had.co.nz/many-models.html) [@R_for_data_science]. Because this work is particularly well respected, we went with a methodology that uses [**functional programming**]{style="color: purple;"}. There are pros and cons to using different methods (i.e. a ***for loop***), and this tutorial itself was originally written using three different fundamentally different approaches before settling on a **functional programming** approach, which is a programming paradigm that focuses on the actions being taken, rather than focusing on  -->
 <p>From this point forward, we will deal with the new dataset <span style="color: blue;"><strong>cryptodata_nested</strong></span>, review the <a href="model-validation-plan.html#nest-data">previous section where it was created</a> if you missed it. Here is a preview of the data again:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="predictive-modeling.html#cb99-1"></a>cryptodata_nested</span></code></pre></div>
-<pre><code>## # A tibble: 200 x 5
-## # Groups:   symbol, split [200]
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="predictive-modeling.html#cb97-1"></a>cryptodata_nested</span></code></pre></div>
+<pre><code>## [90m# A tibble: 195 x 5[39m
+## [90m# Groups:   symbol, split [195][39m
 ##    symbol split train_data          test_data          holdout_data      
-##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;              &lt;list&gt;             &lt;list&gt;            
-##  1 EOS        1 &lt;tibble [274 x 11]&gt; &lt;tibble [87 x 11]&gt; &lt;tibble [90 x 11]&gt;
-##  2 EDG        1 &lt;tibble [277 x 11]&gt; &lt;tibble [89 x 11]&gt; &lt;tibble [93 x 11]&gt;
-##  3 BTG        1 &lt;tibble [249 x 11]&gt; &lt;tibble [83 x 11]&gt; &lt;tibble [87 x 11]&gt;
-##  4 VET        1 &lt;tibble [257 x 11]&gt; &lt;tibble [83 x 11]&gt; &lt;tibble [83 x 11]&gt;
-##  5 DGB        1 &lt;tibble [277 x 11]&gt; &lt;tibble [89 x 11]&gt; &lt;tibble [93 x 11]&gt;
-##  6 RCN        1 &lt;tibble [225 x 11]&gt; &lt;tibble [81 x 11]&gt; &lt;tibble [81 x 11]&gt;
-##  7 LTC        1 &lt;tibble [270 x 11]&gt; &lt;tibble [89 x 11]&gt; &lt;tibble [92 x 11]&gt;
-##  8 NEXO       1 &lt;tibble [276 x 11]&gt; &lt;tibble [89 x 11]&gt; &lt;tibble [90 x 11]&gt;
-##  9 XMR        1 &lt;tibble [260 x 11]&gt; &lt;tibble [89 x 11]&gt; &lt;tibble [89 x 11]&gt;
-## 10 VIB        1 &lt;tibble [224 x 11]&gt; &lt;tibble [74 x 11]&gt; &lt;tibble [78 x 11]&gt;
-## # ... with 190 more rows</code></pre>
+##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m              [3m[90m&lt;list&gt;[39m[23m             [3m[90m&lt;list&gt;[39m[23m            
+## [90m 1[39m EOS        1 [90m&lt;tibble [274 × 11]&gt;[39m [90m&lt;tibble [87 × 11]&gt;[39m [90m&lt;tibble [89 × 11]&gt;[39m
+## [90m 2[39m EDG        1 [90m&lt;tibble [278 × 11]&gt;[39m [90m&lt;tibble [89 × 11]&gt;[39m [90m&lt;tibble [92 × 11]&gt;[39m
+## [90m 3[39m BTG        1 [90m&lt;tibble [250 × 11]&gt;[39m [90m&lt;tibble [83 × 11]&gt;[39m [90m&lt;tibble [86 × 11]&gt;[39m
+## [90m 4[39m VET        1 [90m&lt;tibble [257 × 11]&gt;[39m [90m&lt;tibble [83 × 11]&gt;[39m [90m&lt;tibble [85 × 11]&gt;[39m
+## [90m 5[39m DGB        1 [90m&lt;tibble [278 × 11]&gt;[39m [90m&lt;tibble [89 × 11]&gt;[39m [90m&lt;tibble [92 × 11]&gt;[39m
+## [90m 6[39m RCN        1 [90m&lt;tibble [225 × 11]&gt;[39m [90m&lt;tibble [81 × 11]&gt;[39m [90m&lt;tibble [85 × 11]&gt;[39m
+## [90m 7[39m LTC        1 [90m&lt;tibble [271 × 11]&gt;[39m [90m&lt;tibble [89 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m
+## [90m 8[39m NEXO       1 [90m&lt;tibble [277 × 11]&gt;[39m [90m&lt;tibble [89 × 11]&gt;[39m [90m&lt;tibble [89 × 11]&gt;[39m
+## [90m 9[39m XMR        1 [90m&lt;tibble [260 × 11]&gt;[39m [90m&lt;tibble [89 × 11]&gt;[39m [90m&lt;tibble [93 × 11]&gt;[39m
+## [90m10[39m VIB        1 [90m&lt;tibble [224 × 11]&gt;[39m [90m&lt;tibble [74 × 11]&gt;[39m [90m&lt;tibble [78 × 11]&gt;[39m
+## [90m# … with 185 more rows[39m</code></pre>
 <p>Because we are now dealing with a <strong>nested dataframe</strong>, performing operations on the individual nested datasets is not as straightforward. We could extract the individual elements out of the data using <a href="https://rspatial.org/intr/4-indexing.html"><span style="color: purple;"><strong>indexing</strong></span></a>, for example we can return the first element of the column <span style="color: blue;"><strong>train_data</strong></span> by running this code:</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="predictive-modeling.html#cb101-1"></a>cryptodata_nested<span class="op">$</span>train_data[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>## # A tibble: 274 x 11
-##    date_time_utc       date       price_usd target_price_24h lagged_price_1h lagged_price_2h lagged_price_3h
-##    &lt;dttm&gt;              &lt;date&gt;         &lt;dbl&gt;            &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt;
-##  1 2020-08-12 22:00:09 2020-08-13      3.03             3.11            3.03            3.04            3.05
-##  2 2020-08-12 23:00:10 2020-08-13      3.03             3.11            3.03            3.03            3.04
-##  3 2020-08-13 00:00:09 2020-08-13      3.02             3.10            3.03            3.03            3.03
-##  4 2020-08-13 01:00:09 2020-08-13      3.02             3.10            3.02            3.03            3.03
-##  5 2020-08-13 02:00:09 2020-08-13      3.00             3.11            3.02            3.02            3.03
-##  6 2020-08-13 03:00:09 2020-08-13      2.97             3.11            3.00            3.02            3.02
-##  7 2020-08-13 04:00:08 2020-08-13      2.97             3.12            2.97            3.00            3.02
-##  8 2020-08-13 05:00:09 2020-08-13      2.99             3.13            2.97            2.97            3.00
-##  9 2020-08-13 06:00:09 2020-08-13      3.04             3.14            2.99            2.97            2.97
-## 10 2020-08-13 07:00:09 2020-08-13      3.00             3.15            3.04            2.99            2.97
-## # ... with 264 more rows, and 4 more variables: lagged_price_6h &lt;dbl&gt;, lagged_price_12h &lt;dbl&gt;, lagged_price_24h &lt;dbl&gt;,
-## #   lagged_price_3d &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="predictive-modeling.html#cb99-1"></a>cryptodata_nested<span class="op">$</span>train_data[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code>## [90m# A tibble: 274 x 11[39m
+##    date_time_utc       date       price_usd target_price_24h lagged_price_1h
+##    [3m[90m&lt;dttm&gt;[39m[23m              [3m[90m&lt;date&gt;[39m[23m         [3m[90m&lt;dbl&gt;[39m[23m            [3m[90m&lt;dbl&gt;[39m[23m           [3m[90m&lt;dbl&gt;[39m[23m
+## [90m 1[39m 2020-08-13 [90m04:00:09[39m 2020-08-13      3.03             3.11            3.03
+## [90m 2[39m 2020-08-13 [90m05:00:10[39m 2020-08-13      3.03             3.11            3.03
+## [90m 3[39m 2020-08-13 [90m06:00:09[39m 2020-08-13      3.02             3.10            3.03
+## [90m 4[39m 2020-08-13 [90m07:00:09[39m 2020-08-13      3.02             3.10            3.02
+## [90m 5[39m 2020-08-13 [90m08:00:09[39m 2020-08-13      3.00             3.11            3.02
+## [90m 6[39m 2020-08-13 [90m09:00:09[39m 2020-08-13      2.97             3.11            3.00
+## [90m 7[39m 2020-08-13 [90m10:00:08[39m 2020-08-13      2.97             3.12            2.97
+## [90m 8[39m 2020-08-13 [90m11:00:09[39m 2020-08-13      2.99             3.13            2.97
+## [90m 9[39m 2020-08-13 [90m12:00:09[39m 2020-08-13      3.04             3.14            2.99
+## [90m10[39m 2020-08-13 [90m13:00:09[39m 2020-08-13      3.00             3.15            3.04
+## [90m# … with 264 more rows, and 6 more variables: lagged_price_2h [3m[90m&lt;dbl&gt;[90m[23m,[39m
+## [90m#   lagged_price_3h [3m[90m&lt;dbl&gt;[90m[23m, lagged_price_6h [3m[90m&lt;dbl&gt;[90m[23m, lagged_price_12h [3m[90m&lt;dbl&gt;[90m[23m,[39m
+## [90m#   lagged_price_24h [3m[90m&lt;dbl&gt;[90m[23m, lagged_price_3d [3m[90m&lt;dbl&gt;[90m[23m[39m</code></pre>
 <p>As we already saw dataframes are really flexible as a data structure. We can create a new column in the data to store the models themselves that are associated with each row of the data. There are several ways that we could go about doing this (this tutorial itself was written to execute the same commands using three fundamentally different methodologies), but in this tutorial we will take a <span style="color: purple;"><strong>functional programming</strong></span> approach. This means we will focus the operations we will perform on the actions we want to take themselves, which can be contrasted to a <span style="color: purple;"><strong>for loop</strong></span> which emphasizes the objects more using a similar structure that we used in the example above showing the first element of the <span style="color: blue;"><strong>train_data</strong></span> column.</p>
 <p>When using a <strong>functional programming</strong> approach, we first need to create functions for the operations we want to perform. Let’s wrap the <span style="color: green;"><strong>lm()</strong></span> function <a href="predictive-modeling.html#example-simple-model">we used as an example earlier</a> and create a new custom function called <span style="color: blue;"><strong>linear_model</strong></span>, which takes a dataframe as an input (the <span style="color: blue;"><strong>train_data</strong></span> we will provide for each row of the nested dataset), and generates a linear regression model:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="predictive-modeling.html#cb103-1"></a>linear_model &lt;-<span class="st"> </span><span class="cf">function</span>(df){</span>
-<span id="cb103-2"><a href="predictive-modeling.html#cb103-2"></a>  <span class="kw">lm</span>(target_price_24h <span class="op">~</span><span class="st"> </span>. <span class="op">-</span>date_time_utc <span class="op">-</span>date, <span class="dt">data =</span> df)</span>
-<span id="cb103-3"><a href="predictive-modeling.html#cb103-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="predictive-modeling.html#cb101-1"></a>linear_model &lt;-<span class="st"> </span><span class="cf">function</span>(df){</span>
+<span id="cb101-2"><a href="predictive-modeling.html#cb101-2"></a>  <span class="kw">lm</span>(target_price_24h <span class="op">~</span><span class="st"> </span>. <span class="op">-</span>date_time_utc <span class="op">-</span>date, <span class="dt">data =</span> df)</span>
+<span id="cb101-3"><a href="predictive-modeling.html#cb101-3"></a>}</span></code></pre></div>
 <p>We can now use the <span style="color: green;"><strong>map()</strong></span> function from the <a href="#https://purrr.tidyverse.org/"><span style="color: #ae7b11;"><strong>purrr</strong></span> package</a> in conjunction with the <span style="color: green;"><strong>mutate()</strong></span> function from <span style="color: #ae7b11;"><strong>dplyr</strong></span> to create a new column in the data which contains an individual linear regression model for each row of <span style="color: blue;"><strong>train_data</strong></span>:</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="predictive-modeling.html#cb104-1"></a><span class="kw">mutate</span>(cryptodata_nested, <span class="dt">lm_model =</span> <span class="kw">map</span>(train_data, linear_model))</span></code></pre></div>
-<pre><code>## # A tibble: 200 x 6
-## # Groups:   symbol, split [200]
-##    symbol split train_data          test_data          holdout_data       lm_model
-##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;              &lt;list&gt;             &lt;list&gt;             &lt;list&gt;  
-##  1 EOS        1 &lt;tibble [274 x 11]&gt; &lt;tibble [87 x 11]&gt; &lt;tibble [90 x 11]&gt; &lt;lm&gt;    
-##  2 EDG        1 &lt;tibble [277 x 11]&gt; &lt;tibble [89 x 11]&gt; &lt;tibble [93 x 11]&gt; &lt;lm&gt;    
-##  3 BTG        1 &lt;tibble [249 x 11]&gt; &lt;tibble [83 x 11]&gt; &lt;tibble [87 x 11]&gt; &lt;lm&gt;    
-##  4 VET        1 &lt;tibble [257 x 11]&gt; &lt;tibble [83 x 11]&gt; &lt;tibble [83 x 11]&gt; &lt;lm&gt;    
-##  5 DGB        1 &lt;tibble [277 x 11]&gt; &lt;tibble [89 x 11]&gt; &lt;tibble [93 x 11]&gt; &lt;lm&gt;    
-##  6 RCN        1 &lt;tibble [225 x 11]&gt; &lt;tibble [81 x 11]&gt; &lt;tibble [81 x 11]&gt; &lt;lm&gt;    
-##  7 LTC        1 &lt;tibble [270 x 11]&gt; &lt;tibble [89 x 11]&gt; &lt;tibble [92 x 11]&gt; &lt;lm&gt;    
-##  8 NEXO       1 &lt;tibble [276 x 11]&gt; &lt;tibble [89 x 11]&gt; &lt;tibble [90 x 11]&gt; &lt;lm&gt;    
-##  9 XMR        1 &lt;tibble [260 x 11]&gt; &lt;tibble [89 x 11]&gt; &lt;tibble [89 x 11]&gt; &lt;lm&gt;    
-## 10 VIB        1 &lt;tibble [224 x 11]&gt; &lt;tibble [74 x 11]&gt; &lt;tibble [78 x 11]&gt; &lt;lm&gt;    
-## # ... with 190 more rows</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="predictive-modeling.html#cb102-1"></a><span class="kw">mutate</span>(cryptodata_nested, <span class="dt">lm_model =</span> <span class="kw">map</span>(train_data, linear_model))</span></code></pre></div>
+<pre><code>## [90m# A tibble: 195 x 6[39m
+## [90m# Groups:   symbol, split [195][39m
+##    symbol split train_data          test_data         holdout_data      lm_model
+##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m              [3m[90m&lt;list&gt;[39m[23m            [3m[90m&lt;list&gt;[39m[23m            [3m[90m&lt;list&gt;[39m[23m  
+## [90m 1[39m EOS        1 [90m&lt;tibble [274 × 11]&gt;[39m [90m&lt;tibble [87 × 11[0m… [90m&lt;tibble [89 × 11[0m… [90m&lt;lm&gt;[39m    
+## [90m 2[39m EDG        1 [90m&lt;tibble [278 × 11]&gt;[39m [90m&lt;tibble [89 × 11[0m… [90m&lt;tibble [92 × 11[0m… [90m&lt;lm&gt;[39m    
+## [90m 3[39m BTG        1 [90m&lt;tibble [250 × 11]&gt;[39m [90m&lt;tibble [83 × 11[0m… [90m&lt;tibble [86 × 11[0m… [90m&lt;lm&gt;[39m    
+## [90m 4[39m VET        1 [90m&lt;tibble [257 × 11]&gt;[39m [90m&lt;tibble [83 × 11[0m… [90m&lt;tibble [85 × 11[0m… [90m&lt;lm&gt;[39m    
+## [90m 5[39m DGB        1 [90m&lt;tibble [278 × 11]&gt;[39m [90m&lt;tibble [89 × 11[0m… [90m&lt;tibble [92 × 11[0m… [90m&lt;lm&gt;[39m    
+## [90m 6[39m RCN        1 [90m&lt;tibble [225 × 11]&gt;[39m [90m&lt;tibble [81 × 11[0m… [90m&lt;tibble [85 × 11[0m… [90m&lt;lm&gt;[39m    
+## [90m 7[39m LTC        1 [90m&lt;tibble [271 × 11]&gt;[39m [90m&lt;tibble [89 × 11[0m… [90m&lt;tibble [91 × 11[0m… [90m&lt;lm&gt;[39m    
+## [90m 8[39m NEXO       1 [90m&lt;tibble [277 × 11]&gt;[39m [90m&lt;tibble [89 × 11[0m… [90m&lt;tibble [89 × 11[0m… [90m&lt;lm&gt;[39m    
+## [90m 9[39m XMR        1 [90m&lt;tibble [260 × 11]&gt;[39m [90m&lt;tibble [89 × 11[0m… [90m&lt;tibble [93 × 11[0m… [90m&lt;lm&gt;[39m    
+## [90m10[39m VIB        1 [90m&lt;tibble [224 × 11]&gt;[39m [90m&lt;tibble [74 × 11[0m… [90m&lt;tibble [78 × 11[0m… [90m&lt;lm&gt;[39m    
+## [90m# … with 185 more rows[39m</code></pre>
 <p>Awesome! Now we can use the <a href="https://cryptocurrencyresearch.org/high-level/#/caret-package">same tools we learned in the high-level version to make a wider variety of predictive models to test</a></p>
 </div>
 </div>
-<div id="caret" class="section level2" number="7.2">
+<div id="caret" class="section level2">
 <h2><span class="header-section-number">7.2</span> Caret</h2>
 <p>Refer back to the <a href="https://cryptocurrencyresearch.org/high-level/#/caret-package">high-level version of the tutorial</a> for an explanation of the caret package, or consult this document: <a href="https://topepo.github.io/caret/index.html" class="uri">https://topepo.github.io/caret/index.html</a></p>
-<div id="parallel-processing" class="section level3" number="7.2.1">
+<div id="parallel-processing" class="section level3">
 <h3><span class="header-section-number">7.2.1</span> Parallel Processing</h3>
 <p>R is a <strong><em>single thredded</em></strong> application, meaning it only uses one CPU at a time when performing operations. The step below is optional and uses the <span style="color: #ae7b11;"><strong>parallel</strong></span> and <span style="color: #ae7b11;"><strong>doParallel</strong></span> packages to allow R to use more than a single CPU when creating the predictive models, which will speed up the process considerably:</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="predictive-modeling.html#cb106-1"></a>cl &lt;-<span class="st"> </span><span class="kw">makePSOCKcluster</span>(<span class="kw">detectCores</span>()<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb106-2"><a href="predictive-modeling.html#cb106-2"></a><span class="kw">registerDoParallel</span>(cl)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="predictive-modeling.html#cb104-1"></a>cl &lt;-<span class="st"> </span><span class="kw">makePSOCKcluster</span>(<span class="kw">detectCores</span>()<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb104-2"><a href="predictive-modeling.html#cb104-2"></a><span class="kw">registerDoParallel</span>(cl)</span></code></pre></div>
 </div>
-<div id="more-functional-programming" class="section level3" number="7.2.2">
+<div id="more-functional-programming" class="section level3">
 <h3><span class="header-section-number">7.2.2</span> More Functional Programming</h3>
 <p>Now we can repeat the process we <a href="predictive-modeling.html#using-functional-programming">used earlier to create a column with the linear regression models</a> to create <strong>the exact same models</strong>, but this time using the <span style="color: #ae7b11;"><strong>caret</strong></span> package.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="predictive-modeling.html#cb107-1"></a>linear_model_caret &lt;-<span class="st"> </span><span class="cf">function</span>(df){</span>
-<span id="cb107-2"><a href="predictive-modeling.html#cb107-2"></a>  </span>
-<span id="cb107-3"><a href="predictive-modeling.html#cb107-3"></a>  <span class="kw">train</span>(target_price_24h <span class="op">~</span><span class="st"> </span>. <span class="op">-</span>date_time_utc <span class="op">-</span>date, <span class="dt">data =</span> df,</span>
-<span id="cb107-4"><a href="predictive-modeling.html#cb107-4"></a>        <span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>,</span>
-<span id="cb107-5"><a href="predictive-modeling.html#cb107-5"></a>        <span class="dt">trControl=</span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;none&quot;</span>))</span>
-<span id="cb107-6"><a href="predictive-modeling.html#cb107-6"></a>  </span>
-<span id="cb107-7"><a href="predictive-modeling.html#cb107-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="predictive-modeling.html#cb105-1"></a>linear_model_caret &lt;-<span class="st"> </span><span class="cf">function</span>(df){</span>
+<span id="cb105-2"><a href="predictive-modeling.html#cb105-2"></a>  </span>
+<span id="cb105-3"><a href="predictive-modeling.html#cb105-3"></a>  <span class="kw">train</span>(target_price_24h <span class="op">~</span><span class="st"> </span>. <span class="op">-</span>date_time_utc <span class="op">-</span>date, <span class="dt">data =</span> df,</span>
+<span id="cb105-4"><a href="predictive-modeling.html#cb105-4"></a>        <span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>,</span>
+<span id="cb105-5"><a href="predictive-modeling.html#cb105-5"></a>        <span class="dt">trControl=</span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;none&quot;</span>))</span>
+<span id="cb105-6"><a href="predictive-modeling.html#cb105-6"></a>  </span>
+<span id="cb105-7"><a href="predictive-modeling.html#cb105-7"></a>}</span></code></pre></div>
 <p><em>We specified the method as <strong><code>lm</code></strong> for linear regression. See the high-level version for a refresher on how to use different <span style="color: blue;"><strong>methods</strong></span> to make different models: <a href="https://cryptocurrencyresearch.org/high-level/#/method-options" class="uri">https://cryptocurrencyresearch.org/high-level/#/method-options</a>. the <span style="color: blue;"><strong>trControl</strong></span> argument tells the <span style="color: #ae7b11;"><strong>caret</strong></span> package to avoid additional resampling of the data. As a default behavior <span style="color: #ae7b11;"><strong>caret</strong></span> will do re-sampling on the data and do <span style="color: purple;"><strong>hyperparameter tuning</strong></span> to select values to use for the paramters to get the best results, but we will avoid this discussion for this tutorial. See the <a href="https://topepo.github.io/caret/random-hyperparameter-search.html">official <span style="color: #ae7b11;"><strong>caret</strong></span> documentation for more details</a>.</em></p>
 <p>Here is the full list of models that we can make using the <span style="color: #ae7b11;"><strong>caret</strong></span> package and the <a href="https://cryptocurrencyresearch.org/high-level/#/method-options">steps described the high-level version of the tutorial</a>:
 <iframe src="https://topepo.github.io/caret/available-models.html" width="672" height="400px"></iframe></p>
 <p>We can now use the new function we created <span style="color: blue;"><strong>linear_model_caret</strong></span> in conjunction with <span style="color: green;"><strong>map()</strong></span> and <span style="color: green;"><strong>mutate()</strong></span> to create a new column in the <span style="color: green;"><strong>cryptodata_nested</strong></span> dataset called <span style="color: blue;"><strong>lm_model</strong></span> with the trained linear regression model for each split of the data (by cryptocurrency <span style="color: blue;"><strong>symbol</strong></span> and <span style="color: blue;"><strong>split</strong></span>):</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="predictive-modeling.html#cb108-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
-<span id="cb108-2"><a href="predictive-modeling.html#cb108-2"></a>                            <span class="dt">lm_model =</span> <span class="kw">map</span>(train_data, linear_model_caret))</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="predictive-modeling.html#cb106-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
+<span id="cb106-2"><a href="predictive-modeling.html#cb106-2"></a>                            <span class="dt">lm_model =</span> <span class="kw">map</span>(train_data, linear_model_caret))</span></code></pre></div>
 <p>We can see the new column called <span style="color: blue;"><strong>lm_model</strong></span> with the nested dataframe grouping variables:</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="predictive-modeling.html#cb109-1"></a><span class="kw">select</span>(cryptodata_nested, lm_model)</span></code></pre></div>
-<pre><code>## # A tibble: 200 x 3
-## # Groups:   symbol, split [200]
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="predictive-modeling.html#cb107-1"></a><span class="kw">select</span>(cryptodata_nested, lm_model)</span></code></pre></div>
+<pre><code>## [90m# A tibble: 195 x 3[39m
+## [90m# Groups:   symbol, split [195][39m
 ##    symbol split lm_model
-##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;  
-##  1 EOS        1 &lt;train&gt; 
-##  2 EDG        1 &lt;train&gt; 
-##  3 BTG        1 &lt;train&gt; 
-##  4 VET        1 &lt;train&gt; 
-##  5 DGB        1 &lt;train&gt; 
-##  6 RCN        1 &lt;train&gt; 
-##  7 LTC        1 &lt;train&gt; 
-##  8 NEXO       1 &lt;train&gt; 
-##  9 XMR        1 &lt;train&gt; 
-## 10 VIB        1 &lt;train&gt; 
-## # ... with 190 more rows</code></pre>
+##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m  
+## [90m 1[39m EOS        1 [90m&lt;train&gt;[39m 
+## [90m 2[39m EDG        1 [90m&lt;train&gt;[39m 
+## [90m 3[39m BTG        1 [90m&lt;train&gt;[39m 
+## [90m 4[39m VET        1 [90m&lt;train&gt;[39m 
+## [90m 5[39m DGB        1 [90m&lt;train&gt;[39m 
+## [90m 6[39m RCN        1 [90m&lt;train&gt;[39m 
+## [90m 7[39m LTC        1 [90m&lt;train&gt;[39m 
+## [90m 8[39m NEXO       1 [90m&lt;train&gt;[39m 
+## [90m 9[39m XMR        1 [90m&lt;train&gt;[39m 
+## [90m10[39m VIB        1 [90m&lt;train&gt;[39m 
+## [90m# … with 185 more rows[39m</code></pre>
 <p>And we can view the summarized contents of the first trained model:</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="predictive-modeling.html#cb111-1"></a>cryptodata_nested<span class="op">$</span>lm_model[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="predictive-modeling.html#cb109-1"></a>cryptodata_nested<span class="op">$</span>lm_model[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## Linear Regression 
 ## 
 ## 274 samples
@@ -496,134 +477,142 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## No pre-processing
 ## Resampling: None</code></pre>
 </div>
-<div id="cross-validation-preds" class="section level3" number="7.2.3">
+<div id="cross-validation-preds" class="section level3">
 <h3><span class="header-section-number">7.2.3</span> Cross Validation</h3>
 <p>In the previous output, we saw the output said: <strong><em>Resampling: None</em></strong> because when building the function we specified we did not want any resampling for the <span style="color: blue;"><strong>trControl</strong></span> argument of the <span style="color: green;"><strong>train()</strong></span> function. Within each split of the data however, we can create three separate additional cross validation splits, which will allow the <span style="color: #ae7b11;"><strong>caret</strong></span> package to do some minimal <span style="color: blue;"><strong>hyperparameter</strong></span> tuning, which is the process by which it will test different options for the parameters (which vary based on the specific model being used) to find the most optimal combination of them.</p>
 <p>Within each split we created, we can set caret to perform an additional cross-validation step to allow it to do a minimal level of automated hyperparameter tuning as it creates the models (the more we do the longer it will take).</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="predictive-modeling.html#cb113-1"></a>fitControl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
-<span id="cb113-2"><a href="predictive-modeling.html#cb113-2"></a>                           <span class="dt">number =</span> <span class="dv">3</span>,</span>
-<span id="cb113-3"><a href="predictive-modeling.html#cb113-3"></a>                           <span class="dt">repeats =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="predictive-modeling.html#cb111-1"></a>fitControl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
+<span id="cb111-2"><a href="predictive-modeling.html#cb111-2"></a>                           <span class="dt">number =</span> <span class="dv">3</span>,</span>
+<span id="cb111-3"><a href="predictive-modeling.html#cb111-3"></a>                           <span class="dt">repeats =</span> <span class="dv">3</span>)</span></code></pre></div>
 </div>
-<div id="generalize-the-function" class="section level3" number="7.2.4">
+<div id="generalize-the-function" class="section level3">
 <h3><span class="header-section-number">7.2.4</span> Generalize the Function</h3>
 <p>We can adapt the <a href="predictive-modeling.html#more-functional-programming">function we built earlier for the linear regression models using caret</a>, and add a parameter that allows us to specify the <span style="color: blue;"><strong>method</strong></span> we want to use (as in what predictive model):</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="predictive-modeling.html#cb114-1"></a>model_caret &lt;-<span class="st"> </span><span class="cf">function</span>(df, method_choice){</span>
-<span id="cb114-2"><a href="predictive-modeling.html#cb114-2"></a></span>
-<span id="cb114-3"><a href="predictive-modeling.html#cb114-3"></a>  <span class="kw">train</span>(target_price_24h <span class="op">~</span><span class="st"> </span>. <span class="op">-</span>date_time_utc <span class="op">-</span>date, <span class="dt">data =</span> df,</span>
-<span id="cb114-4"><a href="predictive-modeling.html#cb114-4"></a>        <span class="dt">method =</span> method_choice,</span>
-<span id="cb114-5"><a href="predictive-modeling.html#cb114-5"></a>        <span class="dt">trControl=</span>fitControl)</span>
-<span id="cb114-6"><a href="predictive-modeling.html#cb114-6"></a></span>
-<span id="cb114-7"><a href="predictive-modeling.html#cb114-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="predictive-modeling.html#cb112-1"></a>model_caret &lt;-<span class="st"> </span><span class="cf">function</span>(df, method_choice){</span>
+<span id="cb112-2"><a href="predictive-modeling.html#cb112-2"></a>  </span>
+<span id="cb112-3"><a href="predictive-modeling.html#cb112-3"></a>  <span class="kw">train</span>(target_price_24h <span class="op">~</span><span class="st"> </span>. <span class="op">-</span>date_time_utc <span class="op">-</span>date, <span class="dt">data =</span> df,</span>
+<span id="cb112-4"><a href="predictive-modeling.html#cb112-4"></a>        <span class="dt">method =</span> method_choice,</span>
+<span id="cb112-5"><a href="predictive-modeling.html#cb112-5"></a>        <span class="dt">trControl=</span>fitControl)</span>
+<span id="cb112-6"><a href="predictive-modeling.html#cb112-6"></a></span>
+<span id="cb112-7"><a href="predictive-modeling.html#cb112-7"></a>}</span></code></pre></div>
 </div>
-<div id="xgboost-models" class="section level3" number="7.2.5">
+<div id="xgboost-models" class="section level3">
 <h3><span class="header-section-number">7.2.5</span> XGBoost models</h3>
 <p>Now we can do the same thing we did <a href="predictive-modeling.html#more-functional-programming">earlier for the linear regression models</a>, but use the new function called <span style="color: blue;"><strong>model_caret</strong></span> using the <span style="color: green;"><strong>map2()</strong></span> function to also specify the model as <span style="color: blue;"><strong>xgbLinear</strong></span> to create an <span style="color: purple;"><strong>XGBoost</strong></span> model:</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="predictive-modeling.html#cb115-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
-<span id="cb115-2"><a href="predictive-modeling.html#cb115-2"></a>                            <span class="dt">xgb_model =</span> <span class="kw">map2</span>(train_data, <span class="st">&quot;xgbLinear&quot;</span>, model_caret))</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="predictive-modeling.html#cb113-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
+<span id="cb113-2"><a href="predictive-modeling.html#cb113-2"></a>                            <span class="dt">xgb_model =</span> <span class="kw">map2</span>(train_data, <span class="st">&quot;xgbLinear&quot;</span>, model_caret))</span></code></pre></div>
 <p>We won’t dive into the specifics of each individual model as the correct one to use may depend on a lot of factors and that is a discussion outside the scope of this tutorial. We chose to use the <a href="https://xgboost.readthedocs.io/en/latest/parameter.html"><strong>XGBoost</strong></a> model as an example because it has recently <a href="https://towardsdatascience.com/https-medium-com-vishalmorde-xgboost-algorithm-long-she-may-rein-edd9f99be63d">gained a lot of popularity as a very effective framework for a variety of problems</a>, and is an essential model for any data scientist to have at their disposal.</p>
 <p>There are several possible configurations for XGBoost models, you can find the official documentation here: <a href="https://xgboost.readthedocs.io/en/latest/parameter.html" class="uri">https://xgboost.readthedocs.io/en/latest/parameter.html</a></p>
 <p>Using the exact same process, let’s make make a separate column called <span style="color: blue;"><strong>xgbTree_model</strong></span> for the <span style="color: blue;"><strong>method</strong></span> called <strong><em>xgbTree</em></strong> and add the trained models to the data:</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="predictive-modeling.html#cb116-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
-<span id="cb116-2"><a href="predictive-modeling.html#cb116-2"></a>                            <span class="dt">xgbTree_model =</span> <span class="kw">map2</span>(train_data, <span class="st">&quot;xgbTree&quot;</span>, model_caret))</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="predictive-modeling.html#cb114-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
+<span id="cb114-2"><a href="predictive-modeling.html#cb114-2"></a>                            <span class="dt">xgbTree_model =</span> <span class="kw">map2</span>(train_data, <span class="st">&quot;xgbTree&quot;</span>, model_caret))</span></code></pre></div>
 <p><strong><em>It is normal for the step above to take a while! It is looking for some sweet statistical relationships and it’s not an easy job!</em></strong></p>
 </div>
-<div id="neural-network-models" class="section level3" number="7.2.6">
+<div id="neural-network-models" class="section level3">
 <h3><span class="header-section-number">7.2.6</span> Neural Network Models</h3>
 <p>We could keep adding models. As we saw, <a href="https://topepo.github.io/caret/available-models.html">caret allows for the usage of over 200 predictive models</a>. Let’s create one more set of models using the <span style="color: blue;"><strong>method</strong></span> to create <span style="color: purple;"><strong>deep neural networks</strong></span> (<strong><em><code>dnn</code></em></strong>):</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="predictive-modeling.html#cb117-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
-<span id="cb117-2"><a href="predictive-modeling.html#cb117-2"></a>                            <span class="dt">nnet_model =</span> <span class="kw">map2</span>(train_data, <span class="st">&quot;dnn&quot;</span>, model_caret))</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="predictive-modeling.html#cb115-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
+<span id="cb115-2"><a href="predictive-modeling.html#cb115-2"></a>                            <span class="dt">nnet_model =</span> <span class="kw">map2</span>(train_data, <span class="st">&quot;dnn&quot;</span>, model_caret))</span></code></pre></div>
 <!-- #### Gradient Boosting Machines -->
 <!-- ```{r} -->
 <!-- cryptodata_nested <- mutate(cryptodata_nested, -->
 <!--                             gbm = map2(train_data, "gbm", model_caret)) -->
 <!-- ``` -->
 </div>
-<div id="caret-options" class="section level3" number="7.2.7">
+<div id="caret-options" class="section level3">
 <h3><span class="header-section-number">7.2.7</span> Caret Options</h3>
 <p>Caret offers some additional options to help pre-process the data as well. We outlined an <a href="https://cryptocurrencyresearch.org/high-level/#/caret-additional-options">example of this in the high-level version of the tutorial when showing how to make a <span style="color: purple;"><strong>Support Vector Machine</strong></span> model</a>, which requires the data to be <span style="color: purple;"><strong>centered</strong></span> and <span style="color: purple;"><strong>scaled</strong></span> to avoid running into problems (which we won’t discuss further here).</p>
 </div>
 </div>
-<div id="make-predictions" class="section level2" number="7.3">
+<div id="make-predictions" class="section level2">
 <h2><span class="header-section-number">7.3</span> Make Predictions</h2>
 <p>Awesome! We have trained the predictive models, and we want to start getting a better understanding of how accurate the models are on data they have never seen before. In order to make these comparisons, we will want to make predictions on the test and holdout datasets, and compare those predictions to what actually ended up happening.</p>
 <p>In order to make predictions, we can use the <span style="color: green;"><strong>prediict()</strong></span> function, here is an example on the first elements of the nested dataframe:</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="predictive-modeling.html#cb118-1"></a><span class="kw">predict</span>(<span class="dt">object =</span> cryptodata_nested<span class="op">$</span>lm_model[[<span class="dv">1</span>]],</span>
-<span id="cb118-2"><a href="predictive-modeling.html#cb118-2"></a>        <span class="dt">newdata =</span> cryptodata_nested<span class="op">$</span>test_data[[<span class="dv">1</span>]],</span>
-<span id="cb118-3"><a href="predictive-modeling.html#cb118-3"></a>        <span class="dt">na.action =</span> na.pass)</span></code></pre></div>
-<pre><code>##        1        2        3        4        5        6        7        8        9       10       11       12       13 
-##       NA       NA       NA 3.419840 3.423995       NA 3.458529 3.461182 3.465631 3.463144 3.466944       NA 3.424049 
-##       14       15       16       17       18       19       20       21       22       23       24       25       26 
-## 3.443175 3.424418 3.389698 3.384694 3.371054 3.379556 3.392624 3.384536 3.358411 3.345937       NA 3.334781 3.193421 
-##       27       28       29       30       31       32       33       34       35       36       37       38       39 
-## 3.197391 3.231633 3.223968 3.210201 3.197701 3.214062 3.206176 3.211443 3.233856 3.271907 3.258561 3.298335 3.296370 
-##       40       41       42       43       44       45       46       47       48       49       50       51       52 
-## 3.259741 3.257715 3.281904 3.276327 3.280071 3.281783 3.266941 3.269979 3.293041 3.306212 3.336249 3.334801 3.328735 
-##       53       54       55       56       57       58       59       60       61       62       63       64       65 
-## 3.313209 3.329424 3.321054 3.310882 3.315612 3.343507 3.310966 3.271259 3.270787 3.272817 3.261522 3.276915 3.284694 
-##       66       67       68       69       70       71       72       73       74       75       76       77       78 
-## 3.261296 3.279260 3.258946 3.223822       NA       NA       NA 3.140370 3.121281       NA 3.140544 3.138961 3.154384 
-##       79       80       81       82       83       84       85       86       87 
-## 3.142403 3.177783       NA 3.205023 3.246083 3.245177 3.266033 3.282410 3.280103</code></pre>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="predictive-modeling.html#cb116-1"></a><span class="kw">predict</span>(<span class="dt">object =</span> cryptodata_nested<span class="op">$</span>lm_model[[<span class="dv">1</span>]],</span>
+<span id="cb116-2"><a href="predictive-modeling.html#cb116-2"></a>        <span class="dt">newdata =</span> cryptodata_nested<span class="op">$</span>test_data[[<span class="dv">1</span>]],</span>
+<span id="cb116-3"><a href="predictive-modeling.html#cb116-3"></a>        <span class="dt">na.action =</span> na.pass)</span></code></pre></div>
+<pre><code>##        1        2        3        4        5        6        7        8 
+##       NA       NA 3.419840 3.423995       NA 3.458529 3.461182 3.465631 
+##        9       10       11       12       13       14       15       16 
+## 3.463144 3.466944       NA 3.424049 3.443175 3.424418 3.389698 3.384694 
+##       17       18       19       20       21       22       23       24 
+## 3.371054 3.379556 3.392624 3.384536 3.358411 3.345937       NA 3.334781 
+##       25       26       27       28       29       30       31       32 
+## 3.193421 3.197391 3.231633 3.223968 3.210201 3.197701 3.214062 3.206176 
+##       33       34       35       36       37       38       39       40 
+## 3.211443 3.233856 3.271907 3.258561 3.298335 3.296370 3.259741 3.257715 
+##       41       42       43       44       45       46       47       48 
+## 3.281904 3.276327 3.280071 3.281783 3.266941 3.269979 3.293041 3.306212 
+##       49       50       51       52       53       54       55       56 
+## 3.336249 3.334801 3.328735 3.313209 3.329424 3.321054 3.310882 3.315612 
+##       57       58       59       60       61       62       63       64 
+## 3.343507 3.310966 3.271259 3.270787 3.272817 3.261522 3.276915 3.284694 
+##       65       66       67       68       69       70       71       72 
+## 3.261296 3.279260 3.258946 3.223822       NA       NA       NA 3.140370 
+##       73       74       75       76       77       78       79       80 
+## 3.121281       NA 3.140544 3.138961 3.154384 3.142403 3.177783       NA 
+##       81       82       83       84       85       86       87 
+## 3.205023 3.246083 3.245177 3.266033 3.282410 3.280103 3.267116</code></pre>
 <p>Now we can create a new custom function called <span style="color: blue;"><strong>make_predictions</strong></span> that wraps this functionality in a way that we can use with <span style="color: green;"><strong>map()</strong></span> to iterate through all options of the nested dataframe:</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="predictive-modeling.html#cb120-1"></a>make_predictions &lt;-<span class="st"> </span><span class="cf">function</span>(model, test){</span>
-<span id="cb120-2"><a href="predictive-modeling.html#cb120-2"></a>  </span>
-<span id="cb120-3"><a href="predictive-modeling.html#cb120-3"></a>  <span class="kw">predict</span>(<span class="dt">object  =</span> model, <span class="dt">newdata =</span> test, <span class="dt">na.action =</span> na.pass)</span>
-<span id="cb120-4"><a href="predictive-modeling.html#cb120-4"></a>  </span>
-<span id="cb120-5"><a href="predictive-modeling.html#cb120-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="predictive-modeling.html#cb118-1"></a>make_predictions &lt;-<span class="st"> </span><span class="cf">function</span>(model, test){</span>
+<span id="cb118-2"><a href="predictive-modeling.html#cb118-2"></a>  </span>
+<span id="cb118-3"><a href="predictive-modeling.html#cb118-3"></a>  <span class="kw">predict</span>(<span class="dt">object  =</span> model, <span class="dt">newdata =</span> test, <span class="dt">na.action =</span> na.pass)</span>
+<span id="cb118-4"><a href="predictive-modeling.html#cb118-4"></a>  </span>
+<span id="cb118-5"><a href="predictive-modeling.html#cb118-5"></a>}</span></code></pre></div>
 <p>Now we can create the new columns <span style="color: blue;"><strong>lm_test_predictions</strong></span> and <span style="color: blue;"><strong>lm_holdout_predictions</strong></span> with the predictions:</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="predictive-modeling.html#cb121-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
-<span id="cb121-2"><a href="predictive-modeling.html#cb121-2"></a>                            <span class="dt">lm_test_predictions =</span>  <span class="kw">map2</span>(lm_model,</span>
-<span id="cb121-3"><a href="predictive-modeling.html#cb121-3"></a>                                                   test_data,</span>
-<span id="cb121-4"><a href="predictive-modeling.html#cb121-4"></a>                                                   make_predictions),</span>
-<span id="cb121-5"><a href="predictive-modeling.html#cb121-5"></a>                            </span>
-<span id="cb121-6"><a href="predictive-modeling.html#cb121-6"></a>                            <span class="dt">lm_holdout_predictions =</span>  <span class="kw">map2</span>(lm_model,</span>
-<span id="cb121-7"><a href="predictive-modeling.html#cb121-7"></a>                                                      holdout_data,</span>
-<span id="cb121-8"><a href="predictive-modeling.html#cb121-8"></a>                                                      make_predictions))</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="predictive-modeling.html#cb119-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
+<span id="cb119-2"><a href="predictive-modeling.html#cb119-2"></a>                            <span class="dt">lm_test_predictions =</span>  <span class="kw">map2</span>(lm_model,</span>
+<span id="cb119-3"><a href="predictive-modeling.html#cb119-3"></a>                                                   test_data,</span>
+<span id="cb119-4"><a href="predictive-modeling.html#cb119-4"></a>                                                   make_predictions),</span>
+<span id="cb119-5"><a href="predictive-modeling.html#cb119-5"></a>                            </span>
+<span id="cb119-6"><a href="predictive-modeling.html#cb119-6"></a>                            <span class="dt">lm_holdout_predictions =</span>  <span class="kw">map2</span>(lm_model,</span>
+<span id="cb119-7"><a href="predictive-modeling.html#cb119-7"></a>                                                      holdout_data,</span>
+<span id="cb119-8"><a href="predictive-modeling.html#cb119-8"></a>                                                      make_predictions))</span></code></pre></div>
 <p>The predictions were made using the models that had only seen the <strong>training data</strong>, and we can start assessing how good the model is on data it has not seen before in the <strong>test</strong> and <strong>holdout</strong> sets. Let’s view the results from the previous step:</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="predictive-modeling.html#cb122-1"></a><span class="kw">select</span>(cryptodata_nested, lm_test_predictions, lm_holdout_predictions)</span></code></pre></div>
-<pre><code>## # A tibble: 200 x 4
-## # Groups:   symbol, split [200]
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="predictive-modeling.html#cb120-1"></a><span class="kw">select</span>(cryptodata_nested, lm_test_predictions, lm_holdout_predictions)</span></code></pre></div>
+<pre><code>## [90m# A tibble: 195 x 4[39m
+## [90m# Groups:   symbol, split [195][39m
 ##    symbol split lm_test_predictions lm_holdout_predictions
-##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;              &lt;list&gt;                
-##  1 EOS        1 &lt;dbl [87]&gt;          &lt;dbl [90]&gt;            
-##  2 EDG        1 &lt;dbl [89]&gt;          &lt;dbl [93]&gt;            
-##  3 BTG        1 &lt;dbl [83]&gt;          &lt;dbl [87]&gt;            
-##  4 VET        1 &lt;dbl [83]&gt;          &lt;dbl [83]&gt;            
-##  5 DGB        1 &lt;dbl [89]&gt;          &lt;dbl [93]&gt;            
-##  6 RCN        1 &lt;dbl [81]&gt;          &lt;dbl [81]&gt;            
-##  7 LTC        1 &lt;dbl [89]&gt;          &lt;dbl [92]&gt;            
-##  8 NEXO       1 &lt;dbl [89]&gt;          &lt;dbl [90]&gt;            
-##  9 XMR        1 &lt;dbl [89]&gt;          &lt;dbl [89]&gt;            
-## 10 VIB        1 &lt;dbl [74]&gt;          &lt;dbl [78]&gt;            
-## # ... with 190 more rows</code></pre>
+##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m              [3m[90m&lt;list&gt;[39m[23m                
+## [90m 1[39m EOS        1 [90m&lt;dbl [87]&gt;[39m          [90m&lt;dbl [89]&gt;[39m            
+## [90m 2[39m EDG        1 [90m&lt;dbl [89]&gt;[39m          [90m&lt;dbl [92]&gt;[39m            
+## [90m 3[39m BTG        1 [90m&lt;dbl [83]&gt;[39m          [90m&lt;dbl [86]&gt;[39m            
+## [90m 4[39m VET        1 [90m&lt;dbl [83]&gt;[39m          [90m&lt;dbl [85]&gt;[39m            
+## [90m 5[39m DGB        1 [90m&lt;dbl [89]&gt;[39m          [90m&lt;dbl [92]&gt;[39m            
+## [90m 6[39m RCN        1 [90m&lt;dbl [81]&gt;[39m          [90m&lt;dbl [85]&gt;[39m            
+## [90m 7[39m LTC        1 [90m&lt;dbl [89]&gt;[39m          [90m&lt;dbl [91]&gt;[39m            
+## [90m 8[39m NEXO       1 [90m&lt;dbl [89]&gt;[39m          [90m&lt;dbl [89]&gt;[39m            
+## [90m 9[39m XMR        1 [90m&lt;dbl [89]&gt;[39m          [90m&lt;dbl [93]&gt;[39m            
+## [90m10[39m VIB        1 [90m&lt;dbl [74]&gt;[39m          [90m&lt;dbl [78]&gt;[39m            
+## [90m# … with 185 more rows[39m</code></pre>
 <p>Now we can do the same for the rest of the models:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="predictive-modeling.html#cb124-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
-<span id="cb124-2"><a href="predictive-modeling.html#cb124-2"></a>                            <span class="co"># XGBoost:</span></span>
-<span id="cb124-3"><a href="predictive-modeling.html#cb124-3"></a>                            <span class="dt">xgb_test_predictions =</span>  <span class="kw">map2</span>(xgb_model,</span>
-<span id="cb124-4"><a href="predictive-modeling.html#cb124-4"></a>                                                    test_data,</span>
-<span id="cb124-5"><a href="predictive-modeling.html#cb124-5"></a>                                                    make_predictions),</span>
-<span id="cb124-6"><a href="predictive-modeling.html#cb124-6"></a>                            <span class="co"># holdout</span></span>
-<span id="cb124-7"><a href="predictive-modeling.html#cb124-7"></a>                            <span class="dt">xgb_holdout_predictions =</span>  <span class="kw">map2</span>(xgb_model,</span>
-<span id="cb124-8"><a href="predictive-modeling.html#cb124-8"></a>                                                       holdout_data,</span>
-<span id="cb124-9"><a href="predictive-modeling.html#cb124-9"></a>                                                       make_predictions),</span>
-<span id="cb124-10"><a href="predictive-modeling.html#cb124-10"></a>                            <span class="co"># XGBoost Trees:</span></span>
-<span id="cb124-11"><a href="predictive-modeling.html#cb124-11"></a>                            <span class="dt">xgbTree_test_predictions =</span>  <span class="kw">map2</span>(xgbTree_model,</span>
-<span id="cb124-12"><a href="predictive-modeling.html#cb124-12"></a>                                                        test_data,</span>
-<span id="cb124-13"><a href="predictive-modeling.html#cb124-13"></a>                                                        make_predictions),</span>
-<span id="cb124-14"><a href="predictive-modeling.html#cb124-14"></a>                            <span class="co"># holdout</span></span>
-<span id="cb124-15"><a href="predictive-modeling.html#cb124-15"></a>                            <span class="dt">xgbTree_holdout_predictions =</span>  <span class="kw">map2</span>(xgbTree_model,</span>
-<span id="cb124-16"><a href="predictive-modeling.html#cb124-16"></a>                                                           holdout_data,</span>
-<span id="cb124-17"><a href="predictive-modeling.html#cb124-17"></a>                                                           make_predictions),</span>
-<span id="cb124-18"><a href="predictive-modeling.html#cb124-18"></a>                            <span class="co"># Neural Network:</span></span>
-<span id="cb124-19"><a href="predictive-modeling.html#cb124-19"></a>                            <span class="dt">nnet_test_predictions =</span>  <span class="kw">map2</span>(nnet_model,</span>
-<span id="cb124-20"><a href="predictive-modeling.html#cb124-20"></a>                                                     test_data,</span>
-<span id="cb124-21"><a href="predictive-modeling.html#cb124-21"></a>                                                     make_predictions),</span>
-<span id="cb124-22"><a href="predictive-modeling.html#cb124-22"></a>                            <span class="co"># holdout</span></span>
-<span id="cb124-23"><a href="predictive-modeling.html#cb124-23"></a>                            <span class="dt">nnet_holdout_predictions =</span>  <span class="kw">map2</span>(nnet_model,</span>
-<span id="cb124-24"><a href="predictive-modeling.html#cb124-24"></a>                                                        holdout_data,</span>
-<span id="cb124-25"><a href="predictive-modeling.html#cb124-25"></a>                                                        make_predictions))</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="predictive-modeling.html#cb122-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
+<span id="cb122-2"><a href="predictive-modeling.html#cb122-2"></a>                            <span class="co"># XGBoost:</span></span>
+<span id="cb122-3"><a href="predictive-modeling.html#cb122-3"></a>                            <span class="dt">xgb_test_predictions =</span>  <span class="kw">map2</span>(xgb_model,</span>
+<span id="cb122-4"><a href="predictive-modeling.html#cb122-4"></a>                                                    test_data,</span>
+<span id="cb122-5"><a href="predictive-modeling.html#cb122-5"></a>                                                    make_predictions),</span>
+<span id="cb122-6"><a href="predictive-modeling.html#cb122-6"></a>                            <span class="co"># holdout</span></span>
+<span id="cb122-7"><a href="predictive-modeling.html#cb122-7"></a>                            <span class="dt">xgb_holdout_predictions =</span>  <span class="kw">map2</span>(xgb_model,</span>
+<span id="cb122-8"><a href="predictive-modeling.html#cb122-8"></a>                                                       holdout_data,</span>
+<span id="cb122-9"><a href="predictive-modeling.html#cb122-9"></a>                                                       make_predictions),</span>
+<span id="cb122-10"><a href="predictive-modeling.html#cb122-10"></a>                            <span class="co"># XGBoost Trees:</span></span>
+<span id="cb122-11"><a href="predictive-modeling.html#cb122-11"></a>                            <span class="dt">xgbTree_test_predictions =</span>  <span class="kw">map2</span>(xgbTree_model,</span>
+<span id="cb122-12"><a href="predictive-modeling.html#cb122-12"></a>                                                        test_data,</span>
+<span id="cb122-13"><a href="predictive-modeling.html#cb122-13"></a>                                                        make_predictions),</span>
+<span id="cb122-14"><a href="predictive-modeling.html#cb122-14"></a>                            <span class="co"># holdout</span></span>
+<span id="cb122-15"><a href="predictive-modeling.html#cb122-15"></a>                            <span class="dt">xgbTree_holdout_predictions =</span>  <span class="kw">map2</span>(xgbTree_model,</span>
+<span id="cb122-16"><a href="predictive-modeling.html#cb122-16"></a>                                                           holdout_data,</span>
+<span id="cb122-17"><a href="predictive-modeling.html#cb122-17"></a>                                                           make_predictions),</span>
+<span id="cb122-18"><a href="predictive-modeling.html#cb122-18"></a>                            <span class="co"># Neural Network:</span></span>
+<span id="cb122-19"><a href="predictive-modeling.html#cb122-19"></a>                            <span class="dt">nnet_test_predictions =</span>  <span class="kw">map2</span>(nnet_model,</span>
+<span id="cb122-20"><a href="predictive-modeling.html#cb122-20"></a>                                                     test_data,</span>
+<span id="cb122-21"><a href="predictive-modeling.html#cb122-21"></a>                                                     make_predictions),</span>
+<span id="cb122-22"><a href="predictive-modeling.html#cb122-22"></a>                            <span class="co"># holdout</span></span>
+<span id="cb122-23"><a href="predictive-modeling.html#cb122-23"></a>                            <span class="dt">nnet_holdout_predictions =</span>  <span class="kw">map2</span>(nnet_model,</span>
+<span id="cb122-24"><a href="predictive-modeling.html#cb122-24"></a>                                                        holdout_data,</span>
+<span id="cb122-25"><a href="predictive-modeling.html#cb122-25"></a>                                                        make_predictions))</span></code></pre></div>
 <p>We are done using the <span style="color: #ae7b11;"><strong>caret</strong></span> package and can stop the parallel processing cluster:</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="predictive-modeling.html#cb125-1"></a><span class="kw">stopCluster</span>(cl)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="predictive-modeling.html#cb123-1"></a><span class="kw">stopCluster</span>(cl)</span></code></pre></div>
 <!-- ## Traditional Timeseries - NEED TO ADD BACK IN! -->
 <!-- [TODO - HERE TALK ABOUT ARIMA AND ETS AND MAKE MODELS! KEEP SAME STRUCTURE AND WILL BE ABLE TO DO postResample()] -->
 <!-- [TODO - AFTERWARDS ALSO NEED TO ADD NEW STEPS INTO NEXT SECTION!] -->
