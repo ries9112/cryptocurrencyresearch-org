@@ -1,7 +1,7 @@
 name: Run Crypto Tutorial
 on:
   schedule:
-    - cron: '55 02,14 * * *'
+    - cron: '30 02,03,14 * * *'
 
 jobs:
   build:
@@ -22,6 +22,7 @@ jobs:
           Rscript -e "install.packages('renv')"
           Rscript -e 'renv::consent(provided = TRUE)'
           Rscript -e "renv::restore()"
+          Rscript -e "install.packages("bookdown", dependencies = TRUE)"
       - name: Refresh book
         run: |
           pins_key <- "${{secrets.PAT_PINS}}"
