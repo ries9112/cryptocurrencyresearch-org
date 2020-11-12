@@ -3,6 +3,8 @@ on:
      branches:
        - master
 
+  
+
 name: renderbook
 
 jobs:
@@ -14,7 +16,8 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown
-        run: Rscript -e 'install.packages(c("rmarkdown","bookdown","pacman"))'
+        run: |-
+          Rscript -e 'install.packages(c("rmarkdown","bookdown","pacman","emo")'
       - name: Render Book
         run: |-
           Rscript -e 'pins_key <- "${{secrets.PAT_PINS}}"'
@@ -29,4 +32,3 @@ jobs:
 
 
 
-    
