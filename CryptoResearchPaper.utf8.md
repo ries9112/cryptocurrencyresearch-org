@@ -1,6 +1,6 @@
 ---
 title: "Cryptocurrency Research"
-date: 'Last Updated:<br/> 2020-11-12 14:24:10'
+date: 'Last Updated:<br/> 2020-11-12 20:34:04'
 site: bookdown::gitbook
 documentclass: book
 bibliography:
@@ -254,6 +254,85 @@ p_load('pins', 'skimr', 'DT', 'httr', 'jsonlite', # Data Exploration
        'caret', 'doParallel', 'parallel', 'xgboost', 'gbm', 'deepnet', # Predictive Modeling
        'hydroGOF', 'formattable', 'knitr') # Evaluate Model Performance
 ```
+
+```
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+##   There is a binary version available but the source version is later:
+##            binary source needs_compilation
+## colorspace  1.4-1  2.0-0              TRUE
+## 
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+##   There is a binary version available but the source version is later:
+##         binary source needs_compilation
+## recipes 0.1.14 0.1.15             FALSE
+## 
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+## 
+## The downloaded binary packages are in
+## 	/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJUIBPB/downloaded_packages
+```
 ***It is normal for this step to take a long time, as it will install every package you will need to follow along with the rest of the tutorial.*** The next time you run this command it would be much faster because it would skip installing the already installed packages.
 
 Running **p\_load()** is equivalent to running [**install.packages()**]{style="color: green;"} on each of the packages listed **(but only when they are not already installed on your computer)**, and then running [library()]{style="color: green;"} for each package in quotes separated by commas to import the functionality from the package into the current R session. **Both commands are wrapped inside the single function call to** [**p\_load()**]{style="color: green;"}. We could run each command individually using base R and create our own logic to only install packages not currently installed, but we are better off using a package that has already been developed and scrutinized by many expert programmers; the same goes for complex statistical models, we don't need to create things from scratch if we understand how to properly use tools developed by the open source community. Open source tools have become particularly good in recent years and can be used for any kind of work, including commercial work, most large corporations have started using open source tools available through R and Python.
@@ -312,9 +391,9 @@ The data has been saved to the [**cryptodata**]{style="color: blue;"} object.
 
 Below is a preview of the data:
 
-preserve28a1598e51600038
+preserve31f02515ff6ba33d
 
-*Only the first 2,000 rows of the data are shown in the table above. There are 241438 rows in the actual full dataset. The latest data is from 2020-11-12 (UTC timezone).*
+*Only the first 2,000 rows of the data are shown in the table above. There are 242109 rows in the actual full dataset. The latest data is from 2020-11-12 (UTC timezone).*
 
 This is [[***tidy***]{style="color: purple;"} ***data***](https://tidyr.tidyverse.org/articles/tidy-data.html), meaning:
 
@@ -382,7 +461,7 @@ Table: (\#tab:skimr)Data summary
 |                         |           |
 |:------------------------|:----------|
 |Name                     |cryptodata |
-|Number of rows           |241438     |
+|Number of rows           |242109     |
 |Number of columns        |27         |
 |_______________________  |           |
 |Column type frequency:   |           |
@@ -391,7 +470,7 @@ Table: (\#tab:skimr)Data summary
 |numeric                  |20         |
 |POSIXct                  |1          |
 |________________________ |           |
-|Group variables          |           |
+|Group variables          |None       |
 
 
 **Variable type: character**
@@ -401,48 +480,48 @@ Table: (\#tab:skimr)Data summary
 |pair           |         0|             1|   5|   9|     0|      218|          0|
 |symbol         |         0|             1|   2|   6|     0|      218|          0|
 |quote_currency |         0|             1|   3|   3|     0|        1|          0|
-|pkDummy        |       642|             1|  13|  13|     0|     2261|          0|
-|pkey           |       642|             1|  15|  19|     0|   240516|          0|
+|pkDummy        |       644|             1|  13|  13|     0|     2267|          0|
+|pkey           |       644|             1|  15|  19|     0|   241185|          0|
 
 
 **Variable type: Date**
 
 |skim_variable | n_missing| complete_rate|min        |max        |median     | n_unique|
 |:-------------|---------:|-------------:|:----------|:----------|:----------|--------:|
-|date          |       642|             1|2020-08-10 |2020-11-12 |2020-09-28 |       95|
+|date          |       644|             1|2020-08-10 |2020-11-12 |2020-09-28 |       95|
 
 
 **Variable type: numeric**
 
 |skim_variable  | n_missing| complete_rate|      mean|          sd| p0|   p25|    p50|     p75|         p100|hist  |
 |:--------------|---------:|-------------:|---------:|-----------:|--:|-----:|------:|-------:|------------:|:-----|
-|ask_1_price    |        43|             1|  29260.43| 14247345.55|  0|  0.01|   0.06|    0.59| 7000000000.0|▇▁▁▁▁ |
-|ask_1_quantity |        43|             1| 198129.43|  5130486.04|  0| 19.90| 433.00| 3920.00|  455776000.0|▇▁▁▁▁ |
-|ask_2_price    |        85|             1|    245.95|     6927.73|  0|  0.01|   0.06|    0.59|     999999.0|▇▁▁▁▁ |
-|ask_2_quantity |        85|             1| 214705.30|  4640443.20|  0| 20.00| 491.00| 5590.00|  459459000.0|▇▁▁▁▁ |
-|ask_3_price    |       302|             1|    264.20|     7671.76|  0|  0.01|   0.06|    0.59|     999000.0|▇▁▁▁▁ |
-|ask_3_quantity |       302|             1| 262685.13|  5004436.75|  0| 16.00| 428.85| 7200.00|  518082000.0|▇▁▁▁▁ |
-|ask_4_price    |       398|             1| 203499.61| 37722206.27|  0|  0.01|   0.06|    0.60| 7000000000.0|▇▁▁▁▁ |
-|ask_4_quantity |       398|             1| 277083.58|  4927221.75|  0| 14.00| 452.38| 7777.18|  546546000.0|▇▁▁▁▁ |
-|ask_5_price    |       464|             1|    192.93|     1457.28|  0|  0.01|   0.07|    0.61|      24000.0|▇▁▁▁▁ |
-|ask_5_quantity |       464|             1| 284043.55|  5245190.19|  0| 12.60| 439.53| 8886.08|  549312000.0|▇▁▁▁▁ |
-|bid_1_price    |       480|             1|    189.89|     1445.41|  0|  0.00|   0.05|    0.50|      20298.0|▇▁▁▁▁ |
-|bid_1_quantity |       480|             1| 161497.65|  2654470.44|  0| 28.00| 649.80| 7647.00|  296583000.0|▇▁▁▁▁ |
-|bid_2_price    |       539|             1|    189.73|     1444.87|  0|  0.00|   0.05|    0.49|      20269.5|▇▁▁▁▁ |
-|bid_2_quantity |       539|             1| 164421.53|  3178174.20|  0| 23.00| 508.20| 6229.25|  562697873.0|▇▁▁▁▁ |
-|bid_3_price    |       541|             1|    189.44|     1444.05|  0|  0.00|   0.04|    0.48|      20231.5|▇▁▁▁▁ |
-|bid_3_quantity |       541|             1| 222891.42|  3248450.86|  0| 13.72| 400.00| 6299.60|  347366000.0|▇▁▁▁▁ |
-|bid_4_price    |       541|             1|    189.09|     1443.08|  0|  0.00|   0.04|    0.47|      20227.4|▇▁▁▁▁ |
-|bid_4_quantity |       541|             1| 283943.92|  3684537.40|  0| 10.00| 399.67| 7501.00|  331285000.0|▇▁▁▁▁ |
-|bid_5_price    |       543|             1|    188.61|     1441.42|  0|  0.00|   0.04|    0.45|      20210.4|▇▁▁▁▁ |
-|bid_5_quantity |       543|             1| 332568.10|  4376219.28|  0| 10.00| 390.20| 8537.05|  384159000.0|▇▁▁▁▁ |
+|ask_1_price    |        43|             1|  29180.19| 14227585.23|  0|  0.01|   0.06|    0.58| 7000000000.0|▇▁▁▁▁ |
+|ask_1_quantity |        43|             1| 197742.78|  5123419.94|  0| 19.99| 433.95| 3920.00|  455776000.0|▇▁▁▁▁ |
+|ask_2_price    |        85|             1|    246.13|     6919.01|  0|  0.01|   0.06|    0.59|     999999.0|▇▁▁▁▁ |
+|ask_2_quantity |        85|             1| 214323.54|  4634071.33|  0| 20.00| 492.58| 5600.00|  459459000.0|▇▁▁▁▁ |
+|ask_3_price    |       304|             1|    264.34|     7661.94|  0|  0.01|   0.06|    0.59|     999000.0|▇▁▁▁▁ |
+|ask_3_quantity |       304|             1| 262140.21|  4997563.75|  0| 16.00| 430.00| 7200.00|  518082000.0|▇▁▁▁▁ |
+|ask_4_price    |       400|             1| 202937.23| 37669967.81|  0|  0.01|   0.06|    0.60| 7000000000.0|▇▁▁▁▁ |
+|ask_4_quantity |       400|             1| 276466.66|  4920472.28|  0| 14.00| 452.79| 7791.40|  546546000.0|▇▁▁▁▁ |
+|ask_5_price    |       466|             1|    193.26|     1459.50|  0|  0.01|   0.07|    0.61|      24000.0|▇▁▁▁▁ |
+|ask_5_quantity |       466|             1| 283430.71|  5237997.36|  0| 12.70| 440.00| 8900.00|  549312000.0|▇▁▁▁▁ |
+|bid_1_price    |       482|             1|    190.22|     1447.66|  0|  0.00|   0.05|    0.50|      20298.0|▇▁▁▁▁ |
+|bid_1_quantity |       482|             1| 161188.00|  2650823.83|  0| 28.00| 648.00| 7647.00|  296583000.0|▇▁▁▁▁ |
+|bid_2_price    |       541|             1|    190.06|     1447.12|  0|  0.00|   0.05|    0.49|      20269.5|▇▁▁▁▁ |
+|bid_2_quantity |       541|             1| 164040.83|  3173787.25|  0| 23.00| 509.10| 6220.33|  562697873.0|▇▁▁▁▁ |
+|bid_3_price    |       543|             1|    189.77|     1446.30|  0|  0.00|   0.04|    0.48|      20231.5|▇▁▁▁▁ |
+|bid_3_quantity |       543|             1| 222453.72|  3244022.08|  0| 13.80| 400.00| 6299.60|  347366000.0|▇▁▁▁▁ |
+|bid_4_price    |       543|             1|    189.42|     1445.33|  0|  0.00|   0.04|    0.47|      20227.4|▇▁▁▁▁ |
+|bid_4_quantity |       543|             1| 283578.38|  3680071.04|  0| 10.00| 400.00| 7501.00|  331285000.0|▇▁▁▁▁ |
+|bid_5_price    |       545|             1|    188.94|     1443.67|  0|  0.00|   0.04|    0.45|      20210.4|▇▁▁▁▁ |
+|bid_5_quantity |       545|             1| 332488.32|  4374672.37|  0| 10.00| 390.00| 8540.73|  384159000.0|▇▁▁▁▁ |
 
 
 **Variable type: POSIXct**
 
 |skim_variable | n_missing| complete_rate|min                 |max                 |median              | n_unique|
 |:-------------|---------:|-------------:|:-------------------|:-------------------|:-------------------|--------:|
-|date_time_utc |       642|             1|2020-08-10 04:29:09 |2020-11-12 14:03:25 |2020-09-28 06:02:18 |   212784|
+|date_time_utc |       644|             1|2020-08-10 04:29:09 |2020-11-12 20:03:26 |2020-09-28 09:02:41 |   213260|
 
 This summary helps us understand things like how many rows with missing values there are in a given column, or how the values are distributed. In this case there shouldn't be any major data quality issues, for example the majority of values should not be NA/missing. If you are noticing something different please [create an issue on the GitHub repository for the project](https://github.com/ries9112/cryptocurrencyresearch-org/issues).
 
@@ -476,26 +555,26 @@ fromJSON(content(GET("https://api.hitbtc.com/api/2/public/orderbook/ETHUSD",
 ## [1] "ETHUSD"
 ## 
 ## $timestamp
-## [1] "2020-11-12T14:24:26.313Z"
+## [1] "2020-11-12T20:37:50.411Z"
 ## 
 ## $batchingTime
-## [1] "2020-11-12T14:24:26.327Z"
+## [1] "2020-11-12T20:37:50.469Z"
 ## 
 ## $ask
 ##     price    size
-## 1 462.303  5.6250
-## 2 462.304  1.0800
-## 3 462.306  0.2500
-## 4 462.335 30.0000
-## 5 462.420  1.3879
+## 1 458.032  0.4000
+## 2 458.044  0.2917
+## 3 458.122  0.3061
+## 4 458.123  1.0800
+## 5 458.131 30.0000
 ## 
 ## $bid
-##     price    size
-## 1 461.980  4.8761
-## 2 461.979  1.6137
-## 3 461.977 30.0000
-## 4 461.960  1.0800
-## 5 461.954  3.0000
+##     price   size
+## 1 458.011 0.4000
+## 2 458.007 0.2700
+## 3 457.999 0.2700
+## 4 457.902 5.6250
+## 5 457.901 1.4062
 ```
 
 The data is collected by a script running on a private server (RStudio) that iterates through all cryptocurrency options one by one at the start of every hour, and writes all of the data to a private database. Once the data is in the database, a different script gets kicked off every hour to publish the latest data from the database to the publicly available data source [discussed at the beginning of this section](#pull-the-data).
@@ -524,7 +603,7 @@ cryptodata <- filter(cryptodata, !is.na(date_time_utc))
 
 
 
-This step removed 642 rows from the data on the latest run (2020-11-12). The [**is.na()**]{style="color: green;"} function finds all cases where the [**date_time_utc**]{style="color: blue;"} field has a Null value. The function is preceded by the [**!**]{style="color: blue;"} operator, which tells the [**filter()**]{style="color: green;"} function to exclude these rows from the data.
+This step removed 644 rows from the data on the latest run (2020-11-12). The [**is.na()**]{style="color: green;"} function finds all cases where the [**date_time_utc**]{style="color: blue;"} field has a Null value. The function is preceded by the [**!**]{style="color: blue;"} operator, which tells the [**filter()**]{style="color: green;"} function to exclude these rows from the data.
 
 By the same logic, if we don't know what the price was for any of the rows, the whole row of data is useless and should be removed. But how will we define the price of a cryptocurrency?
 
@@ -587,7 +666,7 @@ cryptodata <- filter(cryptodata, !is.na(price_usd))
 
 
 
-This step removed 14753 rows on the latest run.
+This step removed 14784 rows on the latest run.
 
 
 ## Clean Data by Group {#clean-data-by-group}
@@ -604,7 +683,7 @@ count(cryptodata)
 ## [90m# A tibble: 1 x 1[39m
 ##        n
 ##    [3m[90m<int>[39m[23m
-## [90m1[39m [4m2[24m[4m2[24m[4m6[24m043
+## [90m1[39m [4m2[24m[4m2[24m[4m6[24m681
 ```
 
 But what if we wanted to know how many observations in the data are associated with each cryptocurrency separately?
@@ -628,10 +707,10 @@ count(cryptodata)
 ## [90m# Groups:   symbol [216][39m
 ##    symbol     n
 ##    [3m[90m<chr>[39m[23m  [3m[90m<int>[39m[23m
-## [90m 1[39m AAB     [4m1[24m094
-## [90m 2[39m ACAT    [4m1[24m868
-## [90m 3[39m ACT     [4m1[24m625
-## [90m 4[39m ADA     [4m1[24m151
+## [90m 1[39m AAB     [4m1[24m100
+## [90m 2[39m ACAT    [4m1[24m874
+## [90m 3[39m ACT     [4m1[24m631
+## [90m 4[39m ADA     [4m1[24m157
 ## [90m 5[39m ADX      393
 ## [90m 6[39m ADXN     665
 ## [90m 7[39m ALGO       1
@@ -651,7 +730,7 @@ count(ungroup(cryptodata))
 ## [90m# A tibble: 1 x 1[39m
 ##        n
 ##    [3m[90m<int>[39m[23m
-## [90m1[39m [4m2[24m[4m2[24m[4m6[24m043
+## [90m1[39m [4m2[24m[4m2[24m[4m6[24m681
 ```
 
 
@@ -672,7 +751,7 @@ cryptodata <- filter(cryptodata, n() >= 1000)
 
 
 
-The number of rows for the `cryptodata` dataset before the filtering step was 226043 and is now 181262. This step removed 96 cryptocurrencies from the analysis that did not have enough observations associated with them.
+The number of rows for the `cryptodata` dataset before the filtering step was 226681 and is now 181808. This step removed 96 cryptocurrencies from the analysis that did not have enough observations associated with them.
 
 ### Remove symbols without data from the last 3 days
 
@@ -687,7 +766,7 @@ cryptodata <- filter(cryptodata, max(date) > Sys.Date()-3)
 
 
 
-The number of rows for the `cryptodata` dataset before this filtering step was 152914 and is now 181262.
+The number of rows for the `cryptodata` dataset before this filtering step was 153460 and is now 181808.
 
 ## Calculate Target
 
@@ -730,7 +809,7 @@ cryptodata
 ```
 
 ```
-## [90m# A tsibble: 152,694 x 34 [1h] <UTC>[39m
+## [90m# A tsibble: 153,240 x 34 [1h] <UTC>[39m
 ## [90m# Key:       symbol [96][39m
 ## [90m# Groups:    symbol [96][39m
 ##    pair  symbol quote_currency ask_1_price ask_1_quantity ask_2_price
@@ -745,7 +824,7 @@ cryptodata
 ## [90m 8[39m AABU… AAB    USD                  0.390           104.       0.390
 ## [90m 9[39m AABU… AAB    USD                  0.390           104.       0.390
 ## [90m10[39m AABU… AAB    USD                  0.390           104.       0.390
-## [90m# … with 152,684 more rows, and 28 more variables: ask_2_quantity [3m[90m<dbl>[90m[23m,[39m
+## [90m# … with 153,230 more rows, and 28 more variables: ask_2_quantity [3m[90m<dbl>[90m[23m,[39m
 ## [90m#   ask_3_price [3m[90m<dbl>[90m[23m, ask_3_quantity [3m[90m<dbl>[90m[23m, ask_4_price [3m[90m<dbl>[90m[23m,[39m
 ## [90m#   ask_4_quantity [3m[90m<dbl>[90m[23m, ask_5_price [3m[90m<dbl>[90m[23m, ask_5_quantity [3m[90m<dbl>[90m[23m,[39m
 ## [90m#   bid_1_price [3m[90m<dbl>[90m[23m, bid_1_quantity [3m[90m<dbl>[90m[23m, bid_2_price [3m[90m<dbl>[90m[23m,[39m
@@ -777,7 +856,7 @@ cryptodata <- fill_gaps(cryptodata)
 
 
 
-Now looking at the data again, there are 20354 additional rows that were added as implicitly missing in the data:
+Now looking at the data again, there are 20381 additional rows that were added as implicitly missing in the data:
 
 
 ```r
@@ -785,7 +864,7 @@ cryptodata
 ```
 
 ```
-## [90m# A tsibble: 173,048 x 34 [1h] <UTC>[39m
+## [90m# A tsibble: 173,621 x 34 [1h] <UTC>[39m
 ## [90m# Key:       symbol [96][39m
 ## [90m# Groups:    symbol [96][39m
 ##    pair  symbol quote_currency ask_1_price ask_1_quantity ask_2_price
@@ -800,7 +879,7 @@ cryptodata
 ## [90m 8[39m AABU… AAB    USD                  0.390           104.       0.390
 ## [90m 9[39m AABU… AAB    USD                  0.390           104.       0.390
 ## [90m10[39m AABU… AAB    USD                  0.390           104.       0.390
-## [90m# … with 173,038 more rows, and 28 more variables: ask_2_quantity [3m[90m<dbl>[90m[23m,[39m
+## [90m# … with 173,611 more rows, and 28 more variables: ask_2_quantity [3m[90m<dbl>[90m[23m,[39m
 ## [90m#   ask_3_price [3m[90m<dbl>[90m[23m, ask_3_quantity [3m[90m<dbl>[90m[23m, ask_4_price [3m[90m<dbl>[90m[23m,[39m
 ## [90m#   ask_4_quantity [3m[90m<dbl>[90m[23m, ask_5_price [3m[90m<dbl>[90m[23m, ask_5_quantity [3m[90m<dbl>[90m[23m,[39m
 ## [90m#   bid_1_price [3m[90m<dbl>[90m[23m, bid_1_quantity [3m[90m<dbl>[90m[23m, bid_2_price [3m[90m<dbl>[90m[23m,[39m
@@ -858,7 +937,7 @@ print(select(filter(cryptodata, symbol == 'BTC'),
 ```
 
 ```
-## [90m# A tibble: 2,267 x 6[39m
+## [90m# A tibble: 2,273 x 6[39m
 ## [90m# Groups:   symbol [1][39m
 ##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##    [3m[90m<chr>[39m[23m  [3m[90m<dttm>[39m[23m                  [3m[90m<dbl>[39m[23m           [3m[90m<dbl>[39m[23m            [3m[90m<dbl>[39m[23m
@@ -892,7 +971,7 @@ print(select(filter(cryptodata, symbol == 'BTC'),
 ## [90m28[39m BTC    2020-08-11 [90m07:00:00[39m    [4m1[24m[4m1[24m774.          [4m1[24m[4m1[24m847.           [4m1[24m[4m1[24m994.
 ## [90m29[39m BTC    2020-08-11 [90m08:00:00[39m    [4m1[24m[4m1[24m761.          [4m1[24m[4m1[24m774.           [4m1[24m[4m1[24m984.
 ## [90m30[39m BTC    2020-08-11 [90m09:00:00[39m    [4m1[24m[4m1[24m753.          [4m1[24m[4m1[24m761.           [4m1[24m[4m1[24m962.
-## [90m# … with 2,237 more rows, and 1 more variable: target_price_24h [3m[90m<dbl>[90m[23m[39m
+## [90m# … with 2,243 more rows, and 1 more variable: target_price_24h [3m[90m<dbl>[90m[23m[39m
 ```
 
 We can wrap the code used above in the [**tail()**]{style="color: green;"} function to show the most recent data and see the opposite dynamic with the new fields we created:
@@ -909,36 +988,36 @@ print(tail(select(filter(cryptodata, symbol == 'BTC'),
 ## [90m# Groups:   symbol [1][39m
 ##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##    [3m[90m<chr>[39m[23m  [3m[90m<dttm>[39m[23m                  [3m[90m<dbl>[39m[23m           [3m[90m<dbl>[39m[23m            [3m[90m<dbl>[39m[23m
-## [90m 1[39m BTC    2020-11-11 [90m09:00:00[39m    [4m1[24m[4m5[24m398.          [4m1[24m[4m5[24m402.           [4m1[24m[4m5[24m370.
-## [90m 2[39m BTC    2020-11-11 [90m10:00:00[39m    [4m1[24m[4m5[24m430.          [4m1[24m[4m5[24m398.           [4m1[24m[4m5[24m385.
-## [90m 3[39m BTC    2020-11-11 [90m11:00:00[39m    [4m1[24m[4m5[24m589.          [4m1[24m[4m5[24m430.           [4m1[24m[4m5[24m309.
-## [90m 4[39m BTC    2020-11-11 [90m12:00:00[39m    [4m1[24m[4m5[24m570.          [4m1[24m[4m5[24m589.           [4m1[24m[4m5[24m274.
-## [90m 5[39m BTC    2020-11-11 [90m13:00:00[39m    [4m1[24m[4m5[24m624           [4m1[24m[4m5[24m570.           [4m1[24m[4m5[24m283.
-## [90m 6[39m BTC    2020-11-11 [90m14:00:00[39m    [4m1[24m[4m5[24m552.          [4m1[24m[4m5[24m624            [4m1[24m[4m5[24m305.
-## [90m 7[39m BTC    2020-11-11 [90m15:00:00[39m    [4m1[24m[4m5[24m634.          [4m1[24m[4m5[24m552.           [4m1[24m[4m5[24m220.
-## [90m 8[39m BTC    2020-11-11 [90m16:00:00[39m    [4m1[24m[4m5[24m666.          [4m1[24m[4m5[24m634.           [4m1[24m[4m5[24m162.
-## [90m 9[39m BTC    2020-11-11 [90m17:00:00[39m    [4m1[24m[4m5[24m752.          [4m1[24m[4m5[24m666.           [4m1[24m[4m5[24m243.
-## [90m10[39m BTC    2020-11-11 [90m18:00:00[39m    [4m1[24m[4m5[24m869.          [4m1[24m[4m5[24m752.           [4m1[24m[4m5[24m312.
-## [90m11[39m BTC    2020-11-11 [90m19:00:00[39m    [4m1[24m[4m5[24m802.          [4m1[24m[4m5[24m869.           [4m1[24m[4m5[24m266.
-## [90m12[39m BTC    2020-11-11 [90m20:00:00[39m    [4m1[24m[4m5[24m805.          [4m1[24m[4m5[24m802.           [4m1[24m[4m5[24m299.
-## [90m13[39m BTC    2020-11-11 [90m21:00:00[39m    [4m1[24m[4m5[24m712.          [4m1[24m[4m5[24m805.           [4m1[24m[4m5[24m285.
-## [90m14[39m BTC    2020-11-11 [90m22:00:00[39m    [4m1[24m[4m5[24m814.          [4m1[24m[4m5[24m712.           [4m1[24m[4m5[24m376.
-## [90m15[39m BTC    2020-11-11 [90m23:00:00[39m    [4m1[24m[4m5[24m783.          [4m1[24m[4m5[24m814.           [4m1[24m[4m5[24m365.
-## [90m16[39m BTC    2020-11-12 [90m00:00:00[39m    [4m1[24m[4m5[24m685.          [4m1[24m[4m5[24m783.           [4m1[24m[4m5[24m295.
-## [90m17[39m BTC    2020-11-12 [90m01:00:00[39m    [4m1[24m[4m5[24m610.          [4m1[24m[4m5[24m685.           [4m1[24m[4m5[24m473.
-## [90m18[39m BTC    2020-11-12 [90m02:00:00[39m    [4m1[24m[4m5[24m640.          [4m1[24m[4m5[24m610.           [4m1[24m[4m5[24m433.
-## [90m19[39m BTC    2020-11-12 [90m03:00:00[39m    [4m1[24m[4m5[24m618.          [4m1[24m[4m5[24m640.           [4m1[24m[4m5[24m393.
-## [90m20[39m BTC    2020-11-12 [90m04:00:00[39m    [4m1[24m[4m5[24m628.          [4m1[24m[4m5[24m618.           [4m1[24m[4m5[24m405.
-## [90m21[39m BTC    2020-11-12 [90m05:00:00[39m    [4m1[24m[4m5[24m658.          [4m1[24m[4m5[24m628.           [4m1[24m[4m5[24m370.
-## [90m22[39m BTC    2020-11-12 [90m06:00:00[39m    [4m1[24m[4m5[24m747.          [4m1[24m[4m5[24m658.           [4m1[24m[4m5[24m369.
-## [90m23[39m BTC    2020-11-12 [90m07:00:00[39m    [4m1[24m[4m5[24m793.          [4m1[24m[4m5[24m747.           [4m1[24m[4m5[24m357.
-## [90m24[39m BTC    2020-11-12 [90m08:00:00[39m    [4m1[24m[4m5[24m856.          [4m1[24m[4m5[24m793.           [4m1[24m[4m5[24m402.
-## [90m25[39m BTC    2020-11-12 [90m09:00:00[39m    [4m1[24m[4m5[24m786.          [4m1[24m[4m5[24m856.           [4m1[24m[4m5[24m398.
-## [90m26[39m BTC    2020-11-12 [90m10:00:00[39m    [4m1[24m[4m6[24m043.          [4m1[24m[4m5[24m786.           [4m1[24m[4m5[24m430.
-## [90m27[39m BTC    2020-11-12 [90m11:00:00[39m    [4m1[24m[4m5[24m704.          [4m1[24m[4m6[24m043.           [4m1[24m[4m5[24m589.
-## [90m28[39m BTC    2020-11-12 [90m12:00:00[39m    [4m1[24m[4m5[24m770.          [4m1[24m[4m5[24m704.           [4m1[24m[4m5[24m570.
-## [90m29[39m BTC    2020-11-12 [90m13:00:00[39m    [4m1[24m[4m5[24m888.          [4m1[24m[4m5[24m770.           [4m1[24m[4m5[24m624 
-## [90m30[39m BTC    2020-11-12 [90m14:00:00[39m    [4m1[24m[4m5[24m995.          [4m1[24m[4m5[24m888.           [4m1[24m[4m5[24m552.
+## [90m 1[39m BTC    2020-11-11 [90m15:00:00[39m    [4m1[24m[4m5[24m634.          [4m1[24m[4m5[24m552.           [4m1[24m[4m5[24m220.
+## [90m 2[39m BTC    2020-11-11 [90m16:00:00[39m    [4m1[24m[4m5[24m666.          [4m1[24m[4m5[24m634.           [4m1[24m[4m5[24m162.
+## [90m 3[39m BTC    2020-11-11 [90m17:00:00[39m    [4m1[24m[4m5[24m752.          [4m1[24m[4m5[24m666.           [4m1[24m[4m5[24m243.
+## [90m 4[39m BTC    2020-11-11 [90m18:00:00[39m    [4m1[24m[4m5[24m869.          [4m1[24m[4m5[24m752.           [4m1[24m[4m5[24m312.
+## [90m 5[39m BTC    2020-11-11 [90m19:00:00[39m    [4m1[24m[4m5[24m802.          [4m1[24m[4m5[24m869.           [4m1[24m[4m5[24m266.
+## [90m 6[39m BTC    2020-11-11 [90m20:00:00[39m    [4m1[24m[4m5[24m805.          [4m1[24m[4m5[24m802.           [4m1[24m[4m5[24m299.
+## [90m 7[39m BTC    2020-11-11 [90m21:00:00[39m    [4m1[24m[4m5[24m712.          [4m1[24m[4m5[24m805.           [4m1[24m[4m5[24m285.
+## [90m 8[39m BTC    2020-11-11 [90m22:00:00[39m    [4m1[24m[4m5[24m814.          [4m1[24m[4m5[24m712.           [4m1[24m[4m5[24m376.
+## [90m 9[39m BTC    2020-11-11 [90m23:00:00[39m    [4m1[24m[4m5[24m783.          [4m1[24m[4m5[24m814.           [4m1[24m[4m5[24m365.
+## [90m10[39m BTC    2020-11-12 [90m00:00:00[39m    [4m1[24m[4m5[24m685.          [4m1[24m[4m5[24m783.           [4m1[24m[4m5[24m295.
+## [90m11[39m BTC    2020-11-12 [90m01:00:00[39m    [4m1[24m[4m5[24m610.          [4m1[24m[4m5[24m685.           [4m1[24m[4m5[24m473.
+## [90m12[39m BTC    2020-11-12 [90m02:00:00[39m    [4m1[24m[4m5[24m640.          [4m1[24m[4m5[24m610.           [4m1[24m[4m5[24m433.
+## [90m13[39m BTC    2020-11-12 [90m03:00:00[39m    [4m1[24m[4m5[24m618.          [4m1[24m[4m5[24m640.           [4m1[24m[4m5[24m393.
+## [90m14[39m BTC    2020-11-12 [90m04:00:00[39m    [4m1[24m[4m5[24m628.          [4m1[24m[4m5[24m618.           [4m1[24m[4m5[24m405.
+## [90m15[39m BTC    2020-11-12 [90m05:00:00[39m    [4m1[24m[4m5[24m658.          [4m1[24m[4m5[24m628.           [4m1[24m[4m5[24m370.
+## [90m16[39m BTC    2020-11-12 [90m06:00:00[39m    [4m1[24m[4m5[24m747.          [4m1[24m[4m5[24m658.           [4m1[24m[4m5[24m369.
+## [90m17[39m BTC    2020-11-12 [90m07:00:00[39m    [4m1[24m[4m5[24m793.          [4m1[24m[4m5[24m747.           [4m1[24m[4m5[24m357.
+## [90m18[39m BTC    2020-11-12 [90m08:00:00[39m    [4m1[24m[4m5[24m856.          [4m1[24m[4m5[24m793.           [4m1[24m[4m5[24m402.
+## [90m19[39m BTC    2020-11-12 [90m09:00:00[39m    [4m1[24m[4m5[24m786.          [4m1[24m[4m5[24m856.           [4m1[24m[4m5[24m398.
+## [90m20[39m BTC    2020-11-12 [90m10:00:00[39m    [4m1[24m[4m6[24m043.          [4m1[24m[4m5[24m786.           [4m1[24m[4m5[24m430.
+## [90m21[39m BTC    2020-11-12 [90m11:00:00[39m    [4m1[24m[4m5[24m704.          [4m1[24m[4m6[24m043.           [4m1[24m[4m5[24m589.
+## [90m22[39m BTC    2020-11-12 [90m12:00:00[39m    [4m1[24m[4m5[24m770.          [4m1[24m[4m5[24m704.           [4m1[24m[4m5[24m570.
+## [90m23[39m BTC    2020-11-12 [90m13:00:00[39m    [4m1[24m[4m5[24m888.          [4m1[24m[4m5[24m770.           [4m1[24m[4m5[24m624 
+## [90m24[39m BTC    2020-11-12 [90m14:00:00[39m    [4m1[24m[4m5[24m995.          [4m1[24m[4m5[24m888.           [4m1[24m[4m5[24m552.
+## [90m25[39m BTC    2020-11-12 [90m15:00:00[39m    [4m1[24m[4m5[24m985.          [4m1[24m[4m5[24m995.           [4m1[24m[4m5[24m634.
+## [90m26[39m BTC    2020-11-12 [90m16:00:00[39m    [4m1[24m[4m6[24m126.          [4m1[24m[4m5[24m985.           [4m1[24m[4m5[24m666.
+## [90m27[39m BTC    2020-11-12 [90m17:00:00[39m    [4m1[24m[4m6[24m128.          [4m1[24m[4m6[24m126.           [4m1[24m[4m5[24m752.
+## [90m28[39m BTC    2020-11-12 [90m18:00:00[39m    [4m1[24m[4m5[24m940.          [4m1[24m[4m6[24m128.           [4m1[24m[4m5[24m869.
+## [90m29[39m BTC    2020-11-12 [90m19:00:00[39m    [4m1[24m[4m6[24m097.          [4m1[24m[4m5[24m940.           [4m1[24m[4m5[24m802.
+## [90m30[39m BTC    2020-11-12 [90m20:00:00[39m    [4m1[24m[4m6[24m067.          [4m1[24m[4m6[24m097.           [4m1[24m[4m5[24m805.
 ## [90m# … with 1 more variable: target_price_24h [3m[90m<dbl>[90m[23m[39m
 ```
 
@@ -963,36 +1042,36 @@ cryptodata %>%
 ## [90m# Groups:   symbol [1][39m
 ##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##    [3m[90m<chr>[39m[23m  [3m[90m<dttm>[39m[23m                  [3m[90m<dbl>[39m[23m           [3m[90m<dbl>[39m[23m            [3m[90m<dbl>[39m[23m
-## [90m 1[39m BTC    2020-11-11 [90m09:00:00[39m    [4m1[24m[4m5[24m398.          [4m1[24m[4m5[24m402.           [4m1[24m[4m5[24m370.
-## [90m 2[39m BTC    2020-11-11 [90m10:00:00[39m    [4m1[24m[4m5[24m430.          [4m1[24m[4m5[24m398.           [4m1[24m[4m5[24m385.
-## [90m 3[39m BTC    2020-11-11 [90m11:00:00[39m    [4m1[24m[4m5[24m589.          [4m1[24m[4m5[24m430.           [4m1[24m[4m5[24m309.
-## [90m 4[39m BTC    2020-11-11 [90m12:00:00[39m    [4m1[24m[4m5[24m570.          [4m1[24m[4m5[24m589.           [4m1[24m[4m5[24m274.
-## [90m 5[39m BTC    2020-11-11 [90m13:00:00[39m    [4m1[24m[4m5[24m624           [4m1[24m[4m5[24m570.           [4m1[24m[4m5[24m283.
-## [90m 6[39m BTC    2020-11-11 [90m14:00:00[39m    [4m1[24m[4m5[24m552.          [4m1[24m[4m5[24m624            [4m1[24m[4m5[24m305.
-## [90m 7[39m BTC    2020-11-11 [90m15:00:00[39m    [4m1[24m[4m5[24m634.          [4m1[24m[4m5[24m552.           [4m1[24m[4m5[24m220.
-## [90m 8[39m BTC    2020-11-11 [90m16:00:00[39m    [4m1[24m[4m5[24m666.          [4m1[24m[4m5[24m634.           [4m1[24m[4m5[24m162.
-## [90m 9[39m BTC    2020-11-11 [90m17:00:00[39m    [4m1[24m[4m5[24m752.          [4m1[24m[4m5[24m666.           [4m1[24m[4m5[24m243.
-## [90m10[39m BTC    2020-11-11 [90m18:00:00[39m    [4m1[24m[4m5[24m869.          [4m1[24m[4m5[24m752.           [4m1[24m[4m5[24m312.
-## [90m11[39m BTC    2020-11-11 [90m19:00:00[39m    [4m1[24m[4m5[24m802.          [4m1[24m[4m5[24m869.           [4m1[24m[4m5[24m266.
-## [90m12[39m BTC    2020-11-11 [90m20:00:00[39m    [4m1[24m[4m5[24m805.          [4m1[24m[4m5[24m802.           [4m1[24m[4m5[24m299.
-## [90m13[39m BTC    2020-11-11 [90m21:00:00[39m    [4m1[24m[4m5[24m712.          [4m1[24m[4m5[24m805.           [4m1[24m[4m5[24m285.
-## [90m14[39m BTC    2020-11-11 [90m22:00:00[39m    [4m1[24m[4m5[24m814.          [4m1[24m[4m5[24m712.           [4m1[24m[4m5[24m376.
-## [90m15[39m BTC    2020-11-11 [90m23:00:00[39m    [4m1[24m[4m5[24m783.          [4m1[24m[4m5[24m814.           [4m1[24m[4m5[24m365.
-## [90m16[39m BTC    2020-11-12 [90m00:00:00[39m    [4m1[24m[4m5[24m685.          [4m1[24m[4m5[24m783.           [4m1[24m[4m5[24m295.
-## [90m17[39m BTC    2020-11-12 [90m01:00:00[39m    [4m1[24m[4m5[24m610.          [4m1[24m[4m5[24m685.           [4m1[24m[4m5[24m473.
-## [90m18[39m BTC    2020-11-12 [90m02:00:00[39m    [4m1[24m[4m5[24m640.          [4m1[24m[4m5[24m610.           [4m1[24m[4m5[24m433.
-## [90m19[39m BTC    2020-11-12 [90m03:00:00[39m    [4m1[24m[4m5[24m618.          [4m1[24m[4m5[24m640.           [4m1[24m[4m5[24m393.
-## [90m20[39m BTC    2020-11-12 [90m04:00:00[39m    [4m1[24m[4m5[24m628.          [4m1[24m[4m5[24m618.           [4m1[24m[4m5[24m405.
-## [90m21[39m BTC    2020-11-12 [90m05:00:00[39m    [4m1[24m[4m5[24m658.          [4m1[24m[4m5[24m628.           [4m1[24m[4m5[24m370.
-## [90m22[39m BTC    2020-11-12 [90m06:00:00[39m    [4m1[24m[4m5[24m747.          [4m1[24m[4m5[24m658.           [4m1[24m[4m5[24m369.
-## [90m23[39m BTC    2020-11-12 [90m07:00:00[39m    [4m1[24m[4m5[24m793.          [4m1[24m[4m5[24m747.           [4m1[24m[4m5[24m357.
-## [90m24[39m BTC    2020-11-12 [90m08:00:00[39m    [4m1[24m[4m5[24m856.          [4m1[24m[4m5[24m793.           [4m1[24m[4m5[24m402.
-## [90m25[39m BTC    2020-11-12 [90m09:00:00[39m    [4m1[24m[4m5[24m786.          [4m1[24m[4m5[24m856.           [4m1[24m[4m5[24m398.
-## [90m26[39m BTC    2020-11-12 [90m10:00:00[39m    [4m1[24m[4m6[24m043.          [4m1[24m[4m5[24m786.           [4m1[24m[4m5[24m430.
-## [90m27[39m BTC    2020-11-12 [90m11:00:00[39m    [4m1[24m[4m5[24m704.          [4m1[24m[4m6[24m043.           [4m1[24m[4m5[24m589.
-## [90m28[39m BTC    2020-11-12 [90m12:00:00[39m    [4m1[24m[4m5[24m770.          [4m1[24m[4m5[24m704.           [4m1[24m[4m5[24m570.
-## [90m29[39m BTC    2020-11-12 [90m13:00:00[39m    [4m1[24m[4m5[24m888.          [4m1[24m[4m5[24m770.           [4m1[24m[4m5[24m624 
-## [90m30[39m BTC    2020-11-12 [90m14:00:00[39m    [4m1[24m[4m5[24m995.          [4m1[24m[4m5[24m888.           [4m1[24m[4m5[24m552.
+## [90m 1[39m BTC    2020-11-11 [90m15:00:00[39m    [4m1[24m[4m5[24m634.          [4m1[24m[4m5[24m552.           [4m1[24m[4m5[24m220.
+## [90m 2[39m BTC    2020-11-11 [90m16:00:00[39m    [4m1[24m[4m5[24m666.          [4m1[24m[4m5[24m634.           [4m1[24m[4m5[24m162.
+## [90m 3[39m BTC    2020-11-11 [90m17:00:00[39m    [4m1[24m[4m5[24m752.          [4m1[24m[4m5[24m666.           [4m1[24m[4m5[24m243.
+## [90m 4[39m BTC    2020-11-11 [90m18:00:00[39m    [4m1[24m[4m5[24m869.          [4m1[24m[4m5[24m752.           [4m1[24m[4m5[24m312.
+## [90m 5[39m BTC    2020-11-11 [90m19:00:00[39m    [4m1[24m[4m5[24m802.          [4m1[24m[4m5[24m869.           [4m1[24m[4m5[24m266.
+## [90m 6[39m BTC    2020-11-11 [90m20:00:00[39m    [4m1[24m[4m5[24m805.          [4m1[24m[4m5[24m802.           [4m1[24m[4m5[24m299.
+## [90m 7[39m BTC    2020-11-11 [90m21:00:00[39m    [4m1[24m[4m5[24m712.          [4m1[24m[4m5[24m805.           [4m1[24m[4m5[24m285.
+## [90m 8[39m BTC    2020-11-11 [90m22:00:00[39m    [4m1[24m[4m5[24m814.          [4m1[24m[4m5[24m712.           [4m1[24m[4m5[24m376.
+## [90m 9[39m BTC    2020-11-11 [90m23:00:00[39m    [4m1[24m[4m5[24m783.          [4m1[24m[4m5[24m814.           [4m1[24m[4m5[24m365.
+## [90m10[39m BTC    2020-11-12 [90m00:00:00[39m    [4m1[24m[4m5[24m685.          [4m1[24m[4m5[24m783.           [4m1[24m[4m5[24m295.
+## [90m11[39m BTC    2020-11-12 [90m01:00:00[39m    [4m1[24m[4m5[24m610.          [4m1[24m[4m5[24m685.           [4m1[24m[4m5[24m473.
+## [90m12[39m BTC    2020-11-12 [90m02:00:00[39m    [4m1[24m[4m5[24m640.          [4m1[24m[4m5[24m610.           [4m1[24m[4m5[24m433.
+## [90m13[39m BTC    2020-11-12 [90m03:00:00[39m    [4m1[24m[4m5[24m618.          [4m1[24m[4m5[24m640.           [4m1[24m[4m5[24m393.
+## [90m14[39m BTC    2020-11-12 [90m04:00:00[39m    [4m1[24m[4m5[24m628.          [4m1[24m[4m5[24m618.           [4m1[24m[4m5[24m405.
+## [90m15[39m BTC    2020-11-12 [90m05:00:00[39m    [4m1[24m[4m5[24m658.          [4m1[24m[4m5[24m628.           [4m1[24m[4m5[24m370.
+## [90m16[39m BTC    2020-11-12 [90m06:00:00[39m    [4m1[24m[4m5[24m747.          [4m1[24m[4m5[24m658.           [4m1[24m[4m5[24m369.
+## [90m17[39m BTC    2020-11-12 [90m07:00:00[39m    [4m1[24m[4m5[24m793.          [4m1[24m[4m5[24m747.           [4m1[24m[4m5[24m357.
+## [90m18[39m BTC    2020-11-12 [90m08:00:00[39m    [4m1[24m[4m5[24m856.          [4m1[24m[4m5[24m793.           [4m1[24m[4m5[24m402.
+## [90m19[39m BTC    2020-11-12 [90m09:00:00[39m    [4m1[24m[4m5[24m786.          [4m1[24m[4m5[24m856.           [4m1[24m[4m5[24m398.
+## [90m20[39m BTC    2020-11-12 [90m10:00:00[39m    [4m1[24m[4m6[24m043.          [4m1[24m[4m5[24m786.           [4m1[24m[4m5[24m430.
+## [90m21[39m BTC    2020-11-12 [90m11:00:00[39m    [4m1[24m[4m5[24m704.          [4m1[24m[4m6[24m043.           [4m1[24m[4m5[24m589.
+## [90m22[39m BTC    2020-11-12 [90m12:00:00[39m    [4m1[24m[4m5[24m770.          [4m1[24m[4m5[24m704.           [4m1[24m[4m5[24m570.
+## [90m23[39m BTC    2020-11-12 [90m13:00:00[39m    [4m1[24m[4m5[24m888.          [4m1[24m[4m5[24m770.           [4m1[24m[4m5[24m624 
+## [90m24[39m BTC    2020-11-12 [90m14:00:00[39m    [4m1[24m[4m5[24m995.          [4m1[24m[4m5[24m888.           [4m1[24m[4m5[24m552.
+## [90m25[39m BTC    2020-11-12 [90m15:00:00[39m    [4m1[24m[4m5[24m985.          [4m1[24m[4m5[24m995.           [4m1[24m[4m5[24m634.
+## [90m26[39m BTC    2020-11-12 [90m16:00:00[39m    [4m1[24m[4m6[24m126.          [4m1[24m[4m5[24m985.           [4m1[24m[4m5[24m666.
+## [90m27[39m BTC    2020-11-12 [90m17:00:00[39m    [4m1[24m[4m6[24m128.          [4m1[24m[4m6[24m126.           [4m1[24m[4m5[24m752.
+## [90m28[39m BTC    2020-11-12 [90m18:00:00[39m    [4m1[24m[4m5[24m940.          [4m1[24m[4m6[24m128.           [4m1[24m[4m5[24m869.
+## [90m29[39m BTC    2020-11-12 [90m19:00:00[39m    [4m1[24m[4m6[24m097.          [4m1[24m[4m5[24m940.           [4m1[24m[4m5[24m802.
+## [90m30[39m BTC    2020-11-12 [90m20:00:00[39m    [4m1[24m[4m6[24m067.          [4m1[24m[4m6[24m097.           [4m1[24m[4m5[24m805.
 ## [90m# … with 1 more variable: target_price_24h [3m[90m<dbl>[90m[23m[39m
 ```
 
@@ -1004,7 +1083,7 @@ Move on to the [next section](#visualization) ➡️ to learn some amazing tools
 
 <!--chapter:end:03-DataPrep.Rmd-->
 
-# Visualization 📉
+# Visualization
 
 Making visualizations using the [**ggplot2**]{style="color: #ae7b11;"} package [@R-ggplot2] is one of the very best tools available in the R ecosystem. The ***gg*** in [**ggplot2**]{style="color: #ae7b11;"} stands for the [***Grammar of Graphics***]{style="color: purple;"}, which is essentially the idea that many different types of charts share the same underlying building blocks, and that they can be put together in different ways to make charts that look very different from each other. [In Hadley Wickham's (the creator of the package) own words,](https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/) ***"a pie chart is just a bar chart drawn in polar coordinates", "They look very different, but in terms of the grammar they have a lot of underlying similarities."***
 
@@ -1185,7 +1264,7 @@ We already imported the [**plotly**]{style="color: #ae7b11;"} package [in the se
 ggplotly(crypto_chart)
 ```
 
-preserve4a23e4d338f52fea
+preserveb5787863e2c57eaf
 
 **Use your mouse to hover over specific points on the chart above**. Also notice that we did not overwrite the [**crypto_chart**]{style="color: blue;"} object, but are just displaying the results.
 
@@ -1344,4 +1423,2828 @@ Awesome work! Move on to the [next section](#model-validation-plan) ➡️ to st
 
 
 <!--chapter:end:04-Visualization.Rmd-->
+
+# Model Validation Plan
+
+Before making predictive models, we need to be careful in considering the ways by which we will be able to define a predictive model as being "good" or "bad". We **do not** want to deploy a predictive model before having a good understanding of how we expect the model to perform once used in the real world. We will likely never get a 100% accurate representation of what the model will actually perform like in the real world without actually tracking those results over time, but there are ways for us to get a sense of whether something works or not ahead of time, as well as ensuring no blatant mistakes were made when training the models. 
+
+## Testing Models
+
+The simplest method of getting a sense of the efficacy of a predictive model is to take a majority of the data (usually around 80% of the observations) and assign it to be the [**train dataset**]{style="color: purple;"}, which the predictive models use to learn the statistical patterns in the data that can then be used to make predictions about the future. Using the rest of the data which has not yet been seen by the statistical models (referred to as the [**test dataset**]{style="color: purple;"}), we can assess if the statistical models work on the new data in the way that we would expect based on the results obtained on the train dataset. If the results are consistent between the two, this is a good sign. 
+
+## Cross Validation
+
+If we do this multiple times (a process referred to as [**cross validation**]{style="color: purple;"}) we have even more information at our disposal to understand how good the model is at predicting data it has not seen before. If the results on the test data are much worse than those obtained on the train data, this could be a sign of [[**overfitting**]{style="color: purple;"}](https://en.wikipedia.org/wiki/Overfitting) which means the model created overspecialized itself on the training data, and it is not very good at predicting new data because it learned the exact patterns of the training data instead of understanding the actual relationships between the different variables. **Always beware of results that are too good to be true. It is more likely a mistake was made somewhere in the process**. This is a longer discussion in its own right, but it is also important to consider how the data used to trained the model will be utilized in the context of making a new prediction; if a variable used to train the model is not available when making a new prediction, that is simply not going to work. 
+
+In our context, it is also important to consider the date/time aspect of the data. For example, if we used data later into the future for the train dataset relative to the test data, could this give the model more information that would actually be available to it when it is time to make a new prediction? It absolutely could because the columns with the lagged prices represent prices from the past, which could be "giving away the solution" to the test data in a way that could not be leveraged when it is time to make new predictions. Therefore, when splitting the data into train/test datasets we will keep track of when the data was collected using [**time aware cross validation**]{style="color: purple;"}.
+
+### Time Aware Cross Validation
+
+Because of the issues just discussed above, we will need to make sure that the train data was always collected before the test data was. This is what we mean by "time aware".
+
+We will then use "cross validation" in the sense that we will create **5 different train/test splits to assess the accuracy of the models**. From those 5, we will take the test split containing the most recent data, and consider this to be our [**holdout dataset**]{style="color: purple;"}. The holdout dataset represents the most recent version of the world that we can compare the performance of the models against, and will give us an additional way of assessing their accuracy.
+
+This will leave us with:
+
+- 5 train datasets to build predictive models from.
+
+- 4 test datasets to assess the performance of the first 4 trained models against. Is the model able to predict price movements accurately and consistently when trained and tested on 4 independent subsets of the data?
+
+- 1 holdout dataset to assess the performance of all 5 trained models. How accurate are the models at predicting the most recent subset of the data that we can assess?
+
+**The explanation above is really important to understand!** The code and implementation of this step specifically not so much, however. Focus on understanding the idea conceptually as outlined above rather than understanding the code used below.
+
+In the code below we are adding two new columns. First the [**split**]{style="color: blue;"}, which assigns each observation a number 1 through 5 of the cross validation split that the data belongs to based on when it was collected. Then the [**training**]{style="color: blue;"} column, which identifies each row as being part of the **train**, **test**, or **holdout** data of the given [**split**]{style="color: blue;"}.
+
+We will not walk through the steps of the code below in detail outside of the comments left throughout the code because we would rather focus our attention on the conceptual understanding for this step as outlined above. There are many ways of doing time aware cross validation, but none worked particularly well for the way we wanted to outline the next sections, so we made our own and it's not important to understand how this is working, but it is also not that complex and uses the same tools used up to this point in this section. [See this section of the high-level tutorial for an approach that can be used on datasets outside of the one used in this tutorial](https://cryptocurrencyresearch.org/high-level/#/cross-validation-for-timeseries), and is compatible with the tools used in the predictive modeling section of both versions.
+
+
+```r
+# Remove rows with null date_time_utc to exclude missing data from next steps
+cryptodata <- drop_na(cryptodata, date_time_utc)
+# Counts by symbol
+cryptodata <- mutate(group_by(cryptodata, symbol), tot_rows = n())
+# Add row index by symbol
+cryptodata <- mutate(arrange(cryptodata, date_time_utc), row_id = seq_along(date_time_utc))
+# Calculate what rows belong in the first split
+cryptodata <- cryptodata %>% mutate(split_rows_1 = as.integer(n()/5),
+                                    split_rows_2 = as.integer(split_rows_1*2),
+                                    split_rows_3 = as.integer(split_rows_1*3),
+                                    split_rows_4 = as.integer(split_rows_1*4),
+                                    split_rows_5 = as.integer(split_rows_1*5))
+# Now calculate what split the current row_id belongs into
+cryptodata <- mutate(cryptodata, 
+                     split = case_when(
+                       row_id <= split_rows_1 ~ 1,
+                       row_id <= split_rows_2 ~ 2,
+                       row_id <= split_rows_3 ~ 3,
+                       row_id <= split_rows_4 ~ 4,
+                       row_id > split_rows_4 ~ 5))
+# Now figure out train/test groups
+cryptodata <- cryptodata %>% mutate(train_rows_1 = (as.integer(n()/5))*0.8,
+                                    test_rows_1  = train_rows_1 + (as.integer(n()/5))*0.2,
+                                    train_rows_2 = test_rows_1 + train_rows_1,
+                                    test_rows_2  = train_rows_2 + (as.integer(n()/5))*0.2,
+                                    train_rows_3 = test_rows_2 + train_rows_1,
+                                    test_rows_3  = train_rows_3 + (as.integer(n()/5))*0.2,
+                                    train_rows_4 = test_rows_3 + train_rows_1,
+                                    test_rows_4  = train_rows_4 + (as.integer(n()/5))*0.2,
+                                    train_rows_5 = test_rows_4 + train_rows_1,
+                                    test_rows_5  = train_rows_5 + (as.integer(n()/5))*0.2)
+# Now assign train/test groups
+cryptodata <- mutate(cryptodata, 
+                     training = case_when(
+                       row_id <= train_rows_1 ~ 'train',
+                       row_id <= test_rows_1 ~ 'test',
+                       row_id <= train_rows_2 ~ 'train',
+                       row_id <= test_rows_2 ~ 'test',
+                       row_id <= train_rows_3 ~ 'train',
+                       row_id <= test_rows_3 ~ 'test',
+                       row_id <= train_rows_4 ~ 'train',
+                       row_id <= test_rows_4 ~ 'test',
+                       row_id <= train_rows_5 ~ 'train',
+                       row_id > train_rows_5 ~ 'holdout'))
+# Remove all columns that are no longer needed now
+cryptodata <- select(cryptodata, -(tot_rows:test_rows_5), -(trade_usd_1:trade_usd_5),
+                     -(ask_1_price:bid_5_quantity), -pair, -quote_currency, 
+                     -pkDummy, -pkey, -ts_index, split)
+```
+
+Our data now has the new columns `training` (*train*, *test* or *holdout*) and `split` (numbers 1-5) added to it, let's take a look at the new columns:
+
+
+```r
+select(cryptodata, training, split)
+```
+
+```
+## [90m# A tibble: 153,240 x 3[39m
+## [90m# Groups:   symbol [96][39m
+##    symbol training split
+##    [3m[90m<chr>[39m[23m  [3m[90m<chr>[39m[23m    [3m[90m<dbl>[39m[23m
+## [90m 1[39m EOS    train        1
+## [90m 2[39m IQ     train        1
+## [90m 3[39m EDG    train        1
+## [90m 4[39m LEO    train        1
+## [90m 5[39m GBX    train        1
+## [90m 6[39m ACT    train        1
+## [90m 7[39m MBL    train        1
+## [90m 8[39m BTG    train        1
+## [90m 9[39m ACAT   train        1
+## [90m10[39m LINK   train        1
+## [90m# … with 153,230 more rows[39m
+```
+
+*Notice that even though we left `symbol` variables out of our selection, but because it is part of the way we grouped our data, it was added back in with the message "Adding missing grouping variables `symbol`". The data is tied to its groupings when performing all operations until we use [**ungroup()**]{style="color: green;"} to undo them.*
+
+Let's add the new [**split**]{style="color: blue;"} column to the way the data is grouped:
+
+
+```r
+cryptodata <- group_by(cryptodata, symbol, split)
+```
+
+The new field [**split**]{style="color: blue;"}, helps us split the data into 5 different datasets based on the date, and contains a number from 1-5. The new field [**training**]{style="color: blue;"} flags the data as being part of the ***train*** dataset, or the ***test***, or the ***holdout*** (for the first split) dataset for each of the 5 splits/datasets.
+
+Running the same code as before with [**tail()**]{style="color: green;"} added, we can see rows associated with the test data of the 5th split (again remember, each of the 5 splits has a training and testing dataset):
+
+
+```r
+tail( select(cryptodata, training, split) )
+```
+
+```
+## [90m# A tibble: 6 x 3[39m
+## [90m# Groups:   symbol, split [6][39m
+##   symbol training split
+##   [3m[90m<chr>[39m[23m  [3m[90m<chr>[39m[23m    [3m[90m<dbl>[39m[23m
+## [90m1[39m SWM    holdout      5
+## [90m2[39m PLA    holdout      5
+## [90m3[39m IPL    holdout      5
+## [90m4[39m VET    holdout      5
+## [90m5[39m AAB    holdout      5
+## [90m6[39m REP    holdout      5
+```
+
+The easiest way to understand these groupings, is to visualize them:
+
+
+```r
+groups_chart <- ggplot(cryptodata,
+                       aes(x = date_time_utc, y = split, color = training)) +
+                       geom_point()
+# now show the chart we just saved:
+groups_chart
+```
+
+<img src="CryptoResearchPaper_files/figure-html/cv_groupings_visualized-1.png" width="672" />
+
+The chart above looks strange because it includes all cryptocurrencies when they are treated indipendently. We can view the results for the **BTC** cryptocurrency only by running the same code as above, but instead of visualizing the dataset in its entirety, filtering the data using **`filter(cryptodata, symbol == "BTC")`**, which will give us a much better impression of the breakdown that has been created:
+
+
+```r
+ggplot(filter(cryptodata, symbol == 'BTC'), 
+       aes(x = date_time_utc,
+           y = split, 
+           color = training)) +
+  geom_point()
+```
+
+<img src="CryptoResearchPaper_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+
+We can check on the groupings for each cryptocurrency by animating the [**cryptodata**]{style="color: blue;"} object:
+
+
+```r
+animated_chart <- groups_chart +
+    transition_states(symbol) +
+    ggtitle('Now showing: {closest_state}')
+# show the new animated chart
+animate(animated_chart, fps = 2)
+```
+
+![](CryptoResearchPaper_files/figure-html/animate_groupings-1.gif)<!-- -->
+
+<!-- The fps needs to be 1, 2, or any number divisible by 2 or the code won't work -->
+
+It can be a bit hard to tell how many data points there are because they end up looking like lines. Let's change the plot to use `geom_jitter()` instead of `geom_point()`, which will manually offset the points and give us a better impression of how many data points there are:
+
+
+```r
+animated_chart <- animated_chart +
+                    geom_jitter()
+# show the new animated chart
+animate(animated_chart, fps = 2)
+```
+
+![](CryptoResearchPaper_files/figure-html/gganimate_jitter-1.gif)<!-- -->
+
+## Fix Data by Split
+
+Now that we have split the data into many different subsets, those subsets themselves may have issues that prevent the predictive models from working as expected.
+
+### Zero Variance
+
+One of the first models we will make [in the next section is a simple [**linear regression**]{style="color: purple;"} model](#example-simple-model). The regular R function for this **will not work** if the data contains any columns that have [***zero variance***]{style="color: purple;"}, meaning the value of the column never changes throughout the data being given to the model. Therefore, let's fix any issues relating to zero variance columns in any dataset before we change the structure of the data in the step after this one.
+
+First let's change the grouping of the data. We are interested in calculating the zero variance based on the [**symbol**]{style="color: blue;"}, [**split**]{style="color: blue;"}, and [**training**]{style="color: blue;"} fields:
+
+```r
+cryptodata <- group_by(cryptodata, symbol, split, training)
+```
+
+
+Now let's create a new object called [**find_zero_var**]{style="color: blue;"} which shows the value of the minimum standard deviation across all columns and calculated based on the grouping of symbol, split and train:
+
+```r
+find_zero_var <- select(mutate(cryptodata, min_sd = min(sd(price_usd, na.rm=T), 
+                                                        sd(target_price_24h, na.rm=T),
+                                                        sd(lagged_price_1h, na.rm=T), 
+                                                        sd(lagged_price_2h, na.rm=T),
+                                                        sd(lagged_price_3h, na.rm=T), 
+                                                        sd(lagged_price_6h, na.rm=T),
+                                                        sd(lagged_price_12h, na.rm=T), 
+                                                        sd(lagged_price_24h, na.rm=T))), min_sd)
+# Show data
+find_zero_var
+```
+
+```
+## [90m# A tibble: 153,240 x 4[39m
+## [90m# Groups:   symbol, split, training [960][39m
+##    symbol split training     min_sd
+##    [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m [3m[90m<chr>[39m[23m         [3m[90m<dbl>[39m[23m
+## [90m 1[39m EOS        1 train    0.257     
+## [90m 2[39m IQ         1 train    0.011[4m7[24m    
+## [90m 3[39m EDG        1 train    0.000[4m6[24m[4m3[24m[4m3[24m  
+## [90m 4[39m LEO        1 train    0.118     
+## [90m 5[39m GBX        1 train    0.002[4m5[24m[4m6[24m   
+## [90m 6[39m ACT        1 train    0.000[4m7[24m[4m2[24m[4m5[24m  
+## [90m 7[39m MBL        1 train    0.000[4m0[24m[4m0[24m[4m7[24m65
+## [90m 8[39m BTG        1 train    0.375     
+## [90m 9[39m ACAT       1 train    0.000[4m0[24m[4m1[24m[4m6[24m5 
+## [90m10[39m LINK       1 train    1.88      
+## [90m# … with 153,230 more rows[39m
+```
+
+Next let's get to a list of cryptocurrency symbols where the minimum standard deviation across all columns for all splits of the data is 0, which is the list of cryptocurrencies we want to later remove from the data:
+
+```r
+minimum_sd <- filter(distinct(mutate(group_by(ungroup(find_zero_var), symbol),
+                                     min_sd = min(min_sd, na.rm=T)), min_sd),min_sd < 0.0001)$symbol
+# Show result
+minimum_sd
+```
+
+```
+##  [1] "IQ"    "LEO"   "GBX"   "ACT"   "MBL"   "ACAT"  "RCN"   "FDZ"   "PAXG" 
+## [10] "MESH"  "REX"   "NAV"   "SRN"   "XDN"   "CUR"   "DENT"  "IPL"   "XVG"  
+## [19] "APPC"  "NCT"   "HTML"  "STORJ" "IHT"   "CDT"   "COCOS" "SPC"   "SBD"  
+## [28] "OAX"   "GST"   "CND"   "BYTZ"  "SUB"   "PLA"   "BTT"   "SMART" "MG"   
+## [37] "SWM"   "PHX"   "CUTE"  "BCN"   "CHZ"   "SENT"  "BNK"   "CHAT"  "WIKI" 
+## [46] "NEU"   "XPR"   "ECA"   "JST"   "SEELE" "VSYS"  "AAB"   "DDR"   "CMCT"
+```
+
+Now we can remove these symbols from appearing in the dataset:
+
+
+```r
+cryptodata <- filter(cryptodata, !(symbol %in% minimum_sd)) 
+```
+
+In the code above we match all rows where the symbol is part of the [**minimum_sd**]{style="color: blue;"} object with the list of cryptocurrency symbols to remove from the data, and we then negate the selection using the [**!**]{style="color: blue;"} operator to only keep rows with symbols not in the list we found.
+
+
+## Nest data {#nest-data}
+
+The underlying data structure we have been using up to this point is that of a [**data frame**]{style="color: purple;"}. This data type supports values of many kinds inside of its cells, so far we have seen things like numbers, strings, and dates, but we can also store an entire other data frame as a value. Doing this is called [**nesting**]{style="color: purple;"} the data.
+
+The steps taken below and in the [predictive modeling section that comes later](#predictive-modeling) use a similar approach to [the work published by Hadley Wickham on the subject](https://r4ds.had.co.nz/many-models.html) [@R_for_data_science].
+
+<!-- 11/10 REMOVED. CONFIRM NOT NEEDED BECAUSE ALREADY DID IN PREVIOUS STEP -->
+<!-- ... First update the way the data is grouped: -->
+
+<!-- ```{r group_for_nest} -->
+<!-- cryptodata <- group_by(cryptodata, symbol, split, training) -->
+<!-- ``` -->
+
+Here is an example of what happens when we [**nest()**]{style="color: green;"} the data:
+
+
+```r
+nest(cryptodata) 
+```
+
+```
+## [90m# A tibble: 420 x 4[39m
+## [90m# Groups:   symbol, training, split [420][39m
+##    symbol training split data               
+##    [3m[90m<chr>[39m[23m  [3m[90m<chr>[39m[23m    [3m[90m<dbl>[39m[23m [3m[90m<list>[39m[23m             
+## [90m 1[39m EOS    train        1 [90m<tibble [355 × 11]>[39m
+## [90m 2[39m EDG    train        1 [90m<tibble [362 × 11]>[39m
+## [90m 3[39m BTG    train        1 [90m<tibble [338 × 11]>[39m
+## [90m 4[39m LINK   train        1 [90m<tibble [250 × 11]>[39m
+## [90m 5[39m VET    train        1 [90m<tibble [335 × 11]>[39m
+## [90m 6[39m IHF    train        1 [90m<tibble [274 × 11]>[39m
+## [90m 7[39m DGB    train        1 [90m<tibble [362 × 11]>[39m
+## [90m 8[39m LTC    train        1 [90m<tibble [362 × 11]>[39m
+## [90m 9[39m NEXO   train        1 [90m<tibble [360 × 11]>[39m
+## [90m10[39m XMR    train        1 [90m<tibble [360 × 11]>[39m
+## [90m# … with 410 more rows[39m
+```
+
+We will begin by creating the new column containing the nested [**train**]{style="color: blue;"} data. Some additional steps were added to ensure the integrity of the data before we start training it, but these are not material outside of the things we have already discussed up to this point. Try to focus on the conceptual idea that we are creating a new dataset grouped by the [**symbol**]{style="color: blue;"}, [**training**]{style="color: blue;"} and [**split**]{style="color: blue;"} columns. As a first step, we are creating a new dataframe called [**cryptodata_train**]{style="color: blue;"} grouped by the [**symbol**]{style="color: blue;"} and [**split**]{style="color: blue;"} columns with the nested dataframes in the new [**train_data**]{style="color: blue;"} column:
+
+
+```r
+cryptodata_train <- rename(nest(filter(cryptodata, 
+                                       training=='train')), 
+                           train_data = 'data')
+# Now remove training column
+cryptodata_train <- select(ungroup(cryptodata_train, 
+                                   training), 
+                           -training)
+# Fix issues with individual groups of the data
+cryptodata_train$train_data <- lapply(cryptodata_train$train_data, na.omit)
+# First add new column with nrow of train dataset
+cryptodata_train <- group_by(ungroup(mutate(rowwise(cryptodata_train), 
+                                            train_rows = nrow(train_data))),
+                             symbol, split)
+# Remove all symbols where their train data has less than 20 rows at least once
+symbols_rm <- unique(filter(cryptodata_train, 
+                            split < 5, train_rows < 20)$symbol)
+# Remove all data relating to the symbols found above
+cryptodata_train <- filter(cryptodata_train, 
+                           ! symbol %in% symbols_rm) # ! is to make %not in% operator
+# Drop train_rows column
+cryptodata_train <- select(cryptodata_train, -train_rows)
+# Show results
+cryptodata_train
+```
+
+```{.scroll-lim}
+## [90m# A tibble: 200 x 3[39m
+## [90m# Groups:   symbol, split [200][39m
+##    symbol split train_data         
+##    [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m [3m[90m<list>[39m[23m             
+## [90m 1[39m EOS        1 [90m<tibble [278 × 11]>[39m
+## [90m 2[39m EDG        1 [90m<tibble [284 × 11]>[39m
+## [90m 3[39m BTG        1 [90m<tibble [257 × 11]>[39m
+## [90m 4[39m VET        1 [90m<tibble [262 × 11]>[39m
+## [90m 5[39m IHF        1 [90m<tibble [194 × 11]>[39m
+## [90m 6[39m DGB        1 [90m<tibble [284 × 11]>[39m
+## [90m 7[39m LTC        1 [90m<tibble [277 × 11]>[39m
+## [90m 8[39m NEXO       1 [90m<tibble [282 × 11]>[39m
+## [90m 9[39m XMR        1 [90m<tibble [266 × 11]>[39m
+## [90m10[39m VIB        1 [90m<tibble [224 × 11]>[39m
+## [90m# … with 190 more rows[39m
+```
+
+Now let's repeat the same process but on the [**test**]{style="color: blue;"} data to create the [**cryptodata_test**]{style="color: blue;"} object:
+
+
+```r
+cryptodata_test <- select(rename(nest(filter(cryptodata, 
+                                             training=='test')), 
+                                 test_data = 'data'), 
+                          -training)
+# Now remove training column
+cryptodata_test <- select(ungroup(cryptodata_test, 
+                                  training), 
+                          -training)
+# Show nested data
+cryptodata_test
+```
+
+```
+## [90m# A tibble: 168 x 3[39m
+## [90m# Groups:   symbol, split [168][39m
+##    symbol split test_data         
+##    [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m [3m[90m<list>[39m[23m            
+## [90m 1[39m LINK       1 [90m<tibble [63 × 11]>[39m
+## [90m 2[39m IHF        1 [90m<tibble [69 × 11]>[39m
+## [90m 3[39m VIB        1 [90m<tibble [75 × 11]>[39m
+## [90m 4[39m AYA        1 [90m<tibble [74 × 11]>[39m
+## [90m 5[39m REP        1 [90m<tibble [75 × 11]>[39m
+## [90m 6[39m VET        1 [90m<tibble [84 × 11]>[39m
+## [90m 7[39m BTG        1 [90m<tibble [85 × 11]>[39m
+## [90m 8[39m XEM        1 [90m<tibble [87 × 11]>[39m
+## [90m 9[39m HT         1 [90m<tibble [88 × 11]>[39m
+## [90m10[39m EOS        1 [90m<tibble [89 × 11]>[39m
+## [90m# … with 158 more rows[39m
+```
+
+As well as the [**hoildout**]{style="color: blue;"} data to create the [**cryptodata_holdout**]{style="color: blue;"} object:
+
+
+```r
+cryptodata_holdout <- rename(nest(filter(cryptodata, 
+                                         training=='holdout')), 
+                             holdout_data = 'data')
+# Remove split and training columns from holdout
+cryptodata_holdout <- select(ungroup(cryptodata_holdout, split, training), 
+                             -split, -training)
+# Show nested data
+cryptodata_holdout
+```
+
+```
+## [90m# A tibble: 42 x 2[39m
+## [90m# Groups:   symbol [42][39m
+##    symbol holdout_data      
+##    [3m[90m<chr>[39m[23m  [3m[90m<list>[39m[23m            
+## [90m 1[39m VIB    [90m<tibble [75 × 11]>[39m
+## [90m 2[39m VET    [90m<tibble [87 × 11]>[39m
+## [90m 3[39m BAT    [90m<tibble [94 × 11]>[39m
+## [90m 4[39m NEXO   [90m<tibble [94 × 11]>[39m
+## [90m 5[39m XMR    [90m<tibble [93 × 11]>[39m
+## [90m 6[39m DCR    [90m<tibble [91 × 11]>[39m
+## [90m 7[39m BTC    [90m<tibble [92 × 11]>[39m
+## [90m 8[39m DGB    [90m<tibble [92 × 11]>[39m
+## [90m 9[39m EDG    [90m<tibble [92 × 11]>[39m
+## [90m10[39m LTC    [90m<tibble [91 × 11]>[39m
+## [90m# … with 32 more rows[39m
+```
+
+### Join Results
+
+Now we can take the results that we grouped for each subset [**cryptodata_train**]{style="color: blue;"}, [**cryptodata_test**]{style="color: blue;"}, and [**cryptodata_holdout**]{style="color: blue;"}, and we can [**join**]{style="color: purple;"} the results to have all three new columns [**train_data**]{style="color: blue;"}, [**test_data**]{style="color: blue;"}, and [**holdout_data**]{style="color: blue;"} in a single new dataframe, which we will call [**cryptodata_nested**]{style="color: blue;"}:
+
+
+```r
+# Join train and test
+cryptodata_nested <- left_join(cryptodata_train, cryptodata_test, by = c("symbol", "split"))
+# Show new data
+cryptodata_nested
+```
+
+```
+## [90m# A tibble: 200 x 4[39m
+## [90m# Groups:   symbol, split [200][39m
+##    symbol split train_data          test_data         
+##    [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m [3m[90m<list>[39m[23m              [3m[90m<list>[39m[23m            
+## [90m 1[39m EOS        1 [90m<tibble [278 × 11]>[39m [90m<tibble [89 × 11]>[39m
+## [90m 2[39m EDG        1 [90m<tibble [284 × 11]>[39m [90m<tibble [91 × 11]>[39m
+## [90m 3[39m BTG        1 [90m<tibble [257 × 11]>[39m [90m<tibble [85 × 11]>[39m
+## [90m 4[39m VET        1 [90m<tibble [262 × 11]>[39m [90m<tibble [84 × 11]>[39m
+## [90m 5[39m IHF        1 [90m<tibble [194 × 11]>[39m [90m<tibble [69 × 11]>[39m
+## [90m 6[39m DGB        1 [90m<tibble [284 × 11]>[39m [90m<tibble [91 × 11]>[39m
+## [90m 7[39m LTC        1 [90m<tibble [277 × 11]>[39m [90m<tibble [91 × 11]>[39m
+## [90m 8[39m NEXO       1 [90m<tibble [282 × 11]>[39m [90m<tibble [91 × 11]>[39m
+## [90m 9[39m XMR        1 [90m<tibble [266 × 11]>[39m [90m<tibble [91 × 11]>[39m
+## [90m10[39m VIB        1 [90m<tibble [224 × 11]>[39m [90m<tibble [75 × 11]>[39m
+## [90m# … with 190 more rows[39m
+```
+*The [**by**]{style="color: blue;"} argument used above defines the key to use to join the data by, in this case the cryptocurrency [**symbol**]{style="color: blue;"}, as well as the specific [**split**]{style="color: blue;"}*.
+
+Next, let's join the new dataframe we just created [**cryptodata_nested**]{style="color: blue;"} to the holdout data as well and add the [**holdout_data**]{style="color: blue;"} column. In this case, we will want to keep the holdout data consistent for all 5 splits of a cryptocurrency instead of matching the data to a particular split; the models trained on the data from splits 1 through 5 will each have a different test dataset, but all 5 models will then be tested against the same holdout. Therefore, this time in the [**join()**]{style="color: green;"} performed below we are only supplying the cryptocurrency [**symbol**]{style="color: blue;"} for the [**by**]{style="color: blue;"} parameter:
+
+
+```r
+cryptodata_nested <- left_join(cryptodata_nested, cryptodata_holdout, by = "symbol")
+```
+
+Now we have our completed dataset that will allow us to iterate through each option and create many separate models as was [discussed throughout this section](#cross-validation): 
+
+
+```r
+cryptodata_nested
+```
+
+```
+## [90m# A tibble: 200 x 5[39m
+## [90m# Groups:   symbol, split [200][39m
+##    symbol split train_data          test_data          holdout_data      
+##    [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m [3m[90m<list>[39m[23m              [3m[90m<list>[39m[23m             [3m[90m<list>[39m[23m            
+## [90m 1[39m EOS        1 [90m<tibble [278 × 11]>[39m [90m<tibble [89 × 11]>[39m [90m<tibble [89 × 11]>[39m
+## [90m 2[39m EDG        1 [90m<tibble [284 × 11]>[39m [90m<tibble [91 × 11]>[39m [90m<tibble [92 × 11]>[39m
+## [90m 3[39m BTG        1 [90m<tibble [257 × 11]>[39m [90m<tibble [85 × 11]>[39m [90m<tibble [86 × 11]>[39m
+## [90m 4[39m VET        1 [90m<tibble [262 × 11]>[39m [90m<tibble [84 × 11]>[39m [90m<tibble [87 × 11]>[39m
+## [90m 5[39m IHF        1 [90m<tibble [194 × 11]>[39m [90m<tibble [69 × 11]>[39m [90m<tibble [73 × 11]>[39m
+## [90m 6[39m DGB        1 [90m<tibble [284 × 11]>[39m [90m<tibble [91 × 11]>[39m [90m<tibble [92 × 11]>[39m
+## [90m 7[39m LTC        1 [90m<tibble [277 × 11]>[39m [90m<tibble [91 × 11]>[39m [90m<tibble [91 × 11]>[39m
+## [90m 8[39m NEXO       1 [90m<tibble [282 × 11]>[39m [90m<tibble [91 × 11]>[39m [90m<tibble [94 × 11]>[39m
+## [90m 9[39m XMR        1 [90m<tibble [266 × 11]>[39m [90m<tibble [91 × 11]>[39m [90m<tibble [93 × 11]>[39m
+## [90m10[39m VIB        1 [90m<tibble [224 × 11]>[39m [90m<tibble [75 × 11]>[39m [90m<tibble [75 × 11]>[39m
+## [90m# … with 190 more rows[39m
+```
+
+Move on to the [next section](#predictive-modeling) ➡️ to build the predictive models using the methodology discussed in this section.
+
+
+
+<!--chapter:end:05-ModelValidationPlan.Rmd-->
+
+# Predictive Modeling {#predictive-modeling}
+
+We finally have everything we need to start making predictive models now that the [data has been cleaned](#data-prep) and we have come up with a [gameplan to understand the efficacy of the models](#model-validation-plan).
+
+## Example Simple Model {#example-simple-model}
+
+We can start by making a simple [**linear regression** model](https://en.wikipedia.org/wiki/Linear_regression):
+
+
+```r
+lm(formula = target_price_24h ~ ., data = cryptodata)
+```
+
+```{.scroll-lim}
+## 
+## Call:
+## lm(formula = target_price_24h ~ ., data = cryptodata)
+## 
+## Coefficients:
+##      (Intercept)        symbolARDR         symbolAVA         symbolAYA  
+##  -4386.282240866       0.015771820       0.014503159       4.941841038  
+##        symbolBAT         symbolBNT         symbolBRD         symbolBSV  
+##      5.380141461       1.718386849       3.910606157      -2.685345308  
+##        symbolBTC         symbolBTG         symbolBTM         symbolCBC  
+##   -239.444360534       6.086962845       4.093212115       1.912254297  
+##        symbolCRO         symbolDCR         symbolDGB         symbolEDG  
+##      1.862297208       4.882689524       5.427469080       5.445396073  
+##        symbolELF         symbolENJ         symbolEOS         symbolETH  
+##      1.145399106       5.678631006       5.740228504      -6.910204018  
+##        symbolETP          symbolHT         symbolIHF         symbolIPX  
+##      1.898604060       5.749888960       6.260117565       0.108186547  
+##        symbolKMD         symbolKNC        symbolLINK         symbolLTC  
+##     -0.022089758      -0.112451091       8.786700689       4.114133577  
+##       symbolMANA        symbolNEXO         symbolREP        symbolSOLO  
+##      1.956822328       5.404558641       4.716499401       0.004152272  
+##        symbolTRX         symbolVET         symbolVIB        symbolWAXP  
+##      2.018555229       7.195254477       7.845738519       0.015915998  
+##        symbolXEM         symbolXMR         symbolXNS         symbolZAP  
+##      5.746331850       3.205127790       2.372493653       0.072482743  
+##        symbolZEC         symbolZRX     date_time_utc              date  
+##     -0.514799580       1.893674331       0.000005494      -0.238115866  
+##        price_usd   lagged_price_1h   lagged_price_2h   lagged_price_3h  
+##      0.963323820      -0.001943887       0.051377140       0.005435104  
+##  lagged_price_6h  lagged_price_12h  lagged_price_24h   lagged_price_3d  
+##     -0.003206879       0.045878775      -0.052731529       0.016860388  
+##     trainingtest     trainingtrain             split  
+##      5.166902082       3.577937765      -2.263238431
+```
+
+We defined the [**formula**]{style="color: blue;"} for the model as **`target_price_24h ~ .`**, which means that we are want to make predictions for the [**target_price_24h**]{style="color: blue;"} field, and use (**`~`**) every other column found in the data (**`.`**). In other words, we specified a model that uses the [**target_price_24h**]{style="color: blue;"} field as the [dependent variable](https://en.wikipedia.org/wiki/Dependent_and_independent_variables), and all other columns (**`.`**) as the [independent variables](https://en.wikipedia.org/wiki/Dependent_and_independent_variables). Meaning, we are looking to predict the [**target_price_24h**]{style="color: blue;"}, which is the only column that refers to the future, and use all the information available at the time the rest of the data was collected in order to infer statistical relationships that can help us forecast the future values of the [**target_price_24h**]{style="color: blue;"} field when it is still unknown on new data that we want to make new predictions for.
+
+In the example above we used the [**cryptodata**]{style="color: blue;"} object which contained all the non-nested data, and was a big oversimplification of the process we will actually use. 
+
+### Using Functional Programming {#using-functional-programming}
+
+<!-- There are several approaches we could take in order to create the models [according to the plan outlined in the previous section](#model-validation-plan). As previously mentioned, the steps taken below use a similar approach to [the work published by Hadley Wickham on the subject](https://r4ds.had.co.nz/many-models.html) [@R_for_data_science]. Because this work is particularly well respected, we went with a methodology that uses [**functional programming**]{style="color: purple;"}. There are pros and cons to using different methods (i.e. a ***for loop***), and this tutorial itself was originally written using three different fundamentally different approaches before settling on a **functional programming** approach, which is a programming paradigm that focuses on the actions being taken, rather than focusing on  -->
+
+From this point forward, we will deal with the new dataset [**cryptodata_nested**]{style="color: blue;"}, review the [previous section where it was created](#nest-data) if you missed it. Here is a preview of the data again:
+
+```r
+cryptodata_nested
+```
+
+```
+## [90m# A tibble: 200 x 5[39m
+## [90m# Groups:   symbol, split [200][39m
+##    symbol split train_data          test_data          holdout_data      
+##    [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m [3m[90m<list>[39m[23m              [3m[90m<list>[39m[23m             [3m[90m<list>[39m[23m            
+## [90m 1[39m EOS        1 [90m<tibble [278 × 11]>[39m [90m<tibble [89 × 11]>[39m [90m<tibble [89 × 11]>[39m
+## [90m 2[39m EDG        1 [90m<tibble [284 × 11]>[39m [90m<tibble [91 × 11]>[39m [90m<tibble [92 × 11]>[39m
+## [90m 3[39m BTG        1 [90m<tibble [257 × 11]>[39m [90m<tibble [85 × 11]>[39m [90m<tibble [86 × 11]>[39m
+## [90m 4[39m VET        1 [90m<tibble [262 × 11]>[39m [90m<tibble [84 × 11]>[39m [90m<tibble [87 × 11]>[39m
+## [90m 5[39m IHF        1 [90m<tibble [194 × 11]>[39m [90m<tibble [69 × 11]>[39m [90m<tibble [73 × 11]>[39m
+## [90m 6[39m DGB        1 [90m<tibble [284 × 11]>[39m [90m<tibble [91 × 11]>[39m [90m<tibble [92 × 11]>[39m
+## [90m 7[39m LTC        1 [90m<tibble [277 × 11]>[39m [90m<tibble [91 × 11]>[39m [90m<tibble [91 × 11]>[39m
+## [90m 8[39m NEXO       1 [90m<tibble [282 × 11]>[39m [90m<tibble [91 × 11]>[39m [90m<tibble [94 × 11]>[39m
+## [90m 9[39m XMR        1 [90m<tibble [266 × 11]>[39m [90m<tibble [91 × 11]>[39m [90m<tibble [93 × 11]>[39m
+## [90m10[39m VIB        1 [90m<tibble [224 × 11]>[39m [90m<tibble [75 × 11]>[39m [90m<tibble [75 × 11]>[39m
+## [90m# … with 190 more rows[39m
+```
+
+Because we are now dealing with a **nested dataframe**, performing operations on the individual nested datasets is not as straightforward. We could extract the individual elements out of the data using [[**indexing**]{style="color: purple;"}](https://rspatial.org/intr/4-indexing.html), for example we can return the first element of the column [**train_data**]{style="color: blue;"} by running this code:
+
+```r
+cryptodata_nested$train_data[[1]]
+```
+
+```
+## [90m# A tibble: 278 x 11[39m
+##    date_time_utc       date       price_usd target_price_24h lagged_price_1h
+##    [3m[90m<dttm>[39m[23m              [3m[90m<date>[39m[23m         [3m[90m<dbl>[39m[23m            [3m[90m<dbl>[39m[23m           [3m[90m<dbl>[39m[23m
+## [90m 1[39m 2020-08-13 [90m04:00:09[39m 2020-08-13      3.03             3.11            3.03
+## [90m 2[39m 2020-08-13 [90m05:00:10[39m 2020-08-13      3.03             3.11            3.03
+## [90m 3[39m 2020-08-13 [90m06:00:09[39m 2020-08-13      3.02             3.10            3.03
+## [90m 4[39m 2020-08-13 [90m07:00:09[39m 2020-08-13      3.02             3.10            3.02
+## [90m 5[39m 2020-08-13 [90m08:00:09[39m 2020-08-13      3.00             3.11            3.02
+## [90m 6[39m 2020-08-13 [90m09:00:09[39m 2020-08-13      2.97             3.11            3.00
+## [90m 7[39m 2020-08-13 [90m10:00:08[39m 2020-08-13      2.97             3.12            2.97
+## [90m 8[39m 2020-08-13 [90m11:00:09[39m 2020-08-13      2.99             3.13            2.97
+## [90m 9[39m 2020-08-13 [90m12:00:09[39m 2020-08-13      3.04             3.14            2.99
+## [90m10[39m 2020-08-13 [90m13:00:09[39m 2020-08-13      3.00             3.15            3.04
+## [90m# … with 268 more rows, and 6 more variables: lagged_price_2h [3m[90m<dbl>[90m[23m,[39m
+## [90m#   lagged_price_3h [3m[90m<dbl>[90m[23m, lagged_price_6h [3m[90m<dbl>[90m[23m, lagged_price_12h [3m[90m<dbl>[90m[23m,[39m
+## [90m#   lagged_price_24h [3m[90m<dbl>[90m[23m, lagged_price_3d [3m[90m<dbl>[90m[23m[39m
+```
+
+As we already saw dataframes are really flexible as a data structure. We can create a new column in the data to store the models themselves that are associated with each row of the data. There are several ways that we could go about doing this (this tutorial itself was written to execute the same commands using three fundamentally different methodologies), but in this tutorial we will take a [**functional programming**]{style="color: purple;"} approach. This means we will focus the operations we will perform on the actions we want to take themselves, which can be contrasted to a [**for loop**]{style="color: purple;"} which emphasizes the objects more using a similar structure that we used in the example above showing the first element of the [**train_data**]{style="color: blue;"} column.
+
+When using a **functional programming** approach, we first need to create functions for the operations we want to perform. Let's wrap the [**lm()**]{style="color: green;"} function [we used as an example earlier](#example-simple-model) and create a new custom function called [**linear_model**]{style="color: blue;"}, which takes a dataframe as an input (the [**train_data**]{style="color: blue;"} we will provide for each row of the nested dataset), and generates a linear regression model:
+
+
+```r
+linear_model <- function(df){
+  lm(target_price_24h ~ . -date_time_utc -date, data = df)
+}
+```
+
+We can now use the [**map()**]{style="color: green;"} function from the [[**purrr**]{style="color: #ae7b11;"} package](#https://purrr.tidyverse.org/) in conjunction with the [**mutate()**]{style="color: green;"} function from [**dplyr**]{style="color: #ae7b11;"} to create a new column in the data which contains an individual linear regression model for each row of [**train_data**]{style="color: blue;"}:
+
+
+```r
+mutate(cryptodata_nested, lm_model = map(train_data, linear_model))
+```
+
+```
+## [90m# A tibble: 200 x 6[39m
+## [90m# Groups:   symbol, split [200][39m
+##    symbol split train_data          test_data         holdout_data      lm_model
+##    [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m [3m[90m<list>[39m[23m              [3m[90m<list>[39m[23m            [3m[90m<list>[39m[23m            [3m[90m<list>[39m[23m  
+## [90m 1[39m EOS        1 [90m<tibble [278 × 11]>[39m [90m<tibble [89 × 11[0m… [90m<tibble [89 × 11[0m… [90m<lm>[39m    
+## [90m 2[39m EDG        1 [90m<tibble [284 × 11]>[39m [90m<tibble [91 × 11[0m… [90m<tibble [92 × 11[0m… [90m<lm>[39m    
+## [90m 3[39m BTG        1 [90m<tibble [257 × 11]>[39m [90m<tibble [85 × 11[0m… [90m<tibble [86 × 11[0m… [90m<lm>[39m    
+## [90m 4[39m VET        1 [90m<tibble [262 × 11]>[39m [90m<tibble [84 × 11[0m… [90m<tibble [87 × 11[0m… [90m<lm>[39m    
+## [90m 5[39m IHF        1 [90m<tibble [194 × 11]>[39m [90m<tibble [69 × 11[0m… [90m<tibble [73 × 11[0m… [90m<lm>[39m    
+## [90m 6[39m DGB        1 [90m<tibble [284 × 11]>[39m [90m<tibble [91 × 11[0m… [90m<tibble [92 × 11[0m… [90m<lm>[39m    
+## [90m 7[39m LTC        1 [90m<tibble [277 × 11]>[39m [90m<tibble [91 × 11[0m… [90m<tibble [91 × 11[0m… [90m<lm>[39m    
+## [90m 8[39m NEXO       1 [90m<tibble [282 × 11]>[39m [90m<tibble [91 × 11[0m… [90m<tibble [94 × 11[0m… [90m<lm>[39m    
+## [90m 9[39m XMR        1 [90m<tibble [266 × 11]>[39m [90m<tibble [91 × 11[0m… [90m<tibble [93 × 11[0m… [90m<lm>[39m    
+## [90m10[39m VIB        1 [90m<tibble [224 × 11]>[39m [90m<tibble [75 × 11[0m… [90m<tibble [75 × 11[0m… [90m<lm>[39m    
+## [90m# … with 190 more rows[39m
+```
+
+Awesome! Now we can use the [same tools we learned in the high-level version to make a wider variety of predictive models to test](https://cryptocurrencyresearch.org/high-level/#/caret-package)
+
+## Caret
+
+Refer back to the [high-level version of the tutorial](https://cryptocurrencyresearch.org/high-level/#/caret-package) for an explanation of the caret package, or consult this document: https://topepo.github.io/caret/index.html
+
+### Parallel Processing
+
+R is a ***single thredded*** application, meaning it only uses one CPU at a time when performing operations. The step below is optional and uses the [**parallel**]{style="color: #ae7b11;"} and [**doParallel**]{style="color: #ae7b11;"} packages to allow R to use more than a single CPU when creating the predictive models, which will speed up the process considerably:
+
+
+```r
+cl <- makePSOCKcluster(detectCores()-1)
+registerDoParallel(cl)
+```
+
+### More Functional Programming {#more-functional-programming}
+
+Now we can repeat the process we [used earlier to create a column with the linear regression models](#using-functional-programming) to create **the exact same models**, but this time using the [**caret**]{style="color: #ae7b11;"} package.
+
+
+```r
+linear_model_caret <- function(df){
+  
+  train(target_price_24h ~ . -date_time_utc -date, data = df,
+        method = 'lm',
+        trControl=trainControl(method="none"))
+  
+}
+```
+*We specified the method as **`lm`** for linear regression. See the high-level version for a refresher on how to use different [**methods**]{style="color: blue;"} to make different models: https://cryptocurrencyresearch.org/high-level/#/method-options. the [**trControl**]{style="color: blue;"} argument tells the [**caret**]{style="color: #ae7b11;"} package to avoid additional resampling of the data. As a default behavior [**caret**]{style="color: #ae7b11;"} will do re-sampling on the data and do [**hyperparameter tuning**]{style="color: purple;"} to select values to use for the paramters to get the best results, but we will avoid this discussion for this tutorial. See the [official [**caret**]{style="color: #ae7b11;"} documentation for more details](https://topepo.github.io/caret/random-hyperparameter-search.html).*
+
+Here is the full list of models that we can make using the [**caret**]{style="color: #ae7b11;"} package and the [steps described the high-level version of the tutorial](https://cryptocurrencyresearch.org/high-level/#/method-options):
+<iframe src="https://topepo.github.io/caret/available-models.html" width="672" height="400px"></iframe>
+
+We can now use the new function we created [**linear_model_caret**]{style="color: blue;"} in conjunction with [**map()**]{style="color: green;"} and [**mutate()**]{style="color: green;"} to create a new column in the [**cryptodata_nested**]{style="color: green;"} dataset called [**lm_model**]{style="color: blue;"} with the trained linear regression model for each split of the data (by cryptocurrency [**symbol**]{style="color: blue;"} and [**split**]{style="color: blue;"}):
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested, 
+                            lm_model = map(train_data, linear_model_caret))
+```
+
+We can see the new column called [**lm_model**]{style="color: blue;"} with the nested dataframe grouping variables:
+
+```r
+select(cryptodata_nested, lm_model)
+```
+
+```
+## [90m# A tibble: 200 x 3[39m
+## [90m# Groups:   symbol, split [200][39m
+##    symbol split lm_model
+##    [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m [3m[90m<list>[39m[23m  
+## [90m 1[39m EOS        1 [90m<train>[39m 
+## [90m 2[39m EDG        1 [90m<train>[39m 
+## [90m 3[39m BTG        1 [90m<train>[39m 
+## [90m 4[39m VET        1 [90m<train>[39m 
+## [90m 5[39m IHF        1 [90m<train>[39m 
+## [90m 6[39m DGB        1 [90m<train>[39m 
+## [90m 7[39m LTC        1 [90m<train>[39m 
+## [90m 8[39m NEXO       1 [90m<train>[39m 
+## [90m 9[39m XMR        1 [90m<train>[39m 
+## [90m10[39m VIB        1 [90m<train>[39m 
+## [90m# … with 190 more rows[39m
+```
+
+And we can view the summarized contents of the first trained model:
+
+```r
+cryptodata_nested$lm_model[[1]]
+```
+
+```
+## Linear Regression 
+## 
+## 278 samples
+##  10 predictor
+## 
+## No pre-processing
+## Resampling: None
+```
+
+
+### Cross Validation {#cross-validation-preds}
+
+In the previous output, we saw the output said: ***Resampling: None*** because when building the function we specified we did not want any resampling for the [**trControl**]{style="color: blue;"} argument of the [**train()**]{style="color: green;"} function. Within each split of the data however, we can create three separate additional cross validation splits, which will allow the [**caret**]{style="color: #ae7b11;"} package to do some minimal [**hyperparameter**]{style="color: blue;"} tuning, which is the process by which it will test different options for the parameters (which vary based on the specific model being used) to find the most optimal combination of them.
+
+Within each split we created, we can set caret to perform an additional cross-validation step to allow it to do a minimal level of automated hyperparameter tuning as it creates the models (the more we do the longer it will take).
+
+
+```r
+fitControl <- trainControl(method = "repeatedcv",
+                           number = 3,
+                           repeats = 3)
+```
+
+### Generalize the Function
+
+We can adapt the [function we built earlier for the linear regression models using caret](#more-functional-programming), and add a parameter that allows us to specify the [**method**]{style="color: blue;"} we want to use (as in what predictive model):
+
+
+```r
+model_caret <- function(df, method_choice){
+  
+  train(target_price_24h ~ . -date_time_utc -date, data = df,
+        method = method_choice,
+        trControl=fitControl)
+
+}
+```
+
+### XGBoost models
+
+Now we can do the same thing we did [earlier for the linear regression models](#more-functional-programming), but use the new function called [**model_caret**]{style="color: blue;"} using the [**map2()**]{style="color: green;"} function to also specify the model as [**xgbLinear**]{style="color: blue;"} to create an [**XGBoost**]{style="color: purple;"} model:
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested, 
+                            xgb_model = map2(train_data, "xgbLinear", model_caret))
+```
+
+```
+## [20:44:08] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:11] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:13] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:16] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:19] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:21] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:24] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:27] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:30] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:32] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:35] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:38] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:40] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:43] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:46] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:48] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:51] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:54] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:44:57] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:00] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:03] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:07] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:10] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:13] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:17] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:19] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:22] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:24] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:27] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:31] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:34] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:36] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:39] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:42] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:45] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:48] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:51] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:54] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:45:58] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:02] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:06] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:12] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:17] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:23] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:29] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:32] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:36] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:39] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:42] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:46] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:48] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:51] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:53] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:56] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:46:59] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:01] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:04] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:06] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:08] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:11] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:14] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:18] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:22] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:26] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:31] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:33] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:37] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:41] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:44] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:47] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:50] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:53] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:56] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:47:58] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:01] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:04] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:06] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:08] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:10] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:13] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:16] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:19] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:22] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:25] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:28] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:32] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:35] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:39] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:42] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:46] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:49] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:51] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:54] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:48:56] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:00] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:03] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:06] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:08] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:11] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:14] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:17] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:21] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:24] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:27] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:31] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:33] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:36] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:38] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:41] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:43] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:46] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:48] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:51] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:53] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:55] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:49:58] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:01] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:03] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:06] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:09] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:11] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:14] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:16] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:19] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:21] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:25] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:30] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:34] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:39] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:44] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:46] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:49] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:52] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:54] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:50:57] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:00] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:03] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:06] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:09] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:12] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:16] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:20] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:23] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:26] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:30] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:32] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:35] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:38] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:40] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:43] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:46] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:48] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:51] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:53] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:56] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:51:59] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:02] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:04] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:07] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:09] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:12] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:15] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:17] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:20] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:22] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:24] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:27] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:29] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:32] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:34] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:37] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:40] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:43] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:46] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:49] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:53] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:52:58] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:02] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:07] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:12] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:14] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:16] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:19] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:22] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:24] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:27] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:29] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:32] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:34] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:36] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:39] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:42] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:45] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:48] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:51] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:54] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:56] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:53:59] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:02] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:05] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+```
+
+We won't dive into the specifics of each individual model as the correct one to use may depend on a lot of factors and that is a discussion outside the scope of this tutorial. We chose to use the [**XGBoost**](https://xgboost.readthedocs.io/en/latest/parameter.html) model as an example because it has recently [gained a lot of popularity as a very effective framework for a variety of problems](https://towardsdatascience.com/https-medium-com-vishalmorde-xgboost-algorithm-long-she-may-rein-edd9f99be63d), and is an essential model for any data scientist to have at their disposal.
+
+There are several possible configurations for XGBoost models, you can find the official documentation here: https://xgboost.readthedocs.io/en/latest/parameter.html
+
+Using the exact same process, let's make make a separate column called [**xgbTree_model**]{style="color: blue;"} for the [**method**]{style="color: blue;"} called ***xgbTree*** and add the trained models to the data:
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested, 
+                            xgbTree_model = map2(train_data, "xgbTree", model_caret))
+```
+
+```
+## [20:54:09] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:14] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:18] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:23] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:27] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:31] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:35] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:40] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:44] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:49] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:53] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:54:57] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:55:01] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:55:06] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:55:10] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:55:14] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:55:19] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:55:24] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:55:28] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:55:33] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:55:38] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:55:44] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:55:49] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:55:55] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:00] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:05] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:09] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:13] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:17] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:22] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:27] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:31] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:36] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:41] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:45] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:50] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:55] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:56:59] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:57:04] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:57:09] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:57:14] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:57:20] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:57:26] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:57:31] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:57:37] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:57:42] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:57:48] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:57:53] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:57:57] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:02] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:06] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:11] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:15] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:20] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:25] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:29] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:33] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:37] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:41] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:45] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:50] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:58:56] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:59:01] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:59:07] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:59:12] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:59:17] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:59:22] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:59:27] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:59:32] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:59:37] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:59:42] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:59:47] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:59:52] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [20:59:57] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:00:02] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:00:06] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:00:10] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:00:14] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:00:19] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:00:23] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:00:29] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:00:34] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:00:39] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:00:44] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:00:49] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:00:55] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:01:01] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:01:06] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:01:11] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:01:17] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:01:21] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:01:26] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:01:30] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:01:34] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:01:40] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:01:45] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:01:50] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:01:55] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:02:00] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:02:05] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:02:10] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:02:19] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:02:24] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:02:29] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:02:35] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:02:40] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:02:44] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:02:49] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:02:53] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:02:57] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:02] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:06] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:11] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:15] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:19] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:24] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:29] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:33] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:38] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:43] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:47] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:52] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:03:56] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:04:00] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:04:05] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:04:11] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:04:17] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:04:23] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:04:29] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:04:35] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:04:39] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:04:44] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:04:50] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:04:55] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:05:01] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:05:07] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:05:13] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:05:19] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:05:26] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:05:32] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:05:38] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:05:45] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:05:51] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:05:56] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:06:02] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:06:06] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:06:11] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:06:16] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:06:21] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:06:27] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:06:31] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:06:36] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:06:41] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:06:45] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:06:50] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:06:56] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:01] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:07] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:12] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:16] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:21] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:26] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:31] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:36] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:40] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:45] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:49] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:54] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:07:59] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:08:03] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:08:09] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:08:14] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:08:20] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:08:25] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:08:32] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:08:37] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:08:43] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:08:49] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:08:55] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:01] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:05] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:09] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:14] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:20] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:25] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:29] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:34] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:38] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:43] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:48] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:52] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:09:57] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:10:02] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:10:07] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:10:12] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:10:16] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:10:22] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:10:28] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:10:33] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+## [21:10:38] WARNING: amalgamation/../src/objective/regression_obj.cu:174: reg:linear is now deprecated in favor of reg:squarederror.
+```
+***It is normal for the step above to take a while! It is looking for some sweet statistical relationships and it's not an easy job!***
+
+### Neural Network Models
+
+We could keep adding models. As we saw, [caret allows for the usage of over 200 predictive models](https://topepo.github.io/caret/available-models.html). Let's create one more set of models using the [**method**]{style="color: blue;"} to create [**deep neural networks**]{style="color: purple;"} (***`dnn`***):
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested, 
+                            nnet_model = map2(train_data, "dnn", model_caret))
+```
+
+<!-- #### Gradient Boosting Machines -->
+
+<!-- ```{r} -->
+
+<!-- cryptodata_nested <- mutate(cryptodata_nested, -->
+
+<!--                             gbm = map2(train_data, "gbm", model_caret)) -->
+
+<!-- ``` -->
+
+### Caret Options
+
+Caret offers some additional options to help pre-process the data as well. We outlined an [example of this in the high-level version of the tutorial when showing how to make a [**Support Vector Machine**]{style="color: purple;"} model](https://cryptocurrencyresearch.org/high-level/#/caret-additional-options), which requires the data to be [**centered**]{style="color: purple;"} and [**scaled**]{style="color: purple;"} to avoid running into problems (which we won't discuss further here).
+
+
+## Make Predictions
+
+Awesome! We have trained the predictive models, and we want to start getting a better understanding of how accurate the models are on data they have never seen before. In order to make these comparisons, we will want to make predictions on the test and holdout datasets, and compare those predictions to what actually ended up happening.
+
+In order to make predictions, we can use the [**prediict()**]{style="color: green;"} function, here is an example on the first elements of the nested dataframe:
+
+
+```r
+predict(object = cryptodata_nested$lm_model[[1]],
+        newdata = cryptodata_nested$test_data[[1]],
+        na.action = na.pass)
+```
+
+```
+##        1        2        3        4        5        6        7        8 
+## 3.458187 3.456510 3.460057       NA 3.416253 3.436105 3.416399 3.382973 
+##        9       10       11       12       13       14       15       16 
+## 3.377692 3.364315 3.371783 3.384905 3.376780 3.351691 3.338515       NA 
+##       17       18       19       20       21       22       23       24 
+## 3.326479 3.183890 3.184258 3.223692 3.210137 3.197908 3.185440 3.205720 
+##       25       26       27       28       29       30       31       32 
+## 3.196969 3.202072 3.225962 3.265133 3.250467 3.295224 3.293109 3.255298 
+##       33       34       35       36       37       38       39       40 
+## 3.251624 3.276807 3.270288 3.273359 3.275429 3.261464 3.263708 3.286571 
+##       41       42       43       44       45       46       47       48 
+## 3.299594 3.328497 3.327637 3.324289 3.307342 3.323011 3.314027 3.303980 
+##       49       50       51       52       53       54       55       56 
+## 3.308786 3.337356 3.304334 3.263203 3.262970 3.265078 3.252268 3.267987 
+##       57       58       59       60       61       62       63       64 
+## 3.276761 3.252897 3.271555 3.252272 3.215551       NA       NA       NA 
+##       65       66       67       68       69       70       71       72 
+## 3.132343 3.110459       NA 3.128027 3.127112 3.143325 3.133503 3.169352 
+##       73       74       75       76       77       78       79       80 
+##       NA 3.196066 3.240326 3.238510 3.262878 3.278665 3.275799 3.262513 
+##       81       82       83       84       85       86       87       88 
+## 3.261063 3.269548 3.282296 3.291316       NA 3.279309 3.356966 3.397244 
+##       89 
+## 3.442600
+```
+
+Now we can create a new custom function called [**make_predictions**]{style="color: blue;"} that wraps this functionality in a way that we can use with [**map()**]{style="color: green;"} to iterate through all options of the nested dataframe:
+
+
+```r
+make_predictions <- function(model, test){
+  
+  predict(object  = model, newdata = test, na.action = na.pass)
+  
+}
+```
+
+Now we can create the new columns [**lm_test_predictions**]{style="color: blue;"} and [**lm_holdout_predictions**]{style="color: blue;"} with the predictions:
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested, 
+                            lm_test_predictions =  map2(lm_model,
+                                                   test_data,
+                                                   make_predictions),
+                            
+                            lm_holdout_predictions =  map2(lm_model,
+                                                      holdout_data,
+                                                      make_predictions))
+```
+
+The predictions were made using the models that had only seen the **training data**, and we can start assessing how good the model is on data it has not seen before in the **test** and **holdout** sets. Let's view the results from the previous step:
+
+
+```r
+select(cryptodata_nested, lm_test_predictions, lm_holdout_predictions)
+```
+
+```
+## [90m# A tibble: 200 x 4[39m
+## [90m# Groups:   symbol, split [200][39m
+##    symbol split lm_test_predictions lm_holdout_predictions
+##    [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m [3m[90m<list>[39m[23m              [3m[90m<list>[39m[23m                
+## [90m 1[39m EOS        1 [90m<dbl [89]>[39m          [90m<dbl [89]>[39m            
+## [90m 2[39m EDG        1 [90m<dbl [91]>[39m          [90m<dbl [92]>[39m            
+## [90m 3[39m BTG        1 [90m<dbl [85]>[39m          [90m<dbl [86]>[39m            
+## [90m 4[39m VET        1 [90m<dbl [84]>[39m          [90m<dbl [87]>[39m            
+## [90m 5[39m IHF        1 [90m<dbl [69]>[39m          [90m<dbl [73]>[39m            
+## [90m 6[39m DGB        1 [90m<dbl [91]>[39m          [90m<dbl [92]>[39m            
+## [90m 7[39m LTC        1 [90m<dbl [91]>[39m          [90m<dbl [91]>[39m            
+## [90m 8[39m NEXO       1 [90m<dbl [91]>[39m          [90m<dbl [94]>[39m            
+## [90m 9[39m XMR        1 [90m<dbl [91]>[39m          [90m<dbl [93]>[39m            
+## [90m10[39m VIB        1 [90m<dbl [75]>[39m          [90m<dbl [75]>[39m            
+## [90m# … with 190 more rows[39m
+```
+
+Now we can do the same for the rest of the models:
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested, 
+                            # XGBoost:
+                            xgb_test_predictions =  map2(xgb_model,
+                                                    test_data,
+                                                    make_predictions),
+                            # holdout
+                            xgb_holdout_predictions =  map2(xgb_model,
+                                                       holdout_data,
+                                                       make_predictions),
+                            # XGBoost Trees:
+                            xgbTree_test_predictions =  map2(xgbTree_model,
+                                                        test_data,
+                                                        make_predictions),
+                            # holdout
+                            xgbTree_holdout_predictions =  map2(xgbTree_model,
+                                                           holdout_data,
+                                                           make_predictions),
+                            # Neural Network:
+                            nnet_test_predictions =  map2(nnet_model,
+                                                     test_data,
+                                                     make_predictions),
+                            # holdout
+                            nnet_holdout_predictions =  map2(nnet_model,
+                                                        holdout_data,
+                                                        make_predictions))
+```
+
+We are done using the [**caret**]{style="color: #ae7b11;"} package and can stop the parallel processing cluster:
+
+
+```r
+stopCluster(cl)
+```
+
+<!-- ## Traditional Timeseries - NEED TO ADD BACK IN! -->
+
+<!-- [TODO - HERE TALK ABOUT ARIMA AND ETS AND MAKE MODELS! KEEP SAME STRUCTURE AND WILL BE ABLE TO DO postResample()] -->
+
+<!-- [TODO - AFTERWARDS ALSO NEED TO ADD NEW STEPS INTO NEXT SECTION!] -->
+
+
+
+<!-- ### Convert to tsibble {#convert-to-tsibble-pred-model} -->
+
+<!-- Repeat the steps we performed in the [Data Prep section to convert the data to the [**tsibble**]{style="color: blue;"} format](#convert-to-tsibble): -->
+
+<!-- STEPS BELOW NEED TO BE CONVERTED FOR NESTED DATA USING FUNCTIONAL PROGRAMMING -->
+<!-- ```{r} -->
+<!-- cryptodata <- mutate(cryptodata, ts_index = anytime(paste0(pkDummy,':00:00'))) -->
+<!-- # Distinct data by ts_index and symbol -->
+<!-- cryptodata <- distinct(cryptodata, symbol, ts_index, .keep_all=TRUE) -->
+<!-- # Convert to tsibble -->
+<!-- cryptodata <- as_tsibble(cryptodata, index = ts_index, key = symbol) -->
+<!-- ``` -->
+
+
+
+
+
+
+<!--chapter:end:06-PredictiveModeling.Rmd-->
+
+# Evaluate Model Performance {#evaluate-model-performance}
+
+Now we get to see the results of our hard work! There are some additional data preparation steps we need to take before we can visualize the results in aggregate; if you are just looking for the charts showing the results they are [shown later on in the "Visualize Results" section below](#visualize-results).
+
+## Summarizing models
+
+<!-- [TODO - HERE add notes on using **postResample()** and explain that if you think about it all you need to evaluate a model is the predictions made (on data never seen by the model) ] -->
+
+Example for one model:
+
+
+```r
+postResample(pred = cryptodata_nested$lm_test_predictions[[1]], 
+             obs = cryptodata_nested$test_data[[1]]$target_price_24h)
+```
+
+```
+##        RMSE    Rsquared         MAE 
+##          NA 0.007048191          NA
+```
+
+We can extract the first element to return the **RMSE** metric, and the second element for the **R Squared (R\^2)** metric. We are using **`[[1]]`** to extract the first element of the [**lm\_test\_predictions**]{style="color: blue;"} and [**test\_data**]{style="color: blue;"} and compare the predictions to the actual value of the [**target\_price24h**]{style="color: blue;"} column.
+
+
+```r
+print(paste('Now showing RMSE example:', postResample(pred = cryptodata_nested$lm_test_predictions[[1]], 
+                                                      obs = cryptodata_nested$test_data[[1]]$target_price_24h)[[1]]))
+```
+
+```
+## [1] "Now showing RMSE example: NA"
+```
+
+
+```r
+print(paste('Now showing R Squared example:', postResample(pred = cryptodata_nested$lm_test_predictions[[1]], 
+                                                           obs = cryptodata_nested$test_data[[1]]$target_price_24h)[[2]]))
+```
+
+```
+## [1] "Now showing R Squared example: 0.00704819065927261"
+```
+
+This model used the earliest subset of the data available for the  cryptocurrency. How does the same model used to predict this older subset of the data perform when applied to the most recent subset of the data?
+
+We can get the same summary of results on the **holdout**:
+
+
+```r
+postResample(pred = cryptodata_nested$lm_holdout_predictions[[1]], 
+             obs = cryptodata_nested$holdout_data[[1]]$target_price_24h)
+```
+
+```
+##       RMSE   Rsquared        MAE 
+##         NA 0.08242947         NA
+```
+
+<!-- If we wrote a [*for loop*](https://r4ds.had.co.nz/iteration.html#for-loops) to iterate through all the options we would get the same results using an **object oriented approach**, this has to do with coding styles and preferences and generally speaking there are many ways of doing the same things in programming. -->
+
+### Comparing Metrics
+
+How do these two results compare and why is this comparison important?
+
+The **RMSE**
+
+<!-- [TODO - ADD HERE explaining RMSE and R^2 metrics and how we will use them to standardize the way we evaluate the effectiveness of a model. We are looking to avoid using models where the results looked good for the test data but then perform much worse than that initial expectation when looking at the holdout results] -->
+
+## Data Prep - Adjust Prices
+
+<!-- [TODO - add note on first doing lm only?] -->
+
+Because cryptocurrencies can vary dramatically in their prices with some trading in the tens of thousands of dollars and others trading for less than a cent, we need to make sure to standardize the RMSE columns to provide a fair comparison for the metric.
+
+Therefore, before using the `postResample()` function, let's convert both the predictions and the target to be the % change in price over the 24 hour period, rather than the change in price (\$).
+
+\BeginKnitrBlock{infoicon}<div class="infoicon">This step is particularly tedious, but it is important. As with the rest of this tutorial, try to understand what we are doing and why even if you find the code overwhelming. All we are doing in this "Adjust Prices" section is we are adjusting all of the prices to be represented as percentage change between observations, which will allow us to draw a fair comparison of the metrics across all cryptocurrencies, which would not be possible using the prices themselves.</div>\EndKnitrBlock{infoicon}
+
+### Add Last Price
+
+<!-- [TODO - write better] -->
+
+In order to convert the first prediction made to be a percentage, we need to know the previous price.
+
+Function to add last\_price\_train column and append it to the predictions made so we can calculate the % change of the first element, before later removing the value not associated with the predictions:
+
+
+```r
+last_train_price <- function(train_data, predictions){
+  c(tail(train_data$price_usd,1), predictions)
+}
+```
+
+Now overwrite the old predictions:
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested,
+                            lm_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, lm_test_predictions, last_train_price),
+                                                         NA))
+```
+
+#### Holdout
+
+Do the same for the holdout. For all of holdout need to take last price point of 5th training split.
+
+
+```r
+cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
+                                    lm_holdout_predictions = map2(train_data, lm_holdout_predictions, last_train_price))
+```
+
+Join the holdout data to all rows based on the cryptocurrency symbol alone:
+
+
+```r
+cryptodata_nested <- left_join(cryptodata_nested, 
+                               select(cryptodata_nested_holdout, symbol, lm_holdout_predictions),
+                               by='symbol')
+# Remove unwanted columns
+cryptodata_nested <- select(cryptodata_nested, -lm_holdout_predictions.x, -split.y)
+# Rename the columns kept
+cryptodata_nested <- rename(cryptodata_nested, 
+                            lm_holdout_predictions = 'lm_holdout_predictions.y',
+                            split = 'split.x')
+# Reset the correct grouping structure
+cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
+```
+
+### Convert to Percentage Change
+
+<!-- [TODO - CLEAN UP EXPLANATIONS HERE!] -->
+
+
+```r
+standardize_perc_change <- function(predictions){
+  results <- (diff(c(lag(predictions, 1), predictions)) / lag(predictions, 1))*100
+  # Exclude the first element, next element will be % change of first prediction
+  tail(head(results, length(predictions)), length(predictions)-1)
+}
+```
+
+<!-- [TODO - Show formula? It's (diff(V1, V2)/abs(V1))*100] -->
+
+Overwrite the old predictions with the new predictions adjusted as a percentage now:
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested,
+                            lm_test_predictions = ifelse(split < 5,
+                                                         map(lm_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # Holdout for all splits
+                            lm_holdout_predictions = map(lm_holdout_predictions, standardize_perc_change))
+```
+
+### Actuals
+
+Now do the same thing to the actual prices. Let's make a new column called **actuals** containing the real price values (rather than the predicted ones):
+
+
+```r
+actuals_create <- function(train_data, test_data){
+  c(tail(train_data$price_usd,1), as.numeric(unlist(select(test_data, price_usd))))
+}
+```
+
+Use the new function to create the new column `actuals`:
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested,
+                            actuals_test = ifelse(split < 5,
+                                             map2(train_data, test_data, actuals_create),
+                                             NA))
+```
+
+#### Holdout
+
+Again, for the holdout we need the price from the training data of the 5th split
+
+
+```r
+cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
+                                    actuals_holdout = map2(train_data, holdout_data, actuals_create))
+```
+
+Join the holdout data to all rows based on the cryptocurrency symbol alone:
+
+
+```r
+cryptodata_nested <- left_join(cryptodata_nested, 
+                               select(cryptodata_nested_holdout, symbol, actuals_holdout),
+                               by='symbol')
+# Remove unwanted columns
+cryptodata_nested <- select(cryptodata_nested, -split.y)
+# Rename the columns kept
+cryptodata_nested <- rename(cryptodata_nested, split = 'split.x')
+# Reset the correct grouping structure
+cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
+```
+
+### Actuals as % Change
+
+Now we can convert the new `actuals` to express the `price_usd` as a % change relative to the previous value using adapting the function from earlier:
+
+
+```r
+actuals_perc_change <- function(predictions){
+  results <- (diff(c(lag(predictions, 1), predictions)) / lag(predictions, 1))*100
+  # Exclude the first element, next element will be % change of first prediction
+  tail(head(results, length(predictions)), length(predictions)-1)
+}
+```
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested,
+                            actuals_test = ifelse(split < 5,
+                                             map(actuals_test, actuals_perc_change),
+                                             NA),
+                            actuals_holdout = map(actuals_holdout, actuals_perc_change))
+```
+
+## Review Summary Statistics
+
+Now that we standardized the price to show the percentage change relative to the previous period instead of the price in dollars, we can actually compare the summary statistics across all cryptocurrencies and have it be a fair comparison.
+
+Let's get the same statistic as we did at the beginning of this section, but this time on the standardized values:
+
+
+```r
+hydroGOF::rmse(cryptodata_nested$lm_test_predictions[[1]], 
+               cryptodata_nested$actuals_test[[1]], 
+               na.rm=T)
+```
+
+```
+## [1] 1.032505
+```
+
+<!-- [TODO - Here add note on using rmse function from hydroGOF package so we can use the na.rm=T argument, would otherwise get NA when a single value is NA. Also explain caveat of that.] -->
+
+### Calculate RMSE
+
+Now make a function to get the RMSE metric for all models:
+
+
+```r
+evaluate_preds_rmse <- function(predictions, actuals){
+
+  hydroGOF::rmse(predictions, actuals, na.rm=T)
+
+}
+```
+
+Now we can use map2() to use it to get the RMSE metric for both the test data and the holdout:
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested,
+                            lm_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(lm_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            lm_rmse_holdout = unlist(map2(lm_holdout_predictions, actuals_holdout, evaluate_preds_rmse)))
+```
+
+<!-- [TODO - Add explanation for ifelse() to add rmse based on test or holdout] -->
+
+Look at the results:
+
+
+```r
+select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout)
+```
+
+```
+## [90m# A tibble: 200 x 4[39m
+## [90m# Groups:   symbol, split [200][39m
+##    symbol split lm_rmse_test lm_rmse_holdout
+##    [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m        [3m[90m<dbl>[39m[23m           [3m[90m<dbl>[39m[23m
+## [90m 1[39m EOS        1        1.03            0.142
+## [90m 2[39m EDG        1        2.83            8.71 
+## [90m 3[39m BTG        1        1.54            0.511
+## [90m 4[39m VET        1        0.816           2.11 
+## [90m 5[39m IHF        1        1.23            1.68 
+## [90m 6[39m DGB        1        1.32            0.939
+## [90m 7[39m LTC        1        0.674           0.786
+## [90m 8[39m NEXO       1        2.69            0.778
+## [90m 9[39m XMR        1        0.508           0.661
+## [90m10[39m VIB        1        0.890           2.60 
+## [90m# … with 190 more rows[39m
+```
+
+Out of 200 groups, 82 had an equal or lower RMSE score for the holdout than the test set.
+
+### Calculate R\^2
+
+Now we can do the same for the R Squared metric:
+
+
+```r
+evaluate_preds_rsq <- function(predictions, actuals){
+
+  postResample(pred = predictions, obs = actuals)[[2]]
+
+}
+```
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested,
+                            lm_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(lm_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            lm_rsq_holdout = unlist(map2(lm_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))
+```
+
+Look at the results. Wrapping them in `print(n=500)` overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations).
+
+
+```r
+print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), n=500)
+```
+
+```
+## [90m# A tibble: 200 x 6[39m
+## [90m# Groups:   symbol, split [200][39m
+##     symbol split lm_rmse_test lm_rmse_holdout lm_rsq_test lm_rsq_holdout
+##     [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m        [3m[90m<dbl>[39m[23m           [3m[90m<dbl>[39m[23m       [3m[90m<dbl>[39m[23m          [3m[90m<dbl>[39m[23m
+## [90m  1[39m EOS        1       1.03             0.142   0.374         0.940     
+## [90m  2[39m EDG        1       2.83             8.71    0.322         0.329     
+## [90m  3[39m BTG        1       1.54             0.511   0.496         0.560     
+## [90m  4[39m VET        1       0.816            2.11    0.312         0.194     
+## [90m  5[39m IHF        1       1.23             1.68    0.097[4m2[24m        0.027[4m5[24m    
+## [90m  6[39m DGB        1       1.32             0.939   0.559         0.527     
+## [90m  7[39m LTC        1       0.674            0.786   0.481         0.610     
+## [90m  8[39m NEXO       1       2.69             0.778   0.235         0.902     
+## [90m  9[39m XMR        1       0.508            0.661   0.479         0.593     
+## [90m 10[39m VIB        1       0.890            2.60    0.177         0.358     
+## [90m 11[39m XNS        1       1.31             5.90    0.852         0.269     
+## [90m 12[39m REP        1       2.40             1.22    0.617         0.192     
+## [90m 13[39m AYA        1       4.97             1.96    0.025[4m7[24m        0.819     
+## [90m 14[39m BAT        1       0.992            0.572   0.602         0.618     
+## [90m 15[39m BTC        1       0.426            0.673   0.116         0.576     
+## [90m 16[39m DCR        1       0.848            1.14    0.550         0.379     
+## [90m 17[39m ENJ        1       1.22             1.46    0.615         0.522     
+## [90m 18[39m XEM        1       1.44             1.11    0.429         0.348     
+## [90m 19[39m HT         1       0.722            0.222   0.603         0.883     
+## [90m 20[39m BRD        1       0.622            0.902   0.058[4m0[24m        0.851     
+## [90m 21[39m IHF        2       1.39             1.68    0.062[4m6[24m        0.027[4m5[24m    
+## [90m 22[39m VIB        2       5.03             2.60    0.004[4m2[24m[4m9[24m       0.358     
+## [90m 23[39m REP        2       0.764            1.22    0.746         0.192     
+## [90m 24[39m AYA        2       3.10             1.96    0.204         0.819     
+## [90m 25[39m ZEC        1       1.30             1.10    0.047[4m6[24m        0.352     
+## [90m 26[39m VET        2       1.13             2.11    0.115         0.194     
+## [90m 27[39m BTG        2       0.196            0.511   0.885         0.560     
+## [90m 28[39m XEM        2       0.959            1.11    0.210         0.348     
+## [90m 29[39m HT         2       0.403            0.222   0.676         0.883     
+## [90m 30[39m EOS        2       0.451            0.142   0.907         0.940     
+## [90m 31[39m ENJ        2       0.592            1.46    0.828         0.522     
+## [90m 32[39m NEXO       2       0.330            0.778   0.893         0.902     
+## [90m 33[39m EDG        2      26.1              8.71    0.318         0.329     
+## [90m 34[39m DGB        2       1.23             0.939   0.776         0.527     
+## [90m 35[39m XMR        2       0.565            0.661   0.618         0.593     
+## [90m 36[39m LTC        2       0.439            0.786   0.788         0.610     
+## [90m 37[39m BTC        2       0.256            0.673   0.843         0.576     
+## [90m 38[39m BAT        2       0.516            0.572   0.784         0.618     
+## [90m 39[39m DCR        2       0.471            1.14    0.732         0.379     
+## [90m 40[39m XNS        2       2.92             5.90    0.733         0.269     
+## [90m 41[39m BRD        2       2.35             0.902   0.950         0.851     
+## [90m 42[39m IHF        3       0.730            1.68    0.929         0.027[4m5[24m    
+## [90m 43[39m CBC        1       3.30             6.28    0.359         0.255     
+## [90m 44[39m ETH        1       0.610            0.327   0.024[4m5[24m        0.836     
+## [90m 45[39m BNT        1       1.12             0.949   0.814         0.537     
+## [90m 46[39m MANA       1       2.58             3.29    0.044[4m5[24m        0.227     
+## [90m 47[39m ZRX        1       1.38             1.18    0.729         0.442     
+## [90m 48[39m TRX        1       0.825            0.290   0.900         0.549     
+## [90m 49[39m BSV        1       1.93             0.479   0.397         0.486     
+## [90m 50[39m ETP        1       2.02             0.956   0.224         0.000[4m0[24m[4m0[24m[4m1[24m09
+## [90m 51[39m CRO        1       1.34             0.973   0.321         0.126     
+## [90m 52[39m ELF        1       1.47             3.04    0.800         0.590     
+## [90m 53[39m VIB        3       6.11             2.60   [31mNA[39m             0.358     
+## [90m 54[39m VET        3       0.680            2.11    0.542         0.194     
+## [90m 55[39m BTG        3       0.302            0.511   0.076[4m6[24m        0.560     
+## [90m 56[39m XEM        3       1.81             1.11    0.963         0.348     
+## [90m 57[39m HT         3       0.312            0.222   0.459         0.883     
+## [90m 58[39m EOS        3       0.387            0.142   0.612         0.940     
+## [90m 59[39m ENJ        3       3.39             1.46    0.004[4m0[24m[4m1[24m       0.522     
+## [90m 60[39m XMR        3       0.827            0.661   0.487         0.593     
+## [90m 61[39m NEXO       3       1.63             0.778   0.216         0.902     
+## [90m 62[39m EDG        3      13.5              8.71    0.154         0.329     
+## [90m 63[39m DGB        3       0.821            0.939   0.559         0.527     
+## [90m 64[39m DCR        3       0.354            1.14    0.336         0.379     
+## [90m 65[39m BTC        3       0.287            0.673   0.237         0.576     
+## [90m 66[39m BAT        3       0.751            0.572   0.299         0.618     
+## [90m 67[39m LTC        3       0.335            0.786   0.531         0.610     
+## [90m 68[39m ZEC        2       0.664            1.10    0.362         0.352     
+## [90m 69[39m CRO        2       3.23             0.973   1             0.126     
+## [90m 70[39m ETH        2     [31mNaN[39m                0.327  [31mNA[39m             0.836     
+## [90m 71[39m BNT        2       2.06             0.949   0.266         0.537     
+## [90m 72[39m TRX        2       0.934            0.290   0.484         0.549     
+## [90m 73[39m BSV        2       0.965            0.479   0.009[4m4[24m[4m6[24m       0.486     
+## [90m 74[39m MANA       2       1.54             3.29    0.173         0.227     
+## [90m 75[39m CBC        2       9.45             6.28    0.118         0.255     
+## [90m 76[39m ZRX        2       1.01             1.18    0.388         0.442     
+## [90m 77[39m ETP        2       1.63             0.956   0.354         0.000[4m0[24m[4m0[24m[4m1[24m09
+## [90m 78[39m ELF        2       2.18             3.04    0.161         0.590     
+## [90m 79[39m ADA        1       1.13             0.392   0.115         0.667     
+## [90m 80[39m ARDR       1       1.41             2.97    0.008[4m9[24m[4m0[24m       0.002[4m5[24m[4m8[24m   
+## [90m 81[39m SOLO       1       1.90             2.99    0.000[4m0[24m[4m5[24m[4m8[24m1     0.777     
+## [90m 82[39m WAXP       1       2.58             1.03    0.154         0.303     
+## [90m 83[39m ZAP        1      24.9              5.58    0.000[4m3[24m[4m8[24m[4m2[24m      0.199     
+## [90m 84[39m IPX        1       4.85             3.40    0.112         0.210     
+## [90m 85[39m KNC        1       1.04             1.08    0.002[4m3[24m[4m7[24m       0.480     
+## [90m 86[39m KMD        1       1.02             0.912   0.041[4m0[24m        0.622     
+## [90m 87[39m AVA        1       1.26             3.52    0.003[4m2[24m[4m4[24m       0.145     
+## [90m 88[39m REP        3       0.809            1.22    0.084[4m6[24m        0.192     
+## [90m 89[39m AYA        3       5.45             1.96    0.083[4m5[24m        0.819     
+## [90m 90[39m VIB        4       3.86             2.60    0.530         0.358     
+## [90m 91[39m BRD        3       0.956            0.902   0.825         0.851     
+## [90m 92[39m XNS        3       3.65             5.90    0.746         0.269     
+## [90m 93[39m VET        4       1.03             2.11    1             0.194     
+## [90m 94[39m TRX        3       0.490            0.290   0.199         0.549     
+## [90m 95[39m BTG        4       1.14             0.511   0.074[4m7[24m        0.560     
+## [90m 96[39m BNT        3       9.03             0.949   0.001[4m5[24m[4m0[24m       0.537     
+## [90m 97[39m ETH        3     [31mNaN[39m                0.327  [31mNA[39m             0.836     
+## [90m 98[39m ZAP        2       1.65             5.58    0.413         0.199     
+## [90m 99[39m MANA       3       0.751            3.29    0.474         0.227     
+## [90m100[39m EOS        4       0.473            0.142   0.858         0.940     
+## [90m101[39m IPX        2       2.77             3.40    0.053[4m5[24m        0.210     
+## [90m102[39m KNC        2       0.398            1.08    0.826         0.480     
+## [90m103[39m AVA        2       2.04             3.52    0.303         0.145     
+## [90m104[39m CRO        3       9.56             0.973   0.998         0.126     
+## [90m105[39m CBC        3       5.04             6.28    0.033[4m4[24m        0.255     
+## [90m106[39m ZRX        3       0.514            1.18    0.810         0.442     
+## [90m107[39m ETP        3       1.26             0.956   0.026[4m9[24m        0.000[4m0[24m[4m0[24m[4m1[24m09
+## [90m108[39m BSV        3       0.695            0.479   0.676         0.486     
+## [90m109[39m ARDR       2       0.646            2.97    0.764         0.002[4m5[24m[4m8[24m   
+## [90m110[39m SOLO       2       8.79             2.99    0.025[4m7[24m        0.777     
+## [90m111[39m WAXP       2       0.897            1.03    0.230         0.303     
+## [90m112[39m ADA        2       1.92             0.392   0.013[4m0[24m        0.667     
+## [90m113[39m HT         4       0.350            0.222   0.516         0.883     
+## [90m114[39m KMD        2       0.861            0.912   0.759         0.622     
+## [90m115[39m XEM        4       0.557            1.11    0.549         0.348     
+## [90m116[39m ENJ        4       1.59             1.46    0.010[4m9[24m        0.522     
+## [90m117[39m XMR        4       0.422            0.661   0.926         0.593     
+## [90m118[39m EDG        4       9.64             8.71    0.455         0.329     
+## [90m119[39m BTC        4       0.436            0.673   0.909         0.576     
+## [90m120[39m BAT        4       0.678            0.572   0.229         0.618     
+## [90m121[39m DGB        4       0.653            0.939   0.499         0.527     
+## [90m122[39m LTC        4       1.24             0.786   0.798         0.610     
+## [90m123[39m NEXO       4       1.51             0.778   0.369         0.902     
+## [90m124[39m DCR        4       0.490            1.14    0.722         0.379     
+## [90m125[39m ELF        3       0.917            3.04    0.074[4m1[24m        0.590     
+## [90m126[39m IHF        4       0.035[4m8[24m           1.68    0.005[4m0[24m[4m6[24m       0.027[4m5[24m    
+## [90m127[39m REP        4       0.371            1.22    0.407         0.192     
+## [90m128[39m AYA        4       3.78             1.96    0.286         0.819     
+## [90m129[39m ZAP        3       0.860            5.58    0.794         0.199     
+## [90m130[39m IPX        3       0.565            3.40    0.842         0.210     
+## [90m131[39m AVA        3       1.37             3.52    0.308         0.145     
+## [90m132[39m KNC        3       1.18             1.08    0.571         0.480     
+## [90m133[39m BRD        4      23.0              0.902   0.000[4m0[24m[4m1[24m[4m7[24m4     0.851     
+## [90m134[39m ARDR       3       2.86             2.97    0.019[4m5[24m        0.002[4m5[24m[4m8[24m   
+## [90m135[39m SOLO       3       2.37             2.99    0.106         0.777     
+## [90m136[39m WAXP       3       1.62             1.03    0.176         0.303     
+## [90m137[39m ADA        3       1.54             0.392   0.003[4m5[24m[4m1[24m       0.667     
+## [90m138[39m KMD        3       1.78             0.912   0.001[4m1[24m[4m2[24m       0.622     
+## [90m139[39m XNS        4       5.16             5.90    0.580         0.269     
+## [90m140[39m ZEC        3       1.40             1.10    0.001[4m9[24m[4m3[24m       0.352     
+## [90m141[39m TRX        4       0.570            0.290   0.516         0.549     
+## [90m142[39m MANA       4       1.98             3.29    0.674         0.227     
+## [90m143[39m CBC        4      14.9              6.28    0.039[4m5[24m        0.255     
+## [90m144[39m ZRX        4       0.721            1.18    0.871         0.442     
+## [90m145[39m ETP        4       1.64             0.956   0.496         0.000[4m0[24m[4m0[24m[4m1[24m09
+## [90m146[39m BSV        4       0.484            0.479   0.677         0.486     
+## [90m147[39m BNT        4       5.18             0.949   0.639         0.537     
+## [90m148[39m CRO        4       1.81             0.973   0.426         0.126     
+## [90m149[39m VIB        5      [31mNA[39m                2.60   [31mNA[39m             0.358     
+## [90m150[39m ETH        4       0.640            0.327   0.003[4m2[24m[4m0[24m       0.836     
+## [90m151[39m VET        5      [31mNA[39m                2.11   [31mNA[39m             0.194     
+## [90m152[39m ELF        4       0.406            3.04    0.450         0.590     
+## [90m153[39m IPX        4       6.25             3.40    0.021[4m4[24m        0.210     
+## [90m154[39m AVA        4      16.4              3.52    0.242         0.145     
+## [90m155[39m ARDR       4       4.59             2.97    0.003[4m7[24m[4m0[24m       0.002[4m5[24m[4m8[24m   
+## [90m156[39m WAXP       4       1.09             1.03    0.119         0.303     
+## [90m157[39m SOLO       4       5.20             2.99    0.051[4m8[24m        0.777     
+## [90m158[39m ADA        4       1.90             0.392   0.072[4m3[24m        0.667     
+## [90m159[39m KNC        4       0.799            1.08    0.522         0.480     
+## [90m160[39m ENJ        5      [31mNA[39m                1.46   [31mNA[39m             0.522     
+## [90m161[39m KMD        4       0.835            0.912   0.038[4m3[24m        0.622     
+## [90m162[39m BAT        5      [31mNA[39m                0.572  [31mNA[39m             0.618     
+## [90m163[39m ZAP        4       5.39             5.58    0.247         0.199     
+## [90m164[39m BTC        5      [31mNA[39m                0.673  [31mNA[39m             0.576     
+## [90m165[39m XMR        5      [31mNA[39m                0.661  [31mNA[39m             0.593     
+## [90m166[39m DGB        5      [31mNA[39m                0.939  [31mNA[39m             0.527     
+## [90m167[39m NEXO       5      [31mNA[39m                0.778  [31mNA[39m             0.902     
+## [90m168[39m EDG        5      [31mNA[39m                8.71   [31mNA[39m             0.329     
+## [90m169[39m LTC        5      [31mNA[39m                0.786  [31mNA[39m             0.610     
+## [90m170[39m DCR        5      [31mNA[39m                1.14   [31mNA[39m             0.379     
+## [90m171[39m ZEC        4       0.925            1.10    0.888         0.352     
+## [90m172[39m EOS        5      [31mNA[39m                0.142  [31mNA[39m             0.940     
+## [90m173[39m HT         5      [31mNA[39m                0.222  [31mNA[39m             0.883     
+## [90m174[39m IHF        5      [31mNA[39m                1.68   [31mNA[39m             0.027[4m5[24m    
+## [90m175[39m XEM        5      [31mNA[39m                1.11   [31mNA[39m             0.348     
+## [90m176[39m BTG        5      [31mNA[39m                0.511  [31mNA[39m             0.560     
+## [90m177[39m REP        5      [31mNA[39m                1.22   [31mNA[39m             0.192     
+## [90m178[39m AYA        5      [31mNA[39m                1.96   [31mNA[39m             0.819     
+## [90m179[39m XNS        5      [31mNA[39m                5.90   [31mNA[39m             0.269     
+## [90m180[39m BRD        5      [31mNA[39m                0.902  [31mNA[39m             0.851     
+## [90m181[39m ZRX        5      [31mNA[39m                1.18   [31mNA[39m             0.442     
+## [90m182[39m ETP        5      [31mNA[39m                0.956  [31mNA[39m             0.000[4m0[24m[4m0[24m[4m1[24m09
+## [90m183[39m CBC        5      [31mNA[39m                6.28   [31mNA[39m             0.255     
+## [90m184[39m BSV        5      [31mNA[39m                0.479  [31mNA[39m             0.486     
+## [90m185[39m TRX        5      [31mNA[39m                0.290  [31mNA[39m             0.549     
+## [90m186[39m MANA       5      [31mNA[39m                3.29   [31mNA[39m             0.227     
+## [90m187[39m CRO        5      [31mNA[39m                0.973  [31mNA[39m             0.126     
+## [90m188[39m BNT        5      [31mNA[39m                0.949  [31mNA[39m             0.537     
+## [90m189[39m ETH        5      [31mNA[39m                0.327  [31mNA[39m             0.836     
+## [90m190[39m ELF        5      [31mNA[39m                3.04   [31mNA[39m             0.590     
+## [90m191[39m IPX        5      [31mNA[39m                3.40   [31mNA[39m             0.210     
+## [90m192[39m ARDR       5      [31mNA[39m                2.97   [31mNA[39m             0.002[4m5[24m[4m8[24m   
+## [90m193[39m WAXP       5      [31mNA[39m                1.03   [31mNA[39m             0.303     
+## [90m194[39m AVA        5      [31mNA[39m                3.52   [31mNA[39m             0.145     
+## [90m195[39m SOLO       5      [31mNA[39m                2.99   [31mNA[39m             0.777     
+## [90m196[39m ADA        5      [31mNA[39m                0.392  [31mNA[39m             0.667     
+## [90m197[39m KMD        5      [31mNA[39m                0.912  [31mNA[39m             0.622     
+## [90m198[39m KNC        5      [31mNA[39m                1.08   [31mNA[39m             0.480     
+## [90m199[39m ZEC        5      [31mNA[39m                1.10   [31mNA[39m             0.352     
+## [90m200[39m ZAP        5      [31mNA[39m                5.58   [31mNA[39m             0.199
+```
+
+<!-- WORKING UP TO THIS POINT ON 11/2 -->
+
+## Adjust Prices - All Models
+
+<!-- [TODO - OR IS IT BETTER TO DO ALL AT ONCE ABOVE?] -->
+
+### Add Last Price
+
+And now we can do the same for all the other models
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested,
+                            xgb_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, xgb_test_predictions, last_train_price),
+                                                         NA),
+                            xgbTree_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, xgbTree_test_predictions, last_train_price),
+                                                         NA),
+                            nnet_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, nnet_test_predictions, last_train_price),
+                                                         NA))
+```
+
+##### Holdout
+
+(REMEMBER holdout step for all to get price from 5th train split first)
+
+
+```r
+cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
+                                    xgb_holdout_predictions = map2(train_data, xgb_holdout_predictions, last_train_price),
+                                    xgbTree_holdout_predictions = map2(train_data, xgbTree_holdout_predictions, last_train_price),
+                                    nnet_holdout_predictions = map2(train_data, nnet_holdout_predictions, last_train_price))
+```
+
+Join the holdout data to all rows based on the cryptocurrency symbol alone:
+
+
+```r
+cryptodata_nested <- left_join(cryptodata_nested, 
+                               select(cryptodata_nested_holdout, symbol, 
+                                      xgb_holdout_predictions, xgbTree_holdout_predictions, nnet_holdout_predictions),
+                               by='symbol')
+# Remove unwanted columns
+cryptodata_nested <- select(cryptodata_nested, -xgb_holdout_predictions.x, 
+                            -xgbTree_holdout_predictions.x, -nnet_holdout_predictions.x, -split.y)
+# Rename the columns kept
+cryptodata_nested <- rename(cryptodata_nested, 
+                            xgb_holdout_predictions = 'xgb_holdout_predictions.y',
+                            xgbTree_holdout_predictions = 'xgbTree_holdout_predictions.y',
+                            nnet_holdout_predictions = 'nnet_holdout_predictions.y',
+                            split = 'split.x')
+# Reset the correct grouping structure
+cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
+```
+
+### Convert to % Change
+
+Overwrite the old predictions with the new predictions adjusted as a percentage now:
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested,
+                            xgb_test_predictions = ifelse(split < 5,
+                                                         map(xgb_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # Holdout for all splits
+                            xgb_holdout_predictions = map(xgb_holdout_predictions, standardize_perc_change),
+                            # xgbTree
+                            xgbTree_test_predictions = ifelse(split < 5,
+                                                         map(xgbTree_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # Holdout for all splits
+                            xgbTree_holdout_predictions = map(xgbTree_holdout_predictions, standardize_perc_change),
+                            # nnet
+                            nnet_test_predictions = ifelse(split < 5,
+                                                         map(nnet_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # Holdout for all splits
+                            nnet_holdout_predictions = map(nnet_holdout_predictions, standardize_perc_change))
+```
+
+### Add Metrics
+
+
+```r
+cryptodata_nested <- mutate(cryptodata_nested,
+                            # XGBoost - RMSE - Test
+                            xgb_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(xgb_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            # And holdout:
+                            xgb_rmse_holdout = unlist(map2(xgb_holdout_predictions, actuals_holdout ,evaluate_preds_rmse)),
+                            # XGBoost - R^2 - Test
+                            xgb_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(xgb_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            # And holdout:
+                            xgb_rsq_holdout = unlist(map2(xgb_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
+                            # XGBoost Trees - RMSE - Test
+                            xgbTree_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(xgbTree_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            # And holdout:
+                            xgbTree_rmse_holdout = unlist(map2(xgbTree_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
+                            # XGBoost Trees - R^2 - Test
+                            xgbTree_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(xgbTree_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            # And holdout:
+                            xgbTree_rsq_holdout = unlist(map2(xgbTree_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
+                            # Neural Network - RMSE - Test
+                            nnet_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(nnet_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            # And holdout:
+                            nnet_rmse_holdout = unlist(map2(nnet_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
+                            # Neural Network - R^2 - Test
+                            nnet_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(nnet_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            # And holdout:
+                            nnet_rsq_holdout = unlist(map2(nnet_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))
+```
+
+<!-- Now we have RMSE values for every model created for every cryptocurrency and split of the data: -->
+
+<!-- ```{r} -->
+
+<!-- rmse_scores <- select(cryptodata_nested, lm_rmse_test, xgb_rmse_test, xgbTree_rmse_test, nnet_rmse_test) -->
+
+<!-- # Show RMSE scores -->
+
+<!-- rmse_scores -->
+
+<!-- ``` -->
+
+<!-- And the R Squared values: -->
+
+<!-- ```{r} -->
+
+<!-- rsq_scores <- select(cryptodata_nested, lm_rsq, xgb_rsq, xgbTree_rsq, nnet_rsq) -->
+
+<!-- # Show R^2 scores -->
+
+<!-- rsq_scores -->
+
+<!-- ``` -->
+
+## Eval RMSE
+
+<!-- [TODO - Title?] -->
+
+New object without split column `cryptodata_metrics`:
+
+
+```r
+cryptodata_metrics <- group_by(select(ungroup(cryptodata_nested),-split),symbol)
+```
+
+### Test
+
+Now for each model we will create a new column giving the average RMSE for the 4 cross-validation test splits:
+
+
+```r
+rmse_test <- mutate(cryptodata_metrics,
+                      lm = mean(lm_rmse_test, na.rm = T),
+                      xgb = mean(xgb_rmse_test, na.rm = T),
+                      xgbTree = mean(xgbTree_rmse_test, na.rm = T),
+                      nnet = mean(nnet_rmse_test, na.rm = T))
+```
+
+Now we can use the `gather()` function to summarize the columns as rows:
+
+
+```r
+rmse_test <- unique(gather(select(rmse_test, lm:nnet), 'model', 'rmse', -symbol))
+# Show results
+rmse_test
+```
+
+```
+## [90m# A tibble: 160 x 3[39m
+## [90m# Groups:   symbol [40][39m
+##    symbol model   rmse
+##    [3m[90m<chr>[39m[23m  [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m
+## [90m 1[39m EOS    lm     0.586
+## [90m 2[39m EDG    lm    13.0  
+## [90m 3[39m BTG    lm     0.796
+## [90m 4[39m VET    lm     0.914
+## [90m 5[39m IHF    lm     0.848
+## [90m 6[39m DGB    lm     1.01 
+## [90m 7[39m LTC    lm     0.671
+## [90m 8[39m NEXO   lm     1.54 
+## [90m 9[39m XMR    lm     0.580
+## [90m10[39m VIB    lm     3.97 
+## [90m# … with 150 more rows[39m
+```
+
+Now tag the results as having been for the test set
+
+
+```r
+rmse_test$eval_set <- 'test'
+```
+
+### Holdout
+
+Do the same for the holdout set
+
+
+```r
+rmse_holdout <- mutate(cryptodata_metrics,
+                      lm = mean(lm_rmse_holdout, na.rm = T),
+                      xgb = mean(xgb_rmse_holdout, na.rm = T),
+                      xgbTree = mean(xgbTree_rmse_holdout, na.rm = T),
+                      nnet = mean(nnet_rmse_holdout, na.rm = T))
+```
+
+Now we can use the `gather()` function to summarize the columns as rows:
+
+
+```r
+rmse_holdout <- unique(gather(select(rmse_holdout, lm:nnet), 'model', 'rmse', -symbol))
+# Show results
+rmse_holdout
+```
+
+```
+## [90m# A tibble: 160 x 3[39m
+## [90m# Groups:   symbol [40][39m
+##    symbol model  rmse
+##    [3m[90m<chr>[39m[23m  [3m[90m<chr>[39m[23m [3m[90m<dbl>[39m[23m
+## [90m 1[39m EOS    lm    0.142
+## [90m 2[39m EDG    lm    8.71 
+## [90m 3[39m BTG    lm    0.511
+## [90m 4[39m VET    lm    2.11 
+## [90m 5[39m IHF    lm    1.68 
+## [90m 6[39m DGB    lm    0.939
+## [90m 7[39m LTC    lm    0.786
+## [90m 8[39m NEXO   lm    0.778
+## [90m 9[39m XMR    lm    0.661
+## [90m10[39m VIB    lm    2.60 
+## [90m# … with 150 more rows[39m
+```
+
+Now tag the results as having been for the holdout set
+
+
+```r
+rmse_holdout$eval_set <- 'holdout'
+```
+
+### Union Results
+
+
+```r
+rmse_scores <- union(rmse_test, rmse_holdout)
+```
+
+## Eval R^2
+
+### Test
+
+For each model we will create a new column giving the average R\^2 for the 4 cross-validation test splits:
+
+
+```r
+rsq_test <- mutate(cryptodata_metrics,
+                      lm = mean(lm_rsq_test, na.rm = T),
+                      xgb = mean(xgb_rsq_test, na.rm = T),
+                      xgbTree = mean(xgbTree_rsq_test, na.rm = T),
+                      nnet = mean(nnet_rsq_test, na.rm = T))
+```
+
+Now we can use the `gather()` function to summarize the columns as rows:
+
+
+```r
+rsq_test <- unique(gather(select(rsq_test, lm:nnet), 'model', 'rsq', -symbol))
+# Show results
+rsq_test
+```
+
+```
+## [90m# A tibble: 160 x 3[39m
+## [90m# Groups:   symbol [40][39m
+##    symbol model   rsq
+##    [3m[90m<chr>[39m[23m  [3m[90m<chr>[39m[23m [3m[90m<dbl>[39m[23m
+## [90m 1[39m EOS    lm    0.688
+## [90m 2[39m EDG    lm    0.312
+## [90m 3[39m BTG    lm    0.383
+## [90m 4[39m VET    lm    0.492
+## [90m 5[39m IHF    lm    0.273
+## [90m 6[39m DGB    lm    0.598
+## [90m 7[39m LTC    lm    0.649
+## [90m 8[39m NEXO   lm    0.428
+## [90m 9[39m XMR    lm    0.627
+## [90m10[39m VIB    lm    0.237
+## [90m# … with 150 more rows[39m
+```
+
+Now tag the results as having been for the test set
+
+
+```r
+rsq_test$eval_set <- 'test'
+```
+
+### Holdout
+
+Do the same for the holdout set
+
+
+```r
+rsq_holdout <- mutate(cryptodata_metrics,
+                      lm = mean(lm_rsq_holdout, na.rm = T),
+                      xgb = mean(xgb_rsq_holdout, na.rm = T),
+                      xgbTree = mean(xgbTree_rsq_holdout, na.rm = T),
+                      nnet = mean(nnet_rsq_holdout, na.rm = T))
+```
+
+Now we can use the `gather()` function to summarize the columns as rows:
+
+
+```r
+rsq_holdout <- unique(gather(select(rsq_holdout, lm:nnet), 'model', 'rsq', -symbol))
+# Show results
+rsq_holdout
+```
+
+```
+## [90m# A tibble: 160 x 3[39m
+## [90m# Groups:   symbol [40][39m
+##    symbol model    rsq
+##    [3m[90m<chr>[39m[23m  [3m[90m<chr>[39m[23m  [3m[90m<dbl>[39m[23m
+## [90m 1[39m EOS    lm    0.940 
+## [90m 2[39m EDG    lm    0.329 
+## [90m 3[39m BTG    lm    0.560 
+## [90m 4[39m VET    lm    0.194 
+## [90m 5[39m IHF    lm    0.027[4m5[24m
+## [90m 6[39m DGB    lm    0.527 
+## [90m 7[39m LTC    lm    0.610 
+## [90m 8[39m NEXO   lm    0.902 
+## [90m 9[39m XMR    lm    0.593 
+## [90m10[39m VIB    lm    0.358 
+## [90m# … with 150 more rows[39m
+```
+
+Now tag the results as having been for the holdout set
+
+
+```r
+rsq_holdout$eval_set <- 'holdout'
+```
+
+### Union Results
+
+
+```r
+rsq_scores <- union(rsq_test, rsq_holdout)
+```
+
+## Visualize Results {#visualize-results}
+
+Now we can take the same tools we learned in the [Visualization section from earlier](#visualization) and visualize the results of the models.
+
+### RMSE Visualization
+
+<!-- [TODO - Can I compare test and holdout here?] -->
+
+<!-- ```{r} -->
+
+<!-- ggplot(rmse_scores, aes(x=split, y=rmse, color = model)) + -->
+
+<!--   geom_boxplot() + -->
+
+<!--   geom_point() + -->
+
+<!--   ylim(c(0,50)) + -->
+
+<!--   facet_wrap(~eval_set) -->
+
+<!-- ``` -->
+
+### Both
+
+#### Join Datasets
+
+First join the two
+
+
+```r
+plot_scores <- merge(rmse_scores, rsq_scores)
+```
+
+#### Plot Results
+
+<!-- [TODO - ADJUST THESE SOME MORE] -->
+
+
+```r
+ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
+  geom_point() +
+  ylim(c(0,10))
+```
+
+<img src="CryptoResearchPaper_files/figure-html/unnamed-chunk-74-1.png" width="672" />
+
+Running the same code wrapped in the `ggplotly()` function from the `plotly` package [@R-plotly] we can make the chart interactive. Try hovering over the points on the chart with your mouse.
+
+
+```r
+ggplotly(ggplot(plot_scores, aes(x=rsq, y=rmse, color = model, symbol = symbol)) +
+           geom_point() +
+           ylim(c(0,10)),
+         tooltip = c("model", "symbol", "rmse", "rsq"))
+```
+
+preserve770ac26254fa6719
+
+**The additional `tooltip` argument was passed to `ggpltoly()` to specify the label when hovering over the individual points**.
+
+### Results by the Cryptocurrency
+
+We can use the `facet_wrap()` function from `ggplot2` [@R-ggplot2] to create an individual chart for each cryptocurrency:
+
+
+```r
+ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
+  geom_point() +
+  geom_smooth() +
+  ylim(c(0,10)) +
+  facet_wrap(~symbol)
+```
+
+<img src="CryptoResearchPaper_files/figure-html/unnamed-chunk-76-1.png" width="672" />
+
+<!-- Every 12 hours once this document reaches this point, the results are saved to GitHub using the `pins` package [@R-pins], and a separate script creates the complete dataset over time. You won't be able to run the code shown below (nor do you have a reason to): -->
+
+
+
+
+### Interactive Dashboard
+Use the interactive app below to explore the results over time by the individual cryptocurrency. Use the filters on the left sidebar to visualize the results you are interested in:
+
+<iframe src="https://predictcrypto.shinyapps.io/tutorial_latest_model_summary/?showcase=0" width="100%" height="600px"></iframe>
+
+*If you have trouble viewing the embedded dashboard you can open it here instead: <https://predictcrypto.shinyapps.io/tutorial_latest_model_summary/>*
+
+The default view shows the holdout results for all models. **Another interesting comparison to make is between the holdout and the test set for fewer models (2 is ideal)**.
+
+\BeginKnitrBlock{infoicon}<div class="infoicon">The app shown above also has a button to **Show Code**. If you were to show the code and copy and paste it into an RStudio session on your computer into a file with the .Rmd file extension and you then *Knit* the file, the same exact app should show up on your computer, no logins or setup outside of the packages required for the code to run; RStudio should automatically prompt you to install packages that are not currently installed on your computer.</div>\EndKnitrBlock{infoicon}
+
+<!-- TODO - NOT logging MLflow metrics here because needs Python install. Instead run them through R Studio Server. -->
+
+## Visualizations - Historical Metrics
+
+We can pull the same data into this R session using the `pin_get()` function:
+
+```r
+metrics_historical <- pin_get(name = "full_metrics")
+```
+
+The data is limited to metrics for runs from the past 30 days and includes new data every 12 hours. Using the tools we used in the [data prep section](#data-prep), we can answer a couple more questions.
+
+### Best Models
+
+**Overall**, which **model** has the best metrics for all runs from the last 30 days?
+
+#### Summarize the data
+
+```r
+# First create grouped data
+best_models <- group_by(metrics_historical, model, eval_set)
+# Now summarize the data
+best_models <- summarize(best_models,
+                         rmse = mean(rmse, na.rm=T),
+                         rsq  = mean(rsq, na.rm=T))
+# Show results
+best_models
+```
+
+```
+## [90m# A tibble: 8 x 4[39m
+## [90m# Groups:   model [4][39m
+##   model   eval_set  rmse    rsq
+##   [3m[90m<chr>[39m[23m   [3m[90m<chr>[39m[23m    [3m[90m<dbl>[39m[23m  [3m[90m<dbl>[39m[23m
+## [90m1[39m lm      holdout   2.93 0.181 
+## [90m2[39m lm      test      3.30 0.264 
+## [90m3[39m nnet    holdout   4.56 0.108 
+## [90m4[39m nnet    test     10.8  0.214 
+## [90m5[39m xgb     holdout   3.82 0.087[4m3[24m
+## [90m6[39m xgb     test      3.47 0.110 
+## [90m7[39m xgbTree holdout   3.63 0.114 
+## [90m8[39m xgbTree test      3.26 0.113
+```
+
+#### Plot RMSE by Model
+
+
+```r
+ggplot(best_models, aes(model, rmse, fill = eval_set)) + 
+  geom_bar(stat = "identity", position = 'dodge') +
+  ggtitle('RMSE by Model', 'Comparing Test and Holdout')
+```
+
+<img src="CryptoResearchPaper_files/figure-html/unnamed-chunk-79-1.png" width="672" />
+
+
+<!-- Plotly version: -->
+<!-- ```{r plotly_accuracy_over_time} -->
+<!-- ggplotly(ggplot(best_models, aes(model, rmse, fill = eval_set)) +  -->
+<!--            geom_bar(stat = "identity", position = 'dodge') + -->
+<!--            ggtitle('RMSE by Model', 'Comparing Test and Holdout') ) -->
+<!-- ``` -->
+
+#### Plot $R^2$ by Model
+
+
+```r
+ggplot(best_models, aes(model, rsq, fill = eval_set)) + 
+  geom_bar(stat = "identity", position = 'dodge') +
+  ggtitle('R^2 by Model', 'Comparing Test and Holdout')
+```
+
+<img src="CryptoResearchPaper_files/figure-html/unnamed-chunk-80-1.png" width="672" />
+
+
+
+### Most Predictable Cryptocurrency
+
+
+<!-- [TODO - HERE FIND MOST (AND LEAST) PREDICTABLE CRYPTOCURRENCIES] -->
+
+**Overall**, which **cryptocurrency** has the best metrics for all runs from the last 30 days?
+
+#### Summarize the data
+
+```r
+# First create grouped data
+predictable_cryptos <- group_by(metrics_historical, symbol, eval_set)
+# Now summarize the data
+predictable_cryptos <- summarize(predictable_cryptos,
+                         rmse = mean(rmse, na.rm=T),
+                         rsq  = mean(rsq, na.rm=T))
+# Arrange from most predictable (according to R^2) to least 
+predictable_cryptos <- arrange(predictable_cryptos, desc(rsq))
+# Show results
+predictable_cryptos
+```
+
+```{.scroll-lim}
+## [90m# A tibble: 120 x 4[39m
+## [90m# Groups:   symbol [60][39m
+##    symbol eval_set  rmse   rsq
+##    [3m[90m<chr>[39m[23m  [3m[90m<chr>[39m[23m    [3m[90m<dbl>[39m[23m [3m[90m<dbl>[39m[23m
+## [90m 1[39m NCT    holdout   1.50 0.569
+## [90m 2[39m CRPT   holdout   1.91 0.555
+## [90m 3[39m CRPT   test      2.18 0.441
+## [90m 4[39m VET    holdout   2.55 0.435
+## [90m 5[39m XNS    test      3.61 0.426
+## [90m 6[39m UTT    holdout   3.36 0.426
+## [90m 7[39m LEO    test      1.74 0.416
+## [90m 8[39m UTT    test      2.85 0.389
+## [90m 9[39m RCN    test     20.0  0.376
+## [90m10[39m DDR    holdout   7.75 0.354
+## [90m# … with 110 more rows[39m
+```
+
+<style type="text/css">
+.scroll-100 {
+  max-height: 100px;
+  overflow-y: auto;
+  background-color: inherit;
+}
+</style>
+
+Show the top 15 most predictable cryptocurrencies (according to the $R^2$) using the `formattable` package [@R-formattable] to color code the cells:
+
+```r
+formattable(head(predictable_cryptos ,15), 
+            list(rmse = color_tile("#71CA97", "red"),
+                 rsq = color_tile("firebrick1", "#71CA97")))
+```
+
+
+<table class="table table-condensed">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> symbol </th>
+   <th style="text-align:right;"> eval_set </th>
+   <th style="text-align:right;"> rmse </th>
+   <th style="text-align:right;"> rsq </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> NCT </td>
+   <td style="text-align:right;"> holdout </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #72c795">1.500004</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">0.5693658</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> CRPT </td>
+   <td style="text-align:right;"> holdout </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #75c391">1.907514</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #78c191">0.5549325</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> CRPT </td>
+   <td style="text-align:right;"> test </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #77c08f">2.183429</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b58065">0.4409874</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> VET </td>
+   <td style="text-align:right;"> holdout </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7abc8c">2.550780</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b87c63">0.4346556</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> XNS </td>
+   <td style="text-align:right;"> test </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #82b084">3.611095</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #bc775f">0.4263351</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> UTT </td>
+   <td style="text-align:right;"> holdout </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #80b386">3.359596</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #bd775f">0.4257083</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> LEO </td>
+   <td style="text-align:right;"> test </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #74c493">1.741392</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c2715c">0.4161578</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> UTT </td>
+   <td style="text-align:right;"> test </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7cb88a">2.849692</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d06251">0.3888116</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> RCN </td>
+   <td style="text-align:right;"> test </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ff0000">20.049377</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d75a4c">0.3764202</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> DDR </td>
+   <td style="text-align:right;"> holdout </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a28462">7.753821</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e34d43">0.3536971</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> BNT </td>
+   <td style="text-align:right;"> test </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #919c74">5.524815</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #eb443d">0.3380146</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> SUB </td>
+   <td style="text-align:right;"> holdout </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #99906c">6.583068</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ee413b">0.3327047</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> IHF </td>
+   <td style="text-align:right;"> holdout </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">1.268127</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fd3131">0.3047597</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> WAXP </td>
+   <td style="text-align:right;"> holdout </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #73c694">1.553362</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fd3130">0.3039039</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> ELF </td>
+   <td style="text-align:right;"> test </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7abc8c">2.550478</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ff3030">0.3018058</span> </td>
+  </tr>
+</tbody>
+</table>
+
+
+### Accuracy Over Time
+
+<!-- [TODO - HERE HAVE ACCURACY OVER TIME. TWO LINES, ONE FOR HOLDOUT AND ONE FOR TEST, AND DO RMSE FIRST AND THEN RSQ] -->
+
+#### Summarize the data
+
+```r
+# First create grouped data
+accuracy_over_time <- group_by(metrics_historical, date_utc)
+# Now summarize the data
+accuracy_over_time <- summarize(accuracy_over_time, 
+                                rmse = mean(rmse, na.rm=T),
+                                rsq  = mean(rsq, na.rm=T))
+# Ungroup data
+accuracy_over_time <- ungroup(accuracy_over_time)
+# Show results
+accuracy_over_time
+```
+
+```
+## [90m# A tibble: 6 x 3[39m
+##   date_utc    rmse   rsq
+##   [3m[90m<chr>[39m[23m      [3m[90m<dbl>[39m[23m [3m[90m<dbl>[39m[23m
+## [90m1[39m 2020-11-07  4.59 0.133
+## [90m2[39m 2020-11-08  4.02 0.135
+## [90m3[39m 2020-11-09  7.15 0.143
+## [90m4[39m 2020-11-10  3.52 0.117
+## [90m5[39m 2020-11-11  3.91 0.210
+## [90m6[39m 2020-11-12  2.91 0.216
+```
+
+#### Plot RMSE
+
+<!-- [TODO - here is it better to facet_wrap by eval_set to compare test/holdout?] -->
+
+Remember, for RMSE the lower the score, the more accurate the models were.
+
+
+```r
+ggplot(accuracy_over_time, aes(x = date_utc, y = rmse, group = 1)) +
+  # Plot RMSE over time
+  geom_point(color = 'red', size = 2) +
+  geom_line(color = 'red', size = 1)
+```
+
+<img src="CryptoResearchPaper_files/figure-html/plot_accuracy_over_time_rmse-1.png" width="672" />
+
+#### Plot R^2
+
+For the R^2 recall that we are looking at the correlation between the predictions made and what actually happened, so the higher the score the better, with a maximum score of 1 that would mean the predictions were 100% correlated with each other and therefore identical.
+
+
+```r
+ggplot(accuracy_over_time, aes(x = date_utc, y = rsq, group = 1)) +
+  # Plot R^2 over time
+  geom_point(aes(x = date_utc, y = rsq), color = 'dark green', size = 2) +
+  geom_line(aes(x = date_utc, y = rsq), color = 'dark green', size = 1)
+```
+
+<img src="CryptoResearchPaper_files/figure-html/plot_accuracy_over_time_rsq-1.png" width="672" />
+
+
+[Refer back to the interactive dashboard](#interactive-dashboard) to take a more specific subset of results instead of the aggregate analysis shown above.
+
+
+## Making Predictions
+
+Once we have used the information visualized in this section to determine which models we want to go ahead and use, we want to start thinking about how to make predictions on new data.
+
+To make new predictions, we would start by pulling the newest data. Next we want to make sure the data has the exact same columns that were used to train the models minus the target variable which we will predict. We need to apply the exact same data preparation steps that were performed on the data to train the models to the new data in order to make new predictions.
+
+We have omitted these steps to discourage people from performing real trades. Congratulations, you have made it all the way through all of the code! Learn more about why you should not attempt performing trades using the system outlined [in the next section](#considerations).
+
+
+
+
+
+<!--chapter:end:07-EvaluateModelPerformance.Rmd-->
+
+# Considerations
+
+## Not a trading tutorial
+
+In this document we aimed to predict the change in cryptocurrency prices, and **it is very important to recognize that this is not the same as being able to successfully make money trading on the cryptocurrency markets**. 
+
+This is a very important distinction for the following reasons (and many more we have not thought of):
+
+-   [We already covered some of the reasons for why there is a meaningful difference between predicting price movements for the cryptocurrency markets and actually performing effective trades in the data exploration section](#market-depth), but things are further complicated by the fact that trades can be posted as either a [**limit order**]{style="color: purple;"} or a [**market order**]{style="color: purple;"}. A limit order gets added to the order book after the trader specifies the price point and the quantity, while a market order initiates a trade with the most favorable price from the order book. This is why someone doing a limit order would be referred to as a [**market maker**]{style="color: purple;"}, while someone posting a market order would be consider to be a [**market taker**]{style="color: purple;"}; this indicates whether someone is **creating new liquidity** for the market, or are **taking from the available liquidity**, which has implications in terms of the fees that the exchange actually charges, because exchanges prefer encouring activity that results in more liquidity rather than less. See [this link for the latest specific maker and taker fees based on trading volume](https://hitbtc.com/fee-tier) and [more details on their rationale](https://hitbtc.com/fees-and-limits) (as was also explained here).
+
+- There are **many** cryptocurrencies that have really low levels of liquidity, which can severely affect the ability to purchase the cryptocurrency at the desired price point and at the desired time. Simply put, things can get extraordinarily complex.
+
+- When programmatically trading it is easy to make a single mistake that ends up being more costly than the potential upside of a successful trading system.
+
+- Even if these models were at all accurate in predicting price changes, that would not necessarily indicate that future performance would be any good. **The data made available in this tutorial is very limited in scope and perspective**, and has no way of understanding more complex dynamics like world events and news coverage, which could very well have an effect on the prices.
+
+- Finding an effective trading strategy is easier said than done. Even if we could be accurate in predicting these markets, there is no guarantee we would be able to translate those predictions into an effective trading strategy. There are many nuances (i.e. trading fees) to deal with and decisions to be made, coming up with a good trade execution plan that works consistently is **not easy**.
+
+- Another thing we did not consider in this tutorial is the distinction between the price at which we could buy the cryptocurrency (the "ask" price), and the price at which we could sell it (the "bid" price). In our example we predicted where the ask price was headed rather than considering a specific trading dynamic. 
+
+\BeginKnitrBlock{infoicon}<div class="infoicon">This tutorial is not meant to show anyone how to trade on the cryptocurrency markets, but rather encourage people to apply these tools to their own data problems, and that is the reason the tutorial stops here (also because we like not getting sued).</div>\EndKnitrBlock{infoicon}
+
+
+## Session Information
+
+Below is information relating to the specific R session that was run. If you are unable to reproduce these steps, you can find the correct version of the tools to install below. Otherwise follow the [instructions to run the code in the cloud](#run-in-the-cloud) instead.
+
+
+```r
+sessionInfo()
+```
+
+```
+## R version 4.0.3 (2020-10-10)
+## Platform: x86_64-apple-darwin17.0 (64-bit)
+## Running under: macOS Catalina 10.15.7
+## 
+## Matrix products: default
+## BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## attached base packages:
+## [1] parallel  stats     graphics  grDevices utils     datasets  methods  
+## [8] base     
+## 
+## other attached packages:
+##  [1] formattable_0.2.0.1 hydroGOF_0.4-0      zoo_1.8-8          
+##  [4] deepnet_0.2         gbm_2.1.8           xgboost_1.2.0.1    
+##  [7] doParallel_1.0.16   iterators_1.0.13    foreach_1.5.1      
+## [10] caret_6.0-86        lattice_0.20-41     transformr_0.1.3   
+## [13] gganimate_1.0.7     ggforce_0.3.2       ggpubr_0.4.0       
+## [16] plotly_4.9.2.1      ggthemes_4.2.0      magick_2.5.2       
+## [19] av_0.5.1            gifski_0.8.6        ggTimeSeries_1.0.1 
+## [22] anytime_0.3.9       tsibble_0.9.3       forcats_0.5.0      
+## [25] stringr_1.4.0       dplyr_1.0.2         purrr_0.3.4        
+## [28] readr_1.4.0         tidyr_1.1.2         tibble_3.0.4       
+## [31] ggplot2_3.3.2       tidyverse_1.3.0     jsonlite_1.7.1     
+## [34] httr_1.4.2          DT_0.16             skimr_2.1.2        
+## [37] pins_0.4.4          pacman_0.5.1        knitr_1.30         
+## [40] bookdown_0.21      
+## 
+## loaded via a namespace (and not attached):
+##   [1] readxl_1.3.1         backports_1.2.0      plyr_1.8.6          
+##   [4] repr_1.1.0           lazyeval_0.2.2       sp_1.4-4            
+##   [7] splines_4.0.3        crosstalk_1.1.0.1    gstat_2.0-6         
+##  [10] digest_0.6.27        htmltools_0.5.0      fansi_0.4.1         
+##  [13] magrittr_1.5         openxlsx_4.2.3       recipes_0.1.15      
+##  [16] modelr_0.1.8         gower_0.2.2          xts_0.12.1          
+##  [19] lpSolve_5.6.15       prettyunits_1.1.1    colorspace_2.0-0    
+##  [22] rappdirs_0.3.1       rvest_0.3.6          haven_2.3.1         
+##  [25] xfun_0.19            crayon_1.3.4         survival_3.2-7      
+##  [28] glue_1.4.2           polyclip_1.10-0      gtable_0.3.0        
+##  [31] ipred_0.9-9          car_3.0-10           abind_1.4-5         
+##  [34] scales_1.1.1         DBI_1.1.0            rstatix_0.6.0       
+##  [37] Rcpp_1.0.5           viridisLite_0.3.0    progress_1.2.2      
+##  [40] units_0.6-7          foreign_0.8-80       intervals_0.15.2    
+##  [43] stats4_4.0.3         lava_1.6.8.1         prodlim_2019.11.13  
+##  [46] htmlwidgets_1.5.2    FNN_1.1.3            ellipsis_0.3.1      
+##  [49] reshape_0.8.8        pkgconfig_2.0.3      farver_2.0.3        
+##  [52] nnet_7.3-14          dbplyr_2.0.0         utf8_1.1.4          
+##  [55] labeling_0.4.2       tidyselect_1.1.0     rlang_0.4.8         
+##  [58] reshape2_1.4.4       munsell_0.5.0        cellranger_1.1.0    
+##  [61] tools_4.0.3          cli_2.1.0            generics_0.1.0      
+##  [64] broom_0.7.2          evaluate_0.14        yaml_2.2.1          
+##  [67] ModelMetrics_1.2.2.2 fs_1.5.0             zip_2.1.1           
+##  [70] hydroTSM_0.6-0       nlme_3.1-149         xml2_1.3.2          
+##  [73] compiler_4.0.3       rstudioapi_0.12      filelock_1.0.2      
+##  [76] curl_4.3             e1071_1.7-4          ggsignif_0.6.0      
+##  [79] reprex_0.3.0         spacetime_1.2-3      tweenr_1.0.1        
+##  [82] stringi_1.5.3        highr_0.8            ps_1.4.0            
+##  [85] Matrix_1.2-18        classInt_0.4-3       vctrs_0.3.4         
+##  [88] pillar_1.4.6         lifecycle_0.2.0      maptools_1.0-2      
+##  [91] data.table_1.13.2    R6_2.5.0             KernSmooth_2.23-17  
+##  [94] rio_0.5.16           codetools_0.2-16     MASS_7.3-53         
+##  [97] assertthat_0.2.1     withr_2.3.0          mgcv_1.8-33         
+## [100] hms_0.5.3            grid_4.0.3           rpart_4.1-15        
+## [103] timeDate_3043.102    class_7.3-17         rmarkdown_2.5       
+## [106] carData_3.0-4        automap_1.0-14       sf_0.9-6            
+## [109] pROC_1.16.2          lubridate_1.7.9      base64enc_0.1-3
+```
+
+<!--chapter:end:08-Considerations.Rmd-->
+
+# Archive
+
+Below is an archive of this same document from different dates:
+
+## May 2020
+
+[November 10, 2020 - Morning](https://5fa98c019806070007a1948c--researchpaper.netlify.app/)
+
+[May 23, 2020 - Morning](https://5ec910b25ba546000683ef75--researchpaper.netlify.app/)
+
+[May 22, 2020 - Morning](https://5ec7bfda63f2680006dc7adb--researchpaper.netlify.app/)
+
+[May 21, 2020 - Morning](https://5ec66e35e51006000702d6a6--researchpaper.netlify.app/)
+
+[May 20, 2020 - Morning](https://5ec54d80a11b3100064e7032--researchpaper.netlify.app/)
+
+[May 19, 2020 - Morning](https://5ec3ebd67cef13000653e8ec--researchpaper.netlify.app/)
+
+[May 18, 2020 - Morning](https://5ec27a599a31b90007d45f5e--researchpaper.netlify.app/)
+
+
+<!--chapter:end:09-Archive.Rmd-->
+
+# References Test
+
+## Document Format
+
+The **bookdown** package [@R-bookdown] was used to produce this document, which was built on top of **R Markdown** [@R-rmarkdown] and **knitr** [@R-knitr].
+
+<!-- [TODO - ADJUST TO HAVE ONE FOR EACH ONE] -->
+
+
+```r
+knitr::write_bib(c(.packages()), "packages.bib")
+```
+
+## Open Review Toolkit {#open-review-toolkit-ref}
+
+Thanks to [Ben Marwick](https://github.com/benmarwick) for outlining how to use the [Open Review Toolkit](https://www.openreviewtoolkit.org/) in bookdown to collect feedback on the document: https://benmarwick.github.io/bookdown-ort/mods.html#open-review-block
+
+## Visualization Section
+
+- https://www.rayshader.com/
+
+- https://github.com/yutannihilation/gghighlight
+
+    - https://github.com/njtierney/rstudioconf20/blob/master/slides/index.Rmd
+
+## Time Series Section
+
+- https://stackoverflow.com/questions/42820696/using-prophet-package-to-predict-by-group-in-dataframe-in-r 
+
+- ... add rest here
+
+
+## R Packages Used
+
+<!--chapter:end:10-references.Rmd-->
 
