@@ -21,7 +21,7 @@ jobs:
       - name: Render Book
         run: |-
           Rscript -e 'pins_key <- "${{secrets.PAT_PINS}}"'
-          Rscript -e 'bookdown::render_book("index.Rmd", clean = FALSE)'
+          Rscript -e 'bookdown::render_book("index.Rmd", clean_envir = FALSE, clean = FALSE)'
       - name: Commit and push files
         run: |
           git config --local user.email "ries9112@colorado.edu"
