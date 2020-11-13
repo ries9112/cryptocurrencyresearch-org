@@ -1,7 +1,7 @@
 name: Run Crypto Tutorial
 on:
   schedule:
-    - cron: '35 02,14,22 * * *'
+    - cron: '45 02,14,22 * * *'
 
 jobs:
   build:
@@ -32,6 +32,10 @@ jobs:
       - name: Snapshot renv to update lockfile
         run: |-
           Rscript -e "renv::snapshot()"
+      - name: Update GitHub page
+        run: |
+          rm -r docs
+          cp -R /_book /docs
       - name: Commit and push files
         run: |
           git config --local user.email "ries9112@colorado.edu"
@@ -39,5 +43,6 @@ jobs:
           git add .
           git commit -m "Refresh entire book from CI automated process" -a
           git push https://ries9112:${{secrets.GITHUB_TOKEN}}@github.com/ries9112/cryptocurrencyresearch-org.git HEAD:master --force
+
 
 
