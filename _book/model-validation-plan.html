@@ -376,7 +376,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb65-48"><a href="model-validation-plan.html#cb65-48"></a>                     <span class="op">-</span>pkDummy, <span class="op">-</span>pkey, <span class="op">-</span>ts_index, split)</span></code></pre></div>
 <p>Our data now has the new columns <code>training</code> (<em>train</em>, <em>test</em> or <em>holdout</em>) and <code>split</code> (numbers 1-5) added to it, let’s take a look at the new columns:</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="model-validation-plan.html#cb66-1"></a><span class="kw">select</span>(cryptodata, training, split)</span></code></pre></div>
-<pre><code>## [90m# A tibble: 152,492 x 3[39m
+<pre><code>## [90m# A tibble: 153,553 x 3[39m
 ## [90m# Groups:   symbol [95][39m
 ##    symbol training split
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;dbl&gt;[39m[23m
@@ -390,7 +390,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m 8[39m BTG    train        1
 ## [90m 9[39m ACAT   train        1
 ## [90m10[39m LINK   train        1
-## [90m# … with 152,482 more rows[39m</code></pre>
+## [90m# … with 153,543 more rows[39m</code></pre>
 <p><em>Notice that even though we left <code>symbol</code> variables out of our selection, but because it is part of the way we grouped our data, it was added back in with the message “Adding missing grouping variables <code>symbol</code>”. The data is tied to its groupings when performing all operations until we use <span style="color: green;"><strong>ungroup()</strong></span> to undo them.</em></p>
 <p>Let’s add the new <span style="color: blue;"><strong>split</strong></span> column to the way the data is grouped:</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="model-validation-plan.html#cb68-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol, split)</span></code></pre></div>
@@ -402,8 +402,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   symbol training split
 ##   [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;dbl&gt;[39m[23m
 ## [90m1[39m SWM    holdout      5
-## [90m2[39m IPL    holdout      5
-## [90m3[39m PLA    holdout      5
+## [90m2[39m PLA    holdout      5
+## [90m3[39m IPL    holdout      5
 ## [90m4[39m VET    holdout      5
 ## [90m5[39m AAB    holdout      5
 ## [90m6[39m REP    holdout      5</code></pre>
@@ -456,7 +456,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb76-8"><a href="model-validation-plan.html#cb76-8"></a>                                                        <span class="kw">sd</span>(lagged_price_24h, <span class="dt">na.rm=</span>T))), min_sd)</span>
 <span id="cb76-9"><a href="model-validation-plan.html#cb76-9"></a><span class="co"># Show data</span></span>
 <span id="cb76-10"><a href="model-validation-plan.html#cb76-10"></a>find_zero_var</span></code></pre></div>
-<pre><code>## [90m# A tibble: 152,492 x 4[39m
+<pre><code>## [90m# A tibble: 153,553 x 4[39m
 ## [90m# Groups:   symbol, split, training [950][39m
 ##    symbol split training     min_sd
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m         [3m[90m&lt;dbl&gt;[39m[23m
@@ -465,23 +465,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [90m 3[39m EDG        1 train    0.000[4m6[24m[4m3[24m[4m3[24m  
 ## [90m 4[39m LEO        1 train    0.118     
 ## [90m 5[39m GBX        1 train    0.002[4m5[24m[4m6[24m   
-## [90m 6[39m ACT        1 train    0.000[4m7[24m[4m2[24m[4m5[24m  
-## [90m 7[39m MBL        1 train    0.000[4m0[24m[4m0[24m[4m7[24m71
+## [90m 6[39m ACT        1 train    0.000[4m7[24m[4m1[24m[4m9[24m  
+## [90m 7[39m MBL        1 train    0.000[4m0[24m[4m0[24m[4m7[24m74
 ## [90m 8[39m BTG        1 train    0.374     
 ## [90m 9[39m ACAT       1 train    0.000[4m0[24m[4m1[24m[4m6[24m5 
 ## [90m10[39m LINK       1 train    1.88      
-## [90m# … with 152,482 more rows[39m</code></pre>
+## [90m# … with 153,543 more rows[39m</code></pre>
 <p>Next let’s get to a list of cryptocurrency symbols where the minimum standard deviation across all columns for all splits of the data is 0, which is the list of cryptocurrencies we want to later remove from the data:</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="model-validation-plan.html#cb78-1"></a>minimum_sd &lt;-<span class="st"> </span><span class="kw">filter</span>(<span class="kw">distinct</span>(<span class="kw">mutate</span>(<span class="kw">group_by</span>(<span class="kw">ungroup</span>(find_zero_var), symbol),</span>
 <span id="cb78-2"><a href="model-validation-plan.html#cb78-2"></a>                                     <span class="dt">min_sd =</span> <span class="kw">min</span>(min_sd, <span class="dt">na.rm=</span>T)), min_sd),min_sd <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.0001</span>)<span class="op">$</span>symbol</span>
 <span id="cb78-3"><a href="model-validation-plan.html#cb78-3"></a><span class="co"># Show result</span></span>
 <span id="cb78-4"><a href="model-validation-plan.html#cb78-4"></a>minimum_sd</span></code></pre></div>
-<pre><code>##  [1] &quot;IQ&quot;    &quot;LEO&quot;   &quot;GBX&quot;   &quot;ACT&quot;   &quot;MBL&quot;   &quot;ACAT&quot;  &quot;IHF&quot;   &quot;RCN&quot;   &quot;FDZ&quot;  
-## [10] &quot;PAXG&quot;  &quot;MESH&quot;  &quot;REX&quot;   &quot;NAV&quot;   &quot;SRN&quot;   &quot;XDN&quot;   &quot;CUR&quot;   &quot;DENT&quot;  &quot;IPL&quot;  
-## [19] &quot;XVG&quot;   &quot;APPC&quot;  &quot;NCT&quot;   &quot;HTML&quot;  &quot;STORJ&quot; &quot;IHT&quot;   &quot;CDT&quot;   &quot;COCOS&quot; &quot;SPC&quot;  
-## [28] &quot;SBD&quot;   &quot;OAX&quot;   &quot;GST&quot;   &quot;CND&quot;   &quot;SUB&quot;   &quot;PLA&quot;   &quot;BTT&quot;   &quot;SMART&quot; &quot;MG&quot;   
-## [37] &quot;SWM&quot;   &quot;PHX&quot;   &quot;CUTE&quot;  &quot;BCN&quot;   &quot;CHZ&quot;   &quot;SENT&quot;  &quot;BNK&quot;   &quot;CHAT&quot;  &quot;WIKI&quot; 
-## [46] &quot;NEU&quot;   &quot;XPR&quot;   &quot;ECA&quot;   &quot;JST&quot;   &quot;SEELE&quot; &quot;VSYS&quot;  &quot;AAB&quot;   &quot;DDR&quot;   &quot;CMCT&quot;</code></pre>
+<pre><code>##  [1] &quot;IQ&quot;    &quot;LEO&quot;   &quot;GBX&quot;   &quot;ACT&quot;   &quot;MBL&quot;   &quot;ACAT&quot;  &quot;RCN&quot;   &quot;FDZ&quot;   &quot;PAXG&quot; 
+## [10] &quot;MESH&quot;  &quot;REX&quot;   &quot;NAV&quot;   &quot;SRN&quot;   &quot;XDN&quot;   &quot;CUR&quot;   &quot;DENT&quot;  &quot;IPL&quot;   &quot;XVG&quot;  
+## [19] &quot;APPC&quot;  &quot;NCT&quot;   &quot;HTML&quot;  &quot;IHT&quot;   &quot;CDT&quot;   &quot;COCOS&quot; &quot;SPC&quot;   &quot;SBD&quot;   &quot;OAX&quot;  
+## [28] &quot;GST&quot;   &quot;CND&quot;   &quot;TRX&quot;   &quot;SUB&quot;   &quot;PLA&quot;   &quot;BTT&quot;   &quot;SMART&quot; &quot;MG&quot;    &quot;SWM&quot;  
+## [37] &quot;PHX&quot;   &quot;CUTE&quot;  &quot;BCN&quot;   &quot;CHZ&quot;   &quot;SENT&quot;  &quot;BNK&quot;   &quot;CHAT&quot;  &quot;WIKI&quot;  &quot;NEU&quot;  
+## [46] &quot;XPR&quot;   &quot;ECA&quot;   &quot;JST&quot;   &quot;SEELE&quot; &quot;VSYS&quot;  &quot;AAB&quot;   &quot;DDR&quot;   &quot;CMCT&quot;</code></pre>
 <p>Now we can remove these symbols from appearing in the dataset:</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="model-validation-plan.html#cb80-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="op">!</span>(symbol <span class="op">%in%</span><span class="st"> </span>minimum_sd)) </span></code></pre></div>
 <p>In the code above we match all rows where the symbol is part of the <span style="color: blue;"><strong>minimum_sd</strong></span> object with the list of cryptocurrency symbols to remove from the data, and we then negate the selection using the <span style="color: blue;"><strong>!</strong></span> operator to only keep rows with symbols not in the list we found.</p>
@@ -498,21 +498,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- ``` -->
 <p>Here is an example of what happens when we <span style="color: green;"><strong>nest()</strong></span> the data:</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="model-validation-plan.html#cb81-1"></a><span class="kw">nest</span>(cryptodata) </span></code></pre></div>
-<pre><code>## [90m# A tibble: 410 x 4[39m
-## [90m# Groups:   symbol, training, split [410][39m
+<pre><code>## [90m# A tibble: 420 x 4[39m
+## [90m# Groups:   symbol, training, split [420][39m
 ##    symbol training split data               
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m             
-## [90m 1[39m EOS    train        1 [90m&lt;tibble [356 × 11]&gt;[39m
-## [90m 2[39m EDG    train        1 [90m&lt;tibble [363 × 11]&gt;[39m
-## [90m 3[39m BTG    train        1 [90m&lt;tibble [339 × 11]&gt;[39m
-## [90m 4[39m LINK   train        1 [90m&lt;tibble [251 × 11]&gt;[39m
-## [90m 5[39m VET    train        1 [90m&lt;tibble [336 × 11]&gt;[39m
-## [90m 6[39m DGB    train        1 [90m&lt;tibble [363 × 11]&gt;[39m
-## [90m 7[39m LTC    train        1 [90m&lt;tibble [363 × 11]&gt;[39m
-## [90m 8[39m NEXO   train        1 [90m&lt;tibble [361 × 11]&gt;[39m
-## [90m 9[39m XMR    train        1 [90m&lt;tibble [361 × 11]&gt;[39m
-## [90m10[39m VIB    train        1 [90m&lt;tibble [296 × 11]&gt;[39m
-## [90m# … with 400 more rows[39m</code></pre>
+## [90m 1[39m EOS    train        1 [90m&lt;tibble [357 × 11]&gt;[39m
+## [90m 2[39m EDG    train        1 [90m&lt;tibble [364 × 11]&gt;[39m
+## [90m 3[39m BTG    train        1 [90m&lt;tibble [340 × 11]&gt;[39m
+## [90m 4[39m LINK   train        1 [90m&lt;tibble [252 × 11]&gt;[39m
+## [90m 5[39m VET    train        1 [90m&lt;tibble [337 × 11]&gt;[39m
+## [90m 6[39m IHF    train        1 [90m&lt;tibble [277 × 11]&gt;[39m
+## [90m 7[39m DGB    train        1 [90m&lt;tibble [364 × 11]&gt;[39m
+## [90m 8[39m LTC    train        1 [90m&lt;tibble [364 × 11]&gt;[39m
+## [90m 9[39m NEXO   train        1 [90m&lt;tibble [364 × 11]&gt;[39m
+## [90m10[39m XMR    train        1 [90m&lt;tibble [364 × 11]&gt;[39m
+## [90m# … with 410 more rows[39m</code></pre>
 <p>We will begin by creating the new column containing the nested <span style="color: blue;"><strong>train</strong></span> data. Some additional steps were added to ensure the integrity of the data before we start training it, but these are not material outside of the things we have already discussed up to this point. Try to focus on the conceptual idea that we are creating a new dataset grouped by the <span style="color: blue;"><strong>symbol</strong></span>, <span style="color: blue;"><strong>training</strong></span> and <span style="color: blue;"><strong>split</strong></span> columns. As a first step, we are creating a new dataframe called <span style="color: blue;"><strong>cryptodata_train</strong></span> grouped by the <span style="color: blue;"><strong>symbol</strong></span> and <span style="color: blue;"><strong>split</strong></span> columns with the nested dataframes in the new <span style="color: blue;"><strong>train_data</strong></span> column:</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="model-validation-plan.html#cb83-1"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, </span>
 <span id="cb83-2"><a href="model-validation-plan.html#cb83-2"></a>                                       training<span class="op">==</span><span class="st">&#39;train&#39;</span>)), </span>
@@ -537,21 +537,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb83-21"><a href="model-validation-plan.html#cb83-21"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">select</span>(cryptodata_train, <span class="op">-</span>train_rows)</span>
 <span id="cb83-22"><a href="model-validation-plan.html#cb83-22"></a><span class="co"># Show results</span></span>
 <span id="cb83-23"><a href="model-validation-plan.html#cb83-23"></a>cryptodata_train</span></code></pre></div>
-<pre class="scroll-lim"><code>## [90m# A tibble: 195 x 3[39m
-## [90m# Groups:   symbol, split [195][39m
+<pre class="scroll-lim"><code>## [90m# A tibble: 200 x 3[39m
+## [90m# Groups:   symbol, split [200][39m
 ##    symbol split train_data         
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m             
-## [90m 1[39m EOS        1 [90m&lt;tibble [279 × 11]&gt;[39m
-## [90m 2[39m EDG        1 [90m&lt;tibble [285 × 11]&gt;[39m
-## [90m 3[39m BTG        1 [90m&lt;tibble [258 × 11]&gt;[39m
-## [90m 4[39m VET        1 [90m&lt;tibble [263 × 11]&gt;[39m
-## [90m 5[39m DGB        1 [90m&lt;tibble [285 × 11]&gt;[39m
-## [90m 6[39m LTC        1 [90m&lt;tibble [278 × 11]&gt;[39m
-## [90m 7[39m NEXO       1 [90m&lt;tibble [283 × 11]&gt;[39m
-## [90m 8[39m XMR        1 [90m&lt;tibble [267 × 11]&gt;[39m
-## [90m 9[39m VIB        1 [90m&lt;tibble [224 × 11]&gt;[39m
-## [90m10[39m XNS        1 [90m&lt;tibble [27 × 11]&gt;[39m 
-## [90m# … with 185 more rows[39m</code></pre>
+## [90m 1[39m EOS        1 [90m&lt;tibble [280 × 11]&gt;[39m
+## [90m 2[39m EDG        1 [90m&lt;tibble [286 × 11]&gt;[39m
+## [90m 3[39m BTG        1 [90m&lt;tibble [259 × 11]&gt;[39m
+## [90m 4[39m VET        1 [90m&lt;tibble [264 × 11]&gt;[39m
+## [90m 5[39m IHF        1 [90m&lt;tibble [197 × 11]&gt;[39m
+## [90m 6[39m DGB        1 [90m&lt;tibble [286 × 11]&gt;[39m
+## [90m 7[39m LTC        1 [90m&lt;tibble [279 × 11]&gt;[39m
+## [90m 8[39m NEXO       1 [90m&lt;tibble [286 × 11]&gt;[39m
+## [90m 9[39m XMR        1 [90m&lt;tibble [270 × 11]&gt;[39m
+## [90m10[39m VIB        1 [90m&lt;tibble [224 × 11]&gt;[39m
+## [90m# … with 190 more rows[39m</code></pre>
 <p>Now let’s repeat the same process but on the <span style="color: blue;"><strong>test</strong></span> data to create the <span style="color: blue;"><strong>cryptodata_test</strong></span> object:</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="model-validation-plan.html#cb85-1"></a>cryptodata_test &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, </span>
 <span id="cb85-2"><a href="model-validation-plan.html#cb85-2"></a>                                             training<span class="op">==</span><span class="st">&#39;test&#39;</span>)), </span>
@@ -563,21 +563,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb85-8"><a href="model-validation-plan.html#cb85-8"></a>                          <span class="op">-</span>training)</span>
 <span id="cb85-9"><a href="model-validation-plan.html#cb85-9"></a><span class="co"># Show nested data</span></span>
 <span id="cb85-10"><a href="model-validation-plan.html#cb85-10"></a>cryptodata_test</span></code></pre></div>
-<pre><code>## [90m# A tibble: 164 x 3[39m
-## [90m# Groups:   symbol, split [164][39m
+<pre><code>## [90m# A tibble: 168 x 3[39m
+## [90m# Groups:   symbol, split [168][39m
 ##    symbol split test_data         
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m            
-## [90m 1[39m LINK       1 [90m&lt;tibble [63 × 11]&gt;[39m
-## [90m 2[39m VIB        1 [90m&lt;tibble [75 × 11]&gt;[39m
-## [90m 3[39m AYA        1 [90m&lt;tibble [75 × 11]&gt;[39m
-## [90m 4[39m REP        1 [90m&lt;tibble [75 × 11]&gt;[39m
-## [90m 5[39m VET        1 [90m&lt;tibble [84 × 11]&gt;[39m
-## [90m 6[39m BTG        1 [90m&lt;tibble [85 × 11]&gt;[39m
-## [90m 7[39m XEM        1 [90m&lt;tibble [87 × 11]&gt;[39m
-## [90m 8[39m HT         1 [90m&lt;tibble [88 × 11]&gt;[39m
-## [90m 9[39m EOS        1 [90m&lt;tibble [89 × 11]&gt;[39m
-## [90m10[39m ENJ        1 [90m&lt;tibble [90 × 11]&gt;[39m
-## [90m# … with 154 more rows[39m</code></pre>
+## [90m 1[39m LINK       1 [90m&lt;tibble [64 × 11]&gt;[39m
+## [90m 2[39m IHF        1 [90m&lt;tibble [70 × 11]&gt;[39m
+## [90m 3[39m VIB        1 [90m&lt;tibble [75 × 11]&gt;[39m
+## [90m 4[39m AYA        1 [90m&lt;tibble [75 × 11]&gt;[39m
+## [90m 5[39m REP        1 [90m&lt;tibble [76 × 11]&gt;[39m
+## [90m 6[39m VET        1 [90m&lt;tibble [85 × 11]&gt;[39m
+## [90m 7[39m BTG        1 [90m&lt;tibble [86 × 11]&gt;[39m
+## [90m 8[39m XEM        1 [90m&lt;tibble [87 × 11]&gt;[39m
+## [90m 9[39m HT         1 [90m&lt;tibble [89 × 11]&gt;[39m
+## [90m10[39m EOS        1 [90m&lt;tibble [90 × 11]&gt;[39m
+## [90m# … with 158 more rows[39m</code></pre>
 <p>As well as the <span style="color: blue;"><strong>hoildout</strong></span> data to create the <span style="color: blue;"><strong>cryptodata_holdout</strong></span> object:</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="model-validation-plan.html#cb87-1"></a>cryptodata_holdout &lt;-<span class="st"> </span><span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, </span>
 <span id="cb87-2"><a href="model-validation-plan.html#cb87-2"></a>                                         training<span class="op">==</span><span class="st">&#39;holdout&#39;</span>)), </span>
@@ -587,21 +587,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb87-6"><a href="model-validation-plan.html#cb87-6"></a>                             <span class="op">-</span>split, <span class="op">-</span>training)</span>
 <span id="cb87-7"><a href="model-validation-plan.html#cb87-7"></a><span class="co"># Show nested data</span></span>
 <span id="cb87-8"><a href="model-validation-plan.html#cb87-8"></a>cryptodata_holdout</span></code></pre></div>
-<pre><code>## [90m# A tibble: 41 x 2[39m
-## [90m# Groups:   symbol [41][39m
+<pre><code>## [90m# A tibble: 42 x 2[39m
+## [90m# Groups:   symbol [42][39m
 ##    symbol holdout_data      
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;list&gt;[39m[23m            
 ## [90m 1[39m VIB    [90m&lt;tibble [75 × 11]&gt;[39m
 ## [90m 2[39m VET    [90m&lt;tibble [87 × 11]&gt;[39m
-## [90m 3[39m BAT    [90m&lt;tibble [95 × 11]&gt;[39m
-## [90m 4[39m NEXO   [90m&lt;tibble [95 × 11]&gt;[39m
-## [90m 5[39m XMR    [90m&lt;tibble [94 × 11]&gt;[39m
-## [90m 6[39m DCR    [90m&lt;tibble [92 × 11]&gt;[39m
-## [90m 7[39m BTC    [90m&lt;tibble [93 × 11]&gt;[39m
-## [90m 8[39m DGB    [90m&lt;tibble [93 × 11]&gt;[39m
-## [90m 9[39m ENJ    [90m&lt;tibble [93 × 11]&gt;[39m
-## [90m10[39m EDG    [90m&lt;tibble [93 × 11]&gt;[39m
-## [90m# … with 31 more rows[39m</code></pre>
+## [90m 3[39m BTC    [90m&lt;tibble [96 × 11]&gt;[39m
+## [90m 4[39m DGB    [90m&lt;tibble [96 × 11]&gt;[39m
+## [90m 5[39m DCR    [90m&lt;tibble [94 × 11]&gt;[39m
+## [90m 6[39m EDG    [90m&lt;tibble [96 × 11]&gt;[39m
+## [90m 7[39m LTC    [90m&lt;tibble [95 × 11]&gt;[39m
+## [90m 8[39m EOS    [90m&lt;tibble [93 × 11]&gt;[39m
+## [90m 9[39m BAT    [90m&lt;tibble [93 × 11]&gt;[39m
+## [90m10[39m HT     [90m&lt;tibble [92 × 11]&gt;[39m
+## [90m# … with 32 more rows[39m</code></pre>
 <div id="join-results" class="section level3">
 <h3><span class="header-section-number">6.4.1</span> Join Results</h3>
 <p>Now we can take the results that we grouped for each subset <span style="color: blue;"><strong>cryptodata_train</strong></span>, <span style="color: blue;"><strong>cryptodata_test</strong></span>, and <span style="color: blue;"><strong>cryptodata_holdout</strong></span>, and we can <span style="color: purple;"><strong>join</strong></span> the results to have all three new columns <span style="color: blue;"><strong>train_data</strong></span>, <span style="color: blue;"><strong>test_data</strong></span>, and <span style="color: blue;"><strong>holdout_data</strong></span> in a single new dataframe, which we will call <span style="color: blue;"><strong>cryptodata_nested</strong></span>:</p>
@@ -609,41 +609,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb89-2"><a href="model-validation-plan.html#cb89-2"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">left_join</span>(cryptodata_train, cryptodata_test, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;symbol&quot;</span>, <span class="st">&quot;split&quot;</span>))</span>
 <span id="cb89-3"><a href="model-validation-plan.html#cb89-3"></a><span class="co"># Show new data</span></span>
 <span id="cb89-4"><a href="model-validation-plan.html#cb89-4"></a>cryptodata_nested</span></code></pre></div>
-<pre><code>## [90m# A tibble: 195 x 4[39m
-## [90m# Groups:   symbol, split [195][39m
+<pre><code>## [90m# A tibble: 200 x 4[39m
+## [90m# Groups:   symbol, split [200][39m
 ##    symbol split train_data          test_data         
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m              [3m[90m&lt;list&gt;[39m[23m            
-## [90m 1[39m EOS        1 [90m&lt;tibble [279 × 11]&gt;[39m [90m&lt;tibble [89 × 11]&gt;[39m
-## [90m 2[39m EDG        1 [90m&lt;tibble [285 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m
-## [90m 3[39m BTG        1 [90m&lt;tibble [258 × 11]&gt;[39m [90m&lt;tibble [85 × 11]&gt;[39m
-## [90m 4[39m VET        1 [90m&lt;tibble [263 × 11]&gt;[39m [90m&lt;tibble [84 × 11]&gt;[39m
-## [90m 5[39m DGB        1 [90m&lt;tibble [285 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m
-## [90m 6[39m LTC        1 [90m&lt;tibble [278 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m
-## [90m 7[39m NEXO       1 [90m&lt;tibble [283 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m
-## [90m 8[39m XMR        1 [90m&lt;tibble [267 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m
-## [90m 9[39m VIB        1 [90m&lt;tibble [224 × 11]&gt;[39m [90m&lt;tibble [75 × 11]&gt;[39m
-## [90m10[39m XNS        1 [90m&lt;tibble [27 × 11]&gt;[39m  [90m&lt;tibble [68 × 11]&gt;[39m
-## [90m# … with 185 more rows[39m</code></pre>
+## [90m 1[39m EOS        1 [90m&lt;tibble [280 × 11]&gt;[39m [90m&lt;tibble [90 × 11]&gt;[39m
+## [90m 2[39m EDG        1 [90m&lt;tibble [286 × 11]&gt;[39m [90m&lt;tibble [92 × 11]&gt;[39m
+## [90m 3[39m BTG        1 [90m&lt;tibble [259 × 11]&gt;[39m [90m&lt;tibble [86 × 11]&gt;[39m
+## [90m 4[39m VET        1 [90m&lt;tibble [264 × 11]&gt;[39m [90m&lt;tibble [85 × 11]&gt;[39m
+## [90m 5[39m IHF        1 [90m&lt;tibble [197 × 11]&gt;[39m [90m&lt;tibble [70 × 11]&gt;[39m
+## [90m 6[39m DGB        1 [90m&lt;tibble [286 × 11]&gt;[39m [90m&lt;tibble [92 × 11]&gt;[39m
+## [90m 7[39m LTC        1 [90m&lt;tibble [279 × 11]&gt;[39m [90m&lt;tibble [92 × 11]&gt;[39m
+## [90m 8[39m NEXO       1 [90m&lt;tibble [286 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m
+## [90m 9[39m XMR        1 [90m&lt;tibble [270 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m
+## [90m10[39m VIB        1 [90m&lt;tibble [224 × 11]&gt;[39m [90m&lt;tibble [75 × 11]&gt;[39m
+## [90m# … with 190 more rows[39m</code></pre>
 <p><em>The <span style="color: blue;"><strong>by</strong></span> argument used above defines the key to use to join the data by, in this case the cryptocurrency <span style="color: blue;"><strong>symbol</strong></span>, as well as the specific <span style="color: blue;"><strong>split</strong></span></em>.</p>
 <p>Next, let’s join the new dataframe we just created <span style="color: blue;"><strong>cryptodata_nested</strong></span> to the holdout data as well and add the <span style="color: blue;"><strong>holdout_data</strong></span> column. In this case, we will want to keep the holdout data consistent for all 5 splits of a cryptocurrency instead of matching the data to a particular split; the models trained on the data from splits 1 through 5 will each have a different test dataset, but all 5 models will then be tested against the same holdout. Therefore, this time in the <span style="color: green;"><strong>join()</strong></span> performed below we are only supplying the cryptocurrency <span style="color: blue;"><strong>symbol</strong></span> for the <span style="color: blue;"><strong>by</strong></span> parameter:</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="model-validation-plan.html#cb91-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">left_join</span>(cryptodata_nested, cryptodata_holdout, <span class="dt">by =</span> <span class="st">&quot;symbol&quot;</span>)</span></code></pre></div>
 <p>Now we have our completed dataset that will allow us to iterate through each option and create many separate models as was <a href="model-validation-plan.html#cross-validation">discussed throughout this section</a>:</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="model-validation-plan.html#cb92-1"></a>cryptodata_nested</span></code></pre></div>
-<pre><code>## [90m# A tibble: 195 x 5[39m
-## [90m# Groups:   symbol, split [195][39m
+<pre><code>## [90m# A tibble: 200 x 5[39m
+## [90m# Groups:   symbol, split [200][39m
 ##    symbol split train_data          test_data          holdout_data      
 ##    [3m[90m&lt;chr&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;list&gt;[39m[23m              [3m[90m&lt;list&gt;[39m[23m             [3m[90m&lt;list&gt;[39m[23m            
-## [90m 1[39m EOS        1 [90m&lt;tibble [279 × 11]&gt;[39m [90m&lt;tibble [89 × 11]&gt;[39m [90m&lt;tibble [90 × 11]&gt;[39m
-## [90m 2[39m EDG        1 [90m&lt;tibble [285 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m [90m&lt;tibble [93 × 11]&gt;[39m
-## [90m 3[39m BTG        1 [90m&lt;tibble [258 × 11]&gt;[39m [90m&lt;tibble [85 × 11]&gt;[39m [90m&lt;tibble [87 × 11]&gt;[39m
-## [90m 4[39m VET        1 [90m&lt;tibble [263 × 11]&gt;[39m [90m&lt;tibble [84 × 11]&gt;[39m [90m&lt;tibble [87 × 11]&gt;[39m
-## [90m 5[39m DGB        1 [90m&lt;tibble [285 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m [90m&lt;tibble [93 × 11]&gt;[39m
-## [90m 6[39m LTC        1 [90m&lt;tibble [278 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m [90m&lt;tibble [92 × 11]&gt;[39m
-## [90m 7[39m NEXO       1 [90m&lt;tibble [283 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m [90m&lt;tibble [95 × 11]&gt;[39m
-## [90m 8[39m XMR        1 [90m&lt;tibble [267 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m [90m&lt;tibble [94 × 11]&gt;[39m
-## [90m 9[39m VIB        1 [90m&lt;tibble [224 × 11]&gt;[39m [90m&lt;tibble [75 × 11]&gt;[39m [90m&lt;tibble [75 × 11]&gt;[39m
-## [90m10[39m XNS        1 [90m&lt;tibble [27 × 11]&gt;[39m  [90m&lt;tibble [68 × 11]&gt;[39m [90m&lt;tibble [71 × 11]&gt;[39m
-## [90m# … with 185 more rows[39m</code></pre>
+## [90m 1[39m EOS        1 [90m&lt;tibble [280 × 11]&gt;[39m [90m&lt;tibble [90 × 11]&gt;[39m [90m&lt;tibble [93 × 11]&gt;[39m
+## [90m 2[39m EDG        1 [90m&lt;tibble [286 × 11]&gt;[39m [90m&lt;tibble [92 × 11]&gt;[39m [90m&lt;tibble [96 × 11]&gt;[39m
+## [90m 3[39m BTG        1 [90m&lt;tibble [259 × 11]&gt;[39m [90m&lt;tibble [86 × 11]&gt;[39m [90m&lt;tibble [90 × 11]&gt;[39m
+## [90m 4[39m VET        1 [90m&lt;tibble [264 × 11]&gt;[39m [90m&lt;tibble [85 × 11]&gt;[39m [90m&lt;tibble [87 × 11]&gt;[39m
+## [90m 5[39m IHF        1 [90m&lt;tibble [197 × 11]&gt;[39m [90m&lt;tibble [70 × 11]&gt;[39m [90m&lt;tibble [72 × 11]&gt;[39m
+## [90m 6[39m DGB        1 [90m&lt;tibble [286 × 11]&gt;[39m [90m&lt;tibble [92 × 11]&gt;[39m [90m&lt;tibble [96 × 11]&gt;[39m
+## [90m 7[39m LTC        1 [90m&lt;tibble [279 × 11]&gt;[39m [90m&lt;tibble [92 × 11]&gt;[39m [90m&lt;tibble [95 × 11]&gt;[39m
+## [90m 8[39m NEXO       1 [90m&lt;tibble [286 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m [90m&lt;tibble [92 × 11]&gt;[39m
+## [90m 9[39m XMR        1 [90m&lt;tibble [270 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m [90m&lt;tibble [91 × 11]&gt;[39m
+## [90m10[39m VIB        1 [90m&lt;tibble [224 × 11]&gt;[39m [90m&lt;tibble [75 × 11]&gt;[39m [90m&lt;tibble [75 × 11]&gt;[39m
+## [90m# … with 190 more rows[39m</code></pre>
 <p>Move on to the <a href="predictive-modeling.html#predictive-modeling">next section</a> ➡️ to build the predictive models using the methodology discussed in this section.</p>
 
 </div>
