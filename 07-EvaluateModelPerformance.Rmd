@@ -601,10 +601,16 @@ ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
   facet_wrap(~symbol)
 ```
 
-<!-- Every 12 hours once this document reaches this point, the results are saved to GitHub using the `pins` package [@R-pins], and a separate script creates the complete dataset over time. You won't be able to run the code shown below (nor do you have a reason to): -->
+Every 12 hours once this document reaches this point, the results are saved to GitHub using the `pins` package [@R-pins], and a separate script creates the complete dataset over time. You won't be able to run the code shown below (nor do you have a reason to):
 
-
-
+```{r upload_results_pin, error=TRUE}
+# register board
+board_register("github", repo = "predictcrypto/pins", token=pins_key)
+# Add current date time
+plot_scores$last_refreshed <- Sys.time()
+# pin data
+pin(plot_scores, board='github', name='crypto_tutorial_results_latest')
+```
 
 ### Interactive Dashboard
 Use the interactive app below to explore the results over time by the individual cryptocurrency. Use the filters on the left sidebar to visualize the results you are interested in:
