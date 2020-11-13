@@ -15,15 +15,15 @@ postResample(pred = cryptodata_nested$lm_test_predictions[[1]],
 
 We can extract the first element to return the **RMSE** metric, and the second element for the **R Squared (R\^2)** metric. We are using **`[[1]]`** to extract the first element of the [**lm\_test\_predictions**]{style="color: blue;"} and [**test\_data**]{style="color: blue;"} and compare the predictions to the actual value of the [**target\_price24h**]{style="color: blue;"} column.
 
-```{r}
-print(paste('Now showing RMSE example:', postResample(pred = cryptodata_nested$lm_test_predictions[[1]], 
-                                                      obs = cryptodata_nested$test_data[[1]]$target_price_24h)[[1]]))
-```
+<!-- ```{r} -->
+<!-- print(paste('Now showing RMSE example:', postResample(pred = cryptodata_nested$lm_test_predictions[[1]],  -->
+<!--                                                       obs = cryptodata_nested$test_data[[1]]$target_price_24h)[[1]])) -->
+<!-- ``` -->
 
-```{r}
-print(paste('Now showing R Squared example:', postResample(pred = cryptodata_nested$lm_test_predictions[[1]], 
-                                                           obs = cryptodata_nested$test_data[[1]]$target_price_24h)[[2]]))
-```
+<!-- ```{r} -->
+<!-- print(paste('Now showing R Squared example:', postResample(pred = cryptodata_nested$lm_test_predictions[[1]],  -->
+<!--                                                            obs = cryptodata_nested$test_data[[1]]$target_price_24h)[[2]])) -->
+<!-- ``` -->
 
 This model used the earliest subset of the data available for the `r cryptodata_nested$test_data[[1]]$symbol` cryptocurrency. How does the same model used to predict this older subset of the data perform when applied to the most recent subset of the data?
 

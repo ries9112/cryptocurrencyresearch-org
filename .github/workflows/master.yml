@@ -1,27 +1,37 @@
+name: Run Crypto Tutorial
 on:
-  push:
-     branches:
-       - master
-
-  
-
-name: renderbook
+  schedule:
+    - cron: '05 02,14 * * *'
 
 jobs:
-  bookdown:
-    name: Render-Book
-    runs-on: macOS-latest
+  build:
+    runs-on: macOS-10.15
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
-      - name: Install rmarkdown
+      - uses: r-lib/actions/setup-tinytex@v1
+      - name: Cache R packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-3-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-3-
+      - name: Install Packages
         run: |-
-          Rscript -e 'install.packages(c("rmarkdown","bookdown","pacman","emo")'
-      - name: Render Book
+          Rscript -e "install.packages('renv')"
+          Rscript -e 'renv::consent(provided = TRUE)'
+          Rscript -e "renv::restore()"
+          Rscript -e "install.packages('bookdown', dependencies = TRUE)"
+      - name: Refresh book
+        run: |
+          pins_key <- "${{secrets.PAT_PINS}}"
+          
+          bookdown::render_book('index.Rmd', clean_envir = FALSE, clean = FALSE)
+        shell: Rscript {0}
+      - name: Snapshot renv to update lockfile
         run: |-
-          Rscript -e 'pins_key <- "${{secrets.PAT_PINS}}"'
-          Rscript -e 'bookdown::render_book("index.Rmd")'
+          Rscript -e "renv::snapshot()"
       - name: Commit and push files
         run: |
           git config --local user.email "ries9112@colorado.edu"
@@ -29,6 +39,5 @@ jobs:
           git add .
           git commit -m "Refresh entire book from CI automated process" -a
           git push https://ries9112:${{secrets.GITHUB_TOKEN}}@github.com/ries9112/cryptocurrencyresearch-org.git HEAD:master --force
-
 
 
