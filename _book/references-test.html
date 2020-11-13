@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Cryptocurrency Research</title>
-  <meta name="description" content="Cryptocurrency Research" />
+  <title>Section - 11 References Test | Cryptocurrency Research</title>
+  <meta name="description" content="Section - 11 References Test | Cryptocurrency Research" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Cryptocurrency Research" />
+  <meta property="og:title" content="Section - 11 References Test | Cryptocurrency Research" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Cryptocurrency Research" />
+  <meta name="twitter:title" content="Section - 11 References Test | Cryptocurrency Research" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="archive.html"/>
 
-<link rel="next" href="setup.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -302,138 +302,109 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Cryptocurrency Research</h1>
-<p class="date"><em>Last Updated:<br/> 2020-11-13 14:24:26</em></p>
+<div id="references-test" class="section level1">
+<h1><span class="header-section-number">Section - 11</span> References Test</h1>
+<div id="document-format" class="section level2">
+<h2><span class="header-section-number">11.1</span> Document Format</h2>
+<p>The <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown" role="doc-biblioref">2020</a><a href="#ref-R-bookdown" role="doc-biblioref">a</a>)</span> was used to produce this document, which was built on top of <strong>R Markdown</strong> <span class="citation">(Xie, Allaire, and Grolemund <a href="#ref-R-rmarkdown" role="doc-biblioref">2018</a>)</span> and <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-R-knitr" role="doc-biblioref">2020</a><a href="#ref-R-knitr" role="doc-biblioref">b</a>)</span>.</p>
+<!-- [TODO - ADJUST TO HAVE ONE FOR EACH ONE] -->
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="references-test.html#cb195-1"></a>knitr<span class="op">::</span><span class="kw">write_bib</span>(<span class="kw">c</span>(<span class="kw">.packages</span>()), <span class="st">&quot;packages.bib&quot;</span>)</span></code></pre></div>
 </div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">Section - 1</span> Introduction</h1>
-<p>Welcome to this programming tutorial on machine learning!</p>
-<p>In this tutorial we will use the latest data from the cryptocurrency markets to provide a hands-on and complete example that anyone can follow along with.</p>
-<div id="what-will-i-learn" class="section level2">
-<h2><span class="header-section-number">1.1</span> What will I learn?</h2>
+<div id="open-review-toolkit-ref" class="section level2">
+<h2><span class="header-section-number">11.2</span> Open Review Toolkit</h2>
+<p>Thanks to <a href="https://github.com/benmarwick">Ben Marwick</a> for outlining how to use the <a href="https://www.openreviewtoolkit.org/">Open Review Toolkit</a> in bookdown to collect feedback on the document: <a href="https://benmarwick.github.io/bookdown-ort/mods.html#open-review-block" class="uri">https://benmarwick.github.io/bookdown-ort/mods.html#open-review-block</a></p>
+</div>
+<div id="visualization-section" class="section level2">
+<h2><span class="header-section-number">11.3</span> Visualization Section</h2>
 <ul>
-<li><p>You will learn about the value of “reproducible” research.</p></li>
-<li><p>In this tutorial you will primarily learn about tools for the R programming language developed by <a href="https://rstudio.com/">RStudio</a> and more specifically the <a href="https://www.tidyverse.org/"><code>tidyverse</code></a>. If you are not familiar with these open source products, don’t worry. We’ll introduce these throughout the tutorial as needed.</p></li>
-<li><p>The focus of the tutorial is on supervised machine learning, a process for building models that can predict future events, such as cryptocurrency prices. You will learn how to use the <a href="https://topepo.github.io/caret/index.html"><code>caret</code></a> package to make many different predictive models, and tools to evaluate their performance.</p></li>
-<li><p>Before we can make the models themselves, we will need to “clean” the data. You will learn how to perform “group by” operations on your data using the <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a> package and to clean and modify grouped data.</p></li>
-</ul>
-<!-- -   You will be exposed to some useful data pre-processing R packages. -->
+<li><p><a href="https://www.rayshader.com/" class="uri">https://www.rayshader.com/</a></p></li>
+<li><p><a href="https://github.com/yutannihilation/gghighlight" class="uri">https://github.com/yutannihilation/gghighlight</a></p>
 <ul>
-<li><p>You will learn to visualize data using the <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> package, as well as some powerful <a href="https://exts.ggplot2.tidyverse.org/">tools to extend the functionality of ggplot2</a>.</p></li>
-<li><p>You will gain a better understanding of the steps involved in any supervised machine learning process, as well as considerations you might need to keep in mind based on your specific data and the way you plan on acting on the predictions you have made. Each problem comes with a unique set of challenges, but there are steps that are necessary in creating any supervised machine learning model, and questions you should ask yourself regardless of the specific problem at hand.</p></li>
-</ul>
-<!-- - [TODO - Add note on cross validation] -->
-<ul>
-<li>You will also learn a little about cryptocurrencies themselves, but <strong>this is not a tutorial centered around trading or blockchain technology</strong>.</li>
+<li><a href="https://github.com/njtierney/rstudioconf20/blob/master/slides/index.Rmd" class="uri">https://github.com/njtierney/rstudioconf20/blob/master/slides/index.Rmd</a></li>
+</ul></li>
 </ul>
 </div>
-<div id="before-getting-started" class="section level2">
-<h2><span class="header-section-number">1.2</span> Before Getting Started</h2>
-<p>You can toggle the sidebar on the left side of the page by clicking on the menu button in the top left, or by pressing on the <strong>s</strong> key on your keyboard. You can read this document as if it were a book, scrolling to the bottom of the page and going to the next “chapter”, or navigating between sections using the sidebar.</p>
-<p>This document is the tutorial itself, but in order to make the tutorial more accessible to people with less programming experience (or none) we created a <a href="https://cryptocurrencyresearch.org/high-level/">high-level version of this tutorial</a>, which simplifies both the problem at hand (what we want to predict) and the specific programming steps, but uses the same tools and methodology providing easier to digest examples on one cryptocurrency using a static dataset that does not get updated over time.</p>
-<div id="high-level-version" class="section level3">
-<h3><span class="header-section-number">1.2.1</span> High-Level Version</h3>
-<p>We recommend for everyone to run the code in the <a href="https://cryptocurrencyresearch.org/high-level/">high-level version first</a> to get more comfortable with the tools we will be using. If you are not very familiar with programming in either R or Python, or are not sure what cryptocurrencies are, you should <strong>definitely</strong> work your way through the <a href="https://cryptocurrencyresearch.org/high-level/">high-level version first</a>.</p>
-<p>Below is an embedded version of the high-level version, you can click on the presentation below and press the <strong><code>f</code></strong> button on your keyboard to full-screen it, or use any of the links above to view it in its own window:</p>
-<iframe src="https://cryptocurrencyresearch.org/high-level/" width="672" height="400px">
-</iframe>
+<div id="time-series-section" class="section level2">
+<h2><span class="header-section-number">11.4</span> Time Series Section</h2>
+<ul>
+<li><p><a href="https://stackoverflow.com/questions/42820696/using-prophet-package-to-predict-by-group-in-dataframe-in-r" class="uri">https://stackoverflow.com/questions/42820696/using-prophet-package-to-predict-by-group-in-dataframe-in-r</a></p></li>
+<li><p>… add rest here</p></li>
+</ul>
+</div>
+<div id="r-packages-used" class="section level2">
+<h2><span class="header-section-number">11.5</span> R Packages Used</h2>
 
-<div class="infoicon">
-When following along with the high-level tutorial embedded above, the results will be completely reproducible and the document is static and does not update over time meaning your results will exactly match those shown. The document you are currently reading this text on on the other hand updates every 12 hours. You will be able to access the same data source, but it updates hourly by the 8th minute of every hour with the most recent data, so this document and your results won’t perfectly match.
+<div id="refs" class="references">
+<div>
+<p>Arnold, Jeffrey B. 2019. <em>Ggthemes: Extra Themes, Scales and Geoms for Ggplot2</em>. <a href="http://github.com/jrnold/ggthemes">http://github.com/jrnold/ggthemes</a>.</p>
 </div>
-
-<!-- ### Approach taken -->
-<!-- It is also worth mentioning that we will be taking a very practical approach to machine learning. Because we are modeling many cryptocurrencies independently at the same time and the dataset evolves as time passes, it becomes difficult to make a decision across the board in terms of what the "best model" to use is because it may change based on the specific cryptocurrency in question and/or over time. -->
-<!-- [TODO - KEEP ADDING HERE?] -->
+<div>
+<p>Eddelbuettel, Dirk. 2020. <em>Anytime: Anything to Posixct or Date Converter</em>. <a href="http://dirk.eddelbuettel.com/code/anytime.html">http://dirk.eddelbuettel.com/code/anytime.html</a>.</p>
 </div>
+<div>
+<p>Freedman, Leonard P., Iain M. Cockburn, and Timothy S. Simcoe. 2015. “The Economics of Reproducibility in Preclinical Research.” <em>PLOS Biology</em> 13 (6): e1002165. <a href="https://doi.org/10.1371/journal.pbio.1002165">https://doi.org/10.1371/journal.pbio.1002165</a>.</p>
 </div>
-<div id="format-notes" class="section level2">
-<h2><span class="header-section-number">1.3</span> Format Notes</h2>
-<ul>
-<li><p>You can hide the sidebar on the left by pressing the <strong><em>s</em></strong> key on your keyboard.</p></li>
-<li><p>The cryptocurrency data was chosen to produce results that change over time and because these markets don’t have any downtime (unlike the stock market).</p></li>
-</ul>
-<!-- [TODO - JUST LIKE THE HIGH LEVEL VERSION, WE WILL USE COLOR CODING] -->
-<ul>
-<li><p>Whenever an <strong>R package</strong> is referenced, the text will be <span style="color: #ae7b11;"><strong>colored orange</strong></span>. We will discuss <strong><em>R packages</em></strong> and the rest of the terms below later in this document, but if you are not familiar with these terms please look through the <a href="https://cryptocurrencyresearch.org/high-level/">high-level version first</a>.</p></li>
-<li><p>Whenever a <strong>function</strong> is referenced, it will be <span style="color: green;"><strong>colored green</strong></span>.</p></li>
-<li><p>Whenever an <strong>R object</strong> is referenced, it will be <span style="color: blue;"><strong>colored blue</strong></span>. We will also refer to the <strong>parameters</strong> of functions in <span style="color: blue;"><strong>blue</strong></span>.</p></li>
-<li><p>When a <strong>term</strong> is particularly common in machine learning or data science, we will call it out with <span style="color: purple;"><strong>purple text</strong></span>, but only the first time it appears.</p></li>
-<li><p>Whenever text is <strong><code>highlighted this way</code></strong>, that means it is a snippet of R code, which will usually be done to bring attention to specific parts of a longer piece of code.</p></li>
-</ul>
+<div>
+<p>Kassambara, Alboukadel. 2020. <em>Ggpubr: Ggplot2 Based Publication Ready Plots</em>. <a href="https://rpkgs.datanovia.com/ggpubr/">https://rpkgs.datanovia.com/ggpubr/</a>.</p>
 </div>
-<div id="plan-of-attack" class="section level2">
-<h2><span class="header-section-number">1.4</span> Plan of Attack</h2>
-<p>How will we generate predictive models to predict cryptocurrency prices? At a high level, here are the steps we will be taking:</p>
-<ol style="list-style-type: decimal">
-<li><p><a href="setup.html#setup">Setup guide</a>. Installation guide on getting the tools used installed on your machine.</p></li>
-<li><p><a href="explore-data.html#explore-data">Explore data</a>. What <strong><em>is</em></strong> the data we are working with? How “good” is the “quality”?</p></li>
-<li><p><a href="data-prep.html#data-prep">Prepare the data</a>. Make adjustments to “clean” the data based on the findings from the previous section to avoid running into problems when making models to make predictions.</p></li>
-<li><p><a href="visualization.html#visualization">Visualize the data</a>. Visualizing the data can be an effective way to understand relationships, trends and outliers before creating predictive models, and is generally useful for many different purposes. Definitely the most fun section!</p></li>
-<li><p><a href="predictive-modeling.html#predictive-modeling">Make predictive models</a>. Now we are ready to take the data available to us and use it to make predictive models that can be used to make predictions about future price movements using the latest data.</p></li>
-<li><p><a href="evaluate-model-performance.html#evaluate-model-performance">Evaluate the performance of the models</a>. Before we can use the predictive models to make predictions on the latest data, we need to understand how well we expect them to perform, which is also essential in detecting issues.</p></li>
-</ol>
+<div>
+<p>Kothari, Aditya. 2018. <em>GgTimeSeries: Time Series Visualisations Using the Grammar of Graphics</em>. <a href="https://github.com/Ather-Energy/ggTimeSeries">https://github.com/Ather-Energy/ggTimeSeries</a>.</p>
 </div>
-<div id="who-is-this-example-for" class="section level2">
-<h2><span class="header-section-number">1.5</span> Who is this example for?</h2>
-<p>Are you a Bob, Hosung, or Jessica below? This section provides more information on how to proceed with this tutorial.</p>
-<ul>
-<li><p><strong>Bob (beginner)</strong>: Bob is someone who understands the idea of predictive analytics at a high level and has heard of cryptocurrencies and is interested in learning more about both, but he has never used R. Bob would want to <a href="https://cryptocurrencyresearch.org/high-level/">opt for the more high-level version of this tutorial</a>. Bob might benefit from reading the free book <a href="https://r4ds.had.co.nz/">“R for Data Science”</a> as well before attempting this tutorial.</p></li>
-<li><p><strong>Hosung (intermediate)</strong>: Hosung is a statistician who learned to use R 10 years ago. He has heard of the tidyverse, but doesn’t regularly use it in his work and he usually sticks to base R as his preference. Hosung should start with the <a href="https://cryptocurrencyresearch.org/high-level/"><strong>high-level version of this tutorial</strong></a> and later return to this version.</p></li>
-<li><p><strong>Jessica (expert)</strong>: Jessica is a business analyst who has experience with both R and the Tidyverse and uses the pipe operator (<strong><code>%\&gt;%</code></strong>) regularly. Jessica should skim over the high-level version before <a href="index.html#introduction"><strong>moving onto the next section</strong></a> for the detailed tutorial.</p></li>
-</ul>
+<div>
+<p>Luraschi, Javier. 2020. <em>Pins: Pin, Discover and Share Resources</em>. <a href="https://github.com/rstudio/pins">https://github.com/rstudio/pins</a>.</p>
 </div>
-<div id="reproducibility" class="section level2">
-<h2><span class="header-section-number">1.6</span> Reproducibility</h2>
-<p>One of the objectives of this document is to showcase the power of <span style="color: purple;"><strong>reproducibility</strong></span>. This tutorial does not provide coded examples on making code reproducible, but it’s worth a quick discussion. The term itself is defined in different ways:</p>
-<ul>
-<li><p>We can think of something as reproducible if anyone can run the exact same analysis and end up with our exact same results. This is how the <a href="index.html#high-level-version">high-level version of the tutorial</a> works.</p></li>
-<li><p>Depending on our definition, we may consider something reproducible if we can run the same analysis that is shown on a newer subset of the data without running into problems. This is how this version works, where the analysis done on your own computer would be between 1 and 12 hours newer than the one shown on this document.</p></li>
-</ul>
-<div id="the-cost-of-non-reproducible-research" class="section level3">
-<h3><span class="header-section-number">1.6.1</span> The cost of non-reproducible research</h3>
-<p>Reproducibility is especially important for research in many fields, but is a valuable tool for anyone who works with data, even within a large corporation. If you work with Excel files or any kind of data, there are tools to be aware of that can save you a lot of time and money. Even if you do things that are “more involved”, for example using your data to run your analysis separately and then putting together a presentation with screenshots of your results with commentary, this is also something you can automate for the future. If you do any kind of repeated manual process in Excel, chances are you would be better off creating a script that you can simply kick off to generate new results.</p>
-<p>Reproducibility is all about making the life of anyone who needs to run the analysis as simple as possible, including and especially for the author herself. When creating a one-time analysis, the tool used should be great for the specific task as well as have the side-effect of being able to run again with the click of a button. In our case are using a tool called <span style="color: purple;"><strong>R Markdown</strong></span> <span class="citation">(Xie, Allaire, and Grolemund <a href="#ref-R-rmarkdown" role="doc-biblioref">2018</a>)</span>.
-<!-- because if important discoveries are made others will want to perform their own experiments and analysis before they start being accepted as fact. --></p>
-<p>Not being transparent about the methodology and data (when possible) used is a quantifiable cost that should be avoided, both in research and in business. A study conducted in 2015 for example approximated that for preclinical research (mostly on pharmaceuticals) alone the economy suffers a cost of $28 Billion a year associated with non-reproducible research in the United States <span class="citation">(Freedman, Cockburn, and Simcoe <a href="#ref-freedman_economics_2015" role="doc-biblioref">2015</a>)</span>:</p>
-<embed src="images/TheEconomicsOfReproducibilityInPreclinicalRe.pdf" width="800px" height="460px" type="application/pdf" />
-<p>Reproducibility as discussed in the paper embedded above relates to many aspects of the specific field of preclinical research, but in their work they identified 4 main categories that drove costs associated with irreproducibility as it pertains to preclinical research in the United States:</p>
-<p><img src="images/IrreproducibilityCosts.PNG" /></p>
-<p>The “Data Analysis and Reporting” aspect (circled in red in the screenshot above) of a project is shared across many disciplines. As it related to preclinical research, in their breakdown they attribute roughly $7.19 Billion of the costs of irreproducible preclinical research to data analysis and reporting, which could potentially be avoided through the usage of open source tools that we are utilizing for this tutorial. These costs should pale in comparison to the other three categories, and this example is meant to show that there currently exists a costly lack of awareness around these tools; the tutorial itself is meant as an example to showcase the power of these free tools.</p>
-<!-- In business reproducibility can be really valuable as well, being able to run an analysis with the click of a button can save a business a lot of money, and the open source tools available through R and Python  -->
+<div>
+<p>Morgan-Wall, Tyler. 2020. <em>Rayshader: Create Maps and Visualize Data in 2D and 3D</em>. <a href="https://github.com/tylermorganwall/rayshader">https://github.com/tylermorganwall/rayshader</a>.</p>
 </div>
-<div id="github" class="section level3">
-<h3><span class="header-section-number">1.6.2</span> GitHub</h3>
-<!-- To that end, rather than saying "this document can be refreshed at any point", the tutorial itself is not only reproducible (in terms of performing the same analysis for the future), but is in fact run on a recurring schedule. -->
-<p>As of 2020, the most popular way of sharing open source data science work is through a website called <span style="color: purple;"><a href="https://github.com/"><strong>GitHub</strong></a></span> which allows users to publicly share their code and do much more. This document gets refreshed using a tool called <span style="color: purple;"><a href="https://github.com/features/actions"><strong>Github Actions</strong></a></span> that runs some code and updates the file you are looking at on the public <strong>GitHub</strong> <span style="color: purple;"><strong>Repository</strong></span> for the project. The website then updates to show the latest version every time the document is refreshed on the GitHub repository.</p>
-<!-- [TODO - INTRODUCE GITHUB HERE] -->
-<div id="github-repository" class="section level4">
-<h4><span class="header-section-number">1.6.2.1</span> GitHub Repository</h4>
-<p>The public <strong>GitHub Repository</strong> associated with this tutorial is not only a website for us to easily distribute all the code behind this document for others to view and use, but also where it actually runs. By clicking on the option that looks like an eye in the options given at the top of the document, you can view the raw code for the page you are currently viewing on the GitHub repository. Every 12 hours, a process gets kicked off on the page associated with our project on GitHub.com and refreshes these results. Anyone can view the latest runs as they execute over time here: <a href="https://github.com/ries9112/cryptocurrencyresearch-org/actions" class="uri">https://github.com/ries9112/cryptocurrencyresearch-org/actions</a></p>
-<p>In the <a href="setup.html#setup">next section</a> we will talk more about the GitHub Repository for this tutorial, for now you can check on the latest run history for this document, which is expected to update every 12 hours every day: <a href="https://github.com/ries9112/cryptocurrencyresearch-org/actions" class="uri">https://github.com/ries9112/cryptocurrencyresearch-org/actions</a></p>
-<!-- If you are seeing ✅ associated with the most recent runs at the link above, that means you are looking at a version that refreshed in the last 12 hours. If you are seeing red ❌ on the latest runs, you may be looking at an older analysis, but that should not be the case, check the timestamp at the top of this document to be sure. -->
-<p>If you are running into problems using the code or notice any problems, please let us know by creating an <strong><em>issue</em></strong> on the GitHub repository: <a href="https://github.com/ries9112/cryptocurrencyresearch-org/issues" class="uri">https://github.com/ries9112/cryptocurrencyresearch-org/issues</a></p>
-<p>Go to the <a href="setup.html#setup">next section</a> for instruction on getting setup to follow along with the code run in the tutorial. You can run every step either in the cloud on your web browser, or in your own R session. You can even make a copy of the GitHub Repository on your computer and run this “book” on the latest data (updated hourly), and make changes wherever you would like. All explained in the next section ➡️</p>
+<div>
+<p>Pedersen, Thomas Lin. 2020. <em>Ggforce: Accelerating Ggplot2</em>. <a href="https://CRAN.R-project.org/package=ggforce">https://CRAN.R-project.org/package=ggforce</a>.</p>
+</div>
+<div>
+<p>Pedersen, Thomas Lin, and David Robinson. 2020. <em>Gganimate: A Grammar of Animated Graphics</em>. <a href="https://CRAN.R-project.org/package=gganimate">https://CRAN.R-project.org/package=gganimate</a>.</p>
+</div>
+<div>
+<p>Ren, Kun, and Kenton Russell. 2016. <em>Formattable: Create Formattable Data Structures</em>. <a href="https://CRAN.R-project.org/package=formattable">https://CRAN.R-project.org/package=formattable</a>.</p>
+</div>
+<div>
+<p>Rinker, Tyler, and Dason Kurkiewicz. 2019. <em>Pacman: Package Management Tool</em>. <a href="https://github.com/trinker/pacman">https://github.com/trinker/pacman</a>.</p>
+</div>
+<div>
+<p>Sievert, Carson, Chris Parmer, Toby Hocking, Scott Chamberlain, Karthik Ram, Marianne Corvellec, and Pedro Despouy. 2020. <em>Plotly: Create Interactive Web Graphics via Plotly.js</em>. <a href="https://CRAN.R-project.org/package=plotly">https://CRAN.R-project.org/package=plotly</a>.</p>
+</div>
+<div>
+<p>Wang, Earo, Di Cook, Rob Hyndman, and Mitchell O’Hara-Wild. 2020. <em>Tsibble: Tidy Temporal Data Frames and Tools</em>. <a href="https://tsibble.tidyverts.org">https://tsibble.tidyverts.org</a>.</p>
+</div>
+<div>
+<p>Waring, Elin, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, and Shannon Ellis. 2020. <em>Skimr: Compact and Flexible Summaries of Data</em>. <a href="https://CRAN.R-project.org/package=skimr">https://CRAN.R-project.org/package=skimr</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, and Dewey Dunnington. 2020. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2020. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. 1st ed. O’Reilly Media, Inc.</p>
+</div>
+<div>
+<p>Xie, Yihui. 2020a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.</p>
+</div>
+<div>
+<p>———. 2020b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.</p>
+</div>
+<div>
+<p>Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. <em>R Markdown: The Definitive Guide</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/rmarkdown">https://bookdown.org/yihui/rmarkdown</a>.</p>
 </div>
 </div>
-</div>
-<div id="disclaimer" class="section level2">
-<h2><span class="header-section-number">1.7</span> Disclaimer</h2>
-
-<div class="rmdimportant">
-This tutorial is made available for learning and educational purposes only and the information to follow does not constitute trading advice in any way shape or form. We avoid giving any advice when it comes to trading strategies, as this is a very complex ecosystem that is out of the scope of this tutorial; we make no attempt in this regard, and if this, rather than data science, is your interest, your time would be better spent following a different tutorial that aims to answer those questions.
-</div>
-
-<p>It should also be noted that this tutorial has nothing to do with trading itself, and that there is a difference between predicting crypotcurrency prices and creating an effective trading strategy. <a href="considerations.html#considerations">See this later section for more details on why the results shown in this document mean nothing in terms of the effectiveness of a trading strategy</a>.</p>
-<p>In this document we aimed to predict the change in cryptocurrency prices, and <strong>it is very important to recognize that this is not the same as being able to successfully make money trading on the cryptocurrency markets</strong>.</p>
-
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-freedman_economics_2015">
-<p>Freedman, Leonard P., Iain M. Cockburn, and Timothy S. Simcoe. 2015. “The Economics of Reproducibility in Preclinical Research.” <em>PLOS Biology</em> 13 (6): e1002165. <a href="https://doi.org/10.1371/journal.pbio.1002165">https://doi.org/10.1371/journal.pbio.1002165</a>.</p>
+<div id="ref-R-bookdown">
+<p>Xie, Yihui. 2020a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.</p>
+</div>
+<div id="ref-R-knitr">
+<p>Xie, Yihui. 2020b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.</p>
 </div>
 <div id="ref-R-rmarkdown">
 <p>Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. <em>R Markdown: The Definitive Guide</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/rmarkdown">https://bookdown.org/yihui/rmarkdown</a>.</p>
@@ -444,8 +415,8 @@ This tutorial is made available for learning and educational purposes only and t
           </div>
         </div>
       </div>
+<a href="archive.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="setup.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
