@@ -58,3 +58,226 @@ cryptodata <- mutate(cryptodata,
 ```
 
 Let's also remove any rows that have Null values for the new [**price_usd**]{style="color: blue;"} field [like we did for the [**date_time_utc**]{style="color: blue;"} field in a previous step](#remove-nulls). These will mostly be made up of rows where the value of trades through the 5th lowest ask price was lower than \$15.
+
+```{r, include=F}
+nrow1 <- nrow(cryptodata)
+```
+
+```{r omit_nulls_price_usd}
+cryptodata <- filter(cryptodata, !is.na(price_usd))
+```
+
+```{r, include=F}
+nrow2 <- nrow(cryptodata)
+```
+
+This step removed `r nrow1-nrow2` rows on the latest run.
+
+
+## Clean Data by Group {#clean-data-by-group}
+
+In the [high-level version of this tutorial](https://cryptocurrencyresearch.org/high-level/) we only dealt with one cryptocurrency. In this version however, we will be creating independent models for each cryptocurrency. Because of this, **we need to ensure data quality not only for the data as a whole, but also for the data associated with each individual cryptocurrency**. Instead of considering all rows when applying a transformation, we can [**group**]{style="color: purple;"} the data by the individual cryptocurrency and apply the transformation to each group. This will only work with compatible functions from [**dplyr**]{style="color: #ae7b11;"} and the [**tidyverse**]{style="color: #ae7b11;"}.
+
+For example, we could count the number of observations by running the [**count()**]{style="color: green;"} function on the data:
+```{r mean_ungrouped}
+count(cryptodata)
+```
+
+But what if we wanted to know how many observations in the data are associated with each cryptocurrency separately?
+
+We can group the data using the [**group_by()**]{style="color: green;"} function from the [**dplyr**]{style="color: #ae7b11;"} package and group the data by the cryptocurrency [**symbol**]{style="color: blue;"}:
+
+```{r group_data}
+cryptodata <- group_by(cryptodata, symbol)
+```
+
+Now if we run the same operation using the [**count()**]{style="color: green;"} function, the operation is performed grouped by the cryptocurrency symbol:
+
+```{r mean_grouped}
+count(cryptodata)
+```
+
+We can remove the grouping at any point by running the [**ungroup()**]{style="color: green;"} function:
+```{r mean_show_ungrouped}
+count(ungroup(cryptodata))
+```
+
+
+### Remove symbols without enough rows
+
+Because this dataset evolves over time, we will need to be proactive about issues that may arise even if they aren't currently a problem. 
+
+What happens if a new cryptocurrency gets added to the cryptocurrency exchange? If we only had a couple days of data for an asset, not only would that not be enough information to build effective predictive models, but we may run into actual errors since the data will be further split into more groups to validate the results of the models against several datasets using [**cross validation**]{style="color: purple;"}, more to come on that later.
+
+To ensure we have a reasonable amount of data for each individual cryptocurrency, let's filter out any cryptocurrencies that don't have at least 1,000 observations using the [**filter()**]{style="color: green;"} function:
+
+```{r, include=F}
+nrow1 <- nrow(cryptodata)
+cryptocount1 <- nrow(count(cryptodata))
+```
+
+```{r rm_subset_not_enough_rows}
+cryptodata <- filter(cryptodata, n() >= 1000)
+```
+
+```{r, include=F}
+nrow2 <- nrow(cryptodata)
+cryptocount2 <- nrow(count(cryptodata))
+```
+
+The number of rows for the `cryptodata` dataset before the filtering step was `r nrow1` and is now `r nrow2`. This step removed `r cryptocount1-cryptocount2` cryptocurrencies from the analysis that did not have enough observations associated with them.
+
+### Remove symbols without data from the last 3 days
+
+If there was no data collected for a cryptocurrency over the last 3 day period, let's exclude that asset from the dataset since we are only looking to model data that is currently flowing through the process. If an asset is removed from the exchange (if a project is a scam for example) or is no longer being actively captured by the data collection process, we can't make new predictions for it, so might as well exclude these ahead of time as well.
+
+```{r, include=F}
+nrow1 <- nrow(cryptodata)
+```
+
+```{r remove_last_3_days_missing}
+cryptodata <- filter(cryptodata, max(date) > Sys.Date()-3)
+```
+
+```{r, include=F}
+nrow1 <- nrow(cryptodata)
+```
+
+The number of rows for the `cryptodata` dataset before this filtering step was `r nrow1` and is now `r nrow2`.
+
+## Calculate Target
+
+Our goal is to be able to make predictions on the price of each cryptocurrency 24 hours into the future from when the data was collected. Therefore, the [**target variable**]{style="color: purple;"} that we will be using as *what we want to predict* for the predictive models, is the price 24 hours into the future relative to when the data was collected. 
+
+To do this we can create a new column in the data that is the [**price_usd**]{style="color: blue;"} offset by 24 rows (one for each hour), but before we can do that we need to make sure there are no gaps anywhere in the data.
+
+### Convert to tsibble {#convert-to-tsibble}
+
+We can fill any gaps in the data using the [**tsibble**]{style="color: #ae7b11;"} package [@R-tsibble], which was covered in more detail in the [high level version of the tutorial](https://cryptocurrencyresearch.org/high-level/#/timeseries-data-prep).
+
+#### Convert to hourly data
+
+The data we are using was collected between the 0th and the 5th minute of every hour; it is collected in the same order every hour to try and get the timing as consistent as possible for each cryptocurrency, but the cadence is not exactly one hour. Therefore, if we convert the data now to a [**tsibble**]{style="color: blue;"} object, it would recognize the data as being collected on the wrong cadence. 
+
+To fix this issue, let's create a new column called [**ts_index**]{style="color: blue;"} using the [**mutate()**]{style="color: green;"} function which will keep the information relating to the date and hour collected, but generalize the minutes and seconds as "00:00", which will be correctly recognized by the [**tsibble**]{style="color: #ae7b11;"} package as being data collected on an hourly basis. The [**pkDummy**]{style="color: blue;"} field contains the date and hour, so we can add the text ":00:00" to the end of that field, and then convert the new string to a date time object using the [**anytime()**]{style="color: green;"} function from the [**anytime**]{style="color: #ae7b11;"} package [@R-anytime]:
+```{r}
+cryptodata <- mutate(cryptodata, ts_index = anytime(paste0(pkDummy,':00:00')))
+```
+
+Before we can convert the data to be a [**tsibble**]{style="color: blue;"} and easily fill in the gaps, we also need to make sure there are no duplicate values in the [**ts_index**]{style="color: blue;"} column for each cryptocurrency. There shouldn't be any duplicates, but just in case any make their way into the data somehow, we can use the [**distinct()**]{style="color: green;"} function from the [**dplyr**]{style="color: #ae7b11;"} package to prevent the issue from potentially arising:
+
+```{r}
+cryptodata <- distinct(cryptodata, symbol, ts_index, .keep_all=TRUE)
+```
+
+Now we can finally convert the table to a [**tsibble**]{style="color: blue;"} data type by using the [**as_tsibble()**]{style="color: green;"} function from the [**tsibble**]{style="color: #ae7b11;"} package [@R-tsibble], and providing the [**symbol**]{style="color: blue;"} column for the [**key**]{style="color: blue;"} parameter to preserve the grouped structure:   
+
+```{r convert_to_tsibble}
+cryptodata <- as_tsibble(cryptodata, index = ts_index, key = symbol)
+```
+
+Notice how the preview of the data below looks a bit different from the summary we were seeing up to this point, and now it says "A tsibble", and next to the table dimensions says **[1h]**, indicating the observations are 1 hour apart from each other. The second row tells us the "Key" of the [**tsibble**]{style="color: blue;"} is the [**symbol**]{style="color: blue;"} column
+```{r preview_tsibble}
+cryptodata
+```
+
+
+<!-- ### Scan gaps -->
+
+<!-- Now we can use the [**scan_gaps()**]{style="color: green;"} function to return   -->
+<!-- ```{r} -->
+<!-- scan_gaps(cryptodata) -->
+<!-- ``` -->
+
+### Fill gaps
+
+Now we can use the [**fill_gaps()**]{style="color: green;"} function from the [**tsibble**]{style="color: #ae7b11;"} package to fill any gaps found in the data, as being implicitly Null. Meaning, we will add these rows into the data with NA values for everything except for the date time field. This will allow us to safely compute the target price found 24 hours into the future relative to when each row was collected.
+
+```{r, include=F}
+nrow1 <- nrow(cryptodata)
+```
+
+```{r fill_gaps}
+cryptodata <- fill_gaps(cryptodata)
+```
+
+```{r, include=F}
+nrow2 <- nrow(cryptodata)
+```
+
+Now looking at the data again, there are `r nrow2-nrow1` additional rows that were added as implicitly missing in the data:
+
+```{r show_filled_cryptodata}
+cryptodata
+```
+
+Now that all of the gaps have been filled in, let's convert the data back to be in the structure of a [[**tibble**]{style="color: #ae7b11;"}](https://tibble.tidyverse.org/), which is the data structure that supports the [grouping structure we discussed previously](#clean-data-by-group), and let's group the data by the [**symbol**]{style="color: blue;"} again:
+
+```{r}
+cryptodata <- group_by(as_tibble(cryptodata), symbol)
+```
+
+
+### Calculate Target
+
+Now we finally have everything we need to calculate the **target variable** containing the price 24 hours into the future relative to when the data was collected. We can use the usual [**mutate()**]{style="color: green;"} function to add a new column to the data called [**target_price_24h**]{style="color: blue;"}, and use the [**lead()**]{style="color: green;"} function from [**dplyr**]{style="color: #ae7b11;"} to offset the [**price_usd**]{style="color: blue;"} column by 24 hours:
+
+```{r}
+cryptodata <- mutate(cryptodata, 
+                     target_price_24h = lead(price_usd, 24, order_by=ts_index))
+```
+
+### Calculate Lagged Prices
+
+What about doing the opposite? If we added a new column showing the price from 24 hours earlier, could the price movement between then and when the data was collected help us predict where the price is headed next? If the price has gone down significantly over the previous 24 hours, is the price for the next 24 hours more likely to increase or decrease? What if the price has gone down significantly over the previous 24 hours, but has increased significantly since the past hour? 
+
+These relationships around the sensitivity of a price to recent price changes may help our models come up with more accurate forecasts about the future, so let's go ahead and add some lagged prices using the same methodology used to calculate the target variable, but this time using the [**lag()**]{style="color: green;"} function to get past observations instead of the [**lead()**]{style="color: green;"} function used before:
+
+```{r}
+cryptodata <- mutate(cryptodata,
+                     lagged_price_1h  = lag(price_usd, 1, order_by=ts_index),
+                     lagged_price_2h  = lag(price_usd, 2, order_by=ts_index),
+                     lagged_price_3h  = lag(price_usd, 3, order_by=ts_index),
+                     lagged_price_6h  = lag(price_usd, 6, order_by=ts_index),
+                     lagged_price_12h = lag(price_usd, 12, order_by=ts_index),
+                     lagged_price_24h = lag(price_usd, 24, order_by=ts_index),
+                     lagged_price_3d  = lag(price_usd, 24*3, order_by=ts_index))
+```
+*This step can be thought of as [**data engineering**]{style="color: purple;"} more than data cleaning, because rather than fixing an issue we are enhancing the dataset with columns that may help with the forecasts.*
+
+Let's view an example of the oldest 30 rows of data associated with the Bitcoin cryptocurrency (`symbol == "BTC"`). With the oldest data starting from the top, the [**lagged_price_1h**]{style="color: blue;"} field should have a NA value for the first row because we don't have any prices before that point. By that same logic, the [**lagged_price_24h**]{style="color: blue;"} column should be missing the first 24 values and have the last 6 values showing the first 6 rows of the [**price_usd**]{style="color: blue;"} column. The [**target_price_24h**]{style="color: blue;"} would values for the oldest data because the opposite is true and we don't know the values for data for the most recent 24 rows of the data:
+
+```{r}
+print(select(filter(cryptodata, symbol == 'BTC'), 
+             ts_index, price_usd, lagged_price_1h, 
+             lagged_price_24h, target_price_24h), n=30)
+```
+
+We can wrap the code used above in the [**tail()**]{style="color: green;"} function to show the most recent data and see the opposite dynamic with the new fields we created:
+
+```{r}
+print(tail(select(filter(cryptodata, symbol == 'BTC'), 
+                  ts_index, price_usd, lagged_price_1h, 
+                  lagged_price_24h, target_price_24h),30), n=30)
+```
+
+Reading the code shown above is less than ideal. One of the more popular tools introduced by the [tidyverse](https://www.tidyverse.org/) is the [**%>%**]{style="color: purple;"} operator, which works by starting with the object/data you want to make changes to first, and then apply each transformation step by step. It's simply a way of re-writing the same code in a way that is easier to read by splitting the way the function is called rather than adding functions onto each other into a single line that becomes really hard to read. In the example above it becomes difficult to keep track of where things begin, the order of operations, and the parameters associated with the specific functions. Compare that to the code below:
+
+```{r pipe_example}
+# Start with the object/data to manipulate
+cryptodata %>% 
+  # Filter the data to only the BTC symbol
+  filter(symbol == 'BTC') %>% 
+  # Select columns to display
+  select(ts_index, price_usd, lagged_price_1h, lagged_price_24h, target_price_24h) %>% 
+  # Show the last 30 elements of the data
+  tail(30) %>% 
+  # Show all 30 elements instead of the default 10 for a tibble dataframe
+  print(n = 30)
+```
+
+There are several advantages to writing code *the* ***tidy*** *way*, but while some love it others hate it, so we won't force anyone to have to understand how the **%>%** operator works and we have stayed away from its use for the rest of the code shown, but we do encourage the use of this tool: https://magrittr.tidyverse.org/reference/pipe.html
+
+</br>
+
+Move on to the [next section](#visualization) ➡️ to learn some amazing tools to visualize data.
