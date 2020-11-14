@@ -148,14 +148,14 @@ cryptodata_nested <- mutate(cryptodata_nested,
 *Again, we will not dive into the specifics of the individual models, but a quick Google search will return a myriad of information on the subject.*
 
 
-### Bayesian Regularized Neural Network Models
+<!-- ### Bayesian Regularized Neural Network Models -->
 
-Next let's create [Bayesian Regularized Neural Network](https://stats.stackexchange.com/questions/328342/is-bayesian-ridge-regression-another-name-of-bayesian-linear-regression) models using the [**method**]{style="color: blue;"} [***`brnn`***]{style="color: blue;"}
+<!-- Next let's create [Bayesian Regularized Neural Network](https://stats.stackexchange.com/questions/328342/is-bayesian-ridge-regression-another-name-of-bayesian-linear-regression) models using the [**method**]{style="color: blue;"} [***`brnn`***]{style="color: blue;"} -->
 
-```{r bayesian_ridge_regression}
-cryptodata_nested <- mutate(cryptodata_nested, 
-                            brnn_model = map2(train_data, "brnn", model_caret))
-```
+<!-- ```{r bayesian_ridge_regression} -->
+<!-- cryptodata_nested <- mutate(cryptodata_nested,  -->
+<!--                             brnn_model = map2(train_data, "brnn", model_caret)) -->
+<!-- ``` -->
 
 
 <!-- ### Elastic Net Models - removed because of package conflict-->
@@ -253,15 +253,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             nnet_holdout_predictions =  map2(nnet_model,
                                                              holdout_data,
                                                              make_predictions),
-                            # Bayesian Regularized Neural Network:
-                            brnn_test_predictions =  map2(brnn_model,
-                                                            test_data,
-                                                            make_predictions),
-                            # holdout
-                            brnn_holdout_predictions =  map2(brnn_model,
-                                                               holdout_data,
-                                                               make_predictions),
-                            # rf:
+                            # Random Forest:
                             rf_test_predictions =  map2(rf_model,
                                                                test_data,
                                                                make_predictions),
