@@ -857,4 +857,29 @@ ggplot(accuracy_over_time, aes(x = date_utc, y = rsq, group = 1)) +
 
 
 
+<!-- HIDDEN: Add new pin with actual predictions from holdout for true comparisons! -->
+
+<!-- First need to add date_time_utc to the predictions -->
+```{r include=F, eval=F}
+last_train_price <- function(holdout_data, holdout_predictions){
+  # NEED TO ADD HERE
+}
+```
+
+
+```{r include=F, eval=F}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            new_col = add_here)
+```
+
+<!-- Afterwards need to unnest the data -->
+```{r include=F, eval=F}
+# example:
+unnest(cryptodata_nested, c(pcr_holdout_predictions, nnet_holdout_predictions)) %>% select(pcr_holdout_predictions, nnet_holdout_predictions)
+```
+
+
+
+<!-- And finally pin it so it can be read it by RStudio Server process -->
+
 
