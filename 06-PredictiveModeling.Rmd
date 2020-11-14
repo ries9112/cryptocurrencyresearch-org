@@ -97,17 +97,17 @@ cryptodata_nested$lm_model[[1]]
 ```
 
 
-### Cross Validation {#cross-validation-preds}
+<!-- ### Cross Validation {#cross-validation-preds} -->
 
-In the previous output, we saw the output said: ***Resampling: None*** because when building the function we specified we did not want any resampling for the [**trControl**]{style="color: blue;"} argument of the [**train()**]{style="color: green;"} function. Within each split of the data however, we can create three separate additional cross validation splits, which will allow the [**caret**]{style="color: #ae7b11;"} package to do some minimal [**hyperparameter**]{style="color: blue;"} tuning, which is the process by which it will test different options for the parameters (which vary based on the specific model being used) to find the most optimal combination of them.
+<!-- In the previous output, we saw the output said: ***Resampling: None*** because when building the function we specified we did not want any resampling for the [**trControl**]{style="color: blue;"} argument of the [**train()**]{style="color: green;"} function. Within each split of the data however, we can create three separate additional cross validation splits, which will allow the [**caret**]{style="color: #ae7b11;"} package to do some minimal [**hyperparameter**]{style="color: blue;"} tuning, which is the process by which it will test different options for the parameters (which vary based on the specific model being used) to find the most optimal combination of them. -->
 
-Within each split we created, we can set caret to perform an additional cross-validation step to allow it to do a minimal level of automated hyperparameter tuning as it creates the models (the more we do the longer it will take).
+<!-- Within each split we created, we can set caret to perform an additional cross-validation step to allow it to do a minimal level of automated hyperparameter tuning as it creates the models (the more we do the longer it will take). -->
 
-```{r}
-fitControl <- trainControl(method = "repeatedcv",
-                           number = 3,
-                           repeats = 3)
-```
+<!-- ```{r} -->
+<!-- fitControl <- trainControl(method = "repeatedcv", -->
+<!--                            number = 3, -->
+<!--                            repeats = 3) -->
+<!-- ``` -->
 
 ### Generalize the Function
 
