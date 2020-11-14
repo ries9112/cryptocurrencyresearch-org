@@ -47,12 +47,13 @@ postResample(pred = cryptodata_nested$lm_holdout_predictions[[1]],
 
 How do these two results compare and why is this comparison important? The **RMSE** is helpful in understanding the magnitude of the errors of the predictions, while the **$R^2$** helps us determine how easily we can predict future values. 
 
-**These are indicators that should be taken with a grain of salt individually, but comparing the results across many different models for the same cryptocurrency can help us determine which models work best for the problem, and then comparing those results across many cryptocurrencies can help us determine which **
+**These are indicators that should be taken with a grain of salt individually, but comparing the results across many different models for the same cryptocurrency can help us determine which models work best for the problem, and then comparing those results across many cryptocurrencies can help us understand which cryptocurrencies we can predict with the most accuracy**.
+
+Before we can draw these comparisons however, we will need to "standardize" the values to create a fair comparison across all dataasets.
+
 
 <!-- TODO - NOTE 11/13: If for holdout a cryptocurrency averaged less than 1% price movement for the holdout it's not volatile enough for us to trade on, for example if a cryptocurrency is a stablecoin get rid of the row -->
 
-
-<!-- [TODO - ADD HERE explaining RMSE and R^2 metrics and how we will use them to standardize the way we evaluate the effectiveness of a model. We are looking to avoid using models where the results looked good for the test data but then perform much worse than that initial expectation when looking at the holdout results] -->
 
 ## Data Prep - Adjust Prices
 
@@ -236,11 +237,12 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             lm_rsq_holdout = unlist(map2(lm_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))
 ```
 
-Look at the results. Wrapping them in `print(n=500)` overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations).
+Look at the results:
 
 ```{r}
-print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), n=500)
+select(cryptodata_nested, lm_rsq_test, lm_rsq_holdout)
 ```
+
 
 ### Calculate RMSE {#calculate-rmse-no-NA}
 
@@ -266,14 +268,13 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 <!-- [TODO - Add explanation for ifelse() to add rmse based on test or holdout] -->
 
-Look at the results:
+Look at the results. Wrapping them in `print(n=500)` overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations).
 
 ```{r}
-select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout)
+print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), n=500)
 ```
 
 Out of `r nrow(cryptodata_nested)` groups, `r count(ungroup(filter(cryptodata_nested, lm_rmse_test >= lm_rmse_holdout)))$n` had an equal or lower RMSE score for the holdout than the test set.
-
 
 
 ## Adjust Prices - All Models
