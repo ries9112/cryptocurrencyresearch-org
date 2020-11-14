@@ -73,6 +73,10 @@ caret-options
 make-predictions
 evaluate-model-performance
 summarizing-models
+mae
+rmse
+r-squared
+get-metrics
 comparing-metrics
 data-prep---adjust-prices
 add-last-price
@@ -82,8 +86,8 @@ actuals
 holdout-1
 actuals-as-change
 review-summary-statistics
-calculate-rmse
 calculate-r2
+calculate-rmse-no-NA
 adjust-prices---all-models
 add-last-price-1
 holdout-2
@@ -126,4 +130,5 @@ document-format
 open-review-toolkit-ref
 visualization-section
 time-series-section
+evaluate-model-performance-1
 r-packages-used
