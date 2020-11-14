@@ -4,9 +4,25 @@ Now we get to see the results of our hard work! There are some additional data p
 
 ## Summarizing models
 
-<!-- [TODO - HERE add notes on using **postResample()** and explain that if you think about it all you need to evaluate a model is the predictions made (on data never seen by the model) ] -->
+Because we know what really happened for the target variable in the test data we used in the previous step, we can get a good idea of how good the model performed on a dataset it has never seen before. We do this to avoid overfitting, which is the idea that the model may work really well on the training data we provided, but not on the new data that we want to predictions on. If the performance on the test set is good, that is a good sign. If the data is split into several subsets and each subset has consistent results for the training and test datasets, that is an even better sign the model may perform as expected.
 
-Example for one model:
+The first row of the data is for the `r cryptodata_nested$symbol[[1]]` cryptocurrency for the split number `r cryptodata_nested$split[[1]]`. For this row of data (and all others), we made predictions for the [**test_data**]{style="color: blue;"} using a linear regression model and saved the results in the [**lm_test_predictions**]{style="color: blue;"} column. The models were trained on the [**train_data**]{style="color: blue;"} and had not yet seen the results from the [**test_data**]{style="color: blue;"}, so how accurate was the model in its predictions on this data? 
+
+### MAE
+
+Each individual prediction can be compared to the observation of what actually happened, and for each prediction we can calculate the error between the two. We can then take all of the values for the error of the prediction relative to the actual observations, and summarize the performance as a [[**M**ean **A**bsolute **Error**]{style="color: purple;"}](https://en.wikipedia.org/wiki/Mean_absolute_error) (MAE) of those values, which gives us a single value to use as an indicator of the accuracy of the model. The higher the MAE score, the higher the error, meaning the model performs worse when the value is larger.
+
+### RMSE
+
+A common metric to evaluate the performance of a model is the [**R**oot **M**ean **S**quare **E**rror](https://en.wikipedia.org/wiki/Root-mean-square_deviation), which is similar to the MAE but squares and then takes the square root of the values. An interesting implication of this, is that the RMSE will always be larger or equal to the MAE, where a large degree of error on a single observation would get penalized more by the RMSE. The higher the RMSE value, the worse the performance of the model, and can range from 0 to infinity, meaning there is no defined limit on the amount of error you could have (unlike the next metric).
+
+### R Squared
+
+The [**$R^2$**]{style="color: purple;"}, also known as the [**coefficient of determination**]{style="color: purple;"}, is a measure that describes the strength in the correlation between the predictions made and the actual results. A value of 1.0 would mean that the predictions made were exactly identical to the actual results. A perfect score is usually concerning because even a great model shouldn't be exactly 100% accurate and usually indicates a mistake was made that gave away the results to the model and would not perform nearly as good when put into practice in the real world, but in the case of the $R^2$ the higher the score (from 0 to 1) the better.
+
+### Get Metrics
+
+We can return the RMSE and $R^2$ metrics for the `r cryptodata_nested$symbol[[1]]` cryptocurrency and the split number `r cryptodata_nested$split[[1]]` by using the [**postResample()**]{style="color: green;"} function from the [**caret**]{style="color: #ae7b11;"} package:
 
 ```{r caret_post_resample_example}
 postResample(pred = cryptodata_nested$lm_test_predictions[[1]], 
@@ -15,32 +31,26 @@ postResample(pred = cryptodata_nested$lm_test_predictions[[1]],
 
 We can extract the first element to return the **RMSE** metric, and the second element for the **R Squared (R\^2)** metric. We are using **`[[1]]`** to extract the first element of the [**lm\_test\_predictions**]{style="color: blue;"} and [**test\_data**]{style="color: blue;"} and compare the predictions to the actual value of the [**target\_price24h**]{style="color: blue;"} column.
 
-<!-- ```{r} -->
-<!-- print(paste('Now showing RMSE example:', postResample(pred = cryptodata_nested$lm_test_predictions[[1]],  -->
-<!--                                                       obs = cryptodata_nested$test_data[[1]]$target_price_24h)[[1]])) -->
-<!-- ``` -->
+This model used the earliest subset of the data available for the `r cryptodata_nested$test_data[[1]]$symbol` cryptocurrency. How does the same model used to predict this older subset of the data perform when applied to the most recent subset of the data from the **holdout**?
 
-<!-- ```{r} -->
-<!-- print(paste('Now showing R Squared example:', postResample(pred = cryptodata_nested$lm_test_predictions[[1]],  -->
-<!--                                                            obs = cryptodata_nested$test_data[[1]]$target_price_24h)[[2]])) -->
-<!-- ``` -->
-
-This model used the earliest subset of the data available for the `r cryptodata_nested$test_data[[1]]$symbol` cryptocurrency. How does the same model used to predict this older subset of the data perform when applied to the most recent subset of the data?
-
-We can get the same summary of results on the **holdout**:
+We can get the same summary of results comparing the [**lm_holdout_predictions**]{style="color: blue;"} to what actually happened to the [**target_price_24h**]{style="color: blue;"} column of the actual [**holdout_data**]{style="color: blue;"}:
 
 ```{r caret_post_resample_example_holdout}
 postResample(pred = cryptodata_nested$lm_holdout_predictions[[1]], 
              obs = cryptodata_nested$holdout_data[[1]]$target_price_24h)
 ```
 
-<!-- If we wrote a [*for loop*](https://r4ds.had.co.nz/iteration.html#for-loops) to iterate through all the options we would get the same results using an **object oriented approach**, this has to do with coding styles and preferences and generally speaking there are many ways of doing the same things in programming. -->
+*The result above may show a value of NA for the RMSE metric. [We will explain and resolve the issue later on](#calculate-rmse-no-NA)*.
+
 
 ### Comparing Metrics
 
-How do these two results compare and why is this comparison important?
+How do these two results compare and why is this comparison important? The **RMSE** is helpful in understanding the magnitude of the errors of the predictions, while the **$R^2$** helps us determine how easily we can predict future values. 
 
-The **RMSE**
+**These are indicators that should be taken with a grain of salt individually, but comparing the results across many different models for the same cryptocurrency can help us determine which models work best for the problem, and then comparing those results across many cryptocurrencies can help us determine which **
+
+<!-- TODO - NOTE 11/13: If for holdout a cryptocurrency averaged less than 1% price movement for the holdout it's not volatile enough for us to trade on, for example if a cryptocurrency is a stablecoin get rid of the row -->
+
 
 <!-- [TODO - ADD HERE explaining RMSE and R^2 metrics and how we will use them to standardize the way we evaluate the effectiveness of a model. We are looking to avoid using models where the results looked good for the test data but then perform much worse than that initial expectation when looking at the holdout results] -->
 
@@ -205,7 +215,34 @@ hydroGOF::rmse(cryptodata_nested$lm_test_predictions[[1]],
 
 <!-- [TODO - Here add note on using rmse function from hydroGOF package so we can use the na.rm=T argument, would otherwise get NA when a single value is NA. Also explain caveat of that.] -->
 
-### Calculate RMSE
+
+### Calculate R\^2
+
+Now we can do the same for the R Squared metric:
+
+```{r evaluate_rsquared_function}
+evaluate_preds_rsq <- function(predictions, actuals){
+
+  postResample(pred = predictions, obs = actuals)[[2]]
+
+}
+```
+
+```{r add_rsq}
+cryptodata_nested <- mutate(cryptodata_nested,
+                            lm_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(lm_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            lm_rsq_holdout = unlist(map2(lm_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))
+```
+
+Look at the results. Wrapping them in `print(n=500)` overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations).
+
+```{r}
+print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), n=500)
+```
+
+### Calculate RMSE {#calculate-rmse-no-NA}
 
 Now make a function to get the RMSE metric for all models:
 
@@ -237,33 +274,7 @@ select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout)
 
 Out of `r nrow(cryptodata_nested)` groups, `r count(ungroup(filter(cryptodata_nested, lm_rmse_test >= lm_rmse_holdout)))$n` had an equal or lower RMSE score for the holdout than the test set.
 
-### Calculate R\^2
 
-Now we can do the same for the R Squared metric:
-
-```{r evaluate_rsquared_function}
-evaluate_preds_rsq <- function(predictions, actuals){
-
-  postResample(pred = predictions, obs = actuals)[[2]]
-
-}
-```
-
-```{r add_rsq}
-cryptodata_nested <- mutate(cryptodata_nested,
-                            lm_rsq_test = unlist(ifelse(split < 5,
-                                                         map2(lm_test_predictions, actuals_test, evaluate_preds_rsq),
-                                                         NA)),
-                            lm_rsq_holdout = unlist(map2(lm_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))
-```
-
-Look at the results. Wrapping them in `print(n=500)` overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations).
-
-```{r}
-print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), n=500)
-```
-
-<!-- WORKING UP TO THIS POINT ON 11/2 -->
 
 ## Adjust Prices - All Models
 

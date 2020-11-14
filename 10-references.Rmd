@@ -28,5 +28,13 @@ Thanks to [Ben Marwick](https://github.com/benmarwick) for outlining how to use 
 
 - ... add rest here
 
+## Evaluate Model Performance
+
+- https://en.wikipedia.org/wiki/Root-mean-square_deviation
+
+- https://medium.com/human-in-a-machine-world/mae-and-rmse-which-metric-is-better-e60ac3bde13d
+
+- https://en.wikipedia.org/wiki/Coefficient_of_determination
+
 
 ## R Packages Used
