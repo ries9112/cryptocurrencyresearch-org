@@ -832,7 +832,7 @@ ggplot(accuracy_over_time, aes(x = date_utc, y = rsq, group = 1)) +
 <!-- HIDDEN: Add new pin with actual predictions from holdout for true comparisons! -->
 
 <!-- First need to add date_time_utc to the predictions -->
-```{r include=F}
+```{r eval=FALSE}
 record_holdout_preds_cbind <- function(holdout_data, holdout_predictions){
   left_join(mutate(as.data.frame(holdout_predictions), num = row_number()), 
             mutate(cryptodata_nested$holdout_data[[1]], num = row_number()))
@@ -840,7 +840,7 @@ record_holdout_preds_cbind <- function(holdout_data, holdout_predictions){
 ```
 
 
-```{r include=F}
+```{r include=F, eval=FALSE}
 cryptodata_nested <- mutate(cryptodata_nested,
                             lm_holdout_predictions = map2(holdout_data, lm_holdout_predictions, record_holdout_preds_cbind),
                             xgb_holdout_predictions = map2(holdout_data, xgb_holdout_predictions, record_holdout_preds_cbind),
@@ -850,7 +850,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
 ```
 
 <!-- Afterwards need to unnest the data -->
-```{r include=F, error=TRUE}
+```{r include=F, eval=FALSE}
 # lm:
 lm_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
                                                 lm_holdout_predictions = map2(holdout_data, lm_holdout_predictions,
@@ -883,7 +883,7 @@ full_holdout_preds <- union(lm_holdout_preds, xgb_holdout_preds, nnet_holdout_pr
 
 <!-- And finally pin it so it can be read it by RStudio Server process -->
 
-```{r upload_full_predictions_pin, error=TRUE}
+```{r upload_full_predictions_pin, eval=FALSE}
 # register board
 board_register("github", repo = "predictcrypto/pins", token=pins_key)
 # Add current date time
