@@ -1,6 +1,6 @@
 # Evaluate Model Performance {#evaluate-model-performance}
 
-Now we get to see the results of our hard work! There are some additional data preparation steps we need to take before we can visualize the results in aggregate; if you are just looking for the charts showing the results they are [shown later on in the "Visualize Results" section below](#visualize-results).
+Now we get to see the results of our hard work! There are some additional data preparation steps we need to take before we can visualize the results in aggregate; if you are just looking for the charts showing the results they are [shown later on in the "Visualize Results" section below](#interactive-dashboard).
 
 ## Summarizing models
 
@@ -103,10 +103,10 @@ Join the holdout data to all rows based on the cryptocurrency symbol alone:
 
 ```{r}
 cryptodata_nested <- left_join(cryptodata_nested, 
-                               select(cryptodata_nested_holdout, symbol, lm_holdout_predictions),
+                               dplyr::select(cryptodata_nested_holdout, symbol, lm_holdout_predictions),
                                by='symbol')
 # Remove unwanted columns
-cryptodata_nested <- select(cryptodata_nested, -lm_holdout_predictions.x, -split.y)
+cryptodata_nested <- dplyr::select(cryptodata_nested, -lm_holdout_predictions.x, -split.y)
 # Rename the columns kept
 cryptodata_nested <- rename(cryptodata_nested, 
                             lm_holdout_predictions = 'lm_holdout_predictions.y',
@@ -146,7 +146,7 @@ Now do the same thing to the actual prices. Let's make a new column called **act
 
 ```{r}
 actuals_create <- function(train_data, test_data){
-  c(tail(train_data$price_usd,1), as.numeric(unlist(select(test_data, price_usd))))
+  c(tail(train_data$price_usd,1), as.numeric(unlist(dplyr::select(test_data, price_usd))))
 }
 ```
 
@@ -172,15 +172,16 @@ Join the holdout data to all rows based on the cryptocurrency symbol alone:
 
 ```{r}
 cryptodata_nested <- left_join(cryptodata_nested, 
-                               select(cryptodata_nested_holdout, symbol, actuals_holdout),
+                               dplyr::select(cryptodata_nested_holdout, symbol, actuals_holdout),
                                by='symbol')
 # Remove unwanted columns
-cryptodata_nested <- select(cryptodata_nested, -split.y)
+cryptodata_nested <- dplyr::select(cryptodata_nested, -split.y)
 # Rename the columns kept
 cryptodata_nested <- rename(cryptodata_nested, split = 'split.x')
 # Reset the correct grouping structure
 cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
 ```
+
 
 ### Actuals as % Change
 
@@ -240,7 +241,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
 Look at the results:
 
 ```{r}
-select(cryptodata_nested, lm_rsq_test, lm_rsq_holdout)
+dplyr::select(cryptodata_nested, lm_rsq_test, lm_rsq_holdout)
 ```
 
 
@@ -271,7 +272,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
 Look at the results. Wrapping them in `print(n=500)` overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations).
 
 ```{r}
-print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), n=500)
+print(dplyr::select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), n=500)
 ```
 
 Out of `r nrow(cryptodata_nested)` groups, `r count(ungroup(filter(cryptodata_nested, lm_rmse_test >= lm_rmse_holdout)))$n` had an equal or lower RMSE score for the holdout than the test set.
@@ -287,14 +288,25 @@ And now we can do the same for all the other models
 
 ```{r}
 cryptodata_nested <- mutate(cryptodata_nested,
+                            # XGBoost:
                             xgb_test_predictions = ifelse(split < 5,
                                                          map2(train_data, xgb_test_predictions, last_train_price),
                                                          NA),
-                            xgbTree_test_predictions = ifelse(split < 5,
-                                                         map2(train_data, xgbTree_test_predictions, last_train_price),
-                                                         NA),
+                            # Neural Network:
                             nnet_test_predictions = ifelse(split < 5,
                                                          map2(train_data, nnet_test_predictions, last_train_price),
+                                                         NA),
+                            # Bayesian Ridge Regression:
+                            bridge_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, bridge_test_predictions, last_train_price),
+                                                         NA),
+                            # randomGLM:
+                            randomGLM_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, randomGLM_test_predictions, last_train_price),
+                                                         NA),
+                            # PCR:
+                            pcr_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, pcr_test_predictions, last_train_price),
                                                          NA))
 ```
 
@@ -304,26 +316,37 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 ```{r}
 cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
+                                    # XGBoost:
                                     xgb_holdout_predictions = map2(train_data, xgb_holdout_predictions, last_train_price),
-                                    xgbTree_holdout_predictions = map2(train_data, xgbTree_holdout_predictions, last_train_price),
-                                    nnet_holdout_predictions = map2(train_data, nnet_holdout_predictions, last_train_price))
+                                    # Neural Network:
+                                    nnet_holdout_predictions = map2(train_data, nnet_holdout_predictions, last_train_price),
+                                    # Bayesian Ridge Regression:
+                                    bridge_holdout_predictions = map2(train_data, bridge_holdout_predictions, last_train_price),
+                                    # randomGLM:
+                                    randomGLM_holdout_predictions = map2(train_data, randomGLM_holdout_predictions, last_train_price),
+                                    # PCR:
+                                    pcr_holdout_predictions = map2(train_data, pcr_holdout_predictions, last_train_price))
 ```
 
 Join the holdout data to all rows based on the cryptocurrency symbol alone:
 
 ```{r}
 cryptodata_nested <- left_join(cryptodata_nested, 
-                               select(cryptodata_nested_holdout, symbol, 
-                                      xgb_holdout_predictions, xgbTree_holdout_predictions, nnet_holdout_predictions),
+                               dplyr::select(cryptodata_nested_holdout, symbol, 
+                                      xgb_holdout_predictions, nnet_holdout_predictions, bridge_holdout_predictions,
+                                      randomGLM_holdout_predictions, pcr_holdout_predictions),
                                by='symbol')
 # Remove unwanted columns
-cryptodata_nested <- select(cryptodata_nested, -xgb_holdout_predictions.x, 
-                            -xgbTree_holdout_predictions.x, -nnet_holdout_predictions.x, -split.y)
+cryptodata_nested <- dplyr::select(cryptodata_nested, -xgb_holdout_predictions.x, 
+                            -nnet_holdout_predictions.x, -bridge_holdout_predictions.x,
+                            -randomGLM_holdout_predictions.x, pcr_holdout_predictions.x, -split.y)
 # Rename the columns kept
 cryptodata_nested <- rename(cryptodata_nested, 
                             xgb_holdout_predictions = 'xgb_holdout_predictions.y',
-                            xgbTree_holdout_predictions = 'xgbTree_holdout_predictions.y',
                             nnet_holdout_predictions = 'nnet_holdout_predictions.y',
+                            bridge_holdout_predictions = 'bridge_holdout_predictions.y',
+                            randomGLM_holdout_predictions = 'randomGLM_holdout_predictions.y',
+                            pcr_holdout_predictions = 'pcr_holdout_predictions.y',
                             split = 'split.x')
 # Reset the correct grouping structure
 cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
@@ -335,23 +358,36 @@ Overwrite the old predictions with the new predictions adjusted as a percentage 
 
 ```{r target_adjust_all_models}
 cryptodata_nested <- mutate(cryptodata_nested,
+                            # XGBoost:
                             xgb_test_predictions = ifelse(split < 5,
                                                          map(xgb_test_predictions, standardize_perc_change),
                                                          NA),
-                            # Holdout for all splits
+                            # holdout - all splits
                             xgb_holdout_predictions = map(xgb_holdout_predictions, standardize_perc_change),
-                            # xgbTree
-                            xgbTree_test_predictions = ifelse(split < 5,
-                                                         map(xgbTree_test_predictions, standardize_perc_change),
-                                                         NA),
-                            # Holdout for all splits
-                            xgbTree_holdout_predictions = map(xgbTree_holdout_predictions, standardize_perc_change),
-                            # nnet
+                            # nnet:
                             nnet_test_predictions = ifelse(split < 5,
                                                          map(nnet_test_predictions, standardize_perc_change),
                                                          NA),
-                            # Holdout for all splits
-                            nnet_holdout_predictions = map(nnet_holdout_predictions, standardize_perc_change))
+                            # holdout - all splits
+                            nnet_holdout_predictions = map(nnet_holdout_predictions, standardize_perc_change),
+                            # Bayesian Lasso Regression:
+                            bridge_test_predictions = ifelse(split < 5,
+                                                         map(bridge_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # holdout - all splits
+                            bridge_holdout_predictions = map(bridge_holdout_predictions, standardize_perc_change),
+                            # randomGLM:
+                            randomGLM_test_predictions = ifelse(split < 5,
+                                                         map(randomGLM_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # holdout - all splits
+                            randomGLM_holdout_predictions = map(randomGLM_holdout_predictions, standardize_perc_change),
+                            # PCR:
+                            pcr_test_predictions = ifelse(split < 5,
+                                                         map(pcr_test_predictions, standardize_perc_change),
+                                                         NA),
+                            # holdout - all splits
+                            pcr_holdout_predictions = map(pcr_holdout_predictions, standardize_perc_change))
 ```
 
 ### Add Metrics
@@ -370,18 +406,6 @@ cryptodata_nested <- mutate(cryptodata_nested,
                                                          NA)),
                             # And holdout:
                             xgb_rsq_holdout = unlist(map2(xgb_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
-                            # XGBoost Trees - RMSE - Test
-                            xgbTree_rmse_test = unlist(ifelse(split < 5,
-                                                         map2(xgbTree_test_predictions, actuals_test, evaluate_preds_rmse),
-                                                         NA)),
-                            # And holdout:
-                            xgbTree_rmse_holdout = unlist(map2(xgbTree_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
-                            # XGBoost Trees - R^2 - Test
-                            xgbTree_rsq_test = unlist(ifelse(split < 5,
-                                                         map2(xgbTree_test_predictions, actuals_test, evaluate_preds_rsq),
-                                                         NA)),
-                            # And holdout:
-                            xgbTree_rsq_holdout = unlist(map2(xgbTree_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
                             # Neural Network - RMSE - Test
                             nnet_rmse_test = unlist(ifelse(split < 5,
                                                          map2(nnet_test_predictions, actuals_test, evaluate_preds_rmse),
@@ -393,14 +417,50 @@ cryptodata_nested <- mutate(cryptodata_nested,
                                                          map2(nnet_test_predictions, actuals_test, evaluate_preds_rsq),
                                                          NA)),
                             # And holdout:
-                            nnet_rsq_holdout = unlist(map2(nnet_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))
+                            nnet_rsq_holdout = unlist(map2(nnet_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
+                            # Bayesian Ridge Regression - RMSE - Test
+                            bridge_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(bridge_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            # And holdout:
+                            bridge_rmse_holdout = unlist(map2(bridge_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
+                            # Bayesian Ridge Regression - R^2 - Test
+                            bridge_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(bridge_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            # And holdout:
+                            bridge_rsq_holdout = unlist(map2(bridge_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
+                            # randomGLM - RMSE - Test
+                            randomGLM_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(randomGLM_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            # And holdout:
+                            randomGLM_rmse_holdout = unlist(map2(randomGLM_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
+                            # randomGLM - R^2 - Test
+                            randomGLM_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(randomGLM_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            # And holdout:
+                            randomGLM_rsq_holdout = unlist(map2(randomGLM_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
+                            # PCR - RMSE - Test
+                            pcr_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(pcr_test_predictions, actuals_test, evaluate_preds_rmse),
+                                                         NA)),
+                            # And holdout:
+                            pcr_rmse_holdout = unlist(map2(pcr_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
+                            # PCR - R^2 - Test
+                            pcr_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(pcr_test_predictions, actuals_test, evaluate_preds_rsq),
+                                                         NA)),
+                            # And holdout:
+                            pcr_rsq_holdout = unlist(map2(pcr_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))
 ```
 
 <!-- Now we have RMSE values for every model created for every cryptocurrency and split of the data: -->
 
 <!-- ```{r} -->
 
-<!-- rmse_scores <- select(cryptodata_nested, lm_rmse_test, xgb_rmse_test, xgbTree_rmse_test, nnet_rmse_test) -->
+<!-- rmse_scores <- dplyr::select(cryptodata_nested, lm_rmse_test, xgb_rmse_test, bridge_rmse_test, nnet_rmse_test) -->
 
 <!-- # Show RMSE scores -->
 
@@ -412,7 +472,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 <!-- ```{r} -->
 
-<!-- rsq_scores <- select(cryptodata_nested, lm_rsq, xgb_rsq, xgbTree_rsq, nnet_rsq) -->
+<!-- rsq_scores <- dplyr::select(cryptodata_nested, lm_rsq, xgb_rsq, bridge_rsq, nnet_rsq) -->
 
 <!-- # Show R^2 scores -->
 
@@ -427,7 +487,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
 New object without split column `cryptodata_metrics`:
 
 ```{r}
-cryptodata_metrics <- group_by(select(ungroup(cryptodata_nested),-split),symbol)
+cryptodata_metrics <- group_by(dplyr::select(ungroup(cryptodata_nested),-split),symbol)
 ```
 
 ### Test
@@ -438,14 +498,16 @@ Now for each model we will create a new column giving the average RMSE for the 4
 rmse_test <- mutate(cryptodata_metrics,
                       lm = mean(lm_rmse_test, na.rm = T),
                       xgb = mean(xgb_rmse_test, na.rm = T),
-                      xgbTree = mean(xgbTree_rmse_test, na.rm = T),
-                      nnet = mean(nnet_rmse_test, na.rm = T))
+                      nnet = mean(nnet_rmse_test, na.rm = T),
+                      bridge = mean(bridge_rmse_test, na.rm = T),
+                      randomGLM = mean(randomGLM_rmse_test, na.rm = T),
+                      pcr = mean(pcr_rmse_test, na.rm = T))
 ```
 
 Now we can use the `gather()` function to summarize the columns as rows:
 
 ```{r gather_rmse}
-rmse_test <- unique(gather(select(rmse_test, lm:nnet), 'model', 'rmse', -symbol))
+rmse_test <- unique(gather(dplyr::select(rmse_test, lm:pcr), 'model', 'rmse', -symbol))
 # Show results
 rmse_test
 ```
@@ -464,14 +526,16 @@ Do the same for the holdout set
 rmse_holdout <- mutate(cryptodata_metrics,
                       lm = mean(lm_rmse_holdout, na.rm = T),
                       xgb = mean(xgb_rmse_holdout, na.rm = T),
-                      xgbTree = mean(xgbTree_rmse_holdout, na.rm = T),
-                      nnet = mean(nnet_rmse_holdout, na.rm = T))
+                      nnet = mean(nnet_rmse_holdout, na.rm = T),
+                      bridge = mean(bridge_rmse_holdout, na.rm = T),
+                      randomGLM = mean(randomGLM_rmse_holdout, na.rm = T),
+                      pcr = mean(pcr_rmse_holdout, na.rm = T))
 ```
 
 Now we can use the `gather()` function to summarize the columns as rows:
 
 ```{r gather_rmse_holdout}
-rmse_holdout <- unique(gather(select(rmse_holdout, lm:nnet), 'model', 'rmse', -symbol))
+rmse_holdout <- unique(gather(dplyr::select(rmse_holdout, lm:pcr), 'model', 'rmse', -symbol))
 # Show results
 rmse_holdout
 ```
@@ -498,14 +562,16 @@ For each model we will create a new column giving the average R\^2 for the 4 cro
 rsq_test <- mutate(cryptodata_metrics,
                       lm = mean(lm_rsq_test, na.rm = T),
                       xgb = mean(xgb_rsq_test, na.rm = T),
-                      xgbTree = mean(xgbTree_rsq_test, na.rm = T),
-                      nnet = mean(nnet_rsq_test, na.rm = T))
+                      nnet = mean(nnet_rsq_test, na.rm = T),
+                      bridge = mean(bridge_rsq_test, na.rm = T),
+                      randomGLM = mean(randomGLM_rsq_test, na.rm = T),
+                      pcr = mean(pcr_rsq_test, na.rm = T))
 ```
 
 Now we can use the `gather()` function to summarize the columns as rows:
 
 ```{r gather_rsq}
-rsq_test <- unique(gather(select(rsq_test, lm:nnet), 'model', 'rsq', -symbol))
+rsq_test <- unique(gather(dplyr::select(rsq_test, lm:pcr), 'model', 'rsq', -symbol))
 # Show results
 rsq_test
 ```
@@ -524,14 +590,16 @@ Do the same for the holdout set
 rsq_holdout <- mutate(cryptodata_metrics,
                       lm = mean(lm_rsq_holdout, na.rm = T),
                       xgb = mean(xgb_rsq_holdout, na.rm = T),
-                      xgbTree = mean(xgbTree_rsq_holdout, na.rm = T),
-                      nnet = mean(nnet_rsq_holdout, na.rm = T))
+                      nnet = mean(nnet_rsq_holdout, na.rm = T),
+                      bridge = mean(bridge_rsq_holdout, na.rm = T),
+                      randomGLM = mean(randomGLM_rsq_holdout, na.rm = T),
+                      pcr = mean(pcr_rsq_holdout, na.rm = T))
 ```
 
 Now we can use the `gather()` function to summarize the columns as rows:
 
 ```{r gather_rsq_holdout}
-rsq_holdout <- unique(gather(select(rsq_holdout, lm:nnet), 'model', 'rsq', -symbol))
+rsq_holdout <- unique(gather(dplyr::select(rsq_holdout, lm:pcr), 'model', 'rsq', -symbol))
 # Show results
 rsq_holdout
 ```
@@ -624,7 +692,7 @@ plot_scores$last_refreshed <- Sys.time()
 pin(plot_scores, board='github', name='crypto_tutorial_results_latest')
 ```
 
-### Interactive Dashboard
+## Interactive Dashboard
 Use the interactive app below to explore the results over time by the individual cryptocurrency. Use the filters on the left sidebar to visualize the results you are interested in:
 
 ```{r metrics_by_crypto_shinyapp, out.height = "600px", out.width='100%', echo=F}
@@ -775,13 +843,17 @@ ggplot(accuracy_over_time, aes(x = date_utc, y = rsq, group = 1)) +
 [Refer back to the interactive dashboard](#interactive-dashboard) to take a more specific subset of results instead of the aggregate analysis shown above.
 
 
-## Making Predictions
+<!-- ## Making Predictions -->
 
-Once we have used the information visualized in this section to determine which models we want to go ahead and use, we want to start thinking about how to make predictions on new data.
+<!-- Once we have used the information visualized in this section to determine which models we want to go ahead and use, we want to start thinking about how to make predictions on new data. -->
 
-To make new predictions, we would start by pulling the newest data. Next we want to make sure the data has the exact same columns that were used to train the models minus the target variable which we will predict. We need to apply the exact same data preparation steps that were performed on the data to train the models to the new data in order to make new predictions.
+<!-- To make new predictions, we would start by pulling the newest data. Next we want to make sure the data has the exact same columns that were used to train the models minus the target variable which we will predict. We need to apply the exact same data preparation steps that were performed on the data to train the models to the new data in order to make new predictions. -->
 
-We have omitted these steps to discourage people from performing real trades. Congratulations, you have made it all the way through all of the code! Learn more about why you should not attempt performing trades using the system outlined [in the next section](#considerations).
+<!-- We have omitted these steps to discourage people from performing real trades. Congratulations, you have made it all the way through all of the code! Learn more about why you should not attempt performing trades using the system outlined [in the next section](#considerations). -->
+
+
+
+<!-- [TODO - HERE unnest data for holdout predictions and write the data to pins! From there pick up using RStudio Server script] -->
 
 
 
