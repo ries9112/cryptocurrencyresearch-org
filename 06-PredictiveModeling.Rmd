@@ -148,19 +148,19 @@ cryptodata_nested <- mutate(cryptodata_nested,
 *Again, we will not dive into the specifics of the individual models, but a quick Google search will return a myriad of information on the subject.*
 
 
-### Bayesian Ridge Regression Models
+<!-- ### Bayesian Ridge Regression Models - removed because of package conflict-->
 
-Next let's create [Bayesian Ridge Regression](https://stats.stackexchange.com/questions/328342/is-bayesian-ridge-regression-another-name-of-bayesian-linear-regression) models using the [**method**]{style="color: blue;"} [***`bridge`***]{style="color: blue;"}
+<!-- Next let's create [Bayesian Ridge Regression](https://stats.stackexchange.com/questions/328342/is-bayesian-ridge-regression-another-name-of-bayesian-linear-regression) models using the [**method**]{style="color: blue;"} [***`bridge`***]{style="color: blue;"} -->
 
-```{r bayesian_ridge_regression}
-cryptodata_nested <- mutate(cryptodata_nested, 
-                            bridge_model = map2(train_data, "bridge", model_caret))
-```
+<!-- ```{r bayesian_ridge_regression} -->
+<!-- cryptodata_nested <- mutate(cryptodata_nested,  -->
+<!--                             bridge_model = map2(train_data, "bridge", model_caret)) -->
+<!-- ``` -->
 
 
 <!-- ### Elastic Net Models - removed because of package conflict-->
 
-<!-- Next let's create [Elastic Net](https://en.wikipedia.org/wiki/Elastic_net_regularization) models using the [**method**]{style="color: blue;"} [***`bridge`***]{style="color: blue;"} -->
+<!-- Next let's create [Elastic Net](https://en.wikipedia.org/wiki/Elastic_net_regularization) models using the [**method**]{style="color: blue;"} [***`enet`***]{style="color: blue;"} -->
 
 <!-- ```{r elastic_net_models} -->
 <!-- cryptodata_nested <- mutate(cryptodata_nested,  -->
@@ -253,14 +253,6 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             nnet_holdout_predictions =  map2(nnet_model,
                                                              holdout_data,
                                                              make_predictions),
-                            # Bayesian Ridge Regression:
-                            bridge_test_predictions =  map2(bridge_model,
-                                                            test_data,
-                                                            make_predictions),
-                            # holdout
-                            bridge_holdout_predictions =  map2(bridge_model,
-                                                               holdout_data,
-                                                               make_predictions),
                             # randomGLM:
                             randomGLM_test_predictions =  map2(randomGLM_model,
                                                                test_data,
