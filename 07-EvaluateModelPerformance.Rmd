@@ -300,9 +300,9 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             brnn_test_predictions = ifelse(split < 5,
                                                          map2(train_data, brnn_test_predictions, last_train_price),
                                                          NA),
-                            # randomGLM:
-                            randomGLM_test_predictions = ifelse(split < 5,
-                                                         map2(train_data, randomGLM_test_predictions, last_train_price),
+                            # rf:
+                            rf_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, rf_test_predictions, last_train_price),
                                                          NA),
                             # PCR:
                             pcr_test_predictions = ifelse(split < 5,
@@ -322,8 +322,8 @@ cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
                                     nnet_holdout_predictions = map2(train_data, nnet_holdout_predictions, last_train_price),
                                     # Bayesian Regularized Neural Network:
                                     brnn_holdout_predictions = map2(train_data, brnn_holdout_predictions, last_train_price),
-                                    # randomGLM:
-                                    randomGLM_holdout_predictions = map2(train_data, randomGLM_holdout_predictions, last_train_price),
+                                    # rf:
+                                    rf_holdout_predictions = map2(train_data, rf_holdout_predictions, last_train_price),
                                     # PCR:
                                     pcr_holdout_predictions = map2(train_data, pcr_holdout_predictions, last_train_price))
 ```
@@ -334,18 +334,18 @@ Join the holdout data to all rows based on the cryptocurrency symbol alone:
 cryptodata_nested <- left_join(cryptodata_nested, 
                                dplyr::select(cryptodata_nested_holdout, symbol, 
                                       xgb_holdout_predictions, nnet_holdout_predictions, brnn_holdout_predictions,
-                                      randomGLM_holdout_predictions, pcr_holdout_predictions),
+                                      rf_holdout_predictions, pcr_holdout_predictions),
                                by='symbol')
 # Remove unwanted columns
 cryptodata_nested <- dplyr::select(cryptodata_nested, -xgb_holdout_predictions.x, 
                             -nnet_holdout_predictions.x, -brnn_holdout_predictions.x,
-                            -randomGLM_holdout_predictions.x, pcr_holdout_predictions.x, -split.y)
+                            -rf_holdout_predictions.x, pcr_holdout_predictions.x, -split.y)
 # Rename the columns kept
 cryptodata_nested <- rename(cryptodata_nested, 
                             xgb_holdout_predictions = 'xgb_holdout_predictions.y',
                             nnet_holdout_predictions = 'nnet_holdout_predictions.y',
                             brnn_holdout_predictions = 'brnn_holdout_predictions.y',
-                            randomGLM_holdout_predictions = 'randomGLM_holdout_predictions.y',
+                            rf_holdout_predictions = 'rf_holdout_predictions.y',
                             pcr_holdout_predictions = 'pcr_holdout_predictions.y',
                             split = 'split.x')
 # Reset the correct grouping structure
@@ -376,12 +376,12 @@ cryptodata_nested <- mutate(cryptodata_nested,
                                                          NA),
                             # holdout - all splits
                             brnn_holdout_predictions = map(brnn_holdout_predictions, standardize_perc_change),
-                            # randomGLM:
-                            randomGLM_test_predictions = ifelse(split < 5,
-                                                         map(randomGLM_test_predictions, standardize_perc_change),
+                            # rf:
+                            rf_test_predictions = ifelse(split < 5,
+                                                         map(rf_test_predictions, standardize_perc_change),
                                                          NA),
                             # holdout - all splits
-                            randomGLM_holdout_predictions = map(randomGLM_holdout_predictions, standardize_perc_change),
+                            rf_holdout_predictions = map(rf_holdout_predictions, standardize_perc_change),
                             # PCR:
                             pcr_test_predictions = ifelse(split < 5,
                                                          map(pcr_test_predictions, standardize_perc_change),
@@ -430,18 +430,18 @@ cryptodata_nested <- mutate(cryptodata_nested,
                                                          NA)),
                             # And holdout:
                             brnn_rsq_holdout = unlist(map2(brnn_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
-                            # randomGLM - RMSE - Test
-                            randomGLM_rmse_test = unlist(ifelse(split < 5,
-                                                         map2(randomGLM_test_predictions, actuals_test, evaluate_preds_rmse),
+                            # rf - RMSE - Test
+                            rf_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(rf_test_predictions, actuals_test, evaluate_preds_rmse),
                                                          NA)),
                             # And holdout:
-                            randomGLM_rmse_holdout = unlist(map2(randomGLM_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
-                            # randomGLM - R^2 - Test
-                            randomGLM_rsq_test = unlist(ifelse(split < 5,
-                                                         map2(randomGLM_test_predictions, actuals_test, evaluate_preds_rsq),
+                            rf_rmse_holdout = unlist(map2(rf_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
+                            # rf - R^2 - Test
+                            rf_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(rf_test_predictions, actuals_test, evaluate_preds_rsq),
                                                          NA)),
                             # And holdout:
-                            randomGLM_rsq_holdout = unlist(map2(randomGLM_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
+                            rf_rsq_holdout = unlist(map2(rf_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
                             # PCR - RMSE - Test
                             pcr_rmse_test = unlist(ifelse(split < 5,
                                                          map2(pcr_test_predictions, actuals_test, evaluate_preds_rmse),
@@ -500,7 +500,7 @@ rmse_test <- mutate(cryptodata_metrics,
                       xgb = mean(xgb_rmse_test, na.rm = T),
                       nnet = mean(nnet_rmse_test, na.rm = T),
                       brnn = mean(brnn_rmse_test, na.rm = T),
-                      randomGLM = mean(randomGLM_rmse_test, na.rm = T),
+                      rf = mean(rf_rmse_test, na.rm = T),
                       pcr = mean(pcr_rmse_test, na.rm = T))
 ```
 
@@ -528,7 +528,7 @@ rmse_holdout <- mutate(cryptodata_metrics,
                       xgb = mean(xgb_rmse_holdout, na.rm = T),
                       nnet = mean(nnet_rmse_holdout, na.rm = T),
                       brnn = mean(brnn_rmse_holdout, na.rm = T),
-                      randomGLM = mean(randomGLM_rmse_holdout, na.rm = T),
+                      rf = mean(rf_rmse_holdout, na.rm = T),
                       pcr = mean(pcr_rmse_holdout, na.rm = T))
 ```
 
@@ -564,7 +564,7 @@ rsq_test <- mutate(cryptodata_metrics,
                       xgb = mean(xgb_rsq_test, na.rm = T),
                       nnet = mean(nnet_rsq_test, na.rm = T),
                       brnn = mean(brnn_rsq_test, na.rm = T),
-                      randomGLM = mean(randomGLM_rsq_test, na.rm = T),
+                      rf = mean(rf_rsq_test, na.rm = T),
                       pcr = mean(pcr_rsq_test, na.rm = T))
 ```
 
@@ -592,7 +592,7 @@ rsq_holdout <- mutate(cryptodata_metrics,
                       xgb = mean(xgb_rsq_holdout, na.rm = T),
                       nnet = mean(nnet_rsq_holdout, na.rm = T),
                       brnn = mean(brnn_rsq_holdout, na.rm = T),
-                      randomGLM = mean(randomGLM_rsq_holdout, na.rm = T),
+                      rf = mean(rf_rsq_holdout, na.rm = T),
                       pcr = mean(pcr_rsq_holdout, na.rm = T))
 ```
 
