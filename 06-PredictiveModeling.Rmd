@@ -169,11 +169,11 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 ### Random Forest	Models
 
-Next let's use the [[**method**]{style="color: blue;"} [***`rf`***]{style="color: blue;"}](https://en.wikipedia.org/wiki/Random_forest)
+Next let's use create [Random Forest](https://stats.stackexchange.com/questions/12140/conditional-inference-trees-vs-traditional-decision-trees) models using the [[**method**]{style="color: blue;"} [***`ctree`***]{style="color: blue;"}](https://en.wikipedia.org/wiki/Random_forest)
 
 ```{r rf_models}
 cryptodata_nested <- mutate(cryptodata_nested, 
-                            rf_model = map2(train_data, "rf", model_caret))
+                            rf_model = map2(train_data, "ctree", model_caret))
 ```
 
 
