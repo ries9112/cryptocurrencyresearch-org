@@ -35,7 +35,7 @@ jobs:
       - name: Update GitHub page
         run: |
           rm -r docs
-          cp -R /_book /docs
+          cp -R _book docs
       - name: Commit and push files
         run: |
           git config --local user.email "ries9112@colorado.edu"
