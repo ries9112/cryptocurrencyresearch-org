@@ -167,13 +167,13 @@ cryptodata_nested <- mutate(cryptodata_nested,
 <!--                             enet_model = map2(train_data, "enet", model_caret)) -->
 <!-- ``` -->
 
-### Ensembles of Generalized Linear Models
+### Random Forest	Models
 
-Next let's use the [[**method**]{style="color: blue;"} [***`randomGLM`***]{style="color: blue;"}](https://horvath.genetics.ucla.edu/html/RGLM/)
+Next let's use the [[**method**]{style="color: blue;"} [***`rf`***]{style="color: blue;"}](https://en.wikipedia.org/wiki/Random_forest)
 
-```{r randomGLM_models}
+```{r rf_models}
 cryptodata_nested <- mutate(cryptodata_nested, 
-                            randomGLM_model = map2(train_data, "randomGLM", model_caret))
+                            rf_model = map2(train_data, "rf", model_caret))
 ```
 
 
@@ -261,12 +261,12 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             brnn_holdout_predictions =  map2(brnn_model,
                                                                holdout_data,
                                                                make_predictions),
-                            # randomGLM:
-                            randomGLM_test_predictions =  map2(randomGLM_model,
+                            # rf:
+                            rf_test_predictions =  map2(rf_model,
                                                                test_data,
                                                                make_predictions),
                             # holdout
-                            randomGLM_holdout_predictions =  map2(randomGLM_model,
+                            rf_holdout_predictions =  map2(rf_model,
                                                                   holdout_data,
                                                                   make_predictions),
                             # PCR:
