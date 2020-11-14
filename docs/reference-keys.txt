@@ -65,12 +65,14 @@ using-functional-programming
 caret
 parallel-processing
 more-functional-programming
-cross-validation-preds
 generalize-the-function
 xgboost-models
 neural-network-models
+random-forest-models
+principal-component-analysis
 caret-options
 make-predictions
+timeseries
 evaluate-model-performance
 summarizing-models
 mae
@@ -119,7 +121,6 @@ accuracy-over-time
 summarize-the-data-2
 plot-rmse
 plot-r2
-making-predictions
 considerations
 not-a-trading-tutorial
 session-information
