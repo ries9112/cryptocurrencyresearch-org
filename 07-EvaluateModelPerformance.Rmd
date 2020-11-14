@@ -296,9 +296,9 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             nnet_test_predictions = ifelse(split < 5,
                                                          map2(train_data, nnet_test_predictions, last_train_price),
                                                          NA),
-                            # Bayesian Ridge Regression:
-                            bridge_test_predictions = ifelse(split < 5,
-                                                         map2(train_data, bridge_test_predictions, last_train_price),
+                            # Bayesian Regularized Neural Network:
+                            brnn_test_predictions = ifelse(split < 5,
+                                                         map2(train_data, brnn_test_predictions, last_train_price),
                                                          NA),
                             # randomGLM:
                             randomGLM_test_predictions = ifelse(split < 5,
@@ -320,8 +320,8 @@ cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
                                     xgb_holdout_predictions = map2(train_data, xgb_holdout_predictions, last_train_price),
                                     # Neural Network:
                                     nnet_holdout_predictions = map2(train_data, nnet_holdout_predictions, last_train_price),
-                                    # Bayesian Ridge Regression:
-                                    bridge_holdout_predictions = map2(train_data, bridge_holdout_predictions, last_train_price),
+                                    # Bayesian Regularized Neural Network:
+                                    brnn_holdout_predictions = map2(train_data, brnn_holdout_predictions, last_train_price),
                                     # randomGLM:
                                     randomGLM_holdout_predictions = map2(train_data, randomGLM_holdout_predictions, last_train_price),
                                     # PCR:
@@ -333,18 +333,18 @@ Join the holdout data to all rows based on the cryptocurrency symbol alone:
 ```{r}
 cryptodata_nested <- left_join(cryptodata_nested, 
                                dplyr::select(cryptodata_nested_holdout, symbol, 
-                                      xgb_holdout_predictions, nnet_holdout_predictions, bridge_holdout_predictions,
+                                      xgb_holdout_predictions, nnet_holdout_predictions, brnn_holdout_predictions,
                                       randomGLM_holdout_predictions, pcr_holdout_predictions),
                                by='symbol')
 # Remove unwanted columns
 cryptodata_nested <- dplyr::select(cryptodata_nested, -xgb_holdout_predictions.x, 
-                            -nnet_holdout_predictions.x, -bridge_holdout_predictions.x,
+                            -nnet_holdout_predictions.x, -brnn_holdout_predictions.x,
                             -randomGLM_holdout_predictions.x, pcr_holdout_predictions.x, -split.y)
 # Rename the columns kept
 cryptodata_nested <- rename(cryptodata_nested, 
                             xgb_holdout_predictions = 'xgb_holdout_predictions.y',
                             nnet_holdout_predictions = 'nnet_holdout_predictions.y',
-                            bridge_holdout_predictions = 'bridge_holdout_predictions.y',
+                            brnn_holdout_predictions = 'brnn_holdout_predictions.y',
                             randomGLM_holdout_predictions = 'randomGLM_holdout_predictions.y',
                             pcr_holdout_predictions = 'pcr_holdout_predictions.y',
                             split = 'split.x')
@@ -371,11 +371,11 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             # holdout - all splits
                             nnet_holdout_predictions = map(nnet_holdout_predictions, standardize_perc_change),
                             # Bayesian Lasso Regression:
-                            bridge_test_predictions = ifelse(split < 5,
-                                                         map(bridge_test_predictions, standardize_perc_change),
+                            brnn_test_predictions = ifelse(split < 5,
+                                                         map(brnn_test_predictions, standardize_perc_change),
                                                          NA),
                             # holdout - all splits
-                            bridge_holdout_predictions = map(bridge_holdout_predictions, standardize_perc_change),
+                            brnn_holdout_predictions = map(brnn_holdout_predictions, standardize_perc_change),
                             # randomGLM:
                             randomGLM_test_predictions = ifelse(split < 5,
                                                          map(randomGLM_test_predictions, standardize_perc_change),
@@ -418,18 +418,18 @@ cryptodata_nested <- mutate(cryptodata_nested,
                                                          NA)),
                             # And holdout:
                             nnet_rsq_holdout = unlist(map2(nnet_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
-                            # Bayesian Ridge Regression - RMSE - Test
-                            bridge_rmse_test = unlist(ifelse(split < 5,
-                                                         map2(bridge_test_predictions, actuals_test, evaluate_preds_rmse),
+                            # Bayesian Regularized Neural Network - RMSE - Test
+                            brnn_rmse_test = unlist(ifelse(split < 5,
+                                                         map2(brnn_test_predictions, actuals_test, evaluate_preds_rmse),
                                                          NA)),
                             # And holdout:
-                            bridge_rmse_holdout = unlist(map2(bridge_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
-                            # Bayesian Ridge Regression - R^2 - Test
-                            bridge_rsq_test = unlist(ifelse(split < 5,
-                                                         map2(bridge_test_predictions, actuals_test, evaluate_preds_rsq),
+                            brnn_rmse_holdout = unlist(map2(brnn_holdout_predictions, actuals_holdout, evaluate_preds_rmse)),
+                            # Bayesian Regularized Neural Network - R^2 - Test
+                            brnn_rsq_test = unlist(ifelse(split < 5,
+                                                         map2(brnn_test_predictions, actuals_test, evaluate_preds_rsq),
                                                          NA)),
                             # And holdout:
-                            bridge_rsq_holdout = unlist(map2(bridge_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
+                            brnn_rsq_holdout = unlist(map2(brnn_holdout_predictions, actuals_holdout, evaluate_preds_rsq)),
                             # randomGLM - RMSE - Test
                             randomGLM_rmse_test = unlist(ifelse(split < 5,
                                                          map2(randomGLM_test_predictions, actuals_test, evaluate_preds_rmse),
@@ -460,7 +460,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 <!-- ```{r} -->
 
-<!-- rmse_scores <- dplyr::select(cryptodata_nested, lm_rmse_test, xgb_rmse_test, bridge_rmse_test, nnet_rmse_test) -->
+<!-- rmse_scores <- dplyr::select(cryptodata_nested, lm_rmse_test, xgb_rmse_test, brnn_rmse_test, nnet_rmse_test) -->
 
 <!-- # Show RMSE scores -->
 
@@ -472,7 +472,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 <!-- ```{r} -->
 
-<!-- rsq_scores <- dplyr::select(cryptodata_nested, lm_rsq, xgb_rsq, bridge_rsq, nnet_rsq) -->
+<!-- rsq_scores <- dplyr::select(cryptodata_nested, lm_rsq, xgb_rsq, brnn_rsq, nnet_rsq) -->
 
 <!-- # Show R^2 scores -->
 
@@ -499,7 +499,7 @@ rmse_test <- mutate(cryptodata_metrics,
                       lm = mean(lm_rmse_test, na.rm = T),
                       xgb = mean(xgb_rmse_test, na.rm = T),
                       nnet = mean(nnet_rmse_test, na.rm = T),
-                      bridge = mean(bridge_rmse_test, na.rm = T),
+                      brnn = mean(brnn_rmse_test, na.rm = T),
                       randomGLM = mean(randomGLM_rmse_test, na.rm = T),
                       pcr = mean(pcr_rmse_test, na.rm = T))
 ```
@@ -527,7 +527,7 @@ rmse_holdout <- mutate(cryptodata_metrics,
                       lm = mean(lm_rmse_holdout, na.rm = T),
                       xgb = mean(xgb_rmse_holdout, na.rm = T),
                       nnet = mean(nnet_rmse_holdout, na.rm = T),
-                      bridge = mean(bridge_rmse_holdout, na.rm = T),
+                      brnn = mean(brnn_rmse_holdout, na.rm = T),
                       randomGLM = mean(randomGLM_rmse_holdout, na.rm = T),
                       pcr = mean(pcr_rmse_holdout, na.rm = T))
 ```
@@ -563,7 +563,7 @@ rsq_test <- mutate(cryptodata_metrics,
                       lm = mean(lm_rsq_test, na.rm = T),
                       xgb = mean(xgb_rsq_test, na.rm = T),
                       nnet = mean(nnet_rsq_test, na.rm = T),
-                      bridge = mean(bridge_rsq_test, na.rm = T),
+                      brnn = mean(brnn_rsq_test, na.rm = T),
                       randomGLM = mean(randomGLM_rsq_test, na.rm = T),
                       pcr = mean(pcr_rsq_test, na.rm = T))
 ```
@@ -591,7 +591,7 @@ rsq_holdout <- mutate(cryptodata_metrics,
                       lm = mean(lm_rsq_holdout, na.rm = T),
                       xgb = mean(xgb_rsq_holdout, na.rm = T),
                       nnet = mean(nnet_rsq_holdout, na.rm = T),
-                      bridge = mean(bridge_rsq_holdout, na.rm = T),
+                      brnn = mean(brnn_rsq_holdout, na.rm = T),
                       randomGLM = mean(randomGLM_rsq_holdout, na.rm = T),
                       pcr = mean(pcr_rsq_holdout, na.rm = T))
 ```
@@ -881,5 +881,3 @@ unnest(cryptodata_nested, c(pcr_holdout_predictions, nnet_holdout_predictions)) 
 
 
 <!-- And finally pin it so it can be read it by RStudio Server process -->
-
-
