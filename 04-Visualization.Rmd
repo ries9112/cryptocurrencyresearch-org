@@ -182,11 +182,11 @@ The [**ggforce**]{style="color: #ae7b11;"} package [@R-ggforce] is a useful tool
 
 ```{r add_ggforce_annotations, error=TRUE}
 crypto_chart +
-        geom_mark_ellipse(aes(filter = price_usd == max(price_usd),
+        geom_mark_ellipse(aes(filter = price_usd == max(price_usd, na.rm=T),
                               label = date_time_utc,
                               description = paste0('Price spike to $', price_usd))) +
         # Now the same to circle the minimum price:
-        geom_mark_ellipse(aes(filter = price_usd == min(price_usd),
+        geom_mark_ellipse(aes(filter = price_usd == min(price_usd, na.rm=T),
                               label = date_time_utc,
                               description = paste0('Price drop to $', price_usd)))
 ```
