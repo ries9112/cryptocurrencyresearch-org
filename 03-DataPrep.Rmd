@@ -2,6 +2,7 @@
 
 Next we will do some data cleaning to make sure our data is in the format we need it to be in. For a gentler introduction to data prep using the [**dplyr**]{style="color: #ae7b11;"} package [@R-dplyr] [consult the high-level version](https://cryptocurrencyresearch.org/high-level/#/data-prep).
 
+
 ## Remove Nulls {#remove-nulls}
 
 First off, we aren't able to do anything at all with a row of data if we don't know ***when*** the data was collected. The specific price doesn't matter if we can't tie it to a timestamp, given by the [**date_time_utc**]{style="color: blue;"} field. 
@@ -15,11 +16,12 @@ nrow1 <- nrow(cryptodata)
 ```{r omit_nulls_datetime}
 cryptodata <- filter(cryptodata, !is.na(date_time_utc))
 ```
-
+ 
 ```{r, include=F}
 nrow2 <- nrow(cryptodata)
 ```
 
+ 
 This step removed `r nrow1-nrow2` rows from the data on the latest run (`r Sys.Date()`). The [**is.na()**]{style="color: green;"} function finds all cases where the [**date_time_utc**]{style="color: blue;"} field has a Null value. The function is preceded by the [**!**]{style="color: blue;"} operator, which tells the [**filter()**]{style="color: green;"} function to exclude these rows from the data.
 
 By the same logic, if we don't know what the price was for any of the rows, the whole row of data is useless and should be removed. But how will we define the price of a cryptocurrency?
@@ -281,7 +283,7 @@ There are several advantages to writing code *the* ***tidy*** *way*, but while s
 
 ## Remove Nulls {#remove-nulls-again}
 
-As a final step before the next section let's double confirm that there are no NA values of [**date_time_utc**]{style="color: blue;"} and [**price_usd**]{style="color: blue;"} since without these two fields there is not much we can do as we need to know when the data was collected and what the price was:
+If we think of the way that we plan on making predictions, we can't actually do anything at all with a row of data if we don't know ***when*** the data was collected, so let's just double confirm that all rows have a value for the [**date_time_utc**]{style="color: blue;"} field by using the [**filter()**]{style="color: green;"} function from the [**dplyr**]{style="color: #ae7b11;"} package to exclude any rows with NA values for the column:
 
 ```{r, include=F}
 nrow1 <- nrow(cryptodata)
@@ -290,16 +292,18 @@ nrow1 <- nrow(cryptodata)
 ```{r omit_nulls_final}
 # Remove all NA values of date_time_utc:
 cryptodata <- filter(cryptodata, !is.na(date_time_utc))
-# Do the same for price_usd
-cryptodata <- filter(cryptodata, !is.na(price_usd))
 ```
+
+<!-- Uncomment code below if visualization section runs into issues on ggforce step circling low and high point correctly -->
+<!-- And now the same thing for the [**price_usd**]{style="color: blue;"} column: -->
+
+<!-- ```{r omit_nulls_price_usd_final} -->
+<!-- cryptodata <- filter(cryptodata, !is.na(price_usd)) -->
+<!-- ``` -->
 
 ```{r, include=F}
 nrow2 <- nrow(cryptodata)
 ```
 
-This step removed `r nrow1-nrow2` rows from the data.
-
-Move on to the [next section](#visualization) ➡️ to learn some amazing tools to visualize data.
-
+This step removed `r nrow1-nrow2` rows from the data. This step mainly helps us avoid issues when programmatically labeling charts in the next section, move on to the [next section](#visualization) ➡️ to learn some amazingly powerful tools to visualize data!
 

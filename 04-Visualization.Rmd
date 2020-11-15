@@ -181,7 +181,7 @@ We will dive deeper into these metrics in [the section where we evaluate the per
 The [**ggforce**]{style="color: #ae7b11;"} package [@R-ggforce] is a useful tool for annotating charts. We can annotate outliers for example:
 
 ```{r add_ggforce_annotations, error=TRUE}
-crypto_chart +
+crypto_chart <- crypto_chart +
         geom_mark_ellipse(aes(filter = price_usd == max(price_usd),
                               label = date_time_utc,
                               description = paste0('Price spike to $', price_usd))) +
