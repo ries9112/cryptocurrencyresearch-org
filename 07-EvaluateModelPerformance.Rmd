@@ -878,7 +878,7 @@ pcr_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
                                   model = 'pcr'), holdout_predictions:pcr_rmse_holdout)
 
 # Now union all data together:
-full_holdout_preds <- gtools::smartbind(lm_holdout_preds, xgb_holdout_preds, nnet_holdout_preds, rf_holdout_preds, pcr_holdout_preds)
+full_holdout_preds <- dplyr::bind_rows(lm_holdout_preds, xgb_holdout_preds, nnet_holdout_preds, rf_holdout_preds, pcr_holdout_preds)
 ```
 
 <!-- And finally pin it so it can be read it by RStudio Server process -->
