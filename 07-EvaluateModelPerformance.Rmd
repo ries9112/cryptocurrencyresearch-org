@@ -70,9 +70,7 @@ This step is particularly tedious, but it is important. As with the rest of this
 
 <!-- [TODO - write better - KEEP GOING 11/14] -->
 
-In order to convert the first prediction made to be a percentage, we need to know the previous price.
-
-Function to add last\_price\_train column and append it to the predictions made so we can calculate the % change of the first element, before later removing the value not associated with the predictions:
+In order to convert the first prediction made to be a percentage, we need to know the previous price, which would be the last observation from the train data. Therefore, let's make a function to add the [**last_price_train**]{style="color: blue;"} column and append it to the predictions made so we can calculate the % change of the first element relative to the last observation in the train data, before later removing the value not associated with the predictions:
 
 ```{r}
 last_train_price <- function(train_data, predictions){
@@ -91,21 +89,20 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 #### Holdout
 
-Do the same for the holdout. For all of holdout need to take last price point of 5th training split.
-
+Do the same but for the holdout now. For the holdout we need to take the last price point of the 5th training split:
 ```{r}
 cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
                                     lm_holdout_predictions = map2(train_data, lm_holdout_predictions, last_train_price))
 ```
 
-Join the holdout data to all rows based on the cryptocurrency symbol alone:
+Now join the holdout data to all rows based on the cryptocurrency symbol alone:
 
 ```{r}
 cryptodata_nested <- left_join(cryptodata_nested, 
-                               dplyr::select(cryptodata_nested_holdout, symbol, lm_holdout_predictions),
+                               select(cryptodata_nested_holdout, symbol, lm_holdout_predictions),
                                by='symbol')
 # Remove unwanted columns
-cryptodata_nested <- dplyr::select(cryptodata_nested, -lm_holdout_predictions.x, -split.y)
+cryptodata_nested <- select(cryptodata_nested, -lm_holdout_predictions.x, -split.y)
 # Rename the columns kept
 cryptodata_nested <- rename(cryptodata_nested, 
                             lm_holdout_predictions = 'lm_holdout_predictions.y',
@@ -116,7 +113,7 @@ cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
 
 ### Convert to Percentage Change
 
-<!-- [TODO - CLEAN UP EXPLANATIONS HERE!] -->
+Now we have everything we need to accurately calculate the percentage change between observations including the first one. Let's make a new function to calculate the percentage change:
 
 ```{r}
 standardize_perc_change <- function(predictions){
@@ -125,8 +122,6 @@ standardize_perc_change <- function(predictions){
   tail(head(results, length(predictions)), length(predictions)-1)
 }
 ```
-
-<!-- [TODO - Show formula? It's (diff(V1, V2)/abs(V1))*100] -->
 
 Overwrite the old predictions with the new predictions adjusted as a percentage now:
 
@@ -141,15 +136,15 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 ### Actuals
 
-Now do the same thing to the actual prices. Let's make a new column called **actuals** containing the real price values (rather than the predicted ones):
+Now do the same thing to the actual prices. Let's make a new column called [**actuals**]{style="color: blue;"} containing the real price values (rather than the predicted ones):
 
 ```{r}
 actuals_create <- function(train_data, test_data){
-  c(tail(train_data$price_usd,1), as.numeric(unlist(dplyr::select(test_data, price_usd))))
+  c(tail(train_data$price_usd,1), as.numeric(unlist(select(test_data, price_usd))))
 }
 ```
 
-Use the new function to create the new column `actuals`:
+Use the new function to create the new column [**actuals**]{style="color: blue;"}:
 
 ```{r}
 cryptodata_nested <- mutate(cryptodata_nested,
@@ -160,8 +155,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 #### Holdout
 
-Again, for the holdout we need the price from the training data of the 5th split
-
+Again, for the holdout we need the price from the training data of the 5th split to perform the first calculation:
 ```{r}
 cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
                                     actuals_holdout = map2(train_data, holdout_data, actuals_create))
@@ -171,10 +165,10 @@ Join the holdout data to all rows based on the cryptocurrency symbol alone:
 
 ```{r}
 cryptodata_nested <- left_join(cryptodata_nested, 
-                               dplyr::select(cryptodata_nested_holdout, symbol, actuals_holdout),
+                               select(cryptodata_nested_holdout, symbol, actuals_holdout),
                                by='symbol')
 # Remove unwanted columns
-cryptodata_nested <- dplyr::select(cryptodata_nested, -split.y)
+cryptodata_nested <- select(cryptodata_nested, -split.y)
 # Rename the columns kept
 cryptodata_nested <- rename(cryptodata_nested, split = 'split.x')
 # Reset the correct grouping structure
@@ -184,7 +178,7 @@ cryptodata_nested <- group_by(cryptodata_nested, symbol, split)
 
 ### Actuals as % Change
 
-Now we can convert the new `actuals` to express the `price_usd` as a % change relative to the previous value using adapting the function from earlier:
+Now we can convert the new [**actuals**]{style="color: blue;"} to express the [**price_usd**]{style="color: blue;"} as a % change relative to the previous value using adapting the function from earlier:
 
 ```{r}
 actuals_perc_change <- function(predictions){
@@ -206,7 +200,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 Now that we standardized the price to show the percentage change relative to the previous period instead of the price in dollars, we can actually compare the summary statistics across all cryptocurrencies and have it be a fair comparison.
 
-Let's get the same statistic as we did at the beginning of this section, but this time on the standardized values:
+Let's get the same statistic as we did at the beginning of this section, but this time on the standardized values. This time to calculate the RMSE error metric let's use the [**rmse()**]{style="color: green;"} function from the [**hydroGOF**]{style="color: #ae7b11;"} package because it allows us to set the [**`na.rm = T`**]{style="color: blue;"} parameter, and otherwise one NA value would return NA for the overall RMSE:
 
 ```{r}
 hydroGOF::rmse(cryptodata_nested$lm_test_predictions[[1]], 
@@ -214,12 +208,10 @@ hydroGOF::rmse(cryptodata_nested$lm_test_predictions[[1]],
                na.rm=T)
 ```
 
-<!-- [TODO - Here add note on using rmse function from hydroGOF package so we can use the na.rm=T argument, would otherwise get NA when a single value is NA. Also explain caveat of that.] -->
-
 
 ### Calculate R\^2
 
-Now we can do the same for the R Squared metric:
+Now we can do the same for the R Squared metric using the same [**postResample()**]{style="color: green;"} function that we used at [the start of this section](#evaluate-model-performance):
 
 ```{r evaluate_rsquared_function}
 evaluate_preds_rsq <- function(predictions, actuals){
@@ -240,13 +232,13 @@ cryptodata_nested <- mutate(cryptodata_nested,
 Look at the results:
 
 ```{r}
-dplyr::select(cryptodata_nested, lm_rsq_test, lm_rsq_holdout)
+select(cryptodata_nested, lm_rsq_test, lm_rsq_holdout)
 ```
 
 
 ### Calculate RMSE {#calculate-rmse-no-NA}
 
-Now make a function to get the RMSE metric for all models:
+Similarly let's make a function to get the RMSE metric for all models:
 
 ```{r evaluate_rmse_function}
 evaluate_preds_rmse <- function(predictions, actuals){
@@ -256,7 +248,7 @@ evaluate_preds_rmse <- function(predictions, actuals){
 }
 ```
 
-Now we can use map2() to use it to get the RMSE metric for both the test data and the holdout:
+Now we can use the [**map2()**]{style="color: green;"} function to use it to get the RMSE metric for both the test data and the holdout:
 
 ```{r add_rmse}
 cryptodata_nested <- mutate(cryptodata_nested,
@@ -268,10 +260,10 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 <!-- [TODO - Add explanation for ifelse() to add rmse based on test or holdout] -->
 
-Look at the results. Wrapping them in `print(n=500)` overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations).
+Look at the results. Wrapping them in [**`print(n=500)`**]{style="color: blue;"} overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations).
 
 ```{r}
-print(dplyr::select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), n=500)
+print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), n=500)
 ```
 
 Out of `r nrow(cryptodata_nested)` groups, `r count(ungroup(filter(cryptodata_nested, lm_rmse_test >= lm_rmse_holdout)))$n` had an equal or lower RMSE score for the holdout than the test set.
@@ -279,11 +271,9 @@ Out of `r nrow(cryptodata_nested)` groups, `r count(ungroup(filter(cryptodata_ne
 
 ## Adjust Prices - All Models
 
-<!-- [TODO - OR IS IT BETTER TO DO ALL AT ONCE ABOVE?] -->
+Let's repeat the same steps that we outlined above for all models.
 
 ### Add Last Price
-
-And now we can do the same for all the other models
 
 ```{r}
 cryptodata_nested <- mutate(cryptodata_nested,
@@ -307,8 +297,6 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 ##### Holdout
 
-(REMEMBER holdout step for all to get price from 5th train split first)
-
 ```{r}
 cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
                                     # XGBoost:
@@ -325,12 +313,12 @@ Join the holdout data to all rows based on the cryptocurrency symbol alone:
 
 ```{r}
 cryptodata_nested <- left_join(cryptodata_nested, 
-                               dplyr::select(cryptodata_nested_holdout, symbol, 
+                               select(cryptodata_nested_holdout, symbol, 
                                       xgb_holdout_predictions, nnet_holdout_predictions, 
                                       rf_holdout_predictions, pcr_holdout_predictions),
                                by='symbol')
 # Remove unwanted columns
-cryptodata_nested <- dplyr::select(cryptodata_nested, -xgb_holdout_predictions.x, 
+cryptodata_nested <- select(cryptodata_nested, -xgb_holdout_predictions.x, 
                             -nnet_holdout_predictions.x,-rf_holdout_predictions.x, 
                             -pcr_holdout_predictions.x, -split.y)
 # Rename the columns kept
@@ -378,6 +366,7 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 ### Add Metrics
 
+Add the RMSE and $R^2$ metrics:
 ```{r add_metrics_rest}
 cryptodata_nested <- mutate(cryptodata_nested,
                             # XGBoost - RMSE - Test
@@ -430,43 +419,25 @@ cryptodata_nested <- mutate(cryptodata_nested,
                             pcr_rsq_holdout = unlist(map2(pcr_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))
 ```
 
-<!-- Now we have RMSE values for every model created for every cryptocurrency and split of the data: -->
-
-<!-- ```{r} -->
-
-<!-- rmse_scores <- dplyr::select(cryptodata_nested, lm_rmse_test, xgb_rmse_test, nnet_rmse_test) -->
-
-<!-- # Show RMSE scores -->
-
-<!-- rmse_scores -->
-
-<!-- ``` -->
-
-<!-- And the R Squared values: -->
-
-<!-- ```{r} -->
-
-<!-- rsq_scores <- dplyr::select(cryptodata_nested, lm_rsq, xgb_rsq, nnet_rsq) -->
-
-<!-- # Show R^2 scores -->
-
-<!-- rsq_scores -->
-
-<!-- ``` -->
-
-## Eval RMSE
-
-<!-- [TODO - Title?] -->
-
-New object without split column `cryptodata_metrics`:
+Now we have RMSE and $R^2$ values for every model created for every cryptocurrency and split of the data:
 
 ```{r}
-cryptodata_metrics <- group_by(dplyr::select(ungroup(cryptodata_nested),-split),symbol)
+select(cryptodata_nested, lm_rmse_test, lm_rsq_test, lm_rmse_holdout, lm_rsq_holdout)
+```
+*Only the results for the linear regression model are shown. There are equivalent columns for the XGBoost, neural network, random forest and PCR models.*
+
+
+## Evaluate Metrics Across Splits
+
+Next, let's evaluate the metrics across all [**splits**]{style="color: blue;"} and keeping moving along with the [model validation plan as was originally outlined](#time-aware-cross-validation). Let's create a new dataset called [**cryptodata_metrics**][**splits**]{style="color: blue;"} that is not grouped by the [**split**]{style="color: blue;"} column and is instead only grouped by the [**symbol**]{style="color: blue;"}:
+
+```{r}
+cryptodata_metrics <- group_by(select(ungroup(cryptodata_nested),-split),symbol)
 ```
 
-### Test
+### Evaluate RMSE Test
 
-Now for each model we will create a new column giving the average RMSE for the 4 cross-validation test splits:
+Now for each model we can create a new column giving the average RMSE for the 4 cross-validation test splits:
 
 ```{r}
 rmse_test <- mutate(cryptodata_metrics,
@@ -477,15 +448,15 @@ rmse_test <- mutate(cryptodata_metrics,
                       pcr = mean(pcr_rmse_test, na.rm = T))
 ```
 
-Now we can use the `gather()` function to summarize the columns as rows:
+Now we can use the [**gather()**]{style="color: green;"} function to summarize the columns as rows:
 
 ```{r gather_rmse}
-rmse_test <- unique(gather(dplyr::select(rmse_test, lm:pcr), 'model', 'rmse', -symbol))
+rmse_test <- unique(gather(select(rmse_test, lm:pcr), 'model', 'rmse', -symbol))
 # Show results
 rmse_test
 ```
 
-Now tag the results as having been for the test set
+Now tag the results as having been for the test set:
 
 ```{r}
 rmse_test$eval_set <- 'test'
@@ -493,7 +464,7 @@ rmse_test$eval_set <- 'test'
 
 ### Holdout
 
-Do the same for the holdout set
+Now repeat the same process for the holdout set:
 
 ```{r}
 rmse_holdout <- mutate(cryptodata_metrics,
@@ -504,15 +475,15 @@ rmse_holdout <- mutate(cryptodata_metrics,
                       pcr = mean(pcr_rmse_holdout, na.rm = T))
 ```
 
-Now we can use the `gather()` function to summarize the columns as rows:
+Again, use the [**gather()**]{style="color: green;"} function to summarize the columns as rows:
 
 ```{r gather_rmse_holdout}
-rmse_holdout <- unique(gather(dplyr::select(rmse_holdout, lm:pcr), 'model', 'rmse', -symbol))
+rmse_holdout <- unique(gather(select(rmse_holdout, lm:pcr), 'model', 'rmse', -symbol))
 # Show results
 rmse_holdout
 ```
 
-Now tag the results as having been for the holdout set
+Now tag the results as having been for the holdout set:
 
 ```{r}
 rmse_holdout$eval_set <- 'holdout'
@@ -520,15 +491,18 @@ rmse_holdout$eval_set <- 'holdout'
 
 ### Union Results
 
+Now we can [**union()**]{style="color: green;"} the results to stack the rows from the two datasets on top of each other:
 ```{r}
 rmse_scores <- union(rmse_test, rmse_holdout)
 ```
 
-## Eval R^2
+## Evaluate R^2
+
+Now let's repeat the same steps we took for the RMSE metrics above for the $R^2$ metric as well.
 
 ### Test
 
-For each model we will create a new column giving the average R\^2 for the 4 cross-validation test splits:
+For each model again we will create a new column giving the average $R^2$ for the 4 cross-validation test splits:
 
 ```{r}
 rsq_test <- mutate(cryptodata_metrics,
@@ -539,10 +513,10 @@ rsq_test <- mutate(cryptodata_metrics,
                       pcr = mean(pcr_rsq_test, na.rm = T))
 ```
 
-Now we can use the `gather()` function to summarize the columns as rows:
+Now we can use the [**gather()**]{style="color: green;"} function to summarize the columns as rows:
 
 ```{r gather_rsq}
-rsq_test <- unique(gather(dplyr::select(rsq_test, lm:pcr), 'model', 'rsq', -symbol))
+rsq_test <- unique(gather(select(rsq_test, lm:pcr), 'model', 'rsq', -symbol))
 # Show results
 rsq_test
 ```
@@ -555,7 +529,7 @@ rsq_test$eval_set <- 'test'
 
 ### Holdout
 
-Do the same for the holdout set
+Do the same and calculate the averages for the holdout sets:
 
 ```{r}
 rsq_holdout <- mutate(cryptodata_metrics,
@@ -566,15 +540,15 @@ rsq_holdout <- mutate(cryptodata_metrics,
                       pcr = mean(pcr_rsq_holdout, na.rm = T))
 ```
 
-Now we can use the `gather()` function to summarize the columns as rows:
+Now we can use the [**gather()**]{style="color: green;"} function to summarize the columns as rows:
 
 ```{r gather_rsq_holdout}
-rsq_holdout <- unique(gather(dplyr::select(rsq_holdout, lm:pcr), 'model', 'rsq', -symbol))
+rsq_holdout <- unique(gather(select(rsq_holdout, lm:pcr), 'model', 'rsq', -symbol))
 # Show results
 rsq_holdout
 ```
 
-Now tag the results as having been for the holdout set
+Now tag the results as having been for the holdout set:
 
 ```{r}
 rsq_holdout$eval_set <- 'holdout'
@@ -610,9 +584,11 @@ Now we can take the same tools we learned in the [Visualization section from ear
 
 ### Both
 
+Now we have everything we need to use the two metrics to compare the results.
+
 #### Join Datasets
 
-First join the two
+First join the two objects [**rmse_scores**]{style="color: blue;"} and [**rsq_scores**]{style="color: blue;"} into the new object [**plot_scores]{style="color: blue;"}:
 
 ```{r}
 plot_scores <- merge(rmse_scores, rsq_scores)
@@ -620,7 +596,7 @@ plot_scores <- merge(rmse_scores, rsq_scores)
 
 #### Plot Results
 
-<!-- [TODO - ADJUST THESE SOME MORE] -->
+Now we can plot the results on a chart:
 
 ```{r}
 ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
@@ -628,7 +604,7 @@ ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
   ylim(c(0,10))
 ```
 
-Running the same code wrapped in the `ggplotly()` function from the `plotly` package [@R-plotly] we can make the chart interactive. Try hovering over the points on the chart with your mouse.
+Running the same code wrapped in the [**ggplotly()**]{style="color: green;"} function from the [**plotly**]{style="color: #ae7b11;"} package (as we [have already done](#plotly)) we can make the chart interactive. Try hovering over the points on the chart with your mouse.
 
 ```{r}
 ggplotly(ggplot(plot_scores, aes(x=rsq, y=rmse, color = model, symbol = symbol)) +
@@ -637,11 +613,11 @@ ggplotly(ggplot(plot_scores, aes(x=rsq, y=rmse, color = model, symbol = symbol))
          tooltip = c("model", "symbol", "rmse", "rsq"))
 ```
 
-**The additional `tooltip` argument was passed to `ggpltoly()` to specify the label when hovering over the individual points**.
+**The additional [**tooltip**]{style="color: blue;"} argument was passed to [**ggpltoly()**]{style="color: green;"} to specify the label when hovering over the individual points**.
 
 ### Results by the Cryptocurrency
 
-We can use the `facet_wrap()` function from `ggplot2` [@R-ggplot2] to create an individual chart for each cryptocurrency:
+We can use the [**facet_wrap()**]{style="color: green;"} function from [**ggplot2**]{style="color: #ae7b11;"} to create an individual chart for each cryptocurrency:
 
 ```{r}
 ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
@@ -651,7 +627,7 @@ ggplot(plot_scores, aes(x=rsq, y=rmse, color = model)) +
   facet_wrap(~symbol)
 ```
 
-Every 12 hours once this document reaches this point, the results are saved to GitHub using the `pins` package [@R-pins], and a separate script creates the complete dataset over time. You won't be able to run the code shown below (nor do you have a reason to):
+Every 12 hours once this document reaches this point, the results are saved to GitHub using the [**pins**]{style="color: #ae7b11;"} package (which we [used to read in the data at the start](#pull-the-data)), and a separate script running on a different server creates the complete dataset in our database over time. You won't be able to run the code shown below (nor do you have a reason to):
 
 ```{r upload_results_pin, error=TRUE}
 # register board
@@ -846,33 +822,33 @@ cryptodata_nested <- mutate(cryptodata_nested,
 lm_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
                                                 lm_holdout_predictions = map2(holdout_data, lm_holdout_predictions,
                                                                               record_holdout_preds_cbind)), lm_holdout_predictions),
-                                  model = 'lm'), holdout_predictions:lm_rmse_holdout)
+                                  model = 'lm'), holdout_predictions:target_price_24h, -num)
 # xgb:
 xgb_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
                                                 xgb_holdout_predictions = map2(holdout_data, xgb_holdout_predictions,
                                                                               record_holdout_preds_cbind)), xgb_holdout_predictions),
-                                  model = 'xgb'), holdout_predictions:xgb_rmse_holdout)
+                                  model = 'xgb'), holdout_predictions:target_price_24h, -num)
 # nnet:
 nnet_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
                                                 nnet_holdout_predictions = map2(holdout_data, nnet_holdout_predictions,
                                                                               record_holdout_preds_cbind)), nnet_holdout_predictions),
-                                  model = 'nnet'), holdout_predictions:nnet_rmse_holdout)
+                                  model = 'nnet'), holdout_predictions:target_price_24h, -num)
 # random forest:
 rf_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
                                                 rf_holdout_predictions = map2(holdout_data, rf_holdout_predictions,
                                                                               record_holdout_preds_cbind)), rf_holdout_predictions),
-                                  model = 'rf'), holdout_predictions:rf_rmse_holdout)
+                                  model = 'rf'), holdout_predictions:target_price_24h, -num)
 # PCR:
 pcr_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
                                                 pcr_holdout_predictions = map2(holdout_data, pcr_holdout_predictions,
                                                                               record_holdout_preds_cbind)), pcr_holdout_predictions),
-                                  model = 'pcr'), holdout_predictions:pcr_rmse_holdout)
+                                  model = 'pcr'), holdout_predictions:target_price_24h, -num)
 
 # Now union all data together:
 full_holdout_preds <- dplyr::bind_rows(lm_holdout_preds, xgb_holdout_preds, nnet_holdout_preds, rf_holdout_preds, pcr_holdout_preds)
 
 # Only Keep data where we don't yet know what the price was 24 hours later:
-write_holdout_preds <- filter(full_holdout_preds, !is.na(target_price_24h))
+write_holdout_preds <- filter(full_holdout_preds, is.na(target_price_24h))
 
 # Before overwriting pins data, pull it so I can add new targets
 old_holdout_preds_pins <- pin_get('crypto_tutorial_holdout_predictions_old')
@@ -889,5 +865,5 @@ pin(write_holdout_preds, board='github', name='crypto_tutorial_holdout_predictio
 # new data pull
 prices_predictions <- left_join(write_holdout_preds, old_holdout_preds_pins)
 # pin data with new info on prices
-pin(write_holdout_preds, board='github', name='crypto_tutorial_holdout_predictions')
+pin(write_holdout_preds, board='github', name='crypto_tutorial_holdout_predictions_n')
 ```
