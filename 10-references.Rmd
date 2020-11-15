@@ -1,10 +1,15 @@
-# References Test
+# References
 
 ## Document Format
 
 The **bookdown** package [@R-bookdown] was used to produce this document, which was built on top of **R Markdown** [@R-rmarkdown] and **knitr** [@R-knitr].
 
-<!-- [TODO - ADJUST TO HAVE ONE FOR EACH ONE] -->
+- https://bookdown.org/
+
+- https://rmarkdown.rstudio.com/
+
+- https://yihui.org/knitr/
+
 
 ```{r write_bib_packages, message=FALSE, warning=FALSE}
 knitr::write_bib(c(.packages()), "packages.bib")
@@ -14,19 +19,22 @@ knitr::write_bib(c(.packages()), "packages.bib")
 
 Thanks to [Ben Marwick](https://github.com/benmarwick) for outlining how to use the [Open Review Toolkit](https://www.openreviewtoolkit.org/) in bookdown to collect feedback on the document: https://benmarwick.github.io/bookdown-ort/mods.html#open-review-block
 
-## Visualization Section
+## Visualization
 
 - https://www.rayshader.com/
 
-- https://github.com/yutannihilation/gghighlight
+- https://ggplot2.tidyverse.org/
 
-    - https://github.com/njtierney/rstudioconf20/blob/master/slides/index.Rmd
+- https://www.data-imaginist.com/2019/the-ggforce-awakens-again/
 
-## Time Series Section
 
-- https://stackoverflow.com/questions/42820696/using-prophet-package-to-predict-by-group-in-dataframe-in-r 
+## Predictive Modeling
 
-- ... add rest here
+- https://topepo.github.io/caret/available-models.html
+
+### Time Series
+
+- https://tidyverts.org/
 
 ## Evaluate Model Performance
 
