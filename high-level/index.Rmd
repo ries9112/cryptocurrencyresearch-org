@@ -193,7 +193,7 @@ Move on to the next section by pressing the right arrow key on your keyboard `r 
 
 As code comes up and is explained, we recommend that you run it yourself on your computer as well. You can run the code by following the installation instructions as outlined in the steps below.
 
-**Alternatively, you can** <a href="https://mybinder.org/v2/gh/ries9112/high-level-reprex-jupyter.git/master" target="_blank">**click here to run the code in the cloud without having to worry about installing anything** </a>.
+**Alternatively, you can** <a href="https://mybinder.org/v2/gh/ries9112/high-level-reprex-jupyter/c48ab7fdf606eee68b30b27c2ed5be01ec5fc19f?filepath=high-level_jupyter.ipynb" target="_blank">**click here to run the code in the cloud without having to worry about installing anything** </a>.
 
 <!-- If you are familiar with the [RStudio](https://rstudio.com/) interface, you can [**click here to run the code in the cloud and in RStudio**](https://mybinder.org/v2/gh/ries9112/high-level-reprex-jupyter.git/master?urlpath=rstudio/master) -->
 

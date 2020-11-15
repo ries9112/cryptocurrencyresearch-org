@@ -6,7 +6,7 @@ You can also follow along with the tutorial without running the individual steps
 
 ## Option 1 - Run in the Cloud {#run-in-the-cloud}
 
-If you do not currently have R and RStudio installed on your computer, you can run all of the code from your web browser one step at a time here: <a href="https://mybinder.org/v2/gh/ries9112/cryptocurrencyresearch-org/HEAD?filepath=Tutorial-Full.ipynb" target="_blank">**this mobile friendly link**</a>.
+If you do not currently have R and RStudio installed on your computer, you can run all of the code from your web browser one step at a time here: <a href="https://mybinder.org/v2/gh/ries9112/cryptocurrencyresearch-org/063040395d07582907efdb49512a42f473da232a?filepath=Tutorial-Full.ipynb" target="_blank">**this mobile friendly link**</a>.
 
 This can take up to 30 seconds to load, and once it has you should see a page that looks like this:
 
@@ -85,7 +85,7 @@ p_load('pins', 'skimr', 'DT', 'httr', 'jsonlite', # Data Exploration
 ```
 ***It is normal for this step to take a long time, as it will install every package you will need to follow along with the rest of the tutorial.*** The next time you run this command it would be much faster because it would skip installing the already installed packages.
 
-Running **p\_load()** is equivalent to running [**install.packages()**]{style="color: green;"} on each of the packages listed **(but only when they are not already installed on your computer)**, and then running [library()]{style="color: green;"} for each package in quotes separated by commas to import the functionality from the package into the current R session. **Both commands are wrapped inside the single function call to** [**p\_load()**]{style="color: green;"}. We could run each command individually using base R and create our own logic to only install packages not currently installed, but we are better off using a package that has already been developed and scrutinized by many expert programmers; the same goes for complex statistical models, we don't need to create things from scratch if we understand how to properly use tools developed by the open source community. Open source tools have become particularly good in recent years and can be used for any kind of work, including commercial work, most large corporations have started using open source tools available through R and Python.
+Running **p\_load()** is equivalent to running [**install.packages()**]{style="color: green;"} on each of the packages listed **(but only when they are not already installed on your computer)**, and then running [**library()**]{style="color: green;"} for each package in quotes separated by commas to import the functionality from the package into the current R session. **Both commands are wrapped inside the single function call to** [**p\_load()**]{style="color: green;"}. We could run each command individually using base R and create our own logic to only install packages not currently installed, but we are better off using a package that has already been developed and scrutinized by many expert programmers; the same goes for complex statistical models, we don't need to create things from scratch if we understand how to properly use tools developed by the open source community. Open source tools have become particularly good in recent years and can be used for any kind of work, including commercial work, most large corporations have started using open source tools available through R and Python.
 
 Nice work! Now you have everything you need to [follow along with this example](#overview) ➡️.
 
