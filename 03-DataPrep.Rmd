@@ -283,7 +283,7 @@ There are several advantages to writing code *the* ***tidy*** *way*, but while s
 
 ## Remove Nulls {#remove-nulls-again}
 
-If we think of the way that we plan on making predictions, we can't actually do anything at all with a row of data if we don't know ***when*** the data was collected, so let's just double confirm that all rows have a value for the [**date_time_utc**]{style="color: blue;"} field by using the [**filter()**]{style="color: green;"} function from the [**dplyr**]{style="color: #ae7b11;"} package to exclude any rows with NA values for the column:
+We can't do anything with a row of data if we don't know ***when*** the data was collected, so let's just double confirm that all rows have a value for the [**date_time_utc**]{style="color: blue;"} field by using the [**filter()**]{style="color: green;"} function from the [**dplyr**]{style="color: #ae7b11;"} package to exclude any rows with NA values for the column:
 
 ```{r, include=F}
 nrow1 <- nrow(cryptodata)
