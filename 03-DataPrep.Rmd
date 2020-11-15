@@ -278,7 +278,27 @@ cryptodata %>%
 
 There are several advantages to writing code *the* ***tidy*** *way*, but while some love it others hate it, so we won't force anyone to have to understand how the **%>%** operator works and we have stayed away from its use for the rest of the code shown, but we do encourage the use of this tool: https://magrittr.tidyverse.org/reference/pipe.html
 
-</br>
+
+## Remove Nulls {#remove-nulls-again}
+
+As a final step before the next section let's double confirm that there are no NA values of [**date_time_utc**]{style="color: blue;"} and [**price_usd**]{style="color: blue;"} since without these two fields there is not much we can do as we need to know when the data was collected and what the price was:
+
+```{r, include=F}
+nrow1 <- nrow(cryptodata)
+```
+
+```{r omit_nulls_final}
+# Remove all NA values of date_time_utc:
+cryptodata <- filter(cryptodata, !is.na(date_time_utc))
+# Do the same for price_usd
+cryptodata <- filter(cryptodata, !is.na(price_usd))
+```
+
+```{r, include=F}
+nrow2 <- nrow(cryptodata)
+```
+
+This step removed `r nrow1-nrow2` rows from the data.
 
 Move on to the [next section](#visualization) ➡️ to learn some amazing tools to visualize data.
 
