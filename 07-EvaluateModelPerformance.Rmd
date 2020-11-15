@@ -54,76 +54,6 @@ Before we can draw these comparisons however, we will need to "standardize" the 
 <!-- TODO: If for holdout a cryptocurrency averaged less than 1% price movement for the holdout it's not volatile enough for us for it to be relevant, for example if a cryptocurrency is a stablecoin -->
 
 
-
-<!-- HIDDEN: Add new pin with actual predictions from holdout for true comparisons! -->
-```{r record_holdout_predictions, include=F, error=T}
-record_holdout_preds_cbind <- function(holdout_data, holdout_predictions){
-  left_join(mutate(as.data.frame(holdout_predictions), num = row_number()), 
-            mutate(cryptodata_nested$holdout_data[[1]], num = row_number()))
-}
-
-# Use new function
-cryptodata_nested <- mutate(cryptodata_nested,
-                            lm_holdout_predictions = map2(holdout_data, lm_holdout_predictions, record_holdout_preds_cbind),
-                            xgb_holdout_predictions = map2(holdout_data, xgb_holdout_predictions, record_holdout_preds_cbind),
-                            nnet_holdout_predictions = map2(holdout_data, nnet_holdout_predictions, record_holdout_preds_cbind),
-                            rf_holdout_predictions = map2(holdout_data, rf_holdout_predictions, record_holdout_preds_cbind),
-                            pcr_holdout_predictions = map2(holdout_data, pcr_holdout_predictions, record_holdout_preds_cbind))
-
-# UNNEST the data:
-
-# lm:
-lm_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
-                                                lm_holdout_predictions = map2(holdout_data, lm_holdout_predictions,
-                                                                              record_holdout_preds_cbind)), lm_holdout_predictions),
-                                  model = 'lm'), holdout_predictions:lm_rmse_holdout)
-# xgb:
-xgb_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
-                                                xgb_holdout_predictions = map2(holdout_data, xgb_holdout_predictions,
-                                                                              record_holdout_preds_cbind)), xgb_holdout_predictions),
-                                  model = 'xgb'), holdout_predictions:xgb_rmse_holdout)
-# nnet:
-nnet_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
-                                                nnet_holdout_predictions = map2(holdout_data, nnet_holdout_predictions,
-                                                                              record_holdout_preds_cbind)), nnet_holdout_predictions),
-                                  model = 'nnet'), holdout_predictions:nnet_rmse_holdout)
-# random forest:
-rf_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
-                                                rf_holdout_predictions = map2(holdout_data, rf_holdout_predictions,
-                                                                              record_holdout_preds_cbind)), rf_holdout_predictions),
-                                  model = 'rf'), holdout_predictions:rf_rmse_holdout)
-# PCR:
-pcr_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
-                                                pcr_holdout_predictions = map2(holdout_data, pcr_holdout_predictions,
-                                                                              record_holdout_preds_cbind)), pcr_holdout_predictions),
-                                  model = 'pcr'), holdout_predictions:pcr_rmse_holdout)
-
-# Now union all data together:
-full_holdout_preds <- dplyr::bind_rows(lm_holdout_preds, xgb_holdout_preds, nnet_holdout_preds, rf_holdout_preds, pcr_holdout_preds)
-
-# Only Keep data where we don't yet know what the price was 24 hours later:
-write_holdout_preds <- filter(full_holdout_preds, !is.na(target_price_24h))
-
-# Before overwriting pins data, pull it so I can add new targets
-old_holdout_preds_pins <- pin_get('crypto_tutorial_holdout_predictions_old')
-
-# PIN NEW DATA so it can be read by RStudio Server process
-
-# register board
-board_register("github", repo = "predictcrypto/pins", token=pins_key)
-# Add current date time
-write_holdout_preds$last_refreshed <- Sys.time()
-# pin data
-pin(write_holdout_preds, board='github', name='crypto_tutorial_holdout_predictions_old')
-
-# new data pull
-prices_predictions <- left_join(write_holdout_preds, old_holdout_preds_pins)
-# pin data with new info on prices
-pin(write_holdout_preds, board='github', name='crypto_tutorial_holdout_predictions')
-```
-
-
-
 ## Data Prep - Adjust Prices
 
 <!-- [TODO - add note on first doing lm only?] -->
@@ -894,3 +824,70 @@ ggplot(accuracy_over_time, aes(x = date_utc, y = rsq, group = 1)) +
 
 
 <!-- [TODO - HERE unnest data for holdout predictions and write the data to pins! From there pick up using RStudio Server script] -->
+
+<!-- HIDDEN: Add new pin with actual predictions from holdout for true comparisons! -->
+```{r record_holdout_predictions, include=F, error=T}
+record_holdout_preds_cbind <- function(holdout_data, holdout_predictions){
+  left_join(mutate(as.data.frame(holdout_predictions), num = row_number()), 
+            mutate(cryptodata_nested$holdout_data[[1]], num = row_number()))
+}
+
+# Use new function
+cryptodata_nested <- mutate(cryptodata_nested,
+                            lm_holdout_predictions = map2(holdout_data, lm_holdout_predictions, record_holdout_preds_cbind),
+                            xgb_holdout_predictions = map2(holdout_data, xgb_holdout_predictions, record_holdout_preds_cbind),
+                            nnet_holdout_predictions = map2(holdout_data, nnet_holdout_predictions, record_holdout_preds_cbind),
+                            rf_holdout_predictions = map2(holdout_data, rf_holdout_predictions, record_holdout_preds_cbind),
+                            pcr_holdout_predictions = map2(holdout_data, pcr_holdout_predictions, record_holdout_preds_cbind))
+
+# UNNEST the data:
+
+# lm:
+lm_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
+                                                lm_holdout_predictions = map2(holdout_data, lm_holdout_predictions,
+                                                                              record_holdout_preds_cbind)), lm_holdout_predictions),
+                                  model = 'lm'), holdout_predictions:lm_rmse_holdout)
+# xgb:
+xgb_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
+                                                xgb_holdout_predictions = map2(holdout_data, xgb_holdout_predictions,
+                                                                              record_holdout_preds_cbind)), xgb_holdout_predictions),
+                                  model = 'xgb'), holdout_predictions:xgb_rmse_holdout)
+# nnet:
+nnet_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
+                                                nnet_holdout_predictions = map2(holdout_data, nnet_holdout_predictions,
+                                                                              record_holdout_preds_cbind)), nnet_holdout_predictions),
+                                  model = 'nnet'), holdout_predictions:nnet_rmse_holdout)
+# random forest:
+rf_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
+                                                rf_holdout_predictions = map2(holdout_data, rf_holdout_predictions,
+                                                                              record_holdout_preds_cbind)), rf_holdout_predictions),
+                                  model = 'rf'), holdout_predictions:rf_rmse_holdout)
+# PCR:
+pcr_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
+                                                pcr_holdout_predictions = map2(holdout_data, pcr_holdout_predictions,
+                                                                              record_holdout_preds_cbind)), pcr_holdout_predictions),
+                                  model = 'pcr'), holdout_predictions:pcr_rmse_holdout)
+
+# Now union all data together:
+full_holdout_preds <- dplyr::bind_rows(lm_holdout_preds, xgb_holdout_preds, nnet_holdout_preds, rf_holdout_preds, pcr_holdout_preds)
+
+# Only Keep data where we don't yet know what the price was 24 hours later:
+write_holdout_preds <- filter(full_holdout_preds, !is.na(target_price_24h))
+
+# Before overwriting pins data, pull it so I can add new targets
+old_holdout_preds_pins <- pin_get('crypto_tutorial_holdout_predictions_old')
+
+# PIN NEW DATA so it can be read by RStudio Server process
+
+# register board
+board_register("github", repo = "predictcrypto/pins", token=pins_key)
+# Add current date time
+write_holdout_preds$last_refreshed <- Sys.time()
+# pin data
+pin(write_holdout_preds, board='github', name='crypto_tutorial_holdout_predictions_old')
+
+# new data pull
+prices_predictions <- left_join(write_holdout_preds, old_holdout_preds_pins)
+# pin data with new info on prices
+pin(write_holdout_preds, board='github', name='crypto_tutorial_holdout_predictions')
+```
