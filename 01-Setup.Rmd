@@ -6,7 +6,7 @@ You can also follow along with the tutorial without running the individual steps
 
 ## Option 1 - Run in the Cloud {#run-in-the-cloud}
 
-If you do not currently have R and RStudio installed on your computer, you can run all of the code from your web browser one step at a time here: <a href="https://mybinder.org/v2/gh/ries9112/cryptocurrencyresearch-org/063040395d07582907efdb49512a42f473da232a?filepath=Tutorial-Full.ipynb" target="_blank">**this mobile friendly link**</a>.
+If you do not currently have R and RStudio installed on your computer, you can run all of the code from your web browser one step at a time here: <a href="https://mybinder.org/v2/gh/ries9112/high-level-reprex-jupyter/9c4602e3288f9ee542f7d4b4d39ebba400f37006?filepath=Tutorial-Full-POST.ipynb" target="_blank">**this mobile friendly link**</a>.
 
 This can take up to 30 seconds to load, and once it has you should see a page that looks like this:
 
