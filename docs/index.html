@@ -203,6 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.3" data-path="data-prep.html"><a href="data-prep.html#calculate-target-1"><i class="fa fa-check"></i><b>4.4.3</b> Calculate Target</a></li>
 <li class="chapter" data-level="4.4.4" data-path="data-prep.html"><a href="data-prep.html#calculate-lagged-prices"><i class="fa fa-check"></i><b>4.4.4</b> Calculate Lagged Prices</a></li>
 </ul></li>
+<li class="chapter" data-level="4.5" data-path="data-prep.html"><a href="data-prep.html#remove-nulls-again"><i class="fa fa-check"></i><b>4.5</b> Remove Nulls</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization 📉</a><ul>
 <li class="chapter" data-level="5.1" data-path="visualization.html"><a href="visualization.html#basics---ggplot2"><i class="fa fa-check"></i><b>5.1</b> Basics - ggplot2</a></li>
@@ -295,15 +296,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="considerations.html"><a href="considerations.html#session-information"><i class="fa fa-check"></i><b>9.2</b> Session Information</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>10</b> Archive</a><ul>
-<li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#may-2020"><i class="fa fa-check"></i><b>10.1</b> May 2020</a></li>
+<li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#november-2020"><i class="fa fa-check"></i><b>10.1</b> November 2020</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="references-test.html"><a href="references-test.html"><i class="fa fa-check"></i><b>11</b> References Test</a><ul>
-<li class="chapter" data-level="11.1" data-path="references-test.html"><a href="references-test.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
-<li class="chapter" data-level="11.2" data-path="references-test.html"><a href="references-test.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
-<li class="chapter" data-level="11.3" data-path="references-test.html"><a href="references-test.html#visualization-section"><i class="fa fa-check"></i><b>11.3</b> Visualization Section</a></li>
-<li class="chapter" data-level="11.4" data-path="references-test.html"><a href="references-test.html#time-series-section"><i class="fa fa-check"></i><b>11.4</b> Time Series Section</a></li>
-<li class="chapter" data-level="11.5" data-path="references-test.html"><a href="references-test.html#evaluate-model-performance-1"><i class="fa fa-check"></i><b>11.5</b> Evaluate Model Performance</a></li>
-<li class="chapter" data-level="11.6" data-path="references-test.html"><a href="references-test.html#r-packages-used"><i class="fa fa-check"></i><b>11.6</b> R Packages Used</a></li>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a><ul>
+<li class="chapter" data-level="11.1" data-path="references.html"><a href="references.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
+<li class="chapter" data-level="11.2" data-path="references.html"><a href="references.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
+<li class="chapter" data-level="11.3" data-path="references.html"><a href="references.html#visualization-1"><i class="fa fa-check"></i><b>11.3</b> Visualization</a></li>
+<li class="chapter" data-level="11.4" data-path="references.html"><a href="references.html#predictive-modeling-1"><i class="fa fa-check"></i><b>11.4</b> Predictive Modeling</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="references.html"><a href="references.html#time-series"><i class="fa fa-check"></i><b>11.4.1</b> Time Series</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="references.html"><a href="references.html#evaluate-model-performance-1"><i class="fa fa-check"></i><b>11.5</b> Evaluate Model Performance</a></li>
+<li class="chapter" data-level="11.6" data-path="references.html"><a href="references.html#r-packages-used"><i class="fa fa-check"></i><b>11.6</b> R Packages Used</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="blank"><img src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" width="80"></a></li>
@@ -328,18 +331,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Cryptocurrency Research</h1>
-<p class="date"><em>Last Updated:<br/> 2020-11-15 14:21:51</em></p>
+<p class="date"><em>Last Updated:<br/> 2020-11-16 02:25:10</em></p>
 </div>
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">Section - 1</span> Introduction</h1>
 <p>Welcome to this programming tutorial on machine learning!</p>
-<p>In this tutorial we will use the latest data from the cryptocurrency markets to provide a hands-on and complete example that anyone can follow along with.</p>
+<p>In this tutorial we will use live data from the cryptocurrency markets to provide a hands-on and complete example of time-series machine learning for everyone.</p>
 <div id="what-will-i-learn" class="section level2">
 <h2><span class="header-section-number">1.1</span> What will I learn?</h2>
 <ul>
-<li><p>You will learn about the value of “reproducible” research.</p></li>
-<li><p>In this tutorial you will primarily learn about tools for the R programming language developed by <a href="https://rstudio.com/">RStudio</a> and more specifically the <a href="https://www.tidyverse.org/"><code>tidyverse</code></a>. If you are not familiar with these open source products, don’t worry. We’ll introduce these throughout the tutorial as needed.</p></li>
 <li><p>The focus of the tutorial is on supervised machine learning, a process for building models that can predict future events, such as cryptocurrency prices. You will learn how to use the <a href="https://topepo.github.io/caret/index.html"><code>caret</code></a> package to make many different predictive models, and tools to evaluate their performance.</p></li>
+<li><p>In this tutorial you will primarily learn about tools for the R programming language developed by <a href="https://rstudio.com/">RStudio</a> and more specifically the <a href="https://www.tidyverse.org/"><code>tidyverse</code></a>. If you are not familiar with these open source products, don’t worry. We’ll introduce these throughout the tutorial as needed.</p></li>
 <li><p>Before we can make the models themselves, we will need to “clean” the data. You will learn how to perform “group by” operations on your data using the <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a> package and to clean and modify grouped data.</p></li>
 </ul>
 <!-- -   You will be exposed to some useful data pre-processing R packages. -->
@@ -349,7 +351,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <!-- - [TODO - Add note on cross validation] -->
 <ul>
-<li>You will also learn a little about cryptocurrencies themselves, but <strong>this is not a tutorial centered around trading or blockchain technology</strong>.</li>
+<li><p>You will learn about the value of “reproducible” research.</p></li>
+<li><p>You will also learn a little about cryptocurrencies themselves, but <strong>this is not a tutorial centered around trading or blockchain technology</strong>.</p></li>
 </ul>
 </div>
 <div id="before-getting-started" class="section level2">
@@ -438,7 +441,7 @@ When following along with the high-level tutorial embedded above, the results wi
 <p>In the <a href="setup.html#setup">next section</a> we will talk more about the GitHub Repository for this tutorial, for now you can check on the latest run history for this document, which is expected to update every 12 hours every day: <a href="https://github.com/ries9112/cryptocurrencyresearch-org/actions" class="uri">https://github.com/ries9112/cryptocurrencyresearch-org/actions</a></p>
 <!-- If you are seeing ✅ associated with the most recent runs at the link above, that means you are looking at a version that refreshed in the last 12 hours. If you are seeing red ❌ on the latest runs, you may be looking at an older analysis, but that should not be the case, check the timestamp at the top of this document to be sure. -->
 <p>If you are running into problems using the code or notice any problems, please let us know by creating an <strong><em>issue</em></strong> on the GitHub repository: <a href="https://github.com/ries9112/cryptocurrencyresearch-org/issues" class="uri">https://github.com/ries9112/cryptocurrencyresearch-org/issues</a></p>
-<p>Go to the <a href="setup.html#setup">next section</a> for instruction on getting setup to follow along with the code run in the tutorial. You can run every step either in the cloud on your web browser, or in your own R session. You can even make a copy of the GitHub Repository on your computer and run this “book” on the latest data (updated hourly), and make changes wherever you would like. All explained in the next section ➡️</p>
+<p>Go to the <a href="setup.html#setup">next section</a> for instructions on getting setup to follow along with the code run in the tutorial. You can run every step either in the cloud on your web browser, or in your own R session. You can even make a copy of the GitHub Repository on your computer and run this “book” on the latest data (updated hourly), and make changes wherever you would like. All explained in the next section ➡️</p>
 </div>
 </div>
 </div>
@@ -449,7 +452,7 @@ When following along with the high-level tutorial embedded above, the results wi
 This tutorial is made available for learning and educational purposes only and the information to follow does not constitute trading advice in any way shape or form. We avoid giving any advice when it comes to trading strategies, as this is a very complex ecosystem that is out of the scope of this tutorial; we make no attempt in this regard, and if this, rather than data science, is your interest, your time would be better spent following a different tutorial that aims to answer those questions.
 </div>
 
-<p>It should also be noted that this tutorial has nothing to do with trading itself, and that there is a difference between predicting crypotcurrency prices and creating an effective trading strategy. <a href="considerations.html#considerations">See this later section for more details on why the results shown in this document mean nothing in terms of the effectiveness of a trading strategy</a>.</p>
+<p>It should also be noted that this tutorial has nothing to do with trading itself, and that there is a difference between predicting crypotcurrency prices and creating an effective trading strategy. <a href="considerations.html#considerations"><strong>See this later section for more details on why the results shown in this document mean nothing in terms of the effectiveness of a trading strategy</strong></a>.</p>
 <p>In this document we aimed to predict the change in cryptocurrency prices, and <strong>it is very important to recognize that this is not the same as being able to successfully make money trading on the cryptocurrency markets</strong>.</p>
 
 </div>

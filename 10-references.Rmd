@@ -11,7 +11,7 @@ The **bookdown** package [@R-bookdown] was used to produce this document, which 
 - https://yihui.org/knitr/
 
 
-```{r write_bib_packages, message=FALSE, warning=FALSE}
+```{r write_bib_packages, message=FALSE, warning=FALSE, include=FALSE}
 knitr::write_bib(c(.packages()), "packages.bib")
 ```
 

@@ -203,6 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.3" data-path="data-prep.html"><a href="data-prep.html#calculate-target-1"><i class="fa fa-check"></i><b>4.4.3</b> Calculate Target</a></li>
 <li class="chapter" data-level="4.4.4" data-path="data-prep.html"><a href="data-prep.html#calculate-lagged-prices"><i class="fa fa-check"></i><b>4.4.4</b> Calculate Lagged Prices</a></li>
 </ul></li>
+<li class="chapter" data-level="4.5" data-path="data-prep.html"><a href="data-prep.html#remove-nulls-again"><i class="fa fa-check"></i><b>4.5</b> Remove Nulls</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization 📉</a><ul>
 <li class="chapter" data-level="5.1" data-path="visualization.html"><a href="visualization.html#basics---ggplot2"><i class="fa fa-check"></i><b>5.1</b> Basics - ggplot2</a></li>
@@ -295,15 +296,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="considerations.html"><a href="considerations.html#session-information"><i class="fa fa-check"></i><b>9.2</b> Session Information</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>10</b> Archive</a><ul>
-<li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#may-2020"><i class="fa fa-check"></i><b>10.1</b> May 2020</a></li>
+<li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#november-2020"><i class="fa fa-check"></i><b>10.1</b> November 2020</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="references-test.html"><a href="references-test.html"><i class="fa fa-check"></i><b>11</b> References Test</a><ul>
-<li class="chapter" data-level="11.1" data-path="references-test.html"><a href="references-test.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
-<li class="chapter" data-level="11.2" data-path="references-test.html"><a href="references-test.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
-<li class="chapter" data-level="11.3" data-path="references-test.html"><a href="references-test.html#visualization-section"><i class="fa fa-check"></i><b>11.3</b> Visualization Section</a></li>
-<li class="chapter" data-level="11.4" data-path="references-test.html"><a href="references-test.html#time-series-section"><i class="fa fa-check"></i><b>11.4</b> Time Series Section</a></li>
-<li class="chapter" data-level="11.5" data-path="references-test.html"><a href="references-test.html#evaluate-model-performance-1"><i class="fa fa-check"></i><b>11.5</b> Evaluate Model Performance</a></li>
-<li class="chapter" data-level="11.6" data-path="references-test.html"><a href="references-test.html#r-packages-used"><i class="fa fa-check"></i><b>11.6</b> R Packages Used</a></li>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a><ul>
+<li class="chapter" data-level="11.1" data-path="references.html"><a href="references.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
+<li class="chapter" data-level="11.2" data-path="references.html"><a href="references.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
+<li class="chapter" data-level="11.3" data-path="references.html"><a href="references.html#visualization-1"><i class="fa fa-check"></i><b>11.3</b> Visualization</a></li>
+<li class="chapter" data-level="11.4" data-path="references.html"><a href="references.html#predictive-modeling-1"><i class="fa fa-check"></i><b>11.4</b> Predictive Modeling</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="references.html"><a href="references.html#time-series"><i class="fa fa-check"></i><b>11.4.1</b> Time Series</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="references.html"><a href="references.html#evaluate-model-performance-1"><i class="fa fa-check"></i><b>11.5</b> Evaluate Model Performance</a></li>
+<li class="chapter" data-level="11.6" data-path="references.html"><a href="references.html#r-packages-used"><i class="fa fa-check"></i><b>11.6</b> R Packages Used</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="blank"><img src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" width="80"></a></li>
@@ -350,57 +353,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>The explanation above is really important to understand!</strong> The code and implementation of this step specifically not so much, however. Focus on understanding the idea conceptually as outlined above rather than understanding the code used below.</p>
 <p>In the code below we are adding two new columns. First the <span style="color: blue;"><strong>split</strong></span>, which assigns each observation a number 1 through 5 of the cross validation split that the data belongs to based on when it was collected. Then the <span style="color: blue;"><strong>training</strong></span> column, which identifies each row as being part of the <strong>train</strong>, <strong>test</strong>, or <strong>holdout</strong> data of the given <span style="color: blue;"><strong>split</strong></span>.</p>
 <p>We will not walk through the steps of the code below in detail outside of the comments left throughout the code because we would rather focus our attention on the conceptual understanding for this step as outlined above. There are many ways of doing time aware cross validation, but none worked particularly well for the way we wanted to outline the next sections, so we made our own and it’s not important to understand how this is working, but it is also not that complex and uses the same tools used up to this point in this section. <a href="https://cryptocurrencyresearch.org/high-level/#/cross-validation-for-timeseries">See this section of the high-level tutorial for an approach that can be used on datasets outside of the one used in this tutorial</a>, and is compatible with the tools used in the predictive modeling section of both versions.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="model-validation-plan.html#cb65-1"></a><span class="co"># Remove rows with null date_time_utc to exclude missing data from next steps</span></span>
-<span id="cb65-2"><a href="model-validation-plan.html#cb65-2"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">drop_na</span>(cryptodata, date_time_utc)</span>
-<span id="cb65-3"><a href="model-validation-plan.html#cb65-3"></a><span class="co"># Counts by symbol</span></span>
-<span id="cb65-4"><a href="model-validation-plan.html#cb65-4"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(<span class="kw">group_by</span>(cryptodata, symbol), <span class="dt">tot_rows =</span> <span class="kw">n</span>())</span>
-<span id="cb65-5"><a href="model-validation-plan.html#cb65-5"></a><span class="co"># Add row index by symbol</span></span>
-<span id="cb65-6"><a href="model-validation-plan.html#cb65-6"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(<span class="kw">arrange</span>(cryptodata, date_time_utc), <span class="dt">row_id =</span> <span class="kw">seq_along</span>(date_time_utc))</span>
-<span id="cb65-7"><a href="model-validation-plan.html#cb65-7"></a><span class="co"># Calculate what rows belong in the first split</span></span>
-<span id="cb65-8"><a href="model-validation-plan.html#cb65-8"></a>cryptodata &lt;-<span class="st"> </span>cryptodata <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">split_rows_1 =</span> <span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>),</span>
-<span id="cb65-9"><a href="model-validation-plan.html#cb65-9"></a>                                    <span class="dt">split_rows_2 =</span> <span class="kw">as.integer</span>(split_rows_<span class="dv">1</span><span class="op">*</span><span class="dv">2</span>),</span>
-<span id="cb65-10"><a href="model-validation-plan.html#cb65-10"></a>                                    <span class="dt">split_rows_3 =</span> <span class="kw">as.integer</span>(split_rows_<span class="dv">1</span><span class="op">*</span><span class="dv">3</span>),</span>
-<span id="cb65-11"><a href="model-validation-plan.html#cb65-11"></a>                                    <span class="dt">split_rows_4 =</span> <span class="kw">as.integer</span>(split_rows_<span class="dv">1</span><span class="op">*</span><span class="dv">4</span>),</span>
-<span id="cb65-12"><a href="model-validation-plan.html#cb65-12"></a>                                    <span class="dt">split_rows_5 =</span> <span class="kw">as.integer</span>(split_rows_<span class="dv">1</span><span class="op">*</span><span class="dv">5</span>))</span>
-<span id="cb65-13"><a href="model-validation-plan.html#cb65-13"></a><span class="co"># Now calculate what split the current row_id belongs into</span></span>
-<span id="cb65-14"><a href="model-validation-plan.html#cb65-14"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
-<span id="cb65-15"><a href="model-validation-plan.html#cb65-15"></a>                     <span class="dt">split =</span> <span class="kw">case_when</span>(</span>
-<span id="cb65-16"><a href="model-validation-plan.html#cb65-16"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>split_rows_<span class="dv">1</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</span>
-<span id="cb65-17"><a href="model-validation-plan.html#cb65-17"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>split_rows_<span class="dv">2</span> <span class="op">~</span><span class="st"> </span><span class="dv">2</span>,</span>
-<span id="cb65-18"><a href="model-validation-plan.html#cb65-18"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>split_rows_<span class="dv">3</span> <span class="op">~</span><span class="st"> </span><span class="dv">3</span>,</span>
-<span id="cb65-19"><a href="model-validation-plan.html#cb65-19"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>split_rows_<span class="dv">4</span> <span class="op">~</span><span class="st"> </span><span class="dv">4</span>,</span>
-<span id="cb65-20"><a href="model-validation-plan.html#cb65-20"></a>                       row_id <span class="op">&gt;</span><span class="st"> </span>split_rows_<span class="dv">4</span> <span class="op">~</span><span class="st"> </span><span class="dv">5</span>))</span>
-<span id="cb65-21"><a href="model-validation-plan.html#cb65-21"></a><span class="co"># Now figure out train/test groups</span></span>
-<span id="cb65-22"><a href="model-validation-plan.html#cb65-22"></a>cryptodata &lt;-<span class="st"> </span>cryptodata <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">train_rows_1 =</span> (<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.8</span>,</span>
-<span id="cb65-23"><a href="model-validation-plan.html#cb65-23"></a>                                    <span class="dt">test_rows_1  =</span> train_rows_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>,</span>
-<span id="cb65-24"><a href="model-validation-plan.html#cb65-24"></a>                                    <span class="dt">train_rows_2 =</span> test_rows_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>train_rows_<span class="dv">1</span>,</span>
-<span id="cb65-25"><a href="model-validation-plan.html#cb65-25"></a>                                    <span class="dt">test_rows_2  =</span> train_rows_<span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>,</span>
-<span id="cb65-26"><a href="model-validation-plan.html#cb65-26"></a>                                    <span class="dt">train_rows_3 =</span> test_rows_<span class="dv">2</span> <span class="op">+</span><span class="st"> </span>train_rows_<span class="dv">1</span>,</span>
-<span id="cb65-27"><a href="model-validation-plan.html#cb65-27"></a>                                    <span class="dt">test_rows_3  =</span> train_rows_<span class="dv">3</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>,</span>
-<span id="cb65-28"><a href="model-validation-plan.html#cb65-28"></a>                                    <span class="dt">train_rows_4 =</span> test_rows_<span class="dv">3</span> <span class="op">+</span><span class="st"> </span>train_rows_<span class="dv">1</span>,</span>
-<span id="cb65-29"><a href="model-validation-plan.html#cb65-29"></a>                                    <span class="dt">test_rows_4  =</span> train_rows_<span class="dv">4</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>,</span>
-<span id="cb65-30"><a href="model-validation-plan.html#cb65-30"></a>                                    <span class="dt">train_rows_5 =</span> test_rows_<span class="dv">4</span> <span class="op">+</span><span class="st"> </span>train_rows_<span class="dv">1</span>,</span>
-<span id="cb65-31"><a href="model-validation-plan.html#cb65-31"></a>                                    <span class="dt">test_rows_5  =</span> train_rows_<span class="dv">5</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>)</span>
-<span id="cb65-32"><a href="model-validation-plan.html#cb65-32"></a><span class="co"># Now assign train/test groups</span></span>
-<span id="cb65-33"><a href="model-validation-plan.html#cb65-33"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
-<span id="cb65-34"><a href="model-validation-plan.html#cb65-34"></a>                     <span class="dt">training =</span> <span class="kw">case_when</span>(</span>
-<span id="cb65-35"><a href="model-validation-plan.html#cb65-35"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">1</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
-<span id="cb65-36"><a href="model-validation-plan.html#cb65-36"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>test_rows_<span class="dv">1</span> <span class="op">~</span><span class="st"> &#39;test&#39;</span>,</span>
-<span id="cb65-37"><a href="model-validation-plan.html#cb65-37"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">2</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
-<span id="cb65-38"><a href="model-validation-plan.html#cb65-38"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>test_rows_<span class="dv">2</span> <span class="op">~</span><span class="st"> &#39;test&#39;</span>,</span>
-<span id="cb65-39"><a href="model-validation-plan.html#cb65-39"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">3</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
-<span id="cb65-40"><a href="model-validation-plan.html#cb65-40"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>test_rows_<span class="dv">3</span> <span class="op">~</span><span class="st"> &#39;test&#39;</span>,</span>
-<span id="cb65-41"><a href="model-validation-plan.html#cb65-41"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">4</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
-<span id="cb65-42"><a href="model-validation-plan.html#cb65-42"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>test_rows_<span class="dv">4</span> <span class="op">~</span><span class="st"> &#39;test&#39;</span>,</span>
-<span id="cb65-43"><a href="model-validation-plan.html#cb65-43"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">5</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
-<span id="cb65-44"><a href="model-validation-plan.html#cb65-44"></a>                       row_id <span class="op">&gt;</span><span class="st"> </span>train_rows_<span class="dv">5</span> <span class="op">~</span><span class="st"> &#39;holdout&#39;</span>))</span>
-<span id="cb65-45"><a href="model-validation-plan.html#cb65-45"></a><span class="co"># Remove all columns that are no longer needed now</span></span>
-<span id="cb65-46"><a href="model-validation-plan.html#cb65-46"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">select</span>(cryptodata, <span class="op">-</span>(tot_rows<span class="op">:</span>test_rows_<span class="dv">5</span>), <span class="op">-</span>(trade_usd_<span class="dv">1</span><span class="op">:</span>trade_usd_<span class="dv">5</span>),</span>
-<span id="cb65-47"><a href="model-validation-plan.html#cb65-47"></a>                     <span class="op">-</span>(ask_<span class="dv">1</span>_price<span class="op">:</span>bid_<span class="dv">5</span>_quantity), <span class="op">-</span>pair, <span class="op">-</span>quote_currency, </span>
-<span id="cb65-48"><a href="model-validation-plan.html#cb65-48"></a>                     <span class="op">-</span>pkDummy, <span class="op">-</span>pkey, <span class="op">-</span>ts_index, split)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="model-validation-plan.html#cb62-1"></a><span class="co"># Remove rows with null date_time_utc to exclude missing data from next steps</span></span>
+<span id="cb62-2"><a href="model-validation-plan.html#cb62-2"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">drop_na</span>(cryptodata, date_time_utc)</span>
+<span id="cb62-3"><a href="model-validation-plan.html#cb62-3"></a><span class="co"># Counts by symbol</span></span>
+<span id="cb62-4"><a href="model-validation-plan.html#cb62-4"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(<span class="kw">group_by</span>(cryptodata, symbol), <span class="dt">tot_rows =</span> <span class="kw">n</span>())</span>
+<span id="cb62-5"><a href="model-validation-plan.html#cb62-5"></a><span class="co"># Add row index by symbol</span></span>
+<span id="cb62-6"><a href="model-validation-plan.html#cb62-6"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(<span class="kw">arrange</span>(cryptodata, date_time_utc), <span class="dt">row_id =</span> <span class="kw">seq_along</span>(date_time_utc))</span>
+<span id="cb62-7"><a href="model-validation-plan.html#cb62-7"></a><span class="co"># Calculate what rows belong in the first split</span></span>
+<span id="cb62-8"><a href="model-validation-plan.html#cb62-8"></a>cryptodata &lt;-<span class="st"> </span>cryptodata <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">split_rows_1 =</span> <span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>),</span>
+<span id="cb62-9"><a href="model-validation-plan.html#cb62-9"></a>                                    <span class="dt">split_rows_2 =</span> <span class="kw">as.integer</span>(split_rows_<span class="dv">1</span><span class="op">*</span><span class="dv">2</span>),</span>
+<span id="cb62-10"><a href="model-validation-plan.html#cb62-10"></a>                                    <span class="dt">split_rows_3 =</span> <span class="kw">as.integer</span>(split_rows_<span class="dv">1</span><span class="op">*</span><span class="dv">3</span>),</span>
+<span id="cb62-11"><a href="model-validation-plan.html#cb62-11"></a>                                    <span class="dt">split_rows_4 =</span> <span class="kw">as.integer</span>(split_rows_<span class="dv">1</span><span class="op">*</span><span class="dv">4</span>),</span>
+<span id="cb62-12"><a href="model-validation-plan.html#cb62-12"></a>                                    <span class="dt">split_rows_5 =</span> <span class="kw">as.integer</span>(split_rows_<span class="dv">1</span><span class="op">*</span><span class="dv">5</span>))</span>
+<span id="cb62-13"><a href="model-validation-plan.html#cb62-13"></a><span class="co"># Now calculate what split the current row_id belongs into</span></span>
+<span id="cb62-14"><a href="model-validation-plan.html#cb62-14"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
+<span id="cb62-15"><a href="model-validation-plan.html#cb62-15"></a>                     <span class="dt">split =</span> <span class="kw">case_when</span>(</span>
+<span id="cb62-16"><a href="model-validation-plan.html#cb62-16"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>split_rows_<span class="dv">1</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</span>
+<span id="cb62-17"><a href="model-validation-plan.html#cb62-17"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>split_rows_<span class="dv">2</span> <span class="op">~</span><span class="st"> </span><span class="dv">2</span>,</span>
+<span id="cb62-18"><a href="model-validation-plan.html#cb62-18"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>split_rows_<span class="dv">3</span> <span class="op">~</span><span class="st"> </span><span class="dv">3</span>,</span>
+<span id="cb62-19"><a href="model-validation-plan.html#cb62-19"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>split_rows_<span class="dv">4</span> <span class="op">~</span><span class="st"> </span><span class="dv">4</span>,</span>
+<span id="cb62-20"><a href="model-validation-plan.html#cb62-20"></a>                       row_id <span class="op">&gt;</span><span class="st"> </span>split_rows_<span class="dv">4</span> <span class="op">~</span><span class="st"> </span><span class="dv">5</span>))</span>
+<span id="cb62-21"><a href="model-validation-plan.html#cb62-21"></a><span class="co"># Now figure out train/test groups</span></span>
+<span id="cb62-22"><a href="model-validation-plan.html#cb62-22"></a>cryptodata &lt;-<span class="st"> </span>cryptodata <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">train_rows_1 =</span> (<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.8</span>,</span>
+<span id="cb62-23"><a href="model-validation-plan.html#cb62-23"></a>                                    <span class="dt">test_rows_1  =</span> train_rows_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>,</span>
+<span id="cb62-24"><a href="model-validation-plan.html#cb62-24"></a>                                    <span class="dt">train_rows_2 =</span> test_rows_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>train_rows_<span class="dv">1</span>,</span>
+<span id="cb62-25"><a href="model-validation-plan.html#cb62-25"></a>                                    <span class="dt">test_rows_2  =</span> train_rows_<span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>,</span>
+<span id="cb62-26"><a href="model-validation-plan.html#cb62-26"></a>                                    <span class="dt">train_rows_3 =</span> test_rows_<span class="dv">2</span> <span class="op">+</span><span class="st"> </span>train_rows_<span class="dv">1</span>,</span>
+<span id="cb62-27"><a href="model-validation-plan.html#cb62-27"></a>                                    <span class="dt">test_rows_3  =</span> train_rows_<span class="dv">3</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>,</span>
+<span id="cb62-28"><a href="model-validation-plan.html#cb62-28"></a>                                    <span class="dt">train_rows_4 =</span> test_rows_<span class="dv">3</span> <span class="op">+</span><span class="st"> </span>train_rows_<span class="dv">1</span>,</span>
+<span id="cb62-29"><a href="model-validation-plan.html#cb62-29"></a>                                    <span class="dt">test_rows_4  =</span> train_rows_<span class="dv">4</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>,</span>
+<span id="cb62-30"><a href="model-validation-plan.html#cb62-30"></a>                                    <span class="dt">train_rows_5 =</span> test_rows_<span class="dv">4</span> <span class="op">+</span><span class="st"> </span>train_rows_<span class="dv">1</span>,</span>
+<span id="cb62-31"><a href="model-validation-plan.html#cb62-31"></a>                                    <span class="dt">test_rows_5  =</span> train_rows_<span class="dv">5</span> <span class="op">+</span><span class="st"> </span>(<span class="kw">as.integer</span>(<span class="kw">n</span>()<span class="op">/</span><span class="dv">5</span>))<span class="op">*</span><span class="fl">0.2</span>)</span>
+<span id="cb62-32"><a href="model-validation-plan.html#cb62-32"></a><span class="co"># Now assign train/test groups</span></span>
+<span id="cb62-33"><a href="model-validation-plan.html#cb62-33"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
+<span id="cb62-34"><a href="model-validation-plan.html#cb62-34"></a>                     <span class="dt">training =</span> <span class="kw">case_when</span>(</span>
+<span id="cb62-35"><a href="model-validation-plan.html#cb62-35"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">1</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
+<span id="cb62-36"><a href="model-validation-plan.html#cb62-36"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>test_rows_<span class="dv">1</span> <span class="op">~</span><span class="st"> &#39;test&#39;</span>,</span>
+<span id="cb62-37"><a href="model-validation-plan.html#cb62-37"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">2</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
+<span id="cb62-38"><a href="model-validation-plan.html#cb62-38"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>test_rows_<span class="dv">2</span> <span class="op">~</span><span class="st"> &#39;test&#39;</span>,</span>
+<span id="cb62-39"><a href="model-validation-plan.html#cb62-39"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">3</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
+<span id="cb62-40"><a href="model-validation-plan.html#cb62-40"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>test_rows_<span class="dv">3</span> <span class="op">~</span><span class="st"> &#39;test&#39;</span>,</span>
+<span id="cb62-41"><a href="model-validation-plan.html#cb62-41"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">4</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
+<span id="cb62-42"><a href="model-validation-plan.html#cb62-42"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>test_rows_<span class="dv">4</span> <span class="op">~</span><span class="st"> &#39;test&#39;</span>,</span>
+<span id="cb62-43"><a href="model-validation-plan.html#cb62-43"></a>                       row_id <span class="op">&lt;=</span><span class="st"> </span>train_rows_<span class="dv">5</span> <span class="op">~</span><span class="st"> &#39;train&#39;</span>,</span>
+<span id="cb62-44"><a href="model-validation-plan.html#cb62-44"></a>                       row_id <span class="op">&gt;</span><span class="st"> </span>train_rows_<span class="dv">5</span> <span class="op">~</span><span class="st"> &#39;holdout&#39;</span>))</span>
+<span id="cb62-45"><a href="model-validation-plan.html#cb62-45"></a><span class="co"># Remove all columns that are no longer needed now</span></span>
+<span id="cb62-46"><a href="model-validation-plan.html#cb62-46"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">select</span>(cryptodata, <span class="op">-</span>(tot_rows<span class="op">:</span>test_rows_<span class="dv">5</span>), <span class="op">-</span>(trade_usd_<span class="dv">1</span><span class="op">:</span>trade_usd_<span class="dv">5</span>),</span>
+<span id="cb62-47"><a href="model-validation-plan.html#cb62-47"></a>                     <span class="op">-</span>(ask_<span class="dv">1</span>_price<span class="op">:</span>bid_<span class="dv">5</span>_quantity), <span class="op">-</span>pair, <span class="op">-</span>quote_currency, </span>
+<span id="cb62-48"><a href="model-validation-plan.html#cb62-48"></a>                     <span class="op">-</span>pkDummy, <span class="op">-</span>pkey, <span class="op">-</span>ts_index, split)</span></code></pre></div>
 <p>Our data now has the new columns <code>training</code> (<em>train</em>, <em>test</em> or <em>holdout</em>) and <code>split</code> (numbers 1-5) added to it, let’s take a look at the new columns:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="model-validation-plan.html#cb66-1"></a><span class="kw">select</span>(cryptodata, training, split)</span></code></pre></div>
-<pre><code>## # A tibble: 157,032 x 3
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="model-validation-plan.html#cb63-1"></a><span class="kw">select</span>(cryptodata, training, split)</span></code></pre></div>
+<pre><code>## # A tibble: 158,124 x 3
 ## # Groups:   symbol [95]
 ##    symbol training split
 ##    &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
@@ -414,13 +417,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8 BTG    train        1
 ##  9 ACAT   train        1
 ## 10 LINK   train        1
-## # … with 157,022 more rows</code></pre>
+## # … with 158,114 more rows</code></pre>
 <p><em>Notice that even though we left <code>symbol</code> variables out of our selection, but because it is part of the way we grouped our data, it was added back in with the message “Adding missing grouping variables <code>symbol</code>”. The data is tied to its groupings when performing all operations until we use <span style="color: green;"><strong>ungroup()</strong></span> to undo them.</em></p>
 <p>Let’s add the new <span style="color: blue;"><strong>split</strong></span> column to the way the data is grouped:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="model-validation-plan.html#cb68-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol, split)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="model-validation-plan.html#cb65-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol, split)</span></code></pre></div>
 <p>The new field <span style="color: blue;"><strong>split</strong></span>, helps us split the data into 5 different datasets based on the date, and contains a number from 1-5. The new field <span style="color: blue;"><strong>training</strong></span> flags the data as being part of the <strong><em>train</em></strong> dataset, or the <strong><em>test</em></strong>, or the <strong><em>holdout</em></strong> (for the first split) dataset for each of the 5 splits/datasets.</p>
 <p>Running the same code as before with <span style="color: green;"><strong>tail()</strong></span> added, we can see rows associated with the test data of the 5th split (again remember, each of the 5 splits has a training and testing dataset):</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="model-validation-plan.html#cb69-1"></a><span class="kw">tail</span>( <span class="kw">select</span>(cryptodata, training, split) )</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="model-validation-plan.html#cb66-1"></a><span class="kw">tail</span>( <span class="kw">select</span>(cryptodata, training, split) )</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ## # Groups:   symbol, split [6]
 ##   symbol training split
@@ -432,32 +435,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 CRPT   holdout      5
 ## 6 REP    holdout      5</code></pre>
 <p>The easiest way to understand these groupings, is to visualize them:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="model-validation-plan.html#cb71-1"></a>groups_chart &lt;-<span class="st"> </span><span class="kw">ggplot</span>(cryptodata,</span>
-<span id="cb71-2"><a href="model-validation-plan.html#cb71-2"></a>                       <span class="kw">aes</span>(<span class="dt">x =</span> date_time_utc, <span class="dt">y =</span> split, <span class="dt">color =</span> training)) <span class="op">+</span></span>
-<span id="cb71-3"><a href="model-validation-plan.html#cb71-3"></a><span class="st">                       </span><span class="kw">geom_point</span>()</span>
-<span id="cb71-4"><a href="model-validation-plan.html#cb71-4"></a><span class="co"># now show the chart we just saved:</span></span>
-<span id="cb71-5"><a href="model-validation-plan.html#cb71-5"></a>groups_chart</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="model-validation-plan.html#cb68-1"></a>groups_chart &lt;-<span class="st"> </span><span class="kw">ggplot</span>(cryptodata,</span>
+<span id="cb68-2"><a href="model-validation-plan.html#cb68-2"></a>                       <span class="kw">aes</span>(<span class="dt">x =</span> date_time_utc, <span class="dt">y =</span> split, <span class="dt">color =</span> training)) <span class="op">+</span></span>
+<span id="cb68-3"><a href="model-validation-plan.html#cb68-3"></a><span class="st">                       </span><span class="kw">geom_point</span>()</span>
+<span id="cb68-4"><a href="model-validation-plan.html#cb68-4"></a><span class="co"># now show the chart we just saved:</span></span>
+<span id="cb68-5"><a href="model-validation-plan.html#cb68-5"></a>groups_chart</span></code></pre></div>
 <p><img src="CryptoResearchPaper_files/figure-html/cv_groupings_visualized-1.png" width="672" /></p>
 <p>The chart above looks strange because it includes all cryptocurrencies when they are treated indipendently. We can view the results for the <strong>BTC</strong> cryptocurrency only by running the same code as above, but instead of visualizing the dataset in its entirety, filtering the data using <strong><code>filter(cryptodata, symbol == "BTC")</code></strong>, which will give us a much better impression of the breakdown that has been created:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="model-validation-plan.html#cb72-1"></a><span class="kw">ggplot</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>), </span>
-<span id="cb72-2"><a href="model-validation-plan.html#cb72-2"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> date_time_utc,</span>
-<span id="cb72-3"><a href="model-validation-plan.html#cb72-3"></a>           <span class="dt">y =</span> split, </span>
-<span id="cb72-4"><a href="model-validation-plan.html#cb72-4"></a>           <span class="dt">color =</span> training)) <span class="op">+</span></span>
-<span id="cb72-5"><a href="model-validation-plan.html#cb72-5"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
-<p><img src="CryptoResearchPaper_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="model-validation-plan.html#cb69-1"></a><span class="kw">ggplot</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>), </span>
+<span id="cb69-2"><a href="model-validation-plan.html#cb69-2"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> date_time_utc,</span>
+<span id="cb69-3"><a href="model-validation-plan.html#cb69-3"></a>           <span class="dt">y =</span> split, </span>
+<span id="cb69-4"><a href="model-validation-plan.html#cb69-4"></a>           <span class="dt">color =</span> training)) <span class="op">+</span></span>
+<span id="cb69-5"><a href="model-validation-plan.html#cb69-5"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="CryptoResearchPaper_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>We can check on the groupings for each cryptocurrency by animating the <span style="color: blue;"><strong>cryptodata</strong></span> object:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="model-validation-plan.html#cb73-1"></a>animated_chart &lt;-<span class="st"> </span>groups_chart <span class="op">+</span></span>
-<span id="cb73-2"><a href="model-validation-plan.html#cb73-2"></a><span class="st">    </span><span class="kw">transition_states</span>(symbol) <span class="op">+</span></span>
-<span id="cb73-3"><a href="model-validation-plan.html#cb73-3"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Now showing: {closest_state}&#39;</span>)</span>
-<span id="cb73-4"><a href="model-validation-plan.html#cb73-4"></a><span class="co"># show the new animated chart</span></span>
-<span id="cb73-5"><a href="model-validation-plan.html#cb73-5"></a><span class="kw">animate</span>(animated_chart, <span class="dt">fps =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="model-validation-plan.html#cb70-1"></a>animated_chart &lt;-<span class="st"> </span>groups_chart <span class="op">+</span></span>
+<span id="cb70-2"><a href="model-validation-plan.html#cb70-2"></a><span class="st">    </span><span class="kw">transition_states</span>(symbol) <span class="op">+</span></span>
+<span id="cb70-3"><a href="model-validation-plan.html#cb70-3"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Now showing: {closest_state}&#39;</span>)</span>
+<span id="cb70-4"><a href="model-validation-plan.html#cb70-4"></a><span class="co"># show the new animated chart</span></span>
+<span id="cb70-5"><a href="model-validation-plan.html#cb70-5"></a><span class="kw">animate</span>(animated_chart, <span class="dt">fps =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="CryptoResearchPaper_files/figure-html/animate_groupings-1.gif" /><!-- --></p>
 <!-- The fps needs to be 1, 2, or any number divisible by 2 or the code won't work -->
 <p>It can be a bit hard to tell how many data points there are because they end up looking like lines. Let’s change the plot to use <code>geom_jitter()</code> instead of <code>geom_point()</code>, which will manually offset the points and give us a better impression of how many data points there are:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="model-validation-plan.html#cb74-1"></a>animated_chart &lt;-<span class="st"> </span>animated_chart <span class="op">+</span></span>
-<span id="cb74-2"><a href="model-validation-plan.html#cb74-2"></a><span class="st">                    </span><span class="kw">geom_jitter</span>()</span>
-<span id="cb74-3"><a href="model-validation-plan.html#cb74-3"></a><span class="co"># show the new animated chart</span></span>
-<span id="cb74-4"><a href="model-validation-plan.html#cb74-4"></a><span class="kw">animate</span>(animated_chart, <span class="dt">fps =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="model-validation-plan.html#cb71-1"></a>animated_chart &lt;-<span class="st"> </span>animated_chart <span class="op">+</span></span>
+<span id="cb71-2"><a href="model-validation-plan.html#cb71-2"></a><span class="st">                    </span><span class="kw">geom_jitter</span>()</span>
+<span id="cb71-3"><a href="model-validation-plan.html#cb71-3"></a><span class="co"># show the new animated chart</span></span>
+<span id="cb71-4"><a href="model-validation-plan.html#cb71-4"></a><span class="kw">animate</span>(animated_chart, <span class="dt">fps =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="CryptoResearchPaper_files/figure-html/gganimate_jitter-1.gif" /><!-- --></p>
 </div>
 </div>
@@ -468,46 +471,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">6.3.1</span> Zero Variance</h3>
 <p>One of the first models we will make <a href="predictive-modeling.html#example-simple-model">in the next section is a simple <span style="color: purple;"><strong>linear regression</strong></span> model</a>. The regular R function for this <strong>will not work</strong> if the data contains any columns that have <span style="color: purple;"><strong><em>zero variance</em></strong></span>, meaning the value of the column never changes throughout the data being given to the model. Therefore, let’s fix any issues relating to zero variance columns in any dataset before we change the structure of the data in the step after this one.</p>
 <p>First let’s change the grouping of the data. We are interested in calculating the zero variance based on the <span style="color: blue;"><strong>symbol</strong></span>, <span style="color: blue;"><strong>split</strong></span>, and <span style="color: blue;"><strong>training</strong></span> fields:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="model-validation-plan.html#cb75-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol, split, training)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="model-validation-plan.html#cb72-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol, split, training)</span></code></pre></div>
 <p>Now let’s create a new object called <span style="color: blue;"><strong>find_zero_var</strong></span> which shows the value of the minimum standard deviation across all columns and calculated based on the grouping of symbol, split and train:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="model-validation-plan.html#cb76-1"></a>find_zero_var &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">mutate</span>(cryptodata, <span class="dt">min_sd =</span> <span class="kw">min</span>(<span class="kw">sd</span>(price_usd, <span class="dt">na.rm=</span>T), </span>
-<span id="cb76-2"><a href="model-validation-plan.html#cb76-2"></a>                                                        <span class="kw">sd</span>(target_price_24h, <span class="dt">na.rm=</span>T),</span>
-<span id="cb76-3"><a href="model-validation-plan.html#cb76-3"></a>                                                        <span class="kw">sd</span>(lagged_price_1h, <span class="dt">na.rm=</span>T), </span>
-<span id="cb76-4"><a href="model-validation-plan.html#cb76-4"></a>                                                        <span class="kw">sd</span>(lagged_price_2h, <span class="dt">na.rm=</span>T),</span>
-<span id="cb76-5"><a href="model-validation-plan.html#cb76-5"></a>                                                        <span class="kw">sd</span>(lagged_price_3h, <span class="dt">na.rm=</span>T), </span>
-<span id="cb76-6"><a href="model-validation-plan.html#cb76-6"></a>                                                        <span class="kw">sd</span>(lagged_price_6h, <span class="dt">na.rm=</span>T),</span>
-<span id="cb76-7"><a href="model-validation-plan.html#cb76-7"></a>                                                        <span class="kw">sd</span>(lagged_price_12h, <span class="dt">na.rm=</span>T), </span>
-<span id="cb76-8"><a href="model-validation-plan.html#cb76-8"></a>                                                        <span class="kw">sd</span>(lagged_price_24h, <span class="dt">na.rm=</span>T))), min_sd)</span>
-<span id="cb76-9"><a href="model-validation-plan.html#cb76-9"></a><span class="co"># Show data</span></span>
-<span id="cb76-10"><a href="model-validation-plan.html#cb76-10"></a>find_zero_var</span></code></pre></div>
-<pre><code>## # A tibble: 157,032 x 4
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="model-validation-plan.html#cb73-1"></a>find_zero_var &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">mutate</span>(cryptodata, <span class="dt">min_sd =</span> <span class="kw">min</span>(<span class="kw">sd</span>(price_usd, <span class="dt">na.rm=</span>T), </span>
+<span id="cb73-2"><a href="model-validation-plan.html#cb73-2"></a>                                                        <span class="kw">sd</span>(target_price_24h, <span class="dt">na.rm=</span>T),</span>
+<span id="cb73-3"><a href="model-validation-plan.html#cb73-3"></a>                                                        <span class="kw">sd</span>(lagged_price_1h, <span class="dt">na.rm=</span>T), </span>
+<span id="cb73-4"><a href="model-validation-plan.html#cb73-4"></a>                                                        <span class="kw">sd</span>(lagged_price_2h, <span class="dt">na.rm=</span>T),</span>
+<span id="cb73-5"><a href="model-validation-plan.html#cb73-5"></a>                                                        <span class="kw">sd</span>(lagged_price_3h, <span class="dt">na.rm=</span>T), </span>
+<span id="cb73-6"><a href="model-validation-plan.html#cb73-6"></a>                                                        <span class="kw">sd</span>(lagged_price_6h, <span class="dt">na.rm=</span>T),</span>
+<span id="cb73-7"><a href="model-validation-plan.html#cb73-7"></a>                                                        <span class="kw">sd</span>(lagged_price_12h, <span class="dt">na.rm=</span>T), </span>
+<span id="cb73-8"><a href="model-validation-plan.html#cb73-8"></a>                                                        <span class="kw">sd</span>(lagged_price_24h, <span class="dt">na.rm=</span>T))), min_sd)</span>
+<span id="cb73-9"><a href="model-validation-plan.html#cb73-9"></a><span class="co"># Show data</span></span>
+<span id="cb73-10"><a href="model-validation-plan.html#cb73-10"></a>find_zero_var</span></code></pre></div>
+<pre><code>## # A tibble: 158,124 x 4
 ## # Groups:   symbol, split, training [950]
 ##    symbol split training     min_sd
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;
-##  1 EOS        1 train    0.257     
+##  1 EOS        1 train    0.256     
 ##  2 IQ         1 train    0.0117    
 ##  3 EDG        1 train    0.000634  
 ##  4 LEO        1 train    0.116     
-##  5 GBX        1 train    0.00256   
-##  6 ACT        1 train    0.00111   
-##  7 MBL        1 train    0.00000797
-##  8 BTG        1 train    0.374     
+##  5 GBX        1 train    0.00257   
+##  6 ACT        1 train    0.00118   
+##  7 MBL        1 train    0.00000803
+##  8 BTG        1 train    0.377     
 ##  9 ACAT       1 train    0.0000163 
-## 10 LINK       1 train    1.90      
-## # … with 157,022 more rows</code></pre>
+## 10 LINK       1 train    1.91      
+## # … with 158,114 more rows</code></pre>
 <p>Next let’s get to a list of cryptocurrency symbols where the minimum standard deviation across all columns for all splits of the data is 0, which is the list of cryptocurrencies we want to later remove from the data:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="model-validation-plan.html#cb78-1"></a>minimum_sd &lt;-<span class="st"> </span><span class="kw">filter</span>(<span class="kw">distinct</span>(<span class="kw">mutate</span>(<span class="kw">group_by</span>(<span class="kw">ungroup</span>(find_zero_var), symbol),</span>
-<span id="cb78-2"><a href="model-validation-plan.html#cb78-2"></a>                                     <span class="dt">min_sd =</span> <span class="kw">min</span>(min_sd, <span class="dt">na.rm=</span>T)), min_sd),min_sd <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.0001</span>)<span class="op">$</span>symbol</span>
-<span id="cb78-3"><a href="model-validation-plan.html#cb78-3"></a><span class="co"># Show result</span></span>
-<span id="cb78-4"><a href="model-validation-plan.html#cb78-4"></a>minimum_sd</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="model-validation-plan.html#cb75-1"></a>minimum_sd &lt;-<span class="st"> </span><span class="kw">filter</span>(<span class="kw">distinct</span>(<span class="kw">mutate</span>(<span class="kw">group_by</span>(<span class="kw">ungroup</span>(find_zero_var), symbol),</span>
+<span id="cb75-2"><a href="model-validation-plan.html#cb75-2"></a>                                     <span class="dt">min_sd =</span> <span class="kw">min</span>(min_sd, <span class="dt">na.rm=</span>T)), min_sd),min_sd <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.0001</span>)<span class="op">$</span>symbol</span>
+<span id="cb75-3"><a href="model-validation-plan.html#cb75-3"></a><span class="co"># Show result</span></span>
+<span id="cb75-4"><a href="model-validation-plan.html#cb75-4"></a>minimum_sd</span></code></pre></div>
 <pre><code>##  [1] &quot;IQ&quot;    &quot;LEO&quot;   &quot;GBX&quot;   &quot;ACT&quot;   &quot;MBL&quot;   &quot;ACAT&quot;  &quot;RCN&quot;   &quot;FDZ&quot;   &quot;PAXG&quot; 
 ## [10] &quot;MESH&quot;  &quot;REX&quot;   &quot;NAV&quot;   &quot;XDN&quot;   &quot;CUR&quot;   &quot;DENT&quot;  &quot;IPL&quot;   &quot;XVG&quot;   &quot;APPC&quot; 
 ## [19] &quot;NCT&quot;   &quot;HTML&quot;  &quot;IHT&quot;   &quot;CDT&quot;   &quot;COCOS&quot; &quot;SPC&quot;   &quot;SBD&quot;   &quot;OAX&quot;   &quot;GST&quot;  
 ## [28] &quot;CND&quot;   &quot;SUB&quot;   &quot;PLA&quot;   &quot;BTT&quot;   &quot;SMART&quot; &quot;MG&quot;    &quot;SWM&quot;   &quot;PHX&quot;   &quot;CUTE&quot; 
-## [37] &quot;BCN&quot;   &quot;ELF&quot;   &quot;CHZ&quot;   &quot;SENT&quot;  &quot;BNK&quot;   &quot;CHAT&quot;  &quot;WIKI&quot;  &quot;NEU&quot;   &quot;XPR&quot;  
-## [46] &quot;ECA&quot;   &quot;JST&quot;   &quot;SEELE&quot; &quot;VSYS&quot;  &quot;AAB&quot;   &quot;DDR&quot;   &quot;CMCT&quot;</code></pre>
+## [37] &quot;BCN&quot;   &quot;ELF&quot;   &quot;CHZ&quot;   &quot;SENT&quot;  &quot;ZAP&quot;   &quot;BNK&quot;   &quot;CHAT&quot;  &quot;WIKI&quot;  &quot;NEU&quot;  
+## [46] &quot;XPR&quot;   &quot;ECA&quot;   &quot;JST&quot;   &quot;SEELE&quot; &quot;VSYS&quot;  &quot;AAB&quot;   &quot;CMCT&quot;</code></pre>
 <p>Now we can remove these symbols from appearing in the dataset:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="model-validation-plan.html#cb80-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="op">!</span>(symbol <span class="op">%in%</span><span class="st"> </span>minimum_sd)) </span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="model-validation-plan.html#cb77-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="op">!</span>(symbol <span class="op">%in%</span><span class="st"> </span>minimum_sd)) </span></code></pre></div>
 <p>In the code above we match all rows where the symbol is part of the <span style="color: blue;"><strong>minimum_sd</strong></span> object with the list of cryptocurrency symbols to remove from the data, and we then negate the selection using the <span style="color: blue;"><strong>!</strong></span> operator to only keep rows with symbols not in the list we found.</p>
 </div>
 </div>
@@ -521,152 +524,152 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- cryptodata <- group_by(cryptodata, symbol, split, training) -->
 <!-- ``` -->
 <p>Here is an example of what happens when we <span style="color: green;"><strong>nest()</strong></span> the data:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="model-validation-plan.html#cb81-1"></a><span class="kw">nest</span>(cryptodata) </span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="model-validation-plan.html#cb78-1"></a><span class="kw">nest</span>(cryptodata) </span></code></pre></div>
 <pre><code>## # A tibble: 430 x 4
 ## # Groups:   symbol, training, split [430]
 ##    symbol training split data               
 ##    &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;list&gt;             
-##  1 EOS    train        1 &lt;tibble [365 × 11]&gt;
-##  2 EDG    train        1 &lt;tibble [372 × 11]&gt;
-##  3 BTG    train        1 &lt;tibble [348 × 11]&gt;
-##  4 LINK   train        1 &lt;tibble [257 × 11]&gt;
-##  5 VET    train        1 &lt;tibble [344 × 11]&gt;
-##  6 IHF    train        1 &lt;tibble [283 × 11]&gt;
-##  7 DGB    train        1 &lt;tibble [372 × 11]&gt;
-##  8 LTC    train        1 &lt;tibble [372 × 11]&gt;
-##  9 NEXO   train        1 &lt;tibble [371 × 11]&gt;
-## 10 XMR    train        1 &lt;tibble [371 × 11]&gt;
+##  1 EOS    train        1 &lt;tibble [367 × 11]&gt;
+##  2 EDG    train        1 &lt;tibble [374 × 11]&gt;
+##  3 BTG    train        1 &lt;tibble [350 × 11]&gt;
+##  4 LINK   train        1 &lt;tibble [259 × 11]&gt;
+##  5 VET    train        1 &lt;tibble [345 × 11]&gt;
+##  6 IHF    train        1 &lt;tibble [285 × 11]&gt;
+##  7 DGB    train        1 &lt;tibble [374 × 11]&gt;
+##  8 LTC    train        1 &lt;tibble [374 × 11]&gt;
+##  9 NEXO   train        1 &lt;tibble [373 × 11]&gt;
+## 10 XMR    train        1 &lt;tibble [373 × 11]&gt;
 ## # … with 420 more rows</code></pre>
 <p>We will begin by creating the new column containing the nested <span style="color: blue;"><strong>train</strong></span> data. Some additional steps were added to ensure the integrity of the data before we start training it, but these are not material outside of the things we have already discussed up to this point. Try to focus on the conceptual idea that we are creating a new dataset grouped by the <span style="color: blue;"><strong>symbol</strong></span>, <span style="color: blue;"><strong>training</strong></span> and <span style="color: blue;"><strong>split</strong></span> columns. As a first step, we are creating a new dataframe called <span style="color: blue;"><strong>cryptodata_train</strong></span> grouped by the <span style="color: blue;"><strong>symbol</strong></span> and <span style="color: blue;"><strong>split</strong></span> columns with the nested dataframes in the new <span style="color: blue;"><strong>train_data</strong></span> column:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="model-validation-plan.html#cb83-1"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, </span>
-<span id="cb83-2"><a href="model-validation-plan.html#cb83-2"></a>                                       training<span class="op">==</span><span class="st">&#39;train&#39;</span>)), </span>
-<span id="cb83-3"><a href="model-validation-plan.html#cb83-3"></a>                           <span class="dt">train_data =</span> <span class="st">&#39;data&#39;</span>)</span>
-<span id="cb83-4"><a href="model-validation-plan.html#cb83-4"></a><span class="co"># Now remove training column</span></span>
-<span id="cb83-5"><a href="model-validation-plan.html#cb83-5"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">ungroup</span>(cryptodata_train, </span>
-<span id="cb83-6"><a href="model-validation-plan.html#cb83-6"></a>                                   training), </span>
-<span id="cb83-7"><a href="model-validation-plan.html#cb83-7"></a>                           <span class="op">-</span>training)</span>
-<span id="cb83-8"><a href="model-validation-plan.html#cb83-8"></a><span class="co"># Fix issues with individual groups of the data</span></span>
-<span id="cb83-9"><a href="model-validation-plan.html#cb83-9"></a>cryptodata_train<span class="op">$</span>train_data &lt;-<span class="st"> </span><span class="kw">lapply</span>(cryptodata_train<span class="op">$</span>train_data, na.omit)</span>
-<span id="cb83-10"><a href="model-validation-plan.html#cb83-10"></a><span class="co"># First add new column with nrow of train dataset</span></span>
-<span id="cb83-11"><a href="model-validation-plan.html#cb83-11"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">group_by</span>(<span class="kw">ungroup</span>(<span class="kw">mutate</span>(<span class="kw">rowwise</span>(cryptodata_train), </span>
-<span id="cb83-12"><a href="model-validation-plan.html#cb83-12"></a>                                            <span class="dt">train_rows =</span> <span class="kw">nrow</span>(train_data))),</span>
-<span id="cb83-13"><a href="model-validation-plan.html#cb83-13"></a>                             symbol, split)</span>
-<span id="cb83-14"><a href="model-validation-plan.html#cb83-14"></a><span class="co"># Remove all symbols where their train data has less than 20 rows at least once</span></span>
-<span id="cb83-15"><a href="model-validation-plan.html#cb83-15"></a>symbols_rm &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">filter</span>(cryptodata_train, </span>
-<span id="cb83-16"><a href="model-validation-plan.html#cb83-16"></a>                            split <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>, train_rows <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>)<span class="op">$</span>symbol)</span>
-<span id="cb83-17"><a href="model-validation-plan.html#cb83-17"></a><span class="co"># Remove all data relating to the symbols found above</span></span>
-<span id="cb83-18"><a href="model-validation-plan.html#cb83-18"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata_train, </span>
-<span id="cb83-19"><a href="model-validation-plan.html#cb83-19"></a>                           <span class="op">!</span><span class="st"> </span>symbol <span class="op">%in%</span><span class="st"> </span>symbols_rm) <span class="co"># ! is to make %not in% operator</span></span>
-<span id="cb83-20"><a href="model-validation-plan.html#cb83-20"></a><span class="co"># Drop train_rows column</span></span>
-<span id="cb83-21"><a href="model-validation-plan.html#cb83-21"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">select</span>(cryptodata_train, <span class="op">-</span>train_rows)</span>
-<span id="cb83-22"><a href="model-validation-plan.html#cb83-22"></a><span class="co"># Show results</span></span>
-<span id="cb83-23"><a href="model-validation-plan.html#cb83-23"></a>cryptodata_train</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="model-validation-plan.html#cb80-1"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, </span>
+<span id="cb80-2"><a href="model-validation-plan.html#cb80-2"></a>                                       training<span class="op">==</span><span class="st">&#39;train&#39;</span>)), </span>
+<span id="cb80-3"><a href="model-validation-plan.html#cb80-3"></a>                           <span class="dt">train_data =</span> <span class="st">&#39;data&#39;</span>)</span>
+<span id="cb80-4"><a href="model-validation-plan.html#cb80-4"></a><span class="co"># Now remove training column</span></span>
+<span id="cb80-5"><a href="model-validation-plan.html#cb80-5"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">ungroup</span>(cryptodata_train, </span>
+<span id="cb80-6"><a href="model-validation-plan.html#cb80-6"></a>                                   training), </span>
+<span id="cb80-7"><a href="model-validation-plan.html#cb80-7"></a>                           <span class="op">-</span>training)</span>
+<span id="cb80-8"><a href="model-validation-plan.html#cb80-8"></a><span class="co"># Fix issues with individual groups of the data</span></span>
+<span id="cb80-9"><a href="model-validation-plan.html#cb80-9"></a>cryptodata_train<span class="op">$</span>train_data &lt;-<span class="st"> </span><span class="kw">lapply</span>(cryptodata_train<span class="op">$</span>train_data, na.omit)</span>
+<span id="cb80-10"><a href="model-validation-plan.html#cb80-10"></a><span class="co"># First add new column with nrow of train dataset</span></span>
+<span id="cb80-11"><a href="model-validation-plan.html#cb80-11"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">group_by</span>(<span class="kw">ungroup</span>(<span class="kw">mutate</span>(<span class="kw">rowwise</span>(cryptodata_train), </span>
+<span id="cb80-12"><a href="model-validation-plan.html#cb80-12"></a>                                            <span class="dt">train_rows =</span> <span class="kw">nrow</span>(train_data))),</span>
+<span id="cb80-13"><a href="model-validation-plan.html#cb80-13"></a>                             symbol, split)</span>
+<span id="cb80-14"><a href="model-validation-plan.html#cb80-14"></a><span class="co"># Remove all symbols where their train data has less than 20 rows at least once</span></span>
+<span id="cb80-15"><a href="model-validation-plan.html#cb80-15"></a>symbols_rm &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">filter</span>(cryptodata_train, </span>
+<span id="cb80-16"><a href="model-validation-plan.html#cb80-16"></a>                            split <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>, train_rows <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>)<span class="op">$</span>symbol)</span>
+<span id="cb80-17"><a href="model-validation-plan.html#cb80-17"></a><span class="co"># Remove all data relating to the symbols found above</span></span>
+<span id="cb80-18"><a href="model-validation-plan.html#cb80-18"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata_train, </span>
+<span id="cb80-19"><a href="model-validation-plan.html#cb80-19"></a>                           <span class="op">!</span><span class="st"> </span>symbol <span class="op">%in%</span><span class="st"> </span>symbols_rm) <span class="co"># ! is to make %not in% operator</span></span>
+<span id="cb80-20"><a href="model-validation-plan.html#cb80-20"></a><span class="co"># Drop train_rows column</span></span>
+<span id="cb80-21"><a href="model-validation-plan.html#cb80-21"></a>cryptodata_train &lt;-<span class="st"> </span><span class="kw">select</span>(cryptodata_train, <span class="op">-</span>train_rows)</span>
+<span id="cb80-22"><a href="model-validation-plan.html#cb80-22"></a><span class="co"># Show results</span></span>
+<span id="cb80-23"><a href="model-validation-plan.html#cb80-23"></a>cryptodata_train</span></code></pre></div>
 <pre class="scroll-lim"><code>## # A tibble: 205 x 3
 ## # Groups:   symbol, split [205]
 ##    symbol split train_data         
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;             
-##  1 EOS        1 &lt;tibble [287 × 11]&gt;
-##  2 EDG        1 &lt;tibble [293 × 11]&gt;
-##  3 BTG        1 &lt;tibble [265 × 11]&gt;
-##  4 VET        1 &lt;tibble [271 × 11]&gt;
-##  5 IHF        1 &lt;tibble [203 × 11]&gt;
-##  6 DGB        1 &lt;tibble [293 × 11]&gt;
-##  7 LTC        1 &lt;tibble [286 × 11]&gt;
-##  8 NEXO       1 &lt;tibble [292 × 11]&gt;
-##  9 XMR        1 &lt;tibble [276 × 11]&gt;
-## 10 SRN        1 &lt;tibble [170 × 11]&gt;
+##  1 EOS        1 &lt;tibble [289 × 11]&gt;
+##  2 EDG        1 &lt;tibble [295 × 11]&gt;
+##  3 BTG        1 &lt;tibble [266 × 11]&gt;
+##  4 VET        1 &lt;tibble [272 × 11]&gt;
+##  5 IHF        1 &lt;tibble [205 × 11]&gt;
+##  6 DGB        1 &lt;tibble [295 × 11]&gt;
+##  7 LTC        1 &lt;tibble [288 × 11]&gt;
+##  8 NEXO       1 &lt;tibble [294 × 11]&gt;
+##  9 XMR        1 &lt;tibble [278 × 11]&gt;
+## 10 SRN        1 &lt;tibble [171 × 11]&gt;
 ## # … with 195 more rows</code></pre>
 <p>Now let’s repeat the same process but on the <span style="color: blue;"><strong>test</strong></span> data to create the <span style="color: blue;"><strong>cryptodata_test</strong></span> object:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="model-validation-plan.html#cb85-1"></a>cryptodata_test &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, </span>
-<span id="cb85-2"><a href="model-validation-plan.html#cb85-2"></a>                                             training<span class="op">==</span><span class="st">&#39;test&#39;</span>)), </span>
-<span id="cb85-3"><a href="model-validation-plan.html#cb85-3"></a>                                 <span class="dt">test_data =</span> <span class="st">&#39;data&#39;</span>), </span>
-<span id="cb85-4"><a href="model-validation-plan.html#cb85-4"></a>                          <span class="op">-</span>training)</span>
-<span id="cb85-5"><a href="model-validation-plan.html#cb85-5"></a><span class="co"># Now remove training column</span></span>
-<span id="cb85-6"><a href="model-validation-plan.html#cb85-6"></a>cryptodata_test &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">ungroup</span>(cryptodata_test, </span>
-<span id="cb85-7"><a href="model-validation-plan.html#cb85-7"></a>                                  training), </span>
-<span id="cb85-8"><a href="model-validation-plan.html#cb85-8"></a>                          <span class="op">-</span>training)</span>
-<span id="cb85-9"><a href="model-validation-plan.html#cb85-9"></a><span class="co"># Show nested data</span></span>
-<span id="cb85-10"><a href="model-validation-plan.html#cb85-10"></a>cryptodata_test</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="model-validation-plan.html#cb82-1"></a>cryptodata_test &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, </span>
+<span id="cb82-2"><a href="model-validation-plan.html#cb82-2"></a>                                             training<span class="op">==</span><span class="st">&#39;test&#39;</span>)), </span>
+<span id="cb82-3"><a href="model-validation-plan.html#cb82-3"></a>                                 <span class="dt">test_data =</span> <span class="st">&#39;data&#39;</span>), </span>
+<span id="cb82-4"><a href="model-validation-plan.html#cb82-4"></a>                          <span class="op">-</span>training)</span>
+<span id="cb82-5"><a href="model-validation-plan.html#cb82-5"></a><span class="co"># Now remove training column</span></span>
+<span id="cb82-6"><a href="model-validation-plan.html#cb82-6"></a>cryptodata_test &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">ungroup</span>(cryptodata_test, </span>
+<span id="cb82-7"><a href="model-validation-plan.html#cb82-7"></a>                                  training), </span>
+<span id="cb82-8"><a href="model-validation-plan.html#cb82-8"></a>                          <span class="op">-</span>training)</span>
+<span id="cb82-9"><a href="model-validation-plan.html#cb82-9"></a><span class="co"># Show nested data</span></span>
+<span id="cb82-10"><a href="model-validation-plan.html#cb82-10"></a>cryptodata_test</span></code></pre></div>
 <pre><code>## # A tibble: 172 x 3
 ## # Groups:   symbol, split [172]
 ##    symbol split test_data         
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;            
 ##  1 LINK       1 &lt;tibble [65 × 11]&gt;
-##  2 IHF        1 &lt;tibble [71 × 11]&gt;
-##  3 AYA        1 &lt;tibble [77 × 11]&gt;
+##  2 IHF        1 &lt;tibble [72 × 11]&gt;
+##  3 AYA        1 &lt;tibble [78 × 11]&gt;
 ##  4 REP        1 &lt;tibble [78 × 11]&gt;
-##  5 VET        1 &lt;tibble [86 × 11]&gt;
+##  5 VET        1 &lt;tibble [87 × 11]&gt;
 ##  6 BTG        1 &lt;tibble [88 × 11]&gt;
-##  7 XEM        1 &lt;tibble [89 × 11]&gt;
+##  7 XEM        1 &lt;tibble [90 × 11]&gt;
 ##  8 HT         1 &lt;tibble [91 × 11]&gt;
 ##  9 EOS        1 &lt;tibble [92 × 11]&gt;
-## 10 ENJ        1 &lt;tibble [92 × 11]&gt;
+## 10 ENJ        1 &lt;tibble [93 × 11]&gt;
 ## # … with 162 more rows</code></pre>
 <p>As well as the <span style="color: blue;"><strong>hoildout</strong></span> data to create the <span style="color: blue;"><strong>cryptodata_holdout</strong></span> object:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="model-validation-plan.html#cb87-1"></a>cryptodata_holdout &lt;-<span class="st"> </span><span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, </span>
-<span id="cb87-2"><a href="model-validation-plan.html#cb87-2"></a>                                         training<span class="op">==</span><span class="st">&#39;holdout&#39;</span>)), </span>
-<span id="cb87-3"><a href="model-validation-plan.html#cb87-3"></a>                             <span class="dt">holdout_data =</span> <span class="st">&#39;data&#39;</span>)</span>
-<span id="cb87-4"><a href="model-validation-plan.html#cb87-4"></a><span class="co"># Remove split and training columns from holdout</span></span>
-<span id="cb87-5"><a href="model-validation-plan.html#cb87-5"></a>cryptodata_holdout &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">ungroup</span>(cryptodata_holdout, split, training), </span>
-<span id="cb87-6"><a href="model-validation-plan.html#cb87-6"></a>                             <span class="op">-</span>split, <span class="op">-</span>training)</span>
-<span id="cb87-7"><a href="model-validation-plan.html#cb87-7"></a><span class="co"># Show nested data</span></span>
-<span id="cb87-8"><a href="model-validation-plan.html#cb87-8"></a>cryptodata_holdout</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="model-validation-plan.html#cb84-1"></a>cryptodata_holdout &lt;-<span class="st"> </span><span class="kw">rename</span>(<span class="kw">nest</span>(<span class="kw">filter</span>(cryptodata, </span>
+<span id="cb84-2"><a href="model-validation-plan.html#cb84-2"></a>                                         training<span class="op">==</span><span class="st">&#39;holdout&#39;</span>)), </span>
+<span id="cb84-3"><a href="model-validation-plan.html#cb84-3"></a>                             <span class="dt">holdout_data =</span> <span class="st">&#39;data&#39;</span>)</span>
+<span id="cb84-4"><a href="model-validation-plan.html#cb84-4"></a><span class="co"># Remove split and training columns from holdout</span></span>
+<span id="cb84-5"><a href="model-validation-plan.html#cb84-5"></a>cryptodata_holdout &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">ungroup</span>(cryptodata_holdout, split, training), </span>
+<span id="cb84-6"><a href="model-validation-plan.html#cb84-6"></a>                             <span class="op">-</span>split, <span class="op">-</span>training)</span>
+<span id="cb84-7"><a href="model-validation-plan.html#cb84-7"></a><span class="co"># Show nested data</span></span>
+<span id="cb84-8"><a href="model-validation-plan.html#cb84-8"></a>cryptodata_holdout</span></code></pre></div>
 <pre><code>## # A tibble: 43 x 2
 ## # Groups:   symbol [43]
 ##    symbol holdout_data      
 ##    &lt;chr&gt;  &lt;list&gt;            
 ##  1 VET    &lt;tibble [88 × 11]&gt;
-##  2 BAT    &lt;tibble [97 × 11]&gt;
-##  3 NEXO   &lt;tibble [97 × 11]&gt;
-##  4 BTC    &lt;tibble [96 × 11]&gt;
-##  5 XMR    &lt;tibble [96 × 11]&gt;
-##  6 DGB    &lt;tibble [96 × 11]&gt;
-##  7 DCR    &lt;tibble [93 × 11]&gt;
-##  8 EDG    &lt;tibble [96 × 11]&gt;
-##  9 LTC    &lt;tibble [95 × 11]&gt;
-## 10 ENJ    &lt;tibble [95 × 11]&gt;
+##  2 BTC    &lt;tibble [98 × 11]&gt;
+##  3 DGB    &lt;tibble [98 × 11]&gt;
+##  4 DCR    &lt;tibble [96 × 11]&gt;
+##  5 EDG    &lt;tibble [98 × 11]&gt;
+##  6 LTC    &lt;tibble [97 × 11]&gt;
+##  7 EOS    &lt;tibble [95 × 11]&gt;
+##  8 BAT    &lt;tibble [95 × 11]&gt;
+##  9 NEXO   &lt;tibble [95 × 11]&gt;
+## 10 HT     &lt;tibble [94 × 11]&gt;
 ## # … with 33 more rows</code></pre>
 <div id="join-results" class="section level3">
 <h3><span class="header-section-number">6.4.1</span> Join Results</h3>
 <p>Now we can take the results that we grouped for each subset <span style="color: blue;"><strong>cryptodata_train</strong></span>, <span style="color: blue;"><strong>cryptodata_test</strong></span>, and <span style="color: blue;"><strong>cryptodata_holdout</strong></span>, and we can <span style="color: purple;"><strong>join</strong></span> the results to have all three new columns <span style="color: blue;"><strong>train_data</strong></span>, <span style="color: blue;"><strong>test_data</strong></span>, and <span style="color: blue;"><strong>holdout_data</strong></span> in a single new dataframe, which we will call <span style="color: blue;"><strong>cryptodata_nested</strong></span>:</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="model-validation-plan.html#cb89-1"></a><span class="co"># Join train and test</span></span>
-<span id="cb89-2"><a href="model-validation-plan.html#cb89-2"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">left_join</span>(cryptodata_train, cryptodata_test, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;symbol&quot;</span>, <span class="st">&quot;split&quot;</span>))</span>
-<span id="cb89-3"><a href="model-validation-plan.html#cb89-3"></a><span class="co"># Show new data</span></span>
-<span id="cb89-4"><a href="model-validation-plan.html#cb89-4"></a>cryptodata_nested</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="model-validation-plan.html#cb86-1"></a><span class="co"># Join train and test</span></span>
+<span id="cb86-2"><a href="model-validation-plan.html#cb86-2"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">left_join</span>(cryptodata_train, cryptodata_test, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;symbol&quot;</span>, <span class="st">&quot;split&quot;</span>))</span>
+<span id="cb86-3"><a href="model-validation-plan.html#cb86-3"></a><span class="co"># Show new data</span></span>
+<span id="cb86-4"><a href="model-validation-plan.html#cb86-4"></a>cryptodata_nested</span></code></pre></div>
 <pre><code>## # A tibble: 205 x 4
 ## # Groups:   symbol, split [205]
 ##    symbol split train_data          test_data         
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;              &lt;list&gt;            
-##  1 EOS        1 &lt;tibble [287 × 11]&gt; &lt;tibble [92 × 11]&gt;
-##  2 EDG        1 &lt;tibble [293 × 11]&gt; &lt;tibble [94 × 11]&gt;
-##  3 BTG        1 &lt;tibble [265 × 11]&gt; &lt;tibble [88 × 11]&gt;
-##  4 VET        1 &lt;tibble [271 × 11]&gt; &lt;tibble [86 × 11]&gt;
-##  5 IHF        1 &lt;tibble [203 × 11]&gt; &lt;tibble [71 × 11]&gt;
-##  6 DGB        1 &lt;tibble [293 × 11]&gt; &lt;tibble [94 × 11]&gt;
-##  7 LTC        1 &lt;tibble [286 × 11]&gt; &lt;tibble [94 × 11]&gt;
-##  8 NEXO       1 &lt;tibble [292 × 11]&gt; &lt;tibble [93 × 11]&gt;
-##  9 XMR        1 &lt;tibble [276 × 11]&gt; &lt;tibble [93 × 11]&gt;
-## 10 SRN        1 &lt;tibble [170 × 11]&gt; &lt;tibble [88 × 11]&gt;
+##  1 EOS        1 &lt;tibble [289 × 11]&gt; &lt;tibble [92 × 11]&gt;
+##  2 EDG        1 &lt;tibble [295 × 11]&gt; &lt;tibble [94 × 11]&gt;
+##  3 BTG        1 &lt;tibble [266 × 11]&gt; &lt;tibble [88 × 11]&gt;
+##  4 VET        1 &lt;tibble [272 × 11]&gt; &lt;tibble [87 × 11]&gt;
+##  5 IHF        1 &lt;tibble [205 × 11]&gt; &lt;tibble [72 × 11]&gt;
+##  6 DGB        1 &lt;tibble [295 × 11]&gt; &lt;tibble [94 × 11]&gt;
+##  7 LTC        1 &lt;tibble [288 × 11]&gt; &lt;tibble [94 × 11]&gt;
+##  8 NEXO       1 &lt;tibble [294 × 11]&gt; &lt;tibble [94 × 11]&gt;
+##  9 XMR        1 &lt;tibble [278 × 11]&gt; &lt;tibble [94 × 11]&gt;
+## 10 SRN        1 &lt;tibble [171 × 11]&gt; &lt;tibble [89 × 11]&gt;
 ## # … with 195 more rows</code></pre>
 <p><em>The <span style="color: blue;"><strong>by</strong></span> argument used above defines the key to use to join the data by, in this case the cryptocurrency <span style="color: blue;"><strong>symbol</strong></span>, as well as the specific <span style="color: blue;"><strong>split</strong></span></em>.</p>
 <p>Next, let’s join the new dataframe we just created <span style="color: blue;"><strong>cryptodata_nested</strong></span> to the holdout data as well and add the <span style="color: blue;"><strong>holdout_data</strong></span> column. In this case, we will want to keep the holdout data consistent for all 5 splits of a cryptocurrency instead of matching the data to a particular split; the models trained on the data from splits 1 through 5 will each have a different test dataset, but all 5 models will then be tested against the same holdout. Therefore, this time in the <span style="color: green;"><strong>join()</strong></span> performed below we are only supplying the cryptocurrency <span style="color: blue;"><strong>symbol</strong></span> for the <span style="color: blue;"><strong>by</strong></span> parameter:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="model-validation-plan.html#cb91-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">left_join</span>(cryptodata_nested, cryptodata_holdout, <span class="dt">by =</span> <span class="st">&quot;symbol&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="model-validation-plan.html#cb88-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">left_join</span>(cryptodata_nested, cryptodata_holdout, <span class="dt">by =</span> <span class="st">&quot;symbol&quot;</span>)</span></code></pre></div>
 <p>Now we have our completed dataset that will allow us to iterate through each option and create many separate models as was <a href="model-validation-plan.html#cross-validation">discussed throughout this section</a>:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="model-validation-plan.html#cb92-1"></a>cryptodata_nested</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="model-validation-plan.html#cb89-1"></a>cryptodata_nested</span></code></pre></div>
 <pre><code>## # A tibble: 205 x 5
 ## # Groups:   symbol, split [205]
 ##    symbol split train_data          test_data          holdout_data      
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;              &lt;list&gt;             &lt;list&gt;            
-##  1 EOS        1 &lt;tibble [287 × 11]&gt; &lt;tibble [92 × 11]&gt; &lt;tibble [93 × 11]&gt;
-##  2 EDG        1 &lt;tibble [293 × 11]&gt; &lt;tibble [94 × 11]&gt; &lt;tibble [96 × 11]&gt;
-##  3 BTG        1 &lt;tibble [265 × 11]&gt; &lt;tibble [88 × 11]&gt; &lt;tibble [90 × 11]&gt;
-##  4 VET        1 &lt;tibble [271 × 11]&gt; &lt;tibble [86 × 11]&gt; &lt;tibble [88 × 11]&gt;
-##  5 IHF        1 &lt;tibble [203 × 11]&gt; &lt;tibble [71 × 11]&gt; &lt;tibble [75 × 11]&gt;
-##  6 DGB        1 &lt;tibble [293 × 11]&gt; &lt;tibble [94 × 11]&gt; &lt;tibble [96 × 11]&gt;
-##  7 LTC        1 &lt;tibble [286 × 11]&gt; &lt;tibble [94 × 11]&gt; &lt;tibble [95 × 11]&gt;
-##  8 NEXO       1 &lt;tibble [292 × 11]&gt; &lt;tibble [93 × 11]&gt; &lt;tibble [97 × 11]&gt;
-##  9 XMR        1 &lt;tibble [276 × 11]&gt; &lt;tibble [93 × 11]&gt; &lt;tibble [96 × 11]&gt;
-## 10 SRN        1 &lt;tibble [170 × 11]&gt; &lt;tibble [88 × 11]&gt; &lt;tibble [90 × 11]&gt;
+##  1 EOS        1 &lt;tibble [289 × 11]&gt; &lt;tibble [92 × 11]&gt; &lt;tibble [95 × 11]&gt;
+##  2 EDG        1 &lt;tibble [295 × 11]&gt; &lt;tibble [94 × 11]&gt; &lt;tibble [98 × 11]&gt;
+##  3 BTG        1 &lt;tibble [266 × 11]&gt; &lt;tibble [88 × 11]&gt; &lt;tibble [92 × 11]&gt;
+##  4 VET        1 &lt;tibble [272 × 11]&gt; &lt;tibble [87 × 11]&gt; &lt;tibble [88 × 11]&gt;
+##  5 IHF        1 &lt;tibble [205 × 11]&gt; &lt;tibble [72 × 11]&gt; &lt;tibble [73 × 11]&gt;
+##  6 DGB        1 &lt;tibble [295 × 11]&gt; &lt;tibble [94 × 11]&gt; &lt;tibble [98 × 11]&gt;
+##  7 LTC        1 &lt;tibble [288 × 11]&gt; &lt;tibble [94 × 11]&gt; &lt;tibble [97 × 11]&gt;
+##  8 NEXO       1 &lt;tibble [294 × 11]&gt; &lt;tibble [94 × 11]&gt; &lt;tibble [95 × 11]&gt;
+##  9 XMR        1 &lt;tibble [278 × 11]&gt; &lt;tibble [94 × 11]&gt; &lt;tibble [94 × 11]&gt;
+## 10 SRN        1 &lt;tibble [171 × 11]&gt; &lt;tibble [89 × 11]&gt; &lt;tibble [93 × 11]&gt;
 ## # … with 195 more rows</code></pre>
 <p>Move on to the <a href="predictive-modeling.html#predictive-modeling">next section</a> ➡️ to build the predictive models using the methodology discussed in this section.</p>
 

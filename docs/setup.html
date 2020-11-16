@@ -203,6 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.3" data-path="data-prep.html"><a href="data-prep.html#calculate-target-1"><i class="fa fa-check"></i><b>4.4.3</b> Calculate Target</a></li>
 <li class="chapter" data-level="4.4.4" data-path="data-prep.html"><a href="data-prep.html#calculate-lagged-prices"><i class="fa fa-check"></i><b>4.4.4</b> Calculate Lagged Prices</a></li>
 </ul></li>
+<li class="chapter" data-level="4.5" data-path="data-prep.html"><a href="data-prep.html#remove-nulls-again"><i class="fa fa-check"></i><b>4.5</b> Remove Nulls</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization 📉</a><ul>
 <li class="chapter" data-level="5.1" data-path="visualization.html"><a href="visualization.html#basics---ggplot2"><i class="fa fa-check"></i><b>5.1</b> Basics - ggplot2</a></li>
@@ -295,15 +296,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="considerations.html"><a href="considerations.html#session-information"><i class="fa fa-check"></i><b>9.2</b> Session Information</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>10</b> Archive</a><ul>
-<li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#may-2020"><i class="fa fa-check"></i><b>10.1</b> May 2020</a></li>
+<li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#november-2020"><i class="fa fa-check"></i><b>10.1</b> November 2020</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="references-test.html"><a href="references-test.html"><i class="fa fa-check"></i><b>11</b> References Test</a><ul>
-<li class="chapter" data-level="11.1" data-path="references-test.html"><a href="references-test.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
-<li class="chapter" data-level="11.2" data-path="references-test.html"><a href="references-test.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
-<li class="chapter" data-level="11.3" data-path="references-test.html"><a href="references-test.html#visualization-section"><i class="fa fa-check"></i><b>11.3</b> Visualization Section</a></li>
-<li class="chapter" data-level="11.4" data-path="references-test.html"><a href="references-test.html#time-series-section"><i class="fa fa-check"></i><b>11.4</b> Time Series Section</a></li>
-<li class="chapter" data-level="11.5" data-path="references-test.html"><a href="references-test.html#evaluate-model-performance-1"><i class="fa fa-check"></i><b>11.5</b> Evaluate Model Performance</a></li>
-<li class="chapter" data-level="11.6" data-path="references-test.html"><a href="references-test.html#r-packages-used"><i class="fa fa-check"></i><b>11.6</b> R Packages Used</a></li>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a><ul>
+<li class="chapter" data-level="11.1" data-path="references.html"><a href="references.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
+<li class="chapter" data-level="11.2" data-path="references.html"><a href="references.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
+<li class="chapter" data-level="11.3" data-path="references.html"><a href="references.html#visualization-1"><i class="fa fa-check"></i><b>11.3</b> Visualization</a></li>
+<li class="chapter" data-level="11.4" data-path="references.html"><a href="references.html#predictive-modeling-1"><i class="fa fa-check"></i><b>11.4</b> Predictive Modeling</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="references.html"><a href="references.html#time-series"><i class="fa fa-check"></i><b>11.4.1</b> Time Series</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="references.html"><a href="references.html#evaluate-model-performance-1"><i class="fa fa-check"></i><b>11.5</b> Evaluate Model Performance</a></li>
+<li class="chapter" data-level="11.6" data-path="references.html"><a href="references.html#r-packages-used"><i class="fa fa-check"></i><b>11.6</b> R Packages Used</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="blank"><img src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" width="80"></a></li>
@@ -329,10 +332,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="setup" class="section level1">
 <h1><span class="header-section-number">Section - 2</span> Setup and Installation</h1>
 <p>Every part of this document can be run on any computer either through a cloud notebook or locally.</p>
-<p>You can also follow along with the tutorial without running the individual steps yourself. In that case, <a href="#overview"><strong>you can move on to the next page where the tutorial actually begins</strong></a>.</p>
+<p>You can also follow along with the tutorial without running the individual steps yourself. In that case, <a href="explore-data.html#explore-data"><strong>you can move on to the next page where the tutorial actually begins</strong></a>.</p>
 <div id="run-in-the-cloud" class="section level2">
 <h2><span class="header-section-number">2.1</span> Option 1 - Run in the Cloud</h2>
-<p>If you do not currently have R and RStudio installed on your computer, you can run all of the code from your web browser one step at a time here: <a href="https://mybinder.org/v2/gh/ries9112/cryptocurrencyresearch-org/HEAD?filepath=Tutorial-Full.ipynb" target="_blank"><strong>this mobile friendly link</strong></a>.</p>
+<p>If you do not currently have R and RStudio installed on your computer, you can run all of the code from your web browser one step at a time here: <a href="https://mybinder.org/v2/gh/ries9112/high-level-reprex-jupyter/9c4602e3288f9ee542f7d4b4d39ebba400f37006?filepath=Tutorial-Full-POST.ipynb" target="_blank"><strong>this mobile friendly link</strong></a>.</p>
 <p>This can take up to 30 seconds to load, and once it has you should see a page that looks like this:</p>
 <p><img src="images/jupyter_notebook.png" /></p>
 <p><strong>From here, you can run the code one cell at a time:</strong></p>
@@ -390,7 +393,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-6"><a href="setup.html#cb3-6"></a>       <span class="st">&#39;brnn&#39;</span>, <span class="st">&#39;party&#39;</span>, <span class="st">&#39;deepnet&#39;</span>, <span class="st">&#39;elasticnet&#39;</span>, <span class="st">&#39;pls&#39;</span>,  <span class="co"># Predictive Modeling continued</span></span>
 <span id="cb3-7"><a href="setup.html#cb3-7"></a>       <span class="st">&#39;hydroGOF&#39;</span>, <span class="st">&#39;formattable&#39;</span>, <span class="st">&#39;knitr&#39;</span>) <span class="co"># Evaluate Model Performance</span></span></code></pre></div>
 <p><strong><em>It is normal for this step to take a long time, as it will install every package you will need to follow along with the rest of the tutorial.</em></strong> The next time you run this command it would be much faster because it would skip installing the already installed packages.</p>
-<p>Running <strong>p_load()</strong> is equivalent to running <span style="color: green;"><strong>install.packages()</strong></span> on each of the packages listed <strong>(but only when they are not already installed on your computer)</strong>, and then running <span style="color: green;">library()</span> for each package in quotes separated by commas to import the functionality from the package into the current R session. <strong>Both commands are wrapped inside the single function call to</strong> <span style="color: green;"><strong>p_load()</strong></span>. We could run each command individually using base R and create our own logic to only install packages not currently installed, but we are better off using a package that has already been developed and scrutinized by many expert programmers; the same goes for complex statistical models, we don’t need to create things from scratch if we understand how to properly use tools developed by the open source community. Open source tools have become particularly good in recent years and can be used for any kind of work, including commercial work, most large corporations have started using open source tools available through R and Python.</p>
+<p>Running <strong>p_load()</strong> is equivalent to running <span style="color: green;"><strong>install.packages()</strong></span> on each of the packages listed <strong>(but only when they are not already installed on your computer)</strong>, and then running <span style="color: green;"><strong>library()</strong></span> for each package in quotes separated by commas to import the functionality from the package into the current R session. <strong>Both commands are wrapped inside the single function call to</strong> <span style="color: green;"><strong>p_load()</strong></span>. We could run each command individually using base R and create our own logic to only install packages not currently installed, but we are better off using a package that has already been developed and scrutinized by many expert programmers; the same goes for complex statistical models, we don’t need to create things from scratch if we understand how to properly use tools developed by the open source community. Open source tools have become particularly good in recent years and can be used for any kind of work, including commercial work, most large corporations have started using open source tools available through R and Python.</p>
 <p>Nice work! Now you have everything you need to <a href="#overview">follow along with this example</a> ➡️.</p>
 <!-- ### GitHub (KEEP OR DEL?) -->
 <!-- Because this document is produced through a free **C**ontinuous **I**ntegration (CI) tool called **GitHub Actions**, it is also really easy for anyone to use the same code on their own computer to produce this document using the latest available data (or even automate their own process). -->
