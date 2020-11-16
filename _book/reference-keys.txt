@@ -41,6 +41,7 @@ convert-to-hourly-data
 fill-gaps
 calculate-target-1
 calculate-lagged-prices
+remove-nulls-again
 visualization
 basics---ggplot2
 using-extensions
@@ -125,11 +126,12 @@ considerations
 not-a-trading-tutorial
 session-information
 archive
-may-2020
-references-test
+november-2020
+references
 document-format
 open-review-toolkit-ref
-visualization-section
-time-series-section
+visualization-1
+predictive-modeling-1
+time-series
 evaluate-model-performance-1
 r-packages-used

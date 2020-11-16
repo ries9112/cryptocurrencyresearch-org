@@ -203,6 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.3" data-path="data-prep.html"><a href="data-prep.html#calculate-target-1"><i class="fa fa-check"></i><b>4.4.3</b> Calculate Target</a></li>
 <li class="chapter" data-level="4.4.4" data-path="data-prep.html"><a href="data-prep.html#calculate-lagged-prices"><i class="fa fa-check"></i><b>4.4.4</b> Calculate Lagged Prices</a></li>
 </ul></li>
+<li class="chapter" data-level="4.5" data-path="data-prep.html"><a href="data-prep.html#remove-nulls-again"><i class="fa fa-check"></i><b>4.5</b> Remove Nulls</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization 📉</a><ul>
 <li class="chapter" data-level="5.1" data-path="visualization.html"><a href="visualization.html#basics---ggplot2"><i class="fa fa-check"></i><b>5.1</b> Basics - ggplot2</a></li>
@@ -295,15 +296,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="considerations.html"><a href="considerations.html#session-information"><i class="fa fa-check"></i><b>9.2</b> Session Information</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>10</b> Archive</a><ul>
-<li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#may-2020"><i class="fa fa-check"></i><b>10.1</b> May 2020</a></li>
+<li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#november-2020"><i class="fa fa-check"></i><b>10.1</b> November 2020</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="references-test.html"><a href="references-test.html"><i class="fa fa-check"></i><b>11</b> References Test</a><ul>
-<li class="chapter" data-level="11.1" data-path="references-test.html"><a href="references-test.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
-<li class="chapter" data-level="11.2" data-path="references-test.html"><a href="references-test.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
-<li class="chapter" data-level="11.3" data-path="references-test.html"><a href="references-test.html#visualization-section"><i class="fa fa-check"></i><b>11.3</b> Visualization Section</a></li>
-<li class="chapter" data-level="11.4" data-path="references-test.html"><a href="references-test.html#time-series-section"><i class="fa fa-check"></i><b>11.4</b> Time Series Section</a></li>
-<li class="chapter" data-level="11.5" data-path="references-test.html"><a href="references-test.html#evaluate-model-performance-1"><i class="fa fa-check"></i><b>11.5</b> Evaluate Model Performance</a></li>
-<li class="chapter" data-level="11.6" data-path="references-test.html"><a href="references-test.html#r-packages-used"><i class="fa fa-check"></i><b>11.6</b> R Packages Used</a></li>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a><ul>
+<li class="chapter" data-level="11.1" data-path="references.html"><a href="references.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
+<li class="chapter" data-level="11.2" data-path="references.html"><a href="references.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
+<li class="chapter" data-level="11.3" data-path="references.html"><a href="references.html#visualization-1"><i class="fa fa-check"></i><b>11.3</b> Visualization</a></li>
+<li class="chapter" data-level="11.4" data-path="references.html"><a href="references.html#predictive-modeling-1"><i class="fa fa-check"></i><b>11.4</b> Predictive Modeling</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="references.html"><a href="references.html#time-series"><i class="fa fa-check"></i><b>11.4.1</b> Time Series</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="references.html"><a href="references.html#evaluate-model-performance-1"><i class="fa fa-check"></i><b>11.5</b> Evaluate Model Performance</a></li>
+<li class="chapter" data-level="11.6" data-path="references.html"><a href="references.html#r-packages-used"><i class="fa fa-check"></i><b>11.6</b> R Packages Used</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="blank"><img src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" width="80"></a></li>
@@ -350,7 +353,7 @@ Hopefully it is clear by now, but this tutorial is not meant to show anyone how 
 <div id="session-information" class="section level2">
 <h2><span class="header-section-number">9.2</span> Session Information</h2>
 <p>Below is information relating to the specific R session that was run. If you are unable to reproduce these steps, you can find the correct version of the tools to install below. Otherwise follow the <a href="setup.html#run-in-the-cloud">instructions to run the code in the cloud</a> instead.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="considerations.html#cb192-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="considerations.html#cb189-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.0.3 (2020-10-10)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
 ## Running under: macOS Catalina 10.15.7

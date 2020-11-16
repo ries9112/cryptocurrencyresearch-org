@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="considerations.html"/>
-<link rel="next" href="references-test.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -203,6 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.3" data-path="data-prep.html"><a href="data-prep.html#calculate-target-1"><i class="fa fa-check"></i><b>4.4.3</b> Calculate Target</a></li>
 <li class="chapter" data-level="4.4.4" data-path="data-prep.html"><a href="data-prep.html#calculate-lagged-prices"><i class="fa fa-check"></i><b>4.4.4</b> Calculate Lagged Prices</a></li>
 </ul></li>
+<li class="chapter" data-level="4.5" data-path="data-prep.html"><a href="data-prep.html#remove-nulls-again"><i class="fa fa-check"></i><b>4.5</b> Remove Nulls</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization 📉</a><ul>
 <li class="chapter" data-level="5.1" data-path="visualization.html"><a href="visualization.html#basics---ggplot2"><i class="fa fa-check"></i><b>5.1</b> Basics - ggplot2</a></li>
@@ -295,15 +296,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="considerations.html"><a href="considerations.html#session-information"><i class="fa fa-check"></i><b>9.2</b> Session Information</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="archive.html"><a href="archive.html"><i class="fa fa-check"></i><b>10</b> Archive</a><ul>
-<li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#may-2020"><i class="fa fa-check"></i><b>10.1</b> May 2020</a></li>
+<li class="chapter" data-level="10.1" data-path="archive.html"><a href="archive.html#november-2020"><i class="fa fa-check"></i><b>10.1</b> November 2020</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="references-test.html"><a href="references-test.html"><i class="fa fa-check"></i><b>11</b> References Test</a><ul>
-<li class="chapter" data-level="11.1" data-path="references-test.html"><a href="references-test.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
-<li class="chapter" data-level="11.2" data-path="references-test.html"><a href="references-test.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
-<li class="chapter" data-level="11.3" data-path="references-test.html"><a href="references-test.html#visualization-section"><i class="fa fa-check"></i><b>11.3</b> Visualization Section</a></li>
-<li class="chapter" data-level="11.4" data-path="references-test.html"><a href="references-test.html#time-series-section"><i class="fa fa-check"></i><b>11.4</b> Time Series Section</a></li>
-<li class="chapter" data-level="11.5" data-path="references-test.html"><a href="references-test.html#evaluate-model-performance-1"><i class="fa fa-check"></i><b>11.5</b> Evaluate Model Performance</a></li>
-<li class="chapter" data-level="11.6" data-path="references-test.html"><a href="references-test.html#r-packages-used"><i class="fa fa-check"></i><b>11.6</b> R Packages Used</a></li>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a><ul>
+<li class="chapter" data-level="11.1" data-path="references.html"><a href="references.html#document-format"><i class="fa fa-check"></i><b>11.1</b> Document Format</a></li>
+<li class="chapter" data-level="11.2" data-path="references.html"><a href="references.html#open-review-toolkit-ref"><i class="fa fa-check"></i><b>11.2</b> Open Review Toolkit</a></li>
+<li class="chapter" data-level="11.3" data-path="references.html"><a href="references.html#visualization-1"><i class="fa fa-check"></i><b>11.3</b> Visualization</a></li>
+<li class="chapter" data-level="11.4" data-path="references.html"><a href="references.html#predictive-modeling-1"><i class="fa fa-check"></i><b>11.4</b> Predictive Modeling</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="references.html"><a href="references.html#time-series"><i class="fa fa-check"></i><b>11.4.1</b> Time Series</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="references.html"><a href="references.html#evaluate-model-performance-1"><i class="fa fa-check"></i><b>11.5</b> Evaluate Model Performance</a></li>
+<li class="chapter" data-level="11.6" data-path="references.html"><a href="references.html#r-packages-used"><i class="fa fa-check"></i><b>11.6</b> R Packages Used</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="blank"><img src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" width="80"></a></li>
@@ -328,16 +331,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="archive" class="section level1">
 <h1><span class="header-section-number">Section - 10</span> Archive</h1>
-<p>Below is an archive of this same document from different dates:</p>
-<div id="may-2020" class="section level2">
-<h2><span class="header-section-number">10.1</span> May 2020</h2>
-<p><a href="https://5fa98c019806070007a1948c--researchpaper.netlify.app/">November 10, 2020 - Morning</a></p>
-<p><a href="https://5ec910b25ba546000683ef75--researchpaper.netlify.app/">May 23, 2020 - Morning</a></p>
-<p><a href="https://5ec7bfda63f2680006dc7adb--researchpaper.netlify.app/">May 22, 2020 - Morning</a></p>
-<p><a href="https://5ec66e35e51006000702d6a6--researchpaper.netlify.app/">May 21, 2020 - Morning</a></p>
-<p><a href="https://5ec54d80a11b3100064e7032--researchpaper.netlify.app/">May 20, 2020 - Morning</a></p>
-<p><a href="https://5ec3ebd67cef13000653e8ec--researchpaper.netlify.app/">May 19, 2020 - Morning</a></p>
-<p><a href="https://5ec27a599a31b90007d45f5e--researchpaper.netlify.app/">May 18, 2020 - Morning</a></p>
+<p>Below is an archive of this same document from different dates. By clicking on any of the links below you can view this same document as was published on a given date.</p>
+<div id="november-2020" class="section level2">
+<h2><span class="header-section-number">10.1</span> November 2020</h2>
+<p><a href="https://5fb13daca7ee8500082a9e87--researchpaper.netlify.app/">November 15th, 2020 - Morning</a></p>
+<p><a href="https://5fb0e95719046d0007714fea--researchpaper.netlify.app/">November 14th, 2020 - Night</a></p>
+<!-- [November 10, 2020 - Morning](https://5fa98c019806070007a1948c--researchpaper.netlify.app/) -->
+<!-- ## May 2020 -->
+<!-- [May 23, 2020 - Morning](https://5ec910b25ba546000683ef75--researchpaper.netlify.app/) -->
+<!-- [May 22, 2020 - Morning](https://5ec7bfda63f2680006dc7adb--researchpaper.netlify.app/) -->
+<!-- [May 21, 2020 - Morning](https://5ec66e35e51006000702d6a6--researchpaper.netlify.app/) -->
+<!-- [May 20, 2020 - Morning](https://5ec54d80a11b3100064e7032--researchpaper.netlify.app/) -->
+<!-- [May 19, 2020 - Morning](https://5ec3ebd67cef13000653e8ec--researchpaper.netlify.app/) -->
+<!-- [May 18, 2020 - Morning](https://5ec27a599a31b90007d45f5e--researchpaper.netlify.app/) -->
 
 </div>
 </div>
@@ -347,7 +353,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="considerations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references-test.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
