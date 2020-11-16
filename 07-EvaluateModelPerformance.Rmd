@@ -20,6 +20,7 @@ A common metric to evaluate the performance of a model is the [**R**oot **M**ean
 
 The [**$R^2$**]{style="color: purple;"}, also known as the [**coefficient of determination**]{style="color: purple;"}, is a measure that describes the strength in the correlation between the predictions made and the actual results. A value of 1.0 would mean that the predictions made were exactly identical to the actual results. A perfect score is usually concerning because even a great model shouldn't be exactly 100% accurate and usually indicates a mistake was made that gave away the results to the model and would not perform nearly as good when put into practice in the real world, but in the case of the $R^2$ the higher the score (from 0 to 1) the better.
 
+
 ### Get Metrics
 
 We can return the RMSE and $R^2$ metrics for the `r cryptodata_nested$symbol[[1]]` cryptocurrency and the split number `r cryptodata_nested$split[[1]]` by using the [**postResample()**]{style="color: green;"} function from the [**caret**]{style="color: #ae7b11;"} package:
@@ -45,7 +46,9 @@ postResample(pred = cryptodata_nested$lm_holdout_predictions[[1]],
 
 ### Comparing Metrics
 
-How do these two results compare and why is this comparison important? The **RMSE** is helpful in understanding the magnitude of the errors of the predictions, while the **$R^2$** helps us determine how easily we can predict future values. 
+Why not just pick one metric and stick to it? We certainly could, but these two metrics complement each other. For example, if we had a model that always predicts a 0% price change for the time period, the model may have a low error but it wouldn't actually be very informative in the direction or magnitude of those movements and the predictions and actuals would not be very correlated with each other which would lead to a low $R^2$ value. We are using both because it helps paint a more complete picture in this sense, and depending on the task you may want to use a different set of metrics to evaluate the performance. It is also worth mentioning that if your target variable you are predicting is either 0 or 1, this would be a [**classification**]{style="color: purple;"} problem where different metrics become more appropriate to use.
+
+<!-- How do these two results compare and why is this comparison important? The **RMSE** is helpful in understanding the magnitude of the errors of the predictions, while the **$R^2$** helps us determine how easily we can predict future values.  -->
 
 **These are indicators that should be taken with a grain of salt individually, but comparing the results across many different models for the same cryptocurrency can help us determine which models work best for the problem, and then comparing those results across many cryptocurrencies can help us understand which cryptocurrencies we can predict with the most accuracy**.
 
@@ -78,7 +81,11 @@ last_train_price <- function(train_data, predictions){
 }
 ```
 
-Now overwrite the old predictions:
+**We will first perform all steps on the linear regression models to make the code a little more digestible, and we will then perform the [same steps for the rest of the models](#adjust-prices-all-models).**
+
+#### Test 
+
+Overwrite the old predictions for the first 4 splits of the test data using the new function created above:
 
 ```{r}
 cryptodata_nested <- mutate(cryptodata_nested,
@@ -86,10 +93,12 @@ cryptodata_nested <- mutate(cryptodata_nested,
                                                          map2(train_data, lm_test_predictions, last_train_price),
                                                          NA))
 ```
+*The [**mutate()**]{style="color: green;"} function is used to create the new column [**lm_test_predictions**]{style="color: blue;"} assigning the value only for the first 4 splits where the test data would actually exist (the 5th being the holdout set) using the [**ifelse()**]{style="color: green;"} function*.
+
 
 #### Holdout
 
-Do the same but for the holdout now. For the holdout we need to take the last price point of the 5th training split:
+Do the same but for the holdout now. For the holdout we need to take the last price point of the 5th split:
 ```{r}
 cryptodata_nested_holdout <- mutate(filter(cryptodata_nested, split == 5),
                                     lm_holdout_predictions = map2(train_data, lm_holdout_predictions, last_train_price))
@@ -269,7 +278,7 @@ print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_r
 Out of `r nrow(cryptodata_nested)` groups, `r count(ungroup(filter(cryptodata_nested, lm_rmse_test >= lm_rmse_holdout)))$n` had an equal or lower RMSE score for the holdout than the test set.
 
 
-## Adjust Prices - All Models
+## Adjust Prices - All Models{#adjust-prices-all-models}
 
 Let's repeat the same steps that we outlined above for all models.
 
