@@ -83,6 +83,7 @@ get-metrics
 comparing-metrics
 data-prep---adjust-prices
 add-last-price
+test
 holdout
 convert-to-percentage-change
 actuals
@@ -91,7 +92,7 @@ actuals-as-change
 review-summary-statistics
 calculate-r2
 calculate-rmse-no-NA
-adjust-prices---all-models
+adjust-prices-all-models
 add-last-price-1
 holdout-2
 convert-to-change
@@ -101,7 +102,7 @@ evaluate-rmse-test
 holdout-3
 union-results
 evaluate-r2
-test
+test-1
 holdout-4
 union-results-1
 visualize-results
