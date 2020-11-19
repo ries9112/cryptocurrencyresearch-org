@@ -87,14 +87,15 @@ crypto_chart +
 
 By not providing any [**method**]{style="color: blue;"} option, the [**stat_smooth()**]{style="color: green;"} function defaults to use the [**method**]{style="color: blue;"} called [**`loess`**, which shows the local trends](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/loess), while the **`lm`** model fits the best fitting linear regression line for the data as a whole. The results shown above were not used to overwrite the [**crypto_chart**]{style="color: blue;"} object.
 
-Before doing some additional formatting to the [**crypto_chart**]{style="color: blue;"} object, let's show one more example adding a new [red]{style="color: red;"} line for the [**target_price_24h**]{style="color: blue;"} column which we will aim to [predict in the predictive modeling section](#predictive-modeling), as well as an [orange]{style="color: orange;"} line showing the price 3 days in the past using the column [**lagged_price_3d**]{style="color: blue;"}. Again, we are **not overwriting** the results for the [**crypto_chart**]{style="color: blue;"} object:
-```{r chart_target_and_lagged}
-crypto_chart + 
-        # red line showing target
-        geom_line(aes(x=date_time_utc, y = target_price_24h), color = 'red') + 
-        # orange line showing price 3 days before
-        geom_line(aes(x=date_time_utc, y = lagged_price_3d), color = 'orange')
-```
+<!-- Removed the step below to keep engagement higher -->
+<!-- Before doing some additional formatting to the [**crypto_chart**]{style="color: blue;"} object, let's show one more example adding a new [red]{style="color: red;"} line for the [**target_price_24h**]{style="color: blue;"} column which we will aim to [predict in the predictive modeling section](#predictive-modeling), as well as an [orange]{style="color: orange;"} line showing the price 3 days in the past using the column [**lagged_price_3d**]{style="color: blue;"}. Again, we are **not overwriting** the results for the [**crypto_chart**]{style="color: blue;"} object: -->
+<!-- ```{r chart_target_and_lagged} -->
+<!-- crypto_chart +  -->
+<!--         # red line showing target -->
+<!--         geom_line(aes(x=date_time_utc, y = target_price_24h), color = 'red') +  -->
+<!--         # orange line showing price 3 days before -->
+<!--         geom_line(aes(x=date_time_utc, y = lagged_price_3d), color = 'orange') -->
+<!-- ``` -->
 
 It is of course important to add other components that make a visualization effective, let's add labels to the chart now using [**xlab()**]{style="color: green;"} and [**ylab()**]{style="color: green;"}, as well as [**ggtitle()**]{style="color: green;"} to add a title and subtitle:
 
