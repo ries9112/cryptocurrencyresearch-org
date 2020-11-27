@@ -44,5 +44,10 @@ Thanks to [Ben Marwick](https://github.com/benmarwick) for outlining how to use 
 
 - https://en.wikipedia.org/wiki/Coefficient_of_determination
 
+## Additional Contributors
+
+A big thank you to anyone who has left feedback to improve this document:
+
+- [David Butler](https://github.com/nimisis) for [pointing out a typo](https://github.com/ries9112/cryptocurrencyresearch-org/pull/1)
 
 ## R Packages Used
