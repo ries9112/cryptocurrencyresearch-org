@@ -135,4 +135,5 @@ visualization-1
 predictive-modeling-1
 time-series
 evaluate-model-performance-1
+additional-contributors
 r-packages-used
