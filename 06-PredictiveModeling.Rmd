@@ -277,6 +277,10 @@ We are done using the [**caret**]{style="color: #ae7b11;"} package and can stop 
 stopCluster(cl)
 ```
 
+```{block2, type='infoicon'}
+In this example we used the [caret package](https://topepo.github.io/caret/) because it provides a straightforward option to create a variety of models, but there are several great similar alternatives to make a variety of models in both R and Python. Some noteworthy mentions are [tidymodels](https://www.tidymodels.org/), [mlr](https://mlr3.mlr-org.com/), and [scikit-learn](https://scikit-learn.org/stable/).
+```
+
 
 ## Timeseries 
 
