@@ -136,3 +136,8 @@ fromJSON(content(GET("https://api.hitbtc.com/api/2/public/orderbook/ETHUSD",
 The data is collected by a script running on a private RStudio server that iterates through all cryptocurrency options one by one at the start of every hour from the HitBTC cryptocurrency exchange API order books data (as pulled above), and appends the latest data to a private database for long-term storage. Once the data is in the database, a different script gets kicked off every hour to publish the latest data from the database to the publicly available [**pins**]{style="color: #ae7b11;"} data source [discussed at the beginning of this section](#pull-the-data).
 
 ![](images/data_lifecycle.PNG){width="208"}
+
+
+```{r write_latest_data_to_github_repo, include=F} 
+write.csv('cryptodata', 'latest_data.csv')
+```
