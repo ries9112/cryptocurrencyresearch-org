@@ -30,7 +30,7 @@ jobs:
         run: |
           pins_key <- "${{secrets.PAT_PINS}}"
           
-          bookdown::render_book('index.Rmd', clean_envir = FALSE, clean = FALSE)
+          bookdown::render_book('introduction.Rmd', clean_envir = FALSE, clean = FALSE)
         shell: Rscript {0}
       - name: Snapshot renv to update lockfile
         run: |-
@@ -39,6 +39,11 @@ jobs:
         run: |
           rm -r docs
           cp -R _book docs
+      - name: Add website front page back in
+        run: |
+	        cp index.html _book
+          cp introduction.html _book
+	        cp about-us.html _book
       - name: Commit and push files
         run: |
           git config --local user.email "ries9112@colorado.edu"

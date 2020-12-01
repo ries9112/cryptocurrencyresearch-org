@@ -1,6 +1,10 @@
 ---
 title: "Cryptocurrency Research"
 date: '`r paste("Last Updated:<br/>",Sys.time())`'
+author:
+  - Riccardo (Ricky) Esclapon - [LinkedIn](https://www.linkedin.com/in/esclaponriccardo/), [Personal Website](https://resclapon.com/)
+  - John Chandler Johnson - [LinkedIn](https://www.linkedin.com/in/john-chandler-johnson-361a666/)
+  - Kai R. Larsen - [LinkedIn](https://www.linkedin.com/in/kai-r-larsen-4413a01/), [ResearchGate](https://www.researchgate.net/profile/Kai_Larsen)
 site: bookdown::gitbook
 documentclass: book
 bibliography:
