@@ -41,9 +41,9 @@ jobs:
           cp -R _book docs
       - name: Add website front page back in
         run: |
-	        cp index.html _book
+	  cp index.html _book
           cp introduction.html _book
-	        cp about-us.html _book
+	  cp about-us.html _book
       - name: Commit and push files
         run: |
           git config --local user.email "ries9112@colorado.edu"
