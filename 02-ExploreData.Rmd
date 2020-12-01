@@ -139,5 +139,5 @@ The data is collected by a script running on a private RStudio server that itera
 
 
 ```{r write_latest_data_to_github_repo, include=F} 
-write.csv('cryptodata', 'latest_data.csv')
+write.csv(cryptodata, 'latest_data.csv')
 ```
