@@ -32,17 +32,17 @@ jobs:
         shell: Rscript {0}
       - name: Snapshot renv to update lockfile
         run: |-
-          Rscript -e "renv::snapshot()"
-      - name: Update GitHub page
-        run: |
-          rm -r docs
-          cp -R _book docs     
+          Rscript -e "renv::snapshot()"     
       - name: Add website front page back in
         run: |
           cp index.html _book
           cp introduction.html _book
           cp about-us.html _book
           cp -r assets _book
+      - name: Update GitHub page
+        run: |
+          rm -r docs
+          cp -R _book docs
       - name: Commit and push files
         run: |
           git config --local user.email "ries9112@colorado.edu"
