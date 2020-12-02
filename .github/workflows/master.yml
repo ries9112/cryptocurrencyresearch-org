@@ -56,7 +56,10 @@ jobs:
         run: |
           mv introduction.html _book/index.html
           rm _book/introduction.html
-          rm -r _book/assets  
+          rm -r _book/assets
+          pandoc -f html -t html -o index.html index.html google_analytics_ab.html
+          pandoc -f html -t html -o introduction.html introduction.html google_analytics_ab.html
+          pandoc -f html -t html -o setup.html setup.html google_analytics_ab.html
       - name: Commit and push files for AB test
         run: |
           git config --local user.email "ries9112@colorado.edu"
