@@ -44,6 +44,7 @@ jobs:
           cp index.html _book
           cp introduction.html _book
           cp about-us.html _book
+          cp -r assets _book
       - name: Commit and push files
         run: |
           git config --local user.email "ries9112@colorado.edu"
