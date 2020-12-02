@@ -1,7 +1,5 @@
 name: Run Crypto Tutorial
-on:
-  schedule:
-    - cron: '05 02,14 * * *'
+on: push
 
 jobs:
   build:
@@ -38,7 +36,7 @@ jobs:
       - name: Add website front page back in
         run: |
           mv _book/index.html _book/introduction.html
-          mv index_home.html index.html
+          cp index_home.html index.html
           cp index.html _book
           cp about-us.html _book
           cp tools.html _book
