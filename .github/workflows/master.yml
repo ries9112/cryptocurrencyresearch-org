@@ -52,3 +52,18 @@ jobs:
           git add .
           git commit -m "Refresh entire book from CI automated process" -a
           git push https://ries9112:${{secrets.GITHUB_TOKEN}}@github.com/ries9112/cryptocurrencyresearch-org.git HEAD:master --force
+      - name: Reorganize for upload to old format branch for AB test
+        run: |
+          mv introduction.html _book/index.html
+          rm _book/introduction.html
+          rm -r _book/assets
+          pandoc -f html -t html -o index.html index.html google_analytics_ab.html
+          pandoc -f html -t html -o introduction.html introduction.html google_analytics_ab.html
+          pandoc -f html -t html -o setup.html setup.html google_analytics_ab.html
+      - name: Commit and push files for AB test
+        run: |
+          git config --local user.email "ries9112@colorado.edu"
+          git config --local user.name "ries9112"
+          git add .
+          git commit -m "Refresh entire book from CI automated process" -a
+          git push https://ries9112:${{secrets.GITHUB_TOKEN}}@github.com/ries9112/cryptocurrencyresearch-org.git HEAD:PROD_AB-Test --force
