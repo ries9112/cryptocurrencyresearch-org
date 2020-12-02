@@ -28,7 +28,7 @@ jobs:
         run: |
           pins_key <- "${{secrets.PAT_PINS}}"
           
-          bookdown::render_book('index.Rmd', clean_envir = FALSE, clean = FALSE)
+          bookdown::render_book('index.Rmd', clean = FALSE)
         shell: Rscript {0}
       - name: Snapshot renv to update lockfile
         run: |-
@@ -36,6 +36,7 @@ jobs:
       - name: Add website front page back in
         run: |
           mv _book/index.html _book/introduction.html
+          mv index_home.html index.html
           cp index.html _book
           cp about-us.html _book
           cp tools.html _book
