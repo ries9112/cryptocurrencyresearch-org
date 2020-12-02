@@ -35,11 +35,10 @@ jobs:
           Rscript -e "renv::snapshot()"     
       - name: Add website front page back in
         run: |
-          mv index.html introduction.html
-          mv index_main.html index.html
+          mv _book/index.html _book/introduction.html
           cp index.html _book
-          cp introduction.html _book
           cp about-us.html _book
+          cp tools.html _book
           cp -r assets _book
       - name: Update GitHub page
         run: |
