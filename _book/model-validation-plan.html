@@ -407,7 +407,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb61-48"><a href="model-validation-plan.html#cb61-48"></a>                     <span class="op">-</span>pkDummy, <span class="op">-</span>pkey, <span class="op">-</span>ts_index, split)</span></code></pre></div>
 <p>Our data now has the new columns <code>training</code> (<em>train</em>, <em>test</em> or <em>holdout</em>) and <code>split</code> (numbers 1-5) added to it, let’s take a look at the new columns:</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="model-validation-plan.html#cb62-1"></a><span class="kw">select</span>(cryptodata, training, split)</span></code></pre></div>
-<pre><code>## # A tibble: 222,825 x 3
+<pre><code>## # A tibble: 223,002 x 3
 ## # Groups:   symbol [118]
 ##    symbol training split
 ##    &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
@@ -421,7 +421,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8 STX    train        1
 ##  9 GBX    train        1
 ## 10 ACT    train        1
-## # … with 222,815 more rows</code></pre>
+## # … with 222,992 more rows</code></pre>
 <p><em>Notice that even though we left <code>symbol</code> variables out of our selection, but because it is part of the way we grouped our data, it was added back in with the message “Adding missing grouping variables <code>symbol</code>”. The data is tied to its groupings when performing all operations until we use <span style="color: green;"><strong>ungroup()</strong></span> to undo them.</em></p>
 <p>Let’s add the new <span style="color: blue;"><strong>split</strong></span> column to the way the data is grouped:</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="model-validation-plan.html#cb64-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol, split)</span></code></pre></div>
@@ -487,7 +487,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb72-8"><a href="model-validation-plan.html#cb72-8"></a>                                                        <span class="kw">sd</span>(lagged_price_24h, <span class="dt">na.rm=</span>T))), min_sd)</span>
 <span id="cb72-9"><a href="model-validation-plan.html#cb72-9"></a><span class="co"># Show data</span></span>
 <span id="cb72-10"><a href="model-validation-plan.html#cb72-10"></a>find_zero_var</span></code></pre></div>
-<pre><code>## # A tibble: 222,825 x 4
+<pre><code>## # A tibble: 223,002 x 4
 ## # Groups:   symbol, split, training [1,180]
 ##    symbol split training   min_sd
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
@@ -501,7 +501,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8 STX        1 train    0.000539
 ##  9 GBX        1 train    0.00313 
 ## 10 ACT        1 train    0.00618 
-## # … with 222,815 more rows</code></pre>
+## # … with 222,992 more rows</code></pre>
 <p>Next let’s get to a list of cryptocurrency symbols where the minimum standard deviation across all columns for all splits of the data is 0, which is the list of cryptocurrencies we want to later remove from the data:</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="model-validation-plan.html#cb74-1"></a>minimum_sd &lt;-<span class="st"> </span><span class="kw">filter</span>(<span class="kw">distinct</span>(<span class="kw">mutate</span>(<span class="kw">group_by</span>(<span class="kw">ungroup</span>(find_zero_var), symbol),</span>
 <span id="cb74-2"><a href="model-validation-plan.html#cb74-2"></a>                                     <span class="dt">min_sd =</span> <span class="kw">min</span>(min_sd, <span class="dt">na.rm=</span>T)), min_sd),min_sd <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.0001</span>)<span class="op">$</span>symbol</span>
@@ -540,7 +540,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  4 EDG    train        1 &lt;tibble [436 × 11]&gt;
 ##  5 GBX    train        1 &lt;tibble [273 × 11]&gt;
 ##  6 EURS   train        1 &lt;tibble [178 × 11]&gt;
-##  7 BTG    train        1 &lt;tibble [414 × 11]&gt;
+##  7 BTG    train        1 &lt;tibble [415 × 11]&gt;
 ##  8 LINK   train        1 &lt;tibble [307 × 11]&gt;
 ##  9 VET    train        1 &lt;tibble [393 × 11]&gt;
 ## 10 IHF    train        1 &lt;tibble [346 × 11]&gt;
@@ -578,7 +578,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  3 NEO        1 &lt;tibble [108 × 11]&gt;
 ##  4 EDG        1 &lt;tibble [351 × 11]&gt;
 ##  5 EURS       1 &lt;tibble [79 × 11]&gt; 
-##  6 BTG        1 &lt;tibble [326 × 11]&gt;
+##  6 BTG        1 &lt;tibble [327 × 11]&gt;
 ##  7 VET        1 &lt;tibble [313 × 11]&gt;
 ##  8 IHF        1 &lt;tibble [265 × 11]&gt;
 ##  9 DGB        1 &lt;tibble [354 × 11]&gt;
@@ -623,13 +623,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # Groups:   symbol [61]
 ##    symbol holdout_data       
 ##    &lt;chr&gt;  &lt;list&gt;             
-##  1 MKR    &lt;tibble [46 × 11]&gt; 
-##  2 ICX    &lt;tibble [45 × 11]&gt; 
-##  3 BCH    &lt;tibble [47 × 11]&gt; 
-##  4 EURS   &lt;tibble [45 × 11]&gt; 
-##  5 NEO    &lt;tibble [45 × 11]&gt; 
-##  6 XUC    &lt;tibble [42 × 11]&gt; 
-##  7 XRP    &lt;tibble [52 × 11]&gt; 
+##  1 MKR    &lt;tibble [48 × 11]&gt; 
+##  2 ICX    &lt;tibble [47 × 11]&gt; 
+##  3 BCH    &lt;tibble [49 × 11]&gt; 
+##  4 EURS   &lt;tibble [47 × 11]&gt; 
+##  5 NEO    &lt;tibble [47 × 11]&gt; 
+##  6 XUC    &lt;tibble [43 × 11]&gt; 
+##  7 XRP    &lt;tibble [49 × 11]&gt; 
 ##  8 VET    &lt;tibble [103 × 11]&gt;
 ##  9 GBX    &lt;tibble [69 × 11]&gt; 
 ## 10 EDG    &lt;tibble [112 × 11]&gt;
@@ -650,7 +650,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  3 NEO        1 &lt;tibble [108 × 11]&gt; &lt;tibble [45 × 11]&gt; 
 ##  4 EDG        1 &lt;tibble [351 × 11]&gt; &lt;tibble [109 × 11]&gt;
 ##  5 EURS       1 &lt;tibble [79 × 11]&gt;  &lt;tibble [45 × 11]&gt; 
-##  6 BTG        1 &lt;tibble [326 × 11]&gt; &lt;tibble [104 × 11]&gt;
+##  6 BTG        1 &lt;tibble [327 × 11]&gt; &lt;tibble [104 × 11]&gt;
 ##  7 VET        1 &lt;tibble [313 × 11]&gt; &lt;tibble [99 × 11]&gt; 
 ##  8 IHF        1 &lt;tibble [265 × 11]&gt; &lt;tibble [87 × 11]&gt; 
 ##  9 DGB        1 &lt;tibble [354 × 11]&gt; &lt;tibble [110 × 11]&gt;
@@ -665,16 +665,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # Groups:   symbol, split [295]
 ##    symbol split train_data          test_data           holdout_data       
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;              &lt;list&gt;              &lt;list&gt;             
-##  1 EOS        1 &lt;tibble [347 × 11]&gt; &lt;tibble [109 × 11]&gt; &lt;tibble [110 × 11]&gt;
-##  2 BCH        1 &lt;tibble [107 × 11]&gt; &lt;tibble [45 × 11]&gt;  &lt;tibble [47 × 11]&gt; 
-##  3 NEO        1 &lt;tibble [108 × 11]&gt; &lt;tibble [45 × 11]&gt;  &lt;tibble [45 × 11]&gt; 
+##  1 EOS        1 &lt;tibble [347 × 11]&gt; &lt;tibble [109 × 11]&gt; &lt;tibble [112 × 11]&gt;
+##  2 BCH        1 &lt;tibble [107 × 11]&gt; &lt;tibble [45 × 11]&gt;  &lt;tibble [49 × 11]&gt; 
+##  3 NEO        1 &lt;tibble [108 × 11]&gt; &lt;tibble [45 × 11]&gt;  &lt;tibble [47 × 11]&gt; 
 ##  4 EDG        1 &lt;tibble [351 × 11]&gt; &lt;tibble [109 × 11]&gt; &lt;tibble [112 × 11]&gt;
-##  5 EURS       1 &lt;tibble [79 × 11]&gt;  &lt;tibble [45 × 11]&gt;  &lt;tibble [45 × 11]&gt; 
-##  6 BTG        1 &lt;tibble [326 × 11]&gt; &lt;tibble [104 × 11]&gt; &lt;tibble [107 × 11]&gt;
+##  5 EURS       1 &lt;tibble [79 × 11]&gt;  &lt;tibble [45 × 11]&gt;  &lt;tibble [47 × 11]&gt; 
+##  6 BTG        1 &lt;tibble [327 × 11]&gt; &lt;tibble [104 × 11]&gt; &lt;tibble [104 × 11]&gt;
 ##  7 VET        1 &lt;tibble [313 × 11]&gt; &lt;tibble [99 × 11]&gt;  &lt;tibble [103 × 11]&gt;
 ##  8 IHF        1 &lt;tibble [265 × 11]&gt; &lt;tibble [87 × 11]&gt;  &lt;tibble [91 × 11]&gt; 
-##  9 DGB        1 &lt;tibble [354 × 11]&gt; &lt;tibble [110 × 11]&gt; &lt;tibble [113 × 11]&gt;
-## 10 XUC        1 &lt;tibble [93 × 11]&gt;  &lt;tibble [42 × 11]&gt;  &lt;tibble [42 × 11]&gt; 
+##  9 DGB        1 &lt;tibble [354 × 11]&gt; &lt;tibble [110 × 11]&gt; &lt;tibble [110 × 11]&gt;
+## 10 XUC        1 &lt;tibble [93 × 11]&gt;  &lt;tibble [42 × 11]&gt;  &lt;tibble [43 × 11]&gt; 
 ## # … with 285 more rows</code></pre>
 <p>Move on to the <a href="predictive-modeling.html#predictive-modeling">next section</a> ➡️ to build the predictive models using the methodology discussed in this section.</p>
 
