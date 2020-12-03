@@ -1,7 +1,5 @@
 name: Run Crypto Tutorial
-on:
-  schedule:
-    - cron: '05 02,14 * * *'
+on: push
 
 jobs:
   build:
@@ -35,14 +33,13 @@ jobs:
       - name: Snapshot renv to update lockfile
         run: |-
           Rscript -e "renv::snapshot()"     
-      - name: Add website front page back in
+      - name: Add website front page
         run: |
-          mv _book/index.html _book/introduction.html
-          cp index_home.html index.html
-          cp index.html _book
+          cp index_home.html _book
           cp about-us.html _book
           cp tools.html _book
           cp -r assets _book
+          DirectoryIndex index_home.html
       - name: Update GitHub page
         run: |
           rm -r docs
