@@ -39,7 +39,6 @@ jobs:
           cp about-us.html _book
           cp tools.html _book
           cp -r assets _book
-          DirectoryIndex index_home.html
       - name: Update GitHub page
         run: |
           rm -r docs
