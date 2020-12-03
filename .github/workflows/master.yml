@@ -41,6 +41,7 @@ jobs:
           cp about-us.html _book
           cp tools.html _book
           cp -r assets _book
+          cp _redirects _book
       - name: Update GitHub page
         run: |
           rm -r docs
