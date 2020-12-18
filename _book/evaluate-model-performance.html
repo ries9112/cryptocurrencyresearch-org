@@ -357,15 +357,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can return the RMSE and <span class="math inline">\(R^2\)</span> metrics for the EOS cryptocurrency and the split number 1 by using the <span style="color: green;"><strong>postResample()</strong></span> function from the <span style="color: #ae7b11;"><strong>caret</strong></span> package:</p>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="evaluate-model-performance.html#cb119-1"></a><span class="kw">postResample</span>(<span class="dt">pred =</span> cryptodata_nested<span class="op">$</span>lm_test_predictions[[<span class="dv">1</span>]], </span>
 <span id="cb119-2"><a href="evaluate-model-performance.html#cb119-2"></a>             <span class="dt">obs =</span> cryptodata_nested<span class="op">$</span>test_data[[<span class="dv">1</span>]]<span class="op">$</span>target_price_24h)</span></code></pre></div>
-<pre><code>##      RMSE  Rsquared       MAE 
-##        NA 0.2367051        NA</code></pre>
+<pre><code>##     RMSE Rsquared      MAE 
+##       NA 0.185555       NA</code></pre>
 <p>We can extract the first element to return the <strong>RMSE</strong> metric, and the second element for the <strong>R Squared (R^2)</strong> metric. We are using <strong><code>[[1]]</code></strong> to extract the first element of the <span style="color: blue;"><strong>lm_test_predictions</strong></span> and <span style="color: blue;"><strong>test_data</strong></span> and compare the predictions to the actual value of the <span style="color: blue;"><strong>target_price24h</strong></span> column.</p>
 <p>This model used the earliest subset of the data available for the cryptocurrency. How does the same model used to predict this older subset of the data perform when applied to the most recent subset of the data from the <strong>holdout</strong>?</p>
 <p>We can get the same summary of results comparing the <span style="color: blue;"><strong>lm_holdout_predictions</strong></span> to what actually happened to the <span style="color: blue;"><strong>target_price_24h</strong></span> column of the actual <span style="color: blue;"><strong>holdout_data</strong></span>:</p>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="evaluate-model-performance.html#cb121-1"></a><span class="kw">postResample</span>(<span class="dt">pred =</span> cryptodata_nested<span class="op">$</span>lm_holdout_predictions[[<span class="dv">1</span>]], </span>
 <span id="cb121-2"><a href="evaluate-model-performance.html#cb121-2"></a>             <span class="dt">obs =</span> cryptodata_nested<span class="op">$</span>holdout_data[[<span class="dv">1</span>]]<span class="op">$</span>target_price_24h)</span></code></pre></div>
-<pre><code>##     RMSE Rsquared      MAE 
-##       NA   0.3626       NA</code></pre>
+<pre><code>##      RMSE  Rsquared       MAE 
+##        NA 0.3193683        NA</code></pre>
 <p><em>The result above may show a value of NA for the RMSE metric. <a href="evaluate-model-performance.html#calculate-rmse-no-NA">We will explain and resolve the issue later on</a></em>.</p>
 </div>
 <div id="comparing-metrics" class="section level3">
@@ -489,7 +489,7 @@ This step is particularly tedious, but it is important. As with the rest of this
 <div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="evaluate-model-performance.html#cb135-1"></a>hydroGOF<span class="op">::</span><span class="kw">rmse</span>(cryptodata_nested<span class="op">$</span>lm_test_predictions[[<span class="dv">1</span>]], </span>
 <span id="cb135-2"><a href="evaluate-model-performance.html#cb135-2"></a>               cryptodata_nested<span class="op">$</span>actuals_test[[<span class="dv">1</span>]], </span>
 <span id="cb135-3"><a href="evaluate-model-performance.html#cb135-3"></a>               <span class="dt">na.rm=</span>T)</span></code></pre></div>
-<pre><code>## [1] 0.4023614</code></pre>
+<pre><code>## [1] 0.4244022</code></pre>
 <div id="calculate-r2" class="section level3">
 <h3><span class="header-section-number">8.3.1</span> Calculate R^2</h3>
 <p>Now we can do the same for the R Squared metric using the same <span style="color: green;"><strong>postResample()</strong></span> function that we used at <a href="evaluate-model-performance.html#evaluate-model-performance">the start of this section</a>:</p>
@@ -505,21 +505,21 @@ This step is particularly tedious, but it is important. As with the rest of this
 <span id="cb138-5"><a href="evaluate-model-performance.html#cb138-5"></a>                            <span class="dt">lm_rsq_holdout =</span> <span class="kw">unlist</span>(<span class="kw">map2</span>(lm_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))</span></code></pre></div>
 <p>Look at the results:</p>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="evaluate-model-performance.html#cb139-1"></a><span class="kw">select</span>(cryptodata_nested, lm_rsq_test, lm_rsq_holdout)</span></code></pre></div>
-<pre><code>## # A tibble: 235 x 4
-## # Groups:   symbol, split [235]
+<pre><code>## # A tibble: 230 x 4
+## # Groups:   symbol, split [230]
 ##    symbol split lm_rsq_test lm_rsq_holdout
 ##    &lt;chr&gt;  &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
-##  1 EOS        1       0.749       0.960   
-##  2 BCH        1       0.399       0.430   
-##  3 NEO        1       0.138       0.000329
-##  4 BTG        1       0.743       0.880   
-##  5 BRD        1       0.768       0.759   
-##  6 DGB        1       0.578       0.693   
-##  7 LTC        1       0.690       0.922   
-##  8 NUT        1       0.192       0.773   
-##  9 NEXO       1       0.783       0.841   
-## 10 XMR        1       0.654       0.934   
-## # … with 225 more rows</code></pre>
+##  1 EOS        1      0.725           0.939
+##  2 BCH        1      0.118           0.347
+##  3 NEO        1      0.0496          0.238
+##  4 BTG        1      0.671           0.927
+##  5 BRD        1      0.846           0.778
+##  6 DGB        1      0.720           0.907
+##  7 LTC        1      0.522           0.933
+##  8 NUT        1      0.167           0.320
+##  9 NEXO       1      0.792           0.882
+## 10 XMR        1      0.301           0.805
+## # … with 220 more rows</code></pre>
 </div>
 <div id="calculate-rmse-no-NA" class="section level3">
 <h3><span class="header-section-number">8.3.2</span> Calculate RMSE</h3>
@@ -538,246 +538,241 @@ This step is particularly tedious, but it is important. As with the rest of this
 <!-- [TODO - Add explanation for ifelse() to add rmse based on test or holdout] -->
 <p>Look at the results. Wrapping them in <span style="color: blue;"><strong><code>print(n=500)</code></strong></span> overwrites the behavior to only give a preview of the data so we can view the full results (up to 500 observations).</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="evaluate-model-performance.html#cb143-1"></a><span class="kw">print</span>(<span class="kw">select</span>(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_rsq_holdout), <span class="dt">n=</span><span class="dv">500</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 235 x 6
-## # Groups:   symbol, split [235]
+<pre><code>## # A tibble: 230 x 6
+## # Groups:   symbol, split [230]
 ##     symbol split lm_rmse_test lm_rmse_holdout lm_rsq_test lm_rsq_holdout
 ##     &lt;chr&gt;  &lt;dbl&gt;        &lt;dbl&gt;           &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
-##   1 EOS        1       0.402           0.382     0.749          0.960   
-##   2 BCH        1       3.04            1.70      0.399          0.430   
-##   3 NEO        1       2.17            1.25      0.138          0.000329
-##   4 BTG        1       0.339           0.582     0.743          0.880   
-##   5 BRD        1       1.24           10.6       0.768          0.759   
-##   6 DGB        1       1.23            0.638     0.578          0.693   
-##   7 LTC        1       0.399           1.10      0.690          0.922   
-##   8 NUT        1       2.00            0.0216    0.192          0.773   
-##   9 NEXO       1       0.453           1.10      0.783          0.841   
-##  10 XMR        1       0.635           0.260     0.654          0.934   
-##  11 SRN        1       0.997           4.22      0.640          0.716   
-##  12 VIB        1       3.38            2.35      0.0146         0.151   
-##  13 XNS        1       3.29            6.78      0.316          0.301   
-##  14 BAT        1       0.711           0.319     0.606          0.902   
-##  15 BTC        1       0.232           0.697     0.791          0.917   
-##  16 CUR        1       6.15            1.51      0.646          0.509   
-##  17 XVG        1       1.02            0.931     0.760          0.498   
-##  18 DCR        1       0.633           0.934     0.793          0.846   
-##  19 XRP        1       2.89            2.23      0.00673        0.612   
-##  20 MKR        1      10.4             0.742     0.488          0.412   
-##  21 STORJ      1       0.835           0.748     0.000996       0.322   
-##  22 ENJ        1       0.959           0.916     0.649          0.862   
-##  23 XEM        1       1.93            0.875     0.142          0.695   
-##  24 HT         1       0.311           0.673     0.349          0.622   
-##  25 ZEC        1       0.713           0.341     0.224          0.974   
-##  26 BTM        1       1.57            0.579     0.520          0.807   
-##  27 MKR        2       1.28            0.742     0.0604         0.412   
-##  28 BCH        2       0.698           1.70      0.000805       0.430   
-##  29 NEO        2       1.22            1.25      0.204          0.000329
-##  30 XRP        2       0.362           2.23      0.0322         0.612   
-##  31 ETH        1       1.03            0.732     0.812          0.802   
-##  32 BNT        1       1.18            3.10      0.420          0.409   
-##  33 MANA       1       1.32            0.592     0.533          0.617   
-##  34 OAX        1       6.57            1.83      0.462          0.794   
-##  35 ZRX        1       0.756           0.427     0.698          0.824   
-##  36 TRX        1       0.399           0.435     0.814          0.800   
-##  37 BSV        1       0.672           0.509     0.801          0.841   
-##  38 ETP        1       1.56            1.48      0.0873         0.385   
-##  39 CRO        1       0.265           0.572     0.737          0.791   
-##  40 ELF        1       1.58            0.784    NA              0.0733  
-##  41 NUT        2       0.359           0.0216    0.0257         0.773   
-##  42 MKR        3       1.76            0.742     0.210          0.412   
-##  43 NEO        3       2.99            1.25      0.901          0.000329
-##  44 BCH        3       0.692           1.70      0.578          0.430   
-##  45 VIB        2       1.72            2.35      0.0762         0.151   
-##  46 XVG        2       0.568           0.931     1              0.498   
-##  47 BTG        2       0.652           0.582     0.947          0.880   
-##  48 SRN        2       4.75            4.22      0.603          0.716   
-##  49 XEM        2       0.434           0.875     0.965          0.695   
-##  50 HT         2       0.204           0.673     0.945          0.622   
-##  51 EOS        2       1.57            0.382     0.161          0.960   
-##  52 ENJ        2       2.93            0.916     0.00421        0.862   
-##  53 XMR        2       0.721           0.260     0.831          0.934   
-##  54 DGB        2       0.726           0.638     0.474          0.693   
-##  55 BAT        2       1.25            0.319     0.280          0.902   
-##  56 DCR        2       0.559           0.934     0.817          0.846   
-##  57 BTC        2       0.492           0.697     0.779          0.917   
-##  58 LTC        2       0.643           1.10      0.685          0.922   
-##  59 NEXO       2       1.61            1.10      0.0206         0.841   
-##  60 BTM        2       0.875           0.579     0.0650         0.807   
-##  61 STORJ      2       4.17            0.748     0.00165        0.322   
-##  62 MKR        4       3.04            0.742     0.748          0.412   
-##  63 NEO        4       1.02            1.25      0.709          0.000329
-##  64 BCH        4       0.828           1.70      0.771          0.430   
-##  65 ZEC        2       2.41            0.341     0.445          0.974   
-##  66 CHZ        1       1.14            1.99      0.206          0.299   
-##  67 ADA        1       1.06            0.794     0.740          0.758   
-##  68 ARDR       1       1.69            0.637     0.801          0.812   
-##  69 WAXP       1       0.318           0.661     0.286          0.108   
-##  70 KNC        1       0.815           0.653     0.548          0.444   
-##  71 XPR        1       0.658           2.89      0.365          0.0158  
-##  72 KMD        1       2.06            0.347     0.0750         0.906   
-##  73 AVA        1       1.12            1.05      0.514          0.486   
-##  74 CRPT       1       0.819           2.09     NA              0.322   
-##  75 NUT        3       0.836           0.0216    0.989          0.773   
-##  76 ETH        2       0.407           0.732     1              0.802   
-##  77 TRX        2       0.668           0.435     0.0703         0.800   
-##  78 BNT        2       2.34            3.10      0.991          0.409   
-##  79 CRO        2       7.10            0.572     0.0127         0.791   
-##  80 OAX        2      13.6             1.83      0.00898        0.794   
-##  81 ETP        2       1.51            1.48      0.179          0.385   
-##  82 BSV        2       0.524           0.509     0.648          0.841   
-##  83 MANA       2       0.616           0.592     0.729          0.617   
-##  84 ZRX        2       0.624           0.427     0.569          0.824   
-##  85 CUR        2       1.17            1.51      0.385          0.509   
-##  86 ELF        2       0.564           0.784     0.0753         0.0733  
-##  87 XRP        3       0.500           2.23      0.242          0.612   
-##  88 BRD        2       2.90           10.6       0.644          0.759   
-##  89 XNS        2       6.35            6.78      0.876          0.301   
-##  90 VIB        3       5.07            2.35      0.124          0.151   
-##  91 XVG        3       5.73            0.931     0.0723         0.498   
-##  92 SRN        3       8.67            4.22      0.0173         0.716   
-##  93 EOS        3       0.671           0.382     0.463          0.960   
-##  94 XRP        4       1.61            2.23      0.000537       0.612   
-##  95 KNC        2       1.09            0.653     0.907          0.444   
-##  96 XMR        3       0.835           0.260     0.721          0.934   
-##  97 DGB        3       1.25            0.638     0.251          0.693   
-##  98 BAT        3       0.555           0.319     0.522          0.902   
-##  99 BTC        3       0.226           0.697     0.852          0.917   
-## 100 LTC        3       0.521           1.10      0.606          0.922   
-## 101 ENJ        3       3.71            0.916     0.0566         0.862   
-## 102 NEXO       3       0.776           1.10      0.711          0.841   
-## 103 AVA        2       1.92            1.05      0.841          0.486   
-## 104 DCR        3       0.590           0.934     0.677          0.846   
-## 105 CHZ        2       0.791           1.99      0.803          0.299   
-## 106 ARDR       2       1.41            0.637     0.172          0.812   
-## 107 WAXP       2       1.15            0.661     0.497          0.108   
-## 108 XPR        2       2.87            2.89      0.756          0.0158  
-## 109 ADA        2       1.27            0.794     0.00828        0.758   
-## 110 HT         3       0.461           0.673     0.939          0.622   
-## 111 KMD        2       1.95            0.347     0.369          0.906   
-## 112 CRPT       2       3.32            2.09      0.731          0.322   
-## 113 BTG        3       0.712           0.582     0.0270         0.880   
-## 114 XEM        3       0.618           0.875     0.680          0.695   
-## 115 NUT        4       0.0973          0.0216    0.00353        0.773   
-## 116 BTM        3       1.05            0.579     0.387          0.807   
-## 117 ETP        3       0.691           1.48      0.812          0.385   
-## 118 ZRX        3       0.631           0.427     0.865          0.824   
-## 119 TRX        3       0.267           0.435     0.932          0.800   
-## 120 CUR        3       0.0227          1.51      0.415          0.509   
-## 121 OAX        3       3.85            1.83      0.284          0.794   
-## 122 BSV        3       0.396           0.509     0.906          0.841   
-## 123 MANA       3       1.10            0.592     0.927          0.617   
-## 124 ASP        1       4.28            3.08      0.243          0.143   
-## 125 STORJ      3       1.95            0.748     0.617          0.322   
-## 126 BRD        3       3.87           10.6       0.0789         0.759   
-## 127 CRO        3       0.470           0.572     0.932          0.791   
-## 128 BNT        3       2.06            3.10      0.807          0.409   
-## 129 XNS        3      12.4             6.78      0.293          0.301   
-## 130 ETH        3       0.878           0.732     0.557          0.802   
-## 131 ELF        3       0.966           0.784     0.922          0.0733  
-## 132 KNC        3       0.766           0.653     0.730          0.444   
-## 133 CHZ        3       0.537           1.99      0.685          0.299   
-## 134 ARDR       3       1.21            0.637     0.0165         0.812   
-## 135 WAXP       3       0.965           0.661     0.404          0.108   
-## 136 XPR        3       7.79            2.89      0.686          0.0158  
-## 137 ADA        3       0.237           0.794     0.881          0.758   
-## 138 KMD        3       0.794           0.347     0.593          0.906   
-## 139 VIB        4       3.29            2.35      0.0712         0.151   
-## 140 AVA        3       1.92            1.05      0.346          0.486   
-## 141 CRPT       3       0.295           2.09      1              0.322   
-## 142 UNI        1       2.10            2.42      0.392          0.000279
-## 143 ZEC        3       0.535           0.341     0.562          0.974   
-## 144 NUT        5      NA               0.0216   NA              0.773   
-## 145 ASP        2      12.8             3.08      0.662          0.143   
-## 146 XVG        4      12.3             0.931     0.0463         0.498   
-## 147 DGB        4       1.07            0.638     0.665          0.693   
-## 148 BAT        4       1.62            0.319     0.893          0.902   
-## 149 BTC        4       0.309           0.697     0.820          0.917   
-## 150 LTC        4       0.917           1.10      0.746          0.922   
-## 151 XMR        4       1.10            0.260     0.617          0.934   
-## 152 NEXO       4       1.25            1.10      0.389          0.841   
-## 153 DCR        4       0.862           0.934     0.682          0.846   
-## 154 ENJ        4       2.12            0.916     0.400          0.862   
-## 155 EOS        4       1.11            0.382     0.881          0.960   
-## 156 SRN        4       1.51            4.22      0.373          0.716   
-## 157 HT         4       0.310           0.673     0.941          0.622   
-## 158 XEM        4       1.98            0.875     0.831          0.695   
-## 159 BTG        4       1.65            0.582     0.391          0.880   
-## 160 CUR        4      18.3             1.51      0.692          0.509   
-## 161 ETP        4       1.63            1.48      0.235          0.385   
-## 162 BTM        4       2.27            0.579     0.160          0.807   
-## 163 ZRX        4       1.95            0.427     0.449          0.824   
-## 164 OAX        4       4.36            1.83      0.0263         0.794   
-## 165 BSV        4       1.52            0.509     0.752          0.841   
-## 166 MANA       4       1.23            0.592     0.682          0.617   
-## 167 TRX        4       4.14            0.435     0.000745       0.800   
-## 168 STORJ      4       0.874           0.748     0.585          0.322   
-## 169 BRD        4       2.26           10.6       0.0818         0.759   
-## 170 XNS        4      10.9             6.78      0.126          0.301   
-## 171 BNT        4       0.569           3.10      0.923          0.409   
-## 172 ETH        4       1.62            0.732     0.594          0.802   
-## 173 CRO        4       1.26            0.572     0.747          0.791   
-## 174 UNI        2       1.01            2.42      0.909          0.000279
-## 175 ELF        4       1.31            0.784     0.460          0.0733  
-## 176 ASP        3       1.60            3.08      0.530          0.143   
-## 177 KNC        4       4.11            0.653     0.0165         0.444   
-## 178 CHZ        4       0.577           1.99      0.554          0.299   
-## 179 ARDR       4       1.21            0.637     0.760          0.812   
-## 180 WAXP       4       1.04            0.661     0.229          0.108   
-## 181 XPR        4       7.04            2.89      0.865          0.0158  
-## 182 ADA        4       1.71            0.794     0.578          0.758   
-## 183 KMD        4       1.75            0.347     0.398          0.906   
-## 184 AVA        4       1.75            1.05      0.203          0.486   
-## 185 ZEC        4       0.791           0.341     0.772          0.974   
-## 186 CRPT       4       7.58            2.09      0.00580        0.322   
-## 187 UNI        3       1.74            2.42      0.223          0.000279
-## 188 ASP        4       4.31            3.08      0.00239        0.143   
-## 189 DGB        5      NA               0.638    NA              0.693   
-## 190 BTC        5      NA               0.697    NA              0.917   
-## 191 LTC        5      NA               1.10     NA              0.922   
-## 192 BAT        5      NA               0.319    NA              0.902   
-## 193 XMR        5      NA               0.260    NA              0.934   
-## 194 SRN        5      NA               4.22     NA              0.716   
-## 195 NEXO       5      NA               1.10     NA              0.841   
-## 196 DCR        5      NA               0.934    NA              0.846   
-## 197 ENJ        5      NA               0.916    NA              0.862   
-## 198 EOS        5      NA               0.382    NA              0.960   
-## 199 CUR        5      NA               1.51     NA              0.509   
-## 200 HT         5      NA               0.673    NA              0.622   
-## 201 XEM        5      NA               0.875    NA              0.695   
-## 202 BTG        5      NA               0.582    NA              0.880   
-## 203 XVG        5      NA               0.931    NA              0.498   
-## 204 BTM        5      NA               0.579    NA              0.807   
-## 205 ZRX        5      NA               0.427    NA              0.824   
-## 206 ETP        5      NA               1.48     NA              0.385   
-## 207 OAX        5      NA               1.83     NA              0.794   
-## 208 MANA       5      NA               0.592    NA              0.617   
-## 209 BSV        5      NA               0.509    NA              0.841   
-## 210 TRX        5      NA               0.435    NA              0.800   
-## 211 STORJ      5      NA               0.748    NA              0.322   
-## 212 BRD        5      NA              10.6      NA              0.759   
-## 213 VIB        5      NA               2.35     NA              0.151   
-## 214 XNS        5      NA               6.78     NA              0.301   
-## 215 BNT        5      NA               3.10     NA              0.409   
-## 216 ETH        5      NA               0.732    NA              0.802   
-## 217 CRO        5      NA               0.572    NA              0.791   
-## 218 UNI        4       0.988           2.42      0.106          0.000279
-## 219 KNC        5      NA               0.653    NA              0.444   
-## 220 ELF        5      NA               0.784    NA              0.0733  
-## 221 CHZ        5      NA               1.99     NA              0.299   
-## 222 ARDR       5      NA               0.637    NA              0.812   
-## 223 WAXP       5      NA               0.661    NA              0.108   
-## 224 XPR        5      NA               2.89     NA              0.0158  
-## 225 ADA        5      NA               0.794    NA              0.758   
-## 226 KMD        5      NA               0.347    NA              0.906   
-## 227 ZEC        5      NA               0.341    NA              0.974   
-## 228 AVA        5      NA               1.05     NA              0.486   
-## 229 CRPT       5      NA               2.09     NA              0.322   
-## 230 ASP        5      NA               3.08     NA              0.143   
-## 231 XRP        5      NA               2.23     NA              0.612   
-## 232 MKR        5      NA               0.742    NA              0.412   
-## 233 UNI        5      NA               2.42     NA              0.000279
-## 234 BCH        5      NA               1.70     NA              0.430   
-## 235 NEO        5      NA               1.25     NA              0.000329</code></pre>
-<p>Out of 235 groups, 120 had an equal or lower RMSE score for the holdout than the test set.</p>
+##   1 EOS        1       0.424           0.424      0.725           0.939 
+##   2 BCH        1       5.35            2.32       0.118           0.347 
+##   3 NEO        1       2.04            0.994      0.0496          0.238 
+##   4 BTG        1       0.400           0.630      0.671           0.927 
+##   5 BRD        1       2.23           10.5        0.846           0.778 
+##   6 DGB        1       1.50            0.562      0.720           0.907 
+##   7 LTC        1       0.458           1.10       0.522           0.933 
+##   8 NUT        1       2.02            0.0334     0.167           0.320 
+##   9 NEXO       1       0.366           1.07       0.792           0.882 
+##  10 XMR        1       0.711           0.365      0.301           0.805 
+##  11 SRN        1       1.32            4.36       0.351           0.710 
+##  12 VIB        1       3.13            2.64       0.0636          0.184 
+##  13 BTC        1       0.313           0.751      0.680           0.969 
+##  14 BAT        1       0.834           0.371      0.509           0.986 
+##  15 XVG        1       1.02            0.922      0.690           0.585 
+##  16 DCR        1       0.512           1.67       0.842           0.877 
+##  17 XRP        1       3.70            3.01       0.130           0.166 
+##  18 MKR        1       5.89            0.958      0.0123          0.492 
+##  19 STORJ      1       0.853           0.742      0.0242          0.492 
+##  20 ENJ        1       1.03            1.36       0.500           0.715 
+##  21 XEM        1       1.57            0.826      0.576           0.730 
+##  22 HT         1       0.338           0.651      0.301           0.721 
+##  23 XNS        1       3.26            4.05       0.427           0.113 
+##  24 BTM        1       2.16            0.554      0.184           0.778 
+##  25 MKR        2       1.29            0.958      0.0834          0.492 
+##  26 BCH        2       1.03            2.32       0.0304          0.347 
+##  27 NEO        2       1.87            0.994      0.0806          0.238 
+##  28 XRP        2       0.757           3.01       0.0303          0.166 
+##  29 ETH        1       1.12            0.669      0.530           0.865 
+##  30 ZEC        1       0.614           0.340      0.370           0.956 
+##  31 BNT        1       1.36            3.51       0.900           0.258 
+##  32 MANA       1       1.29            0.794      0.599           0.492 
+##  33 OAX        1       6.70            2.38       0.407           0.623 
+##  34 ZRX        1       0.733           0.505      0.708           0.884 
+##  35 TRX        1       0.426           0.555      0.790           0.720 
+##  36 BSV        1       0.675           0.524      0.641           0.864 
+##  37 ETP        1       1.89            1.40       0.520           0.414 
+##  38 CRO        1       0.358           0.569      0.535           0.752 
+##  39 ELF        1       1.58            0.695     NA               0.360 
+##  40 NUT        2       0.394           0.0334     0.00355         0.320 
+##  41 MKR        3       1.98            0.958      0.0319          0.492 
+##  42 NEO        3       1.59            0.994      0.476           0.238 
+##  43 BCH        3       0.776           2.32       0.191           0.347 
+##  44 VIB        2       1.49            2.64       0.283           0.184 
+##  45 XVG        2       0.726           0.922     NA               0.585 
+##  46 BTG        2       0.776           0.630      0.851           0.927 
+##  47 SRN        2       3.77            4.36       0.228           0.710 
+##  48 XEM        2       0.188           0.826      0.967           0.730 
+##  49 HT         2       0.283           0.651      0.951           0.721 
+##  50 EOS        2       0.893           0.424      0.0442          0.939 
+##  51 ENJ        2       2.68            1.36       0.190           0.715 
+##  52 BTM        2       1.18            0.554      0.0870          0.778 
+##  53 XMR        2       0.677           0.365      0.839           0.805 
+##  54 BAT        2       1.04            0.371      0.368           0.986 
+##  55 DGB        2       0.575           0.562      0.446           0.907 
+##  56 LTC        2       0.867           1.10       0.255           0.933 
+##  57 BTC        2       0.638           0.751      0.440           0.969 
+##  58 DCR        2       0.582           1.67       0.633           0.877 
+##  59 NEXO       2       1.52            1.07       0.00691         0.882 
+##  60 STORJ      2       4.06            0.742      0.791           0.492 
+##  61 MKR        4       3.81            0.958      1               0.492 
+##  62 NEO        4       1.20            0.994      0.569           0.238 
+##  63 BCH        4       0.795           2.32       0.662           0.347 
+##  64 CHZ        1       1.08            2.92       0.181           0.111 
+##  65 ADA        1       1.02            0.862      0.753           0.668 
+##  66 ARDR       1       1.65            0.708      0.796           0.795 
+##  67 WAXP       1       0.307           0.722      0.297           0.0777
+##  68 KNC        1       0.879           0.860      0.568           0.585 
+##  69 XPR        1       0.671           2.78       0.393           0.0501
+##  70 KMD        1       2.06            0.603      0.0740          0.916 
+##  71 AVA        1       1.09            1.17       0.548           0.597 
+##  72 CRPT       1       0.882           1.51      NA               0.451 
+##  73 NUT        3       3.06            0.0334     0.0807          0.320 
+##  74 ETH        2       0.444           0.669     NA               0.865 
+##  75 TRX        2       0.718           0.555      0.416           0.720 
+##  76 BNT        2       2.44            3.51       0.774           0.258 
+##  77 CRO        2      13.3             0.569      0.937           0.752 
+##  78 OAX        2      13.0             2.38       0.00909         0.623 
+##  79 ETP        2       1.70            1.40       0.558           0.414 
+##  80 BSV        2       0.498           0.524      0.139           0.864 
+##  81 MANA       2       0.653           0.794      0.548           0.492 
+##  82 ZRX        2       0.653           0.505      0.532           0.884 
+##  83 ELF        2       0.637           0.695      0.279           0.360 
+##  84 BRD        2       2.41           10.5        0.767           0.778 
+##  85 XRP        3       0.486           3.01       0.347           0.166 
+##  86 XNS        2       6.48            4.05       0.785           0.113 
+##  87 VIB        3       6.86            2.64       0.348           0.184 
+##  88 XVG        3       3.53            0.922      0.0242          0.585 
+##  89 SRN        3       8.67            4.36       0.196           0.710 
+##  90 EOS        3       0.787           0.424      0.550           0.939 
+##  91 KNC        2       0.935           0.860      0.805           0.585 
+##  92 XRP        4       1.83            3.01       0.149           0.166 
+##  93 AVA        2       2.52            1.17       0.591           0.597 
+##  94 XMR        3       0.786           0.365      0.450           0.805 
+##  95 BAT        3       0.564           0.371      0.575           0.986 
+##  96 LTC        3       0.536           1.10       0.712           0.933 
+##  97 DGB        3       0.998           0.562      0.0784          0.907 
+##  98 BTC        3       0.231           0.751      0.846           0.969 
+##  99 CHZ        2       0.786           2.92       0.742           0.111 
+## 100 ARDR       2       1.42            0.708      0.175           0.795 
+## 101 WAXP       2       1.11            0.722      0.516           0.0777
+## 102 XPR        2       3.40            2.78       0.627           0.0501
+## 103 ENJ        3       3.67            1.36       0.00409         0.715 
+## 104 ADA        2       1.14            0.862      0.00224         0.668 
+## 105 NEXO       3       0.798           1.07       0.701           0.882 
+## 106 KMD        2       1.94            0.603      0.392           0.916 
+## 107 DCR        3       0.657           1.67       0.626           0.877 
+## 108 CRPT       2       8.01            1.51       0.0595          0.451 
+## 109 HT         3       0.671           0.651      0.935           0.721 
+## 110 BTG        3       0.818           0.630      0.0283          0.927 
+## 111 ZEC        2       1.57            0.340      0.0244          0.956 
+## 112 XEM        3       0.632           0.826      0.698           0.730 
+## 113 NUT        4       0.0946          0.0334     0.0198          0.320 
+## 114 BTM        3       0.929           0.554      0.480           0.778 
+## 115 ETP        3       0.787           1.40       0.763           0.414 
+## 116 ZRX        3       0.769           0.505      0.912           0.884 
+## 117 TRX        3       0.220           0.555      0.950           0.720 
+## 118 BSV        3       0.389           0.524      0.899           0.864 
+## 119 OAX        3       1.80            2.38       0.293           0.623 
+## 120 MANA       3       1.70            0.794      0.804           0.492 
+## 121 ASP        1       4.77            2.64       0.594           0.412 
+## 122 STORJ      3       1.87            0.742      0.574           0.492 
+## 123 BRD        3       3.87           10.5        0.0928          0.778 
+## 124 CRO        3       0.467           0.569      0.932           0.752 
+## 125 BNT        3       1.61            3.51       0.846           0.258 
+## 126 ETH        3       0.799           0.669      0.516           0.865 
+## 127 XNS        3      11.8             4.05       0.0912          0.113 
+## 128 ELF        3       1.01            0.695      0.914           0.360 
+## 129 KNC        3       0.721           0.860      0.797           0.585 
+## 130 ARDR       3       1.16            0.708      0.0323          0.795 
+## 131 CHZ        3       0.520           2.92       0.695           0.111 
+## 132 WAXP       3       1.00            0.722      0.416           0.0777
+## 133 XPR        3       7.74            2.78       0.860           0.0501
+## 134 ADA        3       0.276           0.862      0.847           0.668 
+## 135 KMD        3       0.777           0.603      0.495           0.916 
+## 136 AVA        3       2.15            1.17       0.220           0.597 
+## 137 CRPT       3       0.742           1.51       0.978           0.451 
+## 138 VIB        4       2.65            2.64       0.303           0.184 
+## 139 UNI        1      37.7             1.60       0.0535          0.280 
+## 140 ZEC        3       0.379           0.340      0.789           0.956 
+## 141 ASP        2      10.7             2.64       0.387           0.412 
+## 142 NUT        5      NA               0.0334    NA               0.320 
+## 143 XVG        4       7.80            0.922      0.276           0.585 
+## 144 BAT        4       1.60            0.371      0.778           0.986 
+## 145 LTC        4       0.857           1.10       0.688           0.933 
+## 146 DGB        4       1.14            0.562      0.779           0.907 
+## 147 BTC        4       0.219           0.751      0.889           0.969 
+## 148 XMR        4       1.13            0.365      0.426           0.805 
+## 149 NEXO       4       1.37            1.07       0.236           0.882 
+## 150 DCR        4       0.911           1.67       0.776           0.877 
+## 151 ENJ        4       2.28            1.36       0.0360          0.715 
+## 152 EOS        4       1.35            0.424      0.482           0.939 
+## 153 HT         4       0.442           0.651      0.953           0.721 
+## 154 SRN        4       1.29            4.36       0.224           0.710 
+## 155 XEM        4       2.05            0.826      0.850           0.730 
+## 156 BTG        4       1.37            0.630      0.557           0.927 
+## 157 ETP        4       1.53            1.40       0.317           0.414 
+## 158 BTM        4       3.69            0.554      0.0336          0.778 
+## 159 ZRX        4       3.03            0.505      0.0644          0.884 
+## 160 BSV        4       1.24            0.524      0.840           0.864 
+## 161 OAX        4       2.20            2.38       0.242           0.623 
+## 162 TRX        4       3.37            0.555      0.182           0.720 
+## 163 MANA       4       1.30            0.794      0.490           0.492 
+## 164 STORJ      4       1.01            0.742      0.967           0.492 
+## 165 BRD        4       2.22           10.5        0.235           0.778 
+## 166 BNT        4       0.722           3.51       0.852           0.258 
+## 167 ETH        4       2.06            0.669      0.365           0.865 
+## 168 XNS        4      11.8             4.05       0.0806          0.113 
+## 169 CRO        4       1.62            0.569      0.627           0.752 
+## 170 UNI        2       1.40            1.60       0.797           0.280 
+## 171 ELF        4       1.21            0.695      0.464           0.360 
+## 172 ASP        3       1.79            2.64       0.612           0.412 
+## 173 KNC        4       2.59            0.860      0.0870          0.585 
+## 174 ARDR       4       1.38            0.708      0.593           0.795 
+## 175 CHZ        4       0.814           2.92       0.707           0.111 
+## 176 WAXP       4       0.963           0.722      0.384           0.0777
+## 177 XPR        4       4.76            2.78       0.722           0.0501
+## 178 ADA        4       2.03            0.862      0.590           0.668 
+## 179 KMD        4       1.48            0.603      0.154           0.916 
+## 180 AVA        4       1.87            1.17       0.215           0.597 
+## 181 ZEC        4       0.645           0.340      0.832           0.956 
+## 182 CRPT       4       6.40            1.51       0.107           0.451 
+## 183 UNI        3       1.41            1.60       0.467           0.280 
+## 184 ASP        4       4.33            2.64       0.218           0.412 
+## 185 LTC        5      NA               1.10      NA               0.933 
+## 186 BAT        5      NA               0.371     NA               0.986 
+## 187 DGB        5      NA               0.562     NA               0.907 
+## 188 BTC        5      NA               0.751     NA               0.969 
+## 189 XMR        5      NA               0.365     NA               0.805 
+## 190 DCR        5      NA               1.67      NA               0.877 
+## 191 SRN        5      NA               4.36      NA               0.710 
+## 192 NEXO       5      NA               1.07      NA               0.882 
+## 193 ENJ        5      NA               1.36      NA               0.715 
+## 194 EOS        5      NA               0.424     NA               0.939 
+## 195 HT         5      NA               0.651     NA               0.721 
+## 196 XEM        5      NA               0.826     NA               0.730 
+## 197 BTG        5      NA               0.630     NA               0.927 
+## 198 XVG        5      NA               0.922     NA               0.585 
+## 199 BTM        5      NA               0.554     NA               0.778 
+## 200 ZRX        5      NA               0.505     NA               0.884 
+## 201 ETP        5      NA               1.40      NA               0.414 
+## 202 BSV        5      NA               0.524     NA               0.864 
+## 203 TRX        5      NA               0.555     NA               0.720 
+## 204 OAX        5      NA               2.38      NA               0.623 
+## 205 MANA       5      NA               0.794     NA               0.492 
+## 206 BRD        5      NA              10.5       NA               0.778 
+## 207 STORJ      5      NA               0.742     NA               0.492 
+## 208 VIB        5      NA               2.64      NA               0.184 
+## 209 XNS        5      NA               4.05      NA               0.113 
+## 210 BNT        5      NA               3.51      NA               0.258 
+## 211 ETH        5      NA               0.669     NA               0.865 
+## 212 CRO        5      NA               0.569     NA               0.752 
+## 213 UNI        4       2.51            1.60       0.234           0.280 
+## 214 KNC        5      NA               0.860     NA               0.585 
+## 215 ELF        5      NA               0.695     NA               0.360 
+## 216 ARDR       5      NA               0.708     NA               0.795 
+## 217 WAXP       5      NA               0.722     NA               0.0777
+## 218 XPR        5      NA               2.78      NA               0.0501
+## 219 ADA        5      NA               0.862     NA               0.668 
+## 220 KMD        5      NA               0.603     NA               0.916 
+## 221 CHZ        5      NA               2.92      NA               0.111 
+## 222 ZEC        5      NA               0.340     NA               0.956 
+## 223 AVA        5      NA               1.17      NA               0.597 
+## 224 CRPT       5      NA               1.51      NA               0.451 
+## 225 ASP        5      NA               2.64      NA               0.412 
+## 226 MKR        5      NA               0.958     NA               0.492 
+## 227 XRP        5      NA               3.01      NA               0.166 
+## 228 UNI        5      NA               1.60      NA               0.280 
+## 229 NEO        5      NA               0.994     NA               0.238 
+## 230 BCH        5      NA               2.32      NA               0.347</code></pre>
+<p>Out of 230 groups, 117 had an equal or lower RMSE score for the holdout than the test set.</p>
 </div>
 </div>
 <div id="adjust-prices-all-models" class="section level2">
@@ -917,21 +912,21 @@ This step is particularly tedious, but it is important. As with the rest of this
 <span id="cb149-49"><a href="evaluate-model-performance.html#cb149-49"></a>                            <span class="dt">pcr_rsq_holdout =</span> <span class="kw">unlist</span>(<span class="kw">map2</span>(pcr_holdout_predictions, actuals_holdout, evaluate_preds_rsq)))</span></code></pre></div>
 <p>Now we have RMSE and <span class="math inline">\(R^2\)</span> values for every model created for every cryptocurrency and split of the data:</p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="evaluate-model-performance.html#cb150-1"></a><span class="kw">select</span>(cryptodata_nested, lm_rmse_test, lm_rsq_test, lm_rmse_holdout, lm_rsq_holdout)</span></code></pre></div>
-<pre><code>## # A tibble: 235 x 6
-## # Groups:   symbol, split [235]
+<pre><code>## # A tibble: 230 x 6
+## # Groups:   symbol, split [230]
 ##    symbol split lm_rmse_test lm_rsq_test lm_rmse_holdout lm_rsq_holdout
 ##    &lt;chr&gt;  &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;
-##  1 EOS        1        0.402       0.749          0.382        0.960   
-##  2 BCH        1        3.04        0.399          1.70         0.430   
-##  3 NEO        1        2.17        0.138          1.25         0.000329
-##  4 BTG        1        0.339       0.743          0.582        0.880   
-##  5 BRD        1        1.24        0.768         10.6          0.759   
-##  6 DGB        1        1.23        0.578          0.638        0.693   
-##  7 LTC        1        0.399       0.690          1.10         0.922   
-##  8 NUT        1        2.00        0.192          0.0216       0.773   
-##  9 NEXO       1        0.453       0.783          1.10         0.841   
-## 10 XMR        1        0.635       0.654          0.260        0.934   
-## # … with 225 more rows</code></pre>
+##  1 EOS        1        0.424      0.725           0.424           0.939
+##  2 BCH        1        5.35       0.118           2.32            0.347
+##  3 NEO        1        2.04       0.0496          0.994           0.238
+##  4 BTG        1        0.400      0.671           0.630           0.927
+##  5 BRD        1        2.23       0.846          10.5             0.778
+##  6 DGB        1        1.50       0.720           0.562           0.907
+##  7 LTC        1        0.458      0.522           1.10            0.933
+##  8 NUT        1        2.02       0.167           0.0334          0.320
+##  9 NEXO       1        0.366      0.792           1.07            0.882
+## 10 XMR        1        0.711      0.301           0.365           0.805
+## # … with 220 more rows</code></pre>
 <p><em>Only the results for the linear regression model are shown. There are equivalent columns for the XGBoost, neural network, random forest and PCR models.</em></p>
 </div>
 </div>
@@ -952,21 +947,21 @@ This step is particularly tedious, but it is important. As with the rest of this
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="evaluate-model-performance.html#cb154-1"></a>rmse_test &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">gather</span>(<span class="kw">select</span>(rmse_test, lm<span class="op">:</span>pcr), <span class="st">&#39;model&#39;</span>, <span class="st">&#39;rmse&#39;</span>, <span class="op">-</span>symbol))</span>
 <span id="cb154-2"><a href="evaluate-model-performance.html#cb154-2"></a><span class="co"># Show results</span></span>
 <span id="cb154-3"><a href="evaluate-model-performance.html#cb154-3"></a>rmse_test</span></code></pre></div>
-<pre><code>## # A tibble: 235 x 3
-## # Groups:   symbol [47]
+<pre><code>## # A tibble: 230 x 3
+## # Groups:   symbol [46]
 ##    symbol model  rmse
 ##    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
-##  1 EOS    lm    0.940
-##  2 BCH    lm    1.31 
-##  3 NEO    lm    1.85 
-##  4 BTG    lm    0.839
-##  5 BRD    lm    2.57 
-##  6 DGB    lm    1.07 
-##  7 LTC    lm    0.620
-##  8 NUT    lm    0.824
-##  9 NEXO   lm    1.02 
-## 10 XMR    lm    0.824
-## # … with 225 more rows</code></pre>
+##  1 EOS    lm    0.863
+##  2 BCH    lm    1.99 
+##  3 NEO    lm    1.67 
+##  4 BTG    lm    0.841
+##  5 BRD    lm    2.68 
+##  6 DGB    lm    1.05 
+##  7 LTC    lm    0.680
+##  8 NUT    lm    1.39 
+##  9 NEXO   lm    1.01 
+## 10 XMR    lm    0.825
+## # … with 220 more rows</code></pre>
 <p>Now tag the results as having been for the test set:</p>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="evaluate-model-performance.html#cb156-1"></a>rmse_test<span class="op">$</span>eval_set &lt;-<span class="st"> &#39;test&#39;</span></span></code></pre></div>
 </div>
@@ -983,21 +978,21 @@ This step is particularly tedious, but it is important. As with the rest of this
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="evaluate-model-performance.html#cb158-1"></a>rmse_holdout &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">gather</span>(<span class="kw">select</span>(rmse_holdout, lm<span class="op">:</span>pcr), <span class="st">&#39;model&#39;</span>, <span class="st">&#39;rmse&#39;</span>, <span class="op">-</span>symbol))</span>
 <span id="cb158-2"><a href="evaluate-model-performance.html#cb158-2"></a><span class="co"># Show results</span></span>
 <span id="cb158-3"><a href="evaluate-model-performance.html#cb158-3"></a>rmse_holdout</span></code></pre></div>
-<pre><code>## # A tibble: 235 x 3
-## # Groups:   symbol [47]
+<pre><code>## # A tibble: 230 x 3
+## # Groups:   symbol [46]
 ##    symbol model    rmse
 ##    &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;
-##  1 EOS    lm     0.382 
-##  2 BCH    lm     1.70  
-##  3 NEO    lm     1.25  
-##  4 BTG    lm     0.582 
-##  5 BRD    lm    10.6   
-##  6 DGB    lm     0.638 
+##  1 EOS    lm     0.424 
+##  2 BCH    lm     2.32  
+##  3 NEO    lm     0.994 
+##  4 BTG    lm     0.630 
+##  5 BRD    lm    10.5   
+##  6 DGB    lm     0.562 
 ##  7 LTC    lm     1.10  
-##  8 NUT    lm     0.0216
-##  9 NEXO   lm     1.10  
-## 10 XMR    lm     0.260 
-## # … with 225 more rows</code></pre>
+##  8 NUT    lm     0.0334
+##  9 NEXO   lm     1.07  
+## 10 XMR    lm     0.365 
+## # … with 220 more rows</code></pre>
 <p>Now tag the results as having been for the holdout set:</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="evaluate-model-performance.html#cb160-1"></a>rmse_holdout<span class="op">$</span>eval_set &lt;-<span class="st"> &#39;holdout&#39;</span></span></code></pre></div>
 </div>
@@ -1023,21 +1018,21 @@ This step is particularly tedious, but it is important. As with the rest of this
 <div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="evaluate-model-performance.html#cb163-1"></a>rsq_test &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">gather</span>(<span class="kw">select</span>(rsq_test, lm<span class="op">:</span>pcr), <span class="st">&#39;model&#39;</span>, <span class="st">&#39;rsq&#39;</span>, <span class="op">-</span>symbol))</span>
 <span id="cb163-2"><a href="evaluate-model-performance.html#cb163-2"></a><span class="co"># Show results</span></span>
 <span id="cb163-3"><a href="evaluate-model-performance.html#cb163-3"></a>rsq_test</span></code></pre></div>
-<pre><code>## # A tibble: 235 x 3
-## # Groups:   symbol [47]
-##    symbol model   rsq
-##    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
-##  1 EOS    lm    0.564
-##  2 BCH    lm    0.437
-##  3 NEO    lm    0.488
-##  4 BTG    lm    0.527
-##  5 BRD    lm    0.393
-##  6 DGB    lm    0.492
-##  7 LTC    lm    0.682
-##  8 NUT    lm    0.302
-##  9 NEXO   lm    0.476
-## 10 XMR    lm    0.706
-## # … with 225 more rows</code></pre>
+<pre><code>## # A tibble: 230 x 3
+## # Groups:   symbol [46]
+##    symbol model    rsq
+##    &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;
+##  1 EOS    lm    0.450 
+##  2 BCH    lm    0.250 
+##  3 NEO    lm    0.294 
+##  4 BTG    lm    0.527 
+##  5 BRD    lm    0.485 
+##  6 DGB    lm    0.506 
+##  7 LTC    lm    0.544 
+##  8 NUT    lm    0.0678
+##  9 NEXO   lm    0.434 
+## 10 XMR    lm    0.504 
+## # … with 220 more rows</code></pre>
 <p>Now tag the results as having been for the test set</p>
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="evaluate-model-performance.html#cb165-1"></a>rsq_test<span class="op">$</span>eval_set &lt;-<span class="st"> &#39;test&#39;</span></span></code></pre></div>
 </div>
@@ -1054,21 +1049,21 @@ This step is particularly tedious, but it is important. As with the rest of this
 <div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="evaluate-model-performance.html#cb167-1"></a>rsq_holdout &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">gather</span>(<span class="kw">select</span>(rsq_holdout, lm<span class="op">:</span>pcr), <span class="st">&#39;model&#39;</span>, <span class="st">&#39;rsq&#39;</span>, <span class="op">-</span>symbol))</span>
 <span id="cb167-2"><a href="evaluate-model-performance.html#cb167-2"></a><span class="co"># Show results</span></span>
 <span id="cb167-3"><a href="evaluate-model-performance.html#cb167-3"></a>rsq_holdout</span></code></pre></div>
-<pre><code>## # A tibble: 235 x 3
-## # Groups:   symbol [47]
-##    symbol model      rsq
-##    &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
-##  1 EOS    lm    0.960   
-##  2 BCH    lm    0.430   
-##  3 NEO    lm    0.000329
-##  4 BTG    lm    0.880   
-##  5 BRD    lm    0.759   
-##  6 DGB    lm    0.693   
-##  7 LTC    lm    0.922   
-##  8 NUT    lm    0.773   
-##  9 NEXO   lm    0.841   
-## 10 XMR    lm    0.934   
-## # … with 225 more rows</code></pre>
+<pre><code>## # A tibble: 230 x 3
+## # Groups:   symbol [46]
+##    symbol model   rsq
+##    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
+##  1 EOS    lm    0.939
+##  2 BCH    lm    0.347
+##  3 NEO    lm    0.238
+##  4 BTG    lm    0.927
+##  5 BRD    lm    0.778
+##  6 DGB    lm    0.907
+##  7 LTC    lm    0.933
+##  8 NUT    lm    0.320
+##  9 NEXO   lm    0.882
+## 10 XMR    lm    0.805
+## # … with 220 more rows</code></pre>
 <p>Now tag the results as having been for the holdout set:</p>
 <div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="evaluate-model-performance.html#cb169-1"></a>rsq_holdout<span class="op">$</span>eval_set &lt;-<span class="st"> &#39;holdout&#39;</span></span></code></pre></div>
 </div>
@@ -1111,8 +1106,8 @@ This step is particularly tedious, but it is important. As with the rest of this
 <span id="cb173-2"><a href="evaluate-model-performance.html#cb173-2"></a><span class="st">           </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb173-3"><a href="evaluate-model-performance.html#cb173-3"></a><span class="st">           </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>)),</span>
 <span id="cb173-4"><a href="evaluate-model-performance.html#cb173-4"></a>         <span class="dt">tooltip =</span> <span class="kw">c</span>(<span class="st">&quot;model&quot;</span>, <span class="st">&quot;symbol&quot;</span>, <span class="st">&quot;rmse&quot;</span>, <span class="st">&quot;rsq&quot;</span>))</span></code></pre></div>
-<div id="htmlwidget-8f051b5fb42f72f827c7" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8f051b5fb42f72f827c7">{"x":{"data":[{"x":[0.758473997351622,0.551829867507333,0.811515209158135,0.437234369329176,0.143351916511629,0.359339004919901,0.485785787109667,0.475704222658061,0.902193868500882,0.575396334961783,0.429796299479339,0.437364465109062,0.409158931702544,0.785228935160406,0.758616687357354,0.393387699950063,0.841060728993395,0.776881223518089,0.917085941276319,0.810531490908162,0.879955568196271,0.52695533344722,0.806892991458836,0.282995942203096,0.298982696081402,0.561757475268307,0.791356591365535,0.606978544115254,0.321766573841738,0.579030609564275,0.508815691528991,0.534590994493778,0.846316140344771,0.742462873707678,0.692547379132609,0.491842027905205,0.0732759987755293,0.486003133187869,0.862109317991542,0.277500070513616,0.960344795629487,0.563512084062923,0.802305450764929,0.740803452316268,0.385132862592023,0.328329482410346,0.622083494231012,0.793650093054443,0.906294630284876,0.358775065734462,0.44354319287538,0.550652835610914,0.922176698937967,0.68174039614458,0.617355810077304,0.717796195813868,0.41189722773609,0.376493713176181,0.000328932893564005,0.487852481581508,0.840921256235671,0.475901500159991,0.773209679546411,0.302411118910845,0.793991983473996,0.195224968676869,0.715503571861354,0.408419892975044,0.32150375015049,0.301067346119788,0.799534008404098,0.454418435179204,0.000278715120046405,0.407583846273585,0.150906813176918,0.0713947632935086,0.107977437728776,0.354099717689223,0.694702024300038,0.654572552075293,0.933789677228721,0.705601636562413,0.300630425929462,0.402743637977977,0.015776489468342,0.667697868918046,0.612301720509767,0.0703889815978354,0.497849212386427,0.469540845201165,0.974474679975111,0.500830430435696,0.823719231323546,0.645146984913947],"y":[0.794035867770276,1.07063386881993,0.636569489376391,1.38162278548577,3.07813875809418,5.74229180932504,1.04974139652723,1.67886124194955,0.319157372195904,1.03460330591174,1.69797822838155,1.31432960590072,3.09999690007804,1.53617823653912,null,2.56716433319028,0.50933832734195,0.779146586457056,0.696669554373594,0.314519458876538,0.581746908437481,0.839058584053517,0.578527958682152,1.4415661675917,1.98721017396331,0.761076491698525,0.571816796106259,2.27503812575915,2.0874458455437,3.00363944465798,1.50908506965622,6.41397370928964,0.933669261725182,0.66084878397008,0.63849360629983,1.06988253636131,0.784193282476172,1.10626290341505,0.915830161328326,2.43233937649716,0.381531676599217,0.93983173018127,0.732273573861335,0.984501175519025,1.48223210310344,1.34823267041201,0.673139437643423,0.321739184811482,0.346643370785802,1.63944173126063,0.653410749083595,1.69505474285201,1.09510330757815,0.620268677895741,0.591556367523715,1.06864779887952,0.741702931525261,4.12977178661598,1.24794619543085,1.85070173943483,1.09968160437267,1.0215106101141,0.0215518605777999,0.824065075996982,1.83449825462314,7.10932038325694,4.21740342929928,3.98350588212923,0.748144063104063,1.95657230921373,0.43454225180479,1.36858381193296,2.42301830181534,1.45885438540232,2.34802255500562,3.36455346337576,0.66100445928899,0.867369230485061,0.875074883254878,1.24189448050557,0.259642199265659,0.823742254105162,6.77591027257789,8.25200740881777,2.88975171738918,4.59090074076462,2.23329879977367,1.33803885834786,0.931391932078982,4.90268492140147,0.340868121229913,1.11263869938435,0.426633035126536,0.990852431937992],"text":["rsq: 0.758473997352<br />rmse:  0.79403587<br />model: lm<br />symbol: ADA","rsq: 0.551829867507<br />rmse:  1.07063387<br />model: lm<br />symbol: ADA","rsq: 0.811515209158<br />rmse:  0.63656949<br />model: lm<br />symbol: ARDR","rsq: 0.437234369329<br />rmse:  1.38162279<br />model: lm<br />symbol: ARDR","rsq: 0.143351916512<br />rmse:  3.07813876<br />model: lm<br />symbol: ASP","rsq: 0.359339004920<br />rmse:  5.74229181<br />model: lm<br />symbol: ASP","rsq: 0.485785787110<br />rmse:  1.04974140<br />model: lm<br />symbol: AVA","rsq: 0.475704222658<br />rmse:  1.67886124<br />model: lm<br />symbol: AVA","rsq: 0.902193868501<br />rmse:  0.31915737<br />model: lm<br />symbol: BAT","rsq: 0.575396334962<br />rmse:  1.03460331<br />model: lm<br />symbol: BAT","rsq: 0.429796299479<br />rmse:  1.69797823<br />model: lm<br />symbol: BCH","rsq: 0.437364465109<br />rmse:  1.31432961<br />model: lm<br />symbol: BCH","rsq: 0.409158931703<br />rmse:  3.09999690<br />model: lm<br />symbol: BNT","rsq: 0.785228935160<br />rmse:  1.53617824<br />model: lm<br />symbol: BNT","rsq: 0.758616687357<br />rmse: 10.60152489<br />model: lm<br />symbol: BRD","rsq: 0.393387699950<br />rmse:  2.56716433<br />model: lm<br />symbol: BRD","rsq: 0.841060728993<br />rmse:  0.50933833<br />model: lm<br />symbol: BSV","rsq: 0.776881223518<br />rmse:  0.77914659<br />model: lm<br />symbol: BSV","rsq: 0.917085941276<br />rmse:  0.69666955<br />model: lm<br />symbol: BTC","rsq: 0.810531490908<br />rmse:  0.31451946<br />model: lm<br />symbol: BTC","rsq: 0.879955568196<br />rmse:  0.58174691<br />model: lm<br />symbol: BTG","rsq: 0.526955333447<br />rmse:  0.83905858<br />model: lm<br />symbol: BTG","rsq: 0.806892991459<br />rmse:  0.57852796<br />model: lm<br />symbol: BTM","rsq: 0.282995942203<br />rmse:  1.44156617<br />model: lm<br />symbol: BTM","rsq: 0.298982696081<br />rmse:  1.98721017<br />model: lm<br />symbol: CHZ","rsq: 0.561757475268<br />rmse:  0.76107649<br />model: lm<br />symbol: CHZ","rsq: 0.791356591366<br />rmse:  0.57181680<br />model: lm<br />symbol: CRO","rsq: 0.606978544115<br />rmse:  2.27503813<br />model: lm<br />symbol: CRO","rsq: 0.321766573842<br />rmse:  2.08744585<br />model: lm<br />symbol: CRPT","rsq: 0.579030609564<br />rmse:  3.00363944<br />model: lm<br />symbol: CRPT","rsq: 0.508815691529<br />rmse:  1.50908507<br />model: lm<br />symbol: CUR","rsq: 0.534590994494<br />rmse:  6.41397371<br />model: lm<br />symbol: CUR","rsq: 0.846316140345<br />rmse:  0.93366926<br />model: lm<br />symbol: DCR","rsq: 0.742462873708<br />rmse:  0.66084878<br />model: lm<br />symbol: DCR","rsq: 0.692547379133<br />rmse:  0.63849361<br />model: lm<br />symbol: DGB","rsq: 0.491842027905<br />rmse:  1.06988254<br />model: lm<br />symbol: DGB","rsq: 0.073275998776<br />rmse:  0.78419328<br />model: lm<br />symbol: ELF","rsq: 0.486003133188<br />rmse:  1.10626290<br />model: lm<br />symbol: ELF","rsq: 0.862109317992<br />rmse:  0.91583016<br />model: lm<br />symbol: ENJ","rsq: 0.277500070514<br />rmse:  2.43233938<br />model: lm<br />symbol: ENJ","rsq: 0.960344795629<br />rmse:  0.38153168<br />model: lm<br />symbol: EOS","rsq: 0.563512084063<br />rmse:  0.93983173<br />model: lm<br />symbol: EOS","rsq: 0.802305450765<br />rmse:  0.73227357<br />model: lm<br />symbol: ETH","rsq: 0.740803452316<br />rmse:  0.98450118<br />model: lm<br />symbol: ETH","rsq: 0.385132862592<br />rmse:  1.48223210<br />model: lm<br />symbol: ETP","rsq: 0.328329482410<br />rmse:  1.34823267<br />model: lm<br />symbol: ETP","rsq: 0.622083494231<br />rmse:  0.67313944<br />model: lm<br />symbol: HT","rsq: 0.793650093054<br />rmse:  0.32173918<br />model: lm<br />symbol: HT","rsq: 0.906294630285<br />rmse:  0.34664337<br />model: lm<br />symbol: KMD","rsq: 0.358775065734<br />rmse:  1.63944173<br />model: lm<br />symbol: KMD","rsq: 0.443543192875<br />rmse:  0.65341075<br />model: lm<br />symbol: KNC","rsq: 0.550652835611<br />rmse:  1.69505474<br />model: lm<br />symbol: KNC","rsq: 0.922176698938<br />rmse:  1.09510331<br />model: lm<br />symbol: LTC","rsq: 0.681740396145<br />rmse:  0.62026868<br />model: lm<br />symbol: LTC","rsq: 0.617355810077<br />rmse:  0.59155637<br />model: lm<br />symbol: MANA","rsq: 0.717796195814<br />rmse:  1.06864780<br />model: lm<br />symbol: MANA","rsq: 0.411897227736<br />rmse:  0.74170293<br />model: lm<br />symbol: MKR","rsq: 0.376493713176<br />rmse:  4.12977179<br />model: lm<br />symbol: MKR","rsq: 0.000328932894<br />rmse:  1.24794620<br />model: lm<br />symbol: NEO","rsq: 0.487852481582<br />rmse:  1.85070174<br />model: lm<br />symbol: NEO","rsq: 0.840921256236<br />rmse:  1.09968160<br />model: lm<br />symbol: NEXO","rsq: 0.475901500160<br />rmse:  1.02151061<br />model: lm<br />symbol: NEXO","rsq: 0.773209679546<br />rmse:  0.02155186<br />model: lm<br />symbol: NUT","rsq: 0.302411118911<br />rmse:  0.82406508<br />model: lm<br />symbol: NUT","rsq: 0.793991983474<br />rmse:  1.83449825<br />model: lm<br />symbol: OAX","rsq: 0.195224968677<br />rmse:  7.10932038<br />model: lm<br />symbol: OAX","rsq: 0.715503571861<br />rmse:  4.21740343<br />model: lm<br />symbol: SRN","rsq: 0.408419892975<br />rmse:  3.98350588<br />model: lm<br />symbol: SRN","rsq: 0.321503750150<br />rmse:  0.74814406<br />model: lm<br />symbol: STORJ","rsq: 0.301067346120<br />rmse:  1.95657231<br />model: lm<br />symbol: STORJ","rsq: 0.799534008404<br />rmse:  0.43454225<br />model: lm<br />symbol: TRX","rsq: 0.454418435179<br />rmse:  1.36858381<br />model: lm<br />symbol: TRX","rsq: 0.000278715120<br />rmse:  2.42301830<br />model: lm<br />symbol: UNI","rsq: 0.407583846274<br />rmse:  1.45885439<br />model: lm<br />symbol: UNI","rsq: 0.150906813177<br />rmse:  2.34802256<br />model: lm<br />symbol: VIB","rsq: 0.071394763294<br />rmse:  3.36455346<br />model: lm<br />symbol: VIB","rsq: 0.107977437729<br />rmse:  0.66100446<br />model: lm<br />symbol: WAXP","rsq: 0.354099717689<br />rmse:  0.86736923<br />model: lm<br />symbol: WAXP","rsq: 0.694702024300<br />rmse:  0.87507488<br />model: lm<br />symbol: XEM","rsq: 0.654572552075<br />rmse:  1.24189448<br />model: lm<br />symbol: XEM","rsq: 0.933789677229<br />rmse:  0.25964220<br />model: lm<br />symbol: XMR","rsq: 0.705601636562<br />rmse:  0.82374225<br />model: lm<br />symbol: XMR","rsq: 0.300630425929<br />rmse:  6.77591027<br />model: lm<br />symbol: XNS","rsq: 0.402743637978<br />rmse:  8.25200741<br />model: lm<br />symbol: XNS","rsq: 0.015776489468<br />rmse:  2.88975172<br />model: lm<br />symbol: XPR","rsq: 0.667697868918<br />rmse:  4.59090074<br />model: lm<br />symbol: XPR","rsq: 0.612301720510<br />rmse:  2.23329880<br />model: lm<br />symbol: XRP","rsq: 0.070388981598<br />rmse:  1.33803886<br />model: lm<br />symbol: XRP","rsq: 0.497849212386<br />rmse:  0.93139193<br />model: lm<br />symbol: XVG","rsq: 0.469540845201<br />rmse:  4.90268492<br />model: lm<br />symbol: XVG","rsq: 0.974474679975<br />rmse:  0.34086812<br />model: lm<br />symbol: ZEC","rsq: 0.500830430436<br />rmse:  1.11263870<br />model: lm<br />symbol: ZEC","rsq: 0.823719231324<br />rmse:  0.42663304<br />model: lm<br />symbol: ZRX","rsq: 0.645146984914<br />rmse:  0.99085243<br />model: lm<br />symbol: ZRX"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"lm","legendgroup":"lm","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.00795095612844506,0.25631574473005,0.000490324533126951,0.138019590186354,0.414524683692992,0.21738784674827,0.00932126426217721,0.319787207041739,0.110785784106986,0.170343900190016,0.204622141335903,0.278871779206178,0.21754149586429,0.220879907049625,0.00373492514576243,0.260935324078621,0.0973769046784425,0.433229520168667,0.407270332622373,0.215239932133275,0.0404805190113864,0.183102843901946,0.0468545900743965,0.150082436725393,0.0301931300261057,0.181667144506043,0.339659539286267,0.389691197900833,0.305920158056026,0.593728447872567,0.241614862419443,0.240038426535713,0.182162380823447,0.153680019452345,0.325563908190548,0.0894107136409335,0.112246050708094,0.0954001134747536,0.0346731181224921,0.126079803325365,0.199016712302612,0.169932954641745,0.283524022009775,0.44556136307714,0.065005158967832,0.0754007311805584,4.33261274577477e-05,0.360012389165864,0.0076335208595048,0.0992088467203665,0.473553544966159,0.319461354836275,0.36135757115436,0.124059407271986,0.0015133547009038,0.235094734327405,0.105919897115357,0.475996982761552,0.146678422013271,0.403930789713468,0.360769560207027,0.0334292067714362,0.0175862756780333,0.250274870485134,0.219304427556685,0.0236294379524473,0.00565550846624849,0.174072116090247,0.00128179832333692,0.124551689532296,0.0509853256542236,0.127746452413892,0.241652554278772,0.162025605699438,0.211545847231838,0.0344494429390151,1.80265048724622e-05,0.145475630100108,0.0712580983971718,0.28703610592291,0.206992787451036,0.261486446329727,0.342013144824163,0.0896950313617253,0.0925027706880291,0.181993266031865,0.0973952573485762,0.102999398080144,0.0697225791147653,0.362084052057705,0.337239308023751,0.144001178699172,0.0507188639484735,0.07643227342511],"y":[1.36251550671519,1.87256771411904,1.45694831093446,2.37956852921941,3.71584972604488,8.30249160137265,1.52980976484666,3.11177717496729,0.812983531151786,2.09942822536817,1.3089810549064,5.01778045174325,4.33221787922295,2.68725406804205,null,3.46923037210837,0.967007652386405,1.54368889070509,1.96279132776074,1.2169121433805,1.1217119705,2.57153944116323,1.27097640546167,2.47086365894161,4.26138987956305,2.4058467650871,1.02337139314552,1.6945304911046,2.21562975319361,4.08617234181728,3.47917648099936,null,2.23780748288821,1.77679750028048,1.04083710510333,1.56950489809831,2.21445876349004,1.40679876902665,1.5446947366189,2.75457419437073,0.972438893093403,1.99359585057766,1.27615218051059,3.98475853517294,2.66535936300314,2.29694595669469,0.806919013671555,1.42000131530132,1.03722743297283,2.12639313457308,0.832489104783566,1.48241890709331,2.93592631619349,1.76810957241746,0.893297059941016,1.87930748679861,null,null,1.5509571566995,5.10916705271095,8.01411670106775,1.90890143521778,8.39436862995039,8.08480516364958,3.47682621015692,7.72293478549028,7.68681108122613,3.34156113517273,0.914215660888017,1.52491683515944,0.958655753957851,1.43482280942933,4.38079667618696,3.49125061207187,2.53445414920891,6.54978191922491,0.730306455166388,1.37495434358391,3.22008124872908,3.08180627754822,2.11239714930595,1.88262080032152,8.69233249424817,null,3.37844855360003,5.44530007096677,3.20984864797543,3.42831737172836,1.32964163528179,8.2058403316339,1.31092071508706,1.89934675416521,0.745290195455081,1.79765310828779],"text":["rsq: 0.007950956128<br />rmse:  1.36251551<br />model: nnet<br />symbol: ADA","rsq: 0.256315744730<br />rmse:  1.87256771<br />model: nnet<br />symbol: ADA","rsq: 0.000490324533<br />rmse:  1.45694831<br />model: nnet<br />symbol: ARDR","rsq: 0.138019590186<br />rmse:  2.37956853<br />model: nnet<br />symbol: ARDR","rsq: 0.414524683693<br />rmse:  3.71584973<br />model: nnet<br />symbol: ASP","rsq: 0.217387846748<br />rmse:  8.30249160<br />model: nnet<br />symbol: ASP","rsq: 0.009321264262<br />rmse:  1.52980976<br />model: nnet<br />symbol: AVA","rsq: 0.319787207042<br />rmse:  3.11177717<br />model: nnet<br />symbol: AVA","rsq: 0.110785784107<br />rmse:  0.81298353<br />model: nnet<br />symbol: BAT","rsq: 0.170343900190<br />rmse:  2.09942823<br />model: nnet<br />symbol: BAT","rsq: 0.204622141336<br />rmse:  1.30898105<br />model: nnet<br />symbol: BCH","rsq: 0.278871779206<br />rmse:  5.01778045<br />model: nnet<br />symbol: BCH","rsq: 0.217541495864<br />rmse:  4.33221788<br />model: nnet<br />symbol: BNT","rsq: 0.220879907050<br />rmse:  2.68725407<br />model: nnet<br />symbol: BNT","rsq: 0.003734925146<br />rmse: 12.91038558<br />model: nnet<br />symbol: BRD","rsq: 0.260935324079<br />rmse:  3.46923037<br />model: nnet<br />symbol: BRD","rsq: 0.097376904678<br />rmse:  0.96700765<br />model: nnet<br />symbol: BSV","rsq: 0.433229520169<br />rmse:  1.54368889<br />model: nnet<br />symbol: BSV","rsq: 0.407270332622<br />rmse:  1.96279133<br />model: nnet<br />symbol: BTC","rsq: 0.215239932133<br />rmse:  1.21691214<br />model: nnet<br />symbol: BTC","rsq: 0.040480519011<br />rmse:  1.12171197<br />model: nnet<br />symbol: BTG","rsq: 0.183102843902<br />rmse:  2.57153944<br />model: nnet<br />symbol: BTG","rsq: 0.046854590074<br />rmse:  1.27097641<br />model: nnet<br />symbol: BTM","rsq: 0.150082436725<br />rmse:  2.47086366<br />model: nnet<br />symbol: BTM","rsq: 0.030193130026<br />rmse:  4.26138988<br />model: nnet<br />symbol: CHZ","rsq: 0.181667144506<br />rmse:  2.40584677<br />model: nnet<br />symbol: CHZ","rsq: 0.339659539286<br />rmse:  1.02337139<br />model: nnet<br />symbol: CRO","rsq: 0.389691197901<br />rmse:  1.69453049<br />model: nnet<br />symbol: CRO","rsq: 0.305920158056<br />rmse:  2.21562975<br />model: nnet<br />symbol: CRPT","rsq: 0.593728447873<br />rmse:  4.08617234<br />model: nnet<br />symbol: CRPT","rsq: 0.241614862419<br />rmse:  3.47917648<br />model: nnet<br />symbol: CUR","rsq: 0.240038426536<br />rmse: 10.04817188<br />model: nnet<br />symbol: CUR","rsq: 0.182162380823<br />rmse:  2.23780748<br />model: nnet<br />symbol: DCR","rsq: 0.153680019452<br />rmse:  1.77679750<br />model: nnet<br />symbol: DCR","rsq: 0.325563908191<br />rmse:  1.04083711<br />model: nnet<br />symbol: DGB","rsq: 0.089410713641<br />rmse:  1.56950490<br />model: nnet<br />symbol: DGB","rsq: 0.112246050708<br />rmse:  2.21445876<br />model: nnet<br />symbol: ELF","rsq: 0.095400113475<br />rmse:  1.40679877<br />model: nnet<br />symbol: ELF","rsq: 0.034673118122<br />rmse:  1.54469474<br />model: nnet<br />symbol: ENJ","rsq: 0.126079803325<br />rmse:  2.75457419<br />model: nnet<br />symbol: ENJ","rsq: 0.199016712303<br />rmse:  0.97243889<br />model: nnet<br />symbol: EOS","rsq: 0.169932954642<br />rmse:  1.99359585<br />model: nnet<br />symbol: EOS","rsq: 0.283524022010<br />rmse:  1.27615218<br />model: nnet<br />symbol: ETH","rsq: 0.445561363077<br />rmse:  3.98475854<br />model: nnet<br />symbol: ETH","rsq: 0.065005158968<br />rmse:  2.66535936<br />model: nnet<br />symbol: ETP","rsq: 0.075400731181<br />rmse:  2.29694596<br />model: nnet<br />symbol: ETP","rsq: 0.000043326127<br />rmse:  0.80691901<br />model: nnet<br />symbol: HT","rsq: 0.360012389166<br />rmse:  1.42000132<br />model: nnet<br />symbol: HT","rsq: 0.007633520860<br />rmse:  1.03722743<br />model: nnet<br />symbol: KMD","rsq: 0.099208846720<br />rmse:  2.12639313<br />model: nnet<br />symbol: KMD","rsq: 0.473553544966<br />rmse:  0.83248910<br />model: nnet<br />symbol: KNC","rsq: 0.319461354836<br />rmse:  1.48241891<br />model: nnet<br />symbol: KNC","rsq: 0.361357571154<br />rmse:  2.93592632<br />model: nnet<br />symbol: LTC","rsq: 0.124059407272<br />rmse:  1.76810957<br />model: nnet<br />symbol: LTC","rsq: 0.001513354701<br />rmse:  0.89329706<br />model: nnet<br />symbol: MANA","rsq: 0.235094734327<br />rmse:  1.87930749<br />model: nnet<br />symbol: MANA","rsq: 0.105919897115<br />rmse: 10.68040245<br />model: nnet<br />symbol: MKR","rsq: 0.475996982762<br />rmse: 13.08514873<br />model: nnet<br />symbol: MKR","rsq: 0.146678422013<br />rmse:  1.55095716<br />model: nnet<br />symbol: NEO","rsq: 0.403930789713<br />rmse:  5.10916705<br />model: nnet<br />symbol: NEO","rsq: 0.360769560207<br />rmse:  8.01411670<br />model: nnet<br />symbol: NEXO","rsq: 0.033429206771<br />rmse:  1.90890144<br />model: nnet<br />symbol: NEXO","rsq: 0.017586275678<br />rmse:  8.39436863<br />model: nnet<br />symbol: NUT","rsq: 0.250274870485<br />rmse:  8.08480516<br />model: nnet<br />symbol: NUT","rsq: 0.219304427557<br />rmse:  3.47682621<br />model: nnet<br />symbol: OAX","rsq: 0.023629437952<br />rmse:  7.72293479<br />model: nnet<br />symbol: OAX","rsq: 0.005655508466<br />rmse:  7.68681108<br />model: nnet<br />symbol: SRN","rsq: 0.174072116090<br />rmse:  3.34156114<br />model: nnet<br />symbol: SRN","rsq: 0.001281798323<br />rmse:  0.91421566<br />model: nnet<br />symbol: STORJ","rsq: 0.124551689532<br />rmse:  1.52491684<br />model: nnet<br />symbol: STORJ","rsq: 0.050985325654<br />rmse:  0.95865575<br />model: nnet<br />symbol: TRX","rsq: 0.127746452414<br />rmse:  1.43482281<br />model: nnet<br />symbol: TRX","rsq: 0.241652554279<br />rmse:  4.38079668<br />model: nnet<br />symbol: UNI","rsq: 0.162025605699<br />rmse:  3.49125061<br />model: nnet<br />symbol: UNI","rsq: 0.211545847232<br />rmse:  2.53445415<br />model: nnet<br />symbol: VIB","rsq: 0.034449442939<br />rmse:  6.54978192<br />model: nnet<br />symbol: VIB","rsq: 0.000018026505<br />rmse:  0.73030646<br />model: nnet<br />symbol: WAXP","rsq: 0.145475630100<br />rmse:  1.37495434<br />model: nnet<br />symbol: WAXP","rsq: 0.071258098397<br />rmse:  3.22008125<br />model: nnet<br />symbol: XEM","rsq: 0.287036105923<br />rmse:  3.08180628<br />model: nnet<br />symbol: XEM","rsq: 0.206992787451<br />rmse:  2.11239715<br />model: nnet<br />symbol: XMR","rsq: 0.261486446330<br />rmse:  1.88262080<br />model: nnet<br />symbol: XMR","rsq: 0.342013144824<br />rmse:  8.69233249<br />model: nnet<br />symbol: XNS","rsq: 0.089695031362<br />rmse: 17.43991169<br />model: nnet<br />symbol: XNS","rsq: 0.092502770688<br />rmse:  3.37844855<br />model: nnet<br />symbol: XPR","rsq: 0.181993266032<br />rmse:  5.44530007<br />model: nnet<br />symbol: XPR","rsq: 0.097395257349<br />rmse:  3.20984865<br />model: nnet<br />symbol: XRP","rsq: 0.102999398080<br />rmse:  3.42831737<br />model: nnet<br />symbol: XRP","rsq: 0.069722579115<br />rmse:  1.32964164<br />model: nnet<br />symbol: XVG","rsq: 0.362084052058<br />rmse:  8.20584033<br />model: nnet<br />symbol: XVG","rsq: 0.337239308024<br />rmse:  1.31092072<br />model: nnet<br />symbol: ZEC","rsq: 0.144001178699<br />rmse:  1.89934675<br />model: nnet<br />symbol: ZEC","rsq: 0.050718863948<br />rmse:  0.74529020<br />model: nnet<br />symbol: ZRX","rsq: 0.076432273425<br />rmse:  1.79765311<br />model: nnet<br />symbol: ZRX"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"nnet","legendgroup":"nnet","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.271716224560054,0.548903717954605,0.0573228363871709,0.224306050739082,0.321516193673417,0.293864405991779,0.0883745195804071,0.430813310237212,0.313963012389948,0.381961092072976,0.517161102114481,0.455454306016861,0.534492088775223,0.323889898441096,0.193115098731518,0.37064424794748,0.326514908408081,0.61017553898675,0.773003699943689,0.332191245216232,0.228931421261161,0.244355456962601,0.406119469176058,0.212384901422508,0.203052962759433,0.357526618130693,0.706677785826523,0.464910226285984,0.38663046320467,0.656381596385911,0.24119549175612,0.357729990198023,0.487739345933163,0.302497744867908,0.367680521436037,0.231384312425421,0.059672311957443,0.248787399297618,0.168763070291641,0.231945879441323,0.472864871622594,0.218159121449995,0.584313746573783,0.620609095268395,0.159965166387138,0.199383446136411,0.0422516422526418,0.530644730866107,0.0898595066117954,0.12087417666705,0.460594119502629,0.356907274341358,0.73578155310014,0.274623448637458,0.0738327878183218,0.491485979222662,0.20486529853091,0.479081611540836,0.363456135325882,0.481108634896669,0.600881472381058,0.146090325880507,0.281999793688592,0.249736018669464,0.565791930167483,0.131968724577613,0.125083190863678,0.210748792984017,0.089029070858697,0.317415439519872,0.325522391622799,0.190694788248708,0.494022975905692,0.271943117432591,0.158543031600502,0.127585057066141,0.00148265198163057,0.341912558436119,0.185156444963508,0.31414597651477,0.500973434305413,0.532422970504029,0.0342812964011892,0.366009230888713,0.114630504082556,0.331681179758311,0.651024613391885,0.193972402971684,0.3004181819257,0.450415811813214,0.69870173808856,0.240879773858035,0.184127171804578,0.322705517788579],"y":[1.18052766037292,1.13921371061728,1.39372660196576,1.76724994531036,3.25212421106356,5.28843220305781,1.41996379138897,1.73536120586457,0.713310117624252,1.25825163561997,1.45983369971939,1.19366218157416,2.72933810361698,1.4346177437837,null,2.68066561071568,0.799938616726626,1.019625269305,0.997075305532553,0.536869783524483,0.980465510362401,1.02087541720025,0.998036857306889,1.42312428026002,1.7980506126127,0.873662274915619,0.692391119753171,1.17883030093775,2.27468509842675,1.61717538346535,2.03642483800916,7.69148808362449,1.44157720613851,1.03682895227228,0.810515992348331,1.29429102754786,0.999155832942881,1.42231315768993,1.45170743423185,2.29929725922468,0.812532324110295,1.21325474224203,0.974499218082504,1.1576869599484,1.74284522869682,1.35810813867853,0.786281375468728,0.654897718631399,0.947786699399258,1.6835801860941,0.668771228490781,1.4381291453897,1.78654279189309,0.908821159537479,0.84965520398909,1.517310785828,0.838732200178947,2.89934161674253,0.911060206143483,1.76450297247465,1.60751660122313,1.21187222929725,0.0396436262815485,0.63177810008673,2.5432793754643,7.06163966410554,6.94959498334717,3.05495175091413,0.853509810923115,1.32909964463334,0.727184997687035,1.14025782868844,1.53629300416478,1.57284690567789,2.40428809463532,3.03369445082814,0.698911706353993,0.893442607178538,1.42683506949974,1.63634471416392,0.700874675248249,1.05590760330772,7.67160612327158,7.5102963206046,2.68830693358887,4.3583231360517,2.03211453125355,0.828804786400931,1.12912628900735,2.39203129233993,0.783913475937949,1.17711463607514,0.687731642233595,1.33990538786851],"text":["rsq: 0.271716224560<br />rmse:  1.18052766<br />model: pcr<br />symbol: ADA","rsq: 0.548903717955<br />rmse:  1.13921371<br />model: pcr<br />symbol: ADA","rsq: 0.057322836387<br />rmse:  1.39372660<br />model: pcr<br />symbol: ARDR","rsq: 0.224306050739<br />rmse:  1.76724995<br />model: pcr<br />symbol: ARDR","rsq: 0.321516193673<br />rmse:  3.25212421<br />model: pcr<br />symbol: ASP","rsq: 0.293864405992<br />rmse:  5.28843220<br />model: pcr<br />symbol: ASP","rsq: 0.088374519580<br />rmse:  1.41996379<br />model: pcr<br />symbol: AVA","rsq: 0.430813310237<br />rmse:  1.73536121<br />model: pcr<br />symbol: AVA","rsq: 0.313963012390<br />rmse:  0.71331012<br />model: pcr<br />symbol: BAT","rsq: 0.381961092073<br />rmse:  1.25825164<br />model: pcr<br />symbol: BAT","rsq: 0.517161102114<br />rmse:  1.45983370<br />model: pcr<br />symbol: BCH","rsq: 0.455454306017<br />rmse:  1.19366218<br />model: pcr<br />symbol: BCH","rsq: 0.534492088775<br />rmse:  2.72933810<br />model: pcr<br />symbol: BNT","rsq: 0.323889898441<br />rmse:  1.43461774<br />model: pcr<br />symbol: BNT","rsq: 0.193115098732<br />rmse: 12.48225411<br />model: pcr<br />symbol: BRD","rsq: 0.370644247947<br />rmse:  2.68066561<br />model: pcr<br />symbol: BRD","rsq: 0.326514908408<br />rmse:  0.79993862<br />model: pcr<br />symbol: BSV","rsq: 0.610175538987<br />rmse:  1.01962527<br />model: pcr<br />symbol: BSV","rsq: 0.773003699944<br />rmse:  0.99707531<br />model: pcr<br />symbol: BTC","rsq: 0.332191245216<br />rmse:  0.53686978<br />model: pcr<br />symbol: BTC","rsq: 0.228931421261<br />rmse:  0.98046551<br />model: pcr<br />symbol: BTG","rsq: 0.244355456963<br />rmse:  1.02087542<br />model: pcr<br />symbol: BTG","rsq: 0.406119469176<br />rmse:  0.99803686<br />model: pcr<br />symbol: BTM","rsq: 0.212384901423<br />rmse:  1.42312428<br />model: pcr<br />symbol: BTM","rsq: 0.203052962759<br />rmse:  1.79805061<br />model: pcr<br />symbol: CHZ","rsq: 0.357526618131<br />rmse:  0.87366227<br />model: pcr<br />symbol: CHZ","rsq: 0.706677785827<br />rmse:  0.69239112<br />model: pcr<br />symbol: CRO","rsq: 0.464910226286<br />rmse:  1.17883030<br />model: pcr<br />symbol: CRO","rsq: 0.386630463205<br />rmse:  2.27468510<br />model: pcr<br />symbol: CRPT","rsq: 0.656381596386<br />rmse:  1.61717538<br />model: pcr<br />symbol: CRPT","rsq: 0.241195491756<br />rmse:  2.03642484<br />model: pcr<br />symbol: CUR","rsq: 0.357729990198<br />rmse:  7.69148808<br />model: pcr<br />symbol: CUR","rsq: 0.487739345933<br />rmse:  1.44157721<br />model: pcr<br />symbol: DCR","rsq: 0.302497744868<br />rmse:  1.03682895<br />model: pcr<br />symbol: DCR","rsq: 0.367680521436<br />rmse:  0.81051599<br />model: pcr<br />symbol: DGB","rsq: 0.231384312425<br />rmse:  1.29429103<br />model: pcr<br />symbol: DGB","rsq: 0.059672311957<br />rmse:  0.99915583<br />model: pcr<br />symbol: ELF","rsq: 0.248787399298<br />rmse:  1.42231316<br />model: pcr<br />symbol: ELF","rsq: 0.168763070292<br />rmse:  1.45170743<br />model: pcr<br />symbol: ENJ","rsq: 0.231945879441<br />rmse:  2.29929726<br />model: pcr<br />symbol: ENJ","rsq: 0.472864871623<br />rmse:  0.81253232<br />model: pcr<br />symbol: EOS","rsq: 0.218159121450<br />rmse:  1.21325474<br />model: pcr<br />symbol: EOS","rsq: 0.584313746574<br />rmse:  0.97449922<br />model: pcr<br />symbol: ETH","rsq: 0.620609095268<br />rmse:  1.15768696<br />model: pcr<br />symbol: ETH","rsq: 0.159965166387<br />rmse:  1.74284523<br />model: pcr<br />symbol: ETP","rsq: 0.199383446136<br />rmse:  1.35810814<br />model: pcr<br />symbol: ETP","rsq: 0.042251642253<br />rmse:  0.78628138<br />model: pcr<br />symbol: HT","rsq: 0.530644730866<br />rmse:  0.65489772<br />model: pcr<br />symbol: HT","rsq: 0.089859506612<br />rmse:  0.94778670<br />model: pcr<br />symbol: KMD","rsq: 0.120874176667<br />rmse:  1.68358019<br />model: pcr<br />symbol: KMD","rsq: 0.460594119503<br />rmse:  0.66877123<br />model: pcr<br />symbol: KNC","rsq: 0.356907274341<br />rmse:  1.43812915<br />model: pcr<br />symbol: KNC","rsq: 0.735781553100<br />rmse:  1.78654279<br />model: pcr<br />symbol: LTC","rsq: 0.274623448637<br />rmse:  0.90882116<br />model: pcr<br />symbol: LTC","rsq: 0.073832787818<br />rmse:  0.84965520<br />model: pcr<br />symbol: MANA","rsq: 0.491485979223<br />rmse:  1.51731079<br />model: pcr<br />symbol: MANA","rsq: 0.204865298531<br />rmse:  0.83873220<br />model: pcr<br />symbol: MKR","rsq: 0.479081611541<br />rmse:  2.89934162<br />model: pcr<br />symbol: MKR","rsq: 0.363456135326<br />rmse:  0.91106021<br />model: pcr<br />symbol: NEO","rsq: 0.481108634897<br />rmse:  1.76450297<br />model: pcr<br />symbol: NEO","rsq: 0.600881472381<br />rmse:  1.60751660<br />model: pcr<br />symbol: NEXO","rsq: 0.146090325881<br />rmse:  1.21187223<br />model: pcr<br />symbol: NEXO","rsq: 0.281999793689<br />rmse:  0.03964363<br />model: pcr<br />symbol: NUT","rsq: 0.249736018669<br />rmse:  0.63177810<br />model: pcr<br />symbol: NUT","rsq: 0.565791930167<br />rmse:  2.54327938<br />model: pcr<br />symbol: OAX","rsq: 0.131968724578<br />rmse:  7.06163966<br />model: pcr<br />symbol: OAX","rsq: 0.125083190864<br />rmse:  6.94959498<br />model: pcr<br />symbol: SRN","rsq: 0.210748792984<br />rmse:  3.05495175<br />model: pcr<br />symbol: SRN","rsq: 0.089029070859<br />rmse:  0.85350981<br />model: pcr<br />symbol: STORJ","rsq: 0.317415439520<br />rmse:  1.32909964<br />model: pcr<br />symbol: STORJ","rsq: 0.325522391623<br />rmse:  0.72718500<br />model: pcr<br />symbol: TRX","rsq: 0.190694788249<br />rmse:  1.14025783<br />model: pcr<br />symbol: TRX","rsq: 0.494022975906<br />rmse:  1.53629300<br />model: pcr<br />symbol: UNI","rsq: 0.271943117433<br />rmse:  1.57284691<br />model: pcr<br />symbol: UNI","rsq: 0.158543031601<br />rmse:  2.40428809<br />model: pcr<br />symbol: VIB","rsq: 0.127585057066<br />rmse:  3.03369445<br />model: pcr<br />symbol: VIB","rsq: 0.001482651982<br />rmse:  0.69891171<br />model: pcr<br />symbol: WAXP","rsq: 0.341912558436<br />rmse:  0.89344261<br />model: pcr<br />symbol: WAXP","rsq: 0.185156444964<br />rmse:  1.42683507<br />model: pcr<br />symbol: XEM","rsq: 0.314145976515<br />rmse:  1.63634471<br />model: pcr<br />symbol: XEM","rsq: 0.500973434305<br />rmse:  0.70087468<br />model: pcr<br />symbol: XMR","rsq: 0.532422970504<br />rmse:  1.05590760<br />model: pcr<br />symbol: XMR","rsq: 0.034281296401<br />rmse:  7.67160612<br />model: pcr<br />symbol: XNS","rsq: 0.366009230889<br />rmse:  7.51029632<br />model: pcr<br />symbol: XNS","rsq: 0.114630504083<br />rmse:  2.68830693<br />model: pcr<br />symbol: XPR","rsq: 0.331681179758<br />rmse:  4.35832314<br />model: pcr<br />symbol: XPR","rsq: 0.651024613392<br />rmse:  2.03211453<br />model: pcr<br />symbol: XRP","rsq: 0.193972402972<br />rmse:  0.82880479<br />model: pcr<br />symbol: XRP","rsq: 0.300418181926<br />rmse:  1.12912629<br />model: pcr<br />symbol: XVG","rsq: 0.450415811813<br />rmse:  2.39203129<br />model: pcr<br />symbol: XVG","rsq: 0.698701738089<br />rmse:  0.78391348<br />model: pcr<br />symbol: ZEC","rsq: 0.240879773858<br />rmse:  1.17711464<br />model: pcr<br />symbol: ZEC","rsq: 0.184127171805<br />rmse:  0.68773164<br />model: pcr<br />symbol: ZRX","rsq: 0.322705517789<br />rmse:  1.33990539<br />model: pcr<br />symbol: ZRX"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"pcr","legendgroup":"pcr","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.0565297565504977,0.0980442142849015,0.0281725002840543,0.125231341094735,0.359224890154139,0.0229291520013106,0.2456820984564,0.0780278130419451,0.291273465661383,0.0544856469000939,0.19523366522451,0.28707483460785,0.00162597177911533,0.0599661753041191,0.35324925288653,0.288827533648169,0.0260156322108154,0.433587685396395,0.529244374837968,0.122036747795464,0.153564609145838,0.0539354924397283,0.161797261114613,0.124249033714114,0.0293855129163105,0.172333224983492,0.265022581965521,0.209152661797234,0.304404825257579,0.145394271877151,0.318491977009763,0.356024068893636,0.173114526570203,0.168305300692564,0.124736114949167,0.160560735639456,0.119492692382872,0.173829585876712,0.0173426902044315,0.141305907480552,0.168317342513648,0.119208536271244,0.00742709334937667,0.179614925784299,0.0736983727727196,0.0952089227410619,0.153249291776399,0.223708160362081,0.174928336653701,0.109862886255955,0.195358266456842,0.10892724304805,0.0507637494758261,0.091966258206338,0.152464094316656,0.193625328477927,0.062055612483808,0.220840538294748,0.0576756023758343,0.232661703792812,0.260699881979186,0.0593340717207526,0.00861210155663937,0.0153835161329714,0.695793618455639,0.073227058711724,0.692176665549088,0.210823276679341,0.00180908045254986,0.174534204516171,0.166982422345648,0.13841521740268,0.00285298533997216,0.163514802741584,3.0823239000725e-05,0.0180882149426704,0.00299168007803614,0.151237579672471,0.0722129892754613,0.0983620299982587,0.1469252303719,0.180808815399755,0.00112357231415477,0.0193738560607917,0.0934688641675187,0.0472062086486452,0.142427695376295,0.0222658837205165,0.0745598369798676,0.155554025476169,0.11684045719446,0.160850440775719,0.0008447217776135,0.0677393976856422],"y":[1.33116944050729,1.94422610698967,3.39758774032871,2.27328265203376,3.00411669937823,3.31959045654045,2.59728159421217,2.69826578452663,2.63727271661691,2.06443493998424,1.50402694216309,2.01960836615397,6.99922843472864,5.43888065760018,null,4.7782101907244,1.97034391719931,1.94217095315851,1.88053502541507,0.7467323418656,1.42818306253298,1.23460825540331,1.22816653767445,2.93042030224071,2.71976545432888,1.18958934216918,1.52136788207319,2.48098474255643,2.30180539738686,2.28451696651453,1.54155801539986,7.82890311473088,1.86259639601989,1.40070905427734,2.22926496493914,2.06693324595012,0.832425965461413,4.60564811222718,1.86427732437619,3.84522257599544,1.7743130136578,1.47926617895373,1.3202686566034,2.32307933079979,1.83074914869747,1.91355263785602,0.770103707255327,1.07399059752128,1.74780391054391,2.7274513771382,1.07656374952848,2.44505920443769,4.11125716703515,1.39043647247895,1.62244024120344,2.95478558567998,0.883460138974463,2.70458119112166,1.69265011496088,2.09636384297758,2.95685309230512,1.4519227191819,0.0322680512904903,0.777221802151122,2.14945139110935,6.52836324424345,4.60557930414294,6.64057356924253,0.924408976845683,5.07675070787627,1.28114175046476,1.73241672629604,2.6548979667931,3.03543194203093,2.91610699648539,4.8717573937729,0.834244990782401,1.87545664302393,3.19401213575632,2.24563209178257,0.974127899328301,2.3629874108898,null,null,3.25827683563131,5.81586241724465,3.28077944093616,1.67734331557602,1.3082116309872,3.33933453661151,1.88461435447988,1.64723242507556,2.3428366762674,3.42556396098429],"text":["rsq: 0.056529756550<br />rmse:  1.33116944<br />model: rf<br />symbol: ADA","rsq: 0.098044214285<br />rmse:  1.94422611<br />model: rf<br />symbol: ADA","rsq: 0.028172500284<br />rmse:  3.39758774<br />model: rf<br />symbol: ARDR","rsq: 0.125231341095<br />rmse:  2.27328265<br />model: rf<br />symbol: ARDR","rsq: 0.359224890154<br />rmse:  3.00411670<br />model: rf<br />symbol: ASP","rsq: 0.022929152001<br />rmse:  3.31959046<br />model: rf<br />symbol: ASP","rsq: 0.245682098456<br />rmse:  2.59728159<br />model: rf<br />symbol: AVA","rsq: 0.078027813042<br />rmse:  2.69826578<br />model: rf<br />symbol: AVA","rsq: 0.291273465661<br />rmse:  2.63727272<br />model: rf<br />symbol: BAT","rsq: 0.054485646900<br />rmse:  2.06443494<br />model: rf<br />symbol: BAT","rsq: 0.195233665225<br />rmse:  1.50402694<br />model: rf<br />symbol: BCH","rsq: 0.287074834608<br />rmse:  2.01960837<br />model: rf<br />symbol: BCH","rsq: 0.001625971779<br />rmse:  6.99922843<br />model: rf<br />symbol: BNT","rsq: 0.059966175304<br />rmse:  5.43888066<br />model: rf<br />symbol: BNT","rsq: 0.353249252887<br />rmse: 11.79450176<br />model: rf<br />symbol: BRD","rsq: 0.288827533648<br />rmse:  4.77821019<br />model: rf<br />symbol: BRD","rsq: 0.026015632211<br />rmse:  1.97034392<br />model: rf<br />symbol: BSV","rsq: 0.433587685396<br />rmse:  1.94217095<br />model: rf<br />symbol: BSV","rsq: 0.529244374838<br />rmse:  1.88053503<br />model: rf<br />symbol: BTC","rsq: 0.122036747795<br />rmse:  0.74673234<br />model: rf<br />symbol: BTC","rsq: 0.153564609146<br />rmse:  1.42818306<br />model: rf<br />symbol: BTG","rsq: 0.053935492440<br />rmse:  1.23460826<br />model: rf<br />symbol: BTG","rsq: 0.161797261115<br />rmse:  1.22816654<br />model: rf<br />symbol: BTM","rsq: 0.124249033714<br />rmse:  2.93042030<br />model: rf<br />symbol: BTM","rsq: 0.029385512916<br />rmse:  2.71976545<br />model: rf<br />symbol: CHZ","rsq: 0.172333224983<br />rmse:  1.18958934<br />model: rf<br />symbol: CHZ","rsq: 0.265022581966<br />rmse:  1.52136788<br />model: rf<br />symbol: CRO","rsq: 0.209152661797<br />rmse:  2.48098474<br />model: rf<br />symbol: CRO","rsq: 0.304404825258<br />rmse:  2.30180540<br />model: rf<br />symbol: CRPT","rsq: 0.145394271877<br />rmse:  2.28451697<br />model: rf<br />symbol: CRPT","rsq: 0.318491977010<br />rmse:  1.54155802<br />model: rf<br />symbol: CUR","rsq: 0.356024068894<br />rmse:  7.82890311<br />model: rf<br />symbol: CUR","rsq: 0.173114526570<br />rmse:  1.86259640<br />model: rf<br />symbol: DCR","rsq: 0.168305300693<br />rmse:  1.40070905<br />model: rf<br />symbol: DCR","rsq: 0.124736114949<br />rmse:  2.22926496<br />model: rf<br />symbol: DGB","rsq: 0.160560735639<br />rmse:  2.06693325<br />model: rf<br />symbol: DGB","rsq: 0.119492692383<br />rmse:  0.83242597<br />model: rf<br />symbol: ELF","rsq: 0.173829585877<br />rmse:  4.60564811<br />model: rf<br />symbol: ELF","rsq: 0.017342690204<br />rmse:  1.86427732<br />model: rf<br />symbol: ENJ","rsq: 0.141305907481<br />rmse:  3.84522258<br />model: rf<br />symbol: ENJ","rsq: 0.168317342514<br />rmse:  1.77431301<br />model: rf<br />symbol: EOS","rsq: 0.119208536271<br />rmse:  1.47926618<br />model: rf<br />symbol: EOS","rsq: 0.007427093349<br />rmse:  1.32026866<br />model: rf<br />symbol: ETH","rsq: 0.179614925784<br />rmse:  2.32307933<br />model: rf<br />symbol: ETH","rsq: 0.073698372773<br />rmse:  1.83074915<br />model: rf<br />symbol: ETP","rsq: 0.095208922741<br />rmse:  1.91355264<br />model: rf<br />symbol: ETP","rsq: 0.153249291776<br />rmse:  0.77010371<br />model: rf<br />symbol: HT","rsq: 0.223708160362<br />rmse:  1.07399060<br />model: rf<br />symbol: HT","rsq: 0.174928336654<br />rmse:  1.74780391<br />model: rf<br />symbol: KMD","rsq: 0.109862886256<br />rmse:  2.72745138<br />model: rf<br />symbol: KMD","rsq: 0.195358266457<br />rmse:  1.07656375<br />model: rf<br />symbol: KNC","rsq: 0.108927243048<br />rmse:  2.44505920<br />model: rf<br />symbol: KNC","rsq: 0.050763749476<br />rmse:  4.11125717<br />model: rf<br />symbol: LTC","rsq: 0.091966258206<br />rmse:  1.39043647<br />model: rf<br />symbol: LTC","rsq: 0.152464094317<br />rmse:  1.62244024<br />model: rf<br />symbol: MANA","rsq: 0.193625328478<br />rmse:  2.95478559<br />model: rf<br />symbol: MANA","rsq: 0.062055612484<br />rmse:  0.88346014<br />model: rf<br />symbol: MKR","rsq: 0.220840538295<br />rmse:  2.70458119<br />model: rf<br />symbol: MKR","rsq: 0.057675602376<br />rmse:  1.69265011<br />model: rf<br />symbol: NEO","rsq: 0.232661703793<br />rmse:  2.09636384<br />model: rf<br />symbol: NEO","rsq: 0.260699881979<br />rmse:  2.95685309<br />model: rf<br />symbol: NEXO","rsq: 0.059334071721<br />rmse:  1.45192272<br />model: rf<br />symbol: NEXO","rsq: 0.008612101557<br />rmse:  0.03226805<br />model: rf<br />symbol: NUT","rsq: 0.015383516133<br />rmse:  0.77722180<br />model: rf<br />symbol: NUT","rsq: 0.695793618456<br />rmse:  2.14945139<br />model: rf<br />symbol: OAX","rsq: 0.073227058712<br />rmse:  6.52836324<br />model: rf<br />symbol: OAX","rsq: 0.692176665549<br />rmse:  4.60557930<br />model: rf<br />symbol: SRN","rsq: 0.210823276679<br />rmse:  6.64057357<br />model: rf<br />symbol: SRN","rsq: 0.001809080453<br />rmse:  0.92440898<br />model: rf<br />symbol: STORJ","rsq: 0.174534204516<br />rmse:  5.07675071<br />model: rf<br />symbol: STORJ","rsq: 0.166982422346<br />rmse:  1.28114175<br />model: rf<br />symbol: TRX","rsq: 0.138415217403<br />rmse:  1.73241673<br />model: rf<br />symbol: TRX","rsq: 0.002852985340<br />rmse:  2.65489797<br />model: rf<br />symbol: UNI","rsq: 0.163514802742<br />rmse:  3.03543194<br />model: rf<br />symbol: UNI","rsq: 0.000030823239<br />rmse:  2.91610700<br />model: rf<br />symbol: VIB","rsq: 0.018088214943<br />rmse:  4.87175739<br />model: rf<br />symbol: VIB","rsq: 0.002991680078<br />rmse:  0.83424499<br />model: rf<br />symbol: WAXP","rsq: 0.151237579672<br />rmse:  1.87545664<br />model: rf<br />symbol: WAXP","rsq: 0.072212989275<br />rmse:  3.19401214<br />model: rf<br />symbol: XEM","rsq: 0.098362029998<br />rmse:  2.24563209<br />model: rf<br />symbol: XEM","rsq: 0.146925230372<br />rmse:  0.97412790<br />model: rf<br />symbol: XMR","rsq: 0.180808815400<br />rmse:  2.36298741<br />model: rf<br />symbol: XMR","rsq: 0.001123572314<br />rmse: 26.79072349<br />model: rf<br />symbol: XNS","rsq: 0.019373856061<br />rmse: 10.09339227<br />model: rf<br />symbol: XNS","rsq: 0.093468864168<br />rmse:  3.25827684<br />model: rf<br />symbol: XPR","rsq: 0.047206208649<br />rmse:  5.81586242<br />model: rf<br />symbol: XPR","rsq: 0.142427695376<br />rmse:  3.28077944<br />model: rf<br />symbol: XRP","rsq: 0.022265883721<br />rmse:  1.67734332<br />model: rf<br />symbol: XRP","rsq: 0.074559836980<br />rmse:  1.30821163<br />model: rf<br />symbol: XVG","rsq: 0.155554025476<br />rmse:  3.33933454<br />model: rf<br />symbol: XVG","rsq: 0.116840457194<br />rmse:  1.88461435<br />model: rf<br />symbol: ZEC","rsq: 0.160850440776<br />rmse:  1.64723243<br />model: rf<br />symbol: ZEC","rsq: 0.000844721778<br />rmse:  2.34283668<br />model: rf<br />symbol: ZRX","rsq: 0.067739397686<br />rmse:  3.42556396<br />model: rf<br />symbol: ZRX"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"rf","legendgroup":"rf","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.00257459857539601,0.0632208789813778,0.147978402222619,0.0237498130987688,0.0107244232401376,0.0415546317491552,0.119005048541302,0.0750988952380913,0.104872987628316,0.0213539314350481,0.0649388838356422,0.0999988966887272,0.00139031719311395,0.0468757434324314,0.341209702999517,0.223057958276606,0.0317662476273333,0.333971494487732,0.0283236059033341,0.0268407009508425,0.000348857169934961,0.0105013373608686,0.0991723837985582,0.0517429003237573,2.48662283927131e-06,0.121392338969925,0.342884118626878,0.19902753808067,0.0078291260605973,0.107982951197629,0.00409860304340729,0.243619384443067,0.00397634663259662,0.0800179368811816,0.0955501469321164,0.074846609811803,0.112149597574556,0.128970010679758,0.0531317120714724,0.0679289723564514,0.19803969744513,0.0634195919258319,0.000111231600246983,0.0786558499955407,0.000214409000933641,0.167219880371459,0.00319360284348917,0.073532783426984,0.0544753362330362,0.0232788596003823,0.0223825311334409,0.0619941166252654,0.12940676439941,0.0704853622851663,0.09817363259433,0.118226480107076,0.0542577748382802,0.0171475704793599,0.226402505288927,0.25386833456118,0.144868905426291,0.104068079731924,0.00258660782122975,0.0530693245557474,0.229154484765657,0.0422757950399623,0.421734572801442,0.0181793502880012,5.87221590186421e-06,0.0474712715163214,0.174847393103356,0.0208489818980767,0.0513626759980293,0.0583845858049442,0.00511178572856296,0.0354577780130097,0.0807389120704794,0.107349477805541,0.0562773751223913,0.0191465293204399,0.0114961866111715,0.0494630389693302,0.00460288994187015,0.0240735482129699,5.0417046133045e-05,0.155123689361856,0.0661158072260463,0.0454239552101739,0.120721906337638,0.123887697329794,0.461818529658555,0.118894881337835,0.0185270602941142,0.0308846795656144],"y":[2.52830732984535,2.41796363959778,2.88272721333014,2.89871517353059,3.888706084921,4.49778900397986,2.30230017597352,3.35914505872496,1.45101336519279,1.96844399555163,1.88906583797428,1.61688581941844,6.90609417627159,4.77461410736912,null,6.52945779236106,2.75599868249135,1.79541718487904,2.11712206560679,0.725968207523402,3.00713035391015,1.93734799448125,1.283169939921,3.89848789884214,3.03871537312361,1.26683935902473,1.48124959682794,2.31613637237073,2.93638152071953,4.27725175382852,6.30202805102859,8.78753215980666,2.52334835838284,1.86568060366131,1.58808412207725,2.39891103911433,1.29871969701479,3.54074988369428,2.04930143998938,4.875035487619,1.41964589936616,1.78237095259894,1.98999075604385,2.60447075898947,2.59334584037921,2.26916727886166,1.21868550395448,1.50390599761762,1.46569321333306,2.79037141439717,1.34384888464976,3.65577152789105,5.46013569070082,1.67525675292167,2.02675216398949,2.93950333135957,1.33974564195731,4.42869711868013,2.1835330442399,2.13633412391481,3.50516212738688,1.49349495446116,0.0322788476581322,1.15246581824498,3.65019108527041,9.82272743440195,5.55008442361873,7.01662013295268,2.65711830200534,7.03751369756531,1.29903004675326,2.65904413742963,2.49237499143712,3.31927363511427,4.13409932762382,3.80299536992758,1.03229318476734,2.51373200027405,2.70262369280288,2.97178258728885,1.38592568007954,2.14142458726135,null,9.26439722549839,5.47685105011765,5.36779800095909,5.16265852328691,1.42558362291504,1.64148197387124,2.98192741093834,1.02506465606255,1.65859704720808,2.24248296660201,3.38762647990622],"text":["rsq: 0.002574598575<br />rmse:  2.52830733<br />model: xgb<br />symbol: ADA","rsq: 0.063220878981<br />rmse:  2.41796364<br />model: xgb<br />symbol: ADA","rsq: 0.147978402223<br />rmse:  2.88272721<br />model: xgb<br />symbol: ARDR","rsq: 0.023749813099<br />rmse:  2.89871517<br />model: xgb<br />symbol: ARDR","rsq: 0.010724423240<br />rmse:  3.88870608<br />model: xgb<br />symbol: ASP","rsq: 0.041554631749<br />rmse:  4.49778900<br />model: xgb<br />symbol: ASP","rsq: 0.119005048541<br />rmse:  2.30230018<br />model: xgb<br />symbol: AVA","rsq: 0.075098895238<br />rmse:  3.35914506<br />model: xgb<br />symbol: AVA","rsq: 0.104872987628<br />rmse:  1.45101337<br />model: xgb<br />symbol: BAT","rsq: 0.021353931435<br />rmse:  1.96844400<br />model: xgb<br />symbol: BAT","rsq: 0.064938883836<br />rmse:  1.88906584<br />model: xgb<br />symbol: BCH","rsq: 0.099998896689<br />rmse:  1.61688582<br />model: xgb<br />symbol: BCH","rsq: 0.001390317193<br />rmse:  6.90609418<br />model: xgb<br />symbol: BNT","rsq: 0.046875743432<br />rmse:  4.77461411<br />model: xgb<br />symbol: BNT","rsq: 0.341209703000<br />rmse: 11.14278432<br />model: xgb<br />symbol: BRD","rsq: 0.223057958277<br />rmse:  6.52945779<br />model: xgb<br />symbol: BRD","rsq: 0.031766247627<br />rmse:  2.75599868<br />model: xgb<br />symbol: BSV","rsq: 0.333971494488<br />rmse:  1.79541718<br />model: xgb<br />symbol: BSV","rsq: 0.028323605903<br />rmse:  2.11712207<br />model: xgb<br />symbol: BTC","rsq: 0.026840700951<br />rmse:  0.72596821<br />model: xgb<br />symbol: BTC","rsq: 0.000348857170<br />rmse:  3.00713035<br />model: xgb<br />symbol: BTG","rsq: 0.010501337361<br />rmse:  1.93734799<br />model: xgb<br />symbol: BTG","rsq: 0.099172383799<br />rmse:  1.28316994<br />model: xgb<br />symbol: BTM","rsq: 0.051742900324<br />rmse:  3.89848790<br />model: xgb<br />symbol: BTM","rsq: 0.000002486623<br />rmse:  3.03871537<br />model: xgb<br />symbol: CHZ","rsq: 0.121392338970<br />rmse:  1.26683936<br />model: xgb<br />symbol: CHZ","rsq: 0.342884118627<br />rmse:  1.48124960<br />model: xgb<br />symbol: CRO","rsq: 0.199027538081<br />rmse:  2.31613637<br />model: xgb<br />symbol: CRO","rsq: 0.007829126061<br />rmse:  2.93638152<br />model: xgb<br />symbol: CRPT","rsq: 0.107982951198<br />rmse:  4.27725175<br />model: xgb<br />symbol: CRPT","rsq: 0.004098603043<br />rmse:  6.30202805<br />model: xgb<br />symbol: CUR","rsq: 0.243619384443<br />rmse:  8.78753216<br />model: xgb<br />symbol: CUR","rsq: 0.003976346633<br />rmse:  2.52334836<br />model: xgb<br />symbol: DCR","rsq: 0.080017936881<br />rmse:  1.86568060<br />model: xgb<br />symbol: DCR","rsq: 0.095550146932<br />rmse:  1.58808412<br />model: xgb<br />symbol: DGB","rsq: 0.074846609812<br />rmse:  2.39891104<br />model: xgb<br />symbol: DGB","rsq: 0.112149597575<br />rmse:  1.29871970<br />model: xgb<br />symbol: ELF","rsq: 0.128970010680<br />rmse:  3.54074988<br />model: xgb<br />symbol: ELF","rsq: 0.053131712071<br />rmse:  2.04930144<br />model: xgb<br />symbol: ENJ","rsq: 0.067928972356<br />rmse:  4.87503549<br />model: xgb<br />symbol: ENJ","rsq: 0.198039697445<br />rmse:  1.41964590<br />model: xgb<br />symbol: EOS","rsq: 0.063419591926<br />rmse:  1.78237095<br />model: xgb<br />symbol: EOS","rsq: 0.000111231600<br />rmse:  1.98999076<br />model: xgb<br />symbol: ETH","rsq: 0.078655849996<br />rmse:  2.60447076<br />model: xgb<br />symbol: ETH","rsq: 0.000214409001<br />rmse:  2.59334584<br />model: xgb<br />symbol: ETP","rsq: 0.167219880371<br />rmse:  2.26916728<br />model: xgb<br />symbol: ETP","rsq: 0.003193602843<br />rmse:  1.21868550<br />model: xgb<br />symbol: HT","rsq: 0.073532783427<br />rmse:  1.50390600<br />model: xgb<br />symbol: HT","rsq: 0.054475336233<br />rmse:  1.46569321<br />model: xgb<br />symbol: KMD","rsq: 0.023278859600<br />rmse:  2.79037141<br />model: xgb<br />symbol: KMD","rsq: 0.022382531133<br />rmse:  1.34384888<br />model: xgb<br />symbol: KNC","rsq: 0.061994116625<br />rmse:  3.65577153<br />model: xgb<br />symbol: KNC","rsq: 0.129406764399<br />rmse:  5.46013569<br />model: xgb<br />symbol: LTC","rsq: 0.070485362285<br />rmse:  1.67525675<br />model: xgb<br />symbol: LTC","rsq: 0.098173632594<br />rmse:  2.02675216<br />model: xgb<br />symbol: MANA","rsq: 0.118226480107<br />rmse:  2.93950333<br />model: xgb<br />symbol: MANA","rsq: 0.054257774838<br />rmse:  1.33974564<br />model: xgb<br />symbol: MKR","rsq: 0.017147570479<br />rmse:  4.42869712<br />model: xgb<br />symbol: MKR","rsq: 0.226402505289<br />rmse:  2.18353304<br />model: xgb<br />symbol: NEO","rsq: 0.253868334561<br />rmse:  2.13633412<br />model: xgb<br />symbol: NEO","rsq: 0.144868905426<br />rmse:  3.50516213<br />model: xgb<br />symbol: NEXO","rsq: 0.104068079732<br />rmse:  1.49349495<br />model: xgb<br />symbol: NEXO","rsq: 0.002586607821<br />rmse:  0.03227885<br />model: xgb<br />symbol: NUT","rsq: 0.053069324556<br />rmse:  1.15246582<br />model: xgb<br />symbol: NUT","rsq: 0.229154484766<br />rmse:  3.65019109<br />model: xgb<br />symbol: OAX","rsq: 0.042275795040<br />rmse:  9.82272743<br />model: xgb<br />symbol: OAX","rsq: 0.421734572801<br />rmse:  5.55008442<br />model: xgb<br />symbol: SRN","rsq: 0.018179350288<br />rmse:  7.01662013<br />model: xgb<br />symbol: SRN","rsq: 0.000005872216<br />rmse:  2.65711830<br />model: xgb<br />symbol: STORJ","rsq: 0.047471271516<br />rmse:  7.03751370<br />model: xgb<br />symbol: STORJ","rsq: 0.174847393103<br />rmse:  1.29903005<br />model: xgb<br />symbol: TRX","rsq: 0.020848981898<br />rmse:  2.65904414<br />model: xgb<br />symbol: TRX","rsq: 0.051362675998<br />rmse:  2.49237499<br />model: xgb<br />symbol: UNI","rsq: 0.058384585805<br />rmse:  3.31927364<br />model: xgb<br />symbol: UNI","rsq: 0.005111785729<br />rmse:  4.13409933<br />model: xgb<br />symbol: VIB","rsq: 0.035457778013<br />rmse:  3.80299537<br />model: xgb<br />symbol: VIB","rsq: 0.080738912070<br />rmse:  1.03229318<br />model: xgb<br />symbol: WAXP","rsq: 0.107349477806<br />rmse:  2.51373200<br />model: xgb<br />symbol: WAXP","rsq: 0.056277375122<br />rmse:  2.70262369<br />model: xgb<br />symbol: XEM","rsq: 0.019146529320<br />rmse:  2.97178259<br />model: xgb<br />symbol: XEM","rsq: 0.011496186611<br />rmse:  1.38592568<br />model: xgb<br />symbol: XMR","rsq: 0.049463038969<br />rmse:  2.14142459<br />model: xgb<br />symbol: XMR","rsq: 0.004602889942<br />rmse: 20.27201639<br />model: xgb<br />symbol: XNS","rsq: 0.024073548213<br />rmse:  9.26439723<br />model: xgb<br />symbol: XNS","rsq: 0.000050417046<br />rmse:  5.47685105<br />model: xgb<br />symbol: XPR","rsq: 0.155123689362<br />rmse:  5.36779800<br />model: xgb<br />symbol: XPR","rsq: 0.066115807226<br />rmse:  5.16265852<br />model: xgb<br />symbol: XRP","rsq: 0.045423955210<br />rmse:  1.42558362<br />model: xgb<br />symbol: XRP","rsq: 0.120721906338<br />rmse:  1.64148197<br />model: xgb<br />symbol: XVG","rsq: 0.123887697330<br />rmse:  2.98192741<br />model: xgb<br />symbol: XVG","rsq: 0.461818529659<br />rmse:  1.02506466<br />model: xgb<br />symbol: ZEC","rsq: 0.118894881338<br />rmse:  1.65859705<br />model: xgb<br />symbol: ZEC","rsq: 0.018527060294<br />rmse:  2.24248297<br />model: xgb<br />symbol: ZRX","rsq: 0.030884679566<br />rmse:  3.38762648<br />model: xgb<br />symbol: ZRX"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"xgb","legendgroup":"xgb","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":48.9497716894977},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.0487211230447743,1.02319828964272],"tickmode":"array","ticktext":["0.00","0.25","0.50","0.75","1.00"],"tickvals":[0,0.25,0.5,0.75,1],"categoryorder":"array","categoryarray":["0.00","0.25","0.50","0.75","1.00"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"rsq","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.5,10.5],"tickmode":"array","ticktext":["0.0","2.5","5.0","7.5","10.0"],"tickvals":[0,2.5,5,7.5,10],"categoryorder":"array","categoryarray":["0.0","2.5","5.0","7.5","10.0"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"rmse","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.913385826771654},"annotations":[{"text":"model","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"1b026a41b12f":{"x":{},"y":{},"colour":{},"symbol":{},"type":"scatter"}},"cur_data":"1b026a41b12f","visdat":{"1b026a41b12f":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-cd922a6aab8365117dc3" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cd922a6aab8365117dc3">{"x":{"data":[{"x":[0.668446598700148,0.548151232020646,0.795466962932872,0.399156854444753,0.41210136036882,0.452747422965759,0.597014313838493,0.393623702179306,0.985609152638208,0.557530140768393,0.347468710892957,0.250439839067708,0.257607036680591,0.842711957077779,0.778005947533615,0.485292400630877,0.864130783454721,0.629580347664887,0.968775532358037,0.713504031745777,0.926727188774705,0.526666612484769,0.778379348159285,0.196110280532423,0.111130542809524,0.58155302268088,0.751770122641957,0.757634666589335,0.451419369675237,0.381492696708701,0.877345218532697,0.719213836230299,0.906500796505851,0.505856720148902,0.360006957084332,0.552354711612303,0.715378615870429,0.182574248048812,0.938621039355304,0.450279424287707,0.864828306714439,0.470315236179543,0.413661603780277,0.539522723338612,0.721016832329625,0.785046111644429,0.916414040919151,0.278697705640479,0.584896675236134,0.564320944184549,0.933306475108663,0.544400914677357,0.49168853826747,0.610546542782188,0.491511271872371,0.281905468232712,0.237801427518057,0.293890684481543,0.881876206303173,0.43387231497802,0.320258435826798,0.0677676334797298,0.623311638108622,0.237688090749222,0.710030396059091,0.249844747012543,0.491975571931458,0.589106226452564,0.719796097596711,0.584438638985982,0.280256062305081,0.387783543230759,0.183598697280538,0.249466220122116,0.0776888424474737,0.403289761303184,0.729974942485175,0.772875473815586,0.805367788177806,0.504133721584092,0.113257616724569,0.346070165500497,0.0500672951302688,0.650698446948305,0.166273489664899,0.163993829714996,0.584694992081941,0.330047538397829,0.956021801941996,0.503779810826223,0.883600969444253,0.554060427421983],"y":[0.861849967091178,1.11613909548685,0.707833049453125,1.40430075055206,2.63573315253017,5.39265685719961,1.1687538812755,1.90591456555624,0.371373329809778,1.00859122280661,2.32423553156125,1.98889667603359,3.51303595746552,1.53388190360399,null,2.68231852339923,0.523686381680581,0.701017867992673,0.7509339521704,0.350131416194442,0.629854290158601,0.841366885281383,0.55426103158458,1.99044845813136,2.91957223554832,0.799437901254015,0.56901108004198,3.92566705034247,1.50800471782804,4.00849818446277,1.67027467508482,0.665732190084189,0.56151866740118,1.0543648315783,0.695352169905402,1.10960069811168,1.36492279401659,2.41652655028243,0.424330643123337,0.863261486095721,0.668674614399425,1.10540899991799,1.40223885866306,1.47649204335858,0.651379823922073,0.433369405982437,0.602558497979629,1.56590206477892,0.860230270973211,1.28240381907941,1.09828856003188,0.679545018775933,0.794484489095913,1.23565539340993,0.958479672500487,3.24331384303829,0.994002150053061,1.67488935077035,1.06677378273117,1.0138392960704,0.0334286456855816,1.39345377375873,2.38003840954595,5.91877393392965,4.36429972317114,3.76482473764059,0.741974302457988,1.94871066938298,0.554992008318026,1.18280819777054,1.59626432021384,null,2.64014565847865,3.53169645033314,0.721849443101702,0.846119595974891,0.826478375435415,1.10829465441339,0.364569303639463,0.82496317705778,4.04629756398498,8.32695367781311,2.78153910636366,4.14301230101237,3.00719082437424,1.69358684398701,0.921702133169573,3.26614357424369,0.340367109210164,0.801125699271486,0.505313840093883,1.29513178285194],"text":["rsq: 0.66844659870<br />rmse:  0.86184997<br />model: lm<br />symbol: ADA","rsq: 0.54815123202<br />rmse:  1.11613910<br />model: lm<br />symbol: ADA","rsq: 0.79546696293<br />rmse:  0.70783305<br />model: lm<br />symbol: ARDR","rsq: 0.39915685444<br />rmse:  1.40430075<br />model: lm<br />symbol: ARDR","rsq: 0.41210136037<br />rmse:  2.63573315<br />model: lm<br />symbol: ASP","rsq: 0.45274742297<br />rmse:  5.39265686<br />model: lm<br />symbol: ASP","rsq: 0.59701431384<br />rmse:  1.16875388<br />model: lm<br />symbol: AVA","rsq: 0.39362370218<br />rmse:  1.90591457<br />model: lm<br />symbol: AVA","rsq: 0.98560915264<br />rmse:  0.37137333<br />model: lm<br />symbol: BAT","rsq: 0.55753014077<br />rmse:  1.00859122<br />model: lm<br />symbol: BAT","rsq: 0.34746871089<br />rmse:  2.32423553<br />model: lm<br />symbol: BCH","rsq: 0.25043983907<br />rmse:  1.98889668<br />model: lm<br />symbol: BCH","rsq: 0.25760703668<br />rmse:  3.51303596<br />model: lm<br />symbol: BNT","rsq: 0.84271195708<br />rmse:  1.53388190<br />model: lm<br />symbol: BNT","rsq: 0.77800594753<br />rmse: 10.50425742<br />model: lm<br />symbol: BRD","rsq: 0.48529240063<br />rmse:  2.68231852<br />model: lm<br />symbol: BRD","rsq: 0.86413078345<br />rmse:  0.52368638<br />model: lm<br />symbol: BSV","rsq: 0.62958034766<br />rmse:  0.70101787<br />model: lm<br />symbol: BSV","rsq: 0.96877553236<br />rmse:  0.75093395<br />model: lm<br />symbol: BTC","rsq: 0.71350403175<br />rmse:  0.35013142<br />model: lm<br />symbol: BTC","rsq: 0.92672718877<br />rmse:  0.62985429<br />model: lm<br />symbol: BTG","rsq: 0.52666661248<br />rmse:  0.84136689<br />model: lm<br />symbol: BTG","rsq: 0.77837934816<br />rmse:  0.55426103<br />model: lm<br />symbol: BTM","rsq: 0.19611028053<br />rmse:  1.99044846<br />model: lm<br />symbol: BTM","rsq: 0.11113054281<br />rmse:  2.91957224<br />model: lm<br />symbol: CHZ","rsq: 0.58155302268<br />rmse:  0.79943790<br />model: lm<br />symbol: CHZ","rsq: 0.75177012264<br />rmse:  0.56901108<br />model: lm<br />symbol: CRO","rsq: 0.75763466659<br />rmse:  3.92566705<br />model: lm<br />symbol: CRO","rsq: 0.45141936968<br />rmse:  1.50800472<br />model: lm<br />symbol: CRPT","rsq: 0.38149269671<br />rmse:  4.00849818<br />model: lm<br />symbol: CRPT","rsq: 0.87734521853<br />rmse:  1.67027468<br />model: lm<br />symbol: DCR","rsq: 0.71921383623<br />rmse:  0.66573219<br />model: lm<br />symbol: DCR","rsq: 0.90650079651<br />rmse:  0.56151867<br />model: lm<br />symbol: DGB","rsq: 0.50585672015<br />rmse:  1.05436483<br />model: lm<br />symbol: DGB","rsq: 0.36000695708<br />rmse:  0.69535217<br />model: lm<br />symbol: ELF","rsq: 0.55235471161<br />rmse:  1.10960070<br />model: lm<br />symbol: ELF","rsq: 0.71537861587<br />rmse:  1.36492279<br />model: lm<br />symbol: ENJ","rsq: 0.18257424805<br />rmse:  2.41652655<br />model: lm<br />symbol: ENJ","rsq: 0.93862103936<br />rmse:  0.42433064<br />model: lm<br />symbol: EOS","rsq: 0.45027942429<br />rmse:  0.86326149<br />model: lm<br />symbol: EOS","rsq: 0.86482830671<br />rmse:  0.66867461<br />model: lm<br />symbol: ETH","rsq: 0.47031523618<br />rmse:  1.10540900<br />model: lm<br />symbol: ETH","rsq: 0.41366160378<br />rmse:  1.40223886<br />model: lm<br />symbol: ETP","rsq: 0.53952272334<br />rmse:  1.47649204<br />model: lm<br />symbol: ETP","rsq: 0.72101683233<br />rmse:  0.65137982<br />model: lm<br />symbol: HT","rsq: 0.78504611164<br />rmse:  0.43336941<br />model: lm<br />symbol: HT","rsq: 0.91641404092<br />rmse:  0.60255850<br />model: lm<br />symbol: KMD","rsq: 0.27869770564<br />rmse:  1.56590206<br />model: lm<br />symbol: KMD","rsq: 0.58489667524<br />rmse:  0.86023027<br />model: lm<br />symbol: KNC","rsq: 0.56432094418<br />rmse:  1.28240382<br />model: lm<br />symbol: KNC","rsq: 0.93330647511<br />rmse:  1.09828856<br />model: lm<br />symbol: LTC","rsq: 0.54440091468<br />rmse:  0.67954502<br />model: lm<br />symbol: LTC","rsq: 0.49168853827<br />rmse:  0.79448449<br />model: lm<br />symbol: MANA","rsq: 0.61054654278<br />rmse:  1.23565539<br />model: lm<br />symbol: MANA","rsq: 0.49151127187<br />rmse:  0.95847967<br />model: lm<br />symbol: MKR","rsq: 0.28190546823<br />rmse:  3.24331384<br />model: lm<br />symbol: MKR","rsq: 0.23780142752<br />rmse:  0.99400215<br />model: lm<br />symbol: NEO","rsq: 0.29389068448<br />rmse:  1.67488935<br />model: lm<br />symbol: NEO","rsq: 0.88187620630<br />rmse:  1.06677378<br />model: lm<br />symbol: NEXO","rsq: 0.43387231498<br />rmse:  1.01383930<br />model: lm<br />symbol: NEXO","rsq: 0.32025843583<br />rmse:  0.03342865<br />model: lm<br />symbol: NUT","rsq: 0.06776763348<br />rmse:  1.39345377<br />model: lm<br />symbol: NUT","rsq: 0.62331163811<br />rmse:  2.38003841<br />model: lm<br />symbol: OAX","rsq: 0.23768809075<br />rmse:  5.91877393<br />model: lm<br />symbol: OAX","rsq: 0.71003039606<br />rmse:  4.36429972<br />model: lm<br />symbol: SRN","rsq: 0.24984474701<br />rmse:  3.76482474<br />model: lm<br />symbol: SRN","rsq: 0.49197557193<br />rmse:  0.74197430<br />model: lm<br />symbol: STORJ","rsq: 0.58910622645<br />rmse:  1.94871067<br />model: lm<br />symbol: STORJ","rsq: 0.71979609760<br />rmse:  0.55499201<br />model: lm<br />symbol: TRX","rsq: 0.58443863899<br />rmse:  1.18280820<br />model: lm<br />symbol: TRX","rsq: 0.28025606231<br />rmse:  1.59626432<br />model: lm<br />symbol: UNI","rsq: 0.38778354323<br />rmse: 10.76303302<br />model: lm<br />symbol: UNI","rsq: 0.18359869728<br />rmse:  2.64014566<br />model: lm<br />symbol: VIB","rsq: 0.24946622012<br />rmse:  3.53169645<br />model: lm<br />symbol: VIB","rsq: 0.07768884245<br />rmse:  0.72184944<br />model: lm<br />symbol: WAXP","rsq: 0.40328976130<br />rmse:  0.84611960<br />model: lm<br />symbol: WAXP","rsq: 0.72997494249<br />rmse:  0.82647838<br />model: lm<br />symbol: XEM","rsq: 0.77287547382<br />rmse:  1.10829465<br />model: lm<br />symbol: XEM","rsq: 0.80536778818<br />rmse:  0.36456930<br />model: lm<br />symbol: XMR","rsq: 0.50413372158<br />rmse:  0.82496318<br />model: lm<br />symbol: XMR","rsq: 0.11325761672<br />rmse:  4.04629756<br />model: lm<br />symbol: XNS","rsq: 0.34607016550<br />rmse:  8.32695368<br />model: lm<br />symbol: XNS","rsq: 0.05006729513<br />rmse:  2.78153911<br />model: lm<br />symbol: XPR","rsq: 0.65069844695<br />rmse:  4.14301230<br />model: lm<br />symbol: XPR","rsq: 0.16627348966<br />rmse:  3.00719082<br />model: lm<br />symbol: XRP","rsq: 0.16399382971<br />rmse:  1.69358684<br />model: lm<br />symbol: XRP","rsq: 0.58469499208<br />rmse:  0.92170213<br />model: lm<br />symbol: XVG","rsq: 0.33004753840<br />rmse:  3.26614357<br />model: lm<br />symbol: XVG","rsq: 0.95602180194<br />rmse:  0.34036711<br />model: lm<br />symbol: ZEC","rsq: 0.50377981083<br />rmse:  0.80112570<br />model: lm<br />symbol: ZEC","rsq: 0.88360096944<br />rmse:  0.50531384<br />model: lm<br />symbol: ZRX","rsq: 0.55406042742<br />rmse:  1.29513178<br />model: lm<br />symbol: ZRX"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"lm","legendgroup":"lm","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.076219782051026,0.189122005953111,0.0744905990047243,0.0759100388679435,0.287254107946554,0.235463884864877,0.145573288389511,0.193198663815201,0.279509289564196,0.198903262974409,0.151087193069242,0.253838575274701,0.223910084751989,0.363035978004216,0.000119362156873935,0.281492151333365,0.251177797341923,0.182056186210716,0.416070720905192,0.136821856061662,0.322109149304575,0.0861845347890762,0.0185684164231522,0.094607672055805,0.00452935027388626,0.143691226861972,0.269261670760016,0.588037235024912,0.0240177097438153,0.532915770090324,0.29054404969143,0.13431442922186,0.204731192566148,0.11670643393895,0.0394746586721386,0.137549416038139,0.253565466079864,0.0670367562883355,0.184285431465631,0.0988737970536075,0.273965686185218,0.0906494292394293,0.000145335914636648,0.164043398067103,0.00162404868330702,0.374496779143365,0.185038182853512,0.0152327744684551,0.750085900755904,0.275009625544474,0.378449313671764,0.146624827614943,0.176516557428847,0.190068626144115,0.116455980718745,0.345019980127098,0.136683995806542,0.0949199471792727,0.395164225068847,0.043734507847511,0.00611293900374612,0.0314918754728569,0.212159641711008,0.145399226186456,0.0420781883903818,0.136347897162373,0.088759746725532,0.567055174770014,0.137640328131952,0.150631039953218,0.0621277129901401,0.244616577642529,0.0477030582427858,0.176106738891803,5.66612781780071e-05,0.149594234879527,0.0367217154058397,0.0956859068734081,0.145894463561967,0.111289563546082,0.000102246671415011,0.202197962936325,0.10669046940134,0.114227495685525,0.273003978800339,0.274829471420151,0.0847593201278311,0.298596968759953,0.250454162978252,0.0764509615894465,0.237438806352062,0.125547618893581],"y":[1.52513497234268,1.66830569561193,1.67350261319932,2.21982814744742,4.52236974791447,6.67662086509806,2.06824520615644,2.91866854497157,1.47474605561453,1.98881570112454,1.37006175933281,4.99691284111647,4.51201007471368,2.39943510954626,null,3.75900333354976,1.02472023117032,1.60417619262204,1.88338545520586,1.20297228623947,1.48962422851389,1.61504258754148,1.14679169178704,2.59353435484661,3.58538895774928,1.926461712073,0.980874127214991,5.70663285262814,1.94146848730029,6.58087610004618,3.40158622491733,1.72489017887908,1.24659697564665,1.93008244585866,1.4304668660734,1.44020282850644,2.11737432466461,2.68461834897135,1.00399492313403,1.68899861617494,1.56939257932558,1.77078443481497,2.97926251925676,2.77845435337684,0.821763769196207,1.42622889876865,1.98693465376408,2.20551795848074,2.90690055293749,1.61292970251152,3.28208661396697,1.56505810121538,1.03154261304729,1.91840488420618,6.48389714619063,null,1.03127282116116,6.29106152860685,6.25442851173961,1.85191170184966,6.23536857965554,5.08242323928612,3.52765900780938,6.06327864404547,7.77266125622473,2.6208252362539,0.975744380681098,4.75098045421941,0.975280166554612,1.9445431381407,1.93630125147291,null,5.00592512269651,6.26726872753046,0.876445940442438,1.1755204981779,2.13357133789666,2.16674989652427,2.46897103172314,1.97309807723766,3.97826153949632,null,4.13196187723169,5.92992785457679,3.96997018355924,2.4337735338716,1.32985283613588,3.06849308466931,1.23405924595644,1.52443844314369,1.04620328857589,1.73394819161998],"text":["rsq: 0.07621978205<br />rmse:  1.52513497<br />model: nnet<br />symbol: ADA","rsq: 0.18912200595<br />rmse:  1.66830570<br />model: nnet<br />symbol: ADA","rsq: 0.07449059900<br />rmse:  1.67350261<br />model: nnet<br />symbol: ARDR","rsq: 0.07591003887<br />rmse:  2.21982815<br />model: nnet<br />symbol: ARDR","rsq: 0.28725410795<br />rmse:  4.52236975<br />model: nnet<br />symbol: ASP","rsq: 0.23546388486<br />rmse:  6.67662087<br />model: nnet<br />symbol: ASP","rsq: 0.14557328839<br />rmse:  2.06824521<br />model: nnet<br />symbol: AVA","rsq: 0.19319866382<br />rmse:  2.91866854<br />model: nnet<br />symbol: AVA","rsq: 0.27950928956<br />rmse:  1.47474606<br />model: nnet<br />symbol: BAT","rsq: 0.19890326297<br />rmse:  1.98881570<br />model: nnet<br />symbol: BAT","rsq: 0.15108719307<br />rmse:  1.37006176<br />model: nnet<br />symbol: BCH","rsq: 0.25383857527<br />rmse:  4.99691284<br />model: nnet<br />symbol: BCH","rsq: 0.22391008475<br />rmse:  4.51201007<br />model: nnet<br />symbol: BNT","rsq: 0.36303597800<br />rmse:  2.39943511<br />model: nnet<br />symbol: BNT","rsq: 0.00011936216<br />rmse: 12.77470753<br />model: nnet<br />symbol: BRD","rsq: 0.28149215133<br />rmse:  3.75900333<br />model: nnet<br />symbol: BRD","rsq: 0.25117779734<br />rmse:  1.02472023<br />model: nnet<br />symbol: BSV","rsq: 0.18205618621<br />rmse:  1.60417619<br />model: nnet<br />symbol: BSV","rsq: 0.41607072091<br />rmse:  1.88338546<br />model: nnet<br />symbol: BTC","rsq: 0.13682185606<br />rmse:  1.20297229<br />model: nnet<br />symbol: BTC","rsq: 0.32210914930<br />rmse:  1.48962423<br />model: nnet<br />symbol: BTG","rsq: 0.08618453479<br />rmse:  1.61504259<br />model: nnet<br />symbol: BTG","rsq: 0.01856841642<br />rmse:  1.14679169<br />model: nnet<br />symbol: BTM","rsq: 0.09460767206<br />rmse:  2.59353435<br />model: nnet<br />symbol: BTM","rsq: 0.00452935027<br />rmse:  3.58538896<br />model: nnet<br />symbol: CHZ","rsq: 0.14369122686<br />rmse:  1.92646171<br />model: nnet<br />symbol: CHZ","rsq: 0.26926167076<br />rmse:  0.98087413<br />model: nnet<br />symbol: CRO","rsq: 0.58803723502<br />rmse:  5.70663285<br />model: nnet<br />symbol: CRO","rsq: 0.02401770974<br />rmse:  1.94146849<br />model: nnet<br />symbol: CRPT","rsq: 0.53291577009<br />rmse:  6.58087610<br />model: nnet<br />symbol: CRPT","rsq: 0.29054404969<br />rmse:  3.40158622<br />model: nnet<br />symbol: DCR","rsq: 0.13431442922<br />rmse:  1.72489018<br />model: nnet<br />symbol: DCR","rsq: 0.20473119257<br />rmse:  1.24659698<br />model: nnet<br />symbol: DGB","rsq: 0.11670643394<br />rmse:  1.93008245<br />model: nnet<br />symbol: DGB","rsq: 0.03947465867<br />rmse:  1.43046687<br />model: nnet<br />symbol: ELF","rsq: 0.13754941604<br />rmse:  1.44020283<br />model: nnet<br />symbol: ELF","rsq: 0.25356546608<br />rmse:  2.11737432<br />model: nnet<br />symbol: ENJ","rsq: 0.06703675629<br />rmse:  2.68461835<br />model: nnet<br />symbol: ENJ","rsq: 0.18428543147<br />rmse:  1.00399492<br />model: nnet<br />symbol: EOS","rsq: 0.09887379705<br />rmse:  1.68899862<br />model: nnet<br />symbol: EOS","rsq: 0.27396568619<br />rmse:  1.56939258<br />model: nnet<br />symbol: ETH","rsq: 0.09064942924<br />rmse:  1.77078443<br />model: nnet<br />symbol: ETH","rsq: 0.00014533591<br />rmse:  2.97926252<br />model: nnet<br />symbol: ETP","rsq: 0.16404339807<br />rmse:  2.77845435<br />model: nnet<br />symbol: ETP","rsq: 0.00162404868<br />rmse:  0.82176377<br />model: nnet<br />symbol: HT","rsq: 0.37449677914<br />rmse:  1.42622890<br />model: nnet<br />symbol: HT","rsq: 0.18503818285<br />rmse:  1.98693465<br />model: nnet<br />symbol: KMD","rsq: 0.01523277447<br />rmse:  2.20551796<br />model: nnet<br />symbol: KMD","rsq: 0.75008590076<br />rmse:  2.90690055<br />model: nnet<br />symbol: KNC","rsq: 0.27500962554<br />rmse:  1.61292970<br />model: nnet<br />symbol: KNC","rsq: 0.37844931367<br />rmse:  3.28208661<br />model: nnet<br />symbol: LTC","rsq: 0.14662482761<br />rmse:  1.56505810<br />model: nnet<br />symbol: LTC","rsq: 0.17651655743<br />rmse:  1.03154261<br />model: nnet<br />symbol: MANA","rsq: 0.19006862614<br />rmse:  1.91840488<br />model: nnet<br />symbol: MANA","rsq: 0.11645598072<br />rmse:  6.48389715<br />model: nnet<br />symbol: MKR","rsq: 0.34501998013<br />rmse: 15.60704096<br />model: nnet<br />symbol: MKR","rsq: 0.13668399581<br />rmse:  1.03127282<br />model: nnet<br />symbol: NEO","rsq: 0.09491994718<br />rmse:  6.29106153<br />model: nnet<br />symbol: NEO","rsq: 0.39516422507<br />rmse:  6.25442851<br />model: nnet<br />symbol: NEXO","rsq: 0.04373450785<br />rmse:  1.85191170<br />model: nnet<br />symbol: NEXO","rsq: 0.00611293900<br />rmse:  6.23536858<br />model: nnet<br />symbol: NUT","rsq: 0.03149187547<br />rmse:  5.08242324<br />model: nnet<br />symbol: NUT","rsq: 0.21215964171<br />rmse:  3.52765901<br />model: nnet<br />symbol: OAX","rsq: 0.14539922619<br />rmse:  6.06327864<br />model: nnet<br />symbol: OAX","rsq: 0.04207818839<br />rmse:  7.77266126<br />model: nnet<br />symbol: SRN","rsq: 0.13634789716<br />rmse:  2.62082524<br />model: nnet<br />symbol: SRN","rsq: 0.08875974673<br />rmse:  0.97574438<br />model: nnet<br />symbol: STORJ","rsq: 0.56705517477<br />rmse:  4.75098045<br />model: nnet<br />symbol: STORJ","rsq: 0.13764032813<br />rmse:  0.97528017<br />model: nnet<br />symbol: TRX","rsq: 0.15063103995<br />rmse:  1.94454314<br />model: nnet<br />symbol: TRX","rsq: 0.06212771299<br />rmse:  1.93630125<br />model: nnet<br />symbol: UNI","rsq: 0.24461657764<br />rmse: 11.00410870<br />model: nnet<br />symbol: UNI","rsq: 0.04770305824<br />rmse:  5.00592512<br />model: nnet<br />symbol: VIB","rsq: 0.17610673889<br />rmse:  6.26726873<br />model: nnet<br />symbol: VIB","rsq: 0.00005666128<br />rmse:  0.87644594<br />model: nnet<br />symbol: WAXP","rsq: 0.14959423488<br />rmse:  1.17552050<br />model: nnet<br />symbol: WAXP","rsq: 0.03672171541<br />rmse:  2.13357134<br />model: nnet<br />symbol: XEM","rsq: 0.09568590687<br />rmse:  2.16674990<br />model: nnet<br />symbol: XEM","rsq: 0.14589446356<br />rmse:  2.46897103<br />model: nnet<br />symbol: XMR","rsq: 0.11128956355<br />rmse:  1.97309808<br />model: nnet<br />symbol: XMR","rsq: 0.00010224667<br />rmse:  3.97826154<br />model: nnet<br />symbol: XNS","rsq: 0.20219796294<br />rmse: 15.17444014<br />model: nnet<br />symbol: XNS","rsq: 0.10669046940<br />rmse:  4.13196188<br />model: nnet<br />symbol: XPR","rsq: 0.11422749569<br />rmse:  5.92992785<br />model: nnet<br />symbol: XPR","rsq: 0.27300397880<br />rmse:  3.96997018<br />model: nnet<br />symbol: XRP","rsq: 0.27482947142<br />rmse:  2.43377353<br />model: nnet<br />symbol: XRP","rsq: 0.08475932013<br />rmse:  1.32985284<br />model: nnet<br />symbol: XVG","rsq: 0.29859696876<br />rmse:  3.06849308<br />model: nnet<br />symbol: XVG","rsq: 0.25045416298<br />rmse:  1.23405925<br />model: nnet<br />symbol: ZEC","rsq: 0.07645096159<br />rmse:  1.52443844<br />model: nnet<br />symbol: ZEC","rsq: 0.23743880635<br />rmse:  1.04620329<br />model: nnet<br />symbol: ZRX","rsq: 0.12554761889<br />rmse:  1.73394819<br />model: nnet<br />symbol: ZRX"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"nnet","legendgroup":"nnet","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.0467218212436696,0.47954820936523,0.166303140010291,0.168933024421753,0.0602407338934587,0.382987821990911,0.348012976730029,0.339411613405628,0.751054808608616,0.285668324467698,0.300645464993811,0.319671643226747,0.516592259489712,0.473640091477407,0.149035915313137,0.44161803468617,0.487949933173105,0.353156837314249,0.841915764740629,0.250830187682035,0.569994237807164,0.244603223197817,0.263636688594575,0.129990608571188,0.16882158098962,0.345740624125041,0.624808659662498,0.701703773213689,0.0275093075159968,0.546777023887854,0.597792647331656,0.285561331602102,0.550635108489352,0.240143374462387,0.0743718205258138,0.408456094581647,0.285475840298757,0.177382123936874,0.526324860493843,0.199735100256845,0.636329194231254,0.35878935235033,0.0770822472194461,0.309856656785357,0.0677183899065908,0.568412687367359,0.303600495693575,0.064321420830392,0.80117615551702,0.399527041570214,0.743678325451363,0.222753211380164,0.326221544340296,0.414966494651572,0.409805041802656,0.384083623926447,0.127073252721951,0.275822084259044,0.725870118184113,0.0663805440426937,0.291958381484464,0.292525798844189,0.556248798187894,0.210988621660754,0.172807568727045,0.114123368432422,0.265968899812774,0.640501968488575,0.515526878096192,0.258849666114622,0.339531176211449,0.345731517923266,0.104759555831743,0.26772553005991,1.46212321181808e-05,0.36415021708083,0.15830246716581,0.329882053171452,0.218443281947297,0.227087406357068,0.0150395675744921,0.32160362234898,0.251731337494784,0.261314218601847,0.582743580417652,0.442937904780182,0.332369864137332,0.303352110484218,0.63175204167655,0.110305855083208,0.675584738556336,0.333230424512915],"y":[1.3129528065666,1.18920273669564,1.43669063972845,1.76159149883485,3.37664344562461,4.68929235534524,1.73912886115106,2.07561634146808,1.00839237273526,1.28195171307717,2.08892264902669,1.0401589678444,2.86370706082386,1.54834729151555,null,2.48636361079872,0.83786247450534,0.936912905241713,0.888169771116149,0.562511926273617,1.08414343138649,1.03107667172848,0.992489899227345,1.65685903869265,1.534452596936,0.982137220221886,0.709151503241717,2.65128376843622,1.91682955454673,1.27260699492485,2.42270003723621,1.06967164516975,0.875195747597397,1.29972956216798,0.883770627761554,1.37380902440353,1.86990248869949,2.3173737017246,0.771455402803207,0.976234780239148,1.00963730587772,0.770521892232516,1.7416022777215,1.88343935799002,0.793768143258736,0.737050323638284,1.74105329818074,1.64242191455322,0.773263394009765,1.25108213958925,1.67166771037659,0.979308359510443,0.918754320822953,1.54076743132686,0.903012354064293,1.53893314880781,0.990303464339119,1.55418076785084,1.60853578188855,1.19681931589593,0.0353029271628313,1.25376495957355,2.59715796239982,5.86756396370551,6.95014855915217,2.63596244197726,0.875747141335372,1.30672990621236,0.744001715214576,1.0613773364861,1.52761161294365,null,2.56336669520139,3.19181744176837,0.795669358278841,0.921721116273112,1.45632473533343,1.6050414733444,0.744906360071364,1.04846209177249,3.89180069950383,7.8527352482953,2.58608842014041,4.50110958046621,2.38988356216232,0.903316263354377,1.18433028014181,2.55664799153218,0.840336788769809,1.00567910589356,0.779386262079719,1.35209384016553],"text":["rsq: 0.04672182124<br />rmse:  1.31295281<br />model: pcr<br />symbol: ADA","rsq: 0.47954820937<br />rmse:  1.18920274<br />model: pcr<br />symbol: ADA","rsq: 0.16630314001<br />rmse:  1.43669064<br />model: pcr<br />symbol: ARDR","rsq: 0.16893302442<br />rmse:  1.76159150<br />model: pcr<br />symbol: ARDR","rsq: 0.06024073389<br />rmse:  3.37664345<br />model: pcr<br />symbol: ASP","rsq: 0.38298782199<br />rmse:  4.68929236<br />model: pcr<br />symbol: ASP","rsq: 0.34801297673<br />rmse:  1.73912886<br />model: pcr<br />symbol: AVA","rsq: 0.33941161341<br />rmse:  2.07561634<br />model: pcr<br />symbol: AVA","rsq: 0.75105480861<br />rmse:  1.00839237<br />model: pcr<br />symbol: BAT","rsq: 0.28566832447<br />rmse:  1.28195171<br />model: pcr<br />symbol: BAT","rsq: 0.30064546499<br />rmse:  2.08892265<br />model: pcr<br />symbol: BCH","rsq: 0.31967164323<br />rmse:  1.04015897<br />model: pcr<br />symbol: BCH","rsq: 0.51659225949<br />rmse:  2.86370706<br />model: pcr<br />symbol: BNT","rsq: 0.47364009148<br />rmse:  1.54834729<br />model: pcr<br />symbol: BNT","rsq: 0.14903591531<br />rmse: 12.26891437<br />model: pcr<br />symbol: BRD","rsq: 0.44161803469<br />rmse:  2.48636361<br />model: pcr<br />symbol: BRD","rsq: 0.48794993317<br />rmse:  0.83786247<br />model: pcr<br />symbol: BSV","rsq: 0.35315683731<br />rmse:  0.93691291<br />model: pcr<br />symbol: BSV","rsq: 0.84191576474<br />rmse:  0.88816977<br />model: pcr<br />symbol: BTC","rsq: 0.25083018768<br />rmse:  0.56251193<br />model: pcr<br />symbol: BTC","rsq: 0.56999423781<br />rmse:  1.08414343<br />model: pcr<br />symbol: BTG","rsq: 0.24460322320<br />rmse:  1.03107667<br />model: pcr<br />symbol: BTG","rsq: 0.26363668859<br />rmse:  0.99248990<br />model: pcr<br />symbol: BTM","rsq: 0.12999060857<br />rmse:  1.65685904<br />model: pcr<br />symbol: BTM","rsq: 0.16882158099<br />rmse:  1.53445260<br />model: pcr<br />symbol: CHZ","rsq: 0.34574062413<br />rmse:  0.98213722<br />model: pcr<br />symbol: CHZ","rsq: 0.62480865966<br />rmse:  0.70915150<br />model: pcr<br />symbol: CRO","rsq: 0.70170377321<br />rmse:  2.65128377<br />model: pcr<br />symbol: CRO","rsq: 0.02750930752<br />rmse:  1.91682955<br />model: pcr<br />symbol: CRPT","rsq: 0.54677702389<br />rmse:  1.27260699<br />model: pcr<br />symbol: CRPT","rsq: 0.59779264733<br />rmse:  2.42270004<br />model: pcr<br />symbol: DCR","rsq: 0.28556133160<br />rmse:  1.06967165<br />model: pcr<br />symbol: DCR","rsq: 0.55063510849<br />rmse:  0.87519575<br />model: pcr<br />symbol: DGB","rsq: 0.24014337446<br />rmse:  1.29972956<br />model: pcr<br />symbol: DGB","rsq: 0.07437182053<br />rmse:  0.88377063<br />model: pcr<br />symbol: ELF","rsq: 0.40845609458<br />rmse:  1.37380902<br />model: pcr<br />symbol: ELF","rsq: 0.28547584030<br />rmse:  1.86990249<br />model: pcr<br />symbol: ENJ","rsq: 0.17738212394<br />rmse:  2.31737370<br />model: pcr<br />symbol: ENJ","rsq: 0.52632486049<br />rmse:  0.77145540<br />model: pcr<br />symbol: EOS","rsq: 0.19973510026<br />rmse:  0.97623478<br />model: pcr<br />symbol: EOS","rsq: 0.63632919423<br />rmse:  1.00963731<br />model: pcr<br />symbol: ETH","rsq: 0.35878935235<br />rmse:  0.77052189<br />model: pcr<br />symbol: ETH","rsq: 0.07708224722<br />rmse:  1.74160228<br />model: pcr<br />symbol: ETP","rsq: 0.30985665679<br />rmse:  1.88343936<br />model: pcr<br />symbol: ETP","rsq: 0.06771838991<br />rmse:  0.79376814<br />model: pcr<br />symbol: HT","rsq: 0.56841268737<br />rmse:  0.73705032<br />model: pcr<br />symbol: HT","rsq: 0.30360049569<br />rmse:  1.74105330<br />model: pcr<br />symbol: KMD","rsq: 0.06432142083<br />rmse:  1.64242191<br />model: pcr<br />symbol: KMD","rsq: 0.80117615552<br />rmse:  0.77326339<br />model: pcr<br />symbol: KNC","rsq: 0.39952704157<br />rmse:  1.25108214<br />model: pcr<br />symbol: KNC","rsq: 0.74367832545<br />rmse:  1.67166771<br />model: pcr<br />symbol: LTC","rsq: 0.22275321138<br />rmse:  0.97930836<br />model: pcr<br />symbol: LTC","rsq: 0.32622154434<br />rmse:  0.91875432<br />model: pcr<br />symbol: MANA","rsq: 0.41496649465<br />rmse:  1.54076743<br />model: pcr<br />symbol: MANA","rsq: 0.40980504180<br />rmse:  0.90301235<br />model: pcr<br />symbol: MKR","rsq: 0.38408362393<br />rmse:  1.53893315<br />model: pcr<br />symbol: MKR","rsq: 0.12707325272<br />rmse:  0.99030346<br />model: pcr<br />symbol: NEO","rsq: 0.27582208426<br />rmse:  1.55418077<br />model: pcr<br />symbol: NEO","rsq: 0.72587011818<br />rmse:  1.60853578<br />model: pcr<br />symbol: NEXO","rsq: 0.06638054404<br />rmse:  1.19681932<br />model: pcr<br />symbol: NEXO","rsq: 0.29195838148<br />rmse:  0.03530293<br />model: pcr<br />symbol: NUT","rsq: 0.29252579884<br />rmse:  1.25376496<br />model: pcr<br />symbol: NUT","rsq: 0.55624879819<br />rmse:  2.59715796<br />model: pcr<br />symbol: OAX","rsq: 0.21098862166<br />rmse:  5.86756396<br />model: pcr<br />symbol: OAX","rsq: 0.17280756873<br />rmse:  6.95014856<br />model: pcr<br />symbol: SRN","rsq: 0.11412336843<br />rmse:  2.63596244<br />model: pcr<br />symbol: SRN","rsq: 0.26596889981<br />rmse:  0.87574714<br />model: pcr<br />symbol: STORJ","rsq: 0.64050196849<br />rmse:  1.30672991<br />model: pcr<br />symbol: STORJ","rsq: 0.51552687810<br />rmse:  0.74400172<br />model: pcr<br />symbol: TRX","rsq: 0.25884966611<br />rmse:  1.06137734<br />model: pcr<br />symbol: TRX","rsq: 0.33953117621<br />rmse:  1.52761161<br />model: pcr<br />symbol: UNI","rsq: 0.34573151792<br />rmse: 10.07432284<br />model: pcr<br />symbol: UNI","rsq: 0.10475955583<br />rmse:  2.56336670<br />model: pcr<br />symbol: VIB","rsq: 0.26772553006<br />rmse:  3.19181744<br />model: pcr<br />symbol: VIB","rsq: 0.00001462123<br />rmse:  0.79566936<br />model: pcr<br />symbol: WAXP","rsq: 0.36415021708<br />rmse:  0.92172112<br />model: pcr<br />symbol: WAXP","rsq: 0.15830246717<br />rmse:  1.45632474<br />model: pcr<br />symbol: XEM","rsq: 0.32988205317<br />rmse:  1.60504147<br />model: pcr<br />symbol: XEM","rsq: 0.21844328195<br />rmse:  0.74490636<br />model: pcr<br />symbol: XMR","rsq: 0.22708740636<br />rmse:  1.04846209<br />model: pcr<br />symbol: XMR","rsq: 0.01503956757<br />rmse:  3.89180070<br />model: pcr<br />symbol: XNS","rsq: 0.32160362235<br />rmse:  7.85273525<br />model: pcr<br />symbol: XNS","rsq: 0.25173133749<br />rmse:  2.58608842<br />model: pcr<br />symbol: XPR","rsq: 0.26131421860<br />rmse:  4.50110958<br />model: pcr<br />symbol: XPR","rsq: 0.58274358042<br />rmse:  2.38988356<br />model: pcr<br />symbol: XRP","rsq: 0.44293790478<br />rmse:  0.90331626<br />model: pcr<br />symbol: XRP","rsq: 0.33236986414<br />rmse:  1.18433028<br />model: pcr<br />symbol: XVG","rsq: 0.30335211048<br />rmse:  2.55664799<br />model: pcr<br />symbol: XVG","rsq: 0.63175204168<br />rmse:  0.84033679<br />model: pcr<br />symbol: ZEC","rsq: 0.11030585508<br />rmse:  1.00567911<br />model: pcr<br />symbol: ZEC","rsq: 0.67558473856<br />rmse:  0.77938626<br />model: pcr<br />symbol: ZRX","rsq: 0.33323042451<br />rmse:  1.35209384<br />model: pcr<br />symbol: ZRX"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"pcr","legendgroup":"pcr","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.0459956336182475,0.0903648665999456,0.01003627943147,0.0801266597477195,0.240272980024986,0.0478082998913592,0.412501461112334,0.0825282368451231,0.213323094277497,0.0483447355563984,0.139265546903351,0.153304651844058,0.0064633638245938,0.00259319837142803,0.334330672364042,0.329663802348708,0.117165991874663,0.148455371127211,0.21236962273308,0.0875403771539066,0.254538885289473,0.115527270303284,0.116921043053077,0.118636896972416,0.00810318842449429,0.150143173055661,0.0443923873267611,0.1499534267615,0.0235907445405019,0.139792570886908,0.283526211321517,0.167868159342976,0.281535205953799,0.107382655178785,0.0750600611344094,0.167953915468247,0.120039304889246,0.0516983195044916,0.203741542856118,0.0555158723683928,0.0113011123026238,0.140822879560474,0.000899027826324688,0.337689848446928,0.432168139773023,0.122733812675458,0.102350641269281,0.077881763480064,0.245157399767503,0.110099011771482,1.26612546138019e-05,0.0861627331074142,0.0840182415303084,0.158314224114907,0.00583565218044286,0.0491931615935677,0.00796603330870885,0.0831949644327612,0.300524474226772,0.0670156835833632,0.0086120335071469,0.0794528041938934,0.166492647428355,0.404664196674512,0.679415445548886,0.0864963033360191,0.0874693283673288,0.158415430173365,0.186666841914241,0.166217621281293,0.00143411931673218,0.116337430626005,0.0231354510804381,0.160399503774091,0.0217130367851309,0.144425732978551,0.0707008594068269,0.156791543089341,0.100016783441527,0.110854452291914,0.0181805294319108,0.086361379706938,0.117650430856405,0.0590144820365756,0.0132865993583588,0.188562315929904,0.0909520928951779,0.150888502504191,0.520039751655173,0.11130096379079,0.281161636952169,0.0739490445137072],"y":[2.22275455287786,1.88257225819812,2.16378042687513,2.2070453304689,3.22646201969168,7.1285511626767,3.31886656695873,2.4377894719205,1.84399604296894,1.96577921567417,1.60681462354325,1.83928705127151,8.29659346734914,5.2579209891582,null,5.01272411631667,1.94280191842432,2.27693958490725,1.88224968874903,0.656845725260023,1.41903791041396,1.2041036305935,1.24976840580145,3.04991630844442,1.70712284276447,1.30431021134751,2.23174620581092,2.5959571337093,1.92091607975652,1.99374987531304,3.20065267874131,1.51871924454667,2.31143257922106,2.11295501995787,1.42668084598872,4.39183161242433,2.02289309988914,3.67032291866892,1.73387216250431,1.38063898137297,1.42792417717596,2.3353072395395,1.83812683582432,2.11777680389054,0.622687887176714,1.25671520334431,2.26727547398258,2.57269839290648,1.13864575477464,2.3153548165053,3.31161457005052,1.21197947654665,1.9429106875799,2.56266562183094,1.19597388446164,2.64894724373795,3.08747358186385,2.01026553517921,3.05752149792814,1.53286416855351,0.0320477023831538,1.06466247050909,3.90126330101395,5.19596988161548,4.05983783338425,6.29072935031091,0.954362383983519,6.73440944866737,1.57406831450568,1.73701523081866,5.00685658358205,null,3.16345125895883,2.85513409649612,0.994207845169732,1.90455363425747,3.22664273813933,2.04744203012862,0.851041589943643,2.26057389772423,null,9.60916027162815,3.18716180975864,5.6707717929289,3.41303633439235,1.84805012143449,1.36176567616231,2.97244859109551,1.07796253233427,2.0958357617713,1.51181452023782,4.00515152179294],"text":["rsq: 0.04599563362<br />rmse:  2.22275455<br />model: rf<br />symbol: ADA","rsq: 0.09036486660<br />rmse:  1.88257226<br />model: rf<br />symbol: ADA","rsq: 0.01003627943<br />rmse:  2.16378043<br />model: rf<br />symbol: ARDR","rsq: 0.08012665975<br />rmse:  2.20704533<br />model: rf<br />symbol: ARDR","rsq: 0.24027298002<br />rmse:  3.22646202<br />model: rf<br />symbol: ASP","rsq: 0.04780829989<br />rmse:  7.12855116<br />model: rf<br />symbol: ASP","rsq: 0.41250146111<br />rmse:  3.31886657<br />model: rf<br />symbol: AVA","rsq: 0.08252823685<br />rmse:  2.43778947<br />model: rf<br />symbol: AVA","rsq: 0.21332309428<br />rmse:  1.84399604<br />model: rf<br />symbol: BAT","rsq: 0.04834473556<br />rmse:  1.96577922<br />model: rf<br />symbol: BAT","rsq: 0.13926554690<br />rmse:  1.60681462<br />model: rf<br />symbol: BCH","rsq: 0.15330465184<br />rmse:  1.83928705<br />model: rf<br />symbol: BCH","rsq: 0.00646336382<br />rmse:  8.29659347<br />model: rf<br />symbol: BNT","rsq: 0.00259319837<br />rmse:  5.25792099<br />model: rf<br />symbol: BNT","rsq: 0.33433067236<br />rmse: 11.69348161<br />model: rf<br />symbol: BRD","rsq: 0.32966380235<br />rmse:  5.01272412<br />model: rf<br />symbol: BRD","rsq: 0.11716599187<br />rmse:  1.94280192<br />model: rf<br />symbol: BSV","rsq: 0.14845537113<br />rmse:  2.27693958<br />model: rf<br />symbol: BSV","rsq: 0.21236962273<br />rmse:  1.88224969<br />model: rf<br />symbol: BTC","rsq: 0.08754037715<br />rmse:  0.65684573<br />model: rf<br />symbol: BTC","rsq: 0.25453888529<br />rmse:  1.41903791<br />model: rf<br />symbol: BTG","rsq: 0.11552727030<br />rmse:  1.20410363<br />model: rf<br />symbol: BTG","rsq: 0.11692104305<br />rmse:  1.24976841<br />model: rf<br />symbol: BTM","rsq: 0.11863689697<br />rmse:  3.04991631<br />model: rf<br />symbol: BTM","rsq: 0.00810318842<br />rmse:  1.70712284<br />model: rf<br />symbol: CHZ","rsq: 0.15014317306<br />rmse:  1.30431021<br />model: rf<br />symbol: CHZ","rsq: 0.04439238733<br />rmse:  2.23174621<br />model: rf<br />symbol: CRO","rsq: 0.14995342676<br />rmse:  2.59595713<br />model: rf<br />symbol: CRO","rsq: 0.02359074454<br />rmse:  1.92091608<br />model: rf<br />symbol: CRPT","rsq: 0.13979257089<br />rmse:  1.99374988<br />model: rf<br />symbol: CRPT","rsq: 0.28352621132<br />rmse:  3.20065268<br />model: rf<br />symbol: DCR","rsq: 0.16786815934<br />rmse:  1.51871924<br />model: rf<br />symbol: DCR","rsq: 0.28153520595<br />rmse:  2.31143258<br />model: rf<br />symbol: DGB","rsq: 0.10738265518<br />rmse:  2.11295502<br />model: rf<br />symbol: DGB","rsq: 0.07506006113<br />rmse:  1.42668085<br />model: rf<br />symbol: ELF","rsq: 0.16795391547<br />rmse:  4.39183161<br />model: rf<br />symbol: ELF","rsq: 0.12003930489<br />rmse:  2.02289310<br />model: rf<br />symbol: ENJ","rsq: 0.05169831950<br />rmse:  3.67032292<br />model: rf<br />symbol: ENJ","rsq: 0.20374154286<br />rmse:  1.73387216<br />model: rf<br />symbol: EOS","rsq: 0.05551587237<br />rmse:  1.38063898<br />model: rf<br />symbol: EOS","rsq: 0.01130111230<br />rmse:  1.42792418<br />model: rf<br />symbol: ETH","rsq: 0.14082287956<br />rmse:  2.33530724<br />model: rf<br />symbol: ETH","rsq: 0.00089902783<br />rmse:  1.83812684<br />model: rf<br />symbol: ETP","rsq: 0.33768984845<br />rmse:  2.11777680<br />model: rf<br />symbol: ETP","rsq: 0.43216813977<br />rmse:  0.62268789<br />model: rf<br />symbol: HT","rsq: 0.12273381268<br />rmse:  1.25671520<br />model: rf<br />symbol: HT","rsq: 0.10235064127<br />rmse:  2.26727547<br />model: rf<br />symbol: KMD","rsq: 0.07788176348<br />rmse:  2.57269839<br />model: rf<br />symbol: KMD","rsq: 0.24515739977<br />rmse:  1.13864575<br />model: rf<br />symbol: KNC","rsq: 0.11009901177<br />rmse:  2.31535482<br />model: rf<br />symbol: KNC","rsq: 0.00001266125<br />rmse:  3.31161457<br />model: rf<br />symbol: LTC","rsq: 0.08616273311<br />rmse:  1.21197948<br />model: rf<br />symbol: LTC","rsq: 0.08401824153<br />rmse:  1.94291069<br />model: rf<br />symbol: MANA","rsq: 0.15831422411<br />rmse:  2.56266562<br />model: rf<br />symbol: MANA","rsq: 0.00583565218<br />rmse:  1.19597388<br />model: rf<br />symbol: MKR","rsq: 0.04919316159<br />rmse:  2.64894724<br />model: rf<br />symbol: MKR","rsq: 0.00796603331<br />rmse:  3.08747358<br />model: rf<br />symbol: NEO","rsq: 0.08319496443<br />rmse:  2.01026554<br />model: rf<br />symbol: NEO","rsq: 0.30052447423<br />rmse:  3.05752150<br />model: rf<br />symbol: NEXO","rsq: 0.06701568358<br />rmse:  1.53286417<br />model: rf<br />symbol: NEXO","rsq: 0.00861203351<br />rmse:  0.03204770<br />model: rf<br />symbol: NUT","rsq: 0.07945280419<br />rmse:  1.06466247<br />model: rf<br />symbol: NUT","rsq: 0.16649264743<br />rmse:  3.90126330<br />model: rf<br />symbol: OAX","rsq: 0.40466419667<br />rmse:  5.19596988<br />model: rf<br />symbol: OAX","rsq: 0.67941544555<br />rmse:  4.05983783<br />model: rf<br />symbol: SRN","rsq: 0.08649630334<br />rmse:  6.29072935<br />model: rf<br />symbol: SRN","rsq: 0.08746932837<br />rmse:  0.95436238<br />model: rf<br />symbol: STORJ","rsq: 0.15841543017<br />rmse:  6.73440945<br />model: rf<br />symbol: STORJ","rsq: 0.18666684191<br />rmse:  1.57406831<br />model: rf<br />symbol: TRX","rsq: 0.16621762128<br />rmse:  1.73701523<br />model: rf<br />symbol: TRX","rsq: 0.00143411932<br />rmse:  5.00685658<br />model: rf<br />symbol: UNI","rsq: 0.11633743063<br />rmse: 11.51162778<br />model: rf<br />symbol: UNI","rsq: 0.02313545108<br />rmse:  3.16345126<br />model: rf<br />symbol: VIB","rsq: 0.16039950377<br />rmse:  2.85513410<br />model: rf<br />symbol: VIB","rsq: 0.02171303679<br />rmse:  0.99420785<br />model: rf<br />symbol: WAXP","rsq: 0.14442573298<br />rmse:  1.90455363<br />model: rf<br />symbol: WAXP","rsq: 0.07070085941<br />rmse:  3.22664274<br />model: rf<br />symbol: XEM","rsq: 0.15679154309<br />rmse:  2.04744203<br />model: rf<br />symbol: XEM","rsq: 0.10001678344<br />rmse:  0.85104159<br />model: rf<br />symbol: XMR","rsq: 0.11085445229<br />rmse:  2.26057390<br />model: rf<br />symbol: XMR","rsq: 0.01818052943<br />rmse: 10.40222766<br />model: rf<br />symbol: XNS","rsq: 0.08636137971<br />rmse:  9.60916027<br />model: rf<br />symbol: XNS","rsq: 0.11765043086<br />rmse:  3.18716181<br />model: rf<br />symbol: XPR","rsq: 0.05901448204<br />rmse:  5.67077179<br />model: rf<br />symbol: XPR","rsq: 0.01328659936<br />rmse:  3.41303633<br />model: rf<br />symbol: XRP","rsq: 0.18856231593<br />rmse:  1.84805012<br />model: rf<br />symbol: XRP","rsq: 0.09095209290<br />rmse:  1.36176568<br />model: rf<br />symbol: XVG","rsq: 0.15088850250<br />rmse:  2.97244859<br />model: rf<br />symbol: XVG","rsq: 0.52003975166<br />rmse:  1.07796253<br />model: rf<br />symbol: ZEC","rsq: 0.11130096379<br />rmse:  2.09583576<br />model: rf<br />symbol: ZEC","rsq: 0.28116163695<br />rmse:  1.51181452<br />model: rf<br />symbol: ZRX","rsq: 0.07394904451<br />rmse:  4.00515152<br />model: rf<br />symbol: ZRX"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"rf","legendgroup":"rf","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.00177099706294988,0.0362261126284257,0.220806913128042,0.0239110160133455,0.0360024425465004,0.0691847268795229,0.456383929363559,0.071145505852902,0.320164854785105,0.0453471189451359,0.173634779082088,0.0630920110053076,0.0209456880431586,0.0995396134231149,0.336947759302912,0.197273535896106,0.0733072216533921,0.124255972521303,0.0224767953841835,0.0357015825609244,0.161008907092462,0.0504158625319508,0.249805401655473,0.0744608977881367,0.176321203651163,0.113571785532525,0.354120123913788,0.136585597944452,0.0199827103073718,0.0502517492832696,0.0447915179943546,0.142032283452382,0.128491490945546,0.0322413663267086,0.0228556593584432,0.146830170016086,0.0266722505858149,0.0560702700403337,0.287301655571002,0.120896349829682,0.000624217157763537,0.0595048588372889,0.00219898546745762,0.346387795937778,0.0656289962953497,0.116336008997321,0.0542132727201248,0.0164127856887739,0.0186731535289116,0.127981953937845,0.00813437840142751,0.01796550939028,0.132056247233047,0.0949192827805062,0.00967568649981988,0.0284556838071121,0.00154435955536419,0.0523218628650639,0.0882020275336677,0.0816212488017605,0.00117581021802694,0.215123383419449,0.259456683691221,0.0364918289943641,0.295805537539136,0.0643968777216543,0.112311284115626,0.135961937579709,0.314657653100017,0.0302989678376404,0.000307643925093771,0.138702470419407,0.00250959087422867,0.098290198062006,0.0277472346174656,0.0389395696268764,0.0788819692433757,0.0209218574758273,0.00433364132368669,0.0386383542800481,0.0098598707754779,0.114224517103154,0.00177397403111615,0.229492407531564,0.0117735943318902,0.134207857958997,0.129309458747508,0.10667003650745,0.451369546819262,0.0743283802539071,0.0975112366322597,0.060111653145672],"y":[2.6969213185001,2.29681646649192,3.89279154433544,2.64391465782248,4.31464485180013,4.87013163084794,2.74070078956893,3.3719624076811,1.5240039879417,2.04686935754397,1.51026564824804,1.71127087628401,6.72446777940148,4.23083261563534,null,7.32868361025341,2.66967388318793,1.87140509661789,2.01765007465503,0.853496181681857,1.91587635460767,2.02606981436385,1.19771756836329,3.97761306396118,2.11224384671085,1.37488943226957,1.36570074178515,2.24702782920439,2.21605745705658,4.27304199888549,3.98137392579086,1.9434435980573,1.75444548120355,2.34384915327246,1.22791732911034,3.46091231007761,2.40213708911781,3.40377603490455,1.27486963112355,1.34411666771852,1.97131677797293,2.50438240817813,2.45337878118954,2.20191349190381,1.07852337618878,1.84291854825722,1.9763913119311,2.74485710044595,1.4051809297953,3.28919736609682,3.44802600808779,1.58983222154491,2.31874741989108,3.18051795172276,1.19388458710951,4.23438050887884,1.79771017179917,2.25267528019206,3.48699110719973,1.73647017141462,0.0320755032593529,1.30078718998196,3.50398675325438,8.87397951277728,6.17208029081234,6.88425155719732,2.24428246974314,5.54147544433552,1.22951314133259,2.88946933636036,8.51502634798071,null,3.97555850380348,4.33809208006314,1.30332496709801,2.45049361505789,3.12653413577693,2.89885206172702,0.983226900950948,1.81609100041636,null,8.28255559982292,4.44436465291923,5.43209412833265,3.47224359407887,1.18209165858465,1.5235430316813,2.9014690283693,1.01971593349272,2.25087773946332,2.16797127894141,3.7014121107011],"text":["rsq: 0.00177099706<br />rmse:  2.69692132<br />model: xgb<br />symbol: ADA","rsq: 0.03622611263<br />rmse:  2.29681647<br />model: xgb<br />symbol: ADA","rsq: 0.22080691313<br />rmse:  3.89279154<br />model: xgb<br />symbol: ARDR","rsq: 0.02391101601<br />rmse:  2.64391466<br />model: xgb<br />symbol: ARDR","rsq: 0.03600244255<br />rmse:  4.31464485<br />model: xgb<br />symbol: ASP","rsq: 0.06918472688<br />rmse:  4.87013163<br />model: xgb<br />symbol: ASP","rsq: 0.45638392936<br />rmse:  2.74070079<br />model: xgb<br />symbol: AVA","rsq: 0.07114550585<br />rmse:  3.37196241<br />model: xgb<br />symbol: AVA","rsq: 0.32016485479<br />rmse:  1.52400399<br />model: xgb<br />symbol: BAT","rsq: 0.04534711895<br />rmse:  2.04686936<br />model: xgb<br />symbol: BAT","rsq: 0.17363477908<br />rmse:  1.51026565<br />model: xgb<br />symbol: BCH","rsq: 0.06309201101<br />rmse:  1.71127088<br />model: xgb<br />symbol: BCH","rsq: 0.02094568804<br />rmse:  6.72446778<br />model: xgb<br />symbol: BNT","rsq: 0.09953961342<br />rmse:  4.23083262<br />model: xgb<br />symbol: BNT","rsq: 0.33694775930<br />rmse: 11.04076494<br />model: xgb<br />symbol: BRD","rsq: 0.19727353590<br />rmse:  7.32868361<br />model: xgb<br />symbol: BRD","rsq: 0.07330722165<br />rmse:  2.66967388<br />model: xgb<br />symbol: BSV","rsq: 0.12425597252<br />rmse:  1.87140510<br />model: xgb<br />symbol: BSV","rsq: 0.02247679538<br />rmse:  2.01765007<br />model: xgb<br />symbol: BTC","rsq: 0.03570158256<br />rmse:  0.85349618<br />model: xgb<br />symbol: BTC","rsq: 0.16100890709<br />rmse:  1.91587635<br />model: xgb<br />symbol: BTG","rsq: 0.05041586253<br />rmse:  2.02606981<br />model: xgb<br />symbol: BTG","rsq: 0.24980540166<br />rmse:  1.19771757<br />model: xgb<br />symbol: BTM","rsq: 0.07446089779<br />rmse:  3.97761306<br />model: xgb<br />symbol: BTM","rsq: 0.17632120365<br />rmse:  2.11224385<br />model: xgb<br />symbol: CHZ","rsq: 0.11357178553<br />rmse:  1.37488943<br />model: xgb<br />symbol: CHZ","rsq: 0.35412012391<br />rmse:  1.36570074<br />model: xgb<br />symbol: CRO","rsq: 0.13658559794<br />rmse:  2.24702783<br />model: xgb<br />symbol: CRO","rsq: 0.01998271031<br />rmse:  2.21605746<br />model: xgb<br />symbol: CRPT","rsq: 0.05025174928<br />rmse:  4.27304200<br />model: xgb<br />symbol: CRPT","rsq: 0.04479151799<br />rmse:  3.98137393<br />model: xgb<br />symbol: DCR","rsq: 0.14203228345<br />rmse:  1.94344360<br />model: xgb<br />symbol: DCR","rsq: 0.12849149095<br />rmse:  1.75444548<br />model: xgb<br />symbol: DGB","rsq: 0.03224136633<br />rmse:  2.34384915<br />model: xgb<br />symbol: DGB","rsq: 0.02285565936<br />rmse:  1.22791733<br />model: xgb<br />symbol: ELF","rsq: 0.14683017002<br />rmse:  3.46091231<br />model: xgb<br />symbol: ELF","rsq: 0.02667225059<br />rmse:  2.40213709<br />model: xgb<br />symbol: ENJ","rsq: 0.05607027004<br />rmse:  3.40377603<br />model: xgb<br />symbol: ENJ","rsq: 0.28730165557<br />rmse:  1.27486963<br />model: xgb<br />symbol: EOS","rsq: 0.12089634983<br />rmse:  1.34411667<br />model: xgb<br />symbol: EOS","rsq: 0.00062421716<br />rmse:  1.97131678<br />model: xgb<br />symbol: ETH","rsq: 0.05950485884<br />rmse:  2.50438241<br />model: xgb<br />symbol: ETH","rsq: 0.00219898547<br />rmse:  2.45337878<br />model: xgb<br />symbol: ETP","rsq: 0.34638779594<br />rmse:  2.20191349<br />model: xgb<br />symbol: ETP","rsq: 0.06562899630<br />rmse:  1.07852338<br />model: xgb<br />symbol: HT","rsq: 0.11633600900<br />rmse:  1.84291855<br />model: xgb<br />symbol: HT","rsq: 0.05421327272<br />rmse:  1.97639131<br />model: xgb<br />symbol: KMD","rsq: 0.01641278569<br />rmse:  2.74485710<br />model: xgb<br />symbol: KMD","rsq: 0.01867315353<br />rmse:  1.40518093<br />model: xgb<br />symbol: KNC","rsq: 0.12798195394<br />rmse:  3.28919737<br />model: xgb<br />symbol: KNC","rsq: 0.00813437840<br />rmse:  3.44802601<br />model: xgb<br />symbol: LTC","rsq: 0.01796550939<br />rmse:  1.58983222<br />model: xgb<br />symbol: LTC","rsq: 0.13205624723<br />rmse:  2.31874742<br />model: xgb<br />symbol: MANA","rsq: 0.09491928278<br />rmse:  3.18051795<br />model: xgb<br />symbol: MANA","rsq: 0.00967568650<br />rmse:  1.19388459<br />model: xgb<br />symbol: MKR","rsq: 0.02845568381<br />rmse:  4.23438051<br />model: xgb<br />symbol: MKR","rsq: 0.00154435956<br />rmse:  1.79771017<br />model: xgb<br />symbol: NEO","rsq: 0.05232186287<br />rmse:  2.25267528<br />model: xgb<br />symbol: NEO","rsq: 0.08820202753<br />rmse:  3.48699111<br />model: xgb<br />symbol: NEXO","rsq: 0.08162124880<br />rmse:  1.73647017<br />model: xgb<br />symbol: NEXO","rsq: 0.00117581022<br />rmse:  0.03207550<br />model: xgb<br />symbol: NUT","rsq: 0.21512338342<br />rmse:  1.30078719<br />model: xgb<br />symbol: NUT","rsq: 0.25945668369<br />rmse:  3.50398675<br />model: xgb<br />symbol: OAX","rsq: 0.03649182899<br />rmse:  8.87397951<br />model: xgb<br />symbol: OAX","rsq: 0.29580553754<br />rmse:  6.17208029<br />model: xgb<br />symbol: SRN","rsq: 0.06439687772<br />rmse:  6.88425156<br />model: xgb<br />symbol: SRN","rsq: 0.11231128412<br />rmse:  2.24428247<br />model: xgb<br />symbol: STORJ","rsq: 0.13596193758<br />rmse:  5.54147544<br />model: xgb<br />symbol: STORJ","rsq: 0.31465765310<br />rmse:  1.22951314<br />model: xgb<br />symbol: TRX","rsq: 0.03029896784<br />rmse:  2.88946934<br />model: xgb<br />symbol: TRX","rsq: 0.00030764393<br />rmse:  8.51502635<br />model: xgb<br />symbol: UNI","rsq: 0.13870247042<br />rmse: 11.57177687<br />model: xgb<br />symbol: UNI","rsq: 0.00250959087<br />rmse:  3.97555850<br />model: xgb<br />symbol: VIB","rsq: 0.09829019806<br />rmse:  4.33809208<br />model: xgb<br />symbol: VIB","rsq: 0.02774723462<br />rmse:  1.30332497<br />model: xgb<br />symbol: WAXP","rsq: 0.03893956963<br />rmse:  2.45049362<br />model: xgb<br />symbol: WAXP","rsq: 0.07888196924<br />rmse:  3.12653414<br />model: xgb<br />symbol: XEM","rsq: 0.02092185748<br />rmse:  2.89885206<br />model: xgb<br />symbol: XEM","rsq: 0.00433364132<br />rmse:  0.98322690<br />model: xgb<br />symbol: XMR","rsq: 0.03863835428<br />rmse:  1.81609100<br />model: xgb<br />symbol: XMR","rsq: 0.00985987078<br />rmse: 22.16852566<br />model: xgb<br />symbol: XNS","rsq: 0.11422451710<br />rmse:  8.28255560<br />model: xgb<br />symbol: XNS","rsq: 0.00177397403<br />rmse:  4.44436465<br />model: xgb<br />symbol: XPR","rsq: 0.22949240753<br />rmse:  5.43209413<br />model: xgb<br />symbol: XPR","rsq: 0.01177359433<br />rmse:  3.47224359<br />model: xgb<br />symbol: XRP","rsq: 0.13420785796<br />rmse:  1.18209166<br />model: xgb<br />symbol: XRP","rsq: 0.12930945875<br />rmse:  1.52354303<br />model: xgb<br />symbol: XVG","rsq: 0.10667003651<br />rmse:  2.90146903<br />model: xgb<br />symbol: XVG","rsq: 0.45136954682<br />rmse:  1.01971593<br />model: xgb<br />symbol: ZEC","rsq: 0.07432838025<br />rmse:  2.25087774<br />model: xgb<br />symbol: ZEC","rsq: 0.09751123663<br />rmse:  2.16797128<br />model: xgb<br />symbol: ZRX","rsq: 0.06011165315<br />rmse:  3.70141211<br />model: xgb<br />symbol: ZRX"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"xgb","legendgroup":"xgb","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":48.9497716894977},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.0492671633145659,1.03488897720739],"tickmode":"array","ticktext":["0.00","0.25","0.50","0.75","1.00"],"tickvals":[0,0.25,0.5,0.75,1],"categoryorder":"array","categoryarray":["0.00","0.25","0.50","0.75","1.00"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"rsq","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.5,10.5],"tickmode":"array","ticktext":["0.0","2.5","5.0","7.5","10.0"],"tickvals":[0,2.5,5,7.5,10],"categoryorder":"array","categoryarray":["0.0","2.5","5.0","7.5","10.0"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"rmse","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.913385826771654},"annotations":[{"text":"model","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"1e4778a7b43":{"x":{},"y":{},"colour":{},"symbol":{},"type":"scatter"}},"cur_data":"1e4778a7b43","visdat":{"1e4778a7b43":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p><strong>The additional <span style="color: blue;"><strong>tooltip</strong></span> argument was passed to <span style="color: green;"><strong>ggpltoly()</strong></span> to specify the label when hovering over the individual points</strong>.</p>
 </div>
 </div>
@@ -1170,16 +1165,16 @@ The app shown above also has a button to <strong>Show Code</strong>. If you were
 ## # Groups:   model [5]
 ##    model eval_set  rmse    rsq
 ##    &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-##  1 lm    holdout  11.7  0.483 
-##  2 lm    test      4.85 0.448 
-##  3 nnet  holdout   4.01 0.182 
-##  4 nnet  test      3.64 0.194 
-##  5 pcr   holdout   2.59 0.285 
-##  6 pcr   test      2.20 0.300 
-##  7 rf    holdout   3.60 0.142 
-##  8 rf    test      3.23 0.140 
-##  9 xgb   holdout   4.22 0.0921
-## 10 xgb   test      3.63 0.106</code></pre>
+##  1 lm    holdout  11.3  0.485 
+##  2 lm    test      4.82 0.450 
+##  3 nnet  holdout   3.99 0.181 
+##  4 nnet  test      3.62 0.194 
+##  5 pcr   holdout   2.57 0.286 
+##  6 pcr   test      2.19 0.300 
+##  7 rf    holdout   3.58 0.142 
+##  8 rf    test      3.22 0.140 
+##  9 xgb   holdout   4.20 0.0922
+## 10 xgb   test      3.62 0.106</code></pre>
 </div>
 <div id="plot-rmse-by-model" class="section level4">
 <h4><span class="header-section-number">8.9.1.2</span> Plot RMSE by Model</h4>
@@ -1218,21 +1213,21 @@ The app shown above also has a button to <strong>Show Code</strong>. If you were
 <span id="cb181-8"><a href="evaluate-model-performance.html#cb181-8"></a>predictable_cryptos &lt;-<span class="st"> </span><span class="kw">arrange</span>(predictable_cryptos, <span class="kw">desc</span>(rsq))</span>
 <span id="cb181-9"><a href="evaluate-model-performance.html#cb181-9"></a><span class="co"># Show results</span></span>
 <span id="cb181-10"><a href="evaluate-model-performance.html#cb181-10"></a>predictable_cryptos</span></code></pre></div>
-<pre class="scroll-lim"><code>## # A tibble: 142 x 4
-## # Groups:   symbol [71]
+<pre class="scroll-lim"><code>## # A tibble: 140 x 4
+## # Groups:   symbol [70]
 ##    symbol eval_set  rmse   rsq
 ##    &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
 ##  1 SEELE  holdout   3.07 0.554
-##  2 VET    holdout  10.4  0.462
+##  2 VET    holdout  10.6  0.468
 ##  3 XUC    holdout  13.0  0.461
 ##  4 RCN    test      2.57 0.444
 ##  5 ICX    holdout  14.3  0.401
 ##  6 VSYS   holdout   3.05 0.370
-##  7 BCH    holdout   2.51 0.346
-##  8 REX    holdout   5.47 0.346
-##  9 CRPT   test      2.91 0.344
-## 10 LTC    holdout   2.37 0.342
-## # … with 132 more rows</code></pre>
+##  7 REX    holdout   5.47 0.346
+##  8 BCH    holdout   2.48 0.344
+##  9 CRPT   test      2.90 0.343
+## 10 LTC    holdout   2.39 0.341
+## # … with 130 more rows</code></pre>
 <style type="text/css">
 .scroll-100 {
   max-height: 100px;
@@ -1284,10 +1279,10 @@ VET
 holdout
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d43c2d">10.351075</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d7382a">10.619522</span>
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a88e6f">0.4615869</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a39272">0.4681157</span>
 </td>
 </tr>
 <tr>
@@ -1301,7 +1296,7 @@ holdout
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f0140f">12.961281</span>
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a88d6e">0.4607057</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a88e6e">0.4607057</span>
 </td>
 </tr>
 <tr>
@@ -1315,7 +1310,7 @@ test
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #80b486">2.567832</span>
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b28367">0.4444734</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b18367">0.4444734</span>
 </td>
 </tr>
 <tr>
@@ -1329,7 +1324,7 @@ holdout
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ff0000">14.283731</span>
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cc6754">0.4012179</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cb6755">0.4012179</span>
 </td>
 </tr>
 <tr>
@@ -1343,21 +1338,7 @@ holdout
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #85ac81">3.049818</span>
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #de5347">0.3703250</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-BCH
-</td>
-<td style="text-align:right;">
-holdout
-</td>
-<td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7fb587">2.507570</span>
-</td>
-<td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ed433d">0.3462151</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dd5347">0.3703250</span>
 </td>
 </tr>
 <tr>
@@ -1371,7 +1352,21 @@ holdout
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9f8765">5.467049</span>
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ed433c">0.3458826</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ec443d">0.3458826</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+BCH
+</td>
+<td style="text-align:right;">
+holdout
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7fb587">2.476590</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ed423c">0.3441004</span>
 </td>
 </tr>
 <tr>
@@ -1382,10 +1377,10 @@ CRPT
 test
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #84ae82">2.907636</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #83af82">2.899262</span>
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ee413b">0.3435912</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ed423c">0.3434353</span>
 </td>
 </tr>
 <tr>
@@ -1396,10 +1391,10 @@ LTC
 holdout
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7eb788">2.367632</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7eb788">2.387642</span>
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ef403b">0.3418485</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ef413b">0.3414255</span>
 </td>
 </tr>
 <tr>
@@ -1410,10 +1405,10 @@ XRP
 holdout
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9f8765">5.471850</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9e8866">5.397561</span>
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f23d38">0.3367884</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f23d39">0.3360437</span>
 </td>
 </tr>
 <tr>
@@ -1424,10 +1419,10 @@ SEELE
 test
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9e8967">5.316464</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9d8a67">5.316464</span>
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f33c38">0.3356141</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f23d39">0.3356141</span>
 </td>
 </tr>
 <tr>
@@ -1438,24 +1433,10 @@ BTC
 holdout
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">1.148713</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">1.158401</span>
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f73835">0.3290792</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-MKR
-</td>
-<td style="text-align:right;">
-holdout
-</td>
-<td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #929973">4.272727</span>
-</td>
-<td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fc3231">0.3201940</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f63936">0.3293645</span>
 </td>
 </tr>
 <tr>
@@ -1466,10 +1447,24 @@ XVG
 test
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #8ea077">3.856235</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #8ea077">3.876561</span>
 </td>
 <td style="text-align:right;">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ff3030">0.3161365</span>
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fe3030">0.3159829</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+MKR
+</td>
+<td style="text-align:right;">
+holdout
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #929a73">4.226244</span>
+</td>
+<td style="text-align:right;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ff3030">0.3145913</span>
 </td>
 </tr>
 </tbody>
@@ -1491,10 +1486,10 @@ test
 <span id="cb184-8"><a href="evaluate-model-performance.html#cb184-8"></a>accuracy_over_time &lt;-<span class="st"> </span><span class="kw">ungroup</span>(accuracy_over_time)</span>
 <span id="cb184-9"><a href="evaluate-model-performance.html#cb184-9"></a><span class="co"># Show results</span></span>
 <span id="cb184-10"><a href="evaluate-model-performance.html#cb184-10"></a>accuracy_over_time</span></code></pre></div>
-<pre><code>## # A tibble: 30 x 3
+<pre><code>## # A tibble: 31 x 3
 ##    date_utc    rmse   rsq
 ##    &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;
-##  1 2020-11-18  5.06 0.226
+##  1 2020-11-18  4.11 0.216
 ##  2 2020-11-19  4.04 0.226
 ##  3 2020-11-20  3.48 0.232
 ##  4 2020-11-21  3.49 0.233
@@ -1504,7 +1499,7 @@ test
 ##  8 2020-11-25  3.58 0.259
 ##  9 2020-11-26  4.25 0.223
 ## 10 2020-11-27  3.76 0.212
-## # … with 20 more rows</code></pre>
+## # … with 21 more rows</code></pre>
 </div>
 <div id="plot-rmse" class="section level4">
 <h4><span class="header-section-number">8.9.3.2</span> Plot RMSE</h4>
