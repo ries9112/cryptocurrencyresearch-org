@@ -253,7 +253,7 @@ cryptodata_test <- select(ungroup(cryptodata_test,
 cryptodata_test
 ```
 
-As well as the [**hoildout**]{style="color: blue;"} data to create the [**cryptodata_holdout**]{style="color: blue;"} object:
+As well as the [**holdout**]{style="color: blue;"} data to create the [**cryptodata_holdout**]{style="color: blue;"} object:
 
 ```{r nest_holdout}
 cryptodata_holdout <- rename(nest(filter(cryptodata, 
