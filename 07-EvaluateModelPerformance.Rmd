@@ -827,37 +827,40 @@ cryptodata_nested <- mutate(cryptodata_nested,
 
 # UNNEST the data:
 
+# NEW 01/06: FIX ISSUE WHERE model COLUMN NOT BEING KEPT. Swithced order of muate and select to fix. This enables last step for a comparison
 # lm:
-lm_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
+lm_holdout_preds <- mutate(select(unnest(mutate(cryptodata_nested,
                                                 lm_holdout_predictions = map2(holdout_data, lm_holdout_predictions,
-                                                                              record_holdout_preds_cbind)), lm_holdout_predictions),
-                                  model = 'lm'), holdout_predictions:target_price_24h, -num)
+                                                                              record_holdout_preds_cbind)), lm_holdout_predictions), holdout_predictions:target_price_24h, -num),
+                                  model = 'lm')
 # xgb:
-xgb_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
+xgb_holdout_preds <- mutate(select(unnest(mutate(cryptodata_nested,
                                                 xgb_holdout_predictions = map2(holdout_data, xgb_holdout_predictions,
-                                                                              record_holdout_preds_cbind)), xgb_holdout_predictions),
-                                  model = 'xgb'), holdout_predictions:target_price_24h, -num)
+                                                                              record_holdout_preds_cbind)), xgb_holdout_predictions), holdout_predictions:target_price_24h, -num),
+                                  model = 'xgb')
 # nnet:
-nnet_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
+nnet_holdout_preds <- mutate(select(unnest(mutate(cryptodata_nested,
                                                 nnet_holdout_predictions = map2(holdout_data, nnet_holdout_predictions,
-                                                                              record_holdout_preds_cbind)), nnet_holdout_predictions),
-                                  model = 'nnet'), holdout_predictions:target_price_24h, -num)
+                                                                              record_holdout_preds_cbind)), nnet_holdout_predictions), holdout_predictions:target_price_24h, -num),
+                                  model = 'nnet')
 # random forest:
-rf_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
+rf_holdout_preds <- mutate(select(unnest(mutate(cryptodata_nested,
                                                 rf_holdout_predictions = map2(holdout_data, rf_holdout_predictions,
                                                                               record_holdout_preds_cbind)), rf_holdout_predictions),
-                                  model = 'rf'), holdout_predictions:target_price_24h, -num)
+                                  holdout_predictions:target_price_24h, -num),model = 'rf')
 # PCR:
-pcr_holdout_preds <- select(mutate(unnest(mutate(cryptodata_nested,
+pcr_holdout_preds <- mutate(select(unnest(mutate(cryptodata_nested,
                                                 pcr_holdout_predictions = map2(holdout_data, pcr_holdout_predictions,
-                                                                              record_holdout_preds_cbind)), pcr_holdout_predictions),
-                                  model = 'pcr'), holdout_predictions:target_price_24h, -num)
+                                                                              record_holdout_preds_cbind)), pcr_holdout_predictions), holdout_predictions:target_price_24h, -num), model = 'pcr')
 
 # Now union all data together:
 full_holdout_preds <- dplyr::bind_rows(lm_holdout_preds, xgb_holdout_preds, nnet_holdout_preds, rf_holdout_preds, pcr_holdout_preds)
 
 # Only Keep data where we don't yet know what the price was 24 hours later:
-write_holdout_preds <- filter(full_holdout_preds, is.na(target_price_24h))
+#write_holdout_preds <- filter(full_holdout_preds, is.na(target_price_24h), split == 5)
+
+# NEW - Getting back rows with all null values. INSTEAD, should look for those where there was a value for price_usd but not target_price_24h
+write_holdout_preds <- filter(full_holdout_preds, is.na(target_price_24h), !is.na(price_usd), split == 5)
 
 # Before overwriting pins data, pull it so I can add new targets
 old_holdout_preds_pins <- pin_get('crypto_tutorial_holdout_predictions_old')
