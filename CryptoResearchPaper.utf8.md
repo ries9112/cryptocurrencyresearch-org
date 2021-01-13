@@ -1,6 +1,6 @@
 ---
 title: "Cryptocurrency Research"
-date: 'Last Updated:<br/> 2021-01-13 03:24:16'
+date: 'Last Updated:<br/> 2021-01-13 15:00:49'
 author:
   - Riccardo (Ricky) Esclapon - [LinkedIn](https://www.linkedin.com/in/esclaponriccardo/), [Personal Website](https://resclapon.com/)
   - John Chandler Johnson - [LinkedIn](https://www.linkedin.com/in/john-chandler-johnson-361a666/)
@@ -320,7 +320,7 @@ The data has been saved to the [**cryptodata**]{style="color: blue;"} object.
 
 Below is a preview of the data:
 
-preserve4a51bf4a96d2f107
+preserve8d4f1d92d8209afd
 
 *Only the first 2,000 rows of the data are shown in the table above. There are 300000 rows in the actual full dataset. The latest data is from 2021-01-13 (UTC timezone).*
 
@@ -408,7 +408,7 @@ Table: (\#tab:skimr)Data summary
 |pair           |         0|             1|   5|   9|     0|      219|          0|
 |symbol         |         0|             1|   2|   6|     0|      219|          0|
 |quote_currency |         0|             1|   3|   3|     0|        1|          0|
-|pkDummy        |         0|             1|  13|  13|     0|     2531|          0|
+|pkDummy        |         0|             1|  13|  13|     0|     2529|          0|
 |pkey           |         0|             1|  15|  19|     0|   299720|          0|
 
 
@@ -416,40 +416,40 @@ Table: (\#tab:skimr)Data summary
 
 |skim_variable | n_missing| complete_rate|min        |max        |median     | n_unique|
 |:-------------|---------:|-------------:|:----------|:----------|:----------|--------:|
-|date          |         0|             1|2020-09-29 |2021-01-13 |2020-11-25 |      107|
+|date          |         0|             1|2020-09-30 |2021-01-13 |2020-11-25 |      106|
 
 
 **Variable type: numeric**
 
 |skim_variable  | n_missing| complete_rate|      mean|         sd| p0|   p25|    p50|     p75|         p100|hist  |
 |:--------------|---------:|-------------:|---------:|----------:|--:|-----:|------:|-------:|------------:|:-----|
-|ask_1_price    |         0|             1|    262.05|    2209.02|  0|  0.01|   0.06|    0.53|     41424.77|▇▁▁▁▁ |
-|ask_1_quantity |         0|             1| 148997.36| 3519163.26|  0| 23.00| 457.15| 5164.88| 311467000.00|▇▁▁▁▁ |
-|ask_2_price    |         0|             1|    262.25|    2209.77|  0|  0.01|   0.06|    0.53|     41426.04|▇▁▁▁▁ |
-|ask_2_quantity |         0|             1| 162127.99| 3594708.66|  0| 30.00| 621.00| 7371.55| 459459000.00|▇▁▁▁▁ |
-|ask_3_price    |         0|             1|    262.43|    2210.44|  0|  0.01|   0.06|    0.54|     41426.05|▇▁▁▁▁ |
-|ask_3_quantity |         0|             1| 163257.87| 3551654.50|  0| 24.00| 560.00| 7800.00| 459459000.00|▇▁▁▁▁ |
-|ask_4_price    |         0|             1|    262.60|    2211.22|  0|  0.01|   0.07|    0.56|     41426.06|▇▁▁▁▁ |
-|ask_4_quantity |         0|             1| 153465.57| 3052749.43|  0| 19.00| 500.00| 8100.00| 459459000.00|▇▁▁▁▁ |
-|ask_5_price    |         0|             1|    263.23|    2216.98|  0|  0.01|   0.07|    0.57|     70000.00|▇▁▁▁▁ |
-|ask_5_quantity |         0|             1| 156805.60| 2915185.50|  0| 14.00| 440.00| 7699.70| 333063000.00|▇▁▁▁▁ |
-|bid_1_price    |         0|             1|    260.44|    2204.98|  0|  0.00|   0.06|    0.45|     41422.62|▇▁▁▁▁ |
-|bid_1_quantity |         0|             1| 133796.58| 2139191.18|  0| 21.00| 514.82| 7647.00| 296583000.00|▇▁▁▁▁ |
-|bid_2_price    |         0|             1|    260.30|    2204.32|  0|  0.00|   0.06|    0.44|     41421.77|▇▁▁▁▁ |
-|bid_2_quantity |         0|             1| 135394.33| 2477866.49|  0| 27.00| 609.00| 7647.00| 303403000.00|▇▁▁▁▁ |
-|bid_3_price    |         0|             1|    260.10|    2203.60|  0|  0.00|   0.05|    0.43|     41420.99|▇▁▁▁▁ |
-|bid_3_quantity |         0|             1| 159909.93| 2671132.95|  0| 20.00| 500.00| 7170.00| 295303000.00|▇▁▁▁▁ |
-|bid_4_price    |         0|             1|    259.85|    2202.76|  0|  0.00|   0.05|    0.41|     41418.63|▇▁▁▁▁ |
-|bid_4_quantity |         0|             1| 204426.59| 3197460.84|  0| 13.50| 488.70| 7400.00| 331285000.00|▇▁▁▁▁ |
-|bid_5_price    |         0|             1|    259.57|    2201.62|  0|  0.00|   0.05|    0.40|     41417.22|▇▁▁▁▁ |
-|bid_5_quantity |         0|             1| 234348.28| 3447162.79|  0| 10.00| 427.92| 8000.00| 384159000.00|▇▁▁▁▁ |
+|ask_1_price    |         0|             1|    262.85|    2217.48|  0|  0.01|   0.06|    0.53|     41424.77|▇▁▁▁▁ |
+|ask_1_quantity |         0|             1| 148958.39| 3518870.78|  0| 22.80| 453.00| 5150.00| 311467000.00|▇▁▁▁▁ |
+|ask_2_price    |         0|             1|    263.05|    2218.23|  0|  0.01|   0.06|    0.53|     41426.04|▇▁▁▁▁ |
+|ask_2_quantity |         0|             1| 160893.02| 3582091.31|  0| 30.00| 620.00| 7360.00| 459459000.00|▇▁▁▁▁ |
+|ask_3_price    |         0|             1|    263.23|    2218.90|  0|  0.01|   0.06|    0.55|     41426.05|▇▁▁▁▁ |
+|ask_3_quantity |         0|             1| 160497.82| 3519567.17|  0| 24.00| 556.60| 7793.30| 459459000.00|▇▁▁▁▁ |
+|ask_4_price    |         0|             1|    263.40|    2219.68|  0|  0.01|   0.07|    0.56|     41426.06|▇▁▁▁▁ |
+|ask_4_quantity |         0|             1| 152015.14| 3030891.25|  0| 19.00| 500.00| 8094.00| 459459000.00|▇▁▁▁▁ |
+|ask_5_price    |         0|             1|    264.03|    2225.41|  0|  0.01|   0.07|    0.58|     70000.00|▇▁▁▁▁ |
+|ask_5_quantity |         0|             1| 156353.74| 2910073.08|  0| 14.00| 434.80| 7650.18| 333063000.00|▇▁▁▁▁ |
+|bid_1_price    |         0|             1|    261.25|    2213.46|  0|  0.00|   0.06|    0.45|     41422.62|▇▁▁▁▁ |
+|bid_1_quantity |         0|             1| 132127.34| 2124516.10|  0| 20.97| 512.25| 7647.00| 296583000.00|▇▁▁▁▁ |
+|bid_2_price    |         0|             1|    261.11|    2212.80|  0|  0.00|   0.06|    0.45|     41421.77|▇▁▁▁▁ |
+|bid_2_quantity |         0|             1| 135171.09| 2472700.27|  0| 27.00| 609.00| 7647.00| 303403000.00|▇▁▁▁▁ |
+|bid_3_price    |         0|             1|    260.91|    2212.09|  0|  0.00|   0.05|    0.44|     41420.99|▇▁▁▁▁ |
+|bid_3_quantity |         0|             1| 159688.47| 2666568.20|  0| 20.00| 500.00| 7170.00| 295303000.00|▇▁▁▁▁ |
+|bid_4_price    |         0|             1|    260.66|    2211.25|  0|  0.00|   0.05|    0.41|     41418.63|▇▁▁▁▁ |
+|bid_4_quantity |         0|             1| 204942.58| 3201192.57|  0| 13.50| 488.18| 7400.00| 331285000.00|▇▁▁▁▁ |
+|bid_5_price    |         0|             1|    260.39|    2210.11|  0|  0.00|   0.05|    0.40|     41417.22|▇▁▁▁▁ |
+|bid_5_quantity |         0|             1| 234781.33| 3449342.59|  0| 10.00| 425.00| 7989.08| 384159000.00|▇▁▁▁▁ |
 
 
 **Variable type: POSIXct**
 
 |skim_variable | n_missing| complete_rate|min                 |max                 |median              | n_unique|
 |:-------------|---------:|-------------:|:-------------------|:-------------------|:-------------------|--------:|
-|date_time_utc |         0|             1|2020-09-29 00:00:05 |2021-01-13 03:03:53 |2020-11-25 01:02:28 |   228413|
+|date_time_utc |         0|             1|2020-09-30 00:00:04 |2021-01-13 14:03:51 |2020-11-25 14:00:22 |   228133|
 
 This summary helps us understand things like how many rows with missing values there are in a given column, or how the values are distributed. In this case there shouldn't be any major data quality issues, for example the majority of values should not be NA/missing. If you are noticing something different please [create an issue on the GitHub repository for the project](https://github.com/ries9112/cryptocurrencyresearch-org/issues).
 
@@ -490,26 +490,26 @@ fromJSON(content(GET("https://api.hitbtc.com/api/2/public/orderbook/ETHUSD",
 ## [1] "ETHUSD"
 ## 
 ## $timestamp
-## [1] "2021-01-13T03:24:33.792Z"
+## [1] "2021-01-13T15:01:11.417Z"
 ## 
 ## $batchingTime
-## [1] "2021-01-13T03:24:33.835Z"
+## [1] "2021-01-13T15:01:11.441Z"
 ## 
 ## $ask
-##      price    size
-## 1 1051.531  1.1040
-## 2 1051.803 30.0000
-## 3 1051.919  0.1650
-## 4 1052.144  2.2080
-## 5 1052.589  5.0000
+##      price   size
+## 1 1056.226 5.3787
+## 2 1056.527 0.1200
+## 3 1056.546 0.3800
+## 4 1056.585 1.6234
+## 5 1056.663 2.1000
 ## 
 ## $bid
-##      price    size
-## 1 1050.050  1.1040
-## 2 1049.835  1.1049
-## 3 1049.271 16.1838
-## 4 1049.174  1.2942
-## 5 1049.015  0.4150
+##      price   size
+## 1 1056.225 0.0566
+## 2 1055.018 1.1040
+## 3 1055.000 0.3918
+## 4 1054.506 3.9275
+## 5 1054.505 1.6231
 ```
 
 The data is collected by a script running on a private RStudio server that iterates through all cryptocurrency options one by one at the start of every hour from the HitBTC cryptocurrency exchange API order books data (as pulled above), and appends the latest data to a private database for long-term storage. Once the data is in the database, a different script gets kicked off every hour to publish the latest data from the database to the publicly available [**pins**]{style="color: #ae7b11;"} data source [discussed at the beginning of this section](#pull-the-data).
@@ -605,7 +605,7 @@ cryptodata <- filter(cryptodata, !is.na(price_usd))
 
 
 
-This step removed 16171 rows on the latest run.
+This step removed 16170 rows on the latest run.
 
 
 ## Clean Data by Group {#clean-data-by-group}
@@ -622,7 +622,7 @@ count(cryptodata)
 ## # A tibble: 1 x 1
 ##        n
 ##    <int>
-## 1 283829
+## 1 283830
 ```
 
 But what if we wanted to know how many observations in the data are associated with each cryptocurrency separately?
@@ -646,16 +646,16 @@ count(cryptodata)
 ## # Groups:   symbol [216]
 ##    symbol     n
 ##    <chr>  <int>
-##  1 AAB     1859
-##  2 ACAT    1534
-##  3 ACT     2302
-##  4 ADA     2533
-##  5 ADXN     998
+##  1 AAB     1857
+##  2 ACAT    1522
+##  3 ACT     2301
+##  4 ADA     2531
+##  5 ADXN    1009
 ##  6 ALGO     212
-##  7 AMB     1169
+##  7 AMB     1180
 ##  8 APL       37
 ##  9 APPC    2315
-## 10 ARDR    2532
+## 10 ARDR    2530
 ## # … with 206 more rows
 ```
 
@@ -669,7 +669,7 @@ count(ungroup(cryptodata))
 ## # A tibble: 1 x 1
 ##        n
 ##    <int>
-## 1 283829
+## 1 283830
 ```
 
 
@@ -690,7 +690,7 @@ cryptodata <- filter(cryptodata, n() >= 1000)
 
 
 
-The number of rows for the `cryptodata` dataset before the filtering step was 283829 and is now 228780. This step removed 103 cryptocurrencies from the analysis that did not have enough observations associated with them.
+The number of rows for the `cryptodata` dataset before the filtering step was 283830 and is now 240528. This step removed 91 cryptocurrencies from the analysis that did not have enough observations associated with them.
 
 ### Remove symbols without data from the last 3 days
 
@@ -705,7 +705,7 @@ cryptodata <- filter(cryptodata, max(date) > Sys.Date()-3)
 
 
 
-The number of rows for the `cryptodata` dataset before this filtering step was 182820 and is now 228780.
+The number of rows for the `cryptodata` dataset before this filtering step was 194932 and is now 240528.
 
 ## Calculate Target
 
@@ -748,9 +748,9 @@ cryptodata
 ```
 
 ```
-## # A tsibble: 182,650 x 34 [1h] <UTC>
-## # Key:       symbol [81]
-## # Groups:    symbol [81]
+## # A tsibble: 194,762 x 34 [1h] <UTC>
+## # Key:       symbol [93]
+## # Groups:    symbol [93]
 ##    pair  symbol quote_currency ask_1_price ask_1_quantity ask_2_price
 ##    <chr> <chr>  <chr>                <dbl>          <dbl>       <dbl>
 ##  1 AABU… AAB    USD                   0.86            100         0.9
@@ -763,7 +763,7 @@ cryptodata
 ##  8 AABU… AAB    USD                   0.86            100         0.9
 ##  9 AABU… AAB    USD                   0.86            100         0.9
 ## 10 AABU… AAB    USD                   0.86            100         0.9
-## # … with 182,640 more rows, and 28 more variables: ask_2_quantity <dbl>,
+## # … with 194,752 more rows, and 28 more variables: ask_2_quantity <dbl>,
 ## #   ask_3_price <dbl>, ask_3_quantity <dbl>, ask_4_price <dbl>,
 ## #   ask_4_quantity <dbl>, ask_5_price <dbl>, ask_5_quantity <dbl>,
 ## #   bid_1_price <dbl>, bid_1_quantity <dbl>, bid_2_price <dbl>,
@@ -795,7 +795,7 @@ cryptodata <- fill_gaps(cryptodata)
 
 
 
-Now looking at the data again, there are 17870 additional rows that were added as implicitly missing in the data:
+Now looking at the data again, there are 25664 additional rows that were added as implicitly missing in the data:
 
 
 ```r
@@ -803,9 +803,9 @@ cryptodata
 ```
 
 ```
-## # A tsibble: 200,520 x 34 [1h] <UTC>
-## # Key:       symbol [81]
-## # Groups:    symbol [81]
+## # A tsibble: 220,426 x 34 [1h] <UTC>
+## # Key:       symbol [93]
+## # Groups:    symbol [93]
 ##    pair  symbol quote_currency ask_1_price ask_1_quantity ask_2_price
 ##    <chr> <chr>  <chr>                <dbl>          <dbl>       <dbl>
 ##  1 AABU… AAB    USD                   0.86            100         0.9
@@ -816,9 +816,9 @@ cryptodata
 ##  6 AABU… AAB    USD                   0.86            100         0.9
 ##  7 AABU… AAB    USD                   0.86            100         0.9
 ##  8 AABU… AAB    USD                   0.86            100         0.9
-##  9 <NA>  AAB    <NA>                 NA                NA        NA  
-## 10 <NA>  AAB    <NA>                 NA                NA        NA  
-## # … with 200,510 more rows, and 28 more variables: ask_2_quantity <dbl>,
+##  9 AABU… AAB    USD                   0.86            100         0.9
+## 10 AABU… AAB    USD                   0.86            100         0.9
+## # … with 220,416 more rows, and 28 more variables: ask_2_quantity <dbl>,
 ## #   ask_3_price <dbl>, ask_3_quantity <dbl>, ask_4_price <dbl>,
 ## #   ask_4_quantity <dbl>, ask_5_price <dbl>, ask_5_quantity <dbl>,
 ## #   bid_1_price <dbl>, bid_1_quantity <dbl>, bid_2_price <dbl>,
@@ -876,41 +876,41 @@ print(select(filter(cryptodata, symbol == 'BTC'),
 ```
 
 ```
-## # A tibble: 2,548 x 6
+## # A tibble: 2,535 x 6
 ## # Groups:   symbol [1]
 ##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##    <chr>  <dttm>                  <dbl>           <dbl>            <dbl>
-##  1 BTC    2020-09-29 00:00:00    10685.             NA               NA 
-##  2 BTC    2020-09-29 01:00:00    10712.          10685.              NA 
-##  3 BTC    2020-09-29 02:00:00    10685.          10712.              NA 
-##  4 BTC    2020-09-29 03:00:00    10686.          10685.              NA 
-##  5 BTC    2020-09-29 04:00:00    10692.          10686.              NA 
-##  6 BTC    2020-09-29 05:00:00    10698.          10692.              NA 
-##  7 BTC    2020-09-29 06:00:00    10675.          10698.              NA 
-##  8 BTC    2020-09-29 07:00:00    10740.          10675.              NA 
-##  9 BTC    2020-09-29 08:00:00    10729.          10740.              NA 
-## 10 BTC    2020-09-29 09:00:00       NA           10729.              NA 
-## 11 BTC    2020-09-29 10:00:00       NA              NA               NA 
-## 12 BTC    2020-09-29 11:00:00       NA              NA               NA 
-## 13 BTC    2020-09-29 12:00:00       NA              NA               NA 
-## 14 BTC    2020-09-29 13:00:00       NA              NA               NA 
-## 15 BTC    2020-09-29 14:00:00       NA              NA               NA 
-## 16 BTC    2020-09-29 15:00:00       NA              NA               NA 
-## 17 BTC    2020-09-29 16:00:00       NA              NA               NA 
-## 18 BTC    2020-09-29 17:00:00       NA              NA               NA 
-## 19 BTC    2020-09-29 18:00:00       NA              NA               NA 
-## 20 BTC    2020-09-29 19:00:00       NA              NA               NA 
-## 21 BTC    2020-09-29 20:00:00       NA              NA               NA 
-## 22 BTC    2020-09-29 21:00:00       NA              NA               NA 
-## 23 BTC    2020-09-29 22:00:00       NA              NA               NA 
-## 24 BTC    2020-09-29 23:00:00       NA              NA               NA 
-## 25 BTC    2020-09-30 00:00:00    10846.             NA            10685.
-## 26 BTC    2020-09-30 01:00:00    10810.          10846.           10712.
-## 27 BTC    2020-09-30 02:00:00    10787.          10810.           10685.
-## 28 BTC    2020-09-30 03:00:00    10771.          10787.           10686.
-## 29 BTC    2020-09-30 04:00:00    10749.          10771.           10692.
-## 30 BTC    2020-09-30 05:00:00    10736.          10749.           10698.
-## # … with 2,518 more rows, and 1 more variable: target_price_24h <dbl>
+##  1 BTC    2020-09-30 00:00:00    10846.             NA               NA 
+##  2 BTC    2020-09-30 01:00:00    10810.          10846.              NA 
+##  3 BTC    2020-09-30 02:00:00    10787.          10810.              NA 
+##  4 BTC    2020-09-30 03:00:00    10771.          10787.              NA 
+##  5 BTC    2020-09-30 04:00:00    10749.          10771.              NA 
+##  6 BTC    2020-09-30 05:00:00    10736.          10749.              NA 
+##  7 BTC    2020-09-30 06:00:00    10695.          10736.              NA 
+##  8 BTC    2020-09-30 07:00:00    10719.          10695.              NA 
+##  9 BTC    2020-09-30 08:00:00    10692.          10719.              NA 
+## 10 BTC    2020-09-30 09:00:00    10706.          10692.              NA 
+## 11 BTC    2020-09-30 10:00:00    10698.          10706.              NA 
+## 12 BTC    2020-09-30 11:00:00    10725.          10698.              NA 
+## 13 BTC    2020-09-30 12:00:00    10676.          10725.              NA 
+## 14 BTC    2020-09-30 13:00:00    10732.          10676.              NA 
+## 15 BTC    2020-09-30 14:00:00    10745           10732.              NA 
+## 16 BTC    2020-09-30 15:00:00    10758.          10745               NA 
+## 17 BTC    2020-09-30 16:00:00    10780.          10758.              NA 
+## 18 BTC    2020-09-30 17:00:00    10798.          10780.              NA 
+## 19 BTC    2020-09-30 18:00:00    10773.          10798.              NA 
+## 20 BTC    2020-09-30 19:00:00    10734.          10773.              NA 
+## 21 BTC    2020-09-30 20:00:00       NA           10734.              NA 
+## 22 BTC    2020-09-30 21:00:00       NA              NA               NA 
+## 23 BTC    2020-09-30 22:00:00       NA              NA               NA 
+## 24 BTC    2020-09-30 23:00:00       NA              NA               NA 
+## 25 BTC    2020-10-01 00:00:00    10781.             NA            10846.
+## 26 BTC    2020-10-01 01:00:00    10791.          10781.           10810.
+## 27 BTC    2020-10-01 02:00:00    10847.          10791.           10787.
+## 28 BTC    2020-10-01 03:00:00    10822.          10847.           10771.
+## 29 BTC    2020-10-01 04:00:00    10799.          10822.           10749.
+## 30 BTC    2020-10-01 05:00:00    10799.          10799.           10736.
+## # … with 2,505 more rows, and 1 more variable: target_price_24h <dbl>
 ```
 
 We can wrap the code used above in the [**tail()**]{style="color: green;"} function to show the most recent data and see the opposite dynamic with the new fields we created:
@@ -927,36 +927,36 @@ print(tail(select(filter(cryptodata, symbol == 'BTC'),
 ## # Groups:   symbol [1]
 ##    symbol ts_index            price_usd lagged_price_24h target_price_24h
 ##    <chr>  <dttm>                  <dbl>            <dbl>            <dbl>
-##  1 BTC    2021-01-11 22:00:00    33948.           38059.           34715.
-##  2 BTC    2021-01-11 23:00:00    34349.           38444.           33784.
-##  3 BTC    2021-01-12 00:00:00    35385.           38168.           34047.
-##  4 BTC    2021-01-12 01:00:00    34925.           37206.           32474.
-##  5 BTC    2021-01-12 02:00:00    34314.           37232.           33114.
-##  6 BTC    2021-01-12 03:00:00    34389.           36364.           33031.
-##  7 BTC    2021-01-12 04:00:00    34961.           35422.              NA 
-##  8 BTC    2021-01-12 05:00:00    35259.           35553.              NA 
-##  9 BTC    2021-01-12 06:00:00    35877.           34895.              NA 
-## 10 BTC    2021-01-12 07:00:00    35989.           32879.              NA 
-## 11 BTC    2021-01-12 08:00:00    36384.           34368.              NA 
-## 12 BTC    2021-01-12 09:00:00    35767.           35407.              NA 
-## 13 BTC    2021-01-12 10:00:00    35879.           35743.              NA 
-## 14 BTC    2021-01-12 11:00:00    35096.           35362.              NA 
-## 15 BTC    2021-01-12 12:00:00    35393.           34183.              NA 
-## 16 BTC    2021-01-12 13:00:00    34991.           34232.              NA 
-## 17 BTC    2021-01-12 14:00:00    33272.           32808.              NA 
-## 18 BTC    2021-01-12 15:00:00    33416.           33285.              NA 
-## 19 BTC    2021-01-12 16:00:00    33841.           31573.              NA 
-## 20 BTC    2021-01-12 17:00:00    35001.           31752.              NA 
-## 21 BTC    2021-01-12 18:00:00    34994.           32847.              NA 
-## 22 BTC    2021-01-12 19:00:00    35026.           32552.              NA 
-## 23 BTC    2021-01-12 20:00:00    34685.           32219.              NA 
-## 24 BTC    2021-01-12 21:00:00    34289.           33436.              NA 
-## 25 BTC    2021-01-12 22:00:00    34715.           33948.              NA 
-## 26 BTC    2021-01-12 23:00:00    33784.           34349.              NA 
-## 27 BTC    2021-01-13 00:00:00    34047.           35385.              NA 
-## 28 BTC    2021-01-13 01:00:00    32474.           34925.              NA 
-## 29 BTC    2021-01-13 02:00:00    33114.           34314.              NA 
-## 30 BTC    2021-01-13 03:00:00    33031.           34389.              NA
+##  1 BTC    2021-01-12 09:00:00    35767.           35407.           34502.
+##  2 BTC    2021-01-12 10:00:00    35879.           35743.           34343.
+##  3 BTC    2021-01-12 11:00:00    35096.           35362.           34928.
+##  4 BTC    2021-01-12 12:00:00    35393.           34183.           34406.
+##  5 BTC    2021-01-12 13:00:00    34991.           34232.           34269.
+##  6 BTC    2021-01-12 14:00:00    33272.           32808.           34572.
+##  7 BTC    2021-01-12 15:00:00    33416.           33285.              NA 
+##  8 BTC    2021-01-12 16:00:00    33841.           31573.              NA 
+##  9 BTC    2021-01-12 17:00:00    35001.           31752.              NA 
+## 10 BTC    2021-01-12 18:00:00    34994.           32847.              NA 
+## 11 BTC    2021-01-12 19:00:00    35026.           32552.              NA 
+## 12 BTC    2021-01-12 20:00:00    34685.           32219.              NA 
+## 13 BTC    2021-01-12 21:00:00    34289.           33436.              NA 
+## 14 BTC    2021-01-12 22:00:00    34715.           33948.              NA 
+## 15 BTC    2021-01-12 23:00:00    33784.           34349.              NA 
+## 16 BTC    2021-01-13 00:00:00    34047.           35385.              NA 
+## 17 BTC    2021-01-13 01:00:00    32474.           34925.              NA 
+## 18 BTC    2021-01-13 02:00:00    33114.           34314.              NA 
+## 19 BTC    2021-01-13 03:00:00    33031.           34389.              NA 
+## 20 BTC    2021-01-13 04:00:00    33840.           34961.              NA 
+## 21 BTC    2021-01-13 05:00:00    33181.           35259.              NA 
+## 22 BTC    2021-01-13 06:00:00    33318.           35877.              NA 
+## 23 BTC    2021-01-13 07:00:00    33797.           35989.              NA 
+## 24 BTC    2021-01-13 08:00:00    35000.           36384.              NA 
+## 25 BTC    2021-01-13 09:00:00    34502.           35767.              NA 
+## 26 BTC    2021-01-13 10:00:00    34343.           35879.              NA 
+## 27 BTC    2021-01-13 11:00:00    34928.           35096.              NA 
+## 28 BTC    2021-01-13 12:00:00    34406.           35393.              NA 
+## 29 BTC    2021-01-13 13:00:00    34269.           34991.              NA 
+## 30 BTC    2021-01-13 14:00:00    34572.           33272.              NA
 ```
 
 Reading the code shown above is less than ideal. One of the more popular tools introduced by the [tidyverse](https://www.tidyverse.org/) is the [**%>%**]{style="color: purple;"} operator, which works by starting with the object/data you want to make changes to first, and then apply each transformation step by step. It's simply a way of re-writing the same code in a way that is easier to read by splitting the way the function is called rather than adding functions onto each other into a single line that becomes really hard to read. In the example above it becomes difficult to keep track of where things begin, the order of operations, and the parameters associated with the specific functions. Compare that to the code below:
@@ -980,36 +980,36 @@ cryptodata %>%
 ## # Groups:   symbol [1]
 ##    symbol ts_index            price_usd lagged_price_24h target_price_24h
 ##    <chr>  <dttm>                  <dbl>            <dbl>            <dbl>
-##  1 BTC    2021-01-11 22:00:00    33948.           38059.           34715.
-##  2 BTC    2021-01-11 23:00:00    34349.           38444.           33784.
-##  3 BTC    2021-01-12 00:00:00    35385.           38168.           34047.
-##  4 BTC    2021-01-12 01:00:00    34925.           37206.           32474.
-##  5 BTC    2021-01-12 02:00:00    34314.           37232.           33114.
-##  6 BTC    2021-01-12 03:00:00    34389.           36364.           33031.
-##  7 BTC    2021-01-12 04:00:00    34961.           35422.              NA 
-##  8 BTC    2021-01-12 05:00:00    35259.           35553.              NA 
-##  9 BTC    2021-01-12 06:00:00    35877.           34895.              NA 
-## 10 BTC    2021-01-12 07:00:00    35989.           32879.              NA 
-## 11 BTC    2021-01-12 08:00:00    36384.           34368.              NA 
-## 12 BTC    2021-01-12 09:00:00    35767.           35407.              NA 
-## 13 BTC    2021-01-12 10:00:00    35879.           35743.              NA 
-## 14 BTC    2021-01-12 11:00:00    35096.           35362.              NA 
-## 15 BTC    2021-01-12 12:00:00    35393.           34183.              NA 
-## 16 BTC    2021-01-12 13:00:00    34991.           34232.              NA 
-## 17 BTC    2021-01-12 14:00:00    33272.           32808.              NA 
-## 18 BTC    2021-01-12 15:00:00    33416.           33285.              NA 
-## 19 BTC    2021-01-12 16:00:00    33841.           31573.              NA 
-## 20 BTC    2021-01-12 17:00:00    35001.           31752.              NA 
-## 21 BTC    2021-01-12 18:00:00    34994.           32847.              NA 
-## 22 BTC    2021-01-12 19:00:00    35026.           32552.              NA 
-## 23 BTC    2021-01-12 20:00:00    34685.           32219.              NA 
-## 24 BTC    2021-01-12 21:00:00    34289.           33436.              NA 
-## 25 BTC    2021-01-12 22:00:00    34715.           33948.              NA 
-## 26 BTC    2021-01-12 23:00:00    33784.           34349.              NA 
-## 27 BTC    2021-01-13 00:00:00    34047.           35385.              NA 
-## 28 BTC    2021-01-13 01:00:00    32474.           34925.              NA 
-## 29 BTC    2021-01-13 02:00:00    33114.           34314.              NA 
-## 30 BTC    2021-01-13 03:00:00    33031.           34389.              NA
+##  1 BTC    2021-01-12 09:00:00    35767.           35407.           34502.
+##  2 BTC    2021-01-12 10:00:00    35879.           35743.           34343.
+##  3 BTC    2021-01-12 11:00:00    35096.           35362.           34928.
+##  4 BTC    2021-01-12 12:00:00    35393.           34183.           34406.
+##  5 BTC    2021-01-12 13:00:00    34991.           34232.           34269.
+##  6 BTC    2021-01-12 14:00:00    33272.           32808.           34572.
+##  7 BTC    2021-01-12 15:00:00    33416.           33285.              NA 
+##  8 BTC    2021-01-12 16:00:00    33841.           31573.              NA 
+##  9 BTC    2021-01-12 17:00:00    35001.           31752.              NA 
+## 10 BTC    2021-01-12 18:00:00    34994.           32847.              NA 
+## 11 BTC    2021-01-12 19:00:00    35026.           32552.              NA 
+## 12 BTC    2021-01-12 20:00:00    34685.           32219.              NA 
+## 13 BTC    2021-01-12 21:00:00    34289.           33436.              NA 
+## 14 BTC    2021-01-12 22:00:00    34715.           33948.              NA 
+## 15 BTC    2021-01-12 23:00:00    33784.           34349.              NA 
+## 16 BTC    2021-01-13 00:00:00    34047.           35385.              NA 
+## 17 BTC    2021-01-13 01:00:00    32474.           34925.              NA 
+## 18 BTC    2021-01-13 02:00:00    33114.           34314.              NA 
+## 19 BTC    2021-01-13 03:00:00    33031.           34389.              NA 
+## 20 BTC    2021-01-13 04:00:00    33840.           34961.              NA 
+## 21 BTC    2021-01-13 05:00:00    33181.           35259.              NA 
+## 22 BTC    2021-01-13 06:00:00    33318.           35877.              NA 
+## 23 BTC    2021-01-13 07:00:00    33797.           35989.              NA 
+## 24 BTC    2021-01-13 08:00:00    35000.           36384.              NA 
+## 25 BTC    2021-01-13 09:00:00    34502.           35767.              NA 
+## 26 BTC    2021-01-13 10:00:00    34343.           35879.              NA 
+## 27 BTC    2021-01-13 11:00:00    34928.           35096.              NA 
+## 28 BTC    2021-01-13 12:00:00    34406.           35393.              NA 
+## 29 BTC    2021-01-13 13:00:00    34269.           34991.              NA 
+## 30 BTC    2021-01-13 14:00:00    34572.           33272.              NA
 ```
 
 There are several advantages to writing code *the* ***tidy*** *way*, but while some love it others hate it, so we won't force anyone to have to understand how the **%>%** operator works and we have stayed away from its use for the rest of the code shown, but we do encourage the use of this tool: https://magrittr.tidyverse.org/reference/pipe.html
@@ -1036,7 +1036,7 @@ cryptodata <- filter(cryptodata, !is.na(date_time_utc))
 
 
 
-This step removed 17870 rows from the data. This step mainly helps us avoid issues when programmatically labeling charts in the next section, move on to the [next section](#visualization) ➡️ to learn some amazingly powerful tools to visualize data!
+This step removed 25664 rows from the data. This step mainly helps us avoid issues when programmatically labeling charts in the next section, move on to the [next section](#visualization) ➡️ to learn some amazingly powerful tools to visualize data!
 
 
 <!--chapter:end:03-DataPrep.Rmd-->
@@ -1220,7 +1220,7 @@ We already imported the [**plotly**]{style="color: #ae7b11;"} package [in the se
 ggplotly(crypto_chart)
 ```
 
-preservea9fd286a545b76f5
+preservef4ee63a642649b9f
 
 **Use your mouse to hover over specific points on the chart above**. Also notice that we did not overwrite the [**crypto_chart**]{style="color: blue;"} object, but are just displaying the results.
 
@@ -1459,8 +1459,8 @@ select(cryptodata, training, split)
 ```
 
 ```
-## # A tibble: 182,650 x 3
-## # Groups:   symbol [81]
+## # A tibble: 194,762 x 3
+## # Groups:   symbol [93]
 ##    symbol training split
 ##    <chr>  <chr>    <dbl>
 ##  1 CHZ    train        1
@@ -1469,11 +1469,11 @@ select(cryptodata, training, split)
 ##  4 EOS    train        1
 ##  5 BRD    train        1
 ##  6 MBL    train        1
-##  7 BNT    train        1
-##  8 IQ     train        1
-##  9 PHX    train        1
-## 10 XNS    train        1
-## # … with 182,640 more rows
+##  7 IQ     train        1
+##  8 PHX    train        1
+##  9 XNS    train        1
+## 10 ARDR   train        1
+## # … with 194,752 more rows
 ```
 
 *Notice that even though we left `symbol` variables out of our selection, but because it is part of the way we grouped our data, it was added back in with the message "Adding missing grouping variables `symbol`". The data is tied to its groupings when performing all operations until we use [**ungroup()**]{style="color: green;"} to undo them.*
@@ -1499,10 +1499,10 @@ tail( select(cryptodata, training, split) )
 ## # Groups:   symbol, split [6]
 ##   symbol training split
 ##   <chr>  <chr>    <dbl>
-## 1 XVG    holdout      5
-## 2 AMB    holdout      5
-## 3 ASP    holdout      5
-## 4 REX    holdout      5
+## 1 ASP    holdout      5
+## 2 REX    holdout      5
+## 3 POA    holdout      5
+## 4 CVC    holdout      5
 ## 5 PHX    holdout      5
 ## 6 FTM    holdout      5
 ```
@@ -1591,21 +1591,21 @@ find_zero_var
 ```
 
 ```
-## # A tibble: 182,650 x 4
-## # Groups:   symbol, split, training [810]
+## # A tibble: 194,762 x 4
+## # Groups:   symbol, split, training [930]
 ##    symbol split training      min_sd
 ##    <chr>  <dbl> <chr>          <dbl>
-##  1 CHZ        1 train    0.000370   
-##  2 APPC       1 train    0.00142    
-##  3 ADA        1 train    0.00627    
-##  4 EOS        1 train    0.0708     
-##  5 BRD        1 train    0.00518    
-##  6 MBL        1 train    0.000140   
-##  7 BNT        1 train    0.103      
-##  8 IQ         1 train    0.000000356
-##  9 PHX        1 train    0.00120    
-## 10 XNS        1 train    0.0819     
-## # … with 182,640 more rows
+##  1 CHZ        1 train    0.000372   
+##  2 APPC       1 train    0.00143    
+##  3 ADA        1 train    0.00629    
+##  4 EOS        1 train    0.0714     
+##  5 BRD        1 train    0.00827    
+##  6 MBL        1 train    0.000159   
+##  7 IQ         1 train    0.000000375
+##  8 PHX        1 train    0.00119    
+##  9 XNS        1 train    0.0820     
+## 10 ARDR       1 train    0.00295    
+## # … with 194,752 more rows
 ```
 
 Next let's get to a list of cryptocurrency symbols where the minimum standard deviation across all columns for all splits of the data is 0, which is the list of cryptocurrencies we want to later remove from the data:
@@ -1619,9 +1619,9 @@ minimum_sd
 
 ```
 ##  [1] "APPC"  "MBL"   "IQ"    "PHX"   "CND"   "SYBC"  "SMART" "BNK"   "NAV"  
-## [10] "BTT"   "ACT"   "REX"   "XVG"   "COCOS" "BRDG"  "FDZ"   "SUB"   "GST"  
-## [19] "MESH"  "CKB"   "VSYS"  "IPL"   "AAB"   "BYTZ"  "RCN"   "DENT"  "NCT"  
-## [28] "PLA"   "CUTE"  "CCE"
+## [10] "BTT"   "ACT"   "REX"   "XVG"   "COCOS" "DENT"  "BRDG"  "FDZ"   "NCT"  
+## [19] "GST"   "MESH"  "CKB"   "VSYS"  "PLA"   "IPL"   "SRN"   "BYTZ"  "SUB"  
+## [28] "RCN"   "CUTE"  "POA"   "PMA"   "MAN"   "CCE"   "RFR"   "CVT"   "ADXN"
 ```
 
 Now we can remove these symbols from appearing in the dataset:
@@ -1655,21 +1655,21 @@ nest(cryptodata)
 ```
 
 ```
-## # A tibble: 510 x 4
-## # Groups:   symbol, training, split [510]
+## # A tibble: 570 x 4
+## # Groups:   symbol, training, split [570]
 ##    symbol training split data               
 ##    <chr>  <chr>    <dbl> <list>             
 ##  1 CHZ    train        1 <tibble [403 × 11]>
 ##  2 ADA    train        1 <tibble [404 × 11]>
 ##  3 EOS    train        1 <tibble [396 × 11]>
 ##  4 BRD    train        1 <tibble [398 × 11]>
-##  5 BNT    train        1 <tibble [384 × 11]>
-##  6 XNS    train        1 <tibble [401 × 11]>
-##  7 CRO    train        1 <tibble [384 × 11]>
-##  8 ARDR   train        1 <tibble [404 × 11]>
-##  9 WAXP   train        1 <tibble [404 × 11]>
-## 10 XRP    train        1 <tibble [216 × 11]>
-## # … with 500 more rows
+##  5 XNS    train        1 <tibble [400 × 11]>
+##  6 ARDR   train        1 <tibble [404 × 11]>
+##  7 WAXP   train        1 <tibble [404 × 11]>
+##  8 STORJ  train        1 <tibble [360 × 11]>
+##  9 XRP    train        1 <tibble [216 × 11]>
+## 10 BTC    train        1 <tibble [404 × 11]>
+## # … with 560 more rows
 ```
 
 We will begin by creating the new column containing the nested [**train**]{style="color: blue;"} data. Some additional steps were added to ensure the integrity of the data before we start training it, but these are not material outside of the things we have already discussed up to this point. Try to focus on the conceptual idea that we are creating a new dataset grouped by the [**symbol**]{style="color: blue;"}, [**training**]{style="color: blue;"} and [**split**]{style="color: blue;"} columns. As a first step, we are creating a new dataframe called [**cryptodata_train**]{style="color: blue;"} grouped by the [**symbol**]{style="color: blue;"} and [**split**]{style="color: blue;"} columns with the nested dataframes in the new [**train_data**]{style="color: blue;"} column:
@@ -1702,21 +1702,21 @@ cryptodata_train
 ```
 
 ```{.scroll-lim}
-## # A tibble: 255 x 3
-## # Groups:   symbol, split [255]
+## # A tibble: 285 x 3
+## # Groups:   symbol, split [285]
 ##    symbol split train_data         
 ##    <chr>  <dbl> <list>             
 ##  1 CHZ        1 <tibble [331 × 11]>
 ##  2 ADA        1 <tibble [332 × 11]>
-##  3 EOS        1 <tibble [281 × 11]>
-##  4 BRD        1 <tibble [308 × 11]>
-##  5 BNT        1 <tibble [52 × 11]> 
-##  6 XNS        1 <tibble [329 × 11]>
-##  7 CRO        1 <tibble [57 × 11]> 
-##  8 ARDR       1 <tibble [332 × 11]>
-##  9 WAXP       1 <tibble [332 × 11]>
-## 10 XRP        1 <tibble [144 × 11]>
-## # … with 245 more rows
+##  3 EOS        1 <tibble [269 × 11]>
+##  4 BRD        1 <tibble [300 × 11]>
+##  5 XNS        1 <tibble [328 × 11]>
+##  6 ARDR       1 <tibble [332 × 11]>
+##  7 WAXP       1 <tibble [332 × 11]>
+##  8 STORJ      1 <tibble [60 × 11]> 
+##  9 XRP        1 <tibble [144 × 11]>
+## 10 BTC        1 <tibble [332 × 11]>
+## # … with 275 more rows
 ```
 
 Now let's repeat the same process but on the [**test**]{style="color: blue;"} data to create the [**cryptodata_test**]{style="color: blue;"} object:
@@ -1736,21 +1736,21 @@ cryptodata_test
 ```
 
 ```
-## # A tibble: 204 x 3
-## # Groups:   symbol, split [204]
+## # A tibble: 228 x 3
+## # Groups:   symbol, split [228]
 ##    symbol split test_data          
 ##    <chr>  <dbl> <list>             
-##  1 XRP        1 <tibble [55 × 11]> 
+##  1 XRP        1 <tibble [54 × 11]> 
 ##  2 QTUM       1 <tibble [52 × 11]> 
-##  3 NUT        1 <tibble [67 × 11]> 
-##  4 SRN        1 <tibble [93 × 11]> 
+##  3 AAB        1 <tibble [74 × 11]> 
+##  4 NUT        1 <tibble [67 × 11]> 
 ##  5 KNC        1 <tibble [96 × 11]> 
-##  6 CUR        1 <tibble [98 × 11]> 
-##  7 VIB        1 <tibble [70 × 11]> 
+##  6 VIB        1 <tibble [70 × 11]> 
+##  7 CUR        1 <tibble [98 × 11]> 
 ##  8 SEELE      1 <tibble [97 × 11]> 
-##  9 BRD        1 <tibble [100 × 11]>
-## 10 AVA        1 <tibble [99 × 11]> 
-## # … with 194 more rows
+##  9 XNS        1 <tibble [101 × 11]>
+## 10 BAT        1 <tibble [101 × 11]>
+## # … with 218 more rows
 ```
 
 As well as the [**holdout**]{style="color: blue;"} data to create the [**cryptodata_holdout**]{style="color: blue;"} object:
@@ -1768,21 +1768,21 @@ cryptodata_holdout
 ```
 
 ```
-## # A tibble: 51 x 2
-## # Groups:   symbol [51]
+## # A tibble: 57 x 2
+## # Groups:   symbol [57]
 ##    symbol holdout_data       
 ##    <chr>  <list>             
-##  1 SEELE  <tibble [98 × 11]> 
-##  2 XMR    <tibble [105 × 11]>
-##  3 XNS    <tibble [102 × 11]>
-##  4 ZRX    <tibble [105 × 11]>
-##  5 BAT    <tibble [105 × 11]>
-##  6 KMD    <tibble [101 × 11]>
-##  7 EOS    <tibble [104 × 11]>
-##  8 MANA   <tibble [104 × 11]>
-##  9 CHZ    <tibble [104 × 11]>
-## 10 BRD    <tibble [104 × 11]>
-## # … with 41 more rows
+##  1 SEELE  <tibble [101 × 11]>
+##  2 BAT    <tibble [104 × 11]>
+##  3 XNS    <tibble [105 × 11]>
+##  4 KMD    <tibble [104 × 11]>
+##  5 DGB    <tibble [105 × 11]>
+##  6 ADA    <tibble [105 × 11]>
+##  7 XMR    <tibble [103 × 11]>
+##  8 ENJ    <tibble [104 × 11]>
+##  9 ARDR   <tibble [104 × 11]>
+## 10 DCR    <tibble [105 × 11]>
+## # … with 47 more rows
 ```
 
 ### Join Results
@@ -1798,21 +1798,21 @@ cryptodata_nested
 ```
 
 ```
-## # A tibble: 255 x 4
-## # Groups:   symbol, split [255]
+## # A tibble: 285 x 4
+## # Groups:   symbol, split [285]
 ##    symbol split train_data          test_data          
 ##    <chr>  <dbl> <list>              <list>             
 ##  1 CHZ        1 <tibble [331 × 11]> <tibble [101 × 11]>
-##  2 ADA        1 <tibble [332 × 11]> <tibble [102 × 11]>
-##  3 EOS        1 <tibble [281 × 11]> <tibble [100 × 11]>
-##  4 BRD        1 <tibble [308 × 11]> <tibble [100 × 11]>
-##  5 BNT        1 <tibble [52 × 11]>  <tibble [97 × 11]> 
-##  6 XNS        1 <tibble [329 × 11]> <tibble [101 × 11]>
-##  7 CRO        1 <tibble [57 × 11]>  <tibble [96 × 11]> 
-##  8 ARDR       1 <tibble [332 × 11]> <tibble [102 × 11]>
-##  9 WAXP       1 <tibble [332 × 11]> <tibble [102 × 11]>
-## 10 XRP        1 <tibble [144 × 11]> <tibble [55 × 11]> 
-## # … with 245 more rows
+##  2 ADA        1 <tibble [332 × 11]> <tibble [101 × 11]>
+##  3 EOS        1 <tibble [269 × 11]> <tibble [100 × 11]>
+##  4 BRD        1 <tibble [300 × 11]> <tibble [100 × 11]>
+##  5 XNS        1 <tibble [328 × 11]> <tibble [101 × 11]>
+##  6 ARDR       1 <tibble [332 × 11]> <tibble [101 × 11]>
+##  7 WAXP       1 <tibble [332 × 11]> <tibble [101 × 11]>
+##  8 STORJ      1 <tibble [60 × 11]>  <tibble [91 × 11]> 
+##  9 XRP        1 <tibble [144 × 11]> <tibble [54 × 11]> 
+## 10 BTC        1 <tibble [332 × 11]> <tibble [101 × 11]>
+## # … with 275 more rows
 ```
 *The [**by**]{style="color: blue;"} argument used above defines the key to use to join the data by, in this case the cryptocurrency [**symbol**]{style="color: blue;"}, as well as the specific [**split**]{style="color: blue;"}*.
 
@@ -1831,21 +1831,21 @@ cryptodata_nested
 ```
 
 ```
-## # A tibble: 255 x 5
-## # Groups:   symbol, split [255]
+## # A tibble: 285 x 5
+## # Groups:   symbol, split [285]
 ##    symbol split train_data          test_data           holdout_data       
 ##    <chr>  <dbl> <list>              <list>              <list>             
-##  1 CHZ        1 <tibble [331 × 11]> <tibble [101 × 11]> <tibble [104 × 11]>
-##  2 ADA        1 <tibble [332 × 11]> <tibble [102 × 11]> <tibble [103 × 11]>
-##  3 EOS        1 <tibble [281 × 11]> <tibble [100 × 11]> <tibble [104 × 11]>
-##  4 BRD        1 <tibble [308 × 11]> <tibble [100 × 11]> <tibble [104 × 11]>
-##  5 BNT        1 <tibble [52 × 11]>  <tibble [97 × 11]>  <tibble [98 × 11]> 
-##  6 XNS        1 <tibble [329 × 11]> <tibble [101 × 11]> <tibble [102 × 11]>
-##  7 CRO        1 <tibble [57 × 11]>  <tibble [96 × 11]>  <tibble [100 × 11]>
-##  8 ARDR       1 <tibble [332 × 11]> <tibble [102 × 11]> <tibble [102 × 11]>
-##  9 WAXP       1 <tibble [332 × 11]> <tibble [102 × 11]> <tibble [103 × 11]>
-## 10 XRP        1 <tibble [144 × 11]> <tibble [55 × 11]>  <tibble [55 × 11]> 
-## # … with 245 more rows
+##  1 CHZ        1 <tibble [331 × 11]> <tibble [101 × 11]> <tibble [102 × 11]>
+##  2 ADA        1 <tibble [332 × 11]> <tibble [101 × 11]> <tibble [105 × 11]>
+##  3 EOS        1 <tibble [269 × 11]> <tibble [100 × 11]> <tibble [102 × 11]>
+##  4 BRD        1 <tibble [300 × 11]> <tibble [100 × 11]> <tibble [102 × 11]>
+##  5 XNS        1 <tibble [328 × 11]> <tibble [101 × 11]> <tibble [105 × 11]>
+##  6 ARDR       1 <tibble [332 × 11]> <tibble [101 × 11]> <tibble [104 × 11]>
+##  7 WAXP       1 <tibble [332 × 11]> <tibble [101 × 11]> <tibble [105 × 11]>
+##  8 STORJ      1 <tibble [60 × 11]>  <tibble [91 × 11]>  <tibble [92 × 11]> 
+##  9 XRP        1 <tibble [144 × 11]> <tibble [54 × 11]>  <tibble [57 × 11]> 
+## 10 BTC        1 <tibble [332 × 11]> <tibble [101 × 11]> <tibble [104 × 11]>
+## # … with 275 more rows
 ```
 
 Move on to the [next section](#predictive-modeling) ➡️ to build the predictive models using the methodology discussed in this section.
@@ -1873,38 +1873,42 @@ lm(formula = target_price_24h ~ ., data = cryptodata)
 ## lm(formula = target_price_24h ~ ., data = cryptodata)
 ## 
 ## Coefficients:
-##      (Intercept)         symbolAMB        symbolARDR         symbolASP  
-##  -6584.503136488      -8.777958202      -0.130885119      -3.877313096  
-##        symbolAVA         symbolBAT         symbolBNT         symbolBRD  
-##     -0.649839361       0.216034401      -1.858889180      -0.423641083  
-##        symbolBSV         symbolBTC         symbolBTG         symbolBTM  
-##     -2.218875858      49.932114205      -2.349802343      -2.320987675  
-##        symbolCHZ         symbolCRO        symbolCRPT         symbolCRV  
-##      0.145423364      -1.762507958      -2.780350832      -5.950046451  
-##        symbolCUR         symbolDCR         symbolDGB         symbolELF  
-##      1.083646848       0.219246997       0.233446023      -1.680181745  
+##      (Intercept)         symbolADA         symbolAMB        symbolARDR  
+## -6268.0938980387     -3.8356163101    -12.6319993187     -4.0041544605  
+##        symbolASP         symbolAVA         symbolBAT         symbolBCD  
+##    -7.6491398340     -4.4902646622     -3.6188030348    -15.1415709433  
+##        symbolBNT         symbolBRD         symbolBSV         symbolBTC  
+##    -5.7944308771     -4.3891946107     -4.7528295686    166.1255384298  
+##        symbolBTG         symbolBTM         symbolCHZ         symbolCRO  
+##    -6.3117172623     -6.3912507558     -3.7847015530     -5.7493842356  
+##       symbolCRPT         symbolCRV         symbolCUR         symbolCVC  
+##    -6.8172797353     -9.9028719918     -2.7881974349    -14.9710292378  
+##        symbolDCR         symbolDGB         symbolDOT         symbolELF  
+##    -3.4101336093     -3.5315319996    -14.9083754924     -5.5679659347  
 ##        symbolENJ         symbolEOS         symbolETH         symbolETP  
-##     -0.536240912      -0.616251431       1.067661656       0.033067783  
-##        symbolFTM          symbolHT         symbolJST         symbolKMD  
-##     -7.102529404      -1.139284343       0.028866034      -0.322430513  
-##        symbolKNC         symbolLEO        symbolLEVL         symbolLTC  
-##      0.747987162      -1.945357953      -8.009980317       0.167635238  
-##       symbolMANA        symbolNEXO         symbolNUT         symbolOAX  
-##     -0.434005193      -0.032491958      -3.563720466      -0.444945578  
-##       symbolQTUM       symbolSEELE         symbolSRN       symbolSTORJ  
-##     -8.052450676       0.615448568      -0.029615982      -1.505536848  
-##      symbolSUSHI         symbolTRX         symbolUNI         symbolVIB  
-##     -6.752927642      -0.434363056      -6.119853555      -0.585872837  
-##       symbolWAXP         symbolXEM         symbolXMR         symbolXNS  
-##     -0.000973365      -1.169866789      -0.916632876      -0.272420518  
-##        symbolXRP         symbolZEC         symbolZRX     date_time_utc  
-##     -4.772762336      -3.083543106       0.175822150      -0.000005896  
-##             date         price_usd   lagged_price_1h   lagged_price_2h  
-##      0.861245111       1.180368090      -0.048878089       0.079638398  
-##  lagged_price_3h   lagged_price_6h  lagged_price_12h  lagged_price_24h  
-##     -0.036620470       0.068605079      -0.313925747      -0.022388012  
-##  lagged_price_3d      trainingtest     trainingtrain             split  
-##      0.105207485      53.533744363      58.348721172      -3.432781906
+##    -4.3727214840     -4.5823476174      0.6329518704     -3.8008974231  
+##        symbolFTM         symbolFUN        symbolGRIN          symbolHT  
+##   -10.5731365881    -15.1468097848    -15.0097259351     -5.0862492177  
+##        symbolJST         symbolKMD         symbolKNC         symbolLEO  
+##    -3.7732352398     -4.1661553767     -3.1128627499     -5.8449569690  
+##       symbolLEVL         symbolLTC        symbolMANA         symbolNEO  
+##   -12.0875321042     -3.2515205465     -4.3730544975    -15.0970806033  
+##       symbolNEXO         symbolNUT         symbolOAX        symbolQTUM  
+##    -3.8686034554     -7.3925382589     -4.2332753565    -11.9948269553  
+##      symbolSEELE       symbolSTORJ       symbolSUSHI         symbolTRX  
+##    -3.2579694940     -5.2828310093    -10.5758767547     -4.4060576513  
+##        symbolUNI         symbolVIB        symbolWAXP         symbolXEM  
+##    -9.6389193464     -4.7321459342     -3.8373173350     -5.0168652477  
+##        symbolXMR         symbolXNS         symbolXRP         symbolZEC  
+##    -3.8854762054     -4.0284229743     -8.6527305362     -6.1793981289  
+##        symbolZRX     date_time_utc              date         price_usd  
+##    -3.6362199325      0.0000007948      0.2657965861      1.1292899811  
+##  lagged_price_1h   lagged_price_2h   lagged_price_3h   lagged_price_6h  
+##    -0.0448874325      0.0828221904     -0.0260841111      0.0132350350  
+## lagged_price_12h  lagged_price_24h   lagged_price_3d      trainingtest  
+##    -0.1765704137     -0.0259697637      0.0516905253     60.7806491356  
+##    trainingtrain             split  
+##    65.0027508114     -2.4727462554
 ```
 
 We defined the [**formula**]{style="color: blue;"} for the model as **`target_price_24h ~ .`**, which means that we are want to make predictions for the [**target_price_24h**]{style="color: blue;"} field, and use (**`~`**) every other column found in the data (**`.`**). In other words, we specified a model that uses the [**target_price_24h**]{style="color: blue;"} field as the [dependent variable](https://en.wikipedia.org/wiki/Dependent_and_independent_variables), and all other columns (**`.`**) as the [independent variables](https://en.wikipedia.org/wiki/Dependent_and_independent_variables). Meaning, we are looking to predict the [**target_price_24h**]{style="color: blue;"}, which is the only column that refers to the future, and use all the information available at the time the rest of the data was collected in order to infer statistical relationships that can help us forecast the future values of the [**target_price_24h**]{style="color: blue;"} field when it is still unknown on new data that we want to make new predictions for.
@@ -1922,21 +1926,21 @@ cryptodata_nested
 ```
 
 ```
-## # A tibble: 255 x 5
-## # Groups:   symbol, split [255]
+## # A tibble: 285 x 5
+## # Groups:   symbol, split [285]
 ##    symbol split train_data          test_data           holdout_data       
 ##    <chr>  <dbl> <list>              <list>              <list>             
-##  1 CHZ        1 <tibble [331 × 11]> <tibble [101 × 11]> <tibble [104 × 11]>
-##  2 ADA        1 <tibble [332 × 11]> <tibble [102 × 11]> <tibble [103 × 11]>
-##  3 EOS        1 <tibble [281 × 11]> <tibble [100 × 11]> <tibble [104 × 11]>
-##  4 BRD        1 <tibble [308 × 11]> <tibble [100 × 11]> <tibble [104 × 11]>
-##  5 BNT        1 <tibble [52 × 11]>  <tibble [97 × 11]>  <tibble [98 × 11]> 
-##  6 XNS        1 <tibble [329 × 11]> <tibble [101 × 11]> <tibble [102 × 11]>
-##  7 CRO        1 <tibble [57 × 11]>  <tibble [96 × 11]>  <tibble [100 × 11]>
-##  8 ARDR       1 <tibble [332 × 11]> <tibble [102 × 11]> <tibble [102 × 11]>
-##  9 WAXP       1 <tibble [332 × 11]> <tibble [102 × 11]> <tibble [103 × 11]>
-## 10 XRP        1 <tibble [144 × 11]> <tibble [55 × 11]>  <tibble [55 × 11]> 
-## # … with 245 more rows
+##  1 CHZ        1 <tibble [331 × 11]> <tibble [101 × 11]> <tibble [102 × 11]>
+##  2 ADA        1 <tibble [332 × 11]> <tibble [101 × 11]> <tibble [105 × 11]>
+##  3 EOS        1 <tibble [269 × 11]> <tibble [100 × 11]> <tibble [102 × 11]>
+##  4 BRD        1 <tibble [300 × 11]> <tibble [100 × 11]> <tibble [102 × 11]>
+##  5 XNS        1 <tibble [328 × 11]> <tibble [101 × 11]> <tibble [105 × 11]>
+##  6 ARDR       1 <tibble [332 × 11]> <tibble [101 × 11]> <tibble [104 × 11]>
+##  7 WAXP       1 <tibble [332 × 11]> <tibble [101 × 11]> <tibble [105 × 11]>
+##  8 STORJ      1 <tibble [60 × 11]>  <tibble [91 × 11]>  <tibble [92 × 11]> 
+##  9 XRP        1 <tibble [144 × 11]> <tibble [54 × 11]>  <tibble [57 × 11]> 
+## 10 BTC        1 <tibble [332 × 11]> <tibble [101 × 11]> <tibble [104 × 11]>
+## # … with 275 more rows
 ```
 
 Because we are now dealing with a **nested dataframe**, performing operations on the individual nested datasets is not as straightforward. We could extract the individual elements out of the data using [[**indexing**]{style="color: purple;"}](https://rspatial.org/intr/4-indexing.html), for example we can return the first element of the column [**train_data**]{style="color: blue;"} by running this code:
@@ -1949,16 +1953,16 @@ cryptodata_nested$train_data[[1]]
 ## # A tibble: 331 x 11
 ##    date_time_utc       date       price_usd target_price_24h lagged_price_1h
 ##    <dttm>              <date>         <dbl>            <dbl>           <dbl>
-##  1 2020-10-02 00:00:04 2020-10-02    0.0113           0.0107          0.0114
-##  2 2020-10-02 01:00:04 2020-10-02    0.0113           0.0107          0.0113
-##  3 2020-10-02 02:00:05 2020-10-02    0.0112           0.0107          0.0113
-##  4 2020-10-02 03:00:04 2020-10-02    0.0112           0.0107          0.0112
-##  5 2020-10-02 04:00:04 2020-10-02    0.0112           0.0107          0.0112
-##  6 2020-10-02 05:00:04 2020-10-02    0.0112           0.0108          0.0112
-##  7 2020-10-02 06:00:05 2020-10-02    0.0109           0.0108          0.0112
-##  8 2020-10-02 07:00:04 2020-10-02    0.0110           0.0108          0.0109
-##  9 2020-10-02 08:00:04 2020-10-02    0.0109           0.0108          0.0110
-## 10 2020-10-03 00:00:05 2020-10-03    0.0107           0.0109          0.0107
+##  1 2020-10-03 00:00:05 2020-10-03    0.0107           0.0109          0.0107
+##  2 2020-10-03 01:00:05 2020-10-03    0.0107           0.0109          0.0107
+##  3 2020-10-03 02:00:04 2020-10-03    0.0107           0.0109          0.0107
+##  4 2020-10-03 03:00:04 2020-10-03    0.0107           0.0109          0.0107
+##  5 2020-10-03 04:00:05 2020-10-03    0.0107           0.0109          0.0107
+##  6 2020-10-03 05:00:05 2020-10-03    0.0108           0.0109          0.0107
+##  7 2020-10-03 06:00:05 2020-10-03    0.0108           0.0109          0.0108
+##  8 2020-10-03 07:00:05 2020-10-03    0.0108           0.0110          0.0108
+##  9 2020-10-03 08:00:05 2020-10-03    0.0108           0.0111          0.0108
+## 10 2020-10-03 09:00:05 2020-10-03    0.0108           0.0110          0.0108
 ## # … with 321 more rows, and 6 more variables: lagged_price_2h <dbl>,
 ## #   lagged_price_3h <dbl>, lagged_price_6h <dbl>, lagged_price_12h <dbl>,
 ## #   lagged_price_24h <dbl>, lagged_price_3d <dbl>
@@ -1983,21 +1987,21 @@ mutate(cryptodata_nested, lm_model = map(train_data, linear_model))
 ```
 
 ```
-## # A tibble: 255 x 6
-## # Groups:   symbol, split [255]
+## # A tibble: 285 x 6
+## # Groups:   symbol, split [285]
 ##    symbol split train_data         test_data          holdout_data      lm_model
 ##    <chr>  <dbl> <list>             <list>             <list>            <list>  
-##  1 CHZ        1 <tibble [331 × 11… <tibble [101 × 11… <tibble [104 × 1… <lm>    
-##  2 ADA        1 <tibble [332 × 11… <tibble [102 × 11… <tibble [103 × 1… <lm>    
-##  3 EOS        1 <tibble [281 × 11… <tibble [100 × 11… <tibble [104 × 1… <lm>    
-##  4 BRD        1 <tibble [308 × 11… <tibble [100 × 11… <tibble [104 × 1… <lm>    
-##  5 BNT        1 <tibble [52 × 11]> <tibble [97 × 11]> <tibble [98 × 11… <lm>    
-##  6 XNS        1 <tibble [329 × 11… <tibble [101 × 11… <tibble [102 × 1… <lm>    
-##  7 CRO        1 <tibble [57 × 11]> <tibble [96 × 11]> <tibble [100 × 1… <lm>    
-##  8 ARDR       1 <tibble [332 × 11… <tibble [102 × 11… <tibble [102 × 1… <lm>    
-##  9 WAXP       1 <tibble [332 × 11… <tibble [102 × 11… <tibble [103 × 1… <lm>    
-## 10 XRP        1 <tibble [144 × 11… <tibble [55 × 11]> <tibble [55 × 11… <lm>    
-## # … with 245 more rows
+##  1 CHZ        1 <tibble [331 × 11… <tibble [101 × 11… <tibble [102 × 1… <lm>    
+##  2 ADA        1 <tibble [332 × 11… <tibble [101 × 11… <tibble [105 × 1… <lm>    
+##  3 EOS        1 <tibble [269 × 11… <tibble [100 × 11… <tibble [102 × 1… <lm>    
+##  4 BRD        1 <tibble [300 × 11… <tibble [100 × 11… <tibble [102 × 1… <lm>    
+##  5 XNS        1 <tibble [328 × 11… <tibble [101 × 11… <tibble [105 × 1… <lm>    
+##  6 ARDR       1 <tibble [332 × 11… <tibble [101 × 11… <tibble [104 × 1… <lm>    
+##  7 WAXP       1 <tibble [332 × 11… <tibble [101 × 11… <tibble [105 × 1… <lm>    
+##  8 STORJ      1 <tibble [60 × 11]> <tibble [91 × 11]> <tibble [92 × 11… <lm>    
+##  9 XRP        1 <tibble [144 × 11… <tibble [54 × 11]> <tibble [57 × 11… <lm>    
+## 10 BTC        1 <tibble [332 × 11… <tibble [101 × 11… <tibble [104 × 1… <lm>    
+## # … with 275 more rows
 ```
 
 Awesome! Now we can use the [same tools we learned in the high-level version to make a wider variety of predictive models to test](https://cryptocurrencyresearch.org/high-level/#/caret-package)
@@ -2050,21 +2054,21 @@ select(cryptodata_nested, lm_model)
 ```
 
 ```
-## # A tibble: 255 x 3
-## # Groups:   symbol, split [255]
+## # A tibble: 285 x 3
+## # Groups:   symbol, split [285]
 ##    symbol split lm_model
 ##    <chr>  <dbl> <list>  
 ##  1 CHZ        1 <train> 
 ##  2 ADA        1 <train> 
 ##  3 EOS        1 <train> 
 ##  4 BRD        1 <train> 
-##  5 BNT        1 <train> 
-##  6 XNS        1 <train> 
-##  7 CRO        1 <train> 
-##  8 ARDR       1 <train> 
-##  9 WAXP       1 <train> 
-## 10 XRP        1 <train> 
-## # … with 245 more rows
+##  5 XNS        1 <train> 
+##  6 ARDR       1 <train> 
+##  7 WAXP       1 <train> 
+##  8 STORJ      1 <train> 
+##  9 XRP        1 <train> 
+## 10 BTC        1 <train> 
+## # … with 275 more rows
 ```
 
 And we can view the summarized contents of the first trained model:
@@ -2199,35 +2203,35 @@ predict(object = cryptodata_nested$lm_model[[1]],
 
 ```
 ##          1          2          3          4          5          6          7 
-## 0.01053227 0.01056351 0.01064197 0.01060046 0.01062997 0.01063409 0.01082144 
+## 0.01086804 0.01081791 0.01074703 0.01074958 0.01075460 0.01075635 0.01089246 
 ##          8          9         10         11         12         13         14 
-## 0.01087526 0.01086187 0.01095867 0.01082100 0.01079636 0.01093566 0.01088370 
+## 0.01088226 0.01094832 0.01098437 0.01094621 0.01104240 0.01095282 0.01092132 
 ##         15         16         17         18         19         20         21 
-## 0.01082644 0.01075517 0.01076524 0.01077256 0.01075317 0.01088886 0.01087738 
+## 0.01094475 0.01093433 0.01099545 0.01081911 0.01081589 0.01079401 0.01077994 
 ##         22         23         24         25         26         27         28 
-## 0.01094693 0.01098956 0.01095391 0.01103894 0.01095240 0.01092269 0.01095164 
+## 0.01084344 0.01089298 0.01089830 0.01090648 0.01090195 0.01096431 0.01095129 
 ##         29         30         31         32         33         34         35 
-## 0.01093546 0.01099902 0.01082698 0.01082209 0.01080301 0.01078613 0.01084494 
+## 0.01093197 0.01091164 0.01087563 0.01089991 0.01092925 0.01090369 0.01094926 
 ##         36         37         38         39         40         41         42 
-## 0.01089352 0.01090226 0.01091435 0.01090790 0.01097132 0.01095967 0.01093422 
+## 0.01095273 0.01099583 0.01100766 0.01097543 0.01096216 0.01098111 0.01100654 
 ##         43         44         45         46         47         48         49 
-## 0.01091648 0.01088065 0.01090877 0.01094020 0.01091104 0.01095746 0.01095758 
+## 0.01105657 0.01104996 0.01105036 0.01101582 0.01098335 0.01095798 0.01097320 
 ##         50         51         52         53         54         55         56 
-## 0.01100253 0.01101434 0.01098012 0.01096742 0.01098960 0.01101433 0.01106394 
+## 0.01098605 0.01097797 0.01097896 0.01094357 0.01094319 0.01095776 0.01093096 
 ##         57         58         59         60         61         62         63 
-## 0.01105633 0.01105481 0.01102216 0.01098436 0.01096139 0.01097296 0.01098592 
+## 0.01089341 0.01090566 0.01087979 0.01089363 0.01086981 0.01087203 0.01087692 
 ##         64         65         66         67         68         69         70 
-## 0.01097955 0.01098414 0.01094464 0.01094401 0.01095497 0.01093089 0.01089341 
+## 0.01092562 0.01086946 0.01086529 0.01088453 0.01089878 0.01088152 0.01091014 
 ##         71         72         73         74         75         76         77 
-## 0.01090759 0.01088451 0.01089765 0.01087517 0.01087401 0.01088141 0.01092938 
+## 0.01093457 0.01088254 0.01087221 0.01086859 0.01085577 0.01083302 0.01085930 
 ##         78         79         80         81         82         83         84 
-## 0.01087757 0.01086957 0.01089472 0.01090626 0.01089058 0.01091757 0.01094448 
+## 0.01091643 0.01093634 0.01096381 0.01100079 0.01095802 0.01096159 0.01099999 
 ##         85         86         87         88         89         90         91 
-## 0.01088753 0.01087704 0.01087447 0.01086233 0.01083647 0.01086405 0.01092379 
+## 0.01103271 0.01083843 0.01079788 0.01080927 0.01072694 0.01076858 0.01071020 
 ##         92         93         94         95         96         97         98 
-## 0.01094013 0.01096813 0.01100843 0.01096572 0.01096896 0.01100890 0.01104222 
+## 0.01061488 0.01063227 0.01061073 0.01065789 0.01067027 0.01063596 0.01070412 
 ##         99        100        101 
-## 0.01083727 0.01079896 0.01081997
+## 0.01070775 0.01067179 0.01072766
 ```
 
 Now we can create a new custom function called [**make_predictions**]{style="color: blue;"} that wraps this functionality in a way that we can use with [**map()**]{style="color: green;"} to iterate through all options of the nested dataframe:
@@ -2263,21 +2267,21 @@ select(cryptodata_nested, lm_test_predictions, lm_holdout_predictions)
 ```
 
 ```
-## # A tibble: 255 x 4
-## # Groups:   symbol, split [255]
+## # A tibble: 285 x 4
+## # Groups:   symbol, split [285]
 ##    symbol split lm_test_predictions lm_holdout_predictions
 ##    <chr>  <dbl> <list>              <list>                
-##  1 CHZ        1 <dbl [101]>         <dbl [104]>           
-##  2 ADA        1 <dbl [102]>         <dbl [103]>           
-##  3 EOS        1 <dbl [100]>         <dbl [104]>           
-##  4 BRD        1 <dbl [100]>         <dbl [104]>           
-##  5 BNT        1 <dbl [97]>          <dbl [98]>            
-##  6 XNS        1 <dbl [101]>         <dbl [102]>           
-##  7 CRO        1 <dbl [96]>          <dbl [100]>           
-##  8 ARDR       1 <dbl [102]>         <dbl [102]>           
-##  9 WAXP       1 <dbl [102]>         <dbl [103]>           
-## 10 XRP        1 <dbl [55]>          <dbl [55]>            
-## # … with 245 more rows
+##  1 CHZ        1 <dbl [101]>         <dbl [102]>           
+##  2 ADA        1 <dbl [101]>         <dbl [105]>           
+##  3 EOS        1 <dbl [100]>         <dbl [102]>           
+##  4 BRD        1 <dbl [100]>         <dbl [102]>           
+##  5 XNS        1 <dbl [101]>         <dbl [105]>           
+##  6 ARDR       1 <dbl [101]>         <dbl [104]>           
+##  7 WAXP       1 <dbl [101]>         <dbl [105]>           
+##  8 STORJ      1 <dbl [91]>          <dbl [92]>            
+##  9 XRP        1 <dbl [54]>          <dbl [57]>            
+## 10 BTC        1 <dbl [101]>         <dbl [104]>           
+## # … with 275 more rows
 ```
 
 Now we can do the same for the rest of the models:
@@ -2396,7 +2400,7 @@ postResample(pred = cryptodata_nested$lm_test_predictions[[1]],
 
 ```
 ##         RMSE     Rsquared          MAE 
-## 0.0002406673 0.0259863344 0.0002050427
+## 0.0002344638 0.0003040814 0.0001983281
 ```
 
 We can extract the first element to return the **RMSE** metric, and the second element for the **R Squared (R\^2)** metric. We are using **`[[1]]`** to extract the first element of the [**lm\_test\_predictions**]{style="color: blue;"} and [**test\_data**]{style="color: blue;"} and compare the predictions to the actual value of the [**target\_price24h**]{style="color: blue;"} column.
@@ -2413,7 +2417,7 @@ postResample(pred = cryptodata_nested$lm_holdout_predictions[[1]],
 
 ```
 ##      RMSE  Rsquared       MAE 
-##        NA 0.1506998        NA
+##        NA 0.1792002        NA
 ```
 
 *The result above may show a value of NA for the RMSE metric. [We will explain and resolve the issue later on](#calculate-rmse-no-NA)*.
@@ -2604,7 +2608,7 @@ hydroGOF::rmse(cryptodata_nested$lm_test_predictions[[1]],
 ```
 
 ```
-## [1] 0.5889188
+## [1] 0.5048036
 ```
 
 
@@ -2638,21 +2642,21 @@ select(cryptodata_nested, lm_rsq_test, lm_rsq_holdout)
 ```
 
 ```
-## # A tibble: 255 x 4
-## # Groups:   symbol, split [255]
+## # A tibble: 285 x 4
+## # Groups:   symbol, split [285]
 ##    symbol split lm_rsq_test lm_rsq_holdout
 ##    <chr>  <dbl>       <dbl>          <dbl>
-##  1 CHZ        1      0.347           0.648
-##  2 ADA        1      0.687           0.579
-##  3 EOS        1      0.833           0.758
-##  4 BRD        1      0.0723          0.101
-##  5 BNT        1      0.174           0.897
-##  6 XNS        1      0.837           0.484
-##  7 CRO        1      0.386           0.579
-##  8 ARDR       1      0.461           0.902
-##  9 WAXP       1      0.700           0.464
-## 10 XRP        1      0.594           0.294
-## # … with 245 more rows
+##  1 CHZ        1     0.320           0.558 
+##  2 ADA        1     0.704           0.700 
+##  3 EOS        1     0.00525         0.720 
+##  4 BRD        1     0.598           0.173 
+##  5 XNS        1     0.856           0.598 
+##  6 ARDR       1     0.286           0.793 
+##  7 WAXP       1     0.615           0.599 
+##  8 STORJ      1     0.627           0.708 
+##  9 XRP        1     0.0855          0.0583
+## 10 BTC        1     0.922           0.244 
+## # … with 275 more rows
 ```
 
 
@@ -2690,268 +2694,298 @@ print(select(cryptodata_nested, lm_rmse_test, lm_rmse_holdout, lm_rsq_test, lm_r
 ```
 
 ```
-## # A tibble: 255 x 6
-## # Groups:   symbol, split [255]
+## # A tibble: 285 x 6
+## # Groups:   symbol, split [285]
 ##     symbol split lm_rmse_test lm_rmse_holdout lm_rsq_test lm_rsq_holdout
 ##     <chr>  <dbl>        <dbl>           <dbl>       <dbl>          <dbl>
-##   1 CHZ        1     0.589             1.21    0.347              0.648 
-##   2 ADA        1     0.340             1.85    0.687              0.579 
-##   3 EOS        1     0.172             1.59    0.833              0.758 
-##   4 BRD        1     4.69             14.7     0.0723             0.101 
-##   5 BNT        1     1.56              1.70    0.174              0.897 
-##   6 XNS        1     4.05              4.33    0.837              0.484 
-##   7 CRO        1     1.33              2.12    0.386              0.579 
-##   8 ARDR       1     2.62              0.972   0.461              0.902 
-##   9 WAXP       1     1.91              2.93    0.700              0.464 
-##  10 XRP        1     0.449             4.09    0.594              0.294 
-##  11 BTC        1     0.213             2.31    0.885              0.209 
-##  12 KNC        1     0.847             3.06    0.199              0.555 
-##  13 BSV        1     0.288             6.99    0.716              0.170 
-##  14 VIB        1     2.54              9.11    0.846              1     
-##  15 OAX        1    13.3               2.01    0.133              0.877 
-##  16 LEO        1     0.00938           0.380   0.583              0.0336
-##  17 MANA       1     0.545             1.54    0.167              0.812 
-##  18 BTG        1     1.35              2.49    0.375              0.767 
-##  19 ZRX        1     0.625             1.54    0.667              0.630 
-##  20 BAT        1     1.67              1.13    0.184              0.789 
-##  21 KMD        1     1.19              1.76    0.213              0.480 
-##  22 LTC        1     0.504             0.879   0.118              0.971 
-##  23 DGB        1     1.37              1.43    0.515              0.826 
-##  24 CUR        1     1.09              1.66    0.462              0.310 
-##  25 DCR        1     0.535             2.69    0.806              0.295 
-##  26 XEM        1     0.716             1.07    0.629              0.836 
-##  27 ETH        1     0.731             0.730   0.968              0.934 
-##  28 JST        1     1.19              1.31    0.872              0.710 
-##  29 HT         1     0.888             1.52    0.746              0.599 
-##  30 NEXO       1     1.33              1.71    0.313              0.505 
-##  31 SEELE      1     4.84              2.15    0.921              0.293 
-##  32 SRN        1     9.78              5.59    0.00518            0.133 
-##  33 XMR        1     0.487             1.75    0.796              0.663 
-##  34 ENJ        1     4.31              3.52    0.00125            0.473 
-##  35 TRX        1     0.102             1.40    1                  0.509 
-##  36 ELF        1     0.556             1.93    0.0677             0.434 
-##  37 AVA        1     2.06              1.57    0.593              0.660 
-##  38 CRPT       1     0.946             2.38    0.0979             0.329 
-##  39 NUT        1     2.33              0.0804  0.326              0.962 
-##  40 ETP        1     1.67              2.33    0.653              0.564 
-##  41 STORJ      1     3.10              2.09    0.413              0.583 
-##  42 QTUM       1     1.25              3.17    0.146              0.437 
-##  43 BTM        1     0.917             1.56    0.0427             0.820 
-##  44 AMB        1   NaN                 9.38   NA                  0.137 
-##  45 XRP        2     1.74              4.09    0.0764             0.294 
-##  46 QTUM       2     0.788             3.17    0.236              0.437 
-##  47 ZEC        1     0.538             2.42    0.616              0.848 
-##  48 NUT        2     0.0966            0.0804  0.0539             0.962 
-##  49 VIB        2     2.28              9.11    0.541              1     
-##  50 CRV        1     2.97              3.20   NA                  0.454 
-##  51 SRN        2     2.40              5.59    0.306              0.133 
-##  52 CUR        2     5.09              1.66    0.104              0.310 
-##  53 SEELE      2     3.28              2.15    0.824              0.293 
-##  54 XNS        2     9.68              4.33    0.341              0.484 
-##  55 KNC        2     0.980             3.06    0.639              0.555 
-##  56 DGB        2     1.21              1.43    0.486              0.826 
-##  57 ETP        2     0.646             2.33    0.890              0.564 
-##  58 ASP        1     3.99              4.01    0.974              0.878 
-##  59 BAT        2     0.625             1.13    0.803              0.789 
-##  60 CHZ        2     0.667             1.21    0.642              0.648 
-##  61 ZRX        2     0.713             1.54    0.887              0.630 
-##  62 KMD        2     0.661             1.76    0.657              0.480 
-##  63 DCR        2     0.955             2.69    0.544              0.295 
-##  64 ADA        2     0.641             1.85    0.725              0.579 
-##  65 ARDR       2     5.24              0.972   0.386              0.902 
-##  66 WAXP       2     2.03              2.93    0.640              0.464 
-##  67 LTC        2     0.588             0.879   0.833              0.971 
-##  68 BTC        2     0.258             2.31    0.882              0.209 
-##  69 JST        2     0.439             1.31    0.841              0.710 
-##  70 NEXO       2     0.589             1.71    0.746              0.505 
-##  71 XMR        2     0.802             1.75    0.618              0.663 
-##  72 ENJ        2     1.30              3.52    0.314              0.473 
-##  73 AVA        2     2.18              1.57    0.519              0.660 
-##  74 BSV        2     0.348             6.99    0.908              0.170 
-##  75 MANA       2     1.86              1.54    0.701              0.812 
-##  76 BRD        2     2.82             14.7     0.00312            0.101 
-##  77 OAX        2     1.90              2.01    0.171              0.877 
-##  78 TRX        2     0.167             1.40    0.893              0.509 
-##  79 EOS        2     0.200             1.59    0.830              0.758 
-##  80 CRPT       2     0.197             2.38    1                  0.329 
-##  81 HT         2     0.294             1.52    0.822              0.599 
-##  82 XEM        2     1.12              1.07    0.328              0.836 
-##  83 ELF        2     1.20              1.93    0.808              0.434 
-##  84 BTG        2     0.397             2.49    0.700              0.767 
-##  85 CRO        2     0.591             2.12    0.279              0.579 
-##  86 BNT        2     0.457             1.70    0.829              0.897 
-##  87 ETH        2     0.427             0.730   0.762              0.934 
-##  88 LEO        2     1.66              0.380   0.913              0.0336
-##  89 STORJ      2     0.653             2.09    0.899              0.583 
-##  90 BTM        2     0.576             1.56    0.564              0.820 
-##  91 LEVL       1     8.25             12.8     0.421              0.0208
-##  92 UNI        1    22.5               1.98    0.0000675          0.666 
-##  93 SUSHI      1     6.22              4.56    0.0571             0.186 
-##  94 NUT        3     0.000806          0.0804  0.474              0.962 
-##  95 ZEC        2     0.633             2.42    0.664              0.848 
-##  96 VIB        3     2.89              9.11    0.164              1     
-##  97 ASP        2     1.27              4.01    0.658              0.878 
-##  98 CRV        2     7.49              3.20   NA                  0.454 
-##  99 CUR        3    23.3               1.66    0.217              0.310 
-## 100 SEELE      3     2.37              2.15    0.0331             0.293 
-## 101 KNC        3     2.04              3.06    0.278              0.555 
-## 102 DGB        3     0.795             1.43    0.712              0.826 
-## 103 ETP        3     0.964             2.33    0.311              0.564 
-## 104 BAT        3     0.692             1.13    0.785              0.789 
-## 105 FTM        1     2.19             12.6     0.201              0.660 
-## 106 CHZ        3     0.737             1.21    0.725              0.648 
-## 107 DCR        3     0.716             2.69    0.971              0.295 
-## 108 XNS        3     8.49              4.33    0.332              0.484 
-## 109 ZRX        3     0.883             1.54    0.616              0.630 
-## 110 KMD        3     1.83              1.76    0.422              0.480 
-## 111 LTC        3     0.673             0.879   0.952              0.971 
-## 112 JST        3     2.70              1.31    0.784              0.710 
-## 113 BTC        3     0.484             2.31    0.913              0.209 
-## 114 ADA        3     1.54              1.85    0.715              0.579 
-## 115 ARDR       3     1.31              0.972   0.720              0.902 
-## 116 WAXP       3     1.14              2.93    0.344              0.464 
-## 117 XMR        3     0.999             1.75    0.569              0.663 
-## 118 NEXO       3     1.74              1.71    0.891              0.505 
-## 119 ENJ        3     1.09              3.52    0.459              0.473 
-## 120 BSV        3     0.366             6.99    0.920              0.170 
-## 121 MANA       3     0.799             1.54    0.886              0.812 
-## 122 BRD        3     6.61             14.7     0.106              0.101 
-## 123 AVA        3     1.65              1.57    0.137              0.660 
-## 124 OAX        3     2.03              2.01    0.571              0.877 
-## 125 SRN        3     2.09              5.59    0.159              0.133 
-## 126 EOS        3     0.658             1.59    0.816              0.758 
-## 127 TRX        3     0.849             1.40    0.701              0.509 
-## 128 HT         3     0.186             1.52    0.932              0.599 
-## 129 XEM        3     0.770             1.07    0.925              0.836 
-## 130 BTG        3     1.05              2.49    0.404              0.767 
-## 131 ELF        3     1.20              1.93    0.914              0.434 
-## 132 CRPT       3     8.06              2.38    0.00317            0.329 
-## 133 CRO        3     0.750             2.12    0.684              0.579 
-## 134 BNT        3     0.568             1.70    0.814              0.897 
-## 135 ETH        3     0.837             0.730   0.768              0.934 
-## 136 LEO        3     1.63              0.380   0.242              0.0336
-## 137 STORJ      3     1.54              2.09    0.0684             0.583 
-## 138 LEVL       2   NaN                12.8    NA                  0.0208
-## 139 BTM        3     0.498             1.56    0.483              0.820 
-## 140 UNI        2     1.25              1.98    0.518              0.666 
-## 141 SUSHI      2    13.0               4.56    0.761              0.186 
-## 142 ZEC        3     0.418             2.42    0.840              0.848 
-## 143 FTM        2     1.91             12.6     0.422              0.660 
-## 144 ASP        3     4.85              4.01    0.0303             0.878 
-## 145 CRV        3     2.51              3.20    0.265              0.454 
-## 146 SEELE      4     4.76              2.15    0.190              0.293 
-## 147 CUR        4     1.42              1.66    0.659              0.310 
-## 148 KNC        4     1.04              3.06    0.859              0.555 
-## 149 UNI        3     0.801             1.98    0.574              0.666 
-## 150 SRN        4     4.88              5.59    0.474              0.133 
-## 151 DGB        4     1.23              1.43    0.181              0.826 
-## 152 ZRX        4     0.446             1.54    0.907              0.630 
-## 153 KMD        4     0.823             1.76    0.689              0.480 
-## 154 XMR        4     0.450             1.75    0.726              0.663 
-## 155 CHZ        4     0.709             1.21    0.980              0.648 
-## 156 XNS        4     8.80              4.33    0.0247             0.484 
-## 157 BAT        4     0.884             1.13    0.789              0.789 
-## 158 JST        4     1.62              1.31    0.248              0.710 
-## 159 LTC        4     1.06              0.879   0.746              0.971 
-## 160 LEVL       3     2.09             12.8     0.797              0.0208
-## 161 BTC        4     0.838             2.31    0.850              0.209 
-## 162 ADA        4     0.699             1.85    0.649              0.579 
-## 163 ARDR       4     1.08              0.972   0.708              0.902 
-## 164 WAXP       4     1.08              2.93    0.631              0.464 
-## 165 NEXO       4     1.84              1.71    0.697              0.505 
-## 166 DCR        4     1.24              2.69    0.397              0.295 
-## 167 ENJ        4     2.52              3.52    0.528              0.473 
-## 168 ETP        4     2.37              2.33    0.363              0.564 
-## 169 BSV        4     0.579             6.99    0.860              0.170 
-## 170 MANA       4     0.611             1.54    0.866              0.812 
-## 171 BRD        4     6.64             14.7     0.0000140          0.101 
-## 172 OAX        4     4.76              2.01    0.867              0.877 
-## 173 TRX        4     0.345             1.40    0.927              0.509 
-## 174 EOS        4     0.530             1.59    0.889              0.758 
-## 175 VIB        4     2.18              9.11    0.433              1     
-## 176 HT         4     0.967             1.52    0.126              0.599 
-## 177 AVA        4     1.09              1.57    0.780              0.660 
-## 178 XEM        4     0.820             1.07    0.907              0.836 
-## 179 SUSHI      3     2.57              4.56    0.318              0.186 
-## 180 ELF        4     1.14              1.93    0.938              0.434 
-## 181 CRO        4     0.862             2.12    0.841              0.579 
-## 182 BTG        4     0.688             2.49    0.934              0.767 
-## 183 BNT        4     0.964             1.70    0.934              0.897 
-## 184 ETH        4     0.488             0.730   0.929              0.934 
-## 185 LEO        4     2.58              0.380   0.701              0.0336
-## 186 STORJ      4     1.20              2.09    0.917              0.583 
-## 187 AMB        2     0.844             9.38    0.285              0.137 
-## 188 FTM        3     0.802            12.6     0.718              0.660 
-## 189 BTM        4     1.21              1.56    0.497              0.820 
-## 190 CRPT       4     2.31              2.38    0.761              0.329 
-## 191 ZEC        4     0.894             2.42    0.694              0.848 
-## 192 XRP        3     1.14              4.09    0.788              0.294 
-## 193 ASP        4     2.47              4.01    0.692              0.878 
-## 194 QTUM       3     2.32              3.17    0.00740            0.437 
-## 195 CRV        4     5.26              3.20    0.0135             0.454 
-## 196 LEVL       4    10.0              12.8     0.760              0.0208
-## 197 AMB        3    71.7               9.38    0.452              0.137 
-## 198 UNI        4     1.66              1.98    0.300              0.666 
-## 199 NUT        4     0.773             0.0804  0.000278           0.962 
-## 200 SUSHI      4     1.93              4.56    0.0454             0.186 
-## 201 FTM        4     1.21             12.6     0.430              0.660 
-## 202 VIB        5    NA                 9.11   NA                  1     
-## 203 SEELE      5    NA                 2.15   NA                  0.293 
-## 204 XRP        4     1.28              4.09    0.635              0.294 
-## 205 SRN        5    NA                 5.59   NA                  0.133 
-## 206 QTUM       4     0.793             3.17    0.242              0.437 
-## 207 DGB        5    NA                 1.43   NA                  0.826 
-## 208 ZRX        5    NA                 1.54   NA                  0.630 
-## 209 XMR        5    NA                 1.75   NA                  0.663 
-## 210 BAT        5    NA                 1.13   NA                  0.789 
-## 211 KMD        5    NA                 1.76   NA                  0.480 
-## 212 DCR        5    NA                 2.69   NA                  0.295 
-## 213 JST        5    NA                 1.31   NA                  0.710 
-## 214 BTC        5    NA                 2.31   NA                  0.209 
-## 215 LTC        5    NA                 0.879  NA                  0.971 
-## 216 ADA        5    NA                 1.85   NA                  0.579 
-## 217 ARDR       5    NA                 0.972  NA                  0.902 
-## 218 CHZ        5    NA                 1.21   NA                  0.648 
-## 219 WAXP       5    NA                 2.93   NA                  0.464 
-## 220 XNS        5    NA                 4.33   NA                  0.484 
-## 221 NEXO       5    NA                 1.71   NA                  0.505 
-## 222 BSV        5    NA                 6.99   NA                  0.170 
-## 223 TRX        5    NA                 1.40   NA                  0.509 
-## 224 MANA       5    NA                 1.54   NA                  0.812 
-## 225 ENJ        5    NA                 3.52   NA                  0.473 
-## 226 BRD        5    NA                14.7    NA                  0.101 
-## 227 ETP        5    NA                 2.33   NA                  0.564 
-## 228 EOS        5    NA                 1.59   NA                  0.758 
-## 229 OAX        5    NA                 2.01   NA                  0.877 
-## 230 CUR        5    NA                 1.66   NA                  0.310 
-## 231 HT         5    NA                 1.52   NA                  0.599 
-## 232 KNC        5    NA                 3.06   NA                  0.555 
-## 233 AVA        5    NA                 1.57   NA                  0.660 
-## 234 XEM        5    NA                 1.07   NA                  0.836 
-## 235 STORJ      5    NA                 2.09   NA                  0.583 
-## 236 ELF        5    NA                 1.93   NA                  0.434 
-## 237 CRO        5    NA                 2.12   NA                  0.579 
-## 238 BTG        5    NA                 2.49   NA                  0.767 
-## 239 BNT        5    NA                 1.70   NA                  0.897 
-## 240 ETH        5    NA                 0.730  NA                  0.934 
-## 241 LEO        5    NA                 0.380  NA                  0.0336
-## 242 AMB        4    10.9               9.38    0.00000491         0.137 
-## 243 CRPT       5    NA                 2.38   NA                  0.329 
-## 244 BTM        5    NA                 1.56   NA                  0.820 
-## 245 ZEC        5    NA                 2.42   NA                  0.848 
-## 246 ASP        5    NA                 4.01   NA                  0.878 
-## 247 LEVL       5    NA                12.8    NA                  0.0208
-## 248 CRV        5    NA                 3.20   NA                  0.454 
-## 249 UNI        5    NA                 1.98   NA                  0.666 
-## 250 NUT        5    NA                 0.0804 NA                  0.962 
-## 251 SUSHI      5    NA                 4.56   NA                  0.186 
-## 252 FTM        5    NA                12.6    NA                  0.660 
-## 253 XRP        5    NA                 4.09   NA                  0.294 
-## 254 QTUM       5    NA                 3.17   NA                  0.437 
-## 255 AMB        5    NA                 9.38   NA                  0.137
+##   1 CHZ        1     0.505              1.26    0.320            0.558  
+##   2 ADA        1     0.340              1.30    0.704            0.700  
+##   3 EOS        1     0.548              1.48    0.00525          0.720  
+##   4 BRD        1     2.57              14.8     0.598            0.173  
+##   5 XNS        1     4.05               4.76    0.856            0.598  
+##   6 ARDR       1     2.57               1.03    0.286            0.793  
+##   7 WAXP       1     1.50               2.75    0.615            0.599  
+##   8 STORJ      1     2.36               2.00    0.627            0.708  
+##   9 XRP        1     0.614              2.71    0.0855           0.0583 
+##  10 BTC        1     0.224              2.07    0.922            0.244  
+##  11 KNC        1     0.759              2.09    0.104            0.494  
+##  12 BTM        1     0.862              1.93    0.0883           0.764  
+##  13 BSV        1     0.317              7.83    0.837            0.415  
+##  14 VIB        1     4.15               8.97    0.596            1      
+##  15 OAX        1    15.7                1.37    0.0312           0.928  
+##  16 LEO        1     0.0112             0.395   0.995            0.0672 
+##  17 MANA       1     0.663              1.48    0.367            0.731  
+##  18 BTG        1     1.43               4.14    0.200            0.504  
+##  19 ZRX        1     0.589              1.84    0.687            0.654  
+##  20 BAT        1     1.62               1.04    0.114            0.767  
+##  21 KMD        1     1.19               1.64    0.469            0.461  
+##  22 LTC        1     0.580              1.08    0.273            0.943  
+##  23 DGB        1     1.26               1.43    0.576            0.736  
+##  24 QTUM       1     1.82               2.78    0.0934           0.237  
+##  25 CUR        1     1.10               1.73    0.446            0.297  
+##  26 DCR        1     0.559              2.50    0.780            0.484  
+##  27 ETH        1     1.64               0.936   0.899            0.892  
+##  28 JST        1     1.17               1.18    0.811            0.711  
+##  29 HT         1     0.552              1.50    0.267            0.567  
+##  30 NEXO       1     1.37               1.53    0.188            0.281  
+##  31 SEELE      1     4.35               1.74    0.934            0.271  
+##  32 AAB        1   992.                 0.829   0.0185           0.299  
+##  33 XMR        1     0.484              1.95    0.685            0.656  
+##  34 ENJ        1     3.00               2.06    0.00369          0.405  
+##  35 TRX        1     0.138              1.31    1                0.556  
+##  36 ELF        1     0.555              1.82    0.0709           0.344  
+##  37 AVA        1     0.943              1.43    0.487            0.746  
+##  38 NUT        1     2.95               0.145   0.0662           0.869  
+##  39 ETP        1     1.66               1.85    0.697            0.516  
+##  40 BNT        1     3.71               1.61    0.512            0.903  
+##  41 CRO        1     1.04               2.43    0.125            0.223  
+##  42 XEM        1     0.732              0.967   0.591            0.851  
+##  43 CRPT       1     0.887              1.83    0.133            0.328  
+##  44 AMB        1   NaN                  8.73   NA                0.00471
+##  45 XRP        2     1.87               2.71    0.121            0.0583 
+##  46 QTUM       2     0.858              2.78    0.688            0.237  
+##  47 ZEC        1     0.504              1.48    0.669            0.930  
+##  48 AAB        2     0.613              0.829   0.153            0.299  
+##  49 NUT        2     0.113              0.145   0.0365           0.869  
+##  50 CRV        1     2.97               2.64   NA                0.476  
+##  51 CUR        2     5.09               1.73    0.100            0.297  
+##  52 ASP        1     3.12               3.52    0.955            0.886  
+##  53 VIB        2     2.43               8.97    0.500            1      
+##  54 SEELE      2     3.18               1.74    0.821            0.271  
+##  55 XNS        2    10.1                4.76    0.147            0.598  
+##  56 KNC        2     1.10               2.09    0.537            0.494  
+##  57 BAT        2     0.644              1.04    0.718            0.767  
+##  58 DGB        2     0.983              1.43    0.701            0.736  
+##  59 ETP        2     0.564              1.85    0.905            0.516  
+##  60 ZRX        2     1.01               1.84    0.689            0.654  
+##  61 KMD        2     0.647              1.64    0.732            0.461  
+##  62 CHZ        2     0.589              1.26    0.757            0.558  
+##  63 DCR        2     1.03               2.50    0.473            0.484  
+##  64 ADA        2     0.500              1.30    0.827            0.700  
+##  65 ARDR       2     5.27               1.03    0.377            0.793  
+##  66 WAXP       2     2.12               2.75    0.614            0.599  
+##  67 BTC        2     0.391              2.07    0.728            0.244  
+##  68 JST        2     0.407              1.18    0.886            0.711  
+##  69 LTC        2     0.622              1.08    0.767            0.943  
+##  70 NEXO       2     0.583              1.53    0.783            0.281  
+##  71 XMR        2     0.715              1.95    0.584            0.656  
+##  72 ENJ        2     1.65               2.06    0.557            0.405  
+##  73 AVA        2     2.25               1.43    0.495            0.746  
+##  74 BSV        2     0.332              7.83    0.767            0.415  
+##  75 MANA       2     1.69               1.48    0.702            0.731  
+##  76 OAX        2     1.81               1.37    0.448            0.928  
+##  77 BRD        2     1.63              14.8     0.0936           0.173  
+##  78 EOS        2     0.165              1.48    0.874            0.720  
+##  79 TRX        2     0.131              1.31    0.936            0.556  
+##  80 CRPT       2     0.177              1.83    0.968            0.328  
+##  81 HT         2     0.220              1.50    0.887            0.567  
+##  82 NEO        1     1.02               2.38    0.328            0.0198 
+##  83 DOT        1     0.903              3.39    0.00900          0.508  
+##  84 CVC        1     2.37               5.20    0.00125          0.610  
+##  85 XEM        2     1.14               0.967   0.298            0.851  
+##  86 BCD        1     4.37               9.51    0.0127           0.0120 
+##  87 GRIN       1     1.50               2.15    0.0239           0.0938 
+##  88 FUN        1     2.38               8.00    0.480            0.0672 
+##  89 ELF        2     2.52               1.82    0.663            0.344  
+##  90 BTG        2     0.401              4.14    0.675            0.504  
+##  91 CRO        2     0.585              2.43    0.312            0.223  
+##  92 BNT        2     0.465              1.61    0.805            0.903  
+##  93 ETH        2     0.234              0.936   0.891            0.892  
+##  94 LEO        2     1.72               0.395   0.914            0.0672 
+##  95 STORJ      2     0.728              2.00    0.863            0.708  
+##  96 BTM        2     0.471              1.93    0.759            0.764  
+##  97 LEVL       1     8.25              28.1     0.421           NA      
+##  98 UNI        1    22.6                2.03    0.00136          0.510  
+##  99 SUSHI      1     4.15               4.12    0.114            0.291  
+## 100 NUT        3     0.000888           0.145   0.207            0.869  
+## 101 ZEC        2     0.599              1.48    0.716            0.930  
+## 102 AAB        3     7.79               0.829   0.671            0.299  
+## 103 ASP        2     1.37               3.52    0.652            0.886  
+## 104 VIB        3     3.48               8.97    0.0462           1      
+## 105 CRV        2     7.49               2.64   NA                0.476  
+## 106 CUR        3    10.7                1.73    0.0273           0.297  
+## 107 SEELE      3     2.44               1.74    0.0208           0.271  
+## 108 FTM        1     2.31              15.4     0.0106           0.217  
+## 109 KNC        3     1.70               2.09    0.123            0.494  
+## 110 DGB        3     0.867              1.43    0.660            0.736  
+## 111 BAT        3     0.726              1.04    0.599            0.767  
+## 112 ETP        3     0.976              1.85    0.445            0.516  
+## 113 DCR        3     0.687              2.50    0.952            0.484  
+## 114 XNS        3     7.28               4.76    0.538            0.598  
+## 115 KMD        3     1.92               1.64    0.405            0.461  
+## 116 CHZ        3     0.912              1.26    0.729            0.558  
+## 117 ZRX        3     0.933              1.84    0.506            0.654  
+## 118 JST        3     2.61               1.18    0.774            0.711  
+## 119 BTC        3     0.480              2.07    0.880            0.244  
+## 120 ADA        3     1.54               1.30    0.660            0.700  
+## 121 ARDR       3     1.17               1.03    0.630            0.793  
+## 122 WAXP       3     1.06               2.75    0.461            0.599  
+## 123 LTC        3     0.619              1.08    0.952            0.943  
+## 124 NEXO       3     1.77               1.53    0.783            0.281  
+## 125 XMR        3     0.785              1.95    0.725            0.656  
+## 126 ENJ        3     1.09               2.06    0.396            0.405  
+## 127 BSV        3     0.398              7.83    0.878            0.415  
+## 128 OAX        3     2.03               1.37    0.573            0.928  
+## 129 AVA        3     1.64               1.43    0.299            0.746  
+## 130 MANA       3     0.828              1.48    0.883            0.731  
+## 131 BRD        3     6.55              14.8     0.0948           0.173  
+## 132 EOS        3     0.508              1.48    0.836            0.720  
+## 133 TRX        3     0.680              1.31    0.752            0.556  
+## 134 HT         3     0.180              1.50    0.935            0.567  
+## 135 XEM        3     0.831              0.967   0.911            0.851  
+## 136 BTG        3     1.01               4.14    0.315            0.504  
+## 137 ELF        3     1.36               1.82    0.806            0.344  
+## 138 BNT        3     0.518              1.61    0.819            0.903  
+## 139 CRO        3     0.741              2.43    0.680            0.223  
+## 140 CRPT       3     4.62               1.83    0.0296           0.328  
+## 141 ETH        3     0.857              0.936   0.724            0.892  
+## 142 LEO        3     1.12               0.395   0.391            0.0672 
+## 143 LEVL       2   NaN                 28.1    NA               NA      
+## 144 STORJ      3     1.58               2.00    0.0984           0.708  
+## 145 BTM        3     0.468              1.93    0.516            0.764  
+## 146 UNI        2     1.20               2.03    0.598            0.510  
+## 147 SUSHI      2     6.73               4.12    0.676            0.291  
+## 148 AAB        4     4.29               0.829   0.0385           0.299  
+## 149 ZEC        3     0.450              1.48    0.832            0.930  
+## 150 FTM        2     2.08              15.4     0.279            0.217  
+## 151 ASP        3     4.29               3.52    0.00736          0.886  
+## 152 CRV        3     2.37               2.64    0.263            0.476  
+## 153 SEELE      4     2.88               1.74    0.0368           0.271  
+## 154 CUR        4     1.91               1.73    0.370            0.297  
+## 155 KNC        4     1.27               2.09    0.950            0.494  
+## 156 UNI        3     0.881              2.03    0.788            0.510  
+## 157 DGB        4     1.26               1.43    0.198            0.736  
+## 158 LEVL       3     2.07              28.1     0.764           NA      
+## 159 KMD        4     0.652              1.64    0.829            0.461  
+## 160 ZRX        4     0.421              1.84    0.943            0.654  
+## 161 BAT        4     0.747              1.04    0.865            0.767  
+## 162 XNS        4     7.88               4.76    0.120            0.598  
+## 163 JST        4     1.49               1.18    0.610            0.711  
+## 164 BTC        4     0.929              2.07    0.824            0.244  
+## 165 ADA        4     0.693              1.30    0.761            0.700  
+## 166 XMR        4     0.409              1.95    0.824            0.656  
+## 167 ARDR       4     0.913              1.03    0.908            0.793  
+## 168 CHZ        4     0.566              1.26    0.990            0.558  
+## 169 WAXP       4     0.761              2.75    0.871            0.599  
+## 170 NEXO       4     1.94               1.53    0.824            0.281  
+## 171 DCR        4     1.01               2.50    0.635            0.484  
+## 172 LTC        4     1.23               1.08    0.791            0.943  
+## 173 ENJ        4     2.75               2.06    0.508            0.405  
+## 174 ETP        4     2.34               1.85    0.412            0.516  
+## 175 BSV        4     0.647              7.83    0.908            0.415  
+## 176 OAX        4     6.22               1.37    0.699            0.928  
+## 177 MANA       4     0.793              1.48    0.921            0.731  
+## 178 BRD        4     6.51              14.8     0.00642          0.173  
+## 179 VIB        4     2.08               8.97    0.333            1      
+## 180 TRX        4     0.450              1.31    0.954            0.556  
+## 181 EOS        4     0.642              1.48    0.915            0.720  
+## 182 AVA        4     1.15               1.43    0.671            0.746  
+## 183 HT         4     0.979              1.50    0.273            0.567  
+## 184 SUSHI      3     2.42               4.12    0.429            0.291  
+## 185 XEM        4     0.729              0.967   0.968            0.851  
+## 186 ELF        4     1.53               1.82    0.974            0.344  
+## 187 BTG        4     0.750              4.14    0.940            0.504  
+## 188 CRO        4     0.872              2.43    0.914            0.223  
+## 189 BNT        4     0.727              1.61    0.928            0.903  
+## 190 ETH        4     0.493              0.936   0.922            0.892  
+## 191 LEO        4     2.29               0.395   0.755            0.0672 
+## 192 AMB        2     0.863              8.73    0.279            0.00471
+## 193 STORJ      4     2.15               2.00    0.971            0.708  
+## 194 FTM        3     0.812             15.4     0.485            0.217  
+## 195 BTM        4     1.19               1.93    0.533            0.764  
+## 196 CRPT       4     1.89               1.83    0.881            0.328  
+## 197 ZEC        4     1.08               1.48    0.573            0.930  
+## 198 XRP        3     1.15               2.71    0.822            0.0583 
+## 199 GRIN       2     1.40               2.15    0.0132           0.0938 
+## 200 DOT        2     1.07               3.39    0.0701           0.508  
+## 201 CVC        2     1.72               5.20    0.0000465        0.610  
+## 202 BCD        2     1.28               9.51    0.562            0.0120 
+## 203 NEO        2     0.735              2.38    0.412            0.0198 
+## 204 FUN        2     1.12               8.00    0.877            0.0672 
+## 205 ASP        4     3.22               3.52    0.591            0.886  
+## 206 QTUM       3     1.06               2.78    0.858            0.237  
+## 207 CRV        4     5.83               2.64    0.0658           0.476  
+## 208 LEVL       4    12.8               28.1     0.615           NA      
+## 209 AMB        3    67.6                8.73    0.396            0.00471
+## 210 UNI        4     2.07               2.03    0.273            0.510  
+## 211 NUT        4     0.782              0.145   0.000334         0.869  
+## 212 SUSHI      4     1.99               4.12    0.0861           0.291  
+## 213 FTM        4     1.27              15.4     0.429            0.217  
+## 214 VIB        5    NA                  8.97   NA                1      
+## 215 CVC        3     1.93               5.20    0.00250          0.610  
+## 216 DOT        3     1.29               3.39    0.000710         0.508  
+## 217 GRIN       3     6.04               2.15    0.0117           0.0938 
+## 218 BCD        3     3.57               9.51    0.0195           0.0120 
+## 219 NEO        3     3.27               2.38    0.0267           0.0198 
+## 220 FUN        3    11.7                8.00    0.00212          0.0672 
+## 221 SEELE      5    NA                  1.74   NA                0.271  
+## 222 XRP        4     2.05               2.71    0.104            0.0583 
+## 223 QTUM       4     0.860              2.78    0.0323           0.237  
+## 224 DGB        5    NA                  1.43   NA                0.736  
+## 225 BAT        5    NA                  1.04   NA                0.767  
+## 226 ZRX        5    NA                  1.84   NA                0.654  
+## 227 KMD        5    NA                  1.64   NA                0.461  
+## 228 XMR        5    NA                  1.95   NA                0.656  
+## 229 DCR        5    NA                  2.50   NA                0.484  
+## 230 JST        5    NA                  1.18   NA                0.711  
+## 231 BTC        5    NA                  2.07   NA                0.244  
+## 232 ADA        5    NA                  1.30   NA                0.700  
+## 233 ARDR       5    NA                  1.03   NA                0.793  
+## 234 WAXP       5    NA                  2.75   NA                0.599  
+## 235 XNS        5    NA                  4.76   NA                0.598  
+## 236 NEXO       5    NA                  1.53   NA                0.281  
+## 237 LTC        5    NA                  1.08   NA                0.943  
+## 238 CHZ        5    NA                  1.26   NA                0.558  
+## 239 ENJ        5    NA                  2.06   NA                0.405  
+## 240 ETP        5    NA                  1.85   NA                0.516  
+## 241 OAX        5    NA                  1.37   NA                0.928  
+## 242 BSV        5    NA                  7.83   NA                0.415  
+## 243 MANA       5    NA                  1.48   NA                0.731  
+## 244 TRX        5    NA                  1.31   NA                0.556  
+## 245 BRD        5    NA                 14.8    NA                0.173  
+## 246 EOS        5    NA                  1.48   NA                0.720  
+## 247 HT         5    NA                  1.50   NA                0.567  
+## 248 AVA        5    NA                  1.43   NA                0.746  
+## 249 CUR        5    NA                  1.73   NA                0.297  
+## 250 KNC        5    NA                  2.09   NA                0.494  
+## 251 XEM        5    NA                  0.967  NA                0.851  
+## 252 ELF        5    NA                  1.82   NA                0.344  
+## 253 STORJ      5    NA                  2.00   NA                0.708  
+## 254 CRO        5    NA                  2.43   NA                0.223  
+## 255 BTG        5    NA                  4.14   NA                0.504  
+## 256 BNT        5    NA                  1.61   NA                0.903  
+## 257 ETH        5    NA                  0.936  NA                0.892  
+## 258 LEO        5    NA                  0.395  NA                0.0672 
+## 259 AAB        5    NA                  0.829  NA                0.299  
+## 260 AMB        4    14.7                8.73    0.00147          0.00471
+## 261 CRPT       5    NA                  1.83   NA                0.328  
+## 262 BTM        5    NA                  1.93   NA                0.764  
+## 263 ZEC        5    NA                  1.48   NA                0.930  
+## 264 DOT        4     2.46               3.39    0.000106         0.508  
+## 265 GRIN       4     7.64               2.15    0.269            0.0938 
+## 266 BCD        4    14.7                9.51    0.0284           0.0120 
+## 267 NEO        4     2.12               2.38    0.143            0.0198 
+## 268 FUN        4    18.7                8.00    0.188            0.0672 
+## 269 CVC        4     2.06               5.20    0.00612          0.610  
+## 270 ASP        5    NA                  3.52   NA                0.886  
+## 271 LEVL       5    NA                 28.1    NA               NA      
+## 272 CRV        5    NA                  2.64   NA                0.476  
+## 273 UNI        5    NA                  2.03   NA                0.510  
+## 274 NUT        5    NA                  0.145  NA                0.869  
+## 275 SUSHI      5    NA                  4.12   NA                0.291  
+## 276 FTM        5    NA                 15.4    NA                0.217  
+## 277 XRP        5    NA                  2.71   NA                0.0583 
+## 278 QTUM       5    NA                  2.78   NA                0.237  
+## 279 AMB        5    NA                  8.73   NA                0.00471
+## 280 DOT        5    NA                  3.39   NA                0.508  
+## 281 GRIN       5    NA                  2.15   NA                0.0938 
+## 282 CVC        5    NA                  5.20   NA                0.610  
+## 283 BCD        5    NA                  9.51   NA                0.0120 
+## 284 NEO        5    NA                  2.38   NA                0.0198 
+## 285 FUN        5    NA                  8.00   NA                0.0672
 ```
 
-Out of 255 groups, 49 had an equal or lower RMSE score for the holdout than the test set.
+Out of 285 groups, 63 had an equal or lower RMSE score for the holdout than the test set.
 
 
 ## Adjust Prices - All Models{#adjust-prices-all-models}
@@ -3117,21 +3151,21 @@ select(cryptodata_nested, lm_rmse_test, lm_rsq_test, lm_rmse_holdout, lm_rsq_hol
 ```
 
 ```
-## # A tibble: 255 x 6
-## # Groups:   symbol, split [255]
+## # A tibble: 285 x 6
+## # Groups:   symbol, split [285]
 ##    symbol split lm_rmse_test lm_rsq_test lm_rmse_holdout lm_rsq_holdout
 ##    <chr>  <dbl>        <dbl>       <dbl>           <dbl>          <dbl>
-##  1 CHZ        1        0.589      0.347            1.21           0.648
-##  2 ADA        1        0.340      0.687            1.85           0.579
-##  3 EOS        1        0.172      0.833            1.59           0.758
-##  4 BRD        1        4.69       0.0723          14.7            0.101
-##  5 BNT        1        1.56       0.174            1.70           0.897
-##  6 XNS        1        4.05       0.837            4.33           0.484
-##  7 CRO        1        1.33       0.386            2.12           0.579
-##  8 ARDR       1        2.62       0.461            0.972          0.902
-##  9 WAXP       1        1.91       0.700            2.93           0.464
-## 10 XRP        1        0.449      0.594            4.09           0.294
-## # … with 245 more rows
+##  1 CHZ        1        0.505     0.320              1.26         0.558 
+##  2 ADA        1        0.340     0.704              1.30         0.700 
+##  3 EOS        1        0.548     0.00525            1.48         0.720 
+##  4 BRD        1        2.57      0.598             14.8          0.173 
+##  5 XNS        1        4.05      0.856              4.76         0.598 
+##  6 ARDR       1        2.57      0.286              1.03         0.793 
+##  7 WAXP       1        1.50      0.615              2.75         0.599 
+##  8 STORJ      1        2.36      0.627              2.00         0.708 
+##  9 XRP        1        0.614     0.0855             2.71         0.0583
+## 10 BTC        1        0.224     0.922              2.07         0.244 
+## # … with 275 more rows
 ```
 *Only the results for the linear regression model are shown. There are equivalent columns for the XGBoost, neural network, random forest and PCR models.*
 
@@ -3169,21 +3203,21 @@ rmse_test
 ```
 
 ```
-## # A tibble: 255 x 3
-## # Groups:   symbol [51]
+## # A tibble: 285 x 3
+## # Groups:   symbol [57]
 ##    symbol model  rmse
 ##    <chr>  <chr> <dbl>
-##  1 CHZ    lm    0.676
-##  2 ADA    lm    0.804
-##  3 EOS    lm    0.390
-##  4 BRD    lm    5.19 
-##  5 BNT    lm    0.886
-##  6 XNS    lm    7.76 
-##  7 CRO    lm    0.884
-##  8 ARDR   lm    2.56 
-##  9 WAXP   lm    1.54 
-## 10 XRP    lm    1.15 
-## # … with 245 more rows
+##  1 CHZ    lm    0.643
+##  2 ADA    lm    0.767
+##  3 EOS    lm    0.466
+##  4 BRD    lm    4.32 
+##  5 XNS    lm    7.32 
+##  6 ARDR   lm    2.48 
+##  7 WAXP   lm    1.36 
+##  8 STORJ  lm    1.70 
+##  9 XRP    lm    1.42 
+## 10 BTC    lm    0.506
+## # … with 275 more rows
 ```
 
 Now tag the results as having been for the test set:
@@ -3217,21 +3251,21 @@ rmse_holdout
 ```
 
 ```
-## # A tibble: 255 x 3
-## # Groups:   symbol [51]
-##    symbol model   rmse
-##    <chr>  <chr>  <dbl>
-##  1 CHZ    lm     1.21 
-##  2 ADA    lm     1.85 
-##  3 EOS    lm     1.59 
-##  4 BRD    lm    14.7  
-##  5 BNT    lm     1.70 
-##  6 XNS    lm     4.33 
-##  7 CRO    lm     2.12 
-##  8 ARDR   lm     0.972
-##  9 WAXP   lm     2.93 
-## 10 XRP    lm     4.09 
-## # … with 245 more rows
+## # A tibble: 285 x 3
+## # Groups:   symbol [57]
+##    symbol model  rmse
+##    <chr>  <chr> <dbl>
+##  1 CHZ    lm     1.26
+##  2 ADA    lm     1.30
+##  3 EOS    lm     1.48
+##  4 BRD    lm    14.8 
+##  5 XNS    lm     4.76
+##  6 ARDR   lm     1.03
+##  7 WAXP   lm     2.75
+##  8 STORJ  lm     2.00
+##  9 XRP    lm     2.71
+## 10 BTC    lm     2.07
+## # … with 275 more rows
 ```
 
 Now tag the results as having been for the holdout set:
@@ -3277,21 +3311,21 @@ rsq_test
 ```
 
 ```
-## # A tibble: 255 x 3
-## # Groups:   symbol [51]
-##    symbol model    rsq
-##    <chr>  <chr>  <dbl>
-##  1 CHZ    lm    0.674 
-##  2 ADA    lm    0.694 
-##  3 EOS    lm    0.842 
-##  4 BRD    lm    0.0453
-##  5 BNT    lm    0.688 
-##  6 XNS    lm    0.384 
-##  7 CRO    lm    0.548 
-##  8 ARDR   lm    0.569 
-##  9 WAXP   lm    0.579 
-## 10 XRP    lm    0.524 
-## # … with 245 more rows
+## # A tibble: 285 x 3
+## # Groups:   symbol [57]
+##    symbol model   rsq
+##    <chr>  <chr> <dbl>
+##  1 CHZ    lm    0.699
+##  2 ADA    lm    0.738
+##  3 EOS    lm    0.658
+##  4 BRD    lm    0.198
+##  5 XNS    lm    0.415
+##  6 ARDR   lm    0.550
+##  7 WAXP   lm    0.640
+##  8 STORJ  lm    0.640
+##  9 XRP    lm    0.283
+## 10 BTC    lm    0.839
+## # … with 275 more rows
 ```
 
 Now tag the results as having been for the test set
@@ -3325,21 +3359,21 @@ rsq_holdout
 ```
 
 ```
-## # A tibble: 255 x 3
-## # Groups:   symbol [51]
-##    symbol model   rsq
-##    <chr>  <chr> <dbl>
-##  1 CHZ    lm    0.648
-##  2 ADA    lm    0.579
-##  3 EOS    lm    0.758
-##  4 BRD    lm    0.101
-##  5 BNT    lm    0.897
-##  6 XNS    lm    0.484
-##  7 CRO    lm    0.579
-##  8 ARDR   lm    0.902
-##  9 WAXP   lm    0.464
-## 10 XRP    lm    0.294
-## # … with 245 more rows
+## # A tibble: 285 x 3
+## # Groups:   symbol [57]
+##    symbol model    rsq
+##    <chr>  <chr>  <dbl>
+##  1 CHZ    lm    0.558 
+##  2 ADA    lm    0.700 
+##  3 EOS    lm    0.720 
+##  4 BRD    lm    0.173 
+##  5 XNS    lm    0.598 
+##  6 ARDR   lm    0.793 
+##  7 WAXP   lm    0.599 
+##  8 STORJ  lm    0.708 
+##  9 XRP    lm    0.0583
+## 10 BTC    lm    0.244 
+## # … with 275 more rows
 ```
 
 Now tag the results as having been for the holdout set:
@@ -3414,7 +3448,7 @@ ggplotly(ggplot(plot_scores, aes(x=rsq, y=rmse, color = model, symbol = symbol))
          tooltip = c("model", "symbol", "rmse", "rsq"))
 ```
 
-preserve436d1de853794d40
+preserve6885c486ed5d7e99
 
 **The additional [**tooltip**]{style="color: blue;"} argument was passed to [**ggpltoly()**]{style="color: green;"} to specify the label when hovering over the individual points**.
 
@@ -3491,15 +3525,15 @@ best_models
 ##    model eval_set  rmse    rsq
 ##    <chr> <chr>    <dbl>  <dbl>
 ##  1 lm    holdout  10.3  0.555 
-##  2 lm    test      7.63 0.496 
-##  3 nnet  holdout   4.55 0.156 
-##  4 nnet  test      4.02 0.186 
-##  5 pcr   holdout   2.95 0.288 
-##  6 pcr   test      2.30 0.304 
-##  7 rf    holdout   3.65 0.138 
-##  8 rf    test      3.51 0.143 
-##  9 xgb   holdout   4.20 0.0913
-## 10 xgb   test      3.98 0.0996
+##  2 lm    test      7.63 0.497 
+##  3 nnet  holdout   4.58 0.157 
+##  4 nnet  test      4.03 0.186 
+##  5 pcr   holdout   2.98 0.289 
+##  6 pcr   test      2.31 0.304 
+##  7 rf    holdout   3.70 0.139 
+##  8 rf    test      3.52 0.143 
+##  9 xgb   holdout   4.26 0.0916
+## 10 xgb   test      4.00 0.0995
 ```
 
 #### Plot RMSE by Model
@@ -3563,14 +3597,14 @@ predictable_cryptos
 ##    <chr>  <chr>    <dbl> <dbl>
 ##  1 RCN    holdout   1.06 0.612
 ##  2 SYBC   test     17.3  0.474
-##  3 RCN    test      4.16 0.422
-##  4 EURS   holdout   1.85 0.421
-##  5 LEO    test      1.75 0.388
+##  3 EURS   holdout   2.23 0.436
+##  4 RCN    test      4.16 0.422
+##  5 LEO    test      1.76 0.389
 ##  6 REX    holdout   3.92 0.378
-##  7 BTC    holdout   1.75 0.370
-##  8 ETH    holdout   1.88 0.358
-##  9 OAX    holdout   4.13 0.340
-## 10 LTC    holdout   2.34 0.334
+##  7 BTC    holdout   1.77 0.368
+##  8 ETH    holdout   1.91 0.357
+##  9 OAX    holdout   4.13 0.342
+## 10 LTC    holdout   2.37 0.340
 ## # … with 122 more rows
 ```
 
@@ -3611,85 +3645,85 @@ formattable(head(predictable_cryptos ,15),
    <td style="text-align:right;"> SYBC </td>
    <td style="text-align:right;"> test </td>
    <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ff0000">17.307129</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b28267">0.4742285</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b48065">0.4742285</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> EURS </td>
+   <td style="text-align:right;"> holdout </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7bbb8c">2.234254</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c76c58">0.4359465</span> </td>
   </tr>
   <tr>
    <td style="text-align:right;"> RCN </td>
    <td style="text-align:right;"> test </td>
    <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #8ca37a">4.157591</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cb6755">0.4217014</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> EURS </td>
-   <td style="text-align:right;"> holdout </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #77c08f">1.849256</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cc6654">0.4209495</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ce6453">0.4217014</span> </td>
   </tr>
   <tr>
    <td style="text-align:right;"> LEO </td>
    <td style="text-align:right;"> test </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #77c190">1.748218</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dc5549">0.3877581</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #77c190">1.764124</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #de5347">0.3890517</span> </td>
   </tr>
   <tr>
    <td style="text-align:right;"> REX </td>
    <td style="text-align:right;"> holdout </td>
    <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #8aa67c">3.922976</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e05045">0.3779996</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e44d43">0.3779996</span> </td>
   </tr>
   <tr>
    <td style="text-align:right;"> BTC </td>
    <td style="text-align:right;"> holdout </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #76c190">1.745261</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e44c42">0.3696927</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #77c190">1.773310</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e8473f">0.3682642</span> </td>
   </tr>
   <tr>
    <td style="text-align:right;"> ETH </td>
    <td style="text-align:right;"> holdout </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #78bf8f">1.881816</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ea463e">0.3576568</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #78bf8f">1.909690</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ee413c">0.3571430</span> </td>
   </tr>
   <tr>
    <td style="text-align:right;"> OAX </td>
    <td style="text-align:right;"> holdout </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #8ba37a">4.129305</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f33c38">0.3401087</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #8ba37a">4.130792</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f53a36">0.3423330</span> </td>
   </tr>
   <tr>
    <td style="text-align:right;"> LTC </td>
    <td style="text-align:right;"> holdout </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7cba8b">2.336056</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f53936">0.3342897</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7cb98a">2.365679</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f63836">0.3404058</span> </td>
   </tr>
   <tr>
    <td style="text-align:right;"> LEVL </td>
    <td style="text-align:right;"> test </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a87b5c">7.368876</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f63936">0.3336823</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> QTUM </td>
-   <td style="text-align:right;"> test </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7cba8b">2.322322</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f63835">0.3323632</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #aa785a">7.610900</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fa3533">0.3333381</span> </td>
   </tr>
   <tr>
    <td style="text-align:right;"> ZEC </td>
    <td style="text-align:right;"> holdout </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #77c08f">1.850272</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #f93634">0.3269008</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #78bf8f">1.916104</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fc3232">0.3291969</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> QTUM </td>
+   <td style="text-align:right;"> test </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7bba8b">2.315260</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fe3030">0.3248573</span> </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> MKR </td>
+   <td style="text-align:right;"> holdout </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #7fb588">2.669770</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fe3030">0.3239169</span> </td>
   </tr>
   <tr>
    <td style="text-align:right;"> CRO </td>
    <td style="text-align:right;"> test </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #78bf8f">1.876468</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #fb3432">0.3234713</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> BSV </td>
-   <td style="text-align:right;"> test </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #74c593">1.452641</span> </td>
-   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ff3030">0.3151807</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #77c08f">1.855372</span> </td>
+   <td style="text-align:right;"> <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ff3030">0.3235902</span> </td>
   </tr>
 </tbody>
 </table>
@@ -3715,10 +3749,10 @@ accuracy_over_time
 ```
 
 ```
-## # A tibble: 30 x 3
+## # A tibble: 31 x 3
 ##    date_utc    rmse   rsq
 ##    <chr>      <dbl> <dbl>
-##  1 2020-12-14  3.22 0.224
+##  1 2020-12-14  4.15 0.225
 ##  2 2020-12-15  4.82 0.254
 ##  3 2020-12-16  5.11 0.255
 ##  4 2020-12-17  2.51 0.283
@@ -3728,7 +3762,7 @@ accuracy_over_time
 ##  8 2020-12-21  3.74 0.223
 ##  9 2020-12-22 21.3  0.246
 ## 10 2020-12-23  5.86 0.276
-## # … with 20 more rows
+## # … with 21 more rows
 ```
 
 #### Plot RMSE
