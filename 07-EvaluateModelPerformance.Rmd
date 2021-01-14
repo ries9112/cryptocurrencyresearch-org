@@ -766,6 +766,8 @@ accuracy_over_time <- summarize(accuracy_over_time,
                                 rsq  = mean(rsq, na.rm=T))
 # Ungroup data
 accuracy_over_time <- ungroup(accuracy_over_time)
+# Convert date/time
+accuracy_over_time$date_utc <- anytime(accuracy_over_time$date_utc)
 # Show results
 accuracy_over_time
 ```
