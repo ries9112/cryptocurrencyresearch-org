@@ -1,7 +1,7 @@
 name: Run Crypto Tutorial
 on:
   schedule:
-    - cron: '55 04,14 * * *'
+    - cron: '05 02,14 * * *'
 
 jobs:
   build:
@@ -40,7 +40,6 @@ jobs:
           cp index.html _book
           cp about-us.html _book
           cp tools.html _book
-          cp -r assets _book
       - name: Update GitHub page
         run: |
           rm -r docs
