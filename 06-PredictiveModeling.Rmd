@@ -177,9 +177,9 @@ cryptodata_nested <- mutate(cryptodata_nested,
 ```
 
 
-### Principal Component Analysis
+### Principal Component Regression
 
-For one last set of models, let's make [Principal Component Analysis](https://en.wikipedia.org/wiki/Principal_Component_Analysis) models using the [**method**]{style="color: blue;"} [***`pcr`***]{style="color: blue;"}
+For one last set of models, let's make [Principal Component Regression](https://en.wikipedia.org/wiki/Principal_Component_Regression) models using the [**method**]{style="color: blue;"} [***`pcr`***]{style="color: blue;"}
 
 ```{r elastic_net_models}
 cryptodata_nested <- mutate(cryptodata_nested, 
