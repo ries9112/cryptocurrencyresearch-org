@@ -640,7 +640,7 @@ Every 12 hours once this document reaches this point, the results are saved to G
 
 ```{r upload_results_pin, error=TRUE}
 # register board
-board_register("github", repo = "predictcrypto/pins_new", token=pins_key)
+board_register("github", repo = "predictcrypto/pins", token=pins_key)
 # Add current date time
 plot_scores$last_refreshed <- Sys.time()
 # pin data
