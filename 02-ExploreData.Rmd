@@ -8,7 +8,7 @@ First, we will need to connect to a public GitHub repository (as [previously des
 
 ```{r hitBTC_register}
 board_register(name = "pins_board", 
-               url = "https://raw.githubusercontent.com/predictcrypto/pins/master/", 
+               url = "https://raw.githubusercontent.com/predictcrypto/pins_new/master/", 
                board = "datatxt")
 ```
 
