@@ -355,39 +355,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Coefficients:
 ##      (Intercept)        symbolARDR         symbolASP         symbolAVA  
-##  2760.6793036052      0.0552757754     -0.3616466697     -0.0732323600  
+##   4774.946163443      -0.007444842      -0.273873804      -0.121419812  
 ##        symbolBAT        symbolBCHA         symbolBNT         symbolBRD  
-##     0.5885794913      2.1744625115      0.2154990763     -0.0163108946  
+##      0.463907076       3.030158729       0.151694919      -0.016961757  
 ##        symbolBSV         symbolBTC         symbolBTG         symbolBTM  
-##     2.2522561606    749.9972656437      0.4806547832     -0.2506758150  
+##      3.143859397     868.593373615       0.473454705      -0.063577831  
 ##        symbolCCE         symbolCHZ         symbolCKB         symbolCRO  
-##    -0.5258204405     -0.2154531811     -0.3035509653      0.0262516586  
+##     -0.339834531      -0.440639573      -0.314984935      -0.024954664  
 ##        symbolCRV         symbolCUR         symbolDCR         symbolDGB  
-##    -0.3121390086     -0.1382956429      2.2135442581      0.2915855065  
+##     -0.220865794      -0.173969222       2.333323154       0.326493326  
 ##       symbolDOGE         symbolELF         symbolENJ         symbolEOS  
-##     0.8099356407      0.0681306750     -0.0022806630      0.0253687073  
+##      1.169435675       0.069133988      -0.052545749       0.038958975  
 ##        symbolETH         symbolETP         symbolFTM         symbolFTT  
-##    25.1268066645      0.4545986179     -0.1551692026      0.2504839573  
-##         symbolHT       symbolHYDRA         symbolINJ         symbolJST  
-##     0.6827886777      2.9318007367      2.4424912499      0.1712468712  
-##        symbolKMD         symbolKNC        symbolLEVL         symbolLTC  
-##     0.0399403582     -0.6571509323      1.1250259398      2.8379565858  
-##       symbolMANA        symbolNEXO         symbolOAX         symbolSRN  
-##     0.1202375861      0.0142355709      0.0895640673     -0.4729597895  
-##      symbolSTORJ         symbolSUN       symbolSUSHI         symbolTON  
-##     0.8275677778      2.4304827435     -0.0083759202      0.7569451326  
-##        symbolTRX         symbolUNI         symbolVIB        symbolWAXP  
-##     0.0785918668      0.3162640602     -0.2590571132     -0.0179834872  
-##        symbolXEM         symbolXMR         symbolZEC         symbolZRX  
-##    -0.0222515766      3.1143460404      1.5963548766      0.1417417029  
-##    date_time_utc              date         price_usd   lagged_price_1h  
-##    -0.0000004722     -0.1105882377      0.9127423538     -0.0034829865  
-##  lagged_price_2h   lagged_price_3h   lagged_price_6h  lagged_price_12h  
-##     0.0865597372      0.0179951939      0.0124945921     -0.1363337513  
-## lagged_price_24h   lagged_price_3d      trainingtest     trainingtrain  
-##     0.0470879504      0.0502119231     44.3591102948     38.7651526160  
-##            split  
-##     7.3473802489</code></pre>
+##     29.054902058       0.504339288      -0.122616463       0.363590117  
+##         symbolHT       symbolHYDRA         symbolINJ          symbolIQ  
+##      0.714495433       5.166345496       4.138741099       1.554084936  
+##        symbolJST         symbolKMD         symbolKNC        symbolLEVL  
+##      0.182284622      -0.010326340      -0.488496403       1.543590506  
+##        symbolLTC        symbolMANA        symbolNEXO         symbolOAX  
+##      3.327406268       0.101310668       0.015607557       0.070380285  
+##        symbolRCN       symbolSTORJ         symbolSUN       symbolSUSHI  
+##      0.346648531       0.103337458       3.921792751       0.060565092  
+##        symbolTON         symbolTRX         symbolUNI         symbolVIB  
+##      1.690793043       0.024651381       0.367183872       0.168833219  
+##       symbolWAXP         symbolXEM         symbolXMR         symbolZEC  
+##     -0.024408052      -0.020151320       3.809798500       1.920007217  
+##        symbolZRX     date_time_utc              date         price_usd  
+##      0.192497048       0.000007114      -0.874716829       0.914785203  
+##  lagged_price_1h   lagged_price_2h   lagged_price_3h   lagged_price_6h  
+##     -0.006404042       0.078296038       0.018649675       0.024530057  
+## lagged_price_12h  lagged_price_24h   lagged_price_3d      trainingtest  
+##     -0.146357220       0.062216513       0.037681710      53.583477238  
+##    trainingtrain             split  
+##     42.617431638       9.443336900</code></pre>
 <p>We defined the <span style="color: blue;"><strong>formula</strong></span> for the model as <strong><code>target_price_24h ~ .</code></strong>, which means that we are want to make predictions for the <span style="color: blue;"><strong>target_price_24h</strong></span> field, and use (<strong><code>~</code></strong>) every other column found in the data (<strong><code>.</code></strong>). In other words, we specified a model that uses the <span style="color: blue;"><strong>target_price_24h</strong></span> field as the <a href="https://en.wikipedia.org/wiki/Dependent_and_independent_variables">dependent variable</a>, and all other columns (<strong><code>.</code></strong>) as the <a href="https://en.wikipedia.org/wiki/Dependent_and_independent_variables">independent variables</a>. Meaning, we are looking to predict the <span style="color: blue;"><strong>target_price_24h</strong></span>, which is the only column that refers to the future, and use all the information available at the time the rest of the data was collected in order to infer statistical relationships that can help us forecast the future values of the <span style="color: blue;"><strong>target_price_24h</strong></span> field when it is still unknown on new data that we want to make new predictions for.</p>
 <p>In the example above we used the <span style="color: blue;"><strong>cryptodata</strong></span> object which contained all the non-nested data, and was a big oversimplification of the process we will actually use.</p>
 <div id="using-functional-programming" class="section level3">
@@ -395,21 +395,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- There are several approaches we could take in order to create the models [according to the plan outlined in the previous section](#model-validation-plan). As previously mentioned, the steps taken below use a similar approach to [the work published by Hadley Wickham on the subject](https://r4ds.had.co.nz/many-models.html) [@R_for_data_science]. Because this work is particularly well respected, we went with a methodology that uses [**functional programming**]{style="color: purple;"}. There are pros and cons to using different methods (i.e. a ***for loop***), and this tutorial itself was originally written using three different fundamentally different approaches before settling on a **functional programming** approach, which is a programming paradigm that focuses on the actions being taken, rather than focusing on  -->
 <p>From this point forward, we will deal with the new dataset <span style="color: blue;"><strong>cryptodata_nested</strong></span>, review the <a href="model-validation-plan.html#nest-data">previous section where it was created</a> if you missed it. Here is a preview of the data again:</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="predictive-modeling.html#cb92-1"></a>cryptodata_nested</span></code></pre></div>
-<pre><code>## # A tibble: 260 x 5
-## # Groups:   symbol, split [260]
+<pre><code>## # A tibble: 265 x 5
+## # Groups:   symbol, split [265]
 ##    symbol split train_data          test_data          holdout_data      
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;              &lt;list&gt;             &lt;list&gt;            
-##  1 BTC        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [98 x 11]&gt;
-##  2 EOS        1 &lt;tibble [304 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [95 x 11]&gt;
-##  3 ETH        1 &lt;tibble [304 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [95 x 11]&gt;
-##  4 LTC        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [98 x 11]&gt;
-##  5 ADA        1 &lt;tibble [304 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [95 x 11]&gt;
-##  6 BSV        1 &lt;tibble [304 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [95 x 11]&gt;
-##  7 ZEC        1 &lt;tibble [277 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [95 x 11]&gt;
-##  8 HT         1 &lt;tibble [298 x 11]&gt; &lt;tibble [93 x 11]&gt; &lt;tibble [94 x 11]&gt;
-##  9 TRX        1 &lt;tibble [301 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [97 x 11]&gt;
-## 10 KNC        1 &lt;tibble [198 x 11]&gt; &lt;tibble [91 x 11]&gt; &lt;tibble [93 x 11]&gt;
-## # ... with 250 more rows</code></pre>
+##  1 BTC        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [96 x 11]&gt;
+##  2 EOS        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [98 x 11]&gt;
+##  3 ETH        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [98 x 11]&gt;
+##  4 LTC        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [96 x 11]&gt;
+##  5 ADA        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [98 x 11]&gt;
+##  6 BSV        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [98 x 11]&gt;
+##  7 ZEC        1 &lt;tibble [277 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [94 x 11]&gt;
+##  8 HT         1 &lt;tibble [297 x 11]&gt; &lt;tibble [93 x 11]&gt; &lt;tibble [97 x 11]&gt;
+##  9 TRX        1 &lt;tibble [301 x 11]&gt; &lt;tibble [94 x 11]&gt; &lt;tibble [95 x 11]&gt;
+## 10 KNC        1 &lt;tibble [203 x 11]&gt; &lt;tibble [91 x 11]&gt; &lt;tibble [92 x 11]&gt;
+## # ... with 255 more rows</code></pre>
 <p>Because we are now dealing with a <strong>nested dataframe</strong>, performing operations on the individual nested datasets is not as straightforward. We could extract the individual elements out of the data using <a href="https://rspatial.org/intr/4-indexing.html"><span style="color: purple;"><strong>indexing</strong></span></a>, for example we can return the first element of the column <span style="color: blue;"><strong>train_data</strong></span> by running this code:</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="predictive-modeling.html#cb94-1"></a>cryptodata_nested<span class="op">$</span>train_data[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## # A tibble: 303 x 11
@@ -421,10 +421,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  4 2020-11-25 03:00:02 2020-11-25    18964.           18399.          19085.
 ##  5 2020-11-25 04:00:00 2020-11-25    18803.           17913.          18964.
 ##  6 2020-11-25 05:00:00 2020-11-25    18684.           17768.          18803.
-##  7 2020-11-25 06:00:00 2020-11-25    18883.           17915.          18684.
-##  8 2020-11-25 07:00:00 2020-11-25    18893.           17954.          18883.
-##  9 2020-11-25 08:00:00 2020-11-25    18977.           17626.          18893.
-## 10 2020-11-25 09:00:00 2020-11-25    19113.           16883.          18977.
+##  7 2020-11-26 00:00:00 2020-11-26    18716.           17150.          18752.
+##  8 2020-11-26 01:00:00 2020-11-26    18861.           17392.          18716.
+##  9 2020-11-26 02:00:00 2020-11-26    18793            17304.          18861.
+## 10 2020-11-26 03:00:01 2020-11-26    18399.           17097.          18793 
 ## # ... with 293 more rows, and 6 more variables: lagged_price_2h &lt;dbl&gt;,
 ## #   lagged_price_3h &lt;dbl&gt;, lagged_price_6h &lt;dbl&gt;, lagged_price_12h &lt;dbl&gt;,
 ## #   lagged_price_24h &lt;dbl&gt;, lagged_price_3d &lt;dbl&gt;</code></pre>
@@ -435,21 +435,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb96-3"><a href="predictive-modeling.html#cb96-3"></a>}</span></code></pre></div>
 <p>We can now use the <span style="color: green;"><strong>map()</strong></span> function from the <a href="#https://purrr.tidyverse.org/"><span style="color: #ae7b11;"><strong>purrr</strong></span> package</a> in conjunction with the <span style="color: green;"><strong>mutate()</strong></span> function from <span style="color: #ae7b11;"><strong>dplyr</strong></span> to create a new column in the data which contains an individual linear regression model for each row of <span style="color: blue;"><strong>train_data</strong></span>:</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="predictive-modeling.html#cb97-1"></a><span class="kw">mutate</span>(cryptodata_nested, <span class="dt">lm_model =</span> <span class="kw">map</span>(train_data, linear_model))</span></code></pre></div>
-<pre><code>## # A tibble: 260 x 6
-## # Groups:   symbol, split [260]
+<pre><code>## # A tibble: 265 x 6
+## # Groups:   symbol, split [265]
 ##    symbol split train_data          test_data         holdout_data      lm_model
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;              &lt;list&gt;            &lt;list&gt;            &lt;list&gt;  
-##  1 BTC        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [98 x 11~ &lt;lm&gt;    
-##  2 EOS        1 &lt;tibble [304 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [95 x 11~ &lt;lm&gt;    
-##  3 ETH        1 &lt;tibble [304 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [95 x 11~ &lt;lm&gt;    
-##  4 LTC        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [98 x 11~ &lt;lm&gt;    
-##  5 ADA        1 &lt;tibble [304 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [95 x 11~ &lt;lm&gt;    
-##  6 BSV        1 &lt;tibble [304 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [95 x 11~ &lt;lm&gt;    
-##  7 ZEC        1 &lt;tibble [277 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [95 x 11~ &lt;lm&gt;    
-##  8 HT         1 &lt;tibble [298 x 11]&gt; &lt;tibble [93 x 11~ &lt;tibble [94 x 11~ &lt;lm&gt;    
-##  9 TRX        1 &lt;tibble [301 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [97 x 11~ &lt;lm&gt;    
-## 10 KNC        1 &lt;tibble [198 x 11]&gt; &lt;tibble [91 x 11~ &lt;tibble [93 x 11~ &lt;lm&gt;    
-## # ... with 250 more rows</code></pre>
+##  1 BTC        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [96 x 11~ &lt;lm&gt;    
+##  2 EOS        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [98 x 11~ &lt;lm&gt;    
+##  3 ETH        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [98 x 11~ &lt;lm&gt;    
+##  4 LTC        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [96 x 11~ &lt;lm&gt;    
+##  5 ADA        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [98 x 11~ &lt;lm&gt;    
+##  6 BSV        1 &lt;tibble [303 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [98 x 11~ &lt;lm&gt;    
+##  7 ZEC        1 &lt;tibble [277 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [94 x 11~ &lt;lm&gt;    
+##  8 HT         1 &lt;tibble [297 x 11]&gt; &lt;tibble [93 x 11~ &lt;tibble [97 x 11~ &lt;lm&gt;    
+##  9 TRX        1 &lt;tibble [301 x 11]&gt; &lt;tibble [94 x 11~ &lt;tibble [95 x 11~ &lt;lm&gt;    
+## 10 KNC        1 &lt;tibble [203 x 11]&gt; &lt;tibble [91 x 11~ &lt;tibble [92 x 11~ &lt;lm&gt;    
+## # ... with 255 more rows</code></pre>
 <p>Awesome! Now we can use the <a href="https://cryptocurrencyresearch.org/high-level/#/caret-package">same tools we learned in the high-level version to make a wider variety of predictive models to test</a></p>
 </div>
 </div>
@@ -480,8 +480,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb101-2"><a href="predictive-modeling.html#cb101-2"></a>                            <span class="dt">lm_model =</span> <span class="kw">map</span>(train_data, linear_model_caret))</span></code></pre></div>
 <p>We can see the new column called <span style="color: blue;"><strong>lm_model</strong></span> with the nested dataframe grouping variables:</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="predictive-modeling.html#cb102-1"></a><span class="kw">select</span>(cryptodata_nested, lm_model)</span></code></pre></div>
-<pre><code>## # A tibble: 260 x 3
-## # Groups:   symbol, split [260]
+<pre><code>## # A tibble: 265 x 3
+## # Groups:   symbol, split [265]
 ##    symbol split lm_model
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;  
 ##  1 BTC        1 &lt;train&gt; 
@@ -494,7 +494,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8 HT         1 &lt;train&gt; 
 ##  9 TRX        1 &lt;train&gt; 
 ## 10 KNC        1 &lt;train&gt; 
-## # ... with 250 more rows</code></pre>
+## # ... with 255 more rows</code></pre>
 <p>And we can view the summarized contents of the first trained model:</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="predictive-modeling.html#cb104-1"></a>cryptodata_nested<span class="op">$</span>lm_model[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## Linear Regression 
@@ -576,29 +576,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb111-2"><a href="predictive-modeling.html#cb111-2"></a>        <span class="dt">newdata =</span> cryptodata_nested<span class="op">$</span>test_data[[<span class="dv">1</span>]],</span>
 <span id="cb111-3"><a href="predictive-modeling.html#cb111-3"></a>        <span class="dt">na.action =</span> na.pass)</span></code></pre></div>
 <pre><code>##        1        2        3        4        5        6        7        8 
-## 18687.05 18691.48 18741.40 18777.36 18856.60 18860.46 18916.06 18923.13 
+## 18865.87 18631.65 18637.14 18574.84 18511.71 18693.61 18647.67 18624.51 
 ##        9       10       11       12       13       14       15       16 
-## 18908.01 18857.70 18874.02 18966.58 18871.74 18846.86 18779.67 18568.92 
+## 18638.55 18700.07 18686.38 18650.97 18602.75 18675.52 18285.53 18238.62 
 ##       17       18       19       20       21       22       23       24 
-## 18574.41 18513.44 18467.39 18633.60 18594.06 18581.86 18583.56 18651.12 
+## 18071.77 18070.20 18132.54 18166.26 18066.90 18080.64 18115.75 17879.00 
 ##       25       26       27       28       29       30       31       32 
-## 18649.33 18614.00 18549.24 18602.98 18237.17 18190.77 18012.40 18045.35 
+## 17925.48 18010.97 18243.43 18275.31 18322.64 18513.12 18480.46 18416.04 
 ##       33       34       35       36       37       38       39       40 
-## 18097.62 18135.65 18045.05 18051.41 18082.14 17871.05 17904.50 17991.77 
+## 18452.68 18354.26 18274.71 18346.74 18409.78 18542.05 18650.09 18643.20 
 ##       41       42       43       44       45       46       47       48 
-## 18201.61 18238.04 18276.96 18436.63 18418.21 18372.44 18380.22 18283.87 
+## 18593.91 18543.68 18493.37 18508.42 18523.91 18496.81 18452.40 18510.88 
 ##       49       50       51       52       53       54       55       56 
-## 18221.61 18268.06 18332.75 18470.66 18606.35 18611.04 18564.13 18523.69 
+## 18583.33 18385.06 18274.39 18298.56 18311.50 18290.71 18178.15 18243.41 
 ##       57       58       59       60       61       62       63       64 
-## 18464.70 18479.09 18502.11 18471.74 18424.13 18498.35 18565.85 18389.93 
+## 18268.25 18322.98 18427.07 18521.76 18471.34 18466.30 18444.86 18368.21 
 ##       65       66       67       68       69       70       71       72 
-## 18277.39 18282.35 18300.66 18271.93 18164.14 18232.91 18247.39 18310.08 
+## 18172.21 18049.95 17979.01 18113.56 18077.41 18035.91 18082.00 17963.94 
 ##       73       74       75       76       77       78       79       80 
-## 18403.13 18490.73 18448.76 18425.35 18389.79 18323.86 18147.59 18029.18 
+## 18034.60 17994.79 17978.60 17884.86 18094.57 18186.26 18322.68 18346.78 
 ##       81       82       83       84       85       86       87       88 
-## 17950.29 18084.83 18058.25 18039.68 18075.44 17969.25 18029.88 17989.67 
+## 18246.10 18267.38 18276.09 18211.99 18213.46 18316.33 18399.12 18368.08 
 ##       89       90       91       92       93       94 
-## 17988.41 17883.69 18067.65 18151.37 18296.39 18318.26</code></pre>
+## 18641.48 18601.09 18645.04 18573.54 18681.08 18648.05</code></pre>
 <p>Now we can create a new custom function called <span style="color: blue;"><strong>make_predictions</strong></span> that wraps this functionality in a way that we can use with <span style="color: green;"><strong>map()</strong></span> to iterate through all options of the nested dataframe:</p>
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="predictive-modeling.html#cb113-1"></a>make_predictions &lt;-<span class="st"> </span><span class="cf">function</span>(model, test){</span>
 <span id="cb113-2"><a href="predictive-modeling.html#cb113-2"></a>  </span>
@@ -616,21 +616,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb114-8"><a href="predictive-modeling.html#cb114-8"></a>                                                      make_predictions))</span></code></pre></div>
 <p>The predictions were made using the models that had only seen the <strong>training data</strong>, and we can start assessing how good the model is on data it has not seen before in the <strong>test</strong> and <strong>holdout</strong> sets. Let’s view the results from the previous step:</p>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="predictive-modeling.html#cb115-1"></a><span class="kw">select</span>(cryptodata_nested, lm_test_predictions, lm_holdout_predictions)</span></code></pre></div>
-<pre><code>## # A tibble: 260 x 4
-## # Groups:   symbol, split [260]
+<pre><code>## # A tibble: 265 x 4
+## # Groups:   symbol, split [265]
 ##    symbol split lm_test_predictions lm_holdout_predictions
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;list&gt;              &lt;list&gt;                
-##  1 BTC        1 &lt;dbl [94]&gt;          &lt;dbl [98]&gt;            
-##  2 EOS        1 &lt;dbl [94]&gt;          &lt;dbl [95]&gt;            
-##  3 ETH        1 &lt;dbl [94]&gt;          &lt;dbl [95]&gt;            
-##  4 LTC        1 &lt;dbl [94]&gt;          &lt;dbl [98]&gt;            
-##  5 ADA        1 &lt;dbl [94]&gt;          &lt;dbl [95]&gt;            
-##  6 BSV        1 &lt;dbl [94]&gt;          &lt;dbl [95]&gt;            
-##  7 ZEC        1 &lt;dbl [94]&gt;          &lt;dbl [95]&gt;            
-##  8 HT         1 &lt;dbl [93]&gt;          &lt;dbl [94]&gt;            
-##  9 TRX        1 &lt;dbl [94]&gt;          &lt;dbl [97]&gt;            
-## 10 KNC        1 &lt;dbl [91]&gt;          &lt;dbl [93]&gt;            
-## # ... with 250 more rows</code></pre>
+##  1 BTC        1 &lt;dbl [94]&gt;          &lt;dbl [96]&gt;            
+##  2 EOS        1 &lt;dbl [94]&gt;          &lt;dbl [98]&gt;            
+##  3 ETH        1 &lt;dbl [94]&gt;          &lt;dbl [98]&gt;            
+##  4 LTC        1 &lt;dbl [94]&gt;          &lt;dbl [96]&gt;            
+##  5 ADA        1 &lt;dbl [94]&gt;          &lt;dbl [98]&gt;            
+##  6 BSV        1 &lt;dbl [94]&gt;          &lt;dbl [98]&gt;            
+##  7 ZEC        1 &lt;dbl [94]&gt;          &lt;dbl [94]&gt;            
+##  8 HT         1 &lt;dbl [93]&gt;          &lt;dbl [97]&gt;            
+##  9 TRX        1 &lt;dbl [94]&gt;          &lt;dbl [95]&gt;            
+## 10 KNC        1 &lt;dbl [91]&gt;          &lt;dbl [92]&gt;            
+## # ... with 255 more rows</code></pre>
 <p>Now we can do the same for the rest of the models:</p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="predictive-modeling.html#cb117-1"></a>cryptodata_nested &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata_nested, </span>
 <span id="cb117-2"><a href="predictive-modeling.html#cb117-2"></a>                            <span class="co"># XGBoost:</span></span>
