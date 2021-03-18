@@ -350,7 +350,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First off, we aren’t able to do anything at all with a row of data if we don’t know <strong><em>when</em></strong> the data was collected. The specific price doesn’t matter if we can’t tie it to a timestamp, given by the <span style="color: blue;"><strong>date_time_utc</strong></span> field.</p>
 <p>We can exclude all rows where the <span style="color: blue;"><strong>date_time_utc</strong></span> field has a Null (missing) value by using the <span style="color: green;"><strong>filter()</strong></span> function from the <span style="color: #ae7b11;"><strong>dplyr</strong></span> package:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-prep.html#cb9-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="op">!</span><span class="kw">is.na</span>(date_time_utc))</span></code></pre></div>
-<p>This step removed 0 rows from the data on the latest run (2021-03-17). The <span style="color: green;"><strong>is.na()</strong></span> function finds all cases where the <span style="color: blue;"><strong>date_time_utc</strong></span> field has a Null value. The function is preceded by the <span style="color: blue;"><strong>!</strong></span> operator, which tells the <span style="color: green;"><strong>filter()</strong></span> function to exclude these rows from the data.</p>
+<p>This step removed 0 rows from the data on the latest run (2021-03-18). The <span style="color: green;"><strong>is.na()</strong></span> function finds all cases where the <span style="color: blue;"><strong>date_time_utc</strong></span> field has a Null value. The function is preceded by the <span style="color: blue;"><strong>!</strong></span> operator, which tells the <span style="color: green;"><strong>filter()</strong></span> function to exclude these rows from the data.</p>
 <p>By the same logic, if we don’t know what the price was for any of the rows, the whole row of data is useless and should be removed. But how will we define the price of a cryptocurrency?</p>
 </div>
 <div id="calculate-price_usd-column" class="section level2">
@@ -369,12 +369,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 6 x 5
 ##   symbol date_time_utc       ask_1_price ask_1_quantity trade_usd_1
 ##   &lt;chr&gt;  &lt;dttm&gt;                    &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;
-## 1 BTC    2021-03-17 00:00:00    56908.            0.162      9191. 
-## 2 ETH    2021-03-17 00:00:01     1803.            0.233       420. 
-## 3 EOS    2021-03-17 00:00:02        4.06        390.         1587. 
-## 4 LTC    2021-03-17 00:00:02      201.            9.9        1995. 
-## 5 BSV    2021-03-17 00:00:04      195.            3.93        765. 
-## 6 ADA    2021-03-17 00:00:05        1.25         22            27.5</code></pre>
+## 1 BTC    2021-03-18 00:00:01    58909.            1          58909.
+## 2 ETH    2021-03-18 00:00:01     1822.            0.295        537.
+## 3 EOS    2021-03-18 00:00:02        4.09        600           2454.
+## 4 LTC    2021-03-18 00:00:02      206.           28.5         5860.
+## 5 BSV    2021-03-18 00:00:04      196.           30.1         5896.
+## 6 ADA    2021-03-18 00:00:05        1.38       1523           2101.</code></pre>
 <p>Now we can use the <span style="color: green;"><strong>mutate()</strong></span> function to create the new field <span style="color: blue;"><strong>price_usd</strong></span> and find the lowest price at which we could have purchased at least $15 worth of the cryptocurrency. We can use the <span style="color: green;"><strong>case_when()</strong></span> function to find the first <span style="color: blue;"><strong>trade_usd</strong></span> value that is greater or equal to $15, and assign the correct <span style="color: blue;"><strong>ask_price</strong></span> for the new column <span style="color: blue;"><strong>price_usd</strong></span>:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="data-prep.html#cb13-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">mutate</span>(cryptodata, </span>
 <span id="cb13-2"><a href="data-prep.html#cb13-2"></a>                     <span class="dt">price_usd =</span> <span class="kw">case_when</span>(</span>
@@ -385,7 +385,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-7"><a href="data-prep.html#cb13-7"></a>                       cryptodata<span class="op">$</span>trade_usd_<span class="dv">5</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> </span>cryptodata<span class="op">$</span>ask_<span class="dv">5</span>_price))</span></code></pre></div>
 <p>Let’s also remove any rows that have Null values for the new <span style="color: blue;"><strong>price_usd</strong></span> field <a href="data-prep.html#remove-nulls">like we did for the <span style="color: blue;"><strong>date_time_utc</strong></span> field in a previous step</a>. These will mostly be made up of rows where the value of trades through the 5th lowest ask price was lower than $15.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-prep.html#cb14-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="op">!</span><span class="kw">is.na</span>(price_usd))</span></code></pre></div>
-<p>This step removed 15002 rows on the latest run.</p>
+<p>This step removed 15004 rows on the latest run.</p>
 </div>
 <div id="clean-data-by-group" class="section level2">
 <h2><span class="header-section-number">4.3</span> Clean Data by Group</h2>
@@ -395,7 +395,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 x 1
 ##        n
 ##    &lt;int&gt;
-## 1 284998</code></pre>
+## 1 284996</code></pre>
 <p>But what if we wanted to know how many observations in the data are associated with each cryptocurrency separately?</p>
 <p>We can group the data using the <span style="color: green;"><strong>group_by()</strong></span> function from the <span style="color: #ae7b11;"><strong>dplyr</strong></span> package and group the data by the cryptocurrency <span style="color: blue;"><strong>symbol</strong></span>:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-prep.html#cb17-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">group_by</span>(cryptodata, symbol)</span></code></pre></div>
@@ -406,14 +406,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##    symbol     n
 ##    &lt;chr&gt;  &lt;int&gt;
 ##  1 1INCH    692
-##  2 AAB      764
+##  2 AAB      763
 ##  3 AAVE     692
 ##  4 ACAT     671
 ##  5 ACT     1998
 ##  6 ADA     2309
 ##  7 ADXN    1469
 ##  8 AKRO     405
-##  9 ALGO      51
+##  9 ALGO      42
 ## 10 ALPHA    376
 ## # ... with 220 more rows</code></pre>
 <p>We can remove the grouping at any point by running the <span style="color: green;"><strong>ungroup()</strong></span> function:</p>
@@ -421,20 +421,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 x 1
 ##        n
 ##    &lt;int&gt;
-## 1 284998</code></pre>
+## 1 284996</code></pre>
 <div id="remove-symbols-without-enough-rows" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Remove symbols without enough rows</h3>
 <p>Because this dataset evolves over time, we will need to be proactive about issues that may arise even if they aren’t currently a problem.</p>
 <p>What happens if a new cryptocurrency gets added to the cryptocurrency exchange? If we only had a couple days of data for an asset, not only would that not be enough information to build effective predictive models, but we may run into actual errors since the data will be further split into more groups to validate the results of the models against several datasets using <span style="color: purple;"><strong>cross validation</strong></span>, more to come on that later.</p>
 <p>To ensure we have a reasonable amount of data for each individual cryptocurrency, let’s filter out any cryptocurrencies that don’t have at least 1,000 observations using the <span style="color: green;"><strong>filter()</strong></span> function:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-prep.html#cb22-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="kw">n</span>() <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1000</span>)</span></code></pre></div>
-<p>The number of rows for the <code>cryptodata</code> dataset before the filtering step was 284998 and is now 235668. This step removed 105 cryptocurrencies from the analysis that did not have enough observations associated with them.</p>
+<p>The number of rows for the <code>cryptodata</code> dataset before the filtering step was 284996 and is now 235306. This step removed 105 cryptocurrencies from the analysis that did not have enough observations associated with them.</p>
 </div>
 <div id="remove-symbols-without-data-from-the-last-3-days" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> Remove symbols without data from the last 3 days</h3>
 <p>If there was no data collected for a cryptocurrency over the last 3 day period, let’s exclude that asset from the dataset since we are only looking to model data that is currently flowing through the process. If an asset is removed from the exchange (if a project is a scam for example) or is no longer being actively captured by the data collection process, we can’t make new predictions for it, so might as well exclude these ahead of time as well.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-prep.html#cb23-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">filter</span>(cryptodata, <span class="kw">max</span>(date) <span class="op">&gt;</span><span class="st"> </span><span class="kw">Sys.Date</span>()<span class="op">-</span><span class="dv">3</span>)</span></code></pre></div>
-<p>The number of rows for the <code>cryptodata</code> dataset before this filtering step was 177592 and is now 235668.</p>
+<p>The number of rows for the <code>cryptodata</code> dataset before this filtering step was 177621 and is now 235306.</p>
 </div>
 </div>
 <div id="calculate-target" class="section level2">
@@ -455,7 +455,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-prep.html#cb26-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">as_tsibble</span>(cryptodata, <span class="dt">index =</span> ts_index, <span class="dt">key =</span> symbol)</span></code></pre></div>
 <p>Notice how the preview of the data below looks a bit different from the summary we were seeing up to this point, and now it says “A tsibble”, and next to the table dimensions says <strong>[1h]</strong>, indicating the observations are 1 hour apart from each other. The second row tells us the “Key” of the <span style="color: blue;"><strong>tsibble</strong></span> is the <span style="color: blue;"><strong>symbol</strong></span> column</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-prep.html#cb27-1"></a>cryptodata</span></code></pre></div>
-<pre><code>## # A tsibble: 177,592 x 34 [1h] &lt;UTC&gt;
+<pre><code>## # A tsibble: 177,621 x 34 [1h] &lt;UTC&gt;
 ## # Key:       symbol [87]
 ## # Groups:    symbol [87]
 ##    pair  symbol quote_currency ask_1_price ask_1_quantity ask_2_price
@@ -463,14 +463,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  1 ACTU~ ACT    USD                0.00815          19870     0.00815
 ##  2 ACTU~ ACT    USD                0.00810          19870     0.00810
 ##  3 ACTU~ ACT    USD                0.00801           9500     0.00801
-##  4 ACTU~ ACT    USD                0.00814          10570     0.00815
-##  5 ACTU~ ACT    USD                0.00795          10570     0.00795
-##  6 ACTU~ ACT    USD                0.00803           8180     0.00803
-##  7 ACTU~ ACT    USD                0.00787           5780     0.00787
-##  8 ACTU~ ACT    USD                0.00776           8500     0.00818
-##  9 ACTU~ ACT    USD                0.00768           8500     0.00818
-## 10 ACTU~ ACT    USD                0.00813          19870     0.00813
-## # ... with 177,582 more rows, and 28 more variables: ask_2_quantity &lt;dbl&gt;,
+##  4 ACTU~ ACT    USD                0.00767          19870     0.00767
+##  5 ACTU~ ACT    USD                0.00762           9510     0.00762
+##  6 ACTU~ ACT    USD                0.00756          10630     0.00756
+##  7 ACTU~ ACT    USD                0.00752          19870     0.00752
+##  8 ACTU~ ACT    USD                0.00748          12070     0.00748
+##  9 ACTU~ ACT    USD                0.00747           5650     0.00747
+## 10 ACTU~ ACT    USD                0.00747          19870     0.00747
+## # ... with 177,611 more rows, and 28 more variables: ask_2_quantity &lt;dbl&gt;,
 ## #   ask_3_price &lt;dbl&gt;, ask_3_quantity &lt;dbl&gt;, ask_4_price &lt;dbl&gt;,
 ## #   ask_4_quantity &lt;dbl&gt;, ask_5_price &lt;dbl&gt;, ask_5_quantity &lt;dbl&gt;,
 ## #   bid_1_price &lt;dbl&gt;, bid_1_quantity &lt;dbl&gt;, bid_2_price &lt;dbl&gt;,
@@ -490,9 +490,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.4.2</span> Fill gaps</h3>
 <p>Now we can use the <span style="color: green;"><strong>fill_gaps()</strong></span> function from the <span style="color: #ae7b11;"><strong>tsibble</strong></span> package to fill any gaps found in the data, as being implicitly Null. Meaning, we will add these rows into the data with NA values for everything except for the date time field. This will allow us to safely compute the target price found 24 hours into the future relative to when each row was collected.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-prep.html#cb29-1"></a>cryptodata &lt;-<span class="st"> </span><span class="kw">fill_gaps</span>(cryptodata)</span></code></pre></div>
-<p>Now looking at the data again, there are 23300 additional rows that were added as implicitly missing in the data:</p>
+<p>Now looking at the data again, there are 24250 additional rows that were added as implicitly missing in the data:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-prep.html#cb30-1"></a>cryptodata</span></code></pre></div>
-<pre><code>## # A tsibble: 200,892 x 34 [1h] &lt;UTC&gt;
+<pre><code>## # A tsibble: 201,871 x 34 [1h] &lt;UTC&gt;
 ## # Key:       symbol [87]
 ## # Groups:    symbol [87]
 ##    pair  symbol quote_currency ask_1_price ask_1_quantity ask_2_price
@@ -500,14 +500,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  1 ACTU~ ACT    USD                0.00815          19870     0.00815
 ##  2 ACTU~ ACT    USD                0.00810          19870     0.00810
 ##  3 ACTU~ ACT    USD                0.00801           9500     0.00801
-##  4 ACTU~ ACT    USD                0.00814          10570     0.00815
-##  5 ACTU~ ACT    USD                0.00795          10570     0.00795
-##  6 ACTU~ ACT    USD                0.00803           8180     0.00803
-##  7 ACTU~ ACT    USD                0.00787           5780     0.00787
-##  8 ACTU~ ACT    USD                0.00776           8500     0.00818
-##  9 ACTU~ ACT    USD                0.00768           8500     0.00818
-## 10 ACTU~ ACT    USD                0.00813          19870     0.00813
-## # ... with 200,882 more rows, and 28 more variables: ask_2_quantity &lt;dbl&gt;,
+##  4 &lt;NA&gt;  ACT    &lt;NA&gt;              NA                   NA    NA      
+##  5 &lt;NA&gt;  ACT    &lt;NA&gt;              NA                   NA    NA      
+##  6 &lt;NA&gt;  ACT    &lt;NA&gt;              NA                   NA    NA      
+##  7 &lt;NA&gt;  ACT    &lt;NA&gt;              NA                   NA    NA      
+##  8 &lt;NA&gt;  ACT    &lt;NA&gt;              NA                   NA    NA      
+##  9 &lt;NA&gt;  ACT    &lt;NA&gt;              NA                   NA    NA      
+## 10 &lt;NA&gt;  ACT    &lt;NA&gt;              NA                   NA    NA      
+## # ... with 201,861 more rows, and 28 more variables: ask_2_quantity &lt;dbl&gt;,
 ## #   ask_3_price &lt;dbl&gt;, ask_3_quantity &lt;dbl&gt;, ask_4_price &lt;dbl&gt;,
 ## #   ask_4_quantity &lt;dbl&gt;, ask_5_price &lt;dbl&gt;, ask_5_quantity &lt;dbl&gt;,
 ## #   bid_1_price &lt;dbl&gt;, bid_1_quantity &lt;dbl&gt;, bid_2_price &lt;dbl&gt;,
@@ -542,26 +542,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="data-prep.html#cb35-1"></a><span class="kw">print</span>(<span class="kw">select</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>), </span>
 <span id="cb35-2"><a href="data-prep.html#cb35-2"></a>             ts_index, price_usd, lagged_price_1h, </span>
 <span id="cb35-3"><a href="data-prep.html#cb35-3"></a>             lagged_price_24h, target_price_24h), <span class="dt">n=</span><span class="dv">30</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 2,319 x 6
+<pre><code>## # A tibble: 2,331 x 6
 ## # Groups:   symbol [1]
 ##    symbol ts_index            price_usd lagged_price_1h lagged_price_24h
 ##    &lt;chr&gt;  &lt;dttm&gt;                  &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;
 ##  1 BTC    2020-12-11 00:00:00    18251.             NA               NA 
 ##  2 BTC    2020-12-11 01:00:00    18014.          18251.              NA 
 ##  3 BTC    2020-12-11 02:00:00    17898.          18014.              NA 
-##  4 BTC    2020-12-11 03:00:00    17805.          17898.              NA 
-##  5 BTC    2020-12-11 04:00:00    17995.          17805.              NA 
-##  6 BTC    2020-12-11 05:00:00    17964.          17995.              NA 
-##  7 BTC    2020-12-11 06:00:00    17900.          17964.              NA 
-##  8 BTC    2020-12-11 07:00:00    17927.          17900.              NA 
-##  9 BTC    2020-12-11 08:00:00    17813.          17927.              NA 
-## 10 BTC    2020-12-11 09:00:00    17900.          17813.              NA 
-## 11 BTC    2020-12-11 10:00:00    17804.          17900.              NA 
-## 12 BTC    2020-12-11 11:00:00    17760.          17804.              NA 
-## 13 BTC    2020-12-11 12:00:00    17645.          17760.              NA 
-## 14 BTC    2020-12-11 13:00:00    17864.          17645.              NA 
-## 15 BTC    2020-12-11 14:00:00    17971.          17864.              NA 
-## 16 BTC    2020-12-11 15:00:00       NA           17971.              NA 
+##  4 BTC    2020-12-11 03:00:00       NA           17898.              NA 
+##  5 BTC    2020-12-11 04:00:00       NA              NA               NA 
+##  6 BTC    2020-12-11 05:00:00       NA              NA               NA 
+##  7 BTC    2020-12-11 06:00:00       NA              NA               NA 
+##  8 BTC    2020-12-11 07:00:00       NA              NA               NA 
+##  9 BTC    2020-12-11 08:00:00       NA              NA               NA 
+## 10 BTC    2020-12-11 09:00:00       NA              NA               NA 
+## 11 BTC    2020-12-11 10:00:00       NA              NA               NA 
+## 12 BTC    2020-12-11 11:00:00       NA              NA               NA 
+## 13 BTC    2020-12-11 12:00:00       NA              NA               NA 
+## 14 BTC    2020-12-11 13:00:00       NA              NA               NA 
+## 15 BTC    2020-12-11 14:00:00       NA              NA               NA 
+## 16 BTC    2020-12-11 15:00:00       NA              NA               NA 
 ## 17 BTC    2020-12-11 16:00:00       NA              NA               NA 
 ## 18 BTC    2020-12-11 17:00:00       NA              NA               NA 
 ## 19 BTC    2020-12-11 18:00:00       NA              NA               NA 
@@ -573,10 +573,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 25 BTC    2020-12-12 00:00:00    18038.             NA            18251.
 ## 26 BTC    2020-12-12 01:00:00    18342.          18038.           18014.
 ## 27 BTC    2020-12-12 02:00:00    18284.          18342.           17898.
-## 28 BTC    2020-12-12 03:00:00    18311.          18284.           17805.
-## 29 BTC    2020-12-12 04:00:00    18283.          18311.           17995.
-## 30 BTC    2020-12-12 05:00:00    18368.          18283.           17964.
-## # ... with 2,289 more rows, and 1 more variable: target_price_24h &lt;dbl&gt;</code></pre>
+## 28 BTC    2020-12-12 03:00:00    18311.          18284.              NA 
+## 29 BTC    2020-12-12 04:00:00    18283.          18311.              NA 
+## 30 BTC    2020-12-12 05:00:00    18368.          18283.              NA 
+## # ... with 2,301 more rows, and 1 more variable: target_price_24h &lt;dbl&gt;</code></pre>
 <p>We can wrap the code used above in the <span style="color: green;"><strong>tail()</strong></span> function to show the most recent data and see the opposite dynamic with the new fields we created:</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="data-prep.html#cb37-1"></a><span class="kw">print</span>(<span class="kw">tail</span>(<span class="kw">select</span>(<span class="kw">filter</span>(cryptodata, symbol <span class="op">==</span><span class="st"> &#39;BTC&#39;</span>), </span>
 <span id="cb37-2"><a href="data-prep.html#cb37-2"></a>                  ts_index, price_usd, lagged_price_24h, </span>
@@ -585,36 +585,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # Groups:   symbol [1]
 ##    symbol ts_index            price_usd lagged_price_24h target_price_24h
 ##    &lt;chr&gt;  &lt;dttm&gt;                  &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-##  1 BTC    2021-03-16 09:00:00    55891.           57759.           55767.
-##  2 BTC    2021-03-16 10:00:00    55880.           55853.           54759.
-##  3 BTC    2021-03-16 11:00:00    55798.           56355.           55072 
-##  4 BTC    2021-03-16 12:00:00    55468            56149.           54832 
-##  5 BTC    2021-03-16 13:00:00    55100            56464.           55156.
-##  6 BTC    2021-03-16 14:00:00    55308            56841.           55105.
-##  7 BTC    2021-03-16 15:00:00    55664            56204.              NA 
-##  8 BTC    2021-03-16 16:00:00    55848.           56224               NA 
-##  9 BTC    2021-03-16 17:00:00    55651.           56270               NA 
-## 10 BTC    2021-03-16 18:00:00    55248.           56049.              NA 
-## 11 BTC    2021-03-16 19:00:00    55352            56124.              NA 
-## 12 BTC    2021-03-16 20:00:00    55742.           56578.              NA 
-## 13 BTC    2021-03-16 21:00:00    56380.           56367.              NA 
-## 14 BTC    2021-03-16 22:00:00    56465.           56703.              NA 
-## 15 BTC    2021-03-16 23:00:00    56352.           56136.              NA 
-## 16 BTC    2021-03-17 00:00:00    56908.           55623.              NA 
-## 17 BTC    2021-03-17 01:00:00    56531.           54087.              NA 
-## 18 BTC    2021-03-17 02:00:00    56279.           54475.              NA 
-## 19 BTC    2021-03-17 03:00:00    55772.           54558.              NA 
-## 20 BTC    2021-03-17 04:00:00    55500            54261.              NA 
-## 21 BTC    2021-03-17 05:00:00    55565.           54405.              NA 
-## 22 BTC    2021-03-17 06:00:00    55948.           54078.              NA 
-## 23 BTC    2021-03-17 07:00:00    56327.           55052.              NA 
-## 24 BTC    2021-03-17 08:00:00    55831.           55240               NA 
-## 25 BTC    2021-03-17 09:00:00    55767.           55891.              NA 
-## 26 BTC    2021-03-17 10:00:00    54759.           55880.              NA 
-## 27 BTC    2021-03-17 11:00:00    55072            55798.              NA 
-## 28 BTC    2021-03-17 12:00:00    54832            55468               NA 
-## 29 BTC    2021-03-17 13:00:00    55156.           55100               NA 
-## 30 BTC    2021-03-17 14:00:00    55105.           55308               NA</code></pre>
+##  1 BTC    2021-03-16 21:00:00    56380.           56367.           57716.
+##  2 BTC    2021-03-16 22:00:00    56465.           56703.           58451.
+##  3 BTC    2021-03-16 23:00:00    56352.           56136.           58283.
+##  4 BTC    2021-03-17 00:00:00    56908.           55623.           58909.
+##  5 BTC    2021-03-17 01:00:00    56531.           54087.           58914.
+##  6 BTC    2021-03-17 02:00:00    56279.           54475.           59039.
+##  7 BTC    2021-03-17 03:00:00    55772.           54558.              NA 
+##  8 BTC    2021-03-17 04:00:00    55500            54261.              NA 
+##  9 BTC    2021-03-17 05:00:00    55565.           54405.              NA 
+## 10 BTC    2021-03-17 06:00:00    55948.           54078.              NA 
+## 11 BTC    2021-03-17 07:00:00    56327.           55052.              NA 
+## 12 BTC    2021-03-17 08:00:00    55831.           55240               NA 
+## 13 BTC    2021-03-17 09:00:00    55767.           55891.              NA 
+## 14 BTC    2021-03-17 10:00:00    54759.           55880.              NA 
+## 15 BTC    2021-03-17 11:00:00    55072            55798.              NA 
+## 16 BTC    2021-03-17 12:00:00    54832            55468               NA 
+## 17 BTC    2021-03-17 13:00:00    55156.           55100               NA 
+## 18 BTC    2021-03-17 14:00:00    55105.           55308               NA 
+## 19 BTC    2021-03-17 15:00:00    54544.           55664               NA 
+## 20 BTC    2021-03-17 16:00:00    54936.           55848.              NA 
+## 21 BTC    2021-03-17 17:00:00    55274.           55651.              NA 
+## 22 BTC    2021-03-17 18:00:00    55536            55248.              NA 
+## 23 BTC    2021-03-17 19:00:00    57573.           55352               NA 
+## 24 BTC    2021-03-17 20:00:00    57857.           55742.              NA 
+## 25 BTC    2021-03-17 21:00:00    57716.           56380.              NA 
+## 26 BTC    2021-03-17 22:00:00    58451.           56465.              NA 
+## 27 BTC    2021-03-17 23:00:00    58283.           56352.              NA 
+## 28 BTC    2021-03-18 00:00:00    58909.           56908.              NA 
+## 29 BTC    2021-03-18 01:00:00    58914.           56531.              NA 
+## 30 BTC    2021-03-18 02:00:00    59039.           56279.              NA</code></pre>
 <p>Reading the code shown above is less than ideal. One of the more popular tools introduced by the <a href="https://www.tidyverse.org/">tidyverse</a> is the <span style="color: purple;"><strong>%&gt;%</strong></span> operator, which works by starting with the object/data you want to make changes to first, and then apply each transformation step by step. It’s simply a way of re-writing the same code in a way that is easier to read by splitting the way the function is called rather than adding functions onto each other into a single line that becomes really hard to read. In the example above it becomes difficult to keep track of where things begin, the order of operations, and the parameters associated with the specific functions. Compare that to the code below:</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="data-prep.html#cb39-1"></a><span class="co"># Start with the object/data to manipulate</span></span>
 <span id="cb39-2"><a href="data-prep.html#cb39-2"></a>cryptodata <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -630,36 +630,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # Groups:   symbol [1]
 ##    symbol ts_index            price_usd lagged_price_24h target_price_24h
 ##    &lt;chr&gt;  &lt;dttm&gt;                  &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-##  1 BTC    2021-03-16 09:00:00    55891.           57759.           55767.
-##  2 BTC    2021-03-16 10:00:00    55880.           55853.           54759.
-##  3 BTC    2021-03-16 11:00:00    55798.           56355.           55072 
-##  4 BTC    2021-03-16 12:00:00    55468            56149.           54832 
-##  5 BTC    2021-03-16 13:00:00    55100            56464.           55156.
-##  6 BTC    2021-03-16 14:00:00    55308            56841.           55105.
-##  7 BTC    2021-03-16 15:00:00    55664            56204.              NA 
-##  8 BTC    2021-03-16 16:00:00    55848.           56224               NA 
-##  9 BTC    2021-03-16 17:00:00    55651.           56270               NA 
-## 10 BTC    2021-03-16 18:00:00    55248.           56049.              NA 
-## 11 BTC    2021-03-16 19:00:00    55352            56124.              NA 
-## 12 BTC    2021-03-16 20:00:00    55742.           56578.              NA 
-## 13 BTC    2021-03-16 21:00:00    56380.           56367.              NA 
-## 14 BTC    2021-03-16 22:00:00    56465.           56703.              NA 
-## 15 BTC    2021-03-16 23:00:00    56352.           56136.              NA 
-## 16 BTC    2021-03-17 00:00:00    56908.           55623.              NA 
-## 17 BTC    2021-03-17 01:00:00    56531.           54087.              NA 
-## 18 BTC    2021-03-17 02:00:00    56279.           54475.              NA 
-## 19 BTC    2021-03-17 03:00:00    55772.           54558.              NA 
-## 20 BTC    2021-03-17 04:00:00    55500            54261.              NA 
-## 21 BTC    2021-03-17 05:00:00    55565.           54405.              NA 
-## 22 BTC    2021-03-17 06:00:00    55948.           54078.              NA 
-## 23 BTC    2021-03-17 07:00:00    56327.           55052.              NA 
-## 24 BTC    2021-03-17 08:00:00    55831.           55240               NA 
-## 25 BTC    2021-03-17 09:00:00    55767.           55891.              NA 
-## 26 BTC    2021-03-17 10:00:00    54759.           55880.              NA 
-## 27 BTC    2021-03-17 11:00:00    55072            55798.              NA 
-## 28 BTC    2021-03-17 12:00:00    54832            55468               NA 
-## 29 BTC    2021-03-17 13:00:00    55156.           55100               NA 
-## 30 BTC    2021-03-17 14:00:00    55105.           55308               NA</code></pre>
+##  1 BTC    2021-03-16 21:00:00    56380.           56367.           57716.
+##  2 BTC    2021-03-16 22:00:00    56465.           56703.           58451.
+##  3 BTC    2021-03-16 23:00:00    56352.           56136.           58283.
+##  4 BTC    2021-03-17 00:00:00    56908.           55623.           58909.
+##  5 BTC    2021-03-17 01:00:00    56531.           54087.           58914.
+##  6 BTC    2021-03-17 02:00:00    56279.           54475.           59039.
+##  7 BTC    2021-03-17 03:00:00    55772.           54558.              NA 
+##  8 BTC    2021-03-17 04:00:00    55500            54261.              NA 
+##  9 BTC    2021-03-17 05:00:00    55565.           54405.              NA 
+## 10 BTC    2021-03-17 06:00:00    55948.           54078.              NA 
+## 11 BTC    2021-03-17 07:00:00    56327.           55052.              NA 
+## 12 BTC    2021-03-17 08:00:00    55831.           55240               NA 
+## 13 BTC    2021-03-17 09:00:00    55767.           55891.              NA 
+## 14 BTC    2021-03-17 10:00:00    54759.           55880.              NA 
+## 15 BTC    2021-03-17 11:00:00    55072            55798.              NA 
+## 16 BTC    2021-03-17 12:00:00    54832            55468               NA 
+## 17 BTC    2021-03-17 13:00:00    55156.           55100               NA 
+## 18 BTC    2021-03-17 14:00:00    55105.           55308               NA 
+## 19 BTC    2021-03-17 15:00:00    54544.           55664               NA 
+## 20 BTC    2021-03-17 16:00:00    54936.           55848.              NA 
+## 21 BTC    2021-03-17 17:00:00    55274.           55651.              NA 
+## 22 BTC    2021-03-17 18:00:00    55536            55248.              NA 
+## 23 BTC    2021-03-17 19:00:00    57573.           55352               NA 
+## 24 BTC    2021-03-17 20:00:00    57857.           55742.              NA 
+## 25 BTC    2021-03-17 21:00:00    57716.           56380.              NA 
+## 26 BTC    2021-03-17 22:00:00    58451.           56465.              NA 
+## 27 BTC    2021-03-17 23:00:00    58283.           56352.              NA 
+## 28 BTC    2021-03-18 00:00:00    58909.           56908.              NA 
+## 29 BTC    2021-03-18 01:00:00    58914.           56531.              NA 
+## 30 BTC    2021-03-18 02:00:00    59039.           56279.              NA</code></pre>
 <p>There are several advantages to writing code <em>the</em> <strong><em>tidy</em></strong> <em>way</em>, but while some love it others hate it, so we won’t force anyone to have to understand how the <strong>%&gt;%</strong> operator works and we have stayed away from its use for the rest of the code shown, but we do encourage the use of this tool: <a href="https://magrittr.tidyverse.org/reference/pipe.html" class="uri">https://magrittr.tidyverse.org/reference/pipe.html</a></p>
 </div>
 </div>
@@ -673,7 +673,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- ```{r omit_nulls_price_usd_final} -->
 <!-- cryptodata <- filter(cryptodata, !is.na(price_usd)) -->
 <!-- ``` -->
-<p>This step removed 23300 rows from the data. This step mainly helps us avoid issues when programmatically labeling charts in the next section, move on to the <a href="visualization.html#visualization">next section</a> ➡️ to learn some amazingly powerful tools to visualize data!</p>
+<p>This step removed 24250 rows from the data. This step mainly helps us avoid issues when programmatically labeling charts in the next section, move on to the <a href="visualization.html#visualization">next section</a> ➡️ to learn some amazingly powerful tools to visualize data!</p>
 
 </div>
 </div>
