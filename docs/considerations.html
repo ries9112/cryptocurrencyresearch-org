@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Section - 9 Considerations | Cryptocurrency Research</title>
   <meta name="description" content="Section - 9 Considerations | Cryptocurrency Research" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Section - 9 Considerations | Cryptocurrency Research" />
   <meta property="og:type" content="book" />
@@ -52,8 +52,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="libs/datatables-binding-0.15/datatables.js"></script>
@@ -151,6 +151,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -401,7 +402,7 @@ Hopefully it is clear by now, but this tutorial is not meant to show anyone how 
 ## [40] tibble_3.0.4        ggplot2_3.3.2       tidyverse_1.3.0    
 ## [43] jsonlite_1.7.1      httr_1.4.2          DT_0.15            
 ## [46] skimr_2.1           pins_0.4.0          pacman_0.5.1       
-## [49] knitr_1.30          bookdown_0.21      
+## [49] knitr_1.30          bookdown_0.22      
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] utf8_1.1.4           tidyselect_1.1.0     htmlwidgets_1.5.1   
@@ -411,7 +412,7 @@ Hopefully it is clear by now, but this tutorial is not meant to show anyone how 
 ##  [13] highr_0.8            rstudioapi_0.11      ggsignif_0.6.0      
 ##  [16] labeling_0.3         repr_1.1.0           polyclip_1.10-0     
 ##  [19] farver_2.0.3         vctrs_0.3.2          generics_0.0.2      
-##  [22] TH.data_1.0-10       ipred_0.9-9          xfun_0.18           
+##  [22] TH.data_1.0-10       ipred_0.9-9          xfun_0.22           
 ##  [25] R6_2.4.1             reshape_0.8.8        assertthat_0.2.1    
 ##  [28] hydroTSM_0.6-0       scales_1.1.1         multcomp_1.4-15     
 ##  [31] nnet_7.3-12          gtable_0.3.0         timeDate_3043.102   
@@ -420,28 +421,29 @@ Hopefully it is clear by now, but this tutorial is not meant to show anyone how 
 ##  [40] yaml_2.2.1           reshape2_1.4.3       abind_1.4-5         
 ##  [43] modelr_0.1.6         crosstalk_1.1.0.1    backports_1.1.6     
 ##  [46] tools_4.0.3          lava_1.6.7           gstat_2.0-6         
-##  [49] ellipsis_0.3.1       Rcpp_1.0.4.6         plyr_1.8.6          
-##  [52] base64enc_0.1-3      progress_1.2.2       classInt_0.4-3      
-##  [55] prettyunits_1.1.1    rpart_4.1-15         haven_2.2.0         
-##  [58] fs_1.4.1             magrittr_1.5         data.table_1.12.8   
-##  [61] openxlsx_4.2.2       spacetime_1.2-3      reprex_0.3.0        
-##  [64] matrixStats_0.57.0   hms_0.5.3            evaluate_0.14       
-##  [67] rio_0.5.16           readxl_1.3.1         compiler_4.0.3      
-##  [70] KernSmooth_2.23-16   crayon_1.3.4         htmltools_0.5.0     
-##  [73] mgcv_1.8-31          libcoin_1.0-6        lubridate_1.7.8     
-##  [76] DBI_1.1.0            tweenr_1.0.1         dbplyr_1.4.2        
-##  [79] MASS_7.3-51.5        rappdirs_0.3.1       sf_0.9-6            
-##  [82] Matrix_1.2-18        car_3.0-10           cli_2.0.2           
-##  [85] gower_0.2.1          pkgconfig_2.0.3      coin_1.3-1          
-##  [88] foreign_0.8-80       sp_1.4-1             recipes_0.1.14      
-##  [91] xml2_1.3.1           prodlim_2019.11.13   rvest_0.3.5         
-##  [94] digest_0.6.25        rmarkdown_2.5        cellranger_1.1.0    
-##  [97] intervals_0.15.2     curl_4.3             lifecycle_0.2.0     
-## [100] nlme_3.1-144         carData_3.0-4        viridisLite_0.3.0   
-## [103] fansi_0.4.1          pillar_1.4.4         survival_3.1-8      
-## [106] glue_1.4.1           xts_0.12.1           zip_2.0.4           
-## [109] FNN_1.1.3            class_7.3-15         stringi_1.4.6       
-## [112] automap_1.0-14       e1071_1.7-4</code></pre>
+##  [49] ellipsis_0.3.1       jquerylib_0.1.3      Rcpp_1.0.4.6        
+##  [52] plyr_1.8.6           base64enc_0.1-3      progress_1.2.2      
+##  [55] classInt_0.4-3       prettyunits_1.1.1    rpart_4.1-15        
+##  [58] haven_2.2.0          fs_1.4.1             magrittr_1.5        
+##  [61] data.table_1.12.8    openxlsx_4.2.2       spacetime_1.2-3     
+##  [64] reprex_0.3.0         matrixStats_0.57.0   hms_0.5.3           
+##  [67] evaluate_0.14        rio_0.5.16           readxl_1.3.1        
+##  [70] compiler_4.0.3       KernSmooth_2.23-16   crayon_1.3.4        
+##  [73] htmltools_0.5.1.1    mgcv_1.8-31          libcoin_1.0-6       
+##  [76] lubridate_1.7.8      DBI_1.1.0            tweenr_1.0.1        
+##  [79] dbplyr_1.4.2         MASS_7.3-51.5        rappdirs_0.3.1      
+##  [82] sf_0.9-6             Matrix_1.2-18        car_3.0-10          
+##  [85] cli_2.0.2            gower_0.2.1          pkgconfig_2.0.3     
+##  [88] coin_1.3-1           foreign_0.8-80       sp_1.4-1            
+##  [91] recipes_0.1.14       xml2_1.3.1           bslib_0.2.4         
+##  [94] prodlim_2019.11.13   rvest_0.3.5          digest_0.6.25       
+##  [97] rmarkdown_2.7        cellranger_1.1.0     intervals_0.15.2    
+## [100] curl_4.3             lifecycle_0.2.0      nlme_3.1-144        
+## [103] carData_3.0-4        viridisLite_0.3.0    fansi_0.4.1         
+## [106] pillar_1.4.4         survival_3.1-8       glue_1.4.1          
+## [109] xts_0.12.1           zip_2.0.4            FNN_1.1.3           
+## [112] class_7.3-15         stringi_1.4.6        sass_0.3.1          
+## [115] automap_1.0-14       e1071_1.7-4</code></pre>
 
 </div>
 </div>
@@ -474,6 +476,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": {}
 },
 "fontsettings": {
