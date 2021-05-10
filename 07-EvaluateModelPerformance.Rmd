@@ -879,5 +879,5 @@ pin(write_holdout_preds, board='github', name='crypto_tutorial_holdout_predictio
 # new data pull
 prices_predictions <- left_join(write_holdout_preds, old_holdout_preds_pins)
 # pin data with new info on prices
-pin(write_holdout_preds, board='github', name='crypto_tutorial_holdout_predictions_n')
+pin(prices_predictions, board='github', name='crypto_tutorial_holdout_predictions')
 ```
