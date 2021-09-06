@@ -23,8 +23,10 @@ jobs:
       - name: Install Packages
         run: |-
           Rscript -e "install.packages('renv')"
+          Rscript -e "install.packages('fastmap')"
           Rscript -e 'renv::consent(provided = TRUE)'
           Rscript -e "renv::restore()"
+          Rscript -e "update.packages('fastmap')"
           Rscript -e "install.packages('bookdown', dependencies = TRUE)"
       - name: Refresh book
         run: |
