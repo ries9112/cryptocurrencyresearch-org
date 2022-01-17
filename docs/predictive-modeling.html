@@ -356,41 +356,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Coefficients:
 ##      (Intercept)         symbolADA        symbolAPPC        symbolARDR  
-##  -20995.61386680       -0.02360224       -1.00357249       -0.04568461  
+## -25353.040126195      -0.107444722      -1.712519144      -0.129457263  
 ##        symbolAVA         symbolBAL         symbolBAT         symbolBNT  
-##      -0.01870160        2.56899513        0.01790721        0.02510456  
+##     -0.103404141       3.001661132      -0.057818069      -0.060741672  
 ##        symbolBRD         symbolBSV         symbolBTC         symbolBTG  
-##       0.54715104        2.52489397     1028.32081217        0.76187010  
+##      0.413565427       2.352327436     994.680216959       0.665392071  
 ##      symbolBTRST        symbolCELR         symbolCHZ         symbolCKB  
-##       2.28202463       -0.05161615       -0.04509686       -0.35504821  
+##      2.712429752      -0.187328225      -0.128757054      -0.455690008  
 ##        symbolCND       symbolCOCOS      symbolCROOLD        symbolCRPT  
-##      -1.04607759       -0.03647645       -0.04808758        1.84569926  
+##     -1.482237349      -0.151158563      -0.155247315       2.013134470  
 ##       symbolDASH         symbolDCR         symbolDGB        symbolDODO  
-##       4.90513209        2.05409537       -0.28977689        1.14476593  
+##      5.265644318       2.014522858      -0.426117743       1.241101998  
 ##        symbolELF         symbolENJ         symbolEOS         symbolETC  
-##       0.49364365        0.01678269        0.01308702        1.03641642  
+##      0.639430170      -0.070809980      -0.072554048       0.985058363  
 ##        symbolETH          symbolHT         symbolICP         symbolINJ  
-##      85.29117934        0.18981797        0.60198644        2.44421512  
+##     82.717722082       0.101581581       0.425138846       2.873907099  
 ##        symbolJST         symbolKMD         symbolKNC        symbolKRRX  
-##      -0.05003110       -0.12517704       -0.03975506      -14.97966036  
+##     -0.133394845      -0.254006276      -0.067145892     -17.741053793  
 ##        symbolLEO         symbolLTC        symbolMAID        symbolMANA  
-##       0.04347953        3.63737718       -0.30120866        0.04884769  
+##     -0.034496329       3.443774985      -0.692440124      -0.038807448  
 ##        symbolNAV         symbolNCT        symbolNEAR        symbolNEXO  
-##      -0.04206132       -0.09532230        0.45856143        0.00309862  
+##     -0.125568276      -0.187783462       0.389316230      -0.081061340  
 ##        symbolONG         symbolORN         symbolRCN       symbolSTORJ  
-##      -0.05677279        0.32043056       -0.05099419        2.04855366  
+##     -0.094840687       0.176067915      -0.134386597       2.302513562  
 ##        symbolSXP         symbolTRX         symbolTXA         symbolVIB  
-##       2.30043317       -0.04915454        0.02896616       -0.52198965  
+##      2.736070822      -0.132739529      -0.107116379      -0.815411277  
 ##       symbolWAXP         symbolXCH         symbolXEM         symbolXMR  
-##      -0.03381875        1.32923664       -0.04869892        4.96915977  
+##     -0.122343080       1.156925659      -0.132356678       4.795971583  
 ##        symbolZEC         symbolZKS         symbolZRX     date_time_utc  
-##       4.27396650        1.12338900       -0.21396585        0.00001532  
+##      4.080365828       1.504445470      -0.381979340       0.000008028  
 ##             date         price_usd   lagged_price_1h   lagged_price_2h  
-##      -0.21354624        1.02678172       -0.09563067       -0.05668168  
+##      0.646749250       1.026342913      -0.095534613      -0.059225773  
 ##  lagged_price_3h   lagged_price_6h  lagged_price_12h  lagged_price_24h  
-##       0.03600024       -0.03876976        0.00461698        0.00713661  
+##      0.038797846      -0.035656572       0.000788980       0.008309252  
 ##  lagged_price_3d      trainingtest     trainingtrain             split  
-##       0.09074467      -19.46893565       -4.27767812      -20.02228158</code></pre>
+##      0.091058948     -22.100983299      -1.523295803     -23.565532718</code></pre>
 <p>We defined the <span style="color: blue;"><strong>formula</strong></span> for the model as <strong><code>target_price_24h ~ .</code></strong>, which means that we are want to make predictions for the <span style="color: blue;"><strong>target_price_24h</strong></span> field, and use (<strong><code>~</code></strong>) every other column found in the data (<strong><code>.</code></strong>). In other words, we specified a model that uses the <span style="color: blue;"><strong>target_price_24h</strong></span> field as the <a href="https://en.wikipedia.org/wiki/Dependent_and_independent_variables">dependent variable</a>, and all other columns (<strong><code>.</code></strong>) as the <a href="https://en.wikipedia.org/wiki/Dependent_and_independent_variables">independent variables</a>. Meaning, we are looking to predict the <span style="color: blue;"><strong>target_price_24h</strong></span>, which is the only column that refers to the future, and use all the information available at the time the rest of the data was collected in order to infer statistical relationships that can help us forecast the future values of the <span style="color: blue;"><strong>target_price_24h</strong></span> field when it is still unknown on new data that we want to make new predictions for.</p>
 <p>In the example above we used the <span style="color: blue;"><strong>cryptodata</strong></span> object which contained all the non-nested data, and was a big oversimplification of the process we will actually use.</p>
 <div id="using-functional-programming" class="section level3">
@@ -423,11 +423,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  3 2021-11-05 02:00:01 2021-11-05    61795.           61179.          60891.
 ##  4 2021-11-05 03:00:01 2021-11-05    61627.           60986.          61795.
 ##  5 2021-11-05 04:00:01 2021-11-05    62203.           61122.          61627.
-##  6 2021-11-05 05:00:01 2021-11-05    62101.           61199.          62203.
-##  7 2021-11-05 06:00:00 2021-11-05    62199.           61432.          62101.
-##  8 2021-11-05 07:00:02 2021-11-05    62179.           61271.          62199.
-##  9 2021-11-05 08:00:01 2021-11-05    62105.           60794.          62179.
-## 10 2021-11-05 09:00:01 2021-11-05    62190.           61012.          62105.
+##  6 2021-11-06 00:00:01 2021-11-06    60965.           61450           61069.
+##  7 2021-11-06 01:00:01 2021-11-06    61188.           61932.          60965.
+##  8 2021-11-06 02:00:01 2021-11-06    61179.           61877.          61188.
+##  9 2021-11-06 03:00:01 2021-11-06    60986.           61936.          61179.
+## 10 2021-11-06 04:00:01 2021-11-06    61122.           62140.          60986.
 ## # ... with 206 more rows, and 6 more variables: lagged_price_2h &lt;dbl&gt;,
 ## #   lagged_price_3h &lt;dbl&gt;, lagged_price_6h &lt;dbl&gt;, lagged_price_12h &lt;dbl&gt;,
 ## #   lagged_price_24h &lt;dbl&gt;, lagged_price_3d &lt;dbl&gt;</code></pre>
@@ -581,23 +581,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb112-2"><a href="predictive-modeling.html#cb112-2"></a>        <span class="dt">newdata =</span> cryptodata_nested<span class="op">$</span>test_data[[<span class="dv">1</span>]],</span>
 <span id="cb112-3"><a href="predictive-modeling.html#cb112-3"></a>        <span class="dt">na.action =</span> na.pass)</span></code></pre></div>
 <pre><code>##        1        2        3        4        5        6        7        8 
-## 65329.21 65050.50 65039.58 65242.43 65184.09 65292.72 65412.34 65362.21 
+## 64733.40 64807.92 64618.39 64524.59 64577.52 65120.29 64882.01 65066.35 
 ##        9       10       11       12       13       14       15       16 
-## 64329.06 64211.34 64081.82 64407.66 64584.64 64710.01 64477.88 64424.77 
+## 65300.38 65443.99 65477.12 65600.07 65783.27 65891.90 66056.04 66236.58 
 ##       17       18       19       20       21       22       23       24 
-## 64556.80 65268.59 65028.91 65163.00 65273.12 65399.95 65395.29 65462.81 
+## 66126.20 66010.35 65950.94 65804.68 65717.87 65679.60 65888.15 65263.56 
 ##       25       26       27       28       29       30       31       32 
-## 65600.93 65706.41 65956.33 66149.88 66016.52 65956.07 65931.38 65766.37 
+## 65103.25 65143.35 64717.44 64385.06 64426.34 63457.37 62654.35 62607.48 
 ##       33       34       35       36       37       38       39       40 
-## 65507.44 65381.37 65677.82 65039.39 64886.64 65056.43 64586.14 64341.04 
+## 62377.05 61764.42 61787.92 61531.22 60961.43 60944.73 60730.62 60002.40 
 ##       41       42       43       44       45       46       47       48 
-## 64389.08 63318.70 62309.94 62205.72 61896.70 61147.49 61318.71 61011.39 
+## 60061.73 60375.71 59949.03 60232.73 60970.90 60858.26 60946.99 61238.89 
 ##       49       50       51       52       53       54       55       56 
-## 60521.63 60584.34 60420.86 59524.22 59650.30 60054.58 59387.84 59800.29 
+## 60925.83 60920.75 60987.37 61123.07 61219.88 61016.14 61529.72 61776.06 
 ##       57       58       59       60       61       62       63       64 
-## 60557.98 60364.69 60475.88 60672.35 60275.50 60341.81 60278.95 60599.28 
+## 61841.44 62325.89 62243.02 62335.58 62199.10 62231.02 62136.46 62248.35 
 ##       65       66       67       68       69       70       71       72 
-## 60643.19 60375.01 60855.50 61081.81 61298.69 61657.56 61691.75 61815.26</code></pre>
+## 63107.23 63035.24 62996.62 62932.32 62534.61 62416.44 63200.23 63203.43</code></pre>
 <p>Now we can create a new custom function called <span style="color: blue;"><strong>make_predictions</strong></span> that wraps this functionality in a way that we can use with <span style="color: green;"><strong>map()</strong></span> to iterate through all options of the nested dataframe:</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="predictive-modeling.html#cb114-1"></a>make_predictions &lt;-<span class="st"> </span><span class="cf">function</span>(model, test){</span>
 <span id="cb114-2"><a href="predictive-modeling.html#cb114-2"></a>  </span>
