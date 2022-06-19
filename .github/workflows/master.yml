@@ -39,7 +39,7 @@ jobs:
         working-directory: ./
         run: |
           ls
-          rename  index-file.html  index.html
+          cp index-file.html  index.html
           cp index.html _book
           cp about-us.html _book
           cp tools.html _book
