@@ -30,7 +30,7 @@ jobs:
         run: |
           pins_key <- "${{secrets.PAT_PINS}}"
           
-          bookdown::render_book('0-Introduction.Rmd', clean = TRUE)
+          bookdown::render_book('index.Rmd', clean = TRUE)
         shell: Rscript {0}
       - name: Snapshot renv to update lockfile
         run: |-
