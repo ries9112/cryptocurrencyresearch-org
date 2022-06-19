@@ -30,13 +30,15 @@ jobs:
         run: |
           pins_key <- "${{secrets.PAT_PINS}}"
           
-          bookdown::render_book('index.Rmd', clean = TRUE)
+          #bookdown::render_book('index.Rmd', clean = TRUE)
         shell: Rscript {0}
       - name: Snapshot renv to update lockfile
         run: |-
           Rscript -e "renv::snapshot()"     
       - name: Add website front page
         run: |
+          ls -la
+          ls
           cp index.html _book
           cp about-us.html _book
           cp tools.html _book
