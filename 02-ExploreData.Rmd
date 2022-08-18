@@ -15,13 +15,13 @@ board_register(name = "pins_board",
 By running the [**board\_register()**]{style="color: green;"} command on the URL where the data is located, we can now ***"ask"*** for the data we are interested in, which is called [**hitBTC\_orderbook**]{style="color: blue;"}, by using the [**pin\_get()**]{style="color: green;"} command:
 
 ```{r pull_data, eval=FALSE}
-cryptodata <- pin_get(name = "hitBTC_orderbook")
+cryptodata <- pin_get(name = "hitBTC_orderbook",board = "pins_board")
 ```
 
 <!-- Couldn't hide the progress bar so split it into a hidden code chunk instead -->
 
 ```{r pull_data_hidden_exec, include=FALSE}
-cryptodata <- pin_get(name = "hitBTC_orderbook")
+cryptodata <- pin_get(name = "hitBTC_orderbook",board = "pins_board")
 ```
 
 The data has been saved to the [**cryptodata**]{style="color: blue;"} object.
